@@ -2,6 +2,11 @@
 
 namespace Exan\Dhp\Websocket\Events;
 
-class VoiceStateUpdate
+use Exan\Dhp\Parts\VoiceState;
+
+/**
+ * @see https://discord.com/developers/docs/topics/gateway-events#voice-state-update
+ */
+class VoiceStateUpdate extends VoiceState
 {
 }

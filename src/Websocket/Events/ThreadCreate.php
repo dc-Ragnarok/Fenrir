@@ -2,6 +2,15 @@
 
 namespace Exan\Dhp\Websocket\Events;
 
-class ThreadCreate
+use Exan\Dhp\Parts\Channel;
+use WithOptionalNewlyCreated;
+use WithOptionalThreadMember;
+
+/**
+ * @see https://discord.com/developers/docs/topics/gateway-events#thread-create
+ */
+class ThreadCreate extends Channel
 {
+    use WithOptionalNewlyCreated;
+    use WithOptionalThreadMember;
 }

@@ -2,6 +2,9 @@
 
 namespace Exan\Dhp\Websocket\Events;
 
+/**
+ * @see https://discord.com/developers/docs/topics/gateway-events#stage-instance-create
+ */
 class StageInstanceCreate
 {
     public string $token;
