@@ -13,6 +13,7 @@ use React\EventLoop\Loop;
 use React\EventLoop\LoopInterface;
 use React\EventLoop\TimerInterface;
 use React\Socket\Connector;
+use React\Socket\ConnectorInterface;
 
 class Discord
 {
@@ -59,11 +60,13 @@ class Discord
             $this->connector
         );
 
-        $connector(self::WEBSOCKET_URL)->then(function (WebSocket $connection) {
+        /**
+         * Weird syntax required for Mockery in testing
+         */
+        $connector->{'__invoke'}(self::WEBSOCKET_URL)->then(function (WebSocket $connection) {
             $this->connection = $connection;
 
             $connection->on('message', function (MessageInterface $message) {
-                // echo 'Received payload: ', $message, PHP_EOL;
                 $payload = $this->mapper->map(json_decode((string) $message), new Payload());
 
                 $this->handlePayload($payload);
