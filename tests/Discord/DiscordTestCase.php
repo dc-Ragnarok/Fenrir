@@ -1,25 +1,34 @@
 <?php
 
+namespace Tests\Exan\Dhp\Discord;
+
 use Exan\Dhp\Discord;
 use Exan\Dhp\EventHandler;
+use Mockery;
 use Mockery\Adapter\Phpunit\MockeryTestCase;
 use Mockery\Mock;
 use Ratchet\Client\WebSocket;
 use Ratchet\RFC6455\Messaging\MessageInterface;
 use React\Promise\Promise;
 
-/**
- * @runTestsInSeparateProcesses
- * @preserveGlobalState disabled
- */
-final class DiscordTest extends MockeryTestCase
+class DiscordTestCase extends MockeryTestCase
 {
     /**
      * @var callable
      */
-    private $payloadHandler;
+    protected $payloadHandler;
 
-    private Discord $discord;
+    /**
+     * @var Mock
+     */
+    protected $connection;
+
+    /**
+     * @var Mock
+     */
+    protected $loop;
+
+    protected Discord $discord;
 
     protected function setUp(): void
     {
@@ -28,14 +37,14 @@ final class DiscordTest extends MockeryTestCase
         /**
          * @var Mock
          */
-        $mockedLoop = Mockery::mock('React\EventLoop\LoopInterface');
+        $this->loop = Mockery::mock('React\EventLoop\LoopInterface');
 
         /**
          * @var Mock
          */
         $loopMock = Mockery::mock('overload:React\EventLoop\Loop');
         $loopMock->shouldReceive('get')->andReturn(
-            $mockedLoop
+            $this->loop
         );
 
         /**
@@ -47,17 +56,19 @@ final class DiscordTest extends MockeryTestCase
         /**
          * @var Mock
          */
-        $connectionMock = Mockery::mock(WebSocket::class);
-        $connectionMock->shouldReceive('on')->andReturnUsing(function (string $event, callable $handler) {
+        $this->connection = Mockery::mock(WebSocket::class);
+        $this->connection->shouldReceive('on')->andReturnUsing(function (string $event, callable $handler) {
             $this->payloadHandler = $handler;
         });
+        $this->connection->shouldReceive('send');
+
 
         /**
          * @var Mock
          */
         $promiseMock = Mockery::mock(Promise::class);
-        $promiseMock->shouldReceive('then')->andReturnUsing(function (callable $callback, callable $error) use ($connectionMock) {
-            $callback($connectionMock);
+        $promiseMock->shouldReceive('then')->andReturnUsing(function (callable $callback, callable $error) {
+            $callback($this->connection);
         });
 
         /**
@@ -70,18 +81,12 @@ final class DiscordTest extends MockeryTestCase
         $ratchetConnectorMock
             ->allows()->__invoke('wss://gateway.discord.gg/')->andReturns($promiseMock);
 
-        $this->discord = new Discord('::token::');
-
-        /**
-         * @var Mock
-         */
-        $this->discord->events = Mockery::mock(EventHandler::class);
-        $this->discord->events->shouldReceive('handle');
+        $this->discord = new Discord('::token::', ['intents' => 123]);
 
         $this->discord->connect();
     }
 
-    private function mockIncomingMessage(array $message)
+    protected function mockIncomingMessage(array $message)
     {
         /**
          * @var Mock
@@ -92,10 +97,8 @@ final class DiscordTest extends MockeryTestCase
         ($this->payloadHandler)($messageMock);
     }
 
-    public function testRegularEventsGetForwardedToEventHandler()
+    protected function assertMessageSent(array $message)
     {
-        $this->mockIncomingMessage(['op' => 0, 't' => '::some event::']);
-
-        $this->discord->events->shouldHaveReceived('handle');
+        $this->connection->shouldHaveReceived('send', [json_encode($message)]);
     }
 }

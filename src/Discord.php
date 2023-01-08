@@ -32,7 +32,7 @@ class Discord
 
     private ?int $sequence = null;
 
-    private int $intents = 3243773;
+    private int $intents;
 
     private ?TimerInterface $scheduledReconnect;
     private string $sessionId;
@@ -43,7 +43,10 @@ class Discord
         $options = array_merge([
             'timeout' => 10,
             'raw_events' => false,
+            'intents' => 3243773
         ], $options);
+
+        $this->intents = $options['intents'];
 
         $this->events = new EventHandler($options['raw_events']);
 
@@ -158,7 +161,6 @@ class Discord
         $this->heartbeatInterval = $data->heartbeat_interval;
 
         $this->heartbeatTimer = $this->loop->addPeriodicTimer($this->heartbeatInterval / 1000, function () {
-            echo 'Sending heartbeat', PHP_EOL;
             $this->sendPayload([
                 'op' => 1,
                 'd' => $this->sequence
