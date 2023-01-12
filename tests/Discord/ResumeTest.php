@@ -19,9 +19,6 @@ final class ResumeTest extends DiscordTestCase
     {
         parent::setUp();
 
-        $this->discord->events = Mockery::mock(EventHandler::class);
-        $this->discord->events->shouldReceive('handle');
-
         $this->mockIncomingMessage([
             'op' => 0,
             't' => Events::READY,
@@ -33,64 +30,34 @@ final class ResumeTest extends DiscordTestCase
         ]);
 
         $this->loop->shouldReceive('addTimer', 'addPeriodicTimer');
-
-        $this->connection->shouldReceive('close');
     }
 
-    public function testReconnect()
+    public function testResume()
     {
-        /**
-         * @var Closure
-         */
-        $newPayloadHandler = null;
-
-        $newConnection = Mockery::mock(WebSocket::class);
-        $newConnection->shouldReceive('on')->andReturnUsing(function (string $event, callable $handler) use (&$newPayloadHandler) {
-            $newPayloadHandler = $handler;
-        });
-
-        $newConnection->shouldReceive('send');
-
-        /**
-         * @var Mock
-         */
-        $promiseMock = Mockery::mock(Promise::class);
-        $promiseMock->shouldReceive('then')->andReturnUsing(function (callable $callback, callable $error) use ($newConnection) {
-            $callback($newConnection);
-        });
-
-        $this->ratchetConnectorMockOptions['::resume gateway url::'] = $promiseMock;
-
         $this->mockIncomingMessage([
             'op' => 7,
         ]);
 
-        $this->connection->shouldHaveReceived('close', [1001, 'reconnecting']);
+        $this->discord->websocket->shouldHaveReceived('close', [1001, 'reconnecting']);
 
-        /**
-         * @var Mock
-         */
-        $messageMock = Mockery::mock(MessageInterface::class);
-        $messageMock->shouldReceive('__toString')->andReturn(json_encode([
+        $this->mockIncomingMessage([
             'op' => 10,
             'd' => [
-                'heartbeat_interval' => 20000
-            ]
-        ]));
+                'heartbeat_interval' => 20000,
+            ],
+        ]);
 
-        $newPayloadHandler($messageMock);
-
-        $newConnection->shouldHaveReceived('send', [json_encode([
+        $this->assertMessageSent([
             'op' => 6,
             'd' => [
                 'token' => '::token::',
                 'session_id' => '::session id::',
                 'seq' => 1,
             ]
-        ])]);
+        ]);
 
         // Client should not identify when resuming
-        $newConnection->shouldNotHaveReceived('send', [json_encode([
+        $this->assertMessageNotSent([
             'op' => 2,
             'd' => [
                 'token' => '::token::',
@@ -101,6 +68,85 @@ final class ResumeTest extends DiscordTestCase
                     'device' => 'Exan\DHP',
                 ]
             ]
-        ])]);
+        ]);
+    }
+
+    public function testReconnectAndResume()
+    {
+        $this->mockIncomingMessage([
+            'op' => 9,
+            'd' => true
+        ]);
+
+        $this->discord->websocket->shouldNotHaveReceived('close', [1001, 'reconnecting']);
+
+        $this->mockIncomingMessage([
+            'op' => 10,
+            'd' => [
+                'heartbeat_interval' => 20000,
+            ],
+        ]);
+
+        $this->assertMessageSent([
+            'op' => 6,
+            'd' => [
+                'token' => '::token::',
+                'session_id' => '::session id::',
+                'seq' => 1,
+            ]
+        ]);
+
+        // Client should not identify when resuming
+        $this->assertMessageNotSent([
+            'op' => 2,
+            'd' => [
+                'token' => '::token::',
+                'intents' => 123,
+                'properties' => [
+                    'os' => PHP_OS,
+                    'browser' => 'Exan\DHP',
+                    'device' => 'Exan\DHP',
+                ]
+            ]
+        ]);
+    }
+
+    public function testReconnectAndReidentify()
+    {
+        $this->mockIncomingMessage([
+            'op' => 9,
+        ]);
+
+        $this->discord->websocket->shouldNotHaveReceived('close', [1001, 'reconnecting']);
+
+        $this->mockIncomingMessage([
+            'op' => 10,
+            'd' => [
+                'heartbeat_interval' => 20000,
+            ],
+        ]);
+
+        // Client should not identify when (op = 9 && d !== true)
+        $this->assertMessageNotSent([
+            'op' => 6,
+            'd' => [
+                'token' => '::token::',
+                'session_id' => '::session id::',
+                'seq' => 1,
+            ]
+        ]);
+
+        $this->assertMessageSent([
+            'op' => 2,
+            'd' => [
+                'token' => '::token::',
+                'intents' => 123,
+                'properties' => [
+                    'os' => PHP_OS,
+                    'browser' => 'Exan\DHP',
+                    'device' => 'Exan\DHP',
+                ]
+            ]
+        ]);
     }
 }

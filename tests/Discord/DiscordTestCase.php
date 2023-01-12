@@ -2,26 +2,17 @@
 
 namespace Tests\Exan\Dhp\Discord;
 
+use Exan\Dhp\Const\WebsocketEvents;
 use Exan\Dhp\Discord;
+use Exan\Dhp\EventHandler;
 use Mockery;
 use Mockery\Adapter\Phpunit\MockeryTestCase;
 use Mockery\Mock;
-use Ratchet\Client\WebSocket;
 use Ratchet\RFC6455\Messaging\MessageInterface;
 use React\Promise\Promise;
 
 class DiscordTestCase extends MockeryTestCase
 {
-    /**
-     * @var callable
-     */
-    protected $payloadHandler;
-
-    /**
-     * @var Mock
-     */
-    protected $connection;
-
     /**
      * @var Mock
      */
@@ -30,16 +21,14 @@ class DiscordTestCase extends MockeryTestCase
     /**
      * @var Mock
      */
-    protected $ratchetConnectorMock;
+    protected $websocket;
 
     protected Discord $discord;
 
-    protected $ratchetConnectorMockOptions;
+    protected array $websocketHandlers = [];
 
     protected function setUp(): void
     {
-        parent::setUp();
-
         /**
          * @var Mock
          */
@@ -53,49 +42,22 @@ class DiscordTestCase extends MockeryTestCase
             $this->loop
         );
 
-        /**
-         * @var Mock
-         */
-        $connectorMock = Mockery::mock('overload:React\Socket\Connector');
-        $connectorMock->shouldReceive('__construct')->andReturn(null);
-
-        /**
-         * @var Mock
-         */
-        $this->connection = Mockery::mock(WebSocket::class);
-        $this->connection->shouldReceive('on')->andReturnUsing(function (string $event, callable $handler) {
-            $this->payloadHandler = $handler;
+        $websocketMock = Mockery::mock('overload:Exan\Dhp\Websocket');
+        $websocketMock->shouldReceive('on')->andReturnUsing(function (string $event, callable $handler) {
+            $this->websocketHandlers[$event] = $handler;
         });
-        $this->connection->shouldReceive('send');
-
-
-        /**
-         * @var Mock
-         */
-        $promiseMock = Mockery::mock(Promise::class);
-        $promiseMock->shouldReceive('then')->andReturnUsing(function (callable $callback, callable $error) {
-            $callback($this->connection);
-        });
-
-        $this->ratchetConnectorMockOptions['wss://gateway.discord.gg/'] = $promiseMock;
-
-        /**
-         * @var Mock
-         */
-        $this->ratchetConnectorMock = Mockery::mock('overload:Ratchet\Client\Connector');
-        $this->ratchetConnectorMock
-            ->shouldReceive('__construct');
-
-        $this->ratchetConnectorMock
-            ->shouldReceive('__invoke')->andReturnUsing(function ($input) {
-                if (isset($this->ratchetConnectorMockOptions[$input])) {
-                    return $this->ratchetConnectorMockOptions[$input];
-                }
-            });
+        $websocketMock->shouldReceive('open')->withAnyArgs()->andReturn(new Promise(function ($resolve) { $resolve(); }));
+        $websocketMock->shouldReceive('send')->withAnyArgs();
+        $websocketMock->shouldReceive('close')->withAnyArgs();
 
         $this->discord = new Discord('::token::', ['intents' => 123]);
 
+        $this->discord->events = Mockery::mock(EventHandler::class);
+        $this->discord->events->shouldReceive('handle');
+
         $this->discord->connect();
+
+        $this->discord->websocket->shouldHaveReceived('open', ['wss://gateway.discord.gg/']);
     }
 
     protected function mockIncomingMessage(array $message)
@@ -106,11 +68,16 @@ class DiscordTestCase extends MockeryTestCase
         $messageMock = Mockery::mock(MessageInterface::class);
         $messageMock->shouldReceive('__toString')->andReturn(json_encode($message));
 
-        ($this->payloadHandler)($messageMock);
+        ($this->websocketHandlers[WebsocketEvents::MESSAGE])($messageMock);
     }
 
     protected function assertMessageSent(array $message)
     {
-        $this->connection->shouldHaveReceived('send', [json_encode($message)]);
+        $this->discord->websocket->shouldHaveReceived('send', [json_encode($message)]);
+    }
+
+    protected function assertMessageNotSent(array $message)
+    {
+        $this->discord->websocket->shouldNotHaveReceived('send', [json_encode($message)]);
     }
 }

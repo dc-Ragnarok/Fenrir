@@ -3,11 +3,11 @@
 namespace Exan\Dhp;
 
 use Exan\Dhp\Const\Events as Events;
+use Exan\Dhp\Const\WebsocketEvents;
 use Exan\Dhp\Websocket\Objects\D\Hello;
 use Exan\Dhp\Websocket\Objects\Payload;
 use JsonMapper;
 use Ratchet\Client\Connector as RatchetConnector;
-use Ratchet\Client\WebSocket;
 use Ratchet\RFC6455\Messaging\MessageInterface;
 use React\EventLoop\Loop;
 use React\EventLoop\LoopInterface;
@@ -21,8 +21,7 @@ class Discord
     private const WEBSOCKET_URL = 'wss://gateway.discord.gg/';
     private LoopInterface $loop;
 
-    private Connector $connector;
-    private WebSocket $connection;
+    public Websocket $websocket;
 
     private JsonMapper $mapper;
 
@@ -36,8 +35,6 @@ class Discord
     private ?TimerInterface $scheduledReconnect;
     private string $sessionId;
     private string $reconnectUrl;
-
-    private RatchetConnector $ratchetConnector;
 
     private bool $shouldIdentify = true;
 
@@ -56,51 +53,34 @@ class Discord
         $this->mapper = new JsonMapper();
 
         $this->loop = Loop::get();
-        $this->connector = new Connector(['timeout' => $options['timeout']]);
-    }
 
-    public function connect()
-    {
-        $this->ratchetConnector = new RatchetConnector(
-            $this->loop,
-            $this->connector
-        );
+        $this->websocket = new Websocket($options['timeout']);
 
-        /**
-         * Weird syntax required for Mockery in testing
-         */
-        $this->ratchetConnector->{'__invoke'}(self::WEBSOCKET_URL)->then(function (WebSocket $connection) {
-            $this->handleNewConnection($connection);
-
-        }, function (\Exception $e) {
-            echo "Could not connect: {$e->getMessage()}\n";
-        });
-    }
-
-    private function reconnect(bool $close, bool $resume)
-    {
-        if ($close) {
-            $this->connection->close(1001, 'reconnecting');
-        }
-
-        $this->shouldIdentify = !$resume;
-
-        $this->ratchetConnector->{'__invoke'}($this->reconnectUrl)->then(function (WebSocket $connection) use ($resume) {
-            $this->handleNewConnection($connection);
-        }, function (\Exception $e) {
-            echo "Could not connect: {$e->getMessage()}\n";
-        });
-    }
-
-    private function handleNewConnection(WebSocket $connection)
-    {
-        $this->connection = $connection;
-
-        $connection->on('message', function (MessageInterface $message) {
+        $this->websocket->on(WebsocketEvents::MESSAGE, function (MessageInterface $message) {
             $payload = $this->mapper->map(json_decode((string) $message), new Payload());
 
             $this->handlePayload($payload);
         });
+    }
+
+    public function connect()
+    {
+        $this->websocket->open(self::WEBSOCKET_URL);
+    }
+
+    private function reconnect(bool $close, bool $resume)
+    {
+        if (isset($this->heartbeatTimer)) {
+            $this->stopHeartbeat();
+        }
+
+        if ($close) {
+            $this->websocket->close(1001, 'reconnecting');
+        }
+
+        $this->shouldIdentify = !$resume;
+
+        $this->websocket->open($this->reconnectUrl);
     }
 
     private function resume()
@@ -208,14 +188,7 @@ class Discord
     {
         $this->heartbeatInterval = $data->heartbeat_interval;
 
-        $this->heartbeatTimer = $this->loop->addPeriodicTimer($this->heartbeatInterval / 1000, function () {
-            $this->sendPayload([
-                'op' => 1,
-                'd' => $this->sequence
-            ]);
-
-            $this->scheduleReconnect();
-        });
+        $this->startHeartbeat();
     }
 
     private function handleEvent(Payload $payload)
@@ -230,6 +203,27 @@ class Discord
 
     private function sendPayload(array $data)
     {
-        $this->connection->send(json_encode($data));
+        $this->websocket->send(json_encode($data));
+    }
+
+    private function startHeartbeat()
+    {
+        $this->heartbeatTimer = $this->loop->addPeriodicTimer($this->heartbeatInterval / 1000, function () {
+            $this->sendPayload([
+                'op' => 1,
+                'd' => $this->sequence
+            ]);
+
+            $this->scheduleReconnect();
+        });
+    }
+
+    private function stopHeartbeat()
+    {
+        if ($this->heartbeatTimer) {
+            $this->loop->cancelTimer($this->heartbeatTimer);
+
+            unset($this->heartbeatTimer);
+        }
     }
 }

@@ -7,7 +7,7 @@ use Tests\Exan\Dhp\Discord\DiscordTestCase;
  * @runTestsInSeparateProcesses
  * @preserveGlobalState disabled
  */
-class RegularEventsGetForwardedToEventHandlerTest extends DiscordTestCase
+class RegularEventsForwardingTest extends DiscordTestCase
 {
     protected function setUp(): void
     {

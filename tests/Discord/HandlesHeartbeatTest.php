@@ -1,6 +1,5 @@
 <?php
 
-use Mockery\Mock;
 use React\EventLoop\TimerInterface;
 use Tests\Exan\Dhp\Discord\DiscordTestCase;
 
@@ -8,7 +7,7 @@ use Tests\Exan\Dhp\Discord\DiscordTestCase;
  * @runTestsInSeparateProcesses
  * @preserveGlobalState disabled
  */
-final class AcknowledgeHeartbeatTest extends DiscordTestCase
+final class HandlesHeartbeatTest extends DiscordTestCase
 {
     /**
      * @var Mock
@@ -30,6 +29,34 @@ final class AcknowledgeHeartbeatTest extends DiscordTestCase
     }
 
     public function testHandlesHello()
+    {
+        $this->mockIncomingMessage([
+            'op' => 10,
+            'd' => [
+                'heartbeat_interval' => 20000
+            ]
+        ]);
+
+        $this->assertMessageSent([
+            'op' => 2,
+            'd' => [
+                'token' => '::token::',
+                'intents' => 123,
+                'properties' => [
+                    'os' => PHP_OS,
+                    'browser' => 'Exan\DHP',
+                    'device' => 'Exan\DHP',
+                ]
+            ]
+        ]);
+
+        $this->assertMessageSent([
+            'op' => 1,
+            'd' => null
+        ]);
+    }
+
+    public function testAcknowledgesHearbeat()
     {
         // 10 starts sending heartbeats, which starts a timer to reconnect
         $this->mockIncomingMessage([
