@@ -3,7 +3,6 @@
 namespace Tests\Exan\Dhp\Discord;
 
 use Exan\Dhp\Discord;
-use Exan\Dhp\EventHandler;
 use Mockery;
 use Mockery\Adapter\Phpunit\MockeryTestCase;
 use Mockery\Mock;
@@ -28,7 +27,14 @@ class DiscordTestCase extends MockeryTestCase
      */
     protected $loop;
 
+    /**
+     * @var Mock
+     */
+    protected $ratchetConnectorMock;
+
     protected Discord $discord;
+
+    protected $ratchetConnectorMockOptions;
 
     protected function setUp(): void
     {
@@ -71,15 +77,21 @@ class DiscordTestCase extends MockeryTestCase
             $callback($this->connection);
         });
 
+        $this->ratchetConnectorMockOptions['wss://gateway.discord.gg/'] = $promiseMock;
+
         /**
          * @var Mock
          */
-        $ratchetConnectorMock = Mockery::mock('overload:Ratchet\Client\Connector');
-        $ratchetConnectorMock
+        $this->ratchetConnectorMock = Mockery::mock('overload:Ratchet\Client\Connector');
+        $this->ratchetConnectorMock
             ->shouldReceive('__construct');
 
-        $ratchetConnectorMock
-            ->allows()->__invoke('wss://gateway.discord.gg/')->andReturns($promiseMock);
+        $this->ratchetConnectorMock
+            ->shouldReceive('__invoke')->andReturnUsing(function ($input) {
+                if (isset($this->ratchetConnectorMockOptions[$input])) {
+                    return $this->ratchetConnectorMockOptions[$input];
+                }
+            });
 
         $this->discord = new Discord('::token::', ['intents' => 123]);
 

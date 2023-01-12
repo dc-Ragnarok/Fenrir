@@ -13,7 +13,6 @@ use React\EventLoop\Loop;
 use React\EventLoop\LoopInterface;
 use React\EventLoop\TimerInterface;
 use React\Socket\Connector;
-use React\Socket\ConnectorInterface;
 
 class Discord
 {
@@ -38,6 +37,10 @@ class Discord
     private string $sessionId;
     private string $reconnectUrl;
 
+    private RatchetConnector $ratchetConnector;
+
+    private bool $shouldIdentify = true;
+
     public function __construct(private string $token, $options = [])
     {
         $options = array_merge([
@@ -58,7 +61,7 @@ class Discord
 
     public function connect()
     {
-        $connector = new RatchetConnector(
+        $this->ratchetConnector = new RatchetConnector(
             $this->loop,
             $this->connector
         );
@@ -66,28 +69,56 @@ class Discord
         /**
          * Weird syntax required for Mockery in testing
          */
-        $connector->{'__invoke'}(self::WEBSOCKET_URL)->then(function (WebSocket $connection) {
-            $this->connection = $connection;
+        $this->ratchetConnector->{'__invoke'}(self::WEBSOCKET_URL)->then(function (WebSocket $connection) {
+            $this->handleNewConnection($connection);
 
-            $connection->on('message', function (MessageInterface $message) {
-                $payload = $this->mapper->map(json_decode((string) $message), new Payload());
-
-                $this->handlePayload($payload);
-            });
         }, function (\Exception $e) {
             echo "Could not connect: {$e->getMessage()}\n";
         });
     }
 
-    private function reconnect()
+    private function reconnect(bool $close, bool $resume)
     {
+        if ($close) {
+            $this->connection->close(1001, 'reconnecting');
+        }
 
+        $this->shouldIdentify = !$resume;
+
+        $this->ratchetConnector->{'__invoke'}($this->reconnectUrl)->then(function (WebSocket $connection) use ($resume) {
+            $this->handleNewConnection($connection);
+        }, function (\Exception $e) {
+            echo "Could not connect: {$e->getMessage()}\n";
+        });
+    }
+
+    private function handleNewConnection(WebSocket $connection)
+    {
+        $this->connection = $connection;
+
+        $connection->on('message', function (MessageInterface $message) {
+            $payload = $this->mapper->map(json_decode((string) $message), new Payload());
+
+            $this->handlePayload($payload);
+        });
+    }
+
+    private function resume()
+    {
+        $this->sendPayload([
+            'op' => 6,
+            'd' => [
+                'token' => $this->token,
+                'session_id' => $this->sessionId,
+                'seq' => $this->sequence,
+            ]
+        ]);
     }
 
     private function scheduleReconnect()
     {
         $this->scheduledReconnect = $this->loop->addTimer(5, function () {
-            $this->reconnect();
+            $this->reconnect(true, true);
         });
     }
 
@@ -116,19 +147,21 @@ class Discord
                 ]
             ]
         ]);
+
+        $this->shouldIdentify = false;
     }
 
     private function handlePayload(Payload $payload)
     {
-        if (isset($payload->s) && $payload->s > $this->sequence) {
-            $this->sequence = $payload->s;
-        }
-
         switch ($payload->op) {
             /**
              * "Regular" events
              */
             case 0:
+                if (isset($payload->s) && $payload->s > $this->sequence) {
+                    $this->sequence = $payload->s;
+                }
+
                 $this->handleEvent($payload);
                 break;
 
@@ -136,14 +169,29 @@ class Discord
              * Resume event
              */
             case 7:
-                echo 'Received payload: ', json_encode($payload), PHP_EOL;
+                $this->reconnect(true, true);
+                break;
+
+            /**
+             * Invalid session
+             */
+            case 9:
+                $this->reconnect(
+                    false,
+                    isset($payload->d) && $payload->d === true
+                );
                 break;
 
             /**
              * Hello event
              */
             case 10:
-                $this->identify();
+                if ($this->shouldIdentify) {
+                    $this->identify();
+                } else {
+                    $this->resume();
+                }
+
                 $this->handleHello($this->mapper->map($payload->d, new Hello()));
                 break;
 
@@ -168,11 +216,6 @@ class Discord
 
             $this->scheduleReconnect();
         });
-    }
-
-    private function handleResume(Payload $payload)
-    {
-
     }
 
     private function handleEvent(Payload $payload)
