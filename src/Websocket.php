@@ -3,6 +3,7 @@
 namespace Exan\Dhp;
 
 use Evenement\EventEmitter;
+use Exan\Dhp\Const\WebsocketEvents;
 use Exan\Dhp\Exceptions\Websocket\ConnectionNotInitializedException;
 use Ratchet\Client\Connector;
 use Ratchet\Client\WebSocket as RatchetWebsocket;
@@ -50,7 +51,7 @@ class Websocket extends EventEmitter
                 $this->connection = $connection;
 
                 $connection->on('message', function (MessageInterface $message) {
-                    $this->emit(self::EVENT_MESSAGE, [$message]);
+                    $this->emit(WebsocketEvents::MESSAGE, [$message]);
                 });
 
                 $resolver();
