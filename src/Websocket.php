@@ -22,16 +22,19 @@ class Websocket extends EventEmitter
     private LoopInterface $loop;
     private SocketConnector $socketConnector;
 
+    private Bucket $bucket;
+
     public function __construct(private int $timeout)
     {
         $this->loop = Loop::get();
         $this->socketConnector = new SocketConnector(['timeout' => $timeout]);
 
-
         $this->connector = new Connector(
             $this->loop,
             $this->socketConnector
         );
+
+        $this->bucket = new Bucket($this->loop, 110, 61);
     }
 
     /**
@@ -77,10 +80,18 @@ class Websocket extends EventEmitter
     /**
      * @throws ConnectionNotInitializedException
      */
-    public function send(string $message)
+    public function send(string $message, bool $useBucket = true)
     {
         $this->mustHaveActiveConnection();
 
-        $this->connection->send($message);
+        $action = function () use ($message) {
+            $this->connection->send($message);
+        };
+
+        if ($useBucket) {
+            $this->bucket->run($action);
+        } else {
+            $action();
+        }
     }
 }

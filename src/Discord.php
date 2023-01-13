@@ -212,7 +212,7 @@ class Discord
             $this->sendPayload([
                 'op' => 1,
                 'd' => $this->sequence
-            ]);
+            ], false);
 
             $this->scheduleReconnect();
         });
