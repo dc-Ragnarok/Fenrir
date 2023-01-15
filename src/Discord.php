@@ -2,17 +2,20 @@
 
 namespace Exan\Dhp;
 
+use Discord\Http\Drivers\React;
+use Discord\Http\Http;
 use Exan\Dhp\Const\Events as Events;
 use Exan\Dhp\Const\WebsocketEvents;
+use Exan\Dhp\Rest\Rest;
 use Exan\Dhp\Websocket\Objects\D\Hello;
 use Exan\Dhp\Websocket\Objects\Payload;
 use JsonMapper;
-use Ratchet\Client\Connector as RatchetConnector;
+use Psr\Log\LoggerInterface;
+use Psr\Log\NullLogger;
 use Ratchet\RFC6455\Messaging\MessageInterface;
 use React\EventLoop\Loop;
 use React\EventLoop\LoopInterface;
 use React\EventLoop\TimerInterface;
-use React\Socket\Connector;
 
 class Discord
 {
@@ -38,7 +41,11 @@ class Discord
 
     private bool $shouldIdentify = true;
 
-    public function __construct(private string $token, $options = [])
+    private Http $http;
+
+    public Rest $rest;
+
+    public function __construct(private string $token, $options = [], private LoggerInterface $logger = new NullLogger())
     {
         $options = array_merge([
             'timeout' => 10,
@@ -54,7 +61,18 @@ class Discord
 
         $this->loop = Loop::get();
 
-        $this->websocket = new Websocket($options['timeout']);
+        $this->http = new Http(
+            'Bot ' . $this->token,
+            $this->loop,
+            $this->logger,
+            new React(
+                $this->loop
+            )
+        );
+
+        $this->rest = new Rest($this->http);
+
+        $this->websocket = new Websocket($options['timeout'], $this->logger);
 
         $this->websocket->on(WebsocketEvents::MESSAGE, function (MessageInterface $message) {
             $payload = $this->mapper->map(json_decode((string) $message), new Payload());

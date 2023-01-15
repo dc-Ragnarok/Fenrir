@@ -5,6 +5,7 @@ namespace Exan\Dhp;
 use Evenement\EventEmitter;
 use Exan\Dhp\Const\WebsocketEvents;
 use Exan\Dhp\Exceptions\Websocket\ConnectionNotInitializedException;
+use Psr\Log\LoggerInterface;
 use Ratchet\Client\Connector;
 use Ratchet\Client\WebSocket as RatchetWebsocket;
 use Ratchet\RFC6455\Messaging\MessageInterface;
@@ -24,7 +25,7 @@ class Websocket extends EventEmitter
 
     private Bucket $bucket;
 
-    public function __construct(private int $timeout)
+    public function __construct(private int $timeout, private LoggerInterface $logger)
     {
         $this->loop = Loop::get();
         $this->socketConnector = new SocketConnector(['timeout' => $timeout]);
@@ -54,6 +55,7 @@ class Websocket extends EventEmitter
                 $this->connection = $connection;
 
                 $connection->on('message', function (MessageInterface $message) {
+                    $this->logger->info('WS(S->C): ' . $message);
                     $this->emit(WebsocketEvents::MESSAGE, [$message]);
                 });
 
@@ -86,6 +88,7 @@ class Websocket extends EventEmitter
 
         $action = function () use ($message) {
             $this->connection->send($message);
+            $this->logger->info('WS(C->S): ' . $message);
         };
 
         if ($useBucket) {
