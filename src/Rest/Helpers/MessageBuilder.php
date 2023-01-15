@@ -2,10 +2,16 @@
 
 namespace Exan\Dhp\Rest\Helpers;
 
+/**
+ * @see https://discord.com/developers/docs/resources/channel#create-message
+ */
 class MessageBuilder
 {
     private $data = [];
 
+    /**
+     * @var string $content Up to 2000 characters
+     */
     public function setContent(string $content): MessageBuilder
     {
         $this->data['content'] = $content;
@@ -27,6 +33,12 @@ class MessageBuilder
         return $this;
     }
 
+    /**
+     * Deduplicated by url
+     * Up to 6000 characters across all text fields
+     * Up to 25 fields total
+     * @see https://discord.com/developers/docs/resources/channel#embed-object
+     */
     public function addEmbed(EmbedBuilder $embed): MessageBuilder
     {
         if (!isset($this->data['embeds'])) {
@@ -38,6 +50,9 @@ class MessageBuilder
         return $this;
     }
 
+    /**
+     * @see https://discord.com/developers/docs/resources/channel#allowed-mentions-object
+     */
     public function allowMentions(AllowedMentionsBuilder $allowedMentions): MessageBuilder
     {
         $this->data['allowed_mentions'] = $allowedMentions->get();
@@ -45,6 +60,9 @@ class MessageBuilder
         return $this;
     }
 
+    /**
+     * @see https://discord.com/developers/docs/resources/channel#message-reference-object-message-reference-structure
+     */
     public function setReference(string $channelId, string $messageId, bool $failIfNotExists, ?string $guildId = null): MessageBuilder
     {
         $this->data['message_reference'] = [
@@ -60,6 +78,9 @@ class MessageBuilder
         return $this;
     }
 
+    /**
+     * @see https://discord.com/developers/docs/interactions/message-components#component-object
+     */
     public function addComponent(ComponentBuilder $component): MessageBuilder
     {
         if (!isset($this->data['components'])) {
@@ -71,6 +92,9 @@ class MessageBuilder
         return $this;
     }
 
+    /**
+     * Up to 3 stickers
+     */
     public function addSticker(string $stickerId): MessageBuilder
     {
         if (!isset($this->data['stickers'])) {
@@ -87,11 +111,9 @@ class MessageBuilder
         return $this;
     }
 
-    public function setPayloadJson(): MessageBuilder
-    {
-        return $this;
-    }
-
+    /**
+     * @see https://discord.com/developers/docs/resources/channel#attachment-object
+     */
     public function addAttachment(): MessageBuilder
     {
         return $this;
