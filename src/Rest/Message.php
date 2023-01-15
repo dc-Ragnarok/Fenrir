@@ -4,6 +4,7 @@ namespace Exan\Dhp\Rest;
 
 use Discord\Http\Endpoint;
 use Discord\Http\Http;
+use Exan\Dhp\Rest\Helpers\MessageBuilder;
 
 class Message
 {
@@ -12,16 +13,14 @@ class Message
 
     }
 
-    public function send(string $channelId, string $content)
+    public function send(string $channelId, MessageBuilder $message)
     {
         return $this->http->post(
             Endpoint::bind(
                 Endpoint::CHANNEL_MESSAGES,
                 $channelId
             ),
-            [
-                'content' => $content
-            ]
+            $message->get()
         );
     }
 }
