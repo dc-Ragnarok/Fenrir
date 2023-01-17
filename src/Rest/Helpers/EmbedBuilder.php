@@ -22,6 +22,7 @@ class EmbedBuilder
     }
 
     /**
+     * @deprecated
      * @see https://discord.com/developers/docs/resources/channel#embed-object-embed-types
      */
     public function setType(string $type): EmbedBuilder
@@ -71,7 +72,7 @@ class EmbedBuilder
      * @var string $text Up to 2048 characters
      * @see https://discord.com/developers/docs/resources/channel#embed-object-embed-footer-structure
      */
-    public function setFooter(string $text, ?string $iconUrl = null, ?string $proxyIconUrl): EmbedBuilder
+    public function setFooter(string $text, ?string $iconUrl = null, ?string $proxyIconUrl = null): EmbedBuilder
     {
         $this->data['footer'] = ['text' => $text];
 
@@ -89,7 +90,7 @@ class EmbedBuilder
     /**
      * @see https://discord.com/developers/docs/resources/channel#embed-object-embed-image-structure
      */
-    public function setImage(string $url, ?string $proxyUrl, ?int $height, ?int $width): EmbedBuilder
+    public function setImage(string $url, ?string $proxyUrl = null, ?int $height = null, ?int $width = null): EmbedBuilder
     {
         $this->data['image'] = ['url' => $url];
 
@@ -111,7 +112,7 @@ class EmbedBuilder
     /**
      * @see https://discord.com/developers/docs/resources/channel#embed-object-embed-thumbnail-structure
      */
-    public function setThumbnail(string $url, ?string $proxyUrl, ?int $height, ?int $width): EmbedBuilder
+    public function setThumbnail(string $url, ?string $proxyUrl = null, ?int $height = null, ?int $width = null): EmbedBuilder
     {
         $this->data['thumbnail'] = ['url' => $url];
 
@@ -133,7 +134,7 @@ class EmbedBuilder
     /**
      * @see https://discord.com/developers/docs/resources/channel#embed-object-embed-video-structure
      */
-    public function setVideo(string $url, ?string $proxyUrl, ?int $height, ?int $width): EmbedBuilder
+    public function setVideo(string $url, ?string $proxyUrl = null, ?int $height = null, ?int $width = null): EmbedBuilder
     {
         $this->data['video'] = ['url' => $url];
 
@@ -155,7 +156,7 @@ class EmbedBuilder
     /**
      * @see https://discord.com/developers/docs/resources/channel#embed-object-embed-provider-structure
      */
-    public function setProvider(?string $name, ?string $url): EmbedBuilder
+    public function setProvider(?string $name = null, ?string $url = null): EmbedBuilder
     {
         if (!isset($this->data['provider'])) {
             $this->data['provider'] = [];
@@ -176,7 +177,7 @@ class EmbedBuilder
      * @var string $name Up to 256 characters
      * @see https://discord.com/developers/docs/resources/channel#embed-object-embed-author-structure
      */
-    public function setAuthor(string $name, ?string $url, ?string $iconUrl, ?string $proxyIconUrl): EmbedBuilder
+    public function setAuthor(string $name, ?string $url = null, ?string $iconUrl = null, ?string $proxyIconUrl = null): EmbedBuilder
     {
         $this->data['author'] = ['name' => $name];
 
