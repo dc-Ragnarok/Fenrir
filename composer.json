@@ -24,6 +24,7 @@
         "seregazhuk/react-promise-testing": "^0.6.1"
     },
     "scripts": {
-        "test": "./vendor/bin/phpunit tests/"
+        "test": "./vendor/bin/phpunit tests/",
+        "test-coverage": "php -d xdebug.mode=coverage ./vendor/bin/phpunit --coverage-text tests/"
     }
 }

@@ -15,8 +15,8 @@ class StringSelectMenu extends SelectMenu
     public function __construct(
         protected string $customId,
         protected ?string $placeholder = null,
-        protected int $minValues = 1,
-        protected int $maxValues = 25,
+        protected ?int $minValues = null,
+        protected ?int $maxValues = null,
         protected bool $disabled = false
     ) {
         parent::__construct(
