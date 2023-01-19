@@ -25,6 +25,7 @@
     },
     "scripts": {
         "test": "./vendor/bin/phpunit tests/",
-        "test-coverage": "php -d xdebug.mode=coverage ./vendor/bin/phpunit --coverage-text tests/"
+        "test-coverage": "php -d xdebug.mode=coverage ./vendor/bin/phpunit --coverage-text tests/",
+        "test-coverage-html": "php -d xdebug.mode=coverage ./vendor/bin/phpunit --coverage-html .phpunit.cache/cov-html tests/"
     }
 }

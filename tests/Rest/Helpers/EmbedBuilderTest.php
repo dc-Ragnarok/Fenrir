@@ -103,13 +103,14 @@ class EmbedBuilderTest extends TestCase
     public function testSetAuthor()
     {
         $builder = new EmbedBuilder();
-        $builder->setAuthor('Test Author', 'https://test.com', 'https://test.com/icon.png');
+        $builder->setAuthor('Test Author', 'https://test.com', 'https://test.com/icon.png', 'https://test-proxy.com/icon.png');
 
         $author = $builder->get()['author'];
 
         $this->assertEquals('Test Author', $author['name']);
         $this->assertEquals('https://test.com', $author['url']);
         $this->assertEquals('https://test.com/icon.png', $author['icon_url']);
+        $this->assertEquals('https://test-proxy.com/icon.png', $author['proxy_icon_url']);
     }
 
     public function testAddField()
@@ -131,11 +132,12 @@ class EmbedBuilderTest extends TestCase
     public function testSetVideo()
     {
         $builder = new EmbedBuilder();
-        $builder->setVideo('https://test.com/video.mp4', null,  100, 200);
+        $builder->setVideo('https://test.com/video.mp4', 'https://test-proxy.com/video.mp4',  100, 200);
 
         $video = $builder->get()['video'];
 
         $this->assertEquals('https://test.com/video.mp4', $video['url']);
+        $this->assertEquals('https://test-proxy.com/video.mp4', $video['proxy_url']);
         $this->assertEquals(100, $video['height']);
         $this->assertEquals(200, $video['width']);
     }
