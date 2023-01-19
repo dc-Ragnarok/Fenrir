@@ -6,7 +6,7 @@ use Exan\Dhp\Component\Component;
 use Exan\Dhp\Enums\Component\ButtonStyle;
 use Exan\Dhp\Parts\Emoji;
 
-abstract class LinkButton extends Component
+class LinkButton extends Component
 {
     private ButtonStyle $style = ButtonStyle::Link;
 
@@ -31,7 +31,7 @@ abstract class LinkButton extends Component
         }
 
         if (!is_null($this->emoji)) {
-            $data['emoji'] = $this->emoji;
+            $data['emoji'] = $this->emoji->getPartial();
         }
 
         return $data;

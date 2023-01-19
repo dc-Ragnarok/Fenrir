@@ -31,7 +31,7 @@ abstract class InteractionButton extends Component
         }
 
         if (!is_null($this->emoji)) {
-            $data['emoji'] = $this->emoji;
+            $data['emoji'] = $this->emoji->getPartial();
         }
 
         return $data;

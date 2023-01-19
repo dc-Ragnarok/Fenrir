@@ -3,6 +3,7 @@
 namespace Exan\Dhp\Component\SelectMenu;
 
 use Exan\Dhp\Enums\Component\SelectMenuType;
+use Exan\Dhp\Exceptions\Components\SelectMenu\StringSelectMenu\TooManyOptionsException;
 use Exan\Dhp\Parts\Emoji;
 
 class StringSelectMenu extends SelectMenu
@@ -27,6 +28,11 @@ class StringSelectMenu extends SelectMenu
         );
     }
 
+    /**
+     * Can not exceed 25 options
+     *
+     * @throws TooManyOptionsException
+     */
     public function addOption(
         string $label,
         string $value,
@@ -34,6 +40,10 @@ class StringSelectMenu extends SelectMenu
         ?Emoji $emoji = null,
         ?bool $default = null
     ) {
+        if (count($this->items) === 25) {
+            throw new TooManyOptionsException();
+        }
+
         $item = [
             'label' => $label,
             'value' => $value,

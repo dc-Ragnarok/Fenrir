@@ -12,8 +12,8 @@ abstract class SelectMenu extends Component
     public function __construct(
         protected string $customId,
         protected ?string $placeholder = null,
-        protected int $minValues = 1,
-        protected int $maxValues = 25,
+        protected ?int $minValues = null,
+        protected ?int $maxValues = null,
         protected bool $disabled = false
     ) { }
 
@@ -22,8 +22,8 @@ abstract class SelectMenu extends Component
         $data = [
             'type' => $this->type,
             'custom_id' => $this->customId,
-            'min_values' => $this->minValues,
-            'max_values' => $this->maxValues,
+            'min_values' => $this->minValues ?? 1,
+            'max_values' => $this->maxValues ?? 25,
             'disabled' => $this->disabled
         ];
 
