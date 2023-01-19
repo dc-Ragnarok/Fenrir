@@ -3,6 +3,7 @@
 namespace Exan\Dhp\Component\SelectMenu;
 
 use Exan\Dhp\Enums\Component\SelectMenuType;
+use Exan\Dhp\Exceptions\Components\SelectMenu\StringSelectMenu\NoOptionsException;
 use Exan\Dhp\Exceptions\Components\SelectMenu\StringSelectMenu\TooManyOptionsException;
 use Exan\Dhp\Parts\Emoji;
 
@@ -11,22 +12,6 @@ class StringSelectMenu extends SelectMenu
     protected SelectMenuType $type = SelectMenuType::String;
 
     protected array $items = [];
-
-    public function __construct(
-        protected string $customId,
-        protected ?string $placeholder = null,
-        protected ?int $minValues = null,
-        protected ?int $maxValues = null,
-        protected bool $disabled = false
-    ) {
-        parent::__construct(
-            $customId,
-            $placeholder,
-            $minValues,
-            $maxValues,
-            $disabled
-        );
-    }
 
     /**
      * Can not exceed 25 options
@@ -54,18 +39,25 @@ class StringSelectMenu extends SelectMenu
         }
 
         if (!is_null($emoji)) {
-            $item['emoji'] = $emoji;
+            $item['emoji'] = $emoji->getPartial();
         }
 
         if (!is_null($default)) {
-            $item['defaul$default'] = $default;
+            $item['default'] = $default;
         }
 
         $this->items[] = $item;
     }
 
+    /**
+     * @throws NoOptionsException
+     */
     public function get(): array
     {
-        return array_merge(parent::get(), ['items' => $this->items]);
+        if (count($this->items) === 0) {
+            throw new NoOptionsException();
+        }
+
+        return array_merge(parent::get(), ['options' => $this->items]);
     }
 }

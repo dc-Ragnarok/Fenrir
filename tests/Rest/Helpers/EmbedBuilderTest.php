@@ -54,6 +54,14 @@ class EmbedBuilderTest extends TestCase
         $this->assertEquals(123456, $builder->get()['color']);
     }
 
+    public function testSetColour()
+    {
+        $builder = new EmbedBuilder();
+        $builder->setColour(123456);
+
+        $this->assertEquals(123456, $builder->get()['color']);
+    }
+
     public function testSetFooter()
     {
         $builder = new EmbedBuilder();
