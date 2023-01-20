@@ -2,7 +2,7 @@
 
 namespace Exan\Dhp\Rest\Helpers;
 
-use Exan\Dhp\Exceptions\Components\ComponentBuilder\TooManyRowsException;
+use Exan\Dhp\Exceptions\Rest\Helpers\ComponentBuilder\TooManyRowsException;
 
 /**
  * @see https://discord.com/developers/docs/interactions/message-components#component-object

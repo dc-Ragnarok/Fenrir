@@ -1,6 +1,6 @@
 <?php
 
-namespace Exan\Dhp\Exceptions\Components\ComponentRowBuilder;
+namespace Exan\Dhp\Exceptions\Rest\Helpers\ComponentRowBuilder;
 
 use Exception;
 

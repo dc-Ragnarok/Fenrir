@@ -1,10 +1,10 @@
 <?php
 
-namespace Exan\Dhp\Exceptions\Components\ComponentBuilder;
+namespace Exan\Dhp\Exceptions\Rest\Helpers\ComponentBuilder;
 
 use Exception;
 
 class TooManyRowsException extends Exception
 {
-    
+
 }
