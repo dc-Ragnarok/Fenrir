@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use Exan\Dhp\Rest\Helpers\EmbedBuilder;
 use PHPUnit\Framework\TestCase;
 
@@ -132,7 +134,7 @@ class EmbedBuilderTest extends TestCase
     public function testSetVideo()
     {
         $builder = new EmbedBuilder();
-        $builder->setVideo('https://test.com/video.mp4', 'https://test-proxy.com/video.mp4',  100, 200);
+        $builder->setVideo('https://test.com/video.mp4', 'https://test-proxy.com/video.mp4', 100, 200);
 
         $video = $builder->get()['video'];
 

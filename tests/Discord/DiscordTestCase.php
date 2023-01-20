@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\Exan\Dhp\Discord;
 
 use Exan\Dhp\Const\WebsocketEvents;
@@ -46,7 +48,9 @@ class DiscordTestCase extends MockeryTestCase
         $websocketMock->shouldReceive('on')->andReturnUsing(function (string $event, callable $handler) {
             $this->websocketHandlers[$event] = $handler;
         });
-        $websocketMock->shouldReceive('open')->withAnyArgs()->andReturn(new Promise(function ($resolve) { $resolve(); }));
+        $websocketMock->shouldReceive('open')->withAnyArgs()->andReturn(new Promise(function ($resolve) {
+            $resolve();
+        }));
         $websocketMock->shouldReceive('send')->withAnyArgs();
         $websocketMock->shouldReceive('close')->withAnyArgs();
 

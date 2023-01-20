@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use Exan\Dhp\Component\SelectMenu\ChannelSelectMenu;
 use Exan\Dhp\Enums\Component\SelectMenuType;
 use Exan\Dhp\Enums\Parts\ChannelType;

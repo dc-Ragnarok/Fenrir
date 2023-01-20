@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use Exan\Dhp\Const\Events;
 use Exan\Dhp\EventHandler;
 use Exan\Dhp\Websocket\Objects\Payload;

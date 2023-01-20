@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use Exan\Dhp\Component\Button\DangerButton;
 use Exan\Dhp\Component\Button\LinkButton;
 use Exan\Dhp\Component\Button\PrimaryButton;

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use React\EventLoop\TimerInterface;
 use Tests\Exan\Dhp\Discord\DiscordTestCase;
 

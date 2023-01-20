@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Exan\Dhp\Websocket\Events;
 
 use Exan\Dhp\Parts\User;
@@ -9,5 +11,4 @@ use Exan\Dhp\Parts\User;
  */
 class UserUpdate extends User
 {
-
 }

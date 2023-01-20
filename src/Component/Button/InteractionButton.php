@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Exan\Dhp\Component\Button;
 
 use Exan\Dhp\Component\Component;
@@ -15,7 +17,8 @@ abstract class InteractionButton extends Component
         protected ?string $label = null,
         protected ?Emoji $emoji = null,
         protected bool $disabled = false
-    ) { }
+    ) {
+    }
 
     public function get(): array
     {

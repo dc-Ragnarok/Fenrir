@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use Exan\Dhp\Component\Component;
 use Exan\Dhp\Exceptions\Rest\Helpers\ComponentRowBuilder\TooManyItemsException;
 use Exan\Dhp\Rest\Helpers\ComponentRowBuilder;
@@ -9,7 +11,7 @@ class ComponentRowBuilderTest extends TestCase
 {
     public function testGetComponentRow()
     {
-        $component = new class extends Component {
+        $component = new class () extends Component {
             public function get(): array
             {
                 return ['::component::'];
@@ -25,7 +27,7 @@ class ComponentRowBuilderTest extends TestCase
 
     public function testItThrowsAnErrorOnTooManyComponents()
     {
-        $component = new class extends Component {
+        $component = new class () extends Component {
             public function get(): array
             {
                 return ['::component::'];

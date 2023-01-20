@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use Exan\Dhp\Component\SelectMenu\StringSelectMenu;
 use Exan\Dhp\Enums\Component\SelectMenuType;
 use Exan\Dhp\Exceptions\Components\SelectMenu\StringSelectMenu\NoOptionsException;

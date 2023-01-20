@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Exan\Dhp\Rest\Helpers;
 
 use Carbon\Carbon;
@@ -63,7 +65,7 @@ class EmbedBuilder
         return $this;
     }
 
-    public function setColour(int $color) : EmbedBuilder
+    public function setColour(int $color): EmbedBuilder
     {
         return $this->setColor($color);
     }

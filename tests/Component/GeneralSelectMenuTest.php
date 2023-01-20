@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use Exan\Dhp\Component\SelectMenu\MentionableSelectMenu;
 use Exan\Dhp\Component\SelectMenu\RoleSelectMenu;
 use Exan\Dhp\Component\SelectMenu\UserSelectMenu;

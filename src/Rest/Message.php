@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Exan\Dhp\Rest;
 
 use Discord\Http\Endpoint;
@@ -10,7 +12,6 @@ class Message
 {
     public function __construct(private Http $http)
     {
-
     }
 
     public function send(string $channelId, MessageBuilder $message)

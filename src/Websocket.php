@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Exan\Dhp;
 
 use Evenement\EventEmitter;
@@ -64,7 +66,6 @@ class Websocket extends EventEmitter
                 $reject($e);
             });
         });
-
     }
 
     /**

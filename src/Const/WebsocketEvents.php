@@ -1,8 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Exan\Dhp\Const;
 
 class WebsocketEvents
 {
-    final const MESSAGE = 'MESSAGE';
+    final public const MESSAGE = 'MESSAGE';
 }

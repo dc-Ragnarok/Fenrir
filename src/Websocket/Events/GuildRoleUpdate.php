@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Exan\Dhp\Websocket\Events;
 
 use Exan\Dhp\Parts\Role;

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use Exan\Dhp\EventHandler;
 use Tests\Exan\Dhp\Discord\DiscordTestCase;
 

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Exan\Dhp\Component;
 
 use Exan\Dhp\Enums\Component\TextInputStyle;
@@ -47,5 +49,6 @@ class TextInput extends Component
         protected ?bool $required = null,
         protected ?string $value = null,
         protected ?string $placeholder = null
-    ) { }
+    ) {
+    }
 }

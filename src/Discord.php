@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Exan\Dhp;
 
 use Discord\Http\Drivers\React;
@@ -159,16 +161,16 @@ class Discord
                 $this->handleEvent($payload);
                 break;
 
-            /**
-             * Resume event
-             */
+                /**
+                 * Resume event
+                 */
             case 7:
                 $this->reconnect(true, true);
                 break;
 
-            /**
-             * Invalid session
-             */
+                /**
+                 * Invalid session
+                 */
             case 9:
                 $this->reconnect(
                     false,
@@ -176,9 +178,9 @@ class Discord
                 );
                 break;
 
-            /**
-             * Hello event
-             */
+                /**
+                 * Hello event
+                 */
             case 10:
                 if ($this->shouldIdentify) {
                     $this->identify();
@@ -189,9 +191,9 @@ class Discord
                 $this->handleHello($this->mapper->map($payload->d, new Hello()));
                 break;
 
-            /**
-             * Acknowledgement of heartbeat
-             */
+                /**
+                 * Acknowledgement of heartbeat
+                 */
             case 11:
                 $this->cancelScheduledReconnect();
                 break;

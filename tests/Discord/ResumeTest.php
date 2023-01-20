@@ -1,6 +1,8 @@
 <?php
 
-ini_set('memory_limit','-1');
+declare(strict_types=1);
+
+ini_set('memory_limit', '-1');
 
 use Exan\Dhp\Const\Events;
 use Exan\Dhp\EventHandler;

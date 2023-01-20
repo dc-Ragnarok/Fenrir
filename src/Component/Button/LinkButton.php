@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Exan\Dhp\Component\Button;
 
 use Exan\Dhp\Component\Component;
@@ -15,7 +17,8 @@ class LinkButton extends Component
         private ?string $label = null,
         private ?Emoji $emoji = null,
         private bool $disabled = false
-    ) { }
+    ) {
+    }
 
     public function get(): array
     {

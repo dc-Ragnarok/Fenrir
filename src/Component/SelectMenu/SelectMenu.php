@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Exan\Dhp\Component\SelectMenu;
 
 use Exan\Dhp\Component\Component;
@@ -15,7 +17,8 @@ abstract class SelectMenu extends Component
         protected ?int $minValues = null,
         protected ?int $maxValues = null,
         protected bool $disabled = false
-    ) { }
+    ) {
+    }
 
     public function get(): array
     {

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use Exan\Dhp\Component\TextInput;
 use Exan\Dhp\Enums\Component\TextInputStyle;
 use PHPUnit\Framework\TestCase;

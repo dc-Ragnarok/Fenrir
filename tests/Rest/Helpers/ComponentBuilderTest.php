@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use Exan\Dhp\Exceptions\Rest\Helpers\ComponentBuilder\TooManyRowsException;
 use Exan\Dhp\Rest\Helpers\ComponentBuilder;
 use Exan\Dhp\Rest\Helpers\ComponentRowBuilder;
