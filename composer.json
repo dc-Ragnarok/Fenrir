@@ -24,6 +24,8 @@
         "seregazhuk/react-promise-testing": "^0.6.1"
     },
     "scripts": {
+        "post-update-cmd": "composer install --working-dir=phpcs",
+        "phpcs": "./phpcs/vendor/bin/php-cs-fixer fix --allow-risky=yes",
         "test": "./vendor/bin/phpunit tests/",
         "test-coverage": "php -d xdebug.mode=coverage ./vendor/bin/phpunit --coverage-text tests/",
         "test-coverage-html": "php -d xdebug.mode=coverage ./vendor/bin/phpunit --coverage-html .phpunit.cache/cov-html tests/"
