@@ -44,6 +44,7 @@ class Discord
     private bool $shouldIdentify = true;
 
     private Http $http;
+    public Rest $rest;
 
     public function __construct(private string $token, $options = [], private LoggerInterface $logger = new NullLogger())
     {
@@ -69,6 +70,8 @@ class Discord
                 $this->loop
             )
         );
+
+        $this->rest = new Rest($this->http);
 
         $this->websocket = new Websocket($options['timeout'], $this->logger);
 

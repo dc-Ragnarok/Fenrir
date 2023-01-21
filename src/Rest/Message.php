@@ -16,6 +16,25 @@ class Message
 
     public function send(string $channelId, MessageBuilder $message)
     {
+        if ($message->requiresMultipart()) {
+            $multipart = $message->getMultipart();
+
+            $body = $multipart->getBody();
+            $headers = $multipart->getHeaders($body);
+
+            var_dump($body, $headers, $multipart->fields);
+            file_put_contents('out.txt', print_r([$body, $headers, $multipart->fields], true));
+
+            return $this->http->post(
+                Endpoint::bind(
+                    Endpoint::CHANNEL_MESSAGES,
+                    $channelId
+                ),
+                $body . "\n",
+                $headers
+            );
+        }
+
         return $this->http->post(
             Endpoint::bind(
                 Endpoint::CHANNEL_MESSAGES,

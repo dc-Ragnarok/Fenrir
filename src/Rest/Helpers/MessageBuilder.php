@@ -4,12 +4,17 @@ declare(strict_types=1);
 
 namespace Exan\Dhp\Rest\Helpers;
 
+use Exan\Dhp\Parts\Multipart;
+use Exan\Dhp\Parts\MultipartField;
+
 /**
  * @see https://discord.com/developers/docs/resources/channel#create-message
  */
 class MessageBuilder
 {
     private $data = [];
+
+    private $files = [];
 
     /**
      * @var string $content Up to 2000 characters
@@ -108,8 +113,32 @@ class MessageBuilder
         return $this;
     }
 
-    public function addFile(): MessageBuilder
+    public function addFile(string $fileName, string $content, ?string $contentType = null): MessageBuilder
     {
+        $file = [
+            'name' => $fileName,
+            'content' => $content,
+        ];
+
+        $this->files[] = &$file;
+
+        if (!is_null($contentType)) {
+            $file['type'] = $contentType;
+
+            return $this;
+        }
+
+        $fileInfo = pathinfo($fileName);
+        if (empty($fileInfo['extension'])) {
+            return $this;
+        }
+
+        $type = (new \Mimey\MimeTypes)->getMimeType($fileInfo['extension']);
+
+        if (!is_null($type)) {
+            $file['type'] = $type;
+        }
+
         return $this;
     }
 
@@ -127,8 +156,48 @@ class MessageBuilder
         return $this;
     }
 
+    public function requiresMultipart()
+    {
+        return $this->files !== [];
+    }
+
     public function get(): array
     {
         return $this->data;
+    }
+
+    public function getMultipart(): Multipart
+    {
+        $fields = [new MultipartField(
+            'payload_json',
+            json_encode($this->get()),
+            null,
+            ['Content-Type' => 'application/json']
+        )];
+
+        $fields = array_merge(
+            $fields,
+            array_map(function ($fileData, int $index) {
+                $headers = isset($fileData['type'])
+                    ? ['Content-Type' => $fileData['type']]
+                    : [];
+
+                return new MultipartField(
+                    'files[' . $index . ']',
+                    $fileData['content'],
+                    $fileData['name'],
+                    $headers
+                );
+            }, $this->files, array_keys($this->files))
+        );
+
+        // $fields[] = new MultipartField(
+        //     'payload_json',
+        //     json_encode($this->get()),
+        //     null,
+        //     ['Content-Type' => 'application/json']
+        // );
+
+        return new Multipart($fields);
     }
 }
