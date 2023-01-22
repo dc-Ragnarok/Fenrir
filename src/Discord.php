@@ -71,7 +71,7 @@ class Discord
             )
         );
 
-        $this->rest = new Rest($this->http);
+        $this->rest = new Rest($this->http, $this->mapper);
 
         $this->websocket = new Websocket($options['timeout'], $this->logger);
 

@@ -5,14 +5,14 @@ declare(strict_types=1);
 namespace Exan\Dhp\Rest;
 
 use Discord\Http\Http;
-use Exan\Dhp\Rest\Message;
+use JsonMapper;
 
 class Rest
 {
-    public Message $message;
+    public Channel $channel;
 
-    public function __construct(private Http $http)
+    public function __construct(private Http $http, private JsonMapper $jsonMapper)
     {
-        $this->message = new Message($this->http);
+        $this->channel = new Channel($this->http, $this->jsonMapper);
     }
 }
