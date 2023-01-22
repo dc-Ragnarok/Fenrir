@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Exan\Dhp\Parts;
 
 use Ramsey\Uuid\Uuid;
@@ -10,20 +12,20 @@ class Multipart
 
     private function getBoundary(): string
     {
-        return self::BOUNDARY_PREFIX . '-' . strtoupper(Uuid::uuid1());
+        return self::BOUNDARY_PREFIX . '-' . strtoupper((string) Uuid::uuid1());
     }
 
     /**
      * @var MultipartField[] $fields
      */
-    public function __construct(public array $fields, private ?string $boundary = null)
+    public function __construct(private array $fields, private ?string $boundary = null)
     {
         $this->boundary = $this->boundary ?? $this->getBoundary();
     }
 
     public function getBody()
     {
-        $boundaryStart = '----' . $this->boundary;
+        $boundaryStart = '--' . $this->boundary;
         $boundaryEnd = $boundaryStart . '--';
 
         $convertedFields = array_map(
@@ -47,7 +49,7 @@ class Multipart
         $body = $body ?? $this->getBody();
 
         return [
-            'Content-Type' => 'multipart/form-data; boundary=--' . $this->boundary . '',
+            'Content-Type' => 'multipart/form-data; boundary=' . $this->boundary,
             'Content-Length' => strlen($this->getBody()),
         ];
     }

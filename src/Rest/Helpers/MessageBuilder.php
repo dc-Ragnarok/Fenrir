@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Exan\Dhp\Rest\Helpers;
 
+use Exan\Dhp\Exceptions\Rest\Helpers\MessageBuilder\TooManyStickersException;
 use Exan\Dhp\Parts\Multipart;
 use Exan\Dhp\Parts\MultipartField;
 
@@ -101,10 +102,16 @@ class MessageBuilder
 
     /**
      * Up to 3 stickers
+     *
+     * @throws TooManyStickersException
      */
     public function addSticker(string $stickerId): MessageBuilder
     {
-        if (!isset($this->data['stickers'])) {
+        if (isset($this->data['stickers'])) {
+            if (count($this->data['stickers']) === 3) {
+                throw new TooManyStickersException();
+            }
+        } else {
             $this->data['stickers'] = [];
         }
 
@@ -113,6 +120,12 @@ class MessageBuilder
         return $this;
     }
 
+    /**
+     * @var string $contentType
+     *  Content-Type header to be used for this file.
+     *  If not provided, this is guessed based on file extension.
+     * @see https://discord.com/developers/docs/reference#uploading-files
+     */
     public function addFile(string $fileName, string $content, ?string $contentType = null): MessageBuilder
     {
         $file = [
@@ -133,7 +146,7 @@ class MessageBuilder
             return $this;
         }
 
-        $type = (new \Mimey\MimeTypes)->getMimeType($fileInfo['extension']);
+        $type = (new \Mimey\MimeTypes())->getMimeType($fileInfo['extension']);
 
         if (!is_null($type)) {
             $file['type'] = $type;
@@ -145,8 +158,14 @@ class MessageBuilder
     /**
      * @see https://discord.com/developers/docs/resources/channel#attachment-object
      */
-    public function addAttachment(): MessageBuilder
+    public function addAttachment(AttachmentBuilder $attachment): MessageBuilder
     {
+        if (!isset($this->data['attachments'])) {
+            $this->data['attachments'] = [];
+        }
+
+        $this->data['attachments'][] = $attachment->get();
+
         return $this;
     }
 
@@ -154,6 +173,11 @@ class MessageBuilder
     {
         $this->data['flags'] = $flags;
         return $this;
+    }
+
+    public function getFiles(): array
+    {
+        return $this->files;
     }
 
     public function requiresMultipart()
@@ -168,35 +192,25 @@ class MessageBuilder
 
     public function getMultipart(): Multipart
     {
-        $fields = [new MultipartField(
+        $fields = array_map(function ($fileData, int $index) {
+            $headers = isset($fileData['type'])
+                ? ['Content-Type' => $fileData['type']]
+                : [];
+
+            return new MultipartField(
+                'files[' . $index . ']',
+                $fileData['content'],
+                $fileData['name'],
+                $headers
+            );
+        }, $this->files, array_keys($this->files));
+
+        $fields[] = new MultipartField(
             'payload_json',
             json_encode($this->get()),
             null,
             ['Content-Type' => 'application/json']
-        )];
-
-        $fields = array_merge(
-            $fields,
-            array_map(function ($fileData, int $index) {
-                $headers = isset($fileData['type'])
-                    ? ['Content-Type' => $fileData['type']]
-                    : [];
-
-                return new MultipartField(
-                    'files[' . $index . ']',
-                    $fileData['content'],
-                    $fileData['name'],
-                    $headers
-                );
-            }, $this->files, array_keys($this->files))
         );
-
-        // $fields[] = new MultipartField(
-        //     'payload_json',
-        //     json_encode($this->get()),
-        //     null,
-        //     ['Content-Type' => 'application/json']
-        // );
 
         return new Multipart($fields);
     }

@@ -1,24 +1,40 @@
 <?php
 
+declare(strict_types=1);
+
 use Exan\Dhp\Parts\Multipart;
 use Exan\Dhp\Parts\MultipartField;
 use PHPUnit\Framework\TestCase;
 
 class MultipartTest extends TestCase
 {
-    public function testThing()
+    public function testFormBuilding()
     {
+        $fields = array_map(function (string $return) {
+            $mock = Mockery::mock(MultipartField::class);
+            $mock->shouldReceive('__toString')->andReturn($return);
 
-        var_dump((new \Mimey\MimeTypes)->getMimeType('nothing lol'));
+            return $mock;
+        }, ['::first field::', '::second field::', '::third field::']);
 
-        $fields = [
-            new MultipartField('files[0]', 'AAAABBBB', 'test.png'),
-            new MultipartField('files[1]', 'CCCCDDDD', 'something.png'),
-            new MultipartField('files[2]', 'EEEEFFFF', 'thing.png'),
-        ];
+        $multipart = new Multipart($fields, '::boundary::');
 
-        $multipart = new Multipart($fields);
+        $this->assertEquals(
+            <<<EXPECTED
+            --::boundary::
+            ::first field::
+            --::boundary::
+            ::second field::
+            --::boundary::
+            ::third field::
+            --::boundary::--
+            EXPECTED,
+            $multipart->getBody()
+        );
 
-        var_dump((string) $multipart);
+        $this->assertEquals([
+            'Content-Type' => 'multipart/form-data; boundary=::boundary::',
+            'Content-Length' => strlen($multipart->getBody()),
+        ], $multipart->getHeaders());
     }
 }

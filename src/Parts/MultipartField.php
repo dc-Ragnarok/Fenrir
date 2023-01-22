@@ -1,10 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Exan\Dhp\Parts;
 
 class MultipartField
 {
-
     /**
      * @var String[] $headers
      */
@@ -14,7 +15,6 @@ class MultipartField
         private ?string $fileName = null,
         private array $headers = [],
     ) {
-        
     }
 
     public function __toString(): string
