@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Exan\Dhp\Websocket\Events;
 
 use Carbon\Carbon;
+use Exan\Dhp\Enums\Parts\TargetType;
 use Exan\Dhp\Parts\Application;
 use Exan\Dhp\Parts\User;
 
@@ -20,7 +21,7 @@ class InviteCreate
     public ?User $inviter;
     public int $max_age;
     public int $max_uses;
-    public int $target_type; // @TODO\
+    public TargetType $target_type;
     public ?User $target_user;
     public ?Application $target_application;
     public bool $temporary;

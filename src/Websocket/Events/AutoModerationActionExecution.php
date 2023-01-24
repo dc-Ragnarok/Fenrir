@@ -4,15 +4,18 @@ declare(strict_types=1);
 
 namespace Exan\Dhp\Websocket\Events;
 
+use Exan\Dhp\Enums\Parts\TriggerType;
+use Exan\Dhp\Parts\AutoModeractionAction;
+
 /**
  * @see https://discord.com/developers/docs/topics/gateway-events#auto-moderation-action-execution
  */
 class AutoModerationActionExecution
 {
     public string $guild_id;
-    public object $action; // @TODO
+    public AutoModeractionAction $action;
     public string $rule_id;
-    public int $rule_trigger_types; // @TODO
+    public TriggerType $rule_trigger_types;
     public string $user_id;
     public ?string $channel_id;
     public ?string $message_id;

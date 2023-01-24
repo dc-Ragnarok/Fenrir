@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Exan\Dhp\Websocket\Events;
 
+use Exan\Dhp\Parts\Channel;
+use Exan\Dhp\Parts\ThreadMember;
+
 /**
  * @see https://discord.com/developers/docs/topics/gateway-events#thread-update
  */
@@ -16,6 +19,13 @@ class ThreadUpdate
      */
     public array $channel_ids;
 
-    public array $threads; // @TODO
-    public array $members; // @TODO
+    /**
+     * @var Channel[]
+     */
+    public array $threads;
+
+    /**
+     * @var ThreadMember[]
+     */
+    public array $members;
 }
