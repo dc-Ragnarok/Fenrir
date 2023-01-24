@@ -56,9 +56,11 @@ class Discord
 
         $this->intents = $options['intents'];
 
-        $this->events = new EventHandler($options['raw_events']);
-
         $this->mapper = new JsonMapper();
+
+        $this->mapper->bStrictNullTypes = false;
+
+        $this->events = new EventHandler($options['raw_events'], $this->mapper);
 
         $this->loop = Loop::get();
 
