@@ -11,7 +11,7 @@ use JsonMapper;
 
 class EventHandler extends EventEmitter
 {
-    public function __construct(private bool $raw = false, private JsonMapper $mapper)
+    public function __construct(private JsonMapper $mapper, private bool $raw = false)
     {
     }
 

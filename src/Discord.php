@@ -60,7 +60,7 @@ class Discord
 
         $this->mapper->bStrictNullTypes = false;
 
-        $this->events = new EventHandler($options['raw_events'], $this->mapper);
+        $this->events = new EventHandler($this->mapper, $options['raw_events']);
 
         $this->loop = Loop::get();
 
