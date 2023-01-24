@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Exan\Dhp\Parts;
 
 /**
@@ -8,5 +10,4 @@ namespace Exan\Dhp\Parts;
  */
 class PartialMember
 {
-
 }

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Exan\Dhp\Rest;
 
 use JsonMapper;
@@ -12,7 +14,7 @@ trait MapPromises
     public function mapPromise(PromiseInterface $promise, string $class)
     {
         return $promise->then(function ($data) use ($class) {
-            return $this->jsonMapper->map($data, new $class);
+            return $this->jsonMapper->map($data, new $class());
         });
     }
 }
