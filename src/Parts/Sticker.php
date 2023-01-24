@@ -4,6 +4,9 @@ namespace Exan\Dhp\Parts;
 
 use Exan\Dhp\Enums\Parts\StickerFormatType;
 
+/**
+ * @see https://discord.com/developers/docs/resources/sticker#sticker-object
+ */
 class Sticker
 {
     public string $id;

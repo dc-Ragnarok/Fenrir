@@ -6,6 +6,11 @@ namespace Exan\Dhp\Parts;
 
 use Ramsey\Uuid\Uuid;
 
+/**
+ * Not recommended to use in your own application
+ *
+ * @see https://discord.com/developers/docs/reference#uploading-files
+ */
 class Multipart
 {
     public const BOUNDARY_PREFIX = 'DHP-BOUNDARY';

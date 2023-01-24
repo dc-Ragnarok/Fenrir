@@ -4,6 +4,12 @@ declare(strict_types=1);
 
 namespace Exan\Dhp\Parts;
 
+
+/**
+ * Not recommended to use in your own application
+ *
+ * @see https://discord.com/developers/docs/reference#uploading-files
+ */
 class MultipartField
 {
     /**

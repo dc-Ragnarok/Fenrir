@@ -5,6 +5,9 @@ namespace Exan\Dhp\Parts;
 use Carbon\Carbon;
 use Exan\Dhp\Enums\Parts\ActivityType;
 
+/**
+ * @see https://discord.com/developers/docs/topics/gateway-events#activity-object
+ */
 class Activity
 {
     public string $name;

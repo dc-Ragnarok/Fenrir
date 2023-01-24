@@ -7,6 +7,7 @@ namespace Exan\Dhp\Parts;
 /**
  * @see https://discord.com/developers/docs/resources/guild#unavailable-guild-object
  * @see https://discord.com/developers/docs/resources/guild#guild-object
+ * @todo
  */
 class Guild
 {
