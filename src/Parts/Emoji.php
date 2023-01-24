@@ -27,4 +27,20 @@ class Emoji
             'animated' => isset($this->animated),
         ];
     }
+
+    public function __toString(): string
+    {
+        return isset($this->name)
+            ? $this->name . ':' . $this->id
+            : urlencode($this->id);
+    }
+
+    public static function get(string $id, string $name): self
+    {
+        $emoji = new self();
+        $emoji->id = $id;
+        $emoji->name = $name;
+
+        return $emoji;
+    }
 }
