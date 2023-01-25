@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+namespace Tests\Exan\Dhp\Component;
+
 use Exan\Dhp\Component\Button\DangerButton;
 use Exan\Dhp\Component\Button\LinkButton;
 use Exan\Dhp\Component\Button\PrimaryButton;

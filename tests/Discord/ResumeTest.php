@@ -2,13 +2,11 @@
 
 declare(strict_types=1);
 
+namespace Tests\Exan\Dhp\Discord;
+
 ini_set('memory_limit', '-1');
 
 use Exan\Dhp\Const\Events;
-use Exan\Dhp\EventHandler;
-use Mockery\Mock;
-use Ratchet\Client\WebSocket;
-use Ratchet\RFC6455\Messaging\MessageInterface;
 use Tests\Exan\Dhp\Discord\DiscordTestCase;
 
 /**

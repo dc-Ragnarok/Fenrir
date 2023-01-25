@@ -43,13 +43,7 @@ abstract class HttpHelperTestCase extends TestCase
     {
         $this->http->shouldReceive($mockOptions['method'])->andReturns(
             new Promise(function ($resolve) use ($mockOptions) {
-                /**
-                 * Promise resolving immediately can cause issues for strict
-                 * return types.
-                 */
-                // (Loop::get())->addTimer(0.01, function () use ($resolve, $mockOptions) {
                 $resolve($mockOptions['return']);
-                // });
             })
         )->once();
 

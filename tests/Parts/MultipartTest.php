@@ -2,8 +2,11 @@
 
 declare(strict_types=1);
 
+namespace Tests\Exan\Dhp\Parts;
+
 use Exan\Dhp\Parts\Multipart;
 use Exan\Dhp\Parts\MultipartField;
+use Mockery;
 use PHPUnit\Framework\TestCase;
 
 class MultipartTest extends TestCase

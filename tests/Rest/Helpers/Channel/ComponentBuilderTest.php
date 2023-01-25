@@ -2,9 +2,12 @@
 
 declare(strict_types=1);
 
+namespace Tests\Exan\Dhp\Rest\Helpers\Channel;
+
 use Exan\Dhp\Exceptions\Rest\Helpers\ComponentBuilder\TooManyRowsException;
 use Exan\Dhp\Rest\Helpers\ComponentBuilder;
 use Exan\Dhp\Rest\Helpers\ComponentRowBuilder;
+use Mockery;
 use PHPUnit\Framework\TestCase;
 
 class ComponentBuilderTest extends TestCase

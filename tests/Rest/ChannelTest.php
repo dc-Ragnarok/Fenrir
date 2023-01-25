@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+namespace Tests\Exan\Dhp\Rest;
+
 use Exan\Dhp\Parts\Channel as PartsChannel;
 use Exan\Dhp\Parts\Emoji;
 use Exan\Dhp\Parts\Message;

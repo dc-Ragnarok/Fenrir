@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+namespace Tests\Exan\Dhp\Rest\Helpers\Channel;
+
 use Exan\Dhp\Rest\Helpers\EmbedBuilder;
 use PHPUnit\Framework\TestCase;
 
@@ -42,7 +44,7 @@ class EmbedBuilderTest extends TestCase
     public function testSetTimestamp()
     {
         $builder = new EmbedBuilder();
-        $timestamp = Carbon\Carbon::now();
+        $timestamp = \Carbon\Carbon::now();
         $builder->setTimestamp($timestamp);
 
         $this->assertEquals($timestamp->toIso8601String(), $builder->get()['timestamp']);

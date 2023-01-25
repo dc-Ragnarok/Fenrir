@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+namespace Tests\Exan\Dhp\Component;
+
 use Exan\Dhp\Component\SelectMenu\StringSelectMenu;
 use Exan\Dhp\Enums\Component\SelectMenuType;
 use Exan\Dhp\Exceptions\Components\SelectMenu\StringSelectMenu\NoOptionsException;

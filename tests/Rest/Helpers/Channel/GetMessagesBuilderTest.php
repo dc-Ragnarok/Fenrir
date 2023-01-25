@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+namespace Tests\Exan\Dhp\Rest\Helpers\Channel;
+
 use Exan\Dhp\Rest\Helpers\GetMessagesBuilder;
 use PHPUnit\Framework\TestCase;
 

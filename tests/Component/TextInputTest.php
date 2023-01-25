@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+namespace Tests\Exan\Dhp\Component;
+
 use Exan\Dhp\Component\TextInput;
 use Exan\Dhp\Enums\Component\TextInputStyle;
 use PHPUnit\Framework\TestCase;

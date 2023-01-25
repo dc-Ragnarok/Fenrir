@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+namespace Tests\Exan\Dhp\Rest\Helpers\Channel;
+
 use Exan\Dhp\Component\Component;
 use Exan\Dhp\Exceptions\Rest\Helpers\ComponentRowBuilder\TooManyItemsException;
 use Exan\Dhp\Rest\Helpers\ComponentRowBuilder;

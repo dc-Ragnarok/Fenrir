@@ -2,7 +2,10 @@
 
 declare(strict_types=1);
 
+namespace Tests\Exan\Dhp\Discord;
+
 use Exan\Dhp\EventHandler;
+use Mockery;
 use Tests\Exan\Dhp\Discord\DiscordTestCase;
 
 /**
