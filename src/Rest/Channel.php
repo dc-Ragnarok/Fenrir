@@ -16,7 +16,6 @@ use Exan\Dhp\Rest\Helpers\HttpHelper;
 use Exan\Dhp\Rest\Helpers\MessageBuilder;
 use JsonMapper;
 use React\Promise\ExtendedPromiseInterface;
-use React\Promise\Promise;
 
 class Channel
 {
