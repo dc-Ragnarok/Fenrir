@@ -8,10 +8,12 @@ use Discord\Http\Endpoint;
 use Discord\Http\Http;
 use Exan\Dhp\Parts\Channel as PartsChannel;
 use Exan\Dhp\Parts\Emoji;
+use Exan\Dhp\Parts\Invite;
 use Exan\Dhp\Parts\Message;
 use Exan\Dhp\Parts\User;
 use Exan\Dhp\Rest\Helpers\Channel\GetMessagesBuilder;
 use Exan\Dhp\Rest\Helpers\Channel\GetReactionsBuilder;
+use Exan\Dhp\Rest\Helpers\Channel\InviteBuilder;
 use Exan\Dhp\Rest\Helpers\Channel\MessageBuilder;
 use Exan\Dhp\Rest\Helpers\HttpHelper;
 use JsonMapper;
@@ -147,10 +149,22 @@ class Channel
     }
 
     /**
-     * @todo
+     * @see https://discord.com/developers/docs/resources/channel#crosspost-message
+     *
+     * @return ExtendedPromiseInterface<\Exan\Dhp\Parts\Message>
      */
-    public function crosspostMessage()
+    public function crosspostMessage(string $channelId, string $messageId): ExtendedPromiseInterface
     {
+        return $this->mapPromise(
+            $this->http->post(
+                Endpoint::bind(
+                    Endpoint::CHANNEL_CROSSPOST_MESSAGE,
+                    $channelId,
+                    $messageId
+                )
+            ),
+            Message::class,
+        );
     }
 
     /**
@@ -313,17 +327,44 @@ class Channel
     }
 
     /**
-     * @todo
+     * @see https://discord.com/developers/docs/resources/invite#invite-object
+     *
+     * @return ExtendedPromiseInterface<\Exan\Dhp\Parts\Invite>
      */
-    public function getChannelInvites()
+    public function getChannelInvites(string $channelId): ExtendedPromiseInterface
     {
+        return $this->mapArrayPromise(
+            $this->http->get(
+                Endpoint::bind(
+                    Endpoint::CHANNEL_INVITES,
+                    $channelId
+                )
+            ),
+            Invite::class
+        );
     }
 
     /**
-     * @todo
+     * @see https://discord.com/developers/docs/resources/channel#get-channel-invites
+     *
+     * @return ExtendedPromiseInterface<\Exan\Dhp\Parts\Invite>
      */
-    public function createChannelInvite()
-    {
+    public function createChannelInvite(
+        string $channelId,
+        InviteBuilder $inviteBuilder = new InviteBuilder(),
+        ?string $reason = null
+    ): ExtendedPromiseInterface {
+        return $this->mapPromise(
+            $this->http->post(
+                Endpoint::bind(
+                    Endpoint::CHANNEL_INVITES,
+                    $channelId
+                ),
+                $inviteBuilder->get(),
+                $this->getAuditLogReasonHeader($reason)
+            ),
+            Invite::class
+        );
     }
 
     /**

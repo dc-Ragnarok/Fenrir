@@ -6,6 +6,7 @@ namespace Tests\Exan\Dhp\Rest;
 
 use Exan\Dhp\Parts\Channel as PartsChannel;
 use Exan\Dhp\Parts\Emoji;
+use Exan\Dhp\Parts\Invite;
 use Exan\Dhp\Parts\Message;
 use Exan\Dhp\Parts\User;
 use Exan\Dhp\Rest\Channel;
@@ -94,9 +95,17 @@ class ChannelTest extends HttpHelperTestCase
                     'returnType' => Message::class,
                 ]
             ],
-            /**
-             * @todo crosspostMessage
-             */
+            'Crosspost message' => [
+                'method' => 'crosspostMessage',
+                'args' => ['::channel id::', '::message id::'],
+                'mockOptions' => [
+                    'method' => 'post',
+                    'return' => (object) [],
+                ],
+                'validationOptions' => [
+                    'returnType' => Message::class,
+                ]
+            ],
             'Create reaction' => [
                 'method' => 'createReaction',
                 'args' => ['::channel id::', '::message id::', Emoji::get('::id::')],
@@ -168,9 +177,30 @@ class ChannelTest extends HttpHelperTestCase
             ],
             /**
              * @todo editChannelPermissions
-             * @todo getChannelInvites
-             * @todo createChannelInvite
              */
+            'Get channel invites' => [
+                'method' => 'getChannelInvites',
+                'args' => ['::channel id::'],
+                'mockOptions' => [
+                    'method' => 'get',
+                    'return' => [(object) [], (object) [], (object) []],
+                ],
+                'validationOptions' => [
+                    'returnType' => Invite::class,
+                    'array' => true,
+                ]
+            ],
+            'Create channel invite' => [
+                'method' => 'createChannelInvite',
+                'args' => ['::channel id::'],
+                'mockOptions' => [
+                    'method' => 'post',
+                    'return' => (object) [],
+                ],
+                'validationOptions' => [
+                    'returnType' => Invite::class,
+                ]
+            ],
             'Delete channel permissions' => [
                 'method' => 'deleteChannelPermissions',
                 'args' => ['::channel id::', '::overwrite id::'],
