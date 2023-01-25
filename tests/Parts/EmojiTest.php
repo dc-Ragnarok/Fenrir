@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use Exan\Dhp\Parts\Emoji;
 use PHPUnit\Framework\TestCase;
 

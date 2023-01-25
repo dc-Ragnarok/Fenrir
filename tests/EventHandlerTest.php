@@ -19,7 +19,7 @@ final class EventHandlerTest extends TestCase
     {
         parent::setUp();
 
-        $this->jsonMapper = new JsonMapper;
+        $this->jsonMapper = new JsonMapper();
         $this->jsonMapper->bStrictNullTypes = false;
     }
 

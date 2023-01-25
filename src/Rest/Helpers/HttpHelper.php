@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Exan\Dhp\Rest\Helpers;
 
 use JsonMapper;
@@ -20,7 +22,7 @@ trait HttpHelper
     protected function mapArrayPromise(PromiseInterface $promise, string $class): ExtendedPromiseInterface
     {
         return $promise->then(function ($data) use ($class) {
-            return $this->jsonMapper->map($data, [], $class);
+            return $this->jsonMapper->mapArray($data, [], $class);
         });
     }
 

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use Exan\Dhp\Rest\Helpers\GetMessagesBuilder;
 use PHPUnit\Framework\TestCase;
 

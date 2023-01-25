@@ -29,7 +29,7 @@ class Channel
     /**
      * @see https://discord.com/developers/docs/resources/channel#get-channel
      *
-     * @return Promise<Exan\Dhp\Parts\Channel>
+     * @return ExtendedPromiseInterface<\Exan\Dhp\Parts\Channel>
      */
     public function get(string $channelId): ExtendedPromiseInterface
     {
@@ -49,13 +49,12 @@ class Channel
      */
     public function modify()
     {
-
     }
 
     /**
      * @see https://discord.com/developers/docs/resources/channel#deleteclose-channel
      *
-     * @return Promise<Exan\Dhp\Parts\Channel>
+     * @return ExtendedPromiseInterface<\Exan\Dhp\Parts\Channel>
      */
     public function delete(string $channelId, ?string $reason = null): ExtendedPromiseInterface
     {
@@ -74,18 +73,18 @@ class Channel
 
     /**
      * @see https://discord.com/developers/docs/resources/channel#get-channel-messages
+     *
+     * @return ExtendedPromiseInterface<\Exan\Dhp\Parts\Message[]>
      */
     public function getMessages(
         string $channelId,
-        string $messageId,
         GetMessagesBuilder $getMessagesBuilder = new GetMessagesBuilder()
-    ) {
+    ): ExtendedPromiseInterface {
         return $this->mapArrayPromise(
             $this->http->get(
                 Endpoint::bind(
                     Endpoint::CHANNEL_MESSAGES,
-                    $channelId,
-                    $messageId
+                    $channelId
                 ),
                 $getMessagesBuilder->get()
             ),
@@ -96,9 +95,9 @@ class Channel
     /**
      * @see https://discord.com/developers/docs/resources/channel#get-channel-message
      *
-     * @return Promise<Exan\Dhp\Parts\Message>
+     * @return ExtendedPromiseInterface<\Exan\Dhp\Parts\Message>
      */
-    public function getMessage(string $channelId, string $messageId): Promise
+    public function getMessage(string $channelId, string $messageId): ExtendedPromiseInterface
     {
         return $this->mapPromise(
             $this->http->get(
@@ -115,10 +114,12 @@ class Channel
     /**
      * @see https://discord.com/developers/docs/resources/channel#create-message
      *
-     * @return Promise<Exan\Dhp\Parts\Message>
+     * @return ExtendedPromiseInterface<\Exan\Dhp\Parts\Message>
      */
-    public function createMessage(string $channelId, MessageBuilder $message): Promise
-    {
+    public function createMessage(
+        string $channelId,
+        MessageBuilder $message
+    ): ExtendedPromiseInterface {
         return $this->mapPromise((function () use ($channelId, $message) {
             if ($message->requiresMultipart()) {
                 $multipart = $message->getMultipart();
@@ -151,14 +152,18 @@ class Channel
      */
     public function crosspostMessage()
     {
-
     }
 
     /**
      * @see https://discord.com/developers/docs/resources/channel#create-reaction
+     *
+     * @return ExtendedPromiseInterface<void>
      */
-    public function createReaction(string $channelId, string $messageId, Emoji $emoji): Promise
-    {
+    public function createReaction(
+        string $channelId,
+        string $messageId,
+        Emoji $emoji
+    ): ExtendedPromiseInterface {
         return $this->http->put(
             Endpoint::bind(
                 Endpoint::MESSAGE_REACTION_EMOJI,
@@ -171,9 +176,14 @@ class Channel
 
     /**
      * @see https://discord.com/developers/docs/resources/channel#delete-own-reaction
+     *
+     * @return ExtendedPromiseInterface<void>
      */
-    public function deleteOwnReaction(string $channelId, string $messageId, Emoji $emoji): Promise
-    {
+    public function deleteOwnReaction(
+        string $channelId,
+        string $messageId,
+        Emoji $emoji
+    ): ExtendedPromiseInterface {
         return $this->http->delete(
             Endpoint::bind(
                 Endpoint::OWN_MESSAGE_REACTION,
@@ -186,9 +196,15 @@ class Channel
 
     /**
      * @see https://discord.com/developers/docs/resources/channel#delete-user-reaction
+     *
+     * @return ExtendedPromiseInterface<void>
      */
-    public function deleteUserReaction(string $channelId, string $messageId, Emoji $emoji, string $userId): Promise
-    {
+    public function deleteUserReaction(
+        string $channelId,
+        string $messageId,
+        Emoji $emoji,
+        string $userId
+    ): ExtendedPromiseInterface {
         return $this->http->delete(
             Endpoint::bind(
                 Endpoint::USER_MESSAGE_REACTION,
@@ -202,6 +218,8 @@ class Channel
 
     /**
      * @see https://discord.com/developers/docs/resources/channel#get-reactions
+     *
+     * @return ExtendedPromiseInterface<\Exan\Dhp\Parts\Message>
      */
     public function getReactions(
         string $channelId,
@@ -225,8 +243,10 @@ class Channel
 
     /**
      * @see https://discord.com/developers/docs/resources/channel#delete-all-reactions
+     *
+     * @return ExtendedPromiseInterface<void>
      */
-    public function deleteAllReactions(string $channelId, string $messageId): Promise
+    public function deleteAllReactions(string $channelId, string $messageId): ExtendedPromiseInterface
     {
         return $this->http->delete(
             Endpoint::bind(
@@ -239,9 +259,14 @@ class Channel
 
     /**
      * @see https://discord.com/developers/docs/resources/channel#delete-all-reactions-for-emoji
+     *
+     * @return ExtendedPromiseInterface<void>
      */
-    public function deleteAllReactionsForEmoji(string $channelId, string $messageId, Emoji $emoji)
-    {
+    public function deleteAllReactionsForEmoji(
+        string $channelId,
+        string $messageId,
+        Emoji $emoji
+    ): ExtendedPromiseInterface {
         return $this->http->delete(
             Endpoint::bind(
                 Endpoint::MESSAGE_REACTION_EMOJI,
@@ -257,16 +282,20 @@ class Channel
      */
     public function editMessage()
     {
-
     }
 
     /**
      * @see https://discord.com/developers/docs/resources/channel#bulk-delete-messages
      *
      * @var string[] $messageIds
+     *
+     * @return ExtendedPromiseInterface<void>
      */
-    public function bulkDeleteMessages(string $channelId, array $messageIds, ?string $reason = null)
-    {
+    public function bulkDeleteMessages(
+        string $channelId,
+        array $messageIds,
+        ?string $reason = null
+    ): ExtendedPromiseInterface {
         return $this->http->post(
             Endpoint::bind(
                 Endpoint::CHANNEL_MESSAGES_BULK_DELETE,
@@ -282,7 +311,6 @@ class Channel
      */
     public function editChannelPermissions()
     {
-
     }
 
     /**
@@ -290,7 +318,6 @@ class Channel
      */
     public function getChannelInvites()
     {
-
     }
 
     /**
@@ -298,14 +325,18 @@ class Channel
      */
     public function createChannelInvite()
     {
-
     }
 
     /**
      * @see https://discord.com/developers/docs/resources/channel#delete-channel-permission
+     *
+     * @return ExtendedPromiseInterface<void>
      */
-    public function deleteChannelPermissions(string $channelId, string $overwriteId, ?string $reason = null)
-    {
+    public function deleteChannelPermissions(
+        string $channelId,
+        string $overwriteId,
+        ?string $reason = null
+    ): ExtendedPromiseInterface {
         return $this->http->delete(
             Endpoint::bind(
                 Endpoint::CHANNEL_PERMISSIONS,
@@ -322,13 +353,14 @@ class Channel
      */
     public function followAnnouncementChannel()
     {
-
     }
 
     /**
      * @see https://discord.com/developers/docs/resources/channel#trigger-typing-indicator
+     *
+     * @return ExtendedPromiseInterface<void>
      */
-    public function triggerTypingIndicator(string $channelId)
+    public function triggerTypingIndicator(string $channelId): ExtendedPromiseInterface
     {
         return $this->http->post(
             Endpoint::bind(
@@ -343,13 +375,14 @@ class Channel
      */
     public function getPinnedMessages()
     {
-
     }
 
     /**
      * @see https://discord.com/developers/docs/resources/channel#pin-message
+     *
+     * @return ExtendedPromiseInterface<void>
      */
-    public function pinMessage(string $channelId, string $messageId)
+    public function pinMessage(string $channelId, string $messageId): ExtendedPromiseInterface
     {
         return $this->http->put(
             Endpoint::bind(
@@ -362,8 +395,10 @@ class Channel
 
     /**
      * @see https://discord.com/developers/docs/resources/channel#unpin-message
+     *
+     * @return ExtendedPromiseInterface<void>
      */
-    public function unpinMessage(string $channelId, string $messageId)
+    public function unpinMessage(string $channelId, string $messageId): ExtendedPromiseInterface
     {
         return $this->http->delete(
             Endpoint::bind(
@@ -379,7 +414,6 @@ class Channel
      */
     public function startThreadFromMessage()
     {
-
     }
 
     /**
@@ -387,7 +421,6 @@ class Channel
      */
     public function startThreadWithoutMessage()
     {
-
     }
 
     /**
@@ -395,7 +428,6 @@ class Channel
      */
     public function startThreadInForumChannel()
     {
-
     }
 
     /**
@@ -403,7 +435,6 @@ class Channel
      */
     public function joinThread()
     {
-
     }
 
     /**
@@ -411,7 +442,6 @@ class Channel
      */
     public function addThreadMember()
     {
-
     }
 
     /**
@@ -419,7 +449,6 @@ class Channel
      */
     public function leaveThread()
     {
-
     }
 
     /**
@@ -427,7 +456,6 @@ class Channel
      */
     public function removeThreadMember()
     {
-
     }
 
     /**
@@ -435,7 +463,6 @@ class Channel
      */
     public function getThreadMember()
     {
-
     }
 
     /**
@@ -443,7 +470,6 @@ class Channel
      */
     public function listThreadMembers()
     {
-
     }
 
     /**
@@ -451,7 +477,6 @@ class Channel
      */
     public function listPublicArchivedThreads()
     {
-
     }
 
     /**
@@ -459,7 +484,6 @@ class Channel
      */
     public function listPrivateArchivedThreads()
     {
-
     }
 
     /**
@@ -467,6 +491,5 @@ class Channel
      */
     public function listJoinedPrivateArchivedThreads()
     {
-
     }
 }
