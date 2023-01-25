@@ -10,10 +10,10 @@ use Exan\Dhp\Parts\Channel as PartsChannel;
 use Exan\Dhp\Parts\Emoji;
 use Exan\Dhp\Parts\Message;
 use Exan\Dhp\Parts\User;
-use Exan\Dhp\Rest\Helpers\GetMessagesBuilder;
-use Exan\Dhp\Rest\Helpers\GetReactionsBuilder;
+use Exan\Dhp\Rest\Helpers\Channel\GetMessagesBuilder;
+use Exan\Dhp\Rest\Helpers\Channel\GetReactionsBuilder;
+use Exan\Dhp\Rest\Helpers\Channel\MessageBuilder;
 use Exan\Dhp\Rest\Helpers\HttpHelper;
-use Exan\Dhp\Rest\Helpers\MessageBuilder;
 use JsonMapper;
 use React\Promise\ExtendedPromiseInterface;
 

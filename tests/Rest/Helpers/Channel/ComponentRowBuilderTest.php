@@ -6,7 +6,7 @@ namespace Tests\Exan\Dhp\Rest\Helpers\Channel;
 
 use Exan\Dhp\Component\Component;
 use Exan\Dhp\Exceptions\Rest\Helpers\ComponentRowBuilder\TooManyItemsException;
-use Exan\Dhp\Rest\Helpers\ComponentRowBuilder;
+use Exan\Dhp\Rest\Helpers\Channel\ComponentRowBuilder;
 use PHPUnit\Framework\TestCase;
 
 class ComponentRowBuilderTest extends TestCase

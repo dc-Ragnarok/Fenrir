@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Exan\Dhp\Rest\Helpers;
+namespace Exan\Dhp\Rest\Helpers\Channel;
 
 /**
  * @see https://discord.com/developers/docs/resources/channel#attachment-object

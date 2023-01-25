@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Exan\Dhp\Rest\Helpers\Channel;
 
-use Exan\Dhp\Rest\Helpers\AllowedMentionsBuilder;
+use Exan\Dhp\Rest\Helpers\Channel\AllowedMentionsBuilder;
 use PHPUnit\Framework\TestCase;
 
 class AllowedMentionsBuilderTest extends TestCase

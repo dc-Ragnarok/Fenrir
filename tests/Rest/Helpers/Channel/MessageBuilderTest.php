@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace Tests\Exan\Dhp\Rest\Helpers\Channel;
 
 use Exan\Dhp\Exceptions\Rest\Helpers\MessageBuilder\TooManyStickersException;
-use Exan\Dhp\Rest\Helpers\AllowedMentionsBuilder;
-use Exan\Dhp\Rest\Helpers\AttachmentBuilder;
-use Exan\Dhp\Rest\Helpers\ComponentBuilder;
-use Exan\Dhp\Rest\Helpers\EmbedBuilder;
-use Exan\Dhp\Rest\Helpers\MessageBuilder;
+use Exan\Dhp\Rest\Helpers\Channel\AllowedMentionsBuilder;
+use Exan\Dhp\Rest\Helpers\Channel\AttachmentBuilder;
+use Exan\Dhp\Rest\Helpers\Channel\ComponentBuilder;
+use Exan\Dhp\Rest\Helpers\Channel\EmbedBuilder;
+use Exan\Dhp\Rest\Helpers\Channel\MessageBuilder;
 use Mockery;
 use PHPUnit\Framework\TestCase;
 

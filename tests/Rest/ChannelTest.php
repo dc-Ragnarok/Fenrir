@@ -9,7 +9,7 @@ use Exan\Dhp\Parts\Emoji;
 use Exan\Dhp\Parts\Message;
 use Exan\Dhp\Parts\User;
 use Exan\Dhp\Rest\Channel;
-use Exan\Dhp\Rest\Helpers\MessageBuilder;
+use Exan\Dhp\Rest\Helpers\Channel\MessageBuilder;
 use Tests\Exan\Dhp\Rest\HttpHelperTestCase;
 
 class ChannelTest extends HttpHelperTestCase

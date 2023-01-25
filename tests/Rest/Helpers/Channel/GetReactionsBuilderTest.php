@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Exan\Dhp\Rest\Helpers\Channel;
 
-use Exan\Dhp\Rest\Helpers\GetReactionsBuilder;
+use Exan\Dhp\Rest\Helpers\Channel\GetReactionsBuilder;
 use Monolog\Test\TestCase;
 
 class GetReactionsBuilderTest extends TestCase

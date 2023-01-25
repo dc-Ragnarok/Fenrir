@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Exan\Dhp\Rest\Helpers\Channel;
 
-use Exan\Dhp\Rest\Helpers\EmbedBuilder;
+use Exan\Dhp\Rest\Helpers\Channel\EmbedBuilder;
 use PHPUnit\Framework\TestCase;
 
 class EmbedBuilderTest extends TestCase

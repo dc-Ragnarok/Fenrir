@@ -2,11 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Exan\Dhp\Rest\Helpers;
+namespace Exan\Dhp\Rest\Helpers\Channel;
 
 use Exan\Dhp\Component\Component;
 use Exan\Dhp\Exceptions\Rest\Helpers\ComponentRowBuilder\TooManyItemsException;
-use Exan\Dhp\Rest\Helpers\ComponentRowBuilder as HelpersComponentRowBuilder;
 
 /**
  * Can not exceed 9 components
@@ -25,7 +24,7 @@ class ComponentRowBuilder
     /**
      * @throws TooManyItemsException
      */
-    public function add(Component $component): HelpersComponentRowBuilder
+    public function add(Component $component): ComponentRowBuilder
     {
         if (count($this->components) === 9) {
             throw new TooManyItemsException();
