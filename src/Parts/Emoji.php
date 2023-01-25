@@ -6,18 +6,17 @@ namespace Exan\Dhp\Parts;
 
 /**
  * @see https://discord.com/developers/docs/resources/emoji#emoji-object
- * @todo
  */
 class Emoji
 {
     public string $id;
-    public ?string $name;
-    public ?array $roles;
-    public ?User $user;
-    public ?bool $require_colons;
-    public ?bool $managed;
-    public ?bool $animated;
-    public ?bool $available;
+    public ?string $name = null;
+    public ?array $roles = null;
+    public ?User $user = null;
+    public ?bool $require_colons = null;
+    public ?bool $managed = null;
+    public bool $animated = false;
+    public ?bool $available = null;
 
     public function getPartial(): array
     {
@@ -30,16 +29,17 @@ class Emoji
 
     public function __toString(): string
     {
-        return isset($this->name)
-            ? $this->name . ':' . $this->id
-            : urlencode($this->id);
+        return is_null($this->name)
+            ? urlencode($this->id)
+            : $this->name . ':' . $this->id;
     }
 
-    public static function get(string $id, string $name): self
+    public static function get(string $id, ?string $name = null, bool $animated = false): self
     {
         $emoji = new self();
         $emoji->id = $id;
         $emoji->name = $name;
+        $emoji->animated = $animated;
 
         return $emoji;
     }

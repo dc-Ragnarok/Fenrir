@@ -3,16 +3,24 @@
 namespace Exan\Dhp\Rest\Helpers;
 
 use JsonMapper;
+use React\Promise\ExtendedPromiseInterface;
 use React\Promise\PromiseInterface;
 
 trait HttpHelper
 {
     private JsonMapper $jsonMapper;
 
-    protected function mapPromise(PromiseInterface $promise, string $class)
+    protected function mapPromise(PromiseInterface $promise, string $class): ExtendedPromiseInterface
     {
         return $promise->then(function ($data) use ($class) {
             return $this->jsonMapper->map($data, new $class());
+        });
+    }
+
+    protected function mapArrayPromise(PromiseInterface $promise, string $class): ExtendedPromiseInterface
+    {
+        return $promise->then(function ($data) use ($class) {
+            return $this->jsonMapper->map($data, [], $class);
         });
     }
 

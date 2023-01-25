@@ -9,9 +9,13 @@ use Discord\Http\Http;
 use Exan\Dhp\Parts\Channel as PartsChannel;
 use Exan\Dhp\Parts\Emoji;
 use Exan\Dhp\Parts\Message;
+use Exan\Dhp\Parts\User;
+use Exan\Dhp\Rest\Helpers\GetMessagesBuilder;
+use Exan\Dhp\Rest\Helpers\GetReactionsBuilder;
 use Exan\Dhp\Rest\Helpers\HttpHelper;
 use Exan\Dhp\Rest\Helpers\MessageBuilder;
 use JsonMapper;
+use React\Promise\ExtendedPromiseInterface;
 use React\Promise\Promise;
 
 class Channel
@@ -27,7 +31,7 @@ class Channel
      *
      * @return Promise<Exan\Dhp\Parts\Channel>
      */
-    public function get(string $channelId): Promise
+    public function get(string $channelId): ExtendedPromiseInterface
     {
         return $this->mapPromise(
             $this->http->get(
@@ -53,7 +57,7 @@ class Channel
      *
      * @return Promise<Exan\Dhp\Parts\Channel>
      */
-    public function delete(string $channelId, ?string $reason = null): Promise
+    public function delete(string $channelId, ?string $reason = null): ExtendedPromiseInterface
     {
         return $this->mapPromise(
             $this->http->delete(
@@ -69,11 +73,24 @@ class Channel
     }
 
     /**
-     * @todo
+     * @see https://discord.com/developers/docs/resources/channel#get-channel-messages
      */
-    public function getMessages()
-    {
-
+    public function getMessages(
+        string $channelId,
+        string $messageId,
+        GetMessagesBuilder $getMessagesBuilder = new GetMessagesBuilder()
+    ) {
+        return $this->mapArrayPromise(
+            $this->http->get(
+                Endpoint::bind(
+                    Endpoint::CHANNEL_MESSAGES,
+                    $channelId,
+                    $messageId
+                ),
+                $getMessagesBuilder->get()
+            ),
+            Message::class
+        );
     }
 
     /**
@@ -184,11 +201,26 @@ class Channel
     }
 
     /**
-     * @todo
+     * @see https://discord.com/developers/docs/resources/channel#get-reactions
      */
-    public function getReactions()
-    {
-
+    public function getReactions(
+        string $channelId,
+        string $messageId,
+        Emoji $emoji,
+        GetReactionsBuilder $getReactionsBuilder = new GetReactionsBuilder()
+    ) {
+        return $this->mapArrayPromise(
+            $this->http->get(
+                Endpoint::bind(
+                    Endpoint::CHANNEL_MESSAGES,
+                    $channelId,
+                    $messageId,
+                    (string) $emoji
+                ),
+                $getReactionsBuilder->get()
+            ),
+            User::class
+        );
     }
 
     /**
