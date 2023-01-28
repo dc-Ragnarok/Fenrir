@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Exan\Dhp\Rest\Helpers\Channel;
 
+use Exan\Dhp\Const\Validation\ItemLimit;
+
 class GetMessagesBuilder
 {
     private $data = [];
@@ -31,7 +33,7 @@ class GetMessagesBuilder
 
     public function setLimit(int $limit): GetMessagesBuilder
     {
-        $limit = min(max($limit, 1), 100);
+        $limit = ItemLimit::withinLimit($limit);
 
         $this->data['limit'] = $limit;
 

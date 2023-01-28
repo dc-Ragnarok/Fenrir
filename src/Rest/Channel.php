@@ -15,6 +15,7 @@ use Exan\Dhp\Rest\Helpers\Channel\GetMessagesBuilder;
 use Exan\Dhp\Rest\Helpers\Channel\GetReactionsBuilder;
 use Exan\Dhp\Rest\Helpers\Channel\InviteBuilder;
 use Exan\Dhp\Rest\Helpers\Channel\MessageBuilder;
+use Exan\Dhp\Rest\Helpers\Channel\StartThreadFromMessageBuilder;
 use Exan\Dhp\Rest\Helpers\HttpHelper;
 use JsonMapper;
 use React\Promise\ExtendedPromiseInterface;
@@ -411,10 +412,21 @@ class Channel
     }
 
     /**
-     * @todo
+     * @see https://discord.com/developers/docs/resources/channel#get-pinned-messages
+     *
+     * @return ExtendedPromiseInterface<\Exan\Dhp\Parts\Message[]>
      */
-    public function getPinnedMessages()
+    public function getPinnedMessages(string $channelId)
     {
+        return $this->mapArrayPromise(
+            $this->http->get(
+                Endpoint::bind(
+                    Endpoint::CHANNEL_PINS,
+                    $channelId
+                )
+            ),
+            Message::class
+        );
     }
 
     /**
@@ -450,10 +462,26 @@ class Channel
     }
 
     /**
-     * @todo
+     * @see https://discord.com/developers/docs/resources/channel#start-thread-from-message
+     *
+     * @return ExtendedPromiseInterface<\Exan\Dhp\Parts\Channel>
      */
-    public function startThreadFromMessage()
-    {
+    public function startThreadFromMessage(
+        string $channelId,
+        string $messageId,
+        StartThreadFromMessageBuilder $startThreadFromMessageBuilder
+    ) {
+        return $this->mapPromise(
+            $this->http->post(
+                Endpoint::bind(
+                    Endpoint::CHANNEL_MESSAGE_THREADS,
+                    $channelId,
+                    $messageId,
+                ),
+                $startThreadFromMessageBuilder->get()
+            ),
+            PartsChannel::class
+        );
     }
 
     /**

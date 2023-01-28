@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Exan\Dhp\Rest\Helpers\Channel;
 
+use Exan\Dhp\Const\Validation\ItemLimit;
+
 class GetReactionsBuilder
 {
     private $data = [];
@@ -17,7 +19,7 @@ class GetReactionsBuilder
 
     public function setLimit(int $limit): GetReactionsBuilder
     {
-        $this->data['limit'] = min(max($limit, 1), 100);
+        $this->data['limit'] = ItemLimit::withinLimit($limit);
 
         return $this;
     }

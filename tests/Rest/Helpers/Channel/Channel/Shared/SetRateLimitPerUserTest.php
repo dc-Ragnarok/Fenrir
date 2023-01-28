@@ -2,6 +2,7 @@
 
 namespace Tests\Exan\Dhp\Rest\Helpers\Channel\Channel\Shared;
 
+use Exan\Dhp\Const\Validation\RateLimit;
 use Exan\Dhp\Rest\Helpers\Channel\Channel\Shared\SetRateLimitPerUser;
 use PHPUnit\Framework\TestCase;
 
@@ -17,24 +18,24 @@ class SetRateLimitPerUserTest extends TestCase
     public function testSetNormalRateLimitPerUser()
     {
         $class = $this->getTestClass();
-        $class->setRateLimitPerUser(150);
+        $class->setRateLimitPerUser(RateLimit::MIN + 1);
 
-        $this->assertEquals(['rate_limit_per_user' => 150], $class->get());
+        $this->assertEquals(['rate_limit_per_user' => RateLimit::MIN + 1], $class->get());
     }
 
     public function testSetBelowZeroRateLimitPerUser()
     {
         $class = $this->getTestClass();
-        $class->setRateLimitPerUser(-10);
+        $class->setRateLimitPerUser(RateLimit::MIN - 1);
 
-        $this->assertEquals(['rate_limit_per_user' => 0], $class->get());
+        $this->assertEquals(['rate_limit_per_user' => RateLimit::MIN], $class->get());
     }
 
-    public function testSetAbove21600RateLimitPerUser()
+    public function testSetAboveMaxRateLimitPerUser()
     {
         $class = $this->getTestClass();
-        $class->setRateLimitPerUser(22000);
+        $class->setRateLimitPerUser(RateLimit::MAX + 1);
 
-        $this->assertEquals(['rate_limit_per_user' => 21600], $class->get());
+        $this->assertEquals(['rate_limit_per_user' => RateLimit::MAX], $class->get());
     }
 }

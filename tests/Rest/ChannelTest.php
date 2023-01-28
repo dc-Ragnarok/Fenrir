@@ -11,6 +11,7 @@ use Exan\Dhp\Parts\Message;
 use Exan\Dhp\Parts\User;
 use Exan\Dhp\Rest\Channel;
 use Exan\Dhp\Rest\Helpers\Channel\MessageBuilder;
+use Exan\Dhp\Rest\Helpers\Channel\StartThreadFromMessageBuilder;
 use Tests\Exan\Dhp\Rest\HttpHelperTestCase;
 
 class ChannelTest extends HttpHelperTestCase
@@ -155,7 +156,7 @@ class ChannelTest extends HttpHelperTestCase
                 'validationOptions' => [],
             ],
             'Delete all reactions for emoji' => [
-                'method' => 'deleteAllReactions',
+                'method' => 'deleteAllReactionsForEmoji',
                 'args' => ['::channel id::', '::message id::', Emoji::get('::id::')],
                 'mockOptions' => [
                     'method' => 'delete',
@@ -222,9 +223,18 @@ class ChannelTest extends HttpHelperTestCase
                 ],
                 'validationOptions' => [],
             ],
-            /**
-             * @todo getPinnedMessages
-             */
+            'Get pinned messages' => [
+                'method' => 'getPinnedMessages',
+                'args' => ['::channel id::'],
+                'mockOptions' => [
+                    'method' => 'get',
+                    'return' => [(object) [], (object) [], (object) []],
+                ],
+                'validationOptions' => [
+                    'returnType' => Message::class,
+                    'array' => true,
+                ],
+            ],
             'Pin message' => [
                 'method' => 'pinMessage',
                 'args' => ['::channel id::', '::message id::'],
@@ -242,7 +252,18 @@ class ChannelTest extends HttpHelperTestCase
                     'return' => null,
                 ],
                 'validationOptions' => [],
-            ]
+            ],
+            'Start thread from message' => [
+                'method' => 'startThreadFromMessage',
+                'args' => ['::channel id::', '::message id::', new StartThreadFromMessageBuilder],
+                'mockOptions' => [
+                    'method' => 'post',
+                    'return' => (object) [],
+                ],
+                'validationOptions' => [
+                    'returnType' => PartsChannel::class,
+                ],
+            ],
         ];
     }
 }

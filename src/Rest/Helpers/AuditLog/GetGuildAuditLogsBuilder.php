@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Exan\Dhp\Rest\Helpers\AuditLog;
 
+use Exan\Dhp\Const\Validation\ItemLimit;
+
 class GetGuildAuditLogsBuilder
 {
     private $data = [];
@@ -38,7 +40,7 @@ class GetGuildAuditLogsBuilder
 
     public function setLimit(int $limit): GetGuildAuditLogsBuilder
     {
-        $this->data['limit'] = min(max($limit, 1), 100);
+        $this->data['limit'] = ItemLimit::withinLimit($limit);
 
         return $this;
     }
