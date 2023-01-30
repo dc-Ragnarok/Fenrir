@@ -10,6 +10,11 @@ use Exan\Dhp\Parts\Invite;
 use Exan\Dhp\Parts\Message;
 use Exan\Dhp\Parts\User;
 use Exan\Dhp\Rest\Channel;
+use Exan\Dhp\Rest\Helpers\Channel\Channel\GuildAnnouncementChannelBuilder;
+use Exan\Dhp\Rest\Helpers\Channel\Channel\GuildForumChannelBuilder;
+use Exan\Dhp\Rest\Helpers\Channel\Channel\GuildStageVoiceChannelBuilder;
+use Exan\Dhp\Rest\Helpers\Channel\Channel\GuildTextChannelBuilder;
+use Exan\Dhp\Rest\Helpers\Channel\Channel\GuildVoiceChannelBuilder;
 use Exan\Dhp\Rest\Helpers\Channel\MessageBuilder;
 use Exan\Dhp\Rest\Helpers\Channel\StartThreadFromMessageBuilder;
 use Tests\Exan\Dhp\Rest\HttpHelperTestCase;
@@ -37,9 +42,61 @@ class ChannelTest extends HttpHelperTestCase
                     'returnType' => PartsChannel::class,
                 ]
             ],
-            /**
-             * @todo modify
-             */
+            'Modify channel with Guild Text' => [
+                'method' => 'modify',
+                'args' => ['::channel id::', new GuildTextChannelBuilder()],
+                'mockOptions' => [
+                    'method' => 'post',
+                    'return' => (object) [],
+                ],
+                'validationOptions' => [
+                    'returnType' => PartsChannel::class,
+                ]
+            ],
+            'Modify channel with Guild Announcement' => [
+                'method' => 'modify',
+                'args' => ['::channel id::', new GuildAnnouncementChannelBuilder()],
+                'mockOptions' => [
+                    'method' => 'post',
+                    'return' => (object) [],
+                ],
+                'validationOptions' => [
+                    'returnType' => PartsChannel::class,
+                ]
+            ],
+            'Modify channel with Guild Stage Voice' => [
+                'method' => 'modify',
+                'args' => ['::channel id::', new GuildStageVoiceChannelBuilder()],
+                'mockOptions' => [
+                    'method' => 'post',
+                    'return' => (object) [],
+                ],
+                'validationOptions' => [
+                    'returnType' => PartsChannel::class,
+                ]
+            ],
+            'Modify channel with Guild Forum' => [
+                'method' => 'modify',
+                'args' => ['::channel id::', new GuildForumChannelBuilder()],
+                'mockOptions' => [
+                    'method' => 'post',
+                    'return' => (object) [],
+                ],
+                'validationOptions' => [
+                    'returnType' => PartsChannel::class,
+                ]
+            ],
+            'Modify channel with Guild Voice' => [
+                'method' => 'modify',
+                'args' => ['::channel id::', new GuildVoiceChannelBuilder()],
+                'mockOptions' => [
+                    'method' => 'post',
+                    'return' => (object) [],
+                ],
+                'validationOptions' => [
+                    'returnType' => PartsChannel::class,
+                ]
+            ],
             'Delete channel' => [
                 'method' => 'delete',
                 'args' => ['::channel id::'],

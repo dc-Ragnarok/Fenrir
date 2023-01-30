@@ -11,6 +11,7 @@ use Exan\Dhp\Parts\Emoji;
 use Exan\Dhp\Parts\Invite;
 use Exan\Dhp\Parts\Message;
 use Exan\Dhp\Parts\User;
+use Exan\Dhp\Rest\Helpers\Channel\Channel\ChannelBuilder;
 use Exan\Dhp\Rest\Helpers\Channel\GetMessagesBuilder;
 use Exan\Dhp\Rest\Helpers\Channel\GetReactionsBuilder;
 use Exan\Dhp\Rest\Helpers\Channel\InviteBuilder;
@@ -47,10 +48,23 @@ class Channel
     }
 
     /**
-     * @todo
+     * @see https://discord.com/developers/docs/resources/channel#modify-channel
+     *
+     * @return ExtendedPromiseInterface<\Exan\Dhp\Parts\Channel>
      */
-    public function modify()
+    public function modify(string $channelId, ChannelBuilder $channel, ?string $reason = null)
     {
+        return $this->mapPromise(
+            $this->http->post(
+                Endpoint::bind(
+                    Endpoint::CHANNEL,
+                    $channelId
+                ),
+                $channel->get(),
+                $this->getAuditLogReasonHeader($reason)
+            ),
+            PartsChannel::class
+        );
     }
 
     /**
