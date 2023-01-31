@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+namespace Tests\Exan\Dhp\Rest;
+
 use Exan\Dhp\Parts\Emoji as PartsEmoji;
 use Exan\Dhp\Rest\Emoji;
 use Exan\Dhp\Rest\Helpers\Emoji\EmojiBuilder;

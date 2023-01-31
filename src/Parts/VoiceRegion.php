@@ -8,5 +8,4 @@ namespace Exan\Dhp\Parts;
  */
 class VoiceRegion
 {
-
 }

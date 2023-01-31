@@ -107,7 +107,12 @@ class EmbedBuilderTest extends TestCase
     public function testSetAuthor()
     {
         $builder = new EmbedBuilder();
-        $builder->setAuthor('Test Author', 'https://test.com', 'https://test.com/icon.png', 'https://test-proxy.com/icon.png');
+        $builder->setAuthor(
+            'Test Author',
+            'https://test.com',
+            'https://test.com/icon.png',
+            'https://test-proxy.com/icon.png'
+        );
 
         $author = $builder->get()['author'];
 

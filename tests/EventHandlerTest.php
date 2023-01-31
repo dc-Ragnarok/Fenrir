@@ -2,12 +2,16 @@
 
 declare(strict_types=1);
 
+namespace Tests\Exan\Dhp;
+
 use Exan\Dhp\Const\Events;
 use Exan\Dhp\EventHandler;
 use Exan\Dhp\Websocket\Objects\Payload;
+use JsonMapper;
 use PHPUnit\Framework\TestCase;
 use React\Promise\Promise;
 use seregazhuk\React\PromiseTesting\AssertsPromise;
+use stdClass;
 
 final class EventHandlerTest extends TestCase
 {

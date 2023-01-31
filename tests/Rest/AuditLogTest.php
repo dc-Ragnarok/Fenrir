@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+namespace Tests\Exan\Dhp\Rest;
+
 use Exan\Dhp\Parts\AuditLog as PartsAuditLog;
 use Exan\Dhp\Rest\AuditLog;
 use Exan\Dhp\Rest\Helpers\AuditLog\GetGuildAuditLogsBuilder;

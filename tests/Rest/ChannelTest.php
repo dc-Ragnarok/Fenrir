@@ -312,7 +312,7 @@ class ChannelTest extends HttpHelperTestCase
             ],
             'Start thread from message' => [
                 'method' => 'startThreadFromMessage',
-                'args' => ['::channel id::', '::message id::', new StartThreadFromMessageBuilder],
+                'args' => ['::channel id::', '::message id::', new StartThreadFromMessageBuilder()],
                 'mockOptions' => [
                     'method' => 'post',
                     'return' => (object) [],

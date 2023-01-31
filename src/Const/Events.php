@@ -86,7 +86,8 @@ class Events
     final public const WEBHOOKS_UPDATE = 'WEBHOOKS_UPDATE';
 
     final public const MAPPINGS = [
-        self::APPLICATION_COMMAND_PERMISSIONS_UPDATE => \Exan\Dhp\Websocket\Events\ApplicationCommandPermissionsUpdate::class,
+        self::APPLICATION_COMMAND_PERMISSIONS_UPDATE =>
+            \Exan\Dhp\Websocket\Events\ApplicationCommandPermissionsUpdate::class,
         self::AUTO_MODERATION_RULE_CREATE => \Exan\Dhp\Websocket\Events\AutoModerationRuleCreate::class,
         self::AUTO_MODERATION_RULE_UPDATE => \Exan\Dhp\Websocket\Events\AutoModerationRuleUpdate::class,
         self::AUTO_MODERATION_RULE_DELETE => \Exan\Dhp\Websocket\Events\AutoModerationRuleDelete::class,

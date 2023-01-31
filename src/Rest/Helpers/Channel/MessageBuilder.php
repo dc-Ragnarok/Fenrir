@@ -71,8 +71,12 @@ class MessageBuilder
     /**
      * @see https://discord.com/developers/docs/resources/channel#message-reference-object-message-reference-structure
      */
-    public function setReference(string $channelId, string $messageId, bool $failIfNotExists, ?string $guildId = null): MessageBuilder
-    {
+    public function setReference(
+        string $channelId,
+        string $messageId,
+        bool $failIfNotExists,
+        ?string $guildId = null
+    ): MessageBuilder {
         $this->data['message_reference'] = [
             'channel_id' => $channelId,
             'message_id' => $messageId,

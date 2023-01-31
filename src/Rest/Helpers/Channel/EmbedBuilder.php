@@ -92,8 +92,12 @@ class EmbedBuilder
     /**
      * @see https://discord.com/developers/docs/resources/channel#embed-object-embed-image-structure
      */
-    public function setImage(string $url, ?string $proxyUrl = null, ?int $height = null, ?int $width = null): EmbedBuilder
-    {
+    public function setImage(
+        string $url,
+        ?string $proxyUrl = null,
+        ?int $height = null,
+        ?int $width = null
+    ): EmbedBuilder {
         $this->data['image'] = ['url' => $url];
 
         if (!is_null($proxyUrl)) {
@@ -114,8 +118,12 @@ class EmbedBuilder
     /**
      * @see https://discord.com/developers/docs/resources/channel#embed-object-embed-thumbnail-structure
      */
-    public function setThumbnail(string $url, ?string $proxyUrl = null, ?int $height = null, ?int $width = null): EmbedBuilder
-    {
+    public function setThumbnail(
+        string $url,
+        ?string $proxyUrl = null,
+        ?int $height = null,
+        ?int $width = null
+    ): EmbedBuilder {
         $this->data['thumbnail'] = ['url' => $url];
 
         if (!is_null($proxyUrl)) {
@@ -136,8 +144,12 @@ class EmbedBuilder
     /**
      * @see https://discord.com/developers/docs/resources/channel#embed-object-embed-video-structure
      */
-    public function setVideo(string $url, ?string $proxyUrl = null, ?int $height = null, ?int $width = null): EmbedBuilder
-    {
+    public function setVideo(
+        string $url,
+        ?string $proxyUrl = null,
+        ?int $height = null,
+        ?int $width = null
+    ): EmbedBuilder {
         $this->data['video'] = ['url' => $url];
 
         if (!is_null($proxyUrl)) {
@@ -179,8 +191,12 @@ class EmbedBuilder
      * @var string $name Up to 256 characters
      * @see https://discord.com/developers/docs/resources/channel#embed-object-embed-author-structure
      */
-    public function setAuthor(string $name, ?string $url = null, ?string $iconUrl = null, ?string $proxyIconUrl = null): EmbedBuilder
-    {
+    public function setAuthor(
+        string $name,
+        ?string $url = null,
+        ?string $iconUrl = null,
+        ?string $proxyIconUrl = null
+    ): EmbedBuilder {
         $this->data['author'] = ['name' => $name];
 
         if (!is_null($url)) {

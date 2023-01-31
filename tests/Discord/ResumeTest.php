@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Tests\Exan\Dhp\Discord;
 
-ini_set('memory_limit', '-1');
-
 use Exan\Dhp\Const\Events;
 use Tests\Exan\Dhp\Discord\DiscordTestCase;
 

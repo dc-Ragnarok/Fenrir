@@ -46,8 +46,11 @@ class Discord
     private Http $http;
     public Rest $rest;
 
-    public function __construct(private string $token, $options = [], private LoggerInterface $logger = new NullLogger())
-    {
+    public function __construct(
+        private string $token,
+        $options = [],
+        private LoggerInterface $logger = new NullLogger()
+    ) {
         $options = array_merge([
             'timeout' => 10,
             'raw_events' => false,

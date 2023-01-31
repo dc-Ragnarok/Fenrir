@@ -18,7 +18,8 @@ class Overwrite
         public OverwriteType $type,
         public ?string $allow = null,
         public ?string $deny = null
-    ) { }
+    ) {
+    }
 
     public function toArray()
     {

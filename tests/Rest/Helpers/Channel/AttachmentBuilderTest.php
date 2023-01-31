@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Tests\Exan\Dhp\Rest\Helpers\Channel;
 
 use PHPUnit\Framework\TestCase;
-
 use Exan\Dhp\Rest\Helpers\Channel\AttachmentBuilder;
 
 class AttachmentBuilderTest extends TestCase

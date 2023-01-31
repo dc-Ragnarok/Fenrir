@@ -19,7 +19,8 @@ class BucketTest extends TestCase
     {
         $bucket = new Bucket(Loop::get(), 2, 1);
 
-        $spy = Mockery::spy(function() {});
+        $spy = Mockery::spy(function () {
+        });
 
         $start = microtime(true);
 

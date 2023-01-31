@@ -25,7 +25,9 @@ class SetTypeTest extends TestCase
     public function testSetTypeUnsupportedConversionException()
     {
         $class = $this->getClass();
-        $this->expectException(\Exan\Dhp\Exceptions\Rest\Helpers\Channel\Channel\Shared\SetType\UnsupportedConversionException::class);
+        $this->expectException(
+            \Exan\Dhp\Exceptions\Rest\Helpers\Channel\Channel\Shared\SetType\UnsupportedConversionException::class
+        );
         $class->setType(ChannelType::GUILD_VOICE);
     }
 }

@@ -39,7 +39,7 @@ abstract class HttpHelperTestCase extends TestCase
     /**
      * @dataProvider httpBindingsProvider
      */
-    public function testFunctions(string $method, array $args = [], array $mockOptions, array $validationOptions)
+    public function testFunctions(string $method, array $args, array $mockOptions, array $validationOptions)
     {
         $this->http->shouldReceive($mockOptions['method'])->andReturns(
             new Promise(function ($resolve) use ($mockOptions) {
