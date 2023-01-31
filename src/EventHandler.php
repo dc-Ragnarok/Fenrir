@@ -27,6 +27,14 @@ class EventHandler extends EventEmitter
 
         $eventClass = Events::MAPPINGS[$payload->t];
 
-        $this->emit($payload->t, [$this->mapper->map($payload->d, new $eventClass())]);
+        $this->emit(
+            $payload->t,
+            [
+                $this->mapper->map(
+                    $payload->d,
+                    new $eventClass()
+                )
+            ]
+        );
     }
 }
