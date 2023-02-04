@@ -75,13 +75,13 @@ class DiscordTestCase extends MockeryTestCase
         ($this->websocketHandlers[WebsocketEvents::MESSAGE])($messageMock);
     }
 
-    protected function assertMessageSent(array $message)
+    protected function assertMessageSent(array $message, bool $useBucket = true)
     {
-        $this->discord->websocket->shouldHaveReceived('send', [json_encode($message)]);
+        $this->discord->websocket->shouldHaveReceived('send', [json_encode($message), $useBucket]);
     }
 
-    protected function assertMessageNotSent(array $message)
+    protected function assertMessageNotSent(array $message, bool $useBucket = true)
     {
-        $this->discord->websocket->shouldNotHaveReceived('send', [json_encode($message)]);
+        $this->discord->websocket->shouldNotHaveReceived('send', [json_encode($message), $useBucket]);
     }
 }

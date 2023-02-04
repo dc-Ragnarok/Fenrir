@@ -8,7 +8,9 @@ use Discord\Http\Drivers\React;
 use Discord\Http\Http;
 use Exan\Dhp\Const\Events as Events;
 use Exan\Dhp\Const\WebsocketEvents;
+use Exan\Dhp\Enums\Gateway\StatusType;
 use Exan\Dhp\Rest\Rest;
+use Exan\Dhp\Websocket\Helpers\ActivityBuilder;
 use Exan\Dhp\Websocket\Objects\D\Hello;
 use Exan\Dhp\Websocket\Objects\Payload;
 use JsonMapper;
@@ -225,9 +227,9 @@ class Discord
         $this->events->handle($payload);
     }
 
-    private function sendPayload(array $data)
+    private function sendPayload(array $data, bool $useBucket = true)
     {
-        $this->websocket->send(json_encode($data));
+        $this->websocket->send(json_encode($data), $useBucket);
     }
 
     private function startHeartbeat()
@@ -249,5 +251,75 @@ class Discord
 
             unset($this->heartbeatTimer);
         }
+    }
+
+    /**
+     * @see https://discord.com/developers/docs/topics/gateway-events#update-presence
+     */
+    public function updatePresence(
+        StatusType $status,
+        array $activities,
+        bool $afk = false,
+        ?int $since = null
+    ): void {
+        $presenceUpdate = [
+            'status' => $status->value,
+            'activities' => array_map(fn (ActivityBuilder $builder) => $builder->get(), $activities),
+            'afk' => $afk,
+        ];
+
+        if (!is_null($since)) {
+            $presenceUpdate['since'] = $since;
+        }
+
+        $this->sendPayload($presenceUpdate);
+    }
+
+    /**
+     * @see https://discord.com/developers/docs/topics/gateway-events#request-guild-members
+     */
+    public function requestGuildMembersByQuery(
+        string $guildId,
+        string $query = '',
+        int $limit = 0,
+        bool $presences = false,
+        ?string $nonce = null
+    ): void {
+        $guildMemberRequest = [
+            'guild_id' => $guildId,
+            'query' => $query,
+            'limit' => $limit,
+            'presences' => $presences,
+        ];
+
+        if (!is_null($nonce)) {
+            $guildMemberRequest['nonce'] = $nonce;
+        }
+
+        $this->sendPayload($guildMemberRequest);
+    }
+
+    /**
+     * @see https://discord.com/developers/docs/topics/gateway-events#request-guild-members
+     */
+    public function requestGuildMembersByUserIds(
+        string $guildId,
+        array $userIds,
+        int $limit = 0,
+        bool $presences = false,
+        ?string $nonce = null
+    ): void {
+        $guildMemberRequest = [
+            'guild_id' => $guildId,
+            'user_ids' => $userIds,
+            'limit' => $limit,
+            'presences' => $presences,
+        ];
+
+        if (!is_null($nonce)) {
+            $guildMemberRequest['nonce'] = $nonce;
+        }
+
+        $this->sendPayload($guildMemberRequest);
     }
 }

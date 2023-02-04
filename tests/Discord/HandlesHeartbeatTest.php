@@ -58,7 +58,7 @@ final class HandlesHeartbeatTest extends DiscordTestCase
         $this->assertMessageSent([
             'op' => 1,
             'd' => null
-        ]);
+        ], false);
     }
 
     public function testAcknowledgesHearbeat()
