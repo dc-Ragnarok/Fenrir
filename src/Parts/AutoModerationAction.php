@@ -9,7 +9,6 @@ use Exan\Dhp\Enums\Parts\AutoModeractionActionMetadata;
 
 /**
  * @see https://discord.com/developers/docs/resources/auto-moderation#auto-moderation-action-object
- * @todo
  */
 class AutoModeractionAction
 {
