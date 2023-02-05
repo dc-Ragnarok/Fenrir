@@ -44,6 +44,9 @@ class DiscordTestCase extends MockeryTestCase
             $this->loop
         );
 
+        $bucketMock = Mockery::mock('overload:Exan\Dhp\Bucket');
+        $bucketMock->shouldReceive('run')->andReturnUsing(fn ($fn) => $fn());
+
         $websocketMock = Mockery::mock('overload:Exan\Dhp\Websocket');
         $websocketMock->shouldReceive('on')->andReturnUsing(function (string $event, callable $handler) {
             $this->websocketHandlers[$event] = $handler;

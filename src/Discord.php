@@ -48,6 +48,8 @@ class Discord
     private Http $http;
     public Rest $rest;
 
+    private Bucket $activityBucket;
+
     public function __construct(
         private string $token,
         $options = [],
@@ -171,16 +173,16 @@ class Discord
                 $this->handleEvent($payload);
                 break;
 
-                /**
-                 * Resume event
-                 */
+            /**
+             * Resume event
+             */
             case 7:
                 $this->reconnect(true, true);
                 break;
 
-                /**
-                 * Invalid session
-                 */
+            /**
+             * Invalid session
+             */
             case 9:
                 $this->reconnect(
                     false,
@@ -188,9 +190,9 @@ class Discord
                 );
                 break;
 
-                /**
-                 * Hello event
-                 */
+            /**
+             * Hello event
+             */
             case 10:
                 if ($this->shouldIdentify) {
                     $this->identify();
@@ -201,9 +203,9 @@ class Discord
                 $this->handleHello($this->mapper->map($payload->d, new Hello()));
                 break;
 
-                /**
-                 * Acknowledgement of heartbeat
-                 */
+            /**
+             * Acknowledgement of heartbeat
+             */
             case 11:
                 $this->cancelScheduledReconnect();
                 break;
@@ -262,17 +264,23 @@ class Discord
         bool $afk = false,
         ?int $since = null
     ): void {
-        $presenceUpdate = [
-            'status' => $status->value,
-            'activities' => array_map(fn (ActivityBuilder $builder) => $builder->get(), $activities),
-            'afk' => $afk,
-        ];
-
-        if (!is_null($since)) {
-            $presenceUpdate['since'] = $since;
+        if (!isset($this->activityBucket)) {
+            $this->activityBucket = new Bucket($this->loop, 5, 21);
         }
 
-        $this->sendPayload($presenceUpdate);
+        $this->activityBucket->run(function () use ($status, $activities, $afk, $since) {
+            $presenceUpdate = [
+                'status' => $status->value,
+                'activities' => array_map(fn (ActivityBuilder $builder) => $builder->get(), $activities),
+                'afk' => $afk,
+            ];
+
+            if (!is_null($since)) {
+                $presenceUpdate['since'] = $since;
+            }
+
+            $this->sendPayload($presenceUpdate);
+        });
     }
 
     /**

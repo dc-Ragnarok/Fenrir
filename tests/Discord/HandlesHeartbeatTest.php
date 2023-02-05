@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Exan\Dhp\Discord;
 
+use Exan\Dhp\Const\Events;
 use Mockery;
 use React\EventLoop\TimerInterface;
 use Tests\Exan\Dhp\Discord\DiscordTestCase;
@@ -25,6 +26,8 @@ final class HandlesHeartbeatTest extends DiscordTestCase
 
         $this->loop->shouldReceive('addPeriodicTimer')->andReturnUsing(function ($interval, callable $callback) {
             $callback();
+
+            return Mockery::mock(TimerInterface::class);
         });
 
         $this->timerInterface = Mockery::mock(TimerInterface::class);
@@ -87,5 +90,31 @@ final class HandlesHeartbeatTest extends DiscordTestCase
         ]);
 
         $this->loop->shouldNotHaveReceived('cancelTimer');
+    }
+
+    public function testShouldStopHeartBeatForReconnect()
+    {
+        $this->mockIncomingMessage([
+            'op' => 10,
+            'd' => [
+                'heartbeat_interval' => 20000
+            ]
+        ]);
+
+        $this->mockIncomingMessage([
+            'op' => 0,
+            't' => Events::READY,
+            's' => 1,
+            'd' => [
+                'session_id' => '::session id::',
+                'resume_gateway_url' => '::resume gateway url::'
+            ]
+        ]);
+
+        $this->mockIncomingMessage([
+            'op' => 7,
+        ]);
+
+        $this->loop->shouldHaveReceived('cancelTimer');
     }
 }

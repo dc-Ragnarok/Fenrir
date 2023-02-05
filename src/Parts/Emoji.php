@@ -23,7 +23,7 @@ class Emoji
         return [
             'id' => $this->id,
             'name' => isset($this->name) ? $this->name : null,
-            'animated' => isset($this->animated),
+            'animated' => isset($this->animated) && $this->animated,
         ];
     }
 

@@ -33,5 +33,13 @@ class EmojiTest extends TestCase
             'name' => '::name::',
             'animated' => true,
         ], $emoji->getPartial());
+
+        $emoji = Emoji::get('::id::', '::name::', false);
+
+        $this->assertEquals([
+            'id' => '::id::',
+            'name' => '::name::',
+            'animated' => false,
+        ], $emoji->getPartial());
     }
 }
