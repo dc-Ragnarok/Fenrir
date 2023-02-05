@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Exan\Dhp\Websocket\Events;
 
-use Exan\Dhp\Parts\Activity;
 use Exan\Dhp\Parts\ClientStatus;
 use Exan\Dhp\Parts\User;
 
@@ -19,7 +18,7 @@ class PresenceUpdate
     public string $status;
 
     /**
-     * @var Activity[]
+     * @var \Exan\Dhp\Parts\Activity[]
      */
     public array $activities;
 

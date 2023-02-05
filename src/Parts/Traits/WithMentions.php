@@ -4,12 +4,10 @@ declare(strict_types=1);
 
 namespace Exan\Dhp\Parts\Traits;
 
-use Exan\Dhp\Parts\UserWithPartialMember;
-
 trait WithMentions
 {
     /**
-     * @var UserWithPartialMember[]
+     * @var \Exan\Dhp\Parts\UserWithPartialMember[]
      */
     public array $mentions;
 }

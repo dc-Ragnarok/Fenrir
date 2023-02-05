@@ -12,7 +12,7 @@ namespace Exan\Dhp\Parts;
 class MultipartField
 {
     /**
-     * @var String[] $headers
+     * @var string[] $headers
      */
     public function __construct(
         private string $name,

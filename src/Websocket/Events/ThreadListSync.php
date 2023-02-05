@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Exan\Dhp\Websocket\Events;
 
-use Exan\Dhp\Parts\Channel;
-
 /**
  * @see https://discord.com/developers/docs/topics/gateway-events#thread-list-sync
  */
@@ -19,7 +17,7 @@ class ThreadListSync
     public ?array $channel_ids;
 
     /**
-     * @var Channel[]
+     * @var \Exan\Dhp\Parts\Channel[]
      */
     public array $threads;
 

@@ -28,7 +28,7 @@ class Activity
     public $flags;
 
     /**
-     * @var ActivityButton[]
+     * @var \Exan\Dhp\Parts\ActivityButton[]
      */
     public array $buttons;
 }

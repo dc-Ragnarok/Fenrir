@@ -21,7 +21,7 @@ class Multipart
     }
 
     /**
-     * @var MultipartField[] $fields
+     * @var \Exan\Dhp\Parts\MultipartField[] $fields
      */
     public function __construct(private array $fields, private ?string $boundary = null)
     {
