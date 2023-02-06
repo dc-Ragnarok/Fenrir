@@ -21,6 +21,10 @@ class EventHandler extends EventEmitter
             $this->emit(Events::RAW, [$payload]);
         }
 
+        if (!$this->hasListener($payload->t)) {
+            return;
+        }
+
         if (!isset(Events::MAPPINGS[$payload->t])) {
             return;
         }
@@ -36,5 +40,10 @@ class EventHandler extends EventEmitter
                 )
             ]
         );
+    }
+
+    public function hasListener(string $event): bool
+    {
+        return isset($this->listeners[$event], $this->onceListeners[$event]);
     }
 }
