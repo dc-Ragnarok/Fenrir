@@ -33,7 +33,7 @@ class MessageBuilder implements MultipartCapable
 
     private $files = [];
 
-    public function setNonce(string|int $nonce): MessageBuilder
+    public function setNonce(string $nonce): MessageBuilder
     {
         $this->data['nonce'] = $nonce;
 

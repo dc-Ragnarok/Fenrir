@@ -54,7 +54,7 @@ class Message
      * @todo proper type
      */
     public ?array $reactions;
-    public string|int|null $nonce;
+    public ?string $nonce;
     public bool $pinned;
     public ?string $webhook_id;
 
