@@ -44,6 +44,6 @@ class EventHandler extends EventEmitter
 
     public function hasListener(string $event): bool
     {
-        return isset($this->listeners[$event], $this->onceListeners[$event]);
+        return isset($this->listeners[$event]) || isset($this->onceListeners[$event]);
     }
 }
