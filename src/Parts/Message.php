@@ -1,15 +1,10 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Exan\Dhp\Parts;
 
 use Carbon\Carbon;
+use Exan\Dhp\Enums\Parts\MessageTypes;
 
-/**
- * @see https://discord.com/developers/docs/resources/channel#message-object
- * @todo
- */
 class Message
 {
     public string $id;
@@ -20,88 +15,36 @@ class Message
     public ?Carbon $edited_timestamp;
     public bool $tts;
     public bool $mention_everyone;
-
-    /**
-     * @var \Exan\Dhp\Parts\User[]
-     */
+    /** @var \Exan\Dhp\Parts\User[] */
     public array $mentions;
-
-    /**
-     * @var \Exan\Dhp\Parts\Role[]
-     */
+    /** @var \Exan\Dhp\Parts\string[] */
     public array $mention_roles;
-
-    /**
-     * @see https://discord.com/developers/docs/resources/channel#channel-mention-object
-     * @todo proper type
-     */
+    /** @var ?\Exan\Dhp\Parts\ChannelMention[] */
     public ?array $mention_channels;
-
-    /**
-     * @see https://discord.com/developers/docs/resources/channel#attachment-object
-     * @todo proper type
-     */
+    /** @var \Exan\Dhp\Parts\Attachment[] */
     public array $attachments;
-
-    /**
-     * @see https://discord.com/developers/docs/resources/channel#embed-object
-     * @todo proper type
-     */
+    /** @var \Exan\Dhp\Parts\Embed[] */
     public array $embeds;
-
-    /**
-     * @see https://discord.com/developers/docs/resources/channel#reaction-object
-     * @todo proper type
-     */
+    /** @var ?\Exan\Dhp\Parts\Reaction[] */
     public ?array $reactions;
     public ?string $nonce;
     public bool $pinned;
     public ?string $webhook_id;
-
-    /**
-     * @see https://discord.com/developers/docs/resources/channel#message-object-message-types
-     * @todo create enum
-     */
-    public int $type;
-    public ?object $activity;
+    public MessageTypes $type;
+    public ?MessageActivity $activity;
     public ?Application $application;
     public ?string $application_id;
-    /**
-     * @see https://discord.com/developers/docs/resources/channel#message-reference-object-message-reference-structure
-     * @todo proper type
-     */
-    public ?object $message_reference;
-    public ?int $flags;
+    public ?MessageReference $message_reference;
+    public ?string $flags;
     public ?Message $referenced_message;
-    /**
-     * @see https://discord.com/developers/docs/interactions/receiving-and-responding#message-interaction-object-message-interaction-structure
-     * @todo proper type
-     */
-    public ?object $interaction;
+    public ?MessageInteraction $interaction;
     public ?Channel $thread;
-
-    /**
-     * @see https://discord.com/developers/docs/interactions/message-components#component-object
-     * @todo proper type
-     */
-    public ?array $components;
-
-    /**
-     * @see https://discord.com/developers/docs/resources/sticker#sticker-item-object
-     * @todo proper type
-     */
+    /** @var \Exan\Dhp\Parts\MessageComponent[] */
+    public array $components;
+    /** @var ?\Exan\Dhp\Parts\MessageStickerItem[] */
     public ?array $sticker_items;
-
-    /**
-     * @var \Exan\Dhp\Parts\Sticker[]
-     * @deprecated
-     */
+    /** @var ?\Exan\Dhp\Parts\Sticker[] */
     public ?array $stickers;
     public ?int $position;
-
-    /**
-     * @see https://discord.com/developers/docs/resources/channel#role-subscription-data-object
-     * @todo proper type
-     */
-    public ?object $role_subscription_data;
+    public ?RoleSubscriptionData $role_subscription_data;
 }

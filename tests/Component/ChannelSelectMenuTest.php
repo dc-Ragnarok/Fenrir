@@ -6,7 +6,7 @@ namespace Tests\Exan\Dhp\Component;
 
 use Exan\Dhp\Component\SelectMenu\ChannelSelectMenu;
 use Exan\Dhp\Enums\Component\SelectMenuType;
-use Exan\Dhp\Enums\Parts\ChannelType;
+use Exan\Dhp\Enums\Parts\ChannelTypes;
 use PHPUnit\Framework\TestCase;
 
 class ChannelSelectMenuTest extends TestCase
@@ -28,7 +28,7 @@ class ChannelSelectMenuTest extends TestCase
                 'args' => [
                     '::custom id::',
                     '::placeholder::',
-                    [ChannelType::ANNOUNCEMENT_THREAD, ChannelType::PUBLIC_THREAD],
+                    [ChannelTypes::ANNOUNCEMENT_THREAD, ChannelTypes::PUBLIC_THREAD],
                     5,
                     10,
                     true
@@ -37,7 +37,7 @@ class ChannelSelectMenuTest extends TestCase
                     'type' => SelectMenuType::Channel,
                     'custom_id' => '::custom id::',
                     'placeholder' => '::placeholder::',
-                    'channel_types' => [ChannelType::ANNOUNCEMENT_THREAD, ChannelType::PUBLIC_THREAD],
+                    'channel_types' => [ChannelTypes::ANNOUNCEMENT_THREAD, ChannelTypes::PUBLIC_THREAD],
                     'min_values' => 5,
                     'max_values' => 10,
                     'disabled' => true,
@@ -47,7 +47,7 @@ class ChannelSelectMenuTest extends TestCase
                 'args' => [
                     '::custom id::',
                     null,
-                    [ChannelType::ANNOUNCEMENT_THREAD, ChannelType::PUBLIC_THREAD],
+                    [ChannelTypes::ANNOUNCEMENT_THREAD, ChannelTypes::PUBLIC_THREAD],
                     5,
                     10,
                     true
@@ -55,7 +55,7 @@ class ChannelSelectMenuTest extends TestCase
                 'expected' => [
                     'type' => SelectMenuType::Channel,
                     'custom_id' => '::custom id::',
-                    'channel_types' => [ChannelType::ANNOUNCEMENT_THREAD, ChannelType::PUBLIC_THREAD],
+                    'channel_types' => [ChannelTypes::ANNOUNCEMENT_THREAD, ChannelTypes::PUBLIC_THREAD],
                     'min_values' => 5,
                     'max_values' => 10,
                     'disabled' => true,
@@ -83,7 +83,7 @@ class ChannelSelectMenuTest extends TestCase
                 'args' => [
                     '::custom id::',
                     '::placeholder::',
-                    [ChannelType::ANNOUNCEMENT_THREAD, ChannelType::PUBLIC_THREAD],
+                    [ChannelTypes::ANNOUNCEMENT_THREAD, ChannelTypes::PUBLIC_THREAD],
                     null,
                     10,
                     true
@@ -92,7 +92,7 @@ class ChannelSelectMenuTest extends TestCase
                     'type' => SelectMenuType::Channel,
                     'custom_id' => '::custom id::',
                     'placeholder' => '::placeholder::',
-                    'channel_types' => [ChannelType::ANNOUNCEMENT_THREAD, ChannelType::PUBLIC_THREAD],
+                    'channel_types' => [ChannelTypes::ANNOUNCEMENT_THREAD, ChannelTypes::PUBLIC_THREAD],
                     'min_values' => 1,
                     'max_values' => 10,
                     'disabled' => true,
@@ -102,7 +102,7 @@ class ChannelSelectMenuTest extends TestCase
                 'args' => [
                     '::custom id::',
                     '::placeholder::',
-                    [ChannelType::ANNOUNCEMENT_THREAD, ChannelType::PUBLIC_THREAD],
+                    [ChannelTypes::ANNOUNCEMENT_THREAD, ChannelTypes::PUBLIC_THREAD],
                     5,
                     null,
                     true
@@ -111,7 +111,7 @@ class ChannelSelectMenuTest extends TestCase
                     'type' => SelectMenuType::Channel,
                     'custom_id' => '::custom id::',
                     'placeholder' => '::placeholder::',
-                    'channel_types' => [ChannelType::ANNOUNCEMENT_THREAD, ChannelType::PUBLIC_THREAD],
+                    'channel_types' => [ChannelTypes::ANNOUNCEMENT_THREAD, ChannelTypes::PUBLIC_THREAD],
                     'min_values' => 5,
                     'max_values' => 25,
                     'disabled' => true,
@@ -121,7 +121,7 @@ class ChannelSelectMenuTest extends TestCase
                 'args' => [
                     '::custom id::',
                     '::placeholder::',
-                    [ChannelType::ANNOUNCEMENT_THREAD, ChannelType::PUBLIC_THREAD],
+                    [ChannelTypes::ANNOUNCEMENT_THREAD, ChannelTypes::PUBLIC_THREAD],
                     5,
                     10,
                 ],
@@ -129,7 +129,7 @@ class ChannelSelectMenuTest extends TestCase
                     'type' => SelectMenuType::Channel,
                     'custom_id' => '::custom id::',
                     'placeholder' => '::placeholder::',
-                    'channel_types' => [ChannelType::ANNOUNCEMENT_THREAD, ChannelType::PUBLIC_THREAD],
+                    'channel_types' => [ChannelTypes::ANNOUNCEMENT_THREAD, ChannelTypes::PUBLIC_THREAD],
                     'min_values' => 5,
                     'max_values' => 10,
                     'disabled' => false,

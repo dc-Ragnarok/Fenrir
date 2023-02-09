@@ -3,7 +3,7 @@
 namespace Tests\Exan\Dhp\Rest\Helpers\Channel\Channel\Shared;
 
 use Exan\Dhp\Parts\Overwrite;
-use Exan\Dhp\Enums\Parts\OverwriteType;
+use Exan\Dhp\Enums\Parts\OverwriteTypes;
 use Exan\Dhp\Rest\Helpers\Channel\Channel\ChannelBuilder;
 use PHPUnit\Framework\TestCase;
 
@@ -33,7 +33,7 @@ class ChannelBuilderTest extends TestCase
 
     public function testAddPermissionOverwrites()
     {
-        $overwrite = new Overwrite(OverwriteType::MEMBER);
+        $overwrite = new Overwrite(OverwriteTypes::MEMBER);
         $builder = $this->getBuilder();
         $builder->addPermissionOverwrites($overwrite);
 

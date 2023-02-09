@@ -1,76 +1,51 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Exan\Dhp\Parts;
 
+use Exan\Dhp\Enums\Parts\ChannelTypes;
 use Carbon\Carbon;
-use Exan\Dhp\Enums\Parts\ChannelFlags;
-use Exan\Dhp\Enums\Parts\ChannelType;
-use Exan\Dhp\Enums\Parts\VideoQualityMode;
+use Exan\Dhp\Enums\Parts\VideoQualityModes;
+use Exan\Dhp\Enums\Parts\SortOrderTypes;
+use Exan\Dhp\Enums\Parts\ForumLayoutTypes;
 
-/**
- * @see https://discord.com/developers/docs/resources/channel#channel-object
- */
 class Channel
 {
     public string $id;
-    public ChannelType $type;
+    public ChannelTypes $type;
     public ?string $guild_id;
-    public int $position;
-
-    /**
-     * @var \Exan\Dhp\Parts\Overwrite
-     */
-    public array $permission_overwrites;
-
+    public ?int $position;
+    /** @var ?\Exan\Dhp\Parts\Overwrite[] */
+    public ?array $permission_overwrites;
     public ?string $name;
     public ?string $topic;
     public ?bool $nsfw;
     public ?string $last_message_id;
     public ?int $bitrate;
     public ?int $user_limit;
-
-    /**
-     * Seconds
-     */
     public ?int $rate_limit_per_user;
-
-    /**
-     * @var \Exan\Dhp\Parts\User[]
-     */
-    public array $recipients;
-
+    /** @var ?\Exan\Dhp\Parts\User[] */
+    public ?array $recipients;
+    public ?string $icon;
     public ?string $owner_id;
     public ?string $application_id;
     public ?string $parent_id;
     public ?Carbon $last_pin_timestamp;
     public ?string $rtc_region;
-    public ?VideoQualityMode $video_quality_mode;
+    public ?VideoQualityModes $video_quality_mode;
     public ?int $message_count;
+    public ?int $member_count;
     public ?ThreadMetadata $thread_metadata;
     public ?ThreadMember $member;
-
-    /**
-     * Minutes
-     */
     public ?int $default_auto_archive_duration;
-
     public ?string $permissions;
-    public ?ChannelFlags $flags;
-    public ?int $total_messages_sent;
-
-    /**
-     * @var \Exan\Dhp\Parts\ForumTag[]
-     */
+    public ?string $flags;
+    public ?int $total_message_sent;
+    /** @var ?\Exan\Dhp\Parts\Tag[] */
     public ?array $available_tags;
-
-    /**
-     * @var string[]
-     */
+    /** @var ?\Exan\Dhp\Parts\string[] */
     public ?array $applied_tags;
-
-    public ?DefaultReactionEmoji $default_reaction_emoji;
-    public ?int $default_sort_order;
-    public ?int $default_forum_layout;
+    public ?DefaultReaction $default_reaction_emoji;
+    public ?int $default_thread_rate_limit_per_user;
+    public ?SortOrderTypes $default_sort_order;
+    public ?ForumLayoutTypes $default_forum_layout;
 }

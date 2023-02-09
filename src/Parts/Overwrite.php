@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Exan\Dhp\Parts;
 
-use Exan\Dhp\Enums\Parts\OverwriteType;
+use Exan\Dhp\Enums\Parts\OverwriteTypes;
 
 /**
  * @see https://discord.com/developers/docs/resources/channel#overwrite-object
@@ -15,7 +15,7 @@ class Overwrite
     public ?string $id = null;
 
     public function __construct(
-        public OverwriteType $type,
+        public OverwriteTypes $type,
         public ?string $allow = null,
         public ?string $deny = null
     ) {

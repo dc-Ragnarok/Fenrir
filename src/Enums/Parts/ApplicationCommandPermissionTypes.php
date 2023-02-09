@@ -2,7 +2,7 @@
 
 namespace Exan\Dhp\Enums\Parts;
 
-enum ApplicationCommandPermissionType: int
+enum ApplicationCommandPermissionTypes: int
 {
     case ROLE = 1;
     case USER = 2;

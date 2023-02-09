@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Exan\Dhp\Enums\Parts;
 
-enum ActivityType: int
+enum ActivityTypes: int
 {
     case Game = 0;
     case Streaming = 1;

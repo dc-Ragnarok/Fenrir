@@ -4,9 +4,6 @@ namespace Exan\Dhp\Parts;
 
 use Carbon\Carbon;
 
-/**
- * @see https://discord.com/developers/docs/resources/channel#thread-metadata-object
- */
 class ThreadMetadata
 {
     public bool $archived;

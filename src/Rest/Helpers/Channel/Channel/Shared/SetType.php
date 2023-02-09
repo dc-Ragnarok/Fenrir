@@ -2,19 +2,19 @@
 
 namespace Exan\Dhp\Rest\Helpers\Channel\Channel\Shared;
 
-use Exan\Dhp\Enums\Parts\ChannelType;
+use Exan\Dhp\Enums\Parts\ChannelTypes;
 use Exan\Dhp\Exceptions\Rest\Helpers\Channel\Channel\Shared\SetType\UnsupportedConversionException;
 
 trait SetType
 {
     /**
-     * Only supports ChannelType::GUILD_TEXT & ChannelType::GUILD_ANNOUNCEMENT
+     * Only supports ChannelTypes::GUILD_TEXT & ChannelTypes::GUILD_ANNOUNCEMENT
      *
      * @throws UnsupportedConversionException
      */
-    public function setType(ChannelType $type): self
+    public function setType(ChannelTypes $type): self
     {
-        if (!in_array($type, [ChannelType::GUILD_TEXT, ChannelType::GUILD_ANNOUNCEMENT])) {
+        if (!in_array($type, [ChannelTypes::GUILD_TEXT, ChannelTypes::GUILD_ANNOUNCEMENT])) {
             throw new UnsupportedConversionException();
         }
 

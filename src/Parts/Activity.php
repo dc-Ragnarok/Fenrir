@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Exan\Dhp\Parts;
 
 use Carbon\Carbon;
-use Exan\Dhp\Enums\Parts\ActivityType;
+use Exan\Dhp\Enums\Parts\ActivityTypes;
 
 /**
  * @see https://discord.com/developers/docs/topics/gateway-events#activity-object
@@ -13,7 +13,7 @@ use Exan\Dhp\Enums\Parts\ActivityType;
 class Activity
 {
     public string $name;
-    public ActivityType $type;
+    public ActivityTypes $type;
     public ?string $url;
     public Carbon $created_At;
     public $timestamps;

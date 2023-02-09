@@ -11,10 +11,7 @@ class Emoji
 {
     public string $id;
     public ?string $name;
-
-    /**
-     * @var \Exan\Dhp\Parts\Role[]
-     */
+    /** @var \Exan\Dhp\Parts\Role[] */
     public ?array $roles;
     public ?User $user;
     public ?bool $require_colons;

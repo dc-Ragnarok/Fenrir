@@ -2,7 +2,7 @@
 
 namespace Tests\Exan\Dhp\Rest\Helpers\Channel\Channel\Shared;
 
-use Exan\Dhp\Enums\Parts\ChannelType;
+use Exan\Dhp\Enums\Parts\ChannelTypes;
 use Exan\Dhp\Rest\Helpers\Channel\Channel\GuildTextChannelBuilder;
 use PHPUnit\Framework\TestCase;
 
@@ -13,7 +13,7 @@ class GuildTextChannelBuilderTest extends TestCase
         $channelBuilder = new GuildTextChannelBuilder();
 
         $this->assertEquals([
-            'type' => ChannelType::GUILD_TEXT->value
+            'type' => ChannelTypes::GUILD_TEXT->value
         ], $channelBuilder->get());
     }
 }

@@ -3,7 +3,7 @@
 namespace Tests\Exan\Dhp\Rest\Helpers\Channel\Channel\Shared;
 
 use Exan\Dhp\Enums\Parts\ChannelFlags;
-use Exan\Dhp\Enums\Parts\ChannelType;
+use Exan\Dhp\Enums\Parts\ChannelTypes;
 use Exan\Dhp\Enums\Parts\ForumLayoutTypes;
 use Exan\Dhp\Enums\Parts\SortOrderTypes;
 use Exan\Dhp\Exceptions\Rest\Helpers\Channel\Channel\GuildForumChannelBuilder\TooManyAvailableTagsException;
@@ -18,7 +18,7 @@ class GuildForumChannelBuilderTest extends TestCase
         $channelBuilder = new GuildForumChannelBuilder();
 
         $this->assertEquals([
-            'type' => ChannelType::GUILD_FORUM->value
+            'type' => ChannelTypes::GUILD_FORUM->value
         ], $channelBuilder->get());
     }
 

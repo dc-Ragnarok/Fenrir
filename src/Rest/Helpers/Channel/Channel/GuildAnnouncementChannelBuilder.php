@@ -2,7 +2,7 @@
 
 namespace Exan\Dhp\Rest\Helpers\Channel\Channel;
 
-use Exan\Dhp\Enums\Parts\ChannelType;
+use Exan\Dhp\Enums\Parts\ChannelTypes;
 use Exan\Dhp\Rest\Helpers\Channel\Channel\Shared\SetDefaultAutoArchiveDuration;
 use Exan\Dhp\Rest\Helpers\Channel\Channel\Shared\SetNsfw;
 use Exan\Dhp\Rest\Helpers\Channel\Channel\Shared\SetParentId;
@@ -22,6 +22,6 @@ class GuildAnnouncementChannelBuilder extends ChannelBuilder
 
     public function __construct()
     {
-        $this->setChannelType(ChannelType::GUILD_ANNOUNCEMENT);
+        $this->setChannelType(ChannelTypes::GUILD_ANNOUNCEMENT);
     }
 }

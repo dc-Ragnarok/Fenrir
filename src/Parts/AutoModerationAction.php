@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Exan\Dhp\Parts;
 
-use Exan\Dhp\Enums\Parts\ActionType;
+use Exan\Dhp\Enums\Parts\ActionTypes;
 use Exan\Dhp\Enums\Parts\AutoModeractionActionMetadata;
 
 /**
@@ -12,6 +12,6 @@ use Exan\Dhp\Enums\Parts\AutoModeractionActionMetadata;
  */
 class AutoModeractionAction
 {
-    public ActionType $type;
+    public ActionTypes $type;
     public ?AutoModeractionActionMetadata $metadata;
 }

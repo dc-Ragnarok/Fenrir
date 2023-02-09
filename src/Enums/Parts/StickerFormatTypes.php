@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Exan\Dhp\Enums\Parts;
 
-enum StickerFormatType: int
+enum StickerFormatTypes: int
 {
     case PNG = 1;
     case APNG = 2;

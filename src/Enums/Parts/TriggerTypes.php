@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Exan\Dhp\Enums\Parts;
 
-enum TriggerType: int
+enum TriggerTypes: int
 {
     case KEYWORD = 1;
     case SPAM = 3;

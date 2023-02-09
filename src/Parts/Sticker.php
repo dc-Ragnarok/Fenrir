@@ -1,24 +1,22 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Exan\Dhp\Parts;
 
-use Exan\Dhp\Enums\Parts\StickerFormatType;
+use Exan\Dhp\Enums\Parts\StickerTypes;
+use Exan\Dhp\Enums\Parts\StickerFormatTypes;
 
-/**
- * @see https://discord.com/developers/docs/resources/sticker#sticker-object
- */
 class Sticker
 {
     public string $id;
     public ?string $pack_id;
     public string $name;
     public ?string $description;
-    public string $tags;
+    /** @var ?\Exan\Dhp\Parts\string[] */
+    public ?array $tags;
     public ?string $asset;
-    public StickerFormatType $type;
-    public ?bool $available;
+    public StickerTypes $type;
+    public StickerFormatTypes $format_type;
+    public bool $available;
     public ?string $guild_id;
     public ?User $user;
     public ?int $sort_value;

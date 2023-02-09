@@ -2,7 +2,7 @@
 
 namespace Exan\Dhp\Rest\Helpers\Channel\Channel;
 
-use Exan\Dhp\Enums\Parts\ChannelType;
+use Exan\Dhp\Enums\Parts\ChannelTypes;
 use Exan\Dhp\Rest\Helpers\Channel\Channel\Shared\SetBitrate;
 use Exan\Dhp\Rest\Helpers\Channel\Channel\Shared\SetRtcRegion;
 
@@ -16,6 +16,6 @@ class GuildStageVoiceChannelBuilder extends ChannelBuilder
 
     public function __construct()
     {
-        $this->setChannelType(ChannelType::GUILD_STAGE_VOICE);
+        $this->setChannelType(ChannelTypes::GUILD_STAGE_VOICE);
     }
 }

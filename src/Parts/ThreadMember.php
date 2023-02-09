@@ -1,13 +1,14 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Exan\Dhp\Parts;
 
-/**
- * @see https://discord.com/developers/docs/resources/channel#thread-member-object
- * @todo
- */
+use Carbon\Carbon;
+
 class ThreadMember
 {
+    public ?string $id;
+    public ?string $user_id;
+    public Carbon $join_timestamp;
+    public string $flags;
+    public ?GuildMember $member;
 }

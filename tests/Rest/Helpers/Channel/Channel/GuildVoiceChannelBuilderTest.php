@@ -2,8 +2,8 @@
 
 namespace Tests\Exan\Dhp\Rest\Helpers\Channel\Channel\Shared;
 
-use Exan\Dhp\Enums\Parts\ChannelType;
-use Exan\Dhp\Enums\Parts\VideoQualityMode;
+use Exan\Dhp\Enums\Parts\ChannelTypes;
+use Exan\Dhp\Enums\Parts\VideoQualityModes;
 use Exan\Dhp\Rest\Helpers\Channel\Channel\GuildVoiceChannelBuilder;
 use PHPUnit\Framework\TestCase;
 
@@ -14,7 +14,7 @@ class GuildVoiceChannelBuilderTest extends TestCase
         $channelBuilder = new GuildVoiceChannelBuilder();
 
         $this->assertEquals([
-            'type' => ChannelType::GUILD_VOICE->value
+            'type' => ChannelTypes::GUILD_VOICE->value
         ], $channelBuilder->get());
     }
 
@@ -39,8 +39,8 @@ class GuildVoiceChannelBuilderTest extends TestCase
     {
         $channelBuilder = new GuildVoiceChannelBuilder();
 
-        $channelBuilder->setVideoQualityMode(VideoQualityMode::AUTO);
+        $channelBuilder->setVideoQualityMode(VideoQualityModes::AUTO);
 
-        $this->assertEquals(VideoQualityMode::AUTO->value, $channelBuilder->get()['video_quality_mode']);
+        $this->assertEquals(VideoQualityModes::AUTO->value, $channelBuilder->get()['video_quality_mode']);
     }
 }

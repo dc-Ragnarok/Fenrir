@@ -3,7 +3,7 @@
 namespace Exan\Dhp\Rest\Helpers\Channel\Channel;
 
 use Exan\Dhp\Enums\Parts\ChannelFlags;
-use Exan\Dhp\Enums\Parts\ChannelType;
+use Exan\Dhp\Enums\Parts\ChannelTypes;
 use Exan\Dhp\Enums\Parts\ForumLayoutTypes;
 use Exan\Dhp\Enums\Parts\SortOrderTypes;
 use Exan\Dhp\Exceptions\Rest\Helpers\Channel\Channel\GuildForumChannelBuilder\TooManyAvailableTagsException;
@@ -29,7 +29,7 @@ class GuildForumChannelBuilder extends ChannelBuilder
 
     public function __construct()
     {
-        $this->setChannelType(ChannelType::GUILD_FORUM);
+        $this->setChannelType(ChannelTypes::GUILD_FORUM);
     }
 
     public function setFlags(ChannelFlags $flags)

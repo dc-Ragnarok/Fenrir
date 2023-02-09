@@ -13,8 +13,8 @@ class MessageBuilderTest extends TestCase
     public function testSetNonce()
     {
         $builder = new MessageBuilder();
-        $builder->setNonce(123456);
-        $this->assertEquals(123456, $builder->get()['nonce']);
+        $builder->setNonce('::nonce::');
+        $this->assertEquals('::nonce::', $builder->get()['nonce']);
     }
 
     public function testSetTts()

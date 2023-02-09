@@ -8,6 +8,6 @@ namespace Exan\Dhp\Parts;
  * @see https://discord.com/developers/docs/resources/guild#guild-member-object
  * @todo
  */
-class Member
+class GuildMember
 {
 }

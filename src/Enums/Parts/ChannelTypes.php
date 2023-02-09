@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Exan\Dhp\Enums\Parts;
 
-enum ChannelType: int
+enum ChannelTypes: int
 {
     case GUILD_TEXT = 0;
     case DM = 1;

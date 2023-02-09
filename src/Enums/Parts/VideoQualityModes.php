@@ -2,7 +2,7 @@
 
 namespace Exan\Dhp\Enums\Parts;
 
-enum VideoQualityMode: int
+enum VideoQualityModes: int
 {
     case AUTO = 1;
     case FULL = 2;

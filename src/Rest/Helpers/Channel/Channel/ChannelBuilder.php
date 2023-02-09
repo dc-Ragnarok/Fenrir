@@ -2,7 +2,7 @@
 
 namespace Exan\Dhp\Rest\Helpers\Channel\Channel;
 
-use Exan\Dhp\Enums\Parts\ChannelType;
+use Exan\Dhp\Enums\Parts\ChannelTypes;
 use Exan\Dhp\Parts\Overwrite;
 
 /**
@@ -42,7 +42,7 @@ abstract class ChannelBuilder
         return $this;
     }
 
-    protected function setChannelType(ChannelType $type)
+    protected function setChannelType(ChannelTypes $type)
     {
         $this->data['type'] = $type->value;
     }

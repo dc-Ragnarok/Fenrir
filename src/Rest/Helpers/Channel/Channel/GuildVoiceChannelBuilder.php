@@ -2,8 +2,8 @@
 
 namespace Exan\Dhp\Rest\Helpers\Channel\Channel;
 
-use Exan\Dhp\Enums\Parts\ChannelType;
-use Exan\Dhp\Enums\Parts\VideoQualityMode;
+use Exan\Dhp\Enums\Parts\ChannelTypes;
+use Exan\Dhp\Enums\Parts\VideoQualityModes;
 use Exan\Dhp\Rest\Helpers\Channel\Channel\Shared\SetBitrate;
 use Exan\Dhp\Rest\Helpers\Channel\Channel\Shared\SetNsfw;
 use Exan\Dhp\Rest\Helpers\Channel\Channel\Shared\SetParentId;
@@ -21,7 +21,7 @@ class GuildVoiceChannelBuilder extends ChannelBuilder
 
     public function __construct()
     {
-        $this->setChannelType(ChannelType::GUILD_VOICE);
+        $this->setChannelType(ChannelTypes::GUILD_VOICE);
     }
 
     public function setUserLimit(int $limit): GuildVoiceChannelBuilder
@@ -31,7 +31,7 @@ class GuildVoiceChannelBuilder extends ChannelBuilder
         return $this;
     }
 
-    public function setVideoQualityMode(VideoQualityMode $quality)
+    public function setVideoQualityMode(VideoQualityModes $quality)
     {
         $this->data['video_quality_mode'] = $quality->value;
     }

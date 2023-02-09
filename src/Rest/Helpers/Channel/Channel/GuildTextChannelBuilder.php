@@ -2,7 +2,7 @@
 
 namespace Exan\Dhp\Rest\Helpers\Channel\Channel;
 
-use Exan\Dhp\Enums\Parts\ChannelType;
+use Exan\Dhp\Enums\Parts\ChannelTypes;
 use Exan\Dhp\Rest\Helpers\Channel\Channel\Shared\SetDefaultAutoArchiveDuration;
 use Exan\Dhp\Rest\Helpers\Channel\Channel\Shared\SetDefaultThreadRateLimitPerUser;
 use Exan\Dhp\Rest\Helpers\Channel\Channel\Shared\SetNsfw;
@@ -26,6 +26,6 @@ class GuildTextChannelBuilder extends ChannelBuilder
 
     public function __construct()
     {
-        $this->setChannelType(ChannelType::GUILD_TEXT);
+        $this->setChannelType(ChannelTypes::GUILD_TEXT);
     }
 }

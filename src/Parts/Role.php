@@ -1,13 +1,19 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Exan\Dhp\Parts;
 
-/**
- * @see https://discord.com/developers/docs/topics/permissions#role-object
- * @todo
- */
+
 class Role
 {
+    public string $id;
+    public string $name;
+    public int $color;
+    public bool $hoist;
+    public ?string $icon;
+    public ?string $unicode_emoji;
+    public int $position;
+    public string $permissions;
+    public bool $managed;
+    public bool $mentionable;
+    public ?RoleTags $tags;
 }
