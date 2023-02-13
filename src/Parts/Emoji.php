@@ -2,13 +2,12 @@
 
 namespace Exan\Dhp\Parts;
 
-
 class Emoji
 {
     public string $id;
     public string $name;
     /**
-     * @var Role[]
+     * @var \Exan\Dhp\Enums\Parts\Role[]
      */
     public ?array $roles;
     public ?User $user;

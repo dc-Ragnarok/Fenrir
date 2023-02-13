@@ -17,7 +17,7 @@ class Message
     public bool $tts;
     public bool $mention_everyone;
     /**
-     * @var User[]
+     * @var \Exan\Dhp\Enums\Parts\User[]
      */
     public array $mentions;
     /**
@@ -25,19 +25,19 @@ class Message
      */
     public array $mention_roles;
     /**
-     * @var ChannelMention[]
+     * @var \Exan\Dhp\Enums\Parts\ChannelMention[]
      */
     public ?array $mention_channels;
     /**
-     * @var Attachment[]
+     * @var \Exan\Dhp\Enums\Parts\Attachment[]
      */
     public array $attachments;
     /**
-     * @var Embed[]
+     * @var \Exan\Dhp\Enums\Parts\Embed[]
      */
     public array $embeds;
     /**
-     * @var Reaction[]
+     * @var \Exan\Dhp\Enums\Parts\Reaction[]
      */
     public ?array $reactions;
     public ?string $nonce;
@@ -57,11 +57,11 @@ class Message
      */
     public array $components;
     /**
-     * @var MessageStickerItem[]
+     * @var \Exan\Dhp\Enums\Parts\MessageStickerItem[]
      */
     public ?array $sticker_items;
     /**
-     * @var Sticker[]
+     * @var \Exan\Dhp\Enums\Parts\Sticker[]
      */
     public ?array $stickers;
     public ?int $position;

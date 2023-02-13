@@ -7,7 +7,7 @@ class Team
     public ?string $icon;
     public string $id;
     /**
-     * @var TeamMember[]
+     * @var \Exan\Dhp\Enums\Parts\TeamMember[]
      */
     public array $members;
     public string $name;

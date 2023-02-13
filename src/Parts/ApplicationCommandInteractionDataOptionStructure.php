@@ -8,7 +8,7 @@ class ApplicationCommandInteractionDataOptionStructure
     public int $type;
     public string|int|float|bool|null $value;
     /**
-     * @var ApplicationCommandInteractionDataOptionStructure[]
+     * @var \Exan\Dhp\Enums\Parts\ApplicationCommandInteractionDataOptionStructure[]
      */
     public ?array $options;
     public bool $focused;

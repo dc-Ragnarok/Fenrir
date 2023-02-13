@@ -73,12 +73,12 @@ class GuildForumChannelBuilderTest extends TestCase
     public function testSetDefaultReactionEmoji()
     {
         $builder = new GuildForumChannelBuilder();
-        $emoji = (new EmojiBuilder)->setId('::id::')->setName('emoji')->setAnimated(false); // Guild emoji
+        $emoji = (new EmojiBuilder())->setId('::id::')->setName('emoji')->setAnimated(false); // Guild emoji
         $builder->setDefaultReactionEmoji($emoji);
 
         $this->assertEquals(['emoji_id' => '::id::'], $builder->get()['default_reaction_emoji']);
 
-        $emoji = (new EmojiBuilder)->setId('::name::')->setAnimated(false); // Global/default emoji
+        $emoji = (new EmojiBuilder())->setId('::name::')->setAnimated(false); // Global/default emoji
         $builder->setDefaultReactionEmoji($emoji);
 
         $this->assertEquals(['emoji_name' => '::name::'], $builder->get()['default_reaction_emoji']);

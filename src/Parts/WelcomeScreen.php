@@ -6,7 +6,7 @@ class WelcomeScreen
 {
     public ?string $description;
     /**
-     * @var WelcomeScreenChannel[]
+     * @var \Exan\Dhp\Enums\Parts\WelcomeScreenChannel[]
      */
     public array $welcome_channels;
 }

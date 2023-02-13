@@ -9,7 +9,7 @@ class InteractionData
     public int $type;
     public ?InteractionDataResolved $resolved;
     /**
-     * @var ApplicationCommandInteractionDataOptionStructure[]
+     * @var \Exan\Dhp\Enums\Parts\ApplicationCommandInteractionDataOptionStructure[]
      */
     public ?array $options;
     public ?string $guild_id;

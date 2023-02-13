@@ -20,7 +20,7 @@ class Embed
     public ?EmbedProvider $provider;
     public ?EmbedAuthor $author;
     /**
-     * @var EmbedField[]
+     * @var \Exan\Dhp\Enums\Parts\EmbedField[]
      */
     public ?array $fields;
 

@@ -22,7 +22,7 @@ class Activity
     public bool $instance;
     public ?string $flags;
     /**
-     * @var ActivityButton[]
+     * @var \Exan\Dhp\Enums\Parts\ActivityButton[]
      */
     public ?array $buttons;
 

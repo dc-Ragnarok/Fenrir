@@ -5,7 +5,7 @@ namespace Exan\Dhp\Parts;
 class InviteStageInstanceObject
 {
     /**
-     * @var GuildMember[]
+     * @var \Exan\Dhp\Enums\Parts\GuildMember[]
      */
     public array $members;
     public int $participant_count;

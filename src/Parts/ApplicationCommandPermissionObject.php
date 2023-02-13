@@ -8,7 +8,7 @@ class ApplicationCommandPermissionObject
     public string $application_id;
     public string $guild_id;
     /**
-     * @var ApplicationCommandPermissionStructure[]
+     * @var \Exan\Dhp\Enums\Parts\ApplicationCommandPermissionStructure[]
      */
     public array $permissions;
 }

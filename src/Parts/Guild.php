@@ -30,11 +30,11 @@ class Guild
     public MessageNotificationLevels $default_message_notifications;
     public ExplicitContentFilterLevels $explicit_content_filter;
     /**
-     * @var Role[]
+     * @var \Exan\Dhp\Enums\Parts\Role[]
      */
     public array $roles;
     /**
-     * @var Emoji[]
+     * @var \Exan\Dhp\Enums\Parts\Emoji[]
      */
     public array $emojis;
     /**
@@ -61,7 +61,7 @@ class Guild
     public ?WelcomeScreen $welcome_screen;
     public NsfwLevels $nsfw_level;
     /**
-     * @var Sticker[]
+     * @var \Exan\Dhp\Enums\Parts\Sticker[]
      */
     public ?array $stickers;
     public bool $premium_progress_bar_enabled;

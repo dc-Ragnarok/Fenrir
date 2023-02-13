@@ -5,35 +5,35 @@ namespace Exan\Dhp\Parts;
 class AuditLog
 {
     /**
-     * @var ApplicationCommandPermissionObject[]
+     * @var \Exan\Dhp\Enums\Parts\ApplicationCommandPermissionObject[]
      */
     public ?array $application_commands;
     /**
-     * @var AuditLogEntry[]
+     * @var \Exan\Dhp\Enums\Parts\AuditLogEntry[]
      */
     public ?array $audit_log_entries;
     /**
-     * @var AutoModerationRule[]
+     * @var \Exan\Dhp\Enums\Parts\AutoModerationRule[]
      */
     public ?array $auto_moderation_rules;
     /**
-     * @var GuildScheduledEvent[]
+     * @var \Exan\Dhp\Enums\Parts\GuildScheduledEvent[]
      */
     public ?array $guild_scheduled_events;
     /**
-     * @var Integration[]
+     * @var \Exan\Dhp\Enums\Parts\Integration[]
      */
     public ?array $integrations;
     /**
-     * @var Channel[]
+     * @var \Exan\Dhp\Enums\Parts\Channel[]
      */
     public ?array $threads;
     /**
-     * @var User[]
+     * @var \Exan\Dhp\Enums\Parts\User[]
      */
     public ?array $users;
     /**
-     * @var Webhook[]
+     * @var \Exan\Dhp\Enums\Parts\Webhook[]
      */
     public ?array $webhooks;
 }
