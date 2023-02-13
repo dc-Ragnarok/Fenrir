@@ -9,18 +9,19 @@ use Exan\Dhp\Enums\Component\SelectMenuType;
 use Exan\Dhp\Exceptions\Components\SelectMenu\StringSelectMenu\NoOptionsException;
 use Exan\Dhp\Exceptions\Components\SelectMenu\StringSelectMenu\TooManyOptionsException;
 use Exan\Dhp\Parts\Emoji;
+use Exan\Dhp\Rest\Helpers\Emoji\EmojiBuilder;
 use PHPUnit\Framework\TestCase;
 
 class StringSelectMenuTest extends TestCase
 {
-    private function getEmoji(): Emoji
+    private function getEmoji(): EmojiBuilder
     {
         $emoji = new Emoji();
         $emoji->id = '::emoji id::';
         $emoji->name = '::emoji name::';
         $emoji->animated = true;
 
-        return $emoji;
+        return EmojiBuilder::fromPart($emoji);
     }
 
     /**
@@ -200,7 +201,7 @@ class StringSelectMenuTest extends TestCase
                     'label' => '::label::',
                     'value' => '::value::',
                     'description' => '::description::',
-                    'emoji' => $this->getEmoji()->getPartial(),
+                    'emoji' => $this->getEmoji()->get(),
                     'default' => true,
                 ],
             ],
@@ -215,7 +216,7 @@ class StringSelectMenuTest extends TestCase
                 'expected' => [
                     'label' => '::label::',
                     'value' => '::value::',
-                    'emoji' => $this->getEmoji()->getPartial(),
+                    'emoji' => $this->getEmoji()->get(),
                     'default' => true,
                 ],
             ],
@@ -245,7 +246,7 @@ class StringSelectMenuTest extends TestCase
                     'label' => '::label::',
                     'value' => '::value::',
                     'description' => '::description::',
-                    'emoji' => $this->getEmoji()->getPartial(),
+                    'emoji' => $this->getEmoji()->get(),
                 ],
             ],
         ];

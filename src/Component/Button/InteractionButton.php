@@ -6,7 +6,7 @@ namespace Exan\Dhp\Component\Button;
 
 use Exan\Dhp\Component\Component;
 use Exan\Dhp\Enums\Component\ButtonStyle;
-use Exan\Dhp\Parts\Emoji;
+use Exan\Dhp\Rest\Helpers\Emoji\EmojiBuilder;
 
 abstract class InteractionButton extends Component
 {
@@ -15,7 +15,7 @@ abstract class InteractionButton extends Component
     public function __construct(
         protected string $customId,
         protected ?string $label = null,
-        protected ?Emoji $emoji = null,
+        protected ?EmojiBuilder $emoji = null,
         protected bool $disabled = false
     ) {
     }
@@ -34,7 +34,7 @@ abstract class InteractionButton extends Component
         }
 
         if (!is_null($this->emoji)) {
-            $data['emoji'] = $this->emoji->getPartial();
+            $data['emoji'] = $this->emoji->get();
         }
 
         return $data;

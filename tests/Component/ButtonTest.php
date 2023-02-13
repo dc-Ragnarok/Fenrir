@@ -11,18 +11,19 @@ use Exan\Dhp\Component\Button\SecondaryButton;
 use Exan\Dhp\Component\Button\SuccessButton;
 use Exan\Dhp\Enums\Component\ButtonStyle;
 use Exan\Dhp\Parts\Emoji;
+use Exan\Dhp\Rest\Helpers\Emoji\EmojiBuilder;
 use PHPUnit\Framework\TestCase;
 
 class ButtonTest extends TestCase
 {
-    private function getEmoji(): Emoji
+    private function getEmoji(): EmojiBuilder
     {
         $emoji = new Emoji();
         $emoji->id = '::emoji id::';
         $emoji->name = '::emoji name::';
         $emoji->animated = true;
 
-        return $emoji;
+        return EmojiBuilder::fromPart($emoji);
     }
 
     /**
@@ -60,7 +61,7 @@ class ButtonTest extends TestCase
                     'type' => 2,
                     'custom_id' => '::custom id::',
                     'label' => '::label::',
-                    'emoji' => $this->getEmoji()->getPartial(),
+                    'emoji' => $this->getEmoji()->get(),
                     'disabled' => true
                 ],
             ],
@@ -74,7 +75,7 @@ class ButtonTest extends TestCase
                 'expected' => [
                     'type' => 2,
                     'custom_id' => '::custom id::',
-                    'emoji' => $this->getEmoji()->getPartial(),
+                    'emoji' => $this->getEmoji()->get(),
                     'disabled' => true
                 ],
             ],
@@ -102,7 +103,7 @@ class ButtonTest extends TestCase
                     'type' => 2,
                     'custom_id' => '::custom id::',
                     'label' => '::label::',
-                    'emoji' => $this->getEmoji()->getPartial(),
+                    'emoji' => $this->getEmoji()->get(),
                     'disabled' => false
                 ],
             ],
@@ -134,7 +135,7 @@ class ButtonTest extends TestCase
                     'style' => ButtonStyle::Link,
                     'url' => '::url::',
                     'label' => '::label::',
-                    'emoji' => $this->getEmoji()->getPartial(),
+                    'emoji' => $this->getEmoji()->get(),
                     'disabled' => true
                 ],
             ],
@@ -149,7 +150,7 @@ class ButtonTest extends TestCase
                     'type' => 2,
                     'style' => ButtonStyle::Link,
                     'url' => '::url::',
-                    'emoji' => $this->getEmoji()->getPartial(),
+                    'emoji' => $this->getEmoji()->get(),
                     'disabled' => true
                 ],
             ],
@@ -179,7 +180,7 @@ class ButtonTest extends TestCase
                     'style' => ButtonStyle::Link,
                     'url' => '::url::',
                     'label' => '::label::',
-                    'emoji' => $this->getEmoji()->getPartial(),
+                    'emoji' => $this->getEmoji()->get(),
                     'disabled' => false
                 ],
             ],

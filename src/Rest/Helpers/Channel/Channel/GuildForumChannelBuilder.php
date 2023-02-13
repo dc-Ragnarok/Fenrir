@@ -14,6 +14,7 @@ use Exan\Dhp\Rest\Helpers\Channel\Channel\Shared\SetNsfw;
 use Exan\Dhp\Rest\Helpers\Channel\Channel\Shared\SetParentId;
 use Exan\Dhp\Rest\Helpers\Channel\Channel\Shared\SetRateLimitPerUser;
 use Exan\Dhp\Rest\Helpers\Channel\Channel\Shared\SetTopic;
+use Exan\Dhp\Rest\Helpers\Emoji\EmojiBuilder;
 
 /**
  * @see https://discord.com/developers/docs/resources/channel#modify-channel
@@ -47,7 +48,7 @@ class GuildForumChannelBuilder extends ChannelBuilder
     public function addAvailableTag(
         string $name,
         ?bool $moderated = null,
-        ?Emoji $emoji = null
+        ?EmojiBuilder $emoji = null
     ): GuildForumChannelBuilder {
         if (!isset($this->data['available_tags'])) {
             $this->data['available_tags'] = [];
@@ -67,20 +68,27 @@ class GuildForumChannelBuilder extends ChannelBuilder
             return $this;
         }
 
-        if (isset($emoji->name)) {
-            $tag['emoji_id'] = $emoji->id;
-        } else {
-            $tag['emoji_name'] = $emoji->id;
+        if (!is_null($emoji)) {
+            $emojiData = $emoji->get();
+
+            $add = isset($emojiData['name'])
+                ? ['emoji_id' => $emojiData['id']]
+                : ['emoji_name' => $emojiData['id']];
+
+            $tag = array_merge($tag, $add);
         }
+
 
         return $this;
     }
 
-    public function setDefaultReactionEmoji(Emoji $emoji): GuildForumChannelBuilder
+    public function setDefaultReactionEmoji(EmojiBuilder $emoji): GuildForumChannelBuilder
     {
-        $this->data['default_reaction_emoji'] = $emoji->name
-            ? ['emoji_id' => $emoji->id]
-            : ['emoji_name' => $emoji->id];
+        $emojiData = $emoji->get();
+
+        $this->data['default_reaction_emoji'] = isset($emojiData['name'])
+            ? ['emoji_id' => $emojiData['id']]
+            : ['emoji_name' => $emojiData['id']];
 
         return $this;
     }

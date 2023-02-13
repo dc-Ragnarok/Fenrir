@@ -7,7 +7,7 @@ namespace Exan\Dhp\Component\SelectMenu;
 use Exan\Dhp\Enums\Component\SelectMenuType;
 use Exan\Dhp\Exceptions\Components\SelectMenu\StringSelectMenu\NoOptionsException;
 use Exan\Dhp\Exceptions\Components\SelectMenu\StringSelectMenu\TooManyOptionsException;
-use Exan\Dhp\Parts\Emoji;
+use Exan\Dhp\Rest\Helpers\Emoji\EmojiBuilder;
 
 class StringSelectMenu extends SelectMenu
 {
@@ -24,7 +24,7 @@ class StringSelectMenu extends SelectMenu
         string $label,
         string $value,
         ?string $description = null,
-        ?Emoji $emoji = null,
+        ?EmojiBuilder $emoji = null,
         ?bool $default = null
     ) {
         if (count($this->items) === 25) {
@@ -41,7 +41,7 @@ class StringSelectMenu extends SelectMenu
         }
 
         if (!is_null($emoji)) {
-            $item['emoji'] = $emoji->getPartial();
+            $item['emoji'] = $emoji->get();
         }
 
         if (!is_null($default)) {

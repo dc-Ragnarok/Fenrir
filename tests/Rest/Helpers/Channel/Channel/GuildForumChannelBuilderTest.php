@@ -9,6 +9,7 @@ use Exan\Dhp\Enums\Parts\SortOrderTypes;
 use Exan\Dhp\Exceptions\Rest\Helpers\Channel\Channel\GuildForumChannelBuilder\TooManyAvailableTagsException;
 use Exan\Dhp\Parts\Emoji;
 use Exan\Dhp\Rest\Helpers\Channel\Channel\GuildForumChannelBuilder;
+use Exan\Dhp\Rest\Helpers\Emoji\EmojiBuilder;
 use PHPUnit\Framework\TestCase;
 
 class GuildForumChannelBuilderTest extends TestCase
@@ -36,13 +37,13 @@ class GuildForumChannelBuilderTest extends TestCase
         $builder->addAvailableTag(
             '::tag::',
             true,
-            Emoji::get('::id::', 'emoji', false) // Guild emoji
+            (new EmojiBuilder())->setId('::id::')->setName('emoji')->setAnimated(false) // Guild emoji
         );
 
         $builder->addAvailableTag(
             '::tag::',
             true,
-            Emoji::get('::name::', null, false) // Global/default emoji
+            (new EmojiBuilder())->setId('::name::') // Global/default emoji
         );
 
         $this->assertEquals([
@@ -72,12 +73,12 @@ class GuildForumChannelBuilderTest extends TestCase
     public function testSetDefaultReactionEmoji()
     {
         $builder = new GuildForumChannelBuilder();
-        $emoji = Emoji::get('::id::', 'emoji', false); // Guild emoji
+        $emoji = (new EmojiBuilder)->setId('::id::')->setName('emoji')->setAnimated(false); // Guild emoji
         $builder->setDefaultReactionEmoji($emoji);
 
         $this->assertEquals(['emoji_id' => '::id::'], $builder->get()['default_reaction_emoji']);
 
-        $emoji = Emoji::get('::name::', null, false); // Global/default emoji
+        $emoji = (new EmojiBuilder)->setId('::name::')->setAnimated(false); // Global/default emoji
         $builder->setDefaultReactionEmoji($emoji);
 
         $this->assertEquals(['emoji_name' => '::name::'], $builder->get()['default_reaction_emoji']);

@@ -4,6 +4,7 @@ namespace Tests\Exan\Dhp\Websocket\Helpers;
 
 use Exan\Dhp\Enums\Gateway\ActivityType;
 use Exan\Dhp\Parts\Emoji;
+use Exan\Dhp\Rest\Helpers\Emoji\EmojiBuilder;
 use Exan\Dhp\Websocket\Helpers\ActivityBuilder;
 use PHPUnit\Framework\TestCase;
 
@@ -33,9 +34,8 @@ class ActivityBuilderTest extends TestCase
     public function testSetEmoji(): void
     {
         $activityBuilder = new ActivityBuilder();
-        $emoji = Emoji::get('::emoji id::', '::emoji name::');
-
+        $emoji = (new EmojiBuilder())->setId('::emoji id::')->setName('::emoji name::');
         $activityBuilder->setEmoji($emoji);
-        $this->assertEquals(['emoji' => $emoji->getPartial()], $activityBuilder->get());
+        $this->assertEquals(['emoji' => $emoji->get()], $activityBuilder->get());
     }
 }

@@ -17,6 +17,7 @@ use Exan\Dhp\Rest\Helpers\Channel\Channel\GuildTextChannelBuilder;
 use Exan\Dhp\Rest\Helpers\Channel\Channel\GuildVoiceChannelBuilder;
 use Exan\Dhp\Rest\Helpers\Channel\MessageBuilder;
 use Exan\Dhp\Rest\Helpers\Channel\StartThreadFromMessageBuilder;
+use Exan\Dhp\Rest\Helpers\Emoji\EmojiBuilder;
 use Tests\Exan\Dhp\Rest\HttpHelperTestCase;
 
 class ChannelTest extends HttpHelperTestCase
@@ -166,7 +167,7 @@ class ChannelTest extends HttpHelperTestCase
             ],
             'Create reaction' => [
                 'method' => 'createReaction',
-                'args' => ['::channel id::', '::message id::', Emoji::get('::id::')],
+                'args' => ['::channel id::', '::message id::', (new EmojiBuilder())->setId('::id::')],
                 'mockOptions' => [
                     'method' => 'put',
                     'return' => null,
@@ -175,7 +176,7 @@ class ChannelTest extends HttpHelperTestCase
             ],
             'Delete own reaction' => [
                 'method' => 'deleteOwnReaction',
-                'args' => ['::channel id::', '::message id::', Emoji::get('::id::')],
+                'args' => ['::channel id::', '::message id::', (new EmojiBuilder())->setId('::id::')],
                 'mockOptions' => [
                     'method' => 'delete',
                     'return' => null,
@@ -184,7 +185,7 @@ class ChannelTest extends HttpHelperTestCase
             ],
             'Delete user reaction' => [
                 'method' => 'deleteUserReaction',
-                'args' => ['::channel id::', '::message id::', Emoji::get('::id::'), '::user id::'],
+                'args' => ['::channel id::', '::message id::', (new EmojiBuilder())->setId('::id::'), '::user id::'],
                 'mockOptions' => [
                     'method' => 'delete',
                     'return' => null,
@@ -193,7 +194,7 @@ class ChannelTest extends HttpHelperTestCase
             ],
             'Get reactions' => [
                 'method' => 'getReactions',
-                'args' => ['::channel id::', '::message id::', Emoji::get('::id::')],
+                'args' => ['::channel id::', '::message id::', (new EmojiBuilder())->setId('::id::')],
                 'mockOptions' => [
                     'method' => 'get',
                     'return' => [(object) [], (object) [], (object) []],
@@ -214,7 +215,7 @@ class ChannelTest extends HttpHelperTestCase
             ],
             'Delete all reactions for emoji' => [
                 'method' => 'deleteAllReactionsForEmoji',
-                'args' => ['::channel id::', '::message id::', Emoji::get('::id::')],
+                'args' => ['::channel id::', '::message id::', (new EmojiBuilder())->setId('::id::')],
                 'mockOptions' => [
                     'method' => 'delete',
                     'return' => null,
@@ -226,7 +227,7 @@ class ChannelTest extends HttpHelperTestCase
              */
             'Bulk delete messages' => [
                 'method' => 'bulkDeleteMessages',
-                'args' => ['::channel id::', ['::message id::'], Emoji::get('::id::')],
+                'args' => ['::channel id::', ['::message id::'], (new EmojiBuilder())->setId('::id::')],
                 'mockOptions' => [
                     'method' => 'post',
                     'return' => null,

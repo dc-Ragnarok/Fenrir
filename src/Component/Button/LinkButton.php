@@ -6,7 +6,7 @@ namespace Exan\Dhp\Component\Button;
 
 use Exan\Dhp\Component\Component;
 use Exan\Dhp\Enums\Component\ButtonStyle;
-use Exan\Dhp\Parts\Emoji;
+use Exan\Dhp\Rest\Helpers\Emoji\EmojiBuilder;
 
 class LinkButton extends Component
 {
@@ -15,7 +15,7 @@ class LinkButton extends Component
     public function __construct(
         private string $url,
         private ?string $label = null,
-        private ?Emoji $emoji = null,
+        private ?EmojiBuilder $emoji = null,
         private bool $disabled = false
     ) {
     }
@@ -34,7 +34,7 @@ class LinkButton extends Component
         }
 
         if (!is_null($this->emoji)) {
-            $data['emoji'] = $this->emoji->getPartial();
+            $data['emoji'] = $this->emoji->get();
         }
 
         return $data;

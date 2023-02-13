@@ -7,7 +7,7 @@ namespace Exan\Dhp\Rest;
 use Discord\Http\Endpoint;
 use Discord\Http\Http;
 use Exan\Dhp\Parts\Emoji as PartsEmoji;
-use Exan\Dhp\Rest\Helpers\Emoji\EmojiBuilder;
+use Exan\Dhp\Rest\Helpers\Emoji\CreateEmojiBuilder;
 use Exan\Dhp\Rest\Helpers\HttpHelper;
 use JsonMapper;
 use React\Promise\ExtendedPromiseInterface;
@@ -64,7 +64,7 @@ class Emoji
      */
     public function createGuildEmoji(
         string $guildId,
-        EmojiBuilder $emojiBuilder,
+        CreateEmojiBuilder $emojiBuilder,
         string $reason = null
     ): ExtendedPromiseInterface {
         return $this->mapPromise(
@@ -88,7 +88,7 @@ class Emoji
     public function modifyGuildEmoji(
         string $guildId,
         string $emojiId,
-        EmojiBuilder $emojiBuilder,
+        CreateEmojiBuilder $emojiBuilder,
         string $reason = null
     ): ExtendedPromiseInterface {
         return $this->mapPromise(

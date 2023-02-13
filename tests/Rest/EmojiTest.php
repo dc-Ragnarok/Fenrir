@@ -6,7 +6,7 @@ namespace Tests\Exan\Dhp\Rest;
 
 use Exan\Dhp\Parts\Emoji as PartsEmoji;
 use Exan\Dhp\Rest\Emoji;
-use Exan\Dhp\Rest\Helpers\Emoji\EmojiBuilder;
+use Exan\Dhp\Rest\Helpers\Emoji\CreateEmojiBuilder;
 use Tests\Exan\Dhp\Rest\HttpHelperTestCase;
 
 class EmojiTest extends HttpHelperTestCase
@@ -46,7 +46,7 @@ class EmojiTest extends HttpHelperTestCase
             ],
             'Create guild emoji' => [
                 'method' => 'createGuildEmoji',
-                'args' => ['::guild id::', new EmojiBuilder()],
+                'args' => ['::guild id::', new CreateEmojiBuilder()],
                 'mockOptions' => [
                     'method' => 'post',
                     'return' => (object) [],
@@ -57,7 +57,7 @@ class EmojiTest extends HttpHelperTestCase
             ],
             'Modify guild emoji' => [
                 'method' => 'modifyGuildEmoji',
-                'args' => ['::guild id::', '::emoji id::', new EmojiBuilder()],
+                'args' => ['::guild id::', '::emoji id::', new CreateEmojiBuilder()],
                 'mockOptions' => [
                     'method' => 'patch',
                     'return' => (object) [],

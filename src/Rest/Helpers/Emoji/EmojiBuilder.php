@@ -4,8 +4,7 @@ declare(strict_types=1);
 
 namespace Exan\Dhp\Rest\Helpers\Emoji;
 
-use Exan\Dhp\Enums\ImageData;
-use Exan\Dhp\Rest\Helpers\Emoji\EmojiBuilder as EmojiEmojiBuilder;
+use Exan\Dhp\Parts\Emoji;
 
 class EmojiBuilder
 {
@@ -18,22 +17,48 @@ class EmojiBuilder
         return $this;
     }
 
-    public function setRoles(array $roles): EmojiBuilder
+    public function setAnimated(bool $animated): EmojiBuilder
     {
-        $this->data['roles'] = $roles;
+        $this->data['animated'] = $animated;
 
         return $this;
     }
 
-    public function setImage(string $content, ImageData $imageData): EmojiEmojiBuilder
+    public function setId(string $id): EmojiBuilder
     {
-        $this->data['image'] = 'data:' . $imageData->value . ';base64,' . base64_encode($content);
+        $this->data['id'] = $id;
 
         return $this;
+    }
+
+    public static function fromPart(Emoji $emoji): EmojiBuilder
+    {
+        $builder = new EmojiBuilder();
+
+        if (isset($emoji->animated)) {
+            $builder->setAnimated($emoji->animated);
+        }
+
+        if (isset($emoji->name)) {
+            $builder->setName($emoji->name);
+        }
+
+        if (isset($emoji->id)) {
+            $builder->setId($emoji->id);
+        }
+
+        return $builder;
     }
 
     public function get(): array
     {
         return $this->data;
+    }
+
+    public function __toString(): string
+    {
+        return isset($this->data['name'])
+            ? $this->data['name'] . ':' . $this->data['id']
+            : urlencode($this->data['id']);
     }
 }

@@ -17,6 +17,7 @@ use Exan\Dhp\Rest\Helpers\Channel\GetReactionsBuilder;
 use Exan\Dhp\Rest\Helpers\Channel\InviteBuilder;
 use Exan\Dhp\Rest\Helpers\Channel\MessageBuilder;
 use Exan\Dhp\Rest\Helpers\Channel\StartThreadFromMessageBuilder;
+use Exan\Dhp\Rest\Helpers\Emoji\EmojiBuilder;
 use Exan\Dhp\Rest\Helpers\HttpHelper;
 use JsonMapper;
 use React\Promise\ExtendedPromiseInterface;
@@ -190,7 +191,7 @@ class Channel
     public function createReaction(
         string $channelId,
         string $messageId,
-        Emoji $emoji
+        EmojiBuilder $emoji
     ): ExtendedPromiseInterface {
         return $this->http->put(
             Endpoint::bind(
@@ -210,7 +211,7 @@ class Channel
     public function deleteOwnReaction(
         string $channelId,
         string $messageId,
-        Emoji $emoji
+        EmojiBuilder $emoji
     ): ExtendedPromiseInterface {
         return $this->http->delete(
             Endpoint::bind(
@@ -230,7 +231,7 @@ class Channel
     public function deleteUserReaction(
         string $channelId,
         string $messageId,
-        Emoji $emoji,
+        EmojiBuilder $emoji,
         string $userId
     ): ExtendedPromiseInterface {
         return $this->http->delete(
@@ -252,7 +253,7 @@ class Channel
     public function getReactions(
         string $channelId,
         string $messageId,
-        Emoji $emoji,
+        EmojiBuilder $emoji,
         GetReactionsBuilder $getReactionsBuilder = new GetReactionsBuilder()
     ) {
         return $this->mapArrayPromise(
@@ -293,7 +294,7 @@ class Channel
     public function deleteAllReactionsForEmoji(
         string $channelId,
         string $messageId,
-        Emoji $emoji
+        EmojiBuilder $emoji
     ): ExtendedPromiseInterface {
         return $this->http->delete(
             Endpoint::bind(

@@ -3,7 +3,7 @@
 namespace Exan\Dhp\Websocket\Helpers;
 
 use Exan\Dhp\Enums\Gateway\ActivityType;
-use Exan\Dhp\Parts\Emoji;
+use Exan\Dhp\Rest\Helpers\Emoji\EmojiBuilder;
 
 /**
  * @see https://discord.com/developers/docs/topics/gateway-events#activity-object
@@ -40,9 +40,9 @@ class ActivityBuilder
         return $this;
     }
 
-    public function setEmoji(Emoji $emoji): ActivityBuilder
+    public function setEmoji(EmojiBuilder $emoji): ActivityBuilder
     {
-        $this->data['emoji'] = $emoji->getPartial();
+        $this->data['emoji'] = $emoji->get();
 
         return $this;
     }
