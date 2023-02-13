@@ -2,7 +2,7 @@
 
 namespace Exan\Dhp\Parts;
 
-use Exan\Dhp\Enums\Parts\EmbedTypes;
+use \Exan\Dhp\Enums\Parts\EmbedTypes;
 use Carbon\Carbon;
 
 class Embed
@@ -19,6 +19,13 @@ class Embed
     public ?EmbedVideo $video;
     public ?EmbedProvider $provider;
     public ?EmbedAuthor $author;
-    /** @var ?\Exan\Dhp\Parts\EmbedField[] */
+    /**
+     * @var EmbedField[]
+     */
     public ?array $fields;
+
+    public function setType(string $value): void
+    {
+        $this->type = EmbedTypes::from($value);
+    }
 }

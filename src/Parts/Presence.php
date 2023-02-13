@@ -1,18 +1,16 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Exan\Dhp\Parts;
 
-/**
- * @see https://discord.com/developers/docs/topics/gateway-events#presence-update-presence-update-event-fields
- * @todo
- */
+
 class Presence
 {
     public User $user;
     public string $guild_id;
     public string $status;
-    public array $activities; // @TODO
-    public object $client_status; // @TODO
+    /**
+     * @var Activity[]
+     */
+    public ?array $activities;
+    public ClientStatus $client_status;
 }

@@ -9,7 +9,9 @@ class Application
     public string $name;
     public ?string $icon;
     public string $description;
-    /** @var ?\Exan\Dhp\Parts\string[] */
+    /**
+     * @var string[]
+     */
     public ?array $rpc_origins;
     public bool $bot_public;
     public bool $bot_require_code_grant;
@@ -23,7 +25,9 @@ class Application
     public ?string $slug;
     public ?string $cover_image;
     public ?string $flags;
-    /** @var ?\Exan\Dhp\Parts\string[] */
+    /**
+     * @var string[]
+     */
     public ?array $tags;
     public ?InstallParams $install_params;
     public ?string $custom_install_url;

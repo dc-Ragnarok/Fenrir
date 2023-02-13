@@ -12,7 +12,7 @@ class GuildMembersChunk
     public string $guild_id;
 
     /**
-     * @var \Exan\Dhp\Parts\Member[]
+     * @var \Exan\Dhp\Parts\GuildMember[]
      */
     public array $members;
 

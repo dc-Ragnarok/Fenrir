@@ -2,8 +2,8 @@
 
 namespace Exan\Dhp\Parts;
 
-use Exan\Dhp\Enums\Parts\StickerTypes;
-use Exan\Dhp\Enums\Parts\StickerFormatTypes;
+use \Exan\Dhp\Enums\Parts\StickerTypes;
+use \Exan\Dhp\Enums\Parts\StickerFormatTypes;
 
 class Sticker
 {
@@ -11,7 +11,9 @@ class Sticker
     public ?string $pack_id;
     public string $name;
     public ?string $description;
-    /** @var ?\Exan\Dhp\Parts\string[] */
+    /**
+     * @var string[]
+     */
     public ?array $tags;
     public ?string $asset;
     public StickerTypes $type;
@@ -20,4 +22,14 @@ class Sticker
     public ?string $guild_id;
     public ?User $user;
     public ?int $sort_value;
+
+    public function setType(int $value): void
+    {
+        $this->type = StickerTypes::from($value);
+    }
+
+    public function setFormatType(int $value): void
+    {
+        $this->format_type = StickerFormatTypes::from($value);
+    }
 }

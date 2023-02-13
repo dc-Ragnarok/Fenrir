@@ -31,12 +31,15 @@ class ChannelBuilderTest extends TestCase
         $this->assertEquals(1, $builder->get()['position']);
     }
 
-    public function testAddPermissionOverwrites()
-    {
-        $overwrite = new Overwrite(OverwriteTypes::MEMBER);
-        $builder = $this->getBuilder();
-        $builder->addPermissionOverwrites($overwrite);
+    /**
+     * @todo Overwrite builder
+     */
+    // public function testAddPermissionOverwrites()
+    // {
+    //     $overwrite = new Overwrite(OverwriteTypes::MEMBER);
+    //     $builder = $this->getBuilder();
+    //     $builder->addPermissionOverwrites($overwrite);
 
-        $this->assertEquals([$overwrite->toArray()], $builder->get()['permission_overwrites']);
-    }
+    //     $this->assertEquals([$overwrite->toArray()], $builder->get()['permission_overwrites']);
+    // }
 }

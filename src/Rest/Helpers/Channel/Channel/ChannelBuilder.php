@@ -31,16 +31,19 @@ abstract class ChannelBuilder
         return $this;
     }
 
-    public function addPermissionOverwrites(Overwrite $overwrite): self
-    {
-        if (!isset($this->data['permission_overwrites'])) {
-            $this->data['permission_overwrites'] = [];
-        }
+    /**
+     * @todo Overwrite builder
+     */
+    // public function addPermissionOverwrites(Overwrite $overwrite): self
+    // {
+    //     if (!isset($this->data['permission_overwrites'])) {
+    //         $this->data['permission_overwrites'] = [];
+    //     }
 
-        $this->data['permission_overwrites'][] = $overwrite->toArray();
+    //     $this->data['permission_overwrites'][] = $overwrite->toArray();
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
     protected function setChannelType(ChannelTypes $type)
     {

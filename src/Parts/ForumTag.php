@@ -2,9 +2,7 @@
 
 namespace Exan\Dhp\Parts;
 
-/**
- * @see https://discord.com/developers/docs/resources/channel#forum-tag-object
- */
+
 class ForumTag
 {
     public string $id;

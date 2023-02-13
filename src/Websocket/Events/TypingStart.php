@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Exan\Dhp\Websocket\Events;
 
 use Carbon\Carbon;
-use Exan\Dhp\Parts\Member;
+use Exan\Dhp\Parts\GuildMember;
 
 /**
  * Note: this event is sent every 5 seconds while a user is typing. It is not
@@ -19,5 +19,5 @@ class TypingStart
     public ?string $guild_id;
     public string $user_id;
     public Carbon $timestamp;
-    public ?Member $member;
+    public ?GuildMember $member;
 }

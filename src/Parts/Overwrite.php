@@ -1,33 +1,18 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Exan\Dhp\Parts;
 
-use Exan\Dhp\Enums\Parts\OverwriteTypes;
+use \Exan\Dhp\Enums\Parts\OverwriteTypes;
 
-/**
- * @see https://discord.com/developers/docs/resources/channel#overwrite-object
- * @todo
- */
 class Overwrite
 {
-    public ?string $id = null;
+    public string $id;
+    public OverwriteTypes $type;
+    public string $allow;
+    public string $deny;
 
-    public function __construct(
-        public OverwriteTypes $type,
-        public ?string $allow = null,
-        public ?string $deny = null
-    ) {
-    }
-
-    public function toArray()
+    public function setType(int $value): void
     {
-        return array_filter([
-            'id' => $this->id,
-            'type' => $this->type->value,
-            'allow' => $this->allow,
-            'deny' => $this->deny
-        ]);
+        $this->type = OverwriteTypes::from($value);
     }
 }

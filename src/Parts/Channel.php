@@ -2,11 +2,11 @@
 
 namespace Exan\Dhp\Parts;
 
-use Exan\Dhp\Enums\Parts\ChannelTypes;
+use \Exan\Dhp\Enums\Parts\ChannelTypes;
 use Carbon\Carbon;
-use Exan\Dhp\Enums\Parts\VideoQualityModes;
-use Exan\Dhp\Enums\Parts\SortOrderTypes;
-use Exan\Dhp\Enums\Parts\ForumLayoutTypes;
+use \Exan\Dhp\Enums\Parts\VideoQualityModes;
+use \Exan\Dhp\Enums\Parts\SortOrderTypes;
+use \Exan\Dhp\Enums\Parts\ForumLayoutTypes;
 
 class Channel
 {
@@ -14,7 +14,9 @@ class Channel
     public ChannelTypes $type;
     public ?string $guild_id;
     public ?int $position;
-    /** @var ?\Exan\Dhp\Parts\Overwrite[] */
+    /**
+     * @var Overwrite[]
+     */
     public ?array $permission_overwrites;
     public ?string $name;
     public ?string $topic;
@@ -23,7 +25,9 @@ class Channel
     public ?int $bitrate;
     public ?int $user_limit;
     public ?int $rate_limit_per_user;
-    /** @var ?\Exan\Dhp\Parts\User[] */
+    /**
+     * @var User[]
+     */
     public ?array $recipients;
     public ?string $icon;
     public ?string $owner_id;
@@ -40,12 +44,36 @@ class Channel
     public ?string $permissions;
     public ?string $flags;
     public ?int $total_message_sent;
-    /** @var ?\Exan\Dhp\Parts\Tag[] */
+    /**
+     * @var Tag[]
+     */
     public ?array $available_tags;
-    /** @var ?\Exan\Dhp\Parts\string[] */
+    /**
+     * @var string[]
+     */
     public ?array $applied_tags;
     public ?DefaultReaction $default_reaction_emoji;
     public ?int $default_thread_rate_limit_per_user;
     public ?SortOrderTypes $default_sort_order;
     public ?ForumLayoutTypes $default_forum_layout;
+
+    public function setType(int $value): void
+    {
+        $this->type = ChannelTypes::from($value);
+    }
+
+    public function setVideoQualityMode(int $value): void
+    {
+        $this->video_quality_mode = VideoQualityModes::from($value);
+    }
+
+    public function setDefaultSortOrder(int $value): void
+    {
+        $this->default_sort_order = SortOrderTypes::from($value);
+    }
+
+    public function setDefaultForumLayout(int $value): void
+    {
+        $this->default_forum_layout = ForumLayoutTypes::from($value);
+    }
 }

@@ -2,7 +2,7 @@
 
 namespace Exan\Dhp\Parts;
 
-use Exan\Dhp\Enums\Parts\InteractionTypes;
+use \Exan\Dhp\Enums\Parts\InteractionTypes;
 
 class MessageInteraction
 {
@@ -11,4 +11,9 @@ class MessageInteraction
     public string $name;
     public User $user;
     public ?GuildMember $member;
+
+    public function setType(int $value): void
+    {
+        $this->type = InteractionTypes::from($value);
+    }
 }

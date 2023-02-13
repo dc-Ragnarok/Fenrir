@@ -2,8 +2,7 @@
 
 namespace Exan\Dhp\Parts;
 
-use Exan\Dhp\Enums\Parts\UserFlags;
-use Exan\Dhp\Enums\Parts\PremiumTypes;
+use \Exan\Dhp\Enums\Parts\PremiumTypes;
 
 class User
 {
@@ -22,4 +21,9 @@ class User
     public ?string $flags;
     public ?PremiumTypes $premium_type;
     public ?string $public_flags;
+
+    public function setPremiumType(int $value): void
+    {
+        $this->premium_type = PremiumTypes::from($value);
+    }
 }

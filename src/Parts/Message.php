@@ -3,7 +3,8 @@
 namespace Exan\Dhp\Parts;
 
 use Carbon\Carbon;
-use Exan\Dhp\Enums\Parts\MessageTypes;
+use \Exan\Dhp\Enums\Parts\MessageTypes;
+use \Exan\Dhp\Enums\Parts\MessageComponentTypes;
 
 class Message
 {
@@ -15,17 +16,29 @@ class Message
     public ?Carbon $edited_timestamp;
     public bool $tts;
     public bool $mention_everyone;
-    /** @var \Exan\Dhp\Parts\User[] */
+    /**
+     * @var User[]
+     */
     public array $mentions;
-    /** @var \Exan\Dhp\Parts\string[] */
+    /**
+     * @var string[]
+     */
     public array $mention_roles;
-    /** @var ?\Exan\Dhp\Parts\ChannelMention[] */
+    /**
+     * @var ChannelMention[]
+     */
     public ?array $mention_channels;
-    /** @var \Exan\Dhp\Parts\Attachment[] */
+    /**
+     * @var Attachment[]
+     */
     public array $attachments;
-    /** @var \Exan\Dhp\Parts\Embed[] */
+    /**
+     * @var Embed[]
+     */
     public array $embeds;
-    /** @var ?\Exan\Dhp\Parts\Reaction[] */
+    /**
+     * @var Reaction[]
+     */
     public ?array $reactions;
     public ?string $nonce;
     public bool $pinned;
@@ -39,12 +52,32 @@ class Message
     public ?Message $referenced_message;
     public ?MessageInteraction $interaction;
     public ?Channel $thread;
-    /** @var \Exan\Dhp\Parts\MessageComponent[] */
+    /**
+     * @var \Exan\Dhp\Enums\Parts\MessageComponentTypes[]
+     */
     public array $components;
-    /** @var ?\Exan\Dhp\Parts\MessageStickerItem[] */
+    /**
+     * @var MessageStickerItem[]
+     */
     public ?array $sticker_items;
-    /** @var ?\Exan\Dhp\Parts\Sticker[] */
+    /**
+     * @var Sticker[]
+     */
     public ?array $stickers;
     public ?int $position;
     public ?RoleSubscriptionData $role_subscription_data;
+
+    public function setType(int $value): void
+    {
+        $this->type = MessageTypes::from($value);
+    }
+
+    public function setComponents(array $value): void
+    {
+        $this->components = [];
+
+        foreach ($value as $entry) {
+            $this->components[] = MessageComponentTypes::from($entry);
+        }
+    }
 }
