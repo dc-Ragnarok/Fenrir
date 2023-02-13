@@ -2,7 +2,6 @@
 
 namespace Exan\Dhp\Parts;
 
-
 class ClientStatus
 {
     public ?string $desktop;

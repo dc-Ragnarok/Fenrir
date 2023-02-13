@@ -2,7 +2,6 @@
 
 namespace Exan\Dhp\Parts;
 
-
 class WelcomeScreenChannel
 {
     public string $channel_id;

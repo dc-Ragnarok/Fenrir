@@ -3,9 +3,9 @@
 namespace Exan\Dhp\Parts;
 
 use Carbon\Carbon;
-use \Exan\Dhp\Enums\Parts\GuildScheduledEventPrivacyLevels;
-use \Exan\Dhp\Enums\Parts\GuildScheduledEventStatus;
-use \Exan\Dhp\Enums\Parts\GuildScheduledEventEntityTypes;
+use Exan\Dhp\Enums\Parts\GuildScheduledEventPrivacyLevels;
+use Exan\Dhp\Enums\Parts\GuildScheduledEventStatus;
+use Exan\Dhp\Enums\Parts\GuildScheduledEventEntityTypes;
 
 class GuildScheduledEvent
 {

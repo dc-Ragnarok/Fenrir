@@ -2,7 +2,6 @@
 
 namespace Exan\Dhp\Parts;
 
-
 class EmbedAuthor
 {
     public string $name;

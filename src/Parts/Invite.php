@@ -2,7 +2,7 @@
 
 namespace Exan\Dhp\Parts;
 
-use \Exan\Dhp\Enums\Parts\InviteTargetTypes;
+use Exan\Dhp\Enums\Parts\InviteTargetTypes;
 use Carbon\Carbon;
 
 class Invite

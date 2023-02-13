@@ -2,7 +2,6 @@
 
 namespace Exan\Dhp\Parts;
 
-
 class RoleSubscriptionData
 {
     public string $role_subscription_listing_id;

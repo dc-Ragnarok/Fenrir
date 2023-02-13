@@ -2,7 +2,7 @@
 
 namespace Exan\Dhp\Parts;
 
-use \Exan\Dhp\Enums\Parts\EmbedTypes;
+use Exan\Dhp\Enums\Parts\EmbedTypes;
 use Carbon\Carbon;
 
 class Embed

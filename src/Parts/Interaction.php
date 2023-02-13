@@ -2,7 +2,7 @@
 
 namespace Exan\Dhp\Parts;
 
-use \Exan\Dhp\Enums\Parts\InteractionTypes;
+use Exan\Dhp\Enums\Parts\InteractionTypes;
 
 class Interaction
 {

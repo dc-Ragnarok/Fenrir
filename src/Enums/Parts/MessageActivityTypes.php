@@ -2,7 +2,7 @@
 
 namespace Exan\Dhp\Enums\Parts;
 
-enum MessageActivityTypes: int 
+enum MessageActivityTypes: int
 {
     case JOIN  = 1;
     case SPECTATE  = 2;

@@ -2,7 +2,7 @@
 
 namespace Exan\Dhp\Parts;
 
-use \Exan\Dhp\Enums\Parts\OverwriteTypes;
+use Exan\Dhp\Enums\Parts\OverwriteTypes;
 
 class Overwrite
 {

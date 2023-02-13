@@ -2,7 +2,6 @@
 
 namespace Exan\Dhp\Parts;
 
-
 class RoleTags
 {
     public ?string $bot_id;

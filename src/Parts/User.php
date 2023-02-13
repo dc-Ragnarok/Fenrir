@@ -2,7 +2,7 @@
 
 namespace Exan\Dhp\Parts;
 
-use \Exan\Dhp\Enums\Parts\PremiumTypes;
+use Exan\Dhp\Enums\Parts\PremiumTypes;
 
 class User
 {

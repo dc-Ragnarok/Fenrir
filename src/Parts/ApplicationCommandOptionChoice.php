@@ -2,7 +2,6 @@
 
 namespace Exan\Dhp\Parts;
 
-
 class ApplicationCommandOptionChoice
 {
     public string $name;

@@ -2,7 +2,6 @@
 
 namespace Exan\Dhp\Parts;
 
-
 class Tag
 {
     public string $id;

@@ -2,13 +2,13 @@
 
 namespace Exan\Dhp\Parts;
 
-use \Exan\Dhp\Enums\Parts\VerificationLevels;
-use \Exan\Dhp\Enums\Parts\MessageNotificationLevels;
-use \Exan\Dhp\Enums\Parts\ExplicitContentFilterLevels;
-use \Exan\Dhp\Enums\Parts\GuildFeatures;
-use \Exan\Dhp\Enums\Parts\MfaLevels;
-use \Exan\Dhp\Enums\Parts\PremiumTiers;
-use \Exan\Dhp\Enums\Parts\NsfwLevels;
+use Exan\Dhp\Enums\Parts\VerificationLevels;
+use Exan\Dhp\Enums\Parts\MessageNotificationLevels;
+use Exan\Dhp\Enums\Parts\ExplicitContentFilterLevels;
+use Exan\Dhp\Enums\Parts\GuildFeatures;
+use Exan\Dhp\Enums\Parts\MfaLevels;
+use Exan\Dhp\Enums\Parts\PremiumTiers;
+use Exan\Dhp\Enums\Parts\NsfwLevels;
 
 class Guild
 {

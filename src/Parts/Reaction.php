@@ -2,7 +2,6 @@
 
 namespace Exan\Dhp\Parts;
 
-
 class Reaction
 {
     public int $count;

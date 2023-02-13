@@ -2,7 +2,7 @@
 
 namespace Exan\Dhp\Parts;
 
-use \Exan\Dhp\Enums\Parts\ApplicationCommandTypes;
+use Exan\Dhp\Enums\Parts\ApplicationCommandTypes;
 
 class ApplicationCommand
 {

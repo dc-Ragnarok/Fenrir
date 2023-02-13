@@ -2,8 +2,8 @@
 
 namespace Exan\Dhp\Parts;
 
-use \Exan\Dhp\Enums\Parts\StickerTypes;
-use \Exan\Dhp\Enums\Parts\StickerFormatTypes;
+use Exan\Dhp\Enums\Parts\StickerTypes;
+use Exan\Dhp\Enums\Parts\StickerFormatTypes;
 
 class Sticker
 {

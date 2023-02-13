@@ -2,7 +2,7 @@
 
 namespace Exan\Dhp\Parts;
 
-use \Exan\Dhp\Enums\Parts\ChannelTypes;
+use Exan\Dhp\Enums\Parts\ChannelTypes;
 
 class ChannelMention
 {

@@ -2,7 +2,6 @@
 
 namespace Exan\Dhp\Parts;
 
-
 class ActivityAssets
 {
     public ?string $large_image;

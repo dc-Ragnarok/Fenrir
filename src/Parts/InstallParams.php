@@ -2,7 +2,7 @@
 
 namespace Exan\Dhp\Parts;
 
-use \Exan\Dhp\Enums\Parts\Scopes;
+use Exan\Dhp\Enums\Parts\Scopes;
 
 class InstallParams
 {

@@ -2,11 +2,11 @@
 
 namespace Exan\Dhp\Parts;
 
-use \Exan\Dhp\Enums\Parts\ChannelTypes;
+use Exan\Dhp\Enums\Parts\ChannelTypes;
 use Carbon\Carbon;
-use \Exan\Dhp\Enums\Parts\VideoQualityModes;
-use \Exan\Dhp\Enums\Parts\SortOrderTypes;
-use \Exan\Dhp\Enums\Parts\ForumLayoutTypes;
+use Exan\Dhp\Enums\Parts\VideoQualityModes;
+use Exan\Dhp\Enums\Parts\SortOrderTypes;
+use Exan\Dhp\Enums\Parts\ForumLayoutTypes;
 
 class Channel
 {

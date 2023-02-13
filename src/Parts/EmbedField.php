@@ -2,7 +2,6 @@
 
 namespace Exan\Dhp\Parts;
 
-
 class EmbedField
 {
     public string $name;

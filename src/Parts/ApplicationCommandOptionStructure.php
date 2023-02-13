@@ -2,8 +2,8 @@
 
 namespace Exan\Dhp\Parts;
 
-use \Exan\Dhp\Enums\Parts\ApplicationCommandOptionTypes;
-use \Exan\Dhp\Enums\Parts\ChannelTypes;
+use Exan\Dhp\Enums\Parts\ApplicationCommandOptionTypes;
+use Exan\Dhp\Enums\Parts\ChannelTypes;
 
 class ApplicationCommandOptionStructure
 {

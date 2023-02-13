@@ -3,8 +3,8 @@
 namespace Exan\Dhp\Parts;
 
 use Carbon\Carbon;
-use \Exan\Dhp\Enums\Parts\MessageTypes;
-use \Exan\Dhp\Enums\Parts\MessageComponentTypes;
+use Exan\Dhp\Enums\Parts\MessageTypes;
+use Exan\Dhp\Enums\Parts\MessageComponentTypes;
 
 class Message
 {

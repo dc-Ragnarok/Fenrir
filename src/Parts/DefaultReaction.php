@@ -2,7 +2,6 @@
 
 namespace Exan\Dhp\Parts;
 
-
 class DefaultReaction
 {
     public ?string $emoji_id;

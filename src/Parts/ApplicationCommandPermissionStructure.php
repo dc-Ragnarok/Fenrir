@@ -2,7 +2,7 @@
 
 namespace Exan\Dhp\Parts;
 
-use \Exan\Dhp\Enums\Parts\ApplicationCommandPermissionTypes;
+use Exan\Dhp\Enums\Parts\ApplicationCommandPermissionTypes;
 
 class ApplicationCommandPermissionStructure
 {

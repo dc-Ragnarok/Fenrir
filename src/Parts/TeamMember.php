@@ -2,7 +2,7 @@
 
 namespace Exan\Dhp\Parts;
 
-use \Exan\Dhp\Enums\Parts\MembershipStates;
+use Exan\Dhp\Enums\Parts\MembershipStates;
 
 class TeamMember
 {

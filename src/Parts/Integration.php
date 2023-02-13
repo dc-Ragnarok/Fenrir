@@ -2,9 +2,9 @@
 
 namespace Exan\Dhp\Parts;
 
-use \Exan\Dhp\Enums\Parts\IntegrationExpireBehaviors;
+use Exan\Dhp\Enums\Parts\IntegrationExpireBehaviors;
 use Carbon\Carbon;
-use \Exan\Dhp\Enums\Parts\Scopes;
+use Exan\Dhp\Enums\Parts\Scopes;
 
 class Integration
 {

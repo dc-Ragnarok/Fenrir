@@ -2,7 +2,7 @@
 
 namespace Exan\Dhp\Parts;
 
-use \Exan\Dhp\Enums\Parts\MessageActivityTypes;
+use Exan\Dhp\Enums\Parts\MessageActivityTypes;
 
 class MessageActivity
 {

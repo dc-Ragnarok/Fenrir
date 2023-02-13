@@ -2,7 +2,6 @@
 
 namespace Exan\Dhp\Parts;
 
-
 class MessageReference
 {
     public ?string $message_id;

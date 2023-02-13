@@ -2,7 +2,7 @@
 
 namespace Exan\Dhp\Parts;
 
-use \Exan\Dhp\Enums\Parts\ActivityTypes;
+use Exan\Dhp\Enums\Parts\ActivityTypes;
 use Carbon\Carbon;
 
 class Activity
