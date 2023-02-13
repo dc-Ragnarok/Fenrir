@@ -21,7 +21,7 @@ class ApplicationCommand
      */
     public ?array $description_localizations;
     /**
-     * @var \Exan\Dhp\Enums\Parts\ApplicationCommandOption[]
+     * @var \Exan\Dhp\Parts\ApplicationCommandOption[]
      */
     public ?array $options;
     public ?string $default_member_permissions;

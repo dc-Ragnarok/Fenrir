@@ -15,7 +15,7 @@ class Channel
     public ?string $guild_id;
     public ?int $position;
     /**
-     * @var \Exan\Dhp\Enums\Parts\Overwrite[]
+     * @var \Exan\Dhp\Parts\Overwrite[]
      */
     public ?array $permission_overwrites;
     public ?string $name;
@@ -26,7 +26,7 @@ class Channel
     public ?int $user_limit;
     public ?int $rate_limit_per_user;
     /**
-     * @var \Exan\Dhp\Enums\Parts\User[]
+     * @var \Exan\Dhp\Parts\User[]
      */
     public ?array $recipients;
     public ?string $icon;
@@ -45,7 +45,7 @@ class Channel
     public ?string $flags;
     public ?int $total_message_sent;
     /**
-     * @var \Exan\Dhp\Enums\Parts\Tag[]
+     * @var \Exan\Dhp\Parts\Tag[]
      */
     public ?array $available_tags;
     /**

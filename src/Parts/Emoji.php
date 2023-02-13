@@ -7,7 +7,7 @@ class Emoji
     public string $id;
     public string $name;
     /**
-     * @var \Exan\Dhp\Enums\Parts\Role[]
+     * @var \Exan\Dhp\Parts\Role[]
      */
     public ?array $roles;
     public ?User $user;

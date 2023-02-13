@@ -20,11 +20,11 @@ class ApplicationCommandOptionStructure
     public ?array $description_localizations;
     public ?bool $required;
     /**
-     * @var \Exan\Dhp\Enums\Parts\ApplicationCommandOptionChoice[]
+     * @var \Exan\Dhp\Parts\ApplicationCommandOptionChoice[]
      */
     public ?array $choices;
     /**
-     * @var \Exan\Dhp\Enums\Parts\ApplicationCommandOptionStructure[]
+     * @var \Exan\Dhp\Parts\ApplicationCommandOptionStructure[]
      */
     public ?array $options;
     /**
