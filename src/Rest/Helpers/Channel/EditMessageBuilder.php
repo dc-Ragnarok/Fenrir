@@ -28,4 +28,9 @@ class EditMessageBuilder implements MultipartCapable
     private $data = [];
 
     private $files = [];
+
+    public function get(): array
+    {
+        return $this->data;
+    }
 }

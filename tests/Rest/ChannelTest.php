@@ -15,6 +15,7 @@ use Exan\Dhp\Rest\Helpers\Channel\Channel\GuildForumChannelBuilder;
 use Exan\Dhp\Rest\Helpers\Channel\Channel\GuildStageVoiceChannelBuilder;
 use Exan\Dhp\Rest\Helpers\Channel\Channel\GuildTextChannelBuilder;
 use Exan\Dhp\Rest\Helpers\Channel\Channel\GuildVoiceChannelBuilder;
+use Exan\Dhp\Rest\Helpers\Channel\EditMessageBuilder;
 use Exan\Dhp\Rest\Helpers\Channel\MessageBuilder;
 use Exan\Dhp\Rest\Helpers\Channel\StartThreadFromMessageBuilder;
 use Exan\Dhp\Rest\Helpers\Emoji\EmojiBuilder;
@@ -222,9 +223,28 @@ class ChannelTest extends HttpHelperTestCase
                 ],
                 'validationOptions' => [],
             ],
-            /**
-             * @todo editMessage
-             */
+            'Edit message' => [
+                'method' => 'editMessage',
+                'args' => ['::channel id::', '::message id::', new EditMessageBuilder()],
+                'mockOptions' => [
+                    'method' => 'patch',
+                    'return' => (object) [],
+                ],
+                'validationOptions' => [
+                    'returnType' => Message::class,
+                ]
+            ],
+            'Edit message with file' => [
+                'method' => 'editMessage',
+                'args' => ['::channel id::', '::message id::', (new EditMessageBuilder())->addFile('something.png', '::data::')],
+                'mockOptions' => [
+                    'method' => 'patch',
+                    'return' => (object) [],
+                ],
+                'validationOptions' => [
+                    'returnType' => Message::class,
+                ]
+            ],
             'Bulk delete messages' => [
                 'method' => 'bulkDeleteMessages',
                 'args' => ['::channel id::', ['::message id::'], (new EmojiBuilder())->setId('::id::')],

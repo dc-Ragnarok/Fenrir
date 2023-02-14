@@ -12,6 +12,7 @@ use Exan\Dhp\Parts\Invite;
 use Exan\Dhp\Parts\Message;
 use Exan\Dhp\Parts\User;
 use Exan\Dhp\Rest\Helpers\Channel\Channel\ChannelBuilder;
+use Exan\Dhp\Rest\Helpers\Channel\EditMessageBuilder;
 use Exan\Dhp\Rest\Helpers\Channel\GetMessagesBuilder;
 use Exan\Dhp\Rest\Helpers\Channel\GetReactionsBuilder;
 use Exan\Dhp\Rest\Helpers\Channel\InviteBuilder;
@@ -307,10 +308,39 @@ class Channel
     }
 
     /**
-     * @todo
+     * @see https://discord.com/developers/docs/resources/channel#edit-message
+     *
+     * @return ExtendedPromiseInterface<\Exan\Dhp\Parts\Message>
      */
-    public function editMessage()
+    public function editMessage(string $channelId, string $messageId, EditMessageBuilder $message)
     {
+        return $this->mapPromise((function () use ($channelId, $messageId, $message) {
+            if ($message->requiresMultipart()) {
+                $multipart = $message->getMultipart();
+
+                $body = $multipart->getBody();
+                $headers = $multipart->getHeaders($body);
+
+                return $this->http->patch(
+                    Endpoint::bind(
+                        Endpoint::CHANNEL_MESSAGE,
+                        $channelId,
+                        $messageId
+                    ),
+                    $body . "\n",
+                    $headers
+                );
+            }
+
+            return $this->http->patch(
+                Endpoint::bind(
+                    Endpoint::CHANNEL_MESSAGE,
+                    $channelId,
+                    $messageId
+                ),
+                $message->get()
+            );
+        })(), Message::class);
     }
 
     /**
