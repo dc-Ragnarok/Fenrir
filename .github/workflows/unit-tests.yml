@@ -1,8 +1,6 @@
 name: DHP Unit Tests
 run-name: ${{ github.actor }} is running tests
-on:
-  pull_request:
-    branches: [ $default-branch ]
+on: [push, pull_request]
 
 jobs:
   test-8.0:
