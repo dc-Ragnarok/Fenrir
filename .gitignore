@@ -3,3 +3,4 @@ vendor
 discord.log
 .phpunit.cache
 .php-cs-fixer.cache
+composer.lock

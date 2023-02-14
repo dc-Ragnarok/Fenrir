@@ -16,7 +16,7 @@
         "evenement/evenement": "^3.0.0",
         "nesbot/carbon": "^2.64",
         "discord-php/http": "^10.1",
-        "monolog/monolog": "^3.2",
+        "monolog/monolog": "^2.9",
         "ramsey/uuid": "^4.7",
         "ralouphie/mimey": "^1.0"
     },
