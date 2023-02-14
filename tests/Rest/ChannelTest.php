@@ -236,7 +236,11 @@ class ChannelTest extends HttpHelperTestCase
             ],
             'Edit message with file' => [
                 'method' => 'editMessage',
-                'args' => ['::channel id::', '::message id::', (new EditMessageBuilder())->addFile('something.png', '::data::')],
+                'args' => [
+                    '::channel id::',
+                    '::message id::',
+                    (new EditMessageBuilder())->addFile('something.png', '::data::')
+                ],
                 'mockOptions' => [
                     'method' => 'patch',
                     'return' => (object) [],
