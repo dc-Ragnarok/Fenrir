@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Exan\Dhp\Rest\Helpers\Channel;
 
 use Exan\Dhp\Const\Validation\RateLimit;

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\Exan\Dhp;
 
 use Exan\Dhp\Exceptions\Websocket\ConnectionNotInitializedException;

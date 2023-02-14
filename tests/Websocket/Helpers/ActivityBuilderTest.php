@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\Exan\Dhp\Websocket\Helpers;
 
 use Exan\Dhp\Enums\Gateway\ActivityType;

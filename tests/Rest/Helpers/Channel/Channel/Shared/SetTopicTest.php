@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\Exan\Dhp\Rest\Helpers\Channel\Channel\Shared;
 
 use Exan\Dhp\Rest\Helpers\Channel\Channel\Shared\SetTopic;

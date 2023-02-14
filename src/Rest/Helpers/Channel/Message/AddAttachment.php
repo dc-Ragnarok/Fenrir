@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Exan\Dhp\Rest\Helpers\Channel\Message;
 
 use Exan\Dhp\Rest\Helpers\Channel\AttachmentBuilder;
