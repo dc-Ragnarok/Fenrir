@@ -15,5 +15,5 @@ jobs:
         php-version: 8.0
     - name: Install packages
       run: composer install --no-progress
-    -name: Run tests
+    - name: Run tests
       run: composer test
