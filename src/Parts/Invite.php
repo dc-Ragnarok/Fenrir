@@ -10,11 +10,20 @@ use Carbon\Carbon;
 class Invite
 {
     public string $code;
+    /**
+     * @partial
+     */
     public ?Guild $guild;
+    /**
+     * @partial
+     */
     public ?Channel $channel;
     public ?User $inviter;
     public ?InviteTargetTypes $target_type;
     public ?User $target_user;
+    /**
+     * @partial
+     */
     public ?Application $target_application;
     public ?int $approximate_presence_count;
     public ?int $approximate_member_count;

@@ -12,6 +12,9 @@ class MessageInteraction
     public InteractionTypes $type;
     public string $name;
     public User $user;
+    /**
+     * @partial
+     */
     public ?GuildMember $member;
 
     public function setType(int $value): void

@@ -18,6 +18,9 @@ class Application
     public bool $bot_require_code_grant;
     public ?string $terms_of_service_url;
     public ?string $privacy_policy_url;
+    /**
+     * @partial
+     */
     public ?User $owner;
     public string $verify_key;
     public ?Team $team;

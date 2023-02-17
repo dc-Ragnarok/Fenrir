@@ -2,12 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Exan\Dhp\Enums\Parts;
+namespace Exan\Dhp\Parts;
 
-/**
- * @see https://discord.com/developers/docs/resources/auto-moderation#auto-moderation-action-object-action-metadata
- */
-class AutoModeractionActionMetadata
+class AutoModerationActionMetadata
 {
     public string $channel_id;
     public int $duration_seconds;

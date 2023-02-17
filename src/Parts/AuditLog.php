@@ -23,6 +23,7 @@ class AuditLog
      */
     public ?array $guild_scheduled_events;
     /**
+     * @partial
      * @var \Exan\Dhp\Parts\Integration[]
      */
     public ?array $integrations;

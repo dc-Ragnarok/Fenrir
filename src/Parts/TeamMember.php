@@ -14,6 +14,9 @@ class TeamMember
      */
     public array $permissions;
     public string $team_id;
+    /**
+     * @partial
+     */
     public User $user;
 
     public function setMembershipState(int $value): void

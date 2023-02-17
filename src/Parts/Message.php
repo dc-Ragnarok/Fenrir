@@ -47,6 +47,9 @@ class Message
     public ?string $webhook_id;
     public MessageTypes $type;
     public ?MessageActivity $activity;
+    /**
+     * @partial
+     */
     public ?Application $application;
     public ?string $application_id;
     public ?MessageReference $message_reference;

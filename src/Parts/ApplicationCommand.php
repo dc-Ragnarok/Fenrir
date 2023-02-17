@@ -23,7 +23,7 @@ class ApplicationCommand
      */
     public ?array $description_localizations;
     /**
-     * @var \Exan\Dhp\Parts\ApplicationCommandOption[]
+     * @var \Exan\Dhp\Parts\ApplicationCommandOptionStructure[]
      */
     public ?array $options;
     public ?string $default_member_permissions;
@@ -32,7 +32,7 @@ class ApplicationCommand
     public ?bool $nsfw;
     public string $version;
 
-    public function setType(string $value): void
+    public function setType(int $value): void
     {
         $this->type = ApplicationCommandTypes::from($value);
     }
