@@ -7,6 +7,7 @@ namespace Exan\Dhp\Parts;
 use Carbon\Carbon;
 use Exan\Dhp\Enums\Parts\MessageTypes;
 use Exan\Dhp\Enums\Parts\MessageComponentTypes;
+use Exan\Dhp\Attributes\Partial;
 
 class Message
 {
@@ -47,9 +48,7 @@ class Message
     public ?string $webhook_id;
     public MessageTypes $type;
     public ?MessageActivity $activity;
-    /**
-     * @partial
-     */
+    #[Partial]
     public ?Application $application;
     public ?string $application_id;
     public ?MessageReference $message_reference;

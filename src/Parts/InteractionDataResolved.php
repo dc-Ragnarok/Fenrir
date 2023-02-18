@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Exan\Dhp\Parts;
 
+use Exan\Dhp\Attributes\Partial;
+
 class InteractionDataResolved
 {
     /**
@@ -11,23 +13,23 @@ class InteractionDataResolved
      */
     public ?array $users;
     /**
-     * @partial
      * @var array<string, GuildMember>
      */
+    #[Partial]
     public ?array $members;
     /**
      * @var array<string, Role>
      */
     public ?array $roles;
     /**
-     * @partial
      * @var array<string, Channel>
      */
+    #[Partial]
     public ?array $channels;
     /**
-     * @partial
      * @var array<string, Message>
      */
+    #[Partial]
     public ?array $messages;
     /**
      * @var array<string, Attachment>

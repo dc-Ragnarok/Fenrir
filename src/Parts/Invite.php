@@ -6,24 +6,19 @@ namespace Exan\Dhp\Parts;
 
 use Exan\Dhp\Enums\Parts\InviteTargetTypes;
 use Carbon\Carbon;
+use Exan\Dhp\Attributes\Partial;
 
 class Invite
 {
     public string $code;
-    /**
-     * @partial
-     */
+    #[Partial]
     public ?Guild $guild;
-    /**
-     * @partial
-     */
+    #[Partial]
     public ?Channel $channel;
     public ?User $inviter;
     public ?InviteTargetTypes $target_type;
     public ?User $target_user;
-    /**
-     * @partial
-     */
+    #[Partial]
     public ?Application $target_application;
     public ?int $approximate_presence_count;
     public ?int $approximate_member_count;

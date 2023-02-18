@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Exan\Dhp\Parts;
 
+use Exan\Dhp\Attributes\Partial;
+
 class AuditLog
 {
     /**
@@ -23,9 +25,9 @@ class AuditLog
      */
     public ?array $guild_scheduled_events;
     /**
-     * @partial
      * @var \Exan\Dhp\Parts\Integration[]
      */
+    #[Partial]
     public ?array $integrations;
     /**
      * @var \Exan\Dhp\Parts\Channel[]

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Exan\Dhp\Parts;
 
 use Exan\Dhp\Enums\Parts\MembershipStates;
+use Exan\Dhp\Attributes\Partial;
 
 class TeamMember
 {
@@ -14,9 +15,7 @@ class TeamMember
      */
     public array $permissions;
     public string $team_id;
-    /**
-     * @partial
-     */
+    #[Partial]
     public User $user;
 
     public function setMembershipState(int $value): void

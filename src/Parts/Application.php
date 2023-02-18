@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Exan\Dhp\Parts;
 
+use Exan\Dhp\Attributes\Partial;
+
 class Application
 {
     public string $id;
@@ -18,9 +20,7 @@ class Application
     public bool $bot_require_code_grant;
     public ?string $terms_of_service_url;
     public ?string $privacy_policy_url;
-    /**
-     * @partial
-     */
+    #[Partial]
     public ?User $owner;
     public string $verify_key;
     public ?Team $team;

@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace Exan\Dhp\Websocket\Events;
 
+use Exan\Dhp\Attributes\Intent;
+
 /**
- * Requires GUILD_MEMBERS intent
  * @see https://discord.com/developers/docs/topics/gateway-events#thread-members-update
  */
+#[Intent("GUILD_MEMBERS")]
 class ThreadMemberUpdate
 {
     public string $id;

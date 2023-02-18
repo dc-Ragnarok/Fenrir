@@ -4,13 +4,14 @@ declare(strict_types=1);
 
 namespace Exan\Dhp\Websocket\Events;
 
+use Exan\Dhp\Attributes\Intent;
 use Exan\Dhp\Parts\ClientStatus;
 use Exan\Dhp\Parts\User;
 
 /**
- * requires GUILD_PRESENCES intent
  * @see https://discord.com/developers/docs/topics/gateway-events#presence-update
  */
+#[Intent("GUILD_PRESENCES")]
 class PresenceUpdate
 {
     public User $user;

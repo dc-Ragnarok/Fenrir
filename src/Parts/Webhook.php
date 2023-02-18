@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Exan\Dhp\Parts;
 
+use Exan\Dhp\Attributes\Partial;
+
 class Webhook
 {
     public string $id;
@@ -15,13 +17,9 @@ class Webhook
     public ?string $avatar;
     public ?string $token;
     public ?string $application_id;
-    /**
-     * @partial
-     */
+    #[Partial]
     public ?Guild $source_guild;
-    /**
-     * @partial
-     */
+    #[Partial]
     public ?Channel $source_channel;
     public ?string $url;
 }
