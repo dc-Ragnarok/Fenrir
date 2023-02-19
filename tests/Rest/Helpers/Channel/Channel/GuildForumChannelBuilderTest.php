@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Tests\Exan\Dhp\Rest\Helpers\Channel\Channel\Shared;
 
-use Exan\Dhp\Enums\Parts\ChannelFlags;
+use Exan\Dhp\Bitwise\Bitwise;
+use Exan\Dhp\Enums\Flags\ChannelFlags;
 use Exan\Dhp\Enums\Parts\ChannelTypes;
 use Exan\Dhp\Enums\Parts\ForumLayoutTypes;
 use Exan\Dhp\Enums\Parts\SortOrderTypes;
@@ -28,9 +29,10 @@ class GuildForumChannelBuilderTest extends TestCase
     public function testSetFlags()
     {
         $builder = new GuildForumChannelBuilder();
-        $builder->setFlags(ChannelFlags::PINNED);
+        $builder->addFlag(ChannelFlags::PINNED);
+        $bitwise = Bitwise::from(ChannelFlags::PINNED);
 
-        $this->assertEquals(ChannelFlags::PINNED->value, $builder->get()['flags']);
+        $this->assertEquals($bitwise->get(), $builder->get()['flags']);
     }
 
     public function testAddAvailableTag()

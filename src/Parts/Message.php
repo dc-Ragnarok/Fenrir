@@ -6,6 +6,7 @@ namespace Exan\Dhp\Parts;
 
 use Carbon\Carbon;
 use Exan\Dhp\Enums\Parts\MessageTypes;
+use Exan\Dhp\Bitwise\Bitwise;
 use Exan\Dhp\Enums\Parts\MessageComponentTypes;
 use Exan\Dhp\Attributes\Partial;
 
@@ -52,7 +53,7 @@ class Message
     public ?Application $application;
     public ?string $application_id;
     public ?MessageReference $message_reference;
-    public ?string $flags;
+    public ?Bitwise $flags;
     public ?Message $referenced_message;
     public ?MessageInteraction $interaction;
     public ?Channel $thread;

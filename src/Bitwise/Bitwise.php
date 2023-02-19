@@ -8,42 +8,42 @@ use BackedEnum;
 
 class Bitwise
 {
-    public function __construct(private int $result = 0)
+    public function __construct(private int $flags = 0)
     {
     }
 
     /**
-     * @param BackedEnum<int>|int $shiftedValue
+     * @param BackedEnum<int>|int $flag
      */
-    public function add(BackedEnum|int $shiftedValue): static
+    public function add(BackedEnum|int $flag): static
     {
-        $value = $shiftedValue instanceof BackedEnum ? $shiftedValue->value : $shiftedValue;
+        $value = $flag instanceof BackedEnum ? $flag->value : $flag;
 
-        $this->result |= $value;
+        $this->flags |= $value;
 
         return $this;
     }
 
     public function get(): int
     {
-        return $this->result;
+        return $this->flags;
     }
 
-    public function has(int $shiftedValue): bool
+    public function has(int $flag): bool
     {
-        return $this->result & $shiftedValue;
+        return ($this->flags & $flag) === $flag;
     }
 
 
     /**
-     * @param (BackedEnum<int>|int)[] $values
+     * @param (BackedEnum<int>|int)[] $flags
      */
-    public static function from(BackedEnum|int ...$values): static
+    public static function from(BackedEnum|int ...$flags): static
     {
         $bitwise = new static();
 
-        foreach ($values as $value) {
-            $bitwise->add($value);
+        foreach ($flags as $flag) {
+            $bitwise->add($flag);
         }
 
         return $bitwise;

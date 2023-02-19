@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace Exan\Dhp\Rest\Helpers\Channel\Channel;
 
-use Exan\Dhp\Enums\Parts\ChannelFlags;
+use Exan\Dhp\Bitwise\Bitwise;
+use Exan\Dhp\Enums\Flags\ChannelFlags;
 use Exan\Dhp\Enums\Parts\ChannelTypes;
 use Exan\Dhp\Enums\Parts\ForumLayoutTypes;
 use Exan\Dhp\Enums\Parts\SortOrderTypes;
 use Exan\Dhp\Exceptions\Rest\Helpers\Channel\Channel\GuildForumChannelBuilder\TooManyAvailableTagsException;
-use Exan\Dhp\Parts\Emoji;
 use Exan\Dhp\Rest\Helpers\Channel\Channel\Shared\SetDefaultAutoArchiveDuration;
 use Exan\Dhp\Rest\Helpers\Channel\Channel\Shared\SetDefaultThreadRateLimitPerUser;
 use Exan\Dhp\Rest\Helpers\Channel\Channel\Shared\SetNsfw;
@@ -30,14 +30,22 @@ class GuildForumChannelBuilder extends ChannelBuilder
     use SetDefaultAutoArchiveDuration;
     use SetDefaultThreadRateLimitPerUser;
 
+    private Bitwise $channelFlags;
+
     public function __construct()
     {
         $this->setChannelType(ChannelTypes::GUILD_FORUM);
     }
 
-    public function setFlags(ChannelFlags $flags)
+    public function addFlag(ChannelFlags $flag)
     {
-        $this->data['flags'] = $flags->value;
+        if (!isset($this->channelFlags)) {
+            $this->channelFlags = new Bitwise();
+        }
+
+        $this->channelFlags->add($flag);
+
+        $this->data['flags'] = $this->channelFlags->get();
     }
 
     /**

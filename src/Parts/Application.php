@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Exan\Dhp\Parts;
 
+use Exan\Dhp\Bitwise\Bitwise;
 use Exan\Dhp\Attributes\Partial;
 
 class Application
@@ -28,7 +29,7 @@ class Application
     public ?string $primary_sku_id;
     public ?string $slug;
     public ?string $cover_image;
-    public ?string $flags;
+    public ?Bitwise $flags;
     /**
      * @var string[]
      */

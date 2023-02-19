@@ -7,6 +7,7 @@ namespace Exan\Dhp\Parts;
 use Exan\Dhp\Enums\Parts\ChannelTypes;
 use Carbon\Carbon;
 use Exan\Dhp\Enums\Parts\VideoQualityModes;
+use Exan\Dhp\Bitwise\Bitwise;
 use Exan\Dhp\Enums\Parts\SortOrderTypes;
 use Exan\Dhp\Enums\Parts\ForumLayoutTypes;
 
@@ -44,7 +45,7 @@ class Channel
     public ?ThreadMember $member;
     public ?int $default_auto_archive_duration;
     public ?string $permissions;
-    public ?string $flags;
+    public ?Bitwise $flags;
     public ?int $total_message_sent;
     /**
      * @var \Exan\Dhp\Parts\Tag[]

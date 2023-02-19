@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Exan\Dhp\Parts;
 
+use Exan\Dhp\Bitwise\Bitwise;
 use Exan\Dhp\Enums\Parts\PremiumTypes;
 
 class User
@@ -20,9 +21,9 @@ class User
     public ?string $locale;
     public bool $verified;
     public ?string $email;
-    public ?string $flags;
+    public ?Bitwise $flags;
     public ?PremiumTypes $premium_type;
-    public ?string $public_flags;
+    public ?Bitwise $public_flags;
 
     public function setPremiumType(int $value): void
     {

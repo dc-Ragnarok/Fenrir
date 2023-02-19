@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Exan\Dhp\Enums\Parts;
+namespace Exan\Dhp\Enums\Flags;
 
 enum ChannelFlags: int
 {

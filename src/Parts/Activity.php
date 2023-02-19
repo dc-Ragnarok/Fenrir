@@ -6,6 +6,7 @@ namespace Exan\Dhp\Parts;
 
 use Exan\Dhp\Enums\Parts\ActivityTypes;
 use Carbon\Carbon;
+use Exan\Dhp\Bitwise\Bitwise;
 
 class Activity
 {
@@ -22,7 +23,7 @@ class Activity
     public ?ActivityAssets $assets;
     public ?ActivitySecrets $secrets;
     public bool $instance;
-    public ?string $flags;
+    public ?Bitwise $flags;
     /**
      * @var \Exan\Dhp\Parts\ActivityButton[]
      */

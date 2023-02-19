@@ -9,6 +9,7 @@ use Exan\Dhp\Enums\Parts\MessageNotificationLevels;
 use Exan\Dhp\Enums\Parts\ExplicitContentFilterLevels;
 use Exan\Dhp\Enums\Parts\GuildFeatures;
 use Exan\Dhp\Enums\Parts\MfaLevels;
+use Exan\Dhp\Bitwise\Bitwise;
 use Exan\Dhp\Enums\Parts\PremiumTiers;
 use Exan\Dhp\Enums\Parts\NsfwLevels;
 
@@ -46,7 +47,7 @@ class Guild
     public MfaLevels $mfa_level;
     public ?string $application_id;
     public ?string $system_channel_id;
-    public string $system_channel_flags;
+    public Bitwise $system_channel_flags;
     public ?string $rules_channel_id;
     public ?int $max_presences;
     public ?int $max_members;
