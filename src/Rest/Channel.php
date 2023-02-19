@@ -7,7 +7,6 @@ namespace Exan\Dhp\Rest;
 use Discord\Http\Endpoint;
 use Discord\Http\Http;
 use Exan\Dhp\Parts\Channel as PartsChannel;
-use Exan\Dhp\Parts\Emoji;
 use Exan\Dhp\Parts\Invite;
 use Exan\Dhp\Parts\Message;
 use Exan\Dhp\Parts\User;
@@ -18,6 +17,7 @@ use Exan\Dhp\Rest\Helpers\Channel\GetReactionsBuilder;
 use Exan\Dhp\Rest\Helpers\Channel\InviteBuilder;
 use Exan\Dhp\Rest\Helpers\Channel\MessageBuilder;
 use Exan\Dhp\Rest\Helpers\Channel\StartThreadFromMessageBuilder;
+use Exan\Dhp\Rest\Helpers\Channel\StartThreadWithoutMessageBuilder;
 use Exan\Dhp\Rest\Helpers\Emoji\EmojiBuilder;
 use Exan\Dhp\Rest\Helpers\HttpHelper;
 use JsonMapper;
@@ -530,10 +530,23 @@ class Channel
     }
 
     /**
-     * @todo
+     * @see https://discord.com/developers/docs/resources/channel#start-thread-without-message
+     *
+     * @return ExtendedPromiseInterface<\Exan\Dhp\Parts\Channel>
      */
-    public function startThreadWithoutMessage()
-    {
+    public function startThreadWithoutMessage(
+        string $channelId,
+        StartThreadWithoutMessageBuilder $startThreadWithoutMessageBuilder
+    ) {
+        return $this->mapPromise(
+            $this->http->post(
+                Endpoint::bind(
+                    Endpoint::CHANNEL_THREADS,
+                    $channelId
+                )
+            ),
+            PartsChannel::class
+        );
     }
 
     /**

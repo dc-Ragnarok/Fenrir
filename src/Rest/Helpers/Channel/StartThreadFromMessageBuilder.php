@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Exan\Dhp\Rest\Helpers\Channel;
 
 use Exan\Dhp\Const\Validation\RateLimit;
+use Exan\Dhp\Enums\Parts\ThreadAutoArchiveDuration;
 
 class StartThreadFromMessageBuilder
 {
@@ -17,16 +18,16 @@ class StartThreadFromMessageBuilder
         return $this;
     }
 
-    public function setAutoArchiveDuration(int $duration): StartThreadFromMessageBuilder
+    public function setAutoArchiveDuration(ThreadAutoArchiveDuration $duration): StartThreadFromMessageBuilder
     {
-        $this->data['auto_archive_duration'] = $duration;
+        $this->data['auto_archive_duration'] = $duration->value;
 
         return $this;
     }
 
-    public function setRateLimitPerUser(int $rateLimit): StartThreadFromMessageBuilder
+    public function setRateLimitPerUser(int $seconds): StartThreadFromMessageBuilder
     {
-        $this->data['rate_limit_per_user'] = RateLimit::withinLimit($rateLimit);
+        $this->data['rate_limit_per_user'] = RateLimit::withinLimit($seconds);
 
         return $this;
     }

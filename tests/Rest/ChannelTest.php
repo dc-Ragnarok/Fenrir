@@ -18,6 +18,7 @@ use Exan\Dhp\Rest\Helpers\Channel\Channel\GuildVoiceChannelBuilder;
 use Exan\Dhp\Rest\Helpers\Channel\EditMessageBuilder;
 use Exan\Dhp\Rest\Helpers\Channel\MessageBuilder;
 use Exan\Dhp\Rest\Helpers\Channel\StartThreadFromMessageBuilder;
+use Exan\Dhp\Rest\Helpers\Channel\StartThreadWithoutMessageBuilder;
 use Exan\Dhp\Rest\Helpers\Emoji\EmojiBuilder;
 use Tests\Exan\Dhp\Rest\HttpHelperTestCase;
 
@@ -338,6 +339,17 @@ class ChannelTest extends HttpHelperTestCase
             'Start thread from message' => [
                 'method' => 'startThreadFromMessage',
                 'args' => ['::channel id::', '::message id::', new StartThreadFromMessageBuilder()],
+                'mockOptions' => [
+                    'method' => 'post',
+                    'return' => (object) [],
+                ],
+                'validationOptions' => [
+                    'returnType' => PartsChannel::class,
+                ],
+            ],
+            'Start thread without message' => [
+                'method' => 'startThreadWithoutMessage',
+                'args' => ['::channel id::', new StartThreadWithoutMessageBuilder()],
                 'mockOptions' => [
                     'method' => 'post',
                     'return' => (object) [],
