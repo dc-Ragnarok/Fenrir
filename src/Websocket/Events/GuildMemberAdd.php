@@ -12,7 +12,7 @@ use Exan\Dhp\Parts\Traits\WithGuildId;
  * @see https://discord.com/developers/docs/topics/gateway-events#guild-member-add
  */
 #[Intent("GUILD_MEMBERS")]
- class GuildMemberAdd extends GuildMember
+class GuildMemberAdd extends GuildMember
 {
     use WithGuildId;
 }
