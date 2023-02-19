@@ -8,6 +8,7 @@ use Exan\Dhp\Parts\Channel as PartsChannel;
 use Exan\Dhp\Parts\Emoji;
 use Exan\Dhp\Parts\Invite;
 use Exan\Dhp\Parts\Message;
+use Exan\Dhp\Parts\ThreadMember;
 use Exan\Dhp\Parts\User;
 use Exan\Dhp\Rest\Channel;
 use Exan\Dhp\Rest\Helpers\Channel\Channel\GuildAnnouncementChannelBuilder;
@@ -356,6 +357,113 @@ class ChannelTest extends HttpHelperTestCase
                 ],
                 'validationOptions' => [
                     'returnType' => PartsChannel::class,
+                ],
+            ],
+            'Join thread' => [
+                'method' => 'joinThread',
+                'args' => ['::channel id::'],
+                'mockOptions' => [
+                    'method' => 'put',
+                    'return' => null,
+                ],
+                'validationOptions' => [],
+            ],
+            'Add thread member' => [
+                'method' => 'addThreadMember',
+                'args' => ['::channel id::', '::user id::'],
+                'mockOptions' => [
+                    'method' => 'put',
+                    'return' => null,
+                ],
+                'validationOptions' => [],
+            ],
+            'Leave thread' => [
+                'method' => 'leaveThread',
+                'args' => ['::channel id::'],
+                'mockOptions' => [
+                    'method' => 'delete',
+                    'return' => null,
+                ],
+                'validationOptions' => [],
+            ],
+            'Remove thread member' => [
+                'method' => 'removeThreadMember',
+                'args' => ['::channel id::', '::user id::'],
+                'mockOptions' => [
+                    'method' => 'delete',
+                    'return' => null,
+                ],
+                'validationOptions' => [],
+            ],
+            'Get thread member' => [
+                'method' => 'getThreadMember',
+                'args' => ['::channel id::', '::user id::'],
+                'mockOptions' => [
+                    'method' => 'get',
+                    'return' => (object) [],
+                ],
+                'validationOptions' => [
+                    'returnType' => ThreadMember::class,
+                ],
+            ],
+            'Get thread members' => [
+                'method' => 'listThreadMembers',
+                'args' => ['::channel id::'],
+                'mockOptions' => [
+                    'method' => 'get',
+                    'return' => [(object) [], (object) [], (object) []],
+                ],
+                'validationOptions' => [
+                    'returnType' => ThreadMember::class,
+                    'array' => true
+                ],
+            ],
+            'Get thread members' => [
+                'method' => 'listThreadMembers',
+                'args' => ['::channel id::'],
+                'mockOptions' => [
+                    'method' => 'get',
+                    'return' => [(object) [], (object) [], (object) []],
+                ],
+                'validationOptions' => [
+                    'returnType' => ThreadMember::class,
+                    'array' => true
+                ],
+            ],
+            'List public archived threads' => [
+                'method' => 'listPublicArchivedThreads',
+                'args' => ['::channel id::'],
+                'mockOptions' => [
+                    'method' => 'get',
+                    'return' => [(object) [], (object) [], (object) []],
+                ],
+                'validationOptions' => [
+                    'returnType' => PartsChannel::class,
+                    'array' => true
+                ],
+            ],
+            'List private archived threads' => [
+                'method' => 'listPrivateArchivedThreads',
+                'args' => ['::channel id::'],
+                'mockOptions' => [
+                    'method' => 'get',
+                    'return' => [(object) [], (object) [], (object) []],
+                ],
+                'validationOptions' => [
+                    'returnType' => PartsChannel::class,
+                    'array' => true
+                ],
+            ],
+            'List joined private archived threads' => [
+                'method' => 'listJoinedPrivateArchivedThreads',
+                'args' => ['::channel id::'],
+                'mockOptions' => [
+                    'method' => 'get',
+                    'return' => [(object) [], (object) [], (object) []],
+                ],
+                'validationOptions' => [
+                    'returnType' => PartsChannel::class,
+                    'array' => true
                 ],
             ],
         ];

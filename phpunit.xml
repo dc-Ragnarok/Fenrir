@@ -23,5 +23,6 @@
         <include>
             <directory suffix=".php">src</directory>
         </include>
+        <exclude><directory>src/Parts</directory></exclude>
     </coverage>
 </phpunit>

@@ -9,6 +9,7 @@ use Discord\Http\Http;
 use Exan\Dhp\Parts\Channel as PartsChannel;
 use Exan\Dhp\Parts\Invite;
 use Exan\Dhp\Parts\Message;
+use Exan\Dhp\Parts\ThreadMember;
 use Exan\Dhp\Parts\User;
 use Exan\Dhp\Rest\Helpers\Channel\Channel\ChannelBuilder;
 use Exan\Dhp\Rest\Helpers\Channel\EditMessageBuilder;
@@ -515,7 +516,7 @@ class Channel
         string $channelId,
         string $messageId,
         StartThreadFromMessageBuilder $startThreadFromMessageBuilder
-    ) {
+    ): ExtendedPromiseInterface {
         return $this->mapPromise(
             $this->http->post(
                 Endpoint::bind(
@@ -537,7 +538,7 @@ class Channel
     public function startThreadWithoutMessage(
         string $channelId,
         StartThreadWithoutMessageBuilder $startThreadWithoutMessageBuilder
-    ) {
+    ): ExtendedPromiseInterface {
         return $this->mapPromise(
             $this->http->post(
                 Endpoint::bind(
@@ -557,65 +558,166 @@ class Channel
     }
 
     /**
-     * @todo
+     * @see https://discord.com/developers/docs/resources/channel#join-thread
+     *
+     * @return ExtendedPromiseInterface<void>
      */
-    public function joinThread()
+    public function joinThread(string $channelId): ExtendedPromiseInterface
     {
+        return $this->http->put(
+            Endpoint::bind(
+                Endpoint::THREAD_MEMBER_ME,
+                $channelId
+            )
+        );
     }
 
     /**
-     * @todo
+     * @see https://discord.com/developers/docs/resources/channel#add-thread-member
+     *
+     * @return ExtendedPromiseInterface<void>
      */
-    public function addThreadMember()
+    public function addThreadMember(string $channelId, string $userId): ExtendedPromiseInterface
     {
+        return $this->http->put(
+            Endpoint::bind(
+                Endpoint::THREAD_MEMBER,
+                $channelId,
+                $userId
+            )
+        );
     }
 
     /**
-     * @todo
+     * @see https://discord.com/developers/docs/resources/channel#leave-thread
+     *
+     * @return ExtendedPromiseInterface<void>
      */
-    public function leaveThread()
+    public function leaveThread(string $channelId): ExtendedPromiseInterface
     {
+        return $this->http->delete(
+            Endpoint::bind(
+                Endpoint::THREAD_MEMBER_ME,
+                $channelId
+            )
+        );
     }
 
     /**
-     * @todo
+     * @see https://discord.com/developers/docs/resources/channel#remove-thread-member
+     *
+     * @return ExtendedPromiseInterface<void>
      */
-    public function removeThreadMember()
+    public function removeThreadMember(string $channelId, string $userId): ExtendedPromiseInterface
     {
+        return $this->http->delete(
+            Endpoint::bind(
+                Endpoint::THREAD_MEMBER,
+                $channelId,
+                $userId
+            )
+        );
     }
 
     /**
-     * @todo
+     * @see https://discord.com/developers/docs/resources/channel#get-thread-member
+     *
+     * @return ExtendedPromiseInterface<\Exan\Dhp\Parts\ThreadMember>
      */
-    public function getThreadMember()
+    public function getThreadMember(string $channelId, string $userId)
     {
+        return $this->mapPromise(
+            $this->http->get(
+                Endpoint::bind(
+                    Endpoint::THREAD_MEMBER,
+                    $channelId,
+                    $userId
+                )
+            ),
+            ThreadMember::class
+        );
     }
 
     /**
-     * @todo
+     * @see https://discord.com/developers/docs/resources/channel#list-thread-members
+     *
+     * @return ExtendedPromiseInterface<\Exan\Dhp\Parts\ThreadMember[]>
      */
-    public function listThreadMembers()
-    {
+    public function listThreadMembers(
+        string $channelId,
+        ?bool $withMember = null,
+        ?string $after = null,
+        ?int $limit = null,
+    ): ExtendedPromiseInterface {
+        $options = array_filter([
+            'with_member' => $withMember,
+            'after' => $after,
+            'limit' => $limit,
+        ], fn ($value) => !is_null($value));
+
+        return $this->mapArrayPromise(
+            $this->http->get(
+                Endpoint::bind(
+                    Endpoint::THREAD_MEMBERS,
+                    $channelId
+                ),
+                $options
+            ),
+            ThreadMember::class
+        );
     }
 
     /**
-     * @todo
+     * @see https://discord.com/developers/docs/resources/channel#list-public-archived-threads
+     *
+     * @return ExtendedPromiseInterface<\Exan\Dhp\Parts\Channel[]>
      */
-    public function listPublicArchivedThreads()
+    public function listPublicArchivedThreads(string $channelId): ExtendedPromiseInterface
     {
+        return $this->mapArrayPromise(
+            $this->http->get(
+                Endpoint::bind(
+                    Endpoint::CHANNEL_THREADS_ARCHIVED_PUBLIC,
+                    $channelId
+                )
+            ),
+            PartsChannel::class
+        );
     }
 
     /**
-     * @todo
+     * @see https://discord.com/developers/docs/resources/channel#list-private-archived-threads
+     *
+     * @return ExtendedPromiseInterface<\Exan\Dhp\Parts\Channel[]>
      */
-    public function listPrivateArchivedThreads()
+    public function listPrivateArchivedThreads(string $channelId): ExtendedPromiseInterface
     {
+        return $this->mapArrayPromise(
+            $this->http->get(
+                Endpoint::bind(
+                    Endpoint::CHANNEL_THREADS_ARCHIVED_PRIVATE,
+                    $channelId
+                )
+            ),
+            PartsChannel::class
+        );
     }
 
     /**
-     * @todo
+     * @see https://discord.com/developers/docs/resources/channel#list-joined-private-archived-threads
+     *
+     * @return ExtendedPromiseInterface<\Exan\Dhp\Parts\Channel[]>
      */
-    public function listJoinedPrivateArchivedThreads()
+    public function listJoinedPrivateArchivedThreads(string $channelId): ExtendedPromiseInterface
     {
+        return $this->mapArrayPromise(
+            $this->http->get(
+                Endpoint::bind(
+                    Endpoint::CHANNEL_THREADS_ARCHIVED_PRIVATE_ME,
+                    $channelId
+                )
+            ),
+            PartsChannel::class
+        );
     }
 }

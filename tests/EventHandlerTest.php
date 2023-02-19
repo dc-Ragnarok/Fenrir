@@ -62,6 +62,18 @@ final class EventHandlerTest extends TestCase
         $this->assertPromiseRejects($response, 1);
     }
 
+    public function testDoesNotEmitIfUnknownEvent(): void
+    {
+        $eventHandler = new EventHandler($this->jsonMapper, false);
+
+        $payload = new Payload();
+        $payload->t = '::unknown event::';
+
+        $response = $this->awaitResponse($eventHandler, '::unknown event::', $payload);
+
+        $this->assertPromiseRejects($response, 1);
+    }
+
     /**
      * @dataProvider eventProvider
      */
