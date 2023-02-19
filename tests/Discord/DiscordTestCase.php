@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Exan\Dhp\Discord;
 
+use Exan\Dhp\Bitwise\Bitwise;
 use Exan\Dhp\Const\WebsocketEvents;
 use Exan\Dhp\Discord;
 use Exan\Dhp\EventHandler;
@@ -57,14 +58,14 @@ class DiscordTestCase extends MockeryTestCase
         $websocketMock->shouldReceive('send')->withAnyArgs();
         $websocketMock->shouldReceive('close')->withAnyArgs();
 
-        $this->discord = new Discord('::token::', ['intents' => 123]);
+        $this->discord = new Discord('::token::', new Bitwise(123), options: ['intents' => 123]);
 
         $this->discord->events = Mockery::mock(EventHandler::class);
         $this->discord->events->shouldReceive('handle');
 
         $this->discord->connect();
 
-        $this->discord->websocket->shouldHaveReceived('open', ['wss://gateway.discord.gg/']);
+        $this->discord->websocket->shouldHaveReceived('open', [Discord::WEBSOCKET_URL]);
     }
 
     protected function mockIncomingMessage(array $message)

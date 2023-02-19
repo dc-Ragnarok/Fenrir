@@ -6,7 +6,7 @@ namespace Exan\Dhp\Parts;
 
 class AuditLogChange
 {
-    public ?mixed $new_value;
-    public ?mixed $old_value;
+    public mixed $new_value;
+    public mixed $old_value;
     public string $key;
 }

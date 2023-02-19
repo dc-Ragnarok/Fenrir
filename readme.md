@@ -14,14 +14,23 @@ DHP heavily relies on ReactPHP for async operations. Knowing the basics of async
 ## Example bot
 
 ```php
+use Exan\Dhp\Bitwise\Bitwise;
 use Exan\Dhp\Const\Events;
 use Exan\Dhp\Discord;
+use Exan\Dhp\Enums\Gateway\Intents;
 use Exan\Dhp\Rest\Helpers\Channel\MessageBuilder;
 use Exan\Dhp\Websocket\Events\MessageCreate;
 
 require './vendor/autoload.php';
 
-$discord = new Discord('TOKEN');
+$discord = new Discord(
+    'TOKEN',
+    Bitwise::from(
+        Intents::GUILD_MESSAGES,
+        Intents::DIRECT_MESSAGES,
+        Intents::MESSAGE_CONTENT,
+    )
+);
 
 $discord->events->on(Events::MESSAGE_CREATE, function (MessageCreate $message) use ($discord) {
     if ($message->content === '!ping') {
@@ -43,3 +52,4 @@ For more examples, check out the examples directory (todo)
 Contributions are welcome.
 You can look for `@todo` to find something that requires attention.
 Please make sure to write tests where possible & make sure your code matches the phpcs configuration.
+90% code coverage is required.

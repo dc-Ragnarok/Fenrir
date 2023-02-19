@@ -6,6 +6,7 @@ namespace Exan\Dhp;
 
 use Discord\Http\Drivers\React;
 use Discord\Http\Http;
+use Exan\Dhp\Bitwise\Bitwise;
 use Exan\Dhp\Const\Events as Events;
 use Exan\Dhp\Const\WebsocketEvents;
 use Exan\Dhp\Enums\Gateway\StatusType;
@@ -25,7 +26,7 @@ class Discord
 {
     public EventHandler $events;
 
-    private const WEBSOCKET_URL = 'wss://gateway.discord.gg/';
+    public const WEBSOCKET_URL = 'wss://gateway.discord.gg/?v=10';
     private LoopInterface $loop;
 
     public Websocket $websocket;
@@ -36,8 +37,6 @@ class Discord
     private ?TimerInterface $heartbeatTimer;
 
     private ?int $sequence = null;
-
-    private int $intents;
 
     private ?TimerInterface $scheduledReconnect;
     private string $sessionId;
@@ -52,16 +51,14 @@ class Discord
 
     public function __construct(
         private string $token,
+        private Bitwise $intents,
+        private LoggerInterface $logger = new NullLogger(),
         $options = [],
-        private LoggerInterface $logger = new NullLogger()
     ) {
         $options = array_merge([
             'timeout' => 10,
             'raw_events' => false,
-            'intents' => 3243773
         ], $options);
-
-        $this->intents = $options['intents'];
 
         $this->mapper = new JsonMapper();
 
@@ -147,7 +144,7 @@ class Discord
             'op' => 2,
             'd' => [
                 'token' => $this->token,
-                'intents' => $this->intents,
+                'intents' => $this->intents->get(),
                 'properties' => [
                     'os' => PHP_OS,
                     'browser' => 'Exan\DHP',
