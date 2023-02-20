@@ -19,7 +19,6 @@ class GuildSticker
      */
     public function get()
     {
-
     }
 
     /**
@@ -28,7 +27,6 @@ class GuildSticker
      */
     public function create()
     {
-
     }
 
     /**
@@ -37,7 +35,6 @@ class GuildSticker
      */
     public function modify()
     {
-
     }
 
     /**
@@ -46,6 +43,5 @@ class GuildSticker
      */
     public function delete()
     {
-
     }
 }

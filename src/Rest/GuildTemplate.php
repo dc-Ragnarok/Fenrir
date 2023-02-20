@@ -25,7 +25,6 @@ class GuildTemplate
      */
     public function list()
     {
-
     }
 
     /**
@@ -34,7 +33,6 @@ class GuildTemplate
      */
     public function get()
     {
-
     }
 
     /**
@@ -43,7 +41,6 @@ class GuildTemplate
      */
     public function create()
     {
-
     }
 
     /**
@@ -52,7 +49,6 @@ class GuildTemplate
      */
     public function modify()
     {
-
     }
 
     /**
@@ -61,7 +57,6 @@ class GuildTemplate
      */
     public function delete()
     {
-
     }
 
     /**
@@ -70,7 +65,6 @@ class GuildTemplate
      */
     public function createGuildFromTemplate()
     {
-
     }
 
     /**
@@ -79,6 +73,5 @@ class GuildTemplate
      */
     public function sync()
     {
-
     }
 }

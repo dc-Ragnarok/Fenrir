@@ -25,7 +25,6 @@ class GuildAutoModeration
      */
     public function list()
     {
-
     }
 
     /**
@@ -34,7 +33,6 @@ class GuildAutoModeration
      */
     public function get()
     {
-
     }
 
     /**
@@ -43,7 +41,6 @@ class GuildAutoModeration
      */
     public function create()
     {
-
     }
 
     /**
@@ -52,7 +49,6 @@ class GuildAutoModeration
      */
     public function modify()
     {
-
     }
 
     /**
@@ -61,6 +57,5 @@ class GuildAutoModeration
      */
     public function delete()
     {
-
     }
 }

@@ -19,7 +19,6 @@ class Invite
      */
     public function get()
     {
-
     }
 
     /**
@@ -28,6 +27,5 @@ class Invite
      */
     public function delete()
     {
-
     }
 }

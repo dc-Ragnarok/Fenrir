@@ -25,7 +25,6 @@ class GuildScheduledEvent
      */
     public function list()
     {
-
     }
 
     /**
@@ -34,7 +33,6 @@ class GuildScheduledEvent
      */
     public function get()
     {
-
     }
 
     /**
@@ -43,7 +41,6 @@ class GuildScheduledEvent
      */
     public function create()
     {
-
     }
 
     /**
@@ -52,7 +49,6 @@ class GuildScheduledEvent
      */
     public function modify()
     {
-
     }
 
     /**
@@ -61,7 +57,6 @@ class GuildScheduledEvent
      */
     public function delete()
     {
-
     }
 
     /**
@@ -70,6 +65,5 @@ class GuildScheduledEvent
      */
     public function getUsers()
     {
-
     }
 }

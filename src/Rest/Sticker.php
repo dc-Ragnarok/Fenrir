@@ -19,7 +19,6 @@ class Sticker
      */
     public function get()
     {
-
     }
 
     /**
@@ -28,6 +27,5 @@ class Sticker
      */
     public function listNitroPacks()
     {
-
     }
 }
