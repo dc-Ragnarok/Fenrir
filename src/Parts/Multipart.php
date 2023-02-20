@@ -13,7 +13,7 @@ use Ramsey\Uuid\Uuid;
  */
 class Multipart
 {
-    public const BOUNDARY_PREFIX = 'FINRIR-BOUNDARY';
+    public const BOUNDARY_PREFIX = 'FENRIR-BOUNDARY';
 
     private function getBoundary(): string
     {
