@@ -2,7 +2,7 @@
     <img src="./assets/logo.svg" height="150px">
 </p>
 
-<h2 align="center">Fenrir</h2>
+<h3 align="center">Fenrir</h3>
 
 <p align="center">A plain Discord API/Gateway wrapper in PHP.</p>
 
