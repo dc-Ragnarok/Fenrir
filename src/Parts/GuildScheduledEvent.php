@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Exan\Dhp\Parts;
+namespace Exan\Finrir\Parts;
 
 use Carbon\Carbon;
-use Exan\Dhp\Enums\Parts\GuildScheduledEventPrivacyLevels;
-use Exan\Dhp\Enums\Parts\GuildScheduledEventStatus;
-use Exan\Dhp\Enums\Parts\GuildScheduledEventEntityTypes;
+use Exan\Finrir\Enums\Parts\GuildScheduledEventPrivacyLevels;
+use Exan\Finrir\Enums\Parts\GuildScheduledEventStatus;
+use Exan\Finrir\Enums\Parts\GuildScheduledEventEntityTypes;
 
 class GuildScheduledEvent
 {

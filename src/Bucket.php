@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Exan\Dhp;
+namespace Exan\Finrir;
 
 use Evenement\EventEmitter;
 use React\EventLoop\LoopInterface;

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Exan\Dhp\Parts;
+namespace Exan\Finrir\Parts;
 
 class ApplicationCommandInteractionDataOptionStructure
 {
@@ -10,7 +10,7 @@ class ApplicationCommandInteractionDataOptionStructure
     public int $type;
     public string|int|float|bool|null $value;
     /**
-     * @var \Exan\Dhp\Parts\ApplicationCommandInteractionDataOptionStructure[]
+     * @var \Exan\Finrir\Parts\ApplicationCommandInteractionDataOptionStructure[]
      */
     public ?array $options;
     public bool $focused;

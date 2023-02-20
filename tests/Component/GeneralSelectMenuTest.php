@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Tests\Exan\Dhp\Component;
+namespace Tests\Exan\Finrir\Component;
 
-use Exan\Dhp\Component\SelectMenu\MentionableSelectMenu;
-use Exan\Dhp\Component\SelectMenu\RoleSelectMenu;
-use Exan\Dhp\Component\SelectMenu\UserSelectMenu;
-use Exan\Dhp\Enums\Component\SelectMenuType;
+use Exan\Finrir\Component\SelectMenu\MentionableSelectMenu;
+use Exan\Finrir\Component\SelectMenu\RoleSelectMenu;
+use Exan\Finrir\Component\SelectMenu\UserSelectMenu;
+use Exan\Finrir\Enums\Component\SelectMenuType;
 use PHPUnit\Framework\TestCase;
 
 class GeneralSelectMenuTest extends TestCase

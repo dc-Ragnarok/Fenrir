@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Exan\Dhp\Websocket\Objects;
+namespace Exan\Finrir\Websocket\Objects;
 
 class Payload
 {

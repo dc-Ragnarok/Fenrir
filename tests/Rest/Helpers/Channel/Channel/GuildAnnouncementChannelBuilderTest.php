@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Tests\Exan\Dhp\Rest\Helpers\Channel\Channel\Shared;
+namespace Tests\Exan\Finrir\Rest\Helpers\Channel\Channel\Shared;
 
-use Exan\Dhp\Enums\Parts\ChannelTypes;
-use Exan\Dhp\Rest\Helpers\Channel\Channel\GuildAnnouncementChannelBuilder;
+use Exan\Finrir\Enums\Parts\ChannelTypes;
+use Exan\Finrir\Rest\Helpers\Channel\Channel\GuildAnnouncementChannelBuilder;
 use PHPUnit\Framework\TestCase;
 
 class GuildAnnouncementChannelBuilderTest extends TestCase

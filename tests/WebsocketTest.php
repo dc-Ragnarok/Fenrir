@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Tests\Exan\Dhp;
+namespace Tests\Exan\Finrir;
 
-use Exan\Dhp\Exceptions\Websocket\ConnectionNotInitializedException;
-use Exan\Dhp\Websocket;
+use Exan\Finrir\Exceptions\Websocket\ConnectionNotInitializedException;
+use Exan\Finrir\Websocket;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\NullLogger;
 

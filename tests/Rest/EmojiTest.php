@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Tests\Exan\Dhp\Rest;
+namespace Tests\Exan\Finrir\Rest;
 
-use Exan\Dhp\Parts\Emoji as PartsEmoji;
-use Exan\Dhp\Rest\Emoji;
-use Exan\Dhp\Rest\Helpers\Emoji\CreateEmojiBuilder;
-use Tests\Exan\Dhp\Rest\HttpHelperTestCase;
+use Exan\Finrir\Parts\Emoji as PartsEmoji;
+use Exan\Finrir\Rest\Emoji;
+use Exan\Finrir\Rest\Helpers\Emoji\CreateEmojiBuilder;
+use Tests\Exan\Finrir\Rest\HttpHelperTestCase;
 
 class EmojiTest extends HttpHelperTestCase
 {

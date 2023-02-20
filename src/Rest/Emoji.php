@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Exan\Dhp\Rest;
+namespace Exan\Finrir\Rest;
 
 use Discord\Http\Endpoint;
 use Discord\Http\Http;
-use Exan\Dhp\Parts\Emoji as PartsEmoji;
-use Exan\Dhp\Rest\Helpers\Emoji\CreateEmojiBuilder;
-use Exan\Dhp\Rest\Helpers\HttpHelper;
+use Exan\Finrir\Parts\Emoji as PartsEmoji;
+use Exan\Finrir\Rest\Helpers\Emoji\CreateEmojiBuilder;
+use Exan\Finrir\Rest\Helpers\HttpHelper;
 use JsonMapper;
 use React\Promise\ExtendedPromiseInterface;
 
@@ -23,7 +23,7 @@ class Emoji
     /**
      * @see https://discord.com/developers/docs/resources/emoji#list-guild-emojis
      *
-     * @return ExtendedPromiseInterface<\Exan\Dhp\Parts\Emoji[]>
+     * @return ExtendedPromiseInterface<\Exan\Finrir\Parts\Emoji[]>
      */
     public function listGuildEmojis(string $guildId): ExtendedPromiseInterface
     {
@@ -41,7 +41,7 @@ class Emoji
     /**
      * @see https://discord.com/developers/docs/resources/emoji#get-guild-emoji
      *
-     * @return ExtendedPromiseInterface<\Exan\Dhp\Parts\Emoji>
+     * @return ExtendedPromiseInterface<\Exan\Finrir\Parts\Emoji>
      */
     public function getGuildEmoji(string $guildId, string $emojiId): ExtendedPromiseInterface
     {
@@ -60,7 +60,7 @@ class Emoji
     /**
      * @see https://discord.com/developers/docs/resources/emoji#create-guild-emoji
      *
-     * @return ExtendedPromiseInterface<\Exan\Dhp\Parts\Emoji>
+     * @return ExtendedPromiseInterface<\Exan\Finrir\Parts\Emoji>
      */
     public function createGuildEmoji(
         string $guildId,
@@ -83,7 +83,7 @@ class Emoji
     /**
      * @see https://discord.com/developers/docs/resources/emoji#modify-guild-emoji
      *
-     * @return ExtendedPromiseInterface<\Exan\Dhp\Parts\Emoji>
+     * @return ExtendedPromiseInterface<\Exan\Finrir\Parts\Emoji>
      */
     public function modifyGuildEmoji(
         string $guildId,

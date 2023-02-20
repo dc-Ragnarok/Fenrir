@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Exan\Dhp\Enums\Component;
+namespace Exan\Finrir\Enums\Component;
 
 enum TextInputStyle: int
 {

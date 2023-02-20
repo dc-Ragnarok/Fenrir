@@ -1,12 +1,12 @@
 {
-    "name": "exan/dhp",
+    "name": "exan/finrir",
     "description": "Discord API & WS wrapper",
     "type": "library",
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "Exan\\Dhp\\": "src/",
-            "Tests\\Exan\\Dhp\\": "tests/"
+            "Exan\\Finrir\\": "src/",
+            "Tests\\Exan\\Finrir\\": "tests/"
         }
     },
     "require": {

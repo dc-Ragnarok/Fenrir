@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Exan\Dhp\Parts;
+namespace Exan\Finrir\Parts;
 
-use Exan\Dhp\Enums\Parts\ApplicationCommandTypes;
+use Exan\Finrir\Enums\Parts\ApplicationCommandTypes;
 
 class ApplicationCommand
 {
@@ -23,7 +23,7 @@ class ApplicationCommand
      */
     public ?array $description_localizations;
     /**
-     * @var \Exan\Dhp\Parts\ApplicationCommandOptionStructure[]
+     * @var \Exan\Finrir\Parts\ApplicationCommandOptionStructure[]
      */
     public ?array $options;
     public ?string $default_member_permissions;

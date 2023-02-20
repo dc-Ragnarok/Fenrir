@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tests\Exan\Dhp\Discord;
+namespace Tests\Exan\Finrir\Discord;
 
 /**
  * @runTestsInSeparateProcesses

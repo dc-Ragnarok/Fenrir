@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Exan\Dhp\Parts;
+namespace Exan\Finrir\Parts;
 
-use Exan\Dhp\Enums\Parts\ActivityTypes;
+use Exan\Finrir\Enums\Parts\ActivityTypes;
 use Carbon\Carbon;
-use Exan\Dhp\Bitwise\Bitwise;
+use Exan\Finrir\Bitwise\Bitwise;
 
 class Activity
 {
@@ -25,7 +25,7 @@ class Activity
     public bool $instance;
     public ?Bitwise $flags;
     /**
-     * @var \Exan\Dhp\Parts\ActivityButton[]
+     * @var \Exan\Finrir\Parts\ActivityButton[]
      */
     public ?array $buttons;
 

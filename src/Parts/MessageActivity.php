@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Exan\Dhp\Parts;
+namespace Exan\Finrir\Parts;
 
-use Exan\Dhp\Enums\Parts\MessageActivityTypes;
+use Exan\Finrir\Enums\Parts\MessageActivityTypes;
 
 class MessageActivity
 {

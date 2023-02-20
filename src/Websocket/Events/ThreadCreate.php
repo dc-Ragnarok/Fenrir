@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Exan\Dhp\Websocket\Events;
+namespace Exan\Finrir\Websocket\Events;
 
-use Exan\Dhp\Parts\Channel;
-use Exan\Dhp\Parts\Traits\WithOptionalNewlyCreated;
-use Exan\Dhp\Parts\Traits\WithOptionalThreadMember;
+use Exan\Finrir\Parts\Channel;
+use Exan\Finrir\Parts\Traits\WithOptionalNewlyCreated;
+use Exan\Finrir\Parts\Traits\WithOptionalThreadMember;
 
 /**
  * @see https://discord.com/developers/docs/topics/gateway-events#thread-create

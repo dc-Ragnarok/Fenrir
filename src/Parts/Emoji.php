@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Exan\Dhp\Parts;
+namespace Exan\Finrir\Parts;
 
 class Emoji
 {
     public string $id;
     public string $name;
     /**
-     * @var \Exan\Dhp\Parts\Role[]
+     * @var \Exan\Finrir\Parts\Role[]
      */
     public ?array $roles;
     public ?User $user;

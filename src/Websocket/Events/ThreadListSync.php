@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Exan\Dhp\Websocket\Events;
+namespace Exan\Finrir\Websocket\Events;
 
 /**
  * @see https://discord.com/developers/docs/topics/gateway-events#thread-list-sync
@@ -17,7 +17,7 @@ class ThreadListSync
     public ?array $channel_ids;
 
     /**
-     * @var \Exan\Dhp\Parts\Channel[]
+     * @var \Exan\Finrir\Parts\Channel[]
      */
     public array $threads;
 

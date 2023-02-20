@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Exan\Dhp\Exceptions\Rest\Helpers\MessageBuilder;
+namespace Exan\Finrir\Exceptions\Rest\Helpers\MessageBuilder;
 
 use Exception;
 

@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Tests\Exan\Dhp\Rest\Helpers\Channel;
+namespace Tests\Exan\Finrir\Rest\Helpers\Channel;
 
-use Exan\Dhp\Exceptions\Rest\Helpers\ComponentBuilder\TooManyRowsException;
-use Exan\Dhp\Rest\Helpers\Channel\ComponentBuilder;
-use Exan\Dhp\Rest\Helpers\Channel\ComponentRowBuilder;
+use Exan\Finrir\Exceptions\Rest\Helpers\ComponentBuilder\TooManyRowsException;
+use Exan\Finrir\Rest\Helpers\Channel\ComponentBuilder;
+use Exan\Finrir\Rest\Helpers\Channel\ComponentRowBuilder;
 use Mockery;
 use PHPUnit\Framework\TestCase;
 

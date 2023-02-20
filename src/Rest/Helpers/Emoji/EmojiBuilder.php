@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Exan\Dhp\Rest\Helpers\Emoji;
+namespace Exan\Finrir\Rest\Helpers\Emoji;
 
-use Exan\Dhp\Parts\Emoji;
+use Exan\Finrir\Parts\Emoji;
 
 class EmojiBuilder
 {

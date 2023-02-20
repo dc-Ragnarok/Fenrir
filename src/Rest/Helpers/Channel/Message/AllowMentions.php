@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Exan\Dhp\Rest\Helpers\Channel\Message;
+namespace Exan\Finrir\Rest\Helpers\Channel\Message;
 
-use Exan\Dhp\Rest\Helpers\Channel\AllowedMentionsBuilder;
+use Exan\Finrir\Rest\Helpers\Channel\AllowedMentionsBuilder;
 
 trait AllowMentions
 {

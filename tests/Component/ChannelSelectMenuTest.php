@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Tests\Exan\Dhp\Component;
+namespace Tests\Exan\Finrir\Component;
 
-use Exan\Dhp\Component\SelectMenu\ChannelSelectMenu;
-use Exan\Dhp\Enums\Component\SelectMenuType;
-use Exan\Dhp\Enums\Parts\ChannelTypes;
+use Exan\Finrir\Component\SelectMenu\ChannelSelectMenu;
+use Exan\Finrir\Enums\Component\SelectMenuType;
+use Exan\Finrir\Enums\Parts\ChannelTypes;
 use PHPUnit\Framework\TestCase;
 
 class ChannelSelectMenuTest extends TestCase

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Exan\Dhp\Parts;
+namespace Exan\Finrir\Parts;
 
-use Exan\Dhp\Enums\Parts\ChannelTypes;
+use Exan\Finrir\Enums\Parts\ChannelTypes;
 
 class ChannelMention
 {

@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Exan\Dhp;
+namespace Exan\Finrir;
 
 use Evenement\EventEmitter;
-use Exan\Dhp\Const\WebsocketEvents;
-use Exan\Dhp\Exceptions\Websocket\ConnectionNotInitializedException;
+use Exan\Finrir\Const\WebsocketEvents;
+use Exan\Finrir\Exceptions\Websocket\ConnectionNotInitializedException;
 use Psr\Log\LoggerInterface;
 use Ratchet\Client\Connector;
 use Ratchet\Client\WebSocket as RatchetWebsocket;

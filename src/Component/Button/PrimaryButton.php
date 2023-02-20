@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Exan\Dhp\Component\Button;
+namespace Exan\Finrir\Component\Button;
 
-use Exan\Dhp\Enums\Component\ButtonStyle;
+use Exan\Finrir\Enums\Component\ButtonStyle;
 
 class PrimaryButton extends InteractionButton
 {

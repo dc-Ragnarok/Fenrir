@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Exan\Dhp\Parts;
+namespace Exan\Finrir\Parts;
 
-use Exan\Dhp\Enums\Parts\InteractionTypes;
-use Exan\Dhp\Attributes\Partial;
+use Exan\Finrir\Enums\Parts\InteractionTypes;
+use Exan\Finrir\Attributes\Partial;
 
 class MessageInteraction
 {

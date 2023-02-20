@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Exan\Dhp\Websocket\Events;
+namespace Exan\Finrir\Websocket\Events;
 
 /**
  * @see https://discord.com/developers/docs/topics/gateway-events#guild-members-chunk
@@ -12,7 +12,7 @@ class GuildMembersChunk
     public string $guild_id;
 
     /**
-     * @var \Exan\Dhp\Parts\GuildMember[]
+     * @var \Exan\Finrir\Parts\GuildMember[]
      */
     public array $members;
 
@@ -21,7 +21,7 @@ class GuildMembersChunk
     public array $not_found;
 
     /**
-     * @var \Exan\Dhp\Parts\Presence[]
+     * @var \Exan\Finrir\Parts\Presence[]
      */
     public array $presences;
 

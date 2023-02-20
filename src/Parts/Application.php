@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Exan\Dhp\Parts;
+namespace Exan\Finrir\Parts;
 
-use Exan\Dhp\Bitwise\Bitwise;
-use Exan\Dhp\Attributes\Partial;
+use Exan\Finrir\Bitwise\Bitwise;
+use Exan\Finrir\Attributes\Partial;
 
 class Application
 {

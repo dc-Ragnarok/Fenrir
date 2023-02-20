@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Exan\Dhp\Parts;
+namespace Exan\Finrir\Parts;
 
 class ApplicationCommandPermissionObject
 {
@@ -10,7 +10,7 @@ class ApplicationCommandPermissionObject
     public string $application_id;
     public string $guild_id;
     /**
-     * @var \Exan\Dhp\Parts\ApplicationCommandPermissionStructure[]
+     * @var \Exan\Finrir\Parts\ApplicationCommandPermissionStructure[]
      */
     public array $permissions;
 }

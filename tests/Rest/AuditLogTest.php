@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Tests\Exan\Dhp\Rest;
+namespace Tests\Exan\Finrir\Rest;
 
-use Exan\Dhp\Parts\AuditLog as PartsAuditLog;
-use Exan\Dhp\Rest\AuditLog;
-use Exan\Dhp\Rest\Helpers\AuditLog\GetGuildAuditLogsBuilder;
-use Tests\Exan\Dhp\Rest\HttpHelperTestCase;
+use Exan\Finrir\Parts\AuditLog as PartsAuditLog;
+use Exan\Finrir\Rest\AuditLog;
+use Exan\Finrir\Rest\Helpers\AuditLog\GetGuildAuditLogsBuilder;
+use Tests\Exan\Finrir\Rest\HttpHelperTestCase;
 
 class AuditLogTest extends HttpHelperTestCase
 {

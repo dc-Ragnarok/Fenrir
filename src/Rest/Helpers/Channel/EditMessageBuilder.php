@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-namespace Exan\Dhp\Rest\Helpers\Channel;
+namespace Exan\Finrir\Rest\Helpers\Channel;
 
-use Exan\Dhp\Rest\Helpers\Channel\Message\AddAttachment;
-use Exan\Dhp\Rest\Helpers\Channel\Message\AddComponent;
-use Exan\Dhp\Rest\Helpers\Channel\Message\AddEmbed;
-use Exan\Dhp\Rest\Helpers\Channel\Message\AddFile;
-use Exan\Dhp\Rest\Helpers\Channel\Message\AllowMentions;
-use Exan\Dhp\Rest\Helpers\Channel\Message\MultipartMessage;
-use Exan\Dhp\Rest\Helpers\Channel\Message\SetContent;
-use Exan\Dhp\Rest\Helpers\Channel\Message\SetFlags;
-use Exan\Dhp\Rest\Helpers\MultipartCapable;
+use Exan\Finrir\Rest\Helpers\Channel\Message\AddAttachment;
+use Exan\Finrir\Rest\Helpers\Channel\Message\AddComponent;
+use Exan\Finrir\Rest\Helpers\Channel\Message\AddEmbed;
+use Exan\Finrir\Rest\Helpers\Channel\Message\AddFile;
+use Exan\Finrir\Rest\Helpers\Channel\Message\AllowMentions;
+use Exan\Finrir\Rest\Helpers\Channel\Message\MultipartMessage;
+use Exan\Finrir\Rest\Helpers\Channel\Message\SetContent;
+use Exan\Finrir\Rest\Helpers\Channel\Message\SetFlags;
+use Exan\Finrir\Rest\Helpers\MultipartCapable;
 
 class EditMessageBuilder implements MultipartCapable
 {

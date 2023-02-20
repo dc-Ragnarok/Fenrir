@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-namespace Tests\Exan\Dhp\Rest\Helpers\Channel\Channel\Shared;
+namespace Tests\Exan\Finrir\Rest\Helpers\Channel\Channel\Shared;
 
-use Exan\Dhp\Bitwise\Bitwise;
-use Exan\Dhp\Enums\Flags\ChannelFlags;
-use Exan\Dhp\Enums\Parts\ChannelTypes;
-use Exan\Dhp\Enums\Parts\ForumLayoutTypes;
-use Exan\Dhp\Enums\Parts\SortOrderTypes;
-use Exan\Dhp\Exceptions\Rest\Helpers\Channel\Channel\GuildForumChannelBuilder\TooManyAvailableTagsException;
-use Exan\Dhp\Parts\Emoji;
-use Exan\Dhp\Rest\Helpers\Channel\Channel\GuildForumChannelBuilder;
-use Exan\Dhp\Rest\Helpers\Emoji\EmojiBuilder;
+use Exan\Finrir\Bitwise\Bitwise;
+use Exan\Finrir\Enums\Flags\ChannelFlags;
+use Exan\Finrir\Enums\Parts\ChannelTypes;
+use Exan\Finrir\Enums\Parts\ForumLayoutTypes;
+use Exan\Finrir\Enums\Parts\SortOrderTypes;
+use Exan\Finrir\Exceptions\Rest\Helpers\Channel\Channel\GuildForumChannelBuilder\TooManyAvailableTagsException;
+use Exan\Finrir\Parts\Emoji;
+use Exan\Finrir\Rest\Helpers\Channel\Channel\GuildForumChannelBuilder;
+use Exan\Finrir\Rest\Helpers\Emoji\EmojiBuilder;
 use PHPUnit\Framework\TestCase;
 
 class GuildForumChannelBuilderTest extends TestCase

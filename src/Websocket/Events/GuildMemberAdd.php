@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Exan\Dhp\Websocket\Events;
+namespace Exan\Finrir\Websocket\Events;
 
-use Exan\Dhp\Attributes\Intent;
-use Exan\Dhp\Parts\GuildMember;
-use Exan\Dhp\Parts\Traits\WithGuildId;
+use Exan\Finrir\Attributes\Intent;
+use Exan\Finrir\Parts\GuildMember;
+use Exan\Finrir\Parts\Traits\WithGuildId;
 
 /**
  * @see https://discord.com/developers/docs/topics/gateway-events#guild-member-add

@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Tests\Exan\Dhp\Discord;
+namespace Tests\Exan\Finrir\Discord;
 
-use Exan\Dhp\Const\Events;
-use Tests\Exan\Dhp\Discord\DiscordTestCase;
+use Exan\Finrir\Const\Events;
+use Tests\Exan\Finrir\Discord\DiscordTestCase;
 
 /**
  * @runTestsInSeparateProcesses
@@ -62,8 +62,8 @@ final class ResumeTest extends DiscordTestCase
                 'intents' => 123,
                 'properties' => [
                     'os' => PHP_OS,
-                    'browser' => 'Exan\DHP',
-                    'device' => 'Exan\DHP',
+                    'browser' => 'Exan\Finrir',
+                    'device' => 'Exan\Finrir',
                 ]
             ]
         ]);
@@ -102,8 +102,8 @@ final class ResumeTest extends DiscordTestCase
                 'intents' => 123,
                 'properties' => [
                     'os' => PHP_OS,
-                    'browser' => 'Exan\DHP',
-                    'device' => 'Exan\DHP',
+                    'browser' => 'Exan\Finrir',
+                    'device' => 'Exan\Finrir',
                 ]
             ]
         ]);
@@ -141,8 +141,8 @@ final class ResumeTest extends DiscordTestCase
                 'intents' => 123,
                 'properties' => [
                     'os' => PHP_OS,
-                    'browser' => 'Exan\DHP',
-                    'device' => 'Exan\DHP',
+                    'browser' => 'Exan\Finrir',
+                    'device' => 'Exan\Finrir',
                 ]
             ]
         ]);

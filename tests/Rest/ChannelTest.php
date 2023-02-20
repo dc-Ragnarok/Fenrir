@@ -2,26 +2,26 @@
 
 declare(strict_types=1);
 
-namespace Tests\Exan\Dhp\Rest;
+namespace Tests\Exan\Finrir\Rest;
 
-use Exan\Dhp\Parts\Channel as PartsChannel;
-use Exan\Dhp\Parts\Emoji;
-use Exan\Dhp\Parts\Invite;
-use Exan\Dhp\Parts\Message;
-use Exan\Dhp\Parts\ThreadMember;
-use Exan\Dhp\Parts\User;
-use Exan\Dhp\Rest\Channel;
-use Exan\Dhp\Rest\Helpers\Channel\Channel\GuildAnnouncementChannelBuilder;
-use Exan\Dhp\Rest\Helpers\Channel\Channel\GuildForumChannelBuilder;
-use Exan\Dhp\Rest\Helpers\Channel\Channel\GuildStageVoiceChannelBuilder;
-use Exan\Dhp\Rest\Helpers\Channel\Channel\GuildTextChannelBuilder;
-use Exan\Dhp\Rest\Helpers\Channel\Channel\GuildVoiceChannelBuilder;
-use Exan\Dhp\Rest\Helpers\Channel\EditMessageBuilder;
-use Exan\Dhp\Rest\Helpers\Channel\MessageBuilder;
-use Exan\Dhp\Rest\Helpers\Channel\StartThreadFromMessageBuilder;
-use Exan\Dhp\Rest\Helpers\Channel\StartThreadWithoutMessageBuilder;
-use Exan\Dhp\Rest\Helpers\Emoji\EmojiBuilder;
-use Tests\Exan\Dhp\Rest\HttpHelperTestCase;
+use Exan\Finrir\Parts\Channel as PartsChannel;
+use Exan\Finrir\Parts\Emoji;
+use Exan\Finrir\Parts\Invite;
+use Exan\Finrir\Parts\Message;
+use Exan\Finrir\Parts\ThreadMember;
+use Exan\Finrir\Parts\User;
+use Exan\Finrir\Rest\Channel;
+use Exan\Finrir\Rest\Helpers\Channel\Channel\GuildAnnouncementChannelBuilder;
+use Exan\Finrir\Rest\Helpers\Channel\Channel\GuildForumChannelBuilder;
+use Exan\Finrir\Rest\Helpers\Channel\Channel\GuildStageVoiceChannelBuilder;
+use Exan\Finrir\Rest\Helpers\Channel\Channel\GuildTextChannelBuilder;
+use Exan\Finrir\Rest\Helpers\Channel\Channel\GuildVoiceChannelBuilder;
+use Exan\Finrir\Rest\Helpers\Channel\EditMessageBuilder;
+use Exan\Finrir\Rest\Helpers\Channel\MessageBuilder;
+use Exan\Finrir\Rest\Helpers\Channel\StartThreadFromMessageBuilder;
+use Exan\Finrir\Rest\Helpers\Channel\StartThreadWithoutMessageBuilder;
+use Exan\Finrir\Rest\Helpers\Emoji\EmojiBuilder;
+use Tests\Exan\Finrir\Rest\HttpHelperTestCase;
 
 class ChannelTest extends HttpHelperTestCase
 {

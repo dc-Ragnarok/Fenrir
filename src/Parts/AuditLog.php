@@ -2,43 +2,43 @@
 
 declare(strict_types=1);
 
-namespace Exan\Dhp\Parts;
+namespace Exan\Finrir\Parts;
 
-use Exan\Dhp\Attributes\Partial;
+use Exan\Finrir\Attributes\Partial;
 
 class AuditLog
 {
     /**
-     * @var \Exan\Dhp\Parts\ApplicationCommandPermissionObject[]
+     * @var \Exan\Finrir\Parts\ApplicationCommandPermissionObject[]
      */
     public ?array $application_commands;
     /**
-     * @var \Exan\Dhp\Parts\AuditLogEntry[]
+     * @var \Exan\Finrir\Parts\AuditLogEntry[]
      */
     public ?array $audit_log_entries;
     /**
-     * @var \Exan\Dhp\Parts\AutoModerationRule[]
+     * @var \Exan\Finrir\Parts\AutoModerationRule[]
      */
     public ?array $auto_moderation_rules;
     /**
-     * @var \Exan\Dhp\Parts\GuildScheduledEvent[]
+     * @var \Exan\Finrir\Parts\GuildScheduledEvent[]
      */
     public ?array $guild_scheduled_events;
     /**
-     * @var \Exan\Dhp\Parts\Integration[]
+     * @var \Exan\Finrir\Parts\Integration[]
      */
     #[Partial]
     public ?array $integrations;
     /**
-     * @var \Exan\Dhp\Parts\Channel[]
+     * @var \Exan\Finrir\Parts\Channel[]
      */
     public ?array $threads;
     /**
-     * @var \Exan\Dhp\Parts\User[]
+     * @var \Exan\Finrir\Parts\User[]
      */
     public ?array $users;
     /**
-     * @var \Exan\Dhp\Parts\Webhook[]
+     * @var \Exan\Finrir\Parts\Webhook[]
      */
     public ?array $webhooks;
 }

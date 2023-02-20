@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Exan\Dhp\Const\Validation;
+namespace Exan\Finrir\Const\Validation;
 
-use Exan\Dhp\Const\Validation\Traits\WithinLimit;
+use Exan\Finrir\Const\Validation\Traits\WithinLimit;
 
 class ItemLimit
 {

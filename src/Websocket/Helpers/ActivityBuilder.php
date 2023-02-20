@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Exan\Dhp\Websocket\Helpers;
+namespace Exan\Finrir\Websocket\Helpers;
 
-use Exan\Dhp\Enums\Gateway\ActivityType;
-use Exan\Dhp\Rest\Helpers\Emoji\EmojiBuilder;
+use Exan\Finrir\Enums\Gateway\ActivityType;
+use Exan\Finrir\Rest\Helpers\Emoji\EmojiBuilder;
 
 /**
  * @see https://discord.com/developers/docs/topics/gateway-events#activity-object

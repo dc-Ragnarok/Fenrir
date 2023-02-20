@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Exan\Dhp\Websocket\Events;
+namespace Exan\Finrir\Websocket\Events;
 
 use Carbon\Carbon;
-use Exan\Dhp\Enums\Parts\TargetType;
-use Exan\Dhp\Parts\Application;
-use Exan\Dhp\Parts\User;
+use Exan\Finrir\Enums\Parts\TargetType;
+use Exan\Finrir\Parts\Application;
+use Exan\Finrir\Parts\User;
 
 /**
  * @see https://discord.com/developers/docs/topics/gateway-events#invite-create

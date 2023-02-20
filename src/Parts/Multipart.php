@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Exan\Dhp\Parts;
+namespace Exan\Finrir\Parts;
 
 use Ramsey\Uuid\Uuid;
 
@@ -13,7 +13,7 @@ use Ramsey\Uuid\Uuid;
  */
 class Multipart
 {
-    public const BOUNDARY_PREFIX = 'DHP-BOUNDARY';
+    public const BOUNDARY_PREFIX = 'FINRIR-BOUNDARY';
 
     private function getBoundary(): string
     {
@@ -21,7 +21,7 @@ class Multipart
     }
 
     /**
-     * @var \Exan\Dhp\Parts\MultipartField[] $fields
+     * @var \Exan\Finrir\Parts\MultipartField[] $fields
      */
     public function __construct(private array $fields, private ?string $boundary = null)
     {

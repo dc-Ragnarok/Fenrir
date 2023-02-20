@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Exan\Dhp\Component\SelectMenu;
+namespace Exan\Finrir\Component\SelectMenu;
 
-use Exan\Dhp\Enums\Component\SelectMenuType;
-use Exan\Dhp\Exceptions\Components\SelectMenu\StringSelectMenu\NoOptionsException;
-use Exan\Dhp\Exceptions\Components\SelectMenu\StringSelectMenu\TooManyOptionsException;
-use Exan\Dhp\Rest\Helpers\Emoji\EmojiBuilder;
+use Exan\Finrir\Enums\Component\SelectMenuType;
+use Exan\Finrir\Exceptions\Components\SelectMenu\StringSelectMenu\NoOptionsException;
+use Exan\Finrir\Exceptions\Components\SelectMenu\StringSelectMenu\TooManyOptionsException;
+use Exan\Finrir\Rest\Helpers\Emoji\EmojiBuilder;
 
 class StringSelectMenu extends SelectMenu
 {

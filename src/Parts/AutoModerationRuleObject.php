@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Exan\Dhp\Parts;
+namespace Exan\Finrir\Parts;
 
-use Exan\Dhp\Enums\Parts\EventTypes;
-use Exan\Dhp\Enums\Parts\AutoModerationTriggerTypes;
+use Exan\Finrir\Enums\Parts\EventTypes;
+use Exan\Finrir\Enums\Parts\AutoModerationTriggerTypes;
 
 class AutoModerationRuleObject
 {
@@ -17,7 +17,7 @@ class AutoModerationRuleObject
     public AutoModerationTriggerTypes $trigger_type;
     public AutoModerationTriggerMetadata $trigger_metadata;
     /**
-     * @var \Exan\Dhp\Parts\AutoModerationActionStructure[]
+     * @var \Exan\Finrir\Parts\AutoModerationActionStructure[]
      */
     public array $actions;
     public bool $enabled;

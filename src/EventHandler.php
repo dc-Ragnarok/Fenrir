@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Exan\Dhp;
+namespace Exan\Finrir;
 
 use Evenement\EventEmitter;
-use Exan\Dhp\Const\Events;
-use Exan\Dhp\Websocket\Objects\Payload;
+use Exan\Finrir\Const\Events;
+use Exan\Finrir\Websocket\Objects\Payload;
 use JsonMapper;
 
 class EventHandler extends EventEmitter

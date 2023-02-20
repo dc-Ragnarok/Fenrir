@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Exan\Dhp\Rest\Helpers\Channel;
+namespace Exan\Finrir\Rest\Helpers\Channel;
 
-use Exan\Dhp\Const\Validation\RateLimit;
-use Exan\Dhp\Enums\Parts\ThreadAutoArchiveDuration;
+use Exan\Finrir\Const\Validation\RateLimit;
+use Exan\Finrir\Enums\Parts\ThreadAutoArchiveDuration;
 
 class StartThreadFromMessageBuilder
 {

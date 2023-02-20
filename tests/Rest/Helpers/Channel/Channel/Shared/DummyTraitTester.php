@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tests\Exan\Dhp\Rest\Helpers\Channel\Channel\Shared;
+namespace Tests\Exan\Finrir\Rest\Helpers\Channel\Channel\Shared;
 
 class DummyTraitTester
 {

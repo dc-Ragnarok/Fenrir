@@ -1,25 +1,29 @@
-# DHP
+<p align="center">
+    <img src="./assets/logo.svg" height="150px">
+</p>
 
-A gateway/api wrapper for Discord.
+<h2 align="center">Finrir</h2>
 
-## What is DHP
+<p align="center">A plain Discord API/Gateway wrapper in PHP.</p>
 
-The goal of DHP is to provide a mostly plain wrapper over Discords APIs/gateway.
+## Goal
+
+The goal of Finrir is to provide a mostly plain wrapper over Discords APIs/gateway.
 There will be no caching built in, this is for the user to implement themselves.
 
 If you're looking for something thats easier to use, try [DiscordPHP](https://github.com/discord-php/DiscordPHP).
 
-DHP heavily relies on ReactPHP for async operations. Knowing the basics of async PHP is recommended before diving in.
+Finrir heavily relies on ReactPHP for async operations. Knowing the basics of async PHP is recommended before diving in.
 
 ## Example bot
 
 ```php
-use Exan\Dhp\Bitwise\Bitwise;
-use Exan\Dhp\Const\Events;
-use Exan\Dhp\Discord;
-use Exan\Dhp\Enums\Gateway\Intents;
-use Exan\Dhp\Rest\Helpers\Channel\MessageBuilder;
-use Exan\Dhp\Websocket\Events\MessageCreate;
+use Exan\Finrir\Bitwise\Bitwise;
+use Exan\Finrir\Const\Events;
+use Exan\Finrir\Discord;
+use Exan\Finrir\Enums\Gateway\Intents;
+use Exan\Finrir\Rest\Helpers\Channel\MessageBuilder;
+use Exan\Finrir\Websocket\Events\MessageCreate;
 
 require './vendor/autoload.php';
 

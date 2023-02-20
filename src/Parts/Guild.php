@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Exan\Dhp\Parts;
+namespace Exan\Finrir\Parts;
 
-use Exan\Dhp\Enums\Parts\VerificationLevels;
-use Exan\Dhp\Enums\Parts\MessageNotificationLevels;
-use Exan\Dhp\Enums\Parts\ExplicitContentFilterLevels;
-use Exan\Dhp\Enums\Parts\GuildFeatures;
-use Exan\Dhp\Enums\Parts\MfaLevels;
-use Exan\Dhp\Bitwise\Bitwise;
-use Exan\Dhp\Enums\Parts\PremiumTiers;
-use Exan\Dhp\Enums\Parts\NsfwLevels;
+use Exan\Finrir\Enums\Parts\VerificationLevels;
+use Exan\Finrir\Enums\Parts\MessageNotificationLevels;
+use Exan\Finrir\Enums\Parts\ExplicitContentFilterLevels;
+use Exan\Finrir\Enums\Parts\GuildFeatures;
+use Exan\Finrir\Enums\Parts\MfaLevels;
+use Exan\Finrir\Bitwise\Bitwise;
+use Exan\Finrir\Enums\Parts\PremiumTiers;
+use Exan\Finrir\Enums\Parts\NsfwLevels;
 
 class Guild
 {
@@ -33,15 +33,15 @@ class Guild
     public MessageNotificationLevels $default_message_notifications;
     public ExplicitContentFilterLevels $explicit_content_filter;
     /**
-     * @var \Exan\Dhp\Parts\Role[]
+     * @var \Exan\Finrir\Parts\Role[]
      */
     public array $roles;
     /**
-     * @var \Exan\Dhp\Parts\Emoji[]
+     * @var \Exan\Finrir\Parts\Emoji[]
      */
     public array $emojis;
     /**
-     * @var \Exan\Dhp\Enums\Parts\GuildFeatures[]
+     * @var \Exan\Finrir\Enums\Parts\GuildFeatures[]
      */
     public array $features;
     public MfaLevels $mfa_level;
@@ -64,7 +64,7 @@ class Guild
     public ?WelcomeScreen $welcome_screen;
     public NsfwLevels $nsfw_level;
     /**
-     * @var \Exan\Dhp\Parts\Sticker[]
+     * @var \Exan\Finrir\Parts\Sticker[]
      */
     public ?array $stickers;
     public bool $premium_progress_bar_enabled;

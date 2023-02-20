@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Tests\Exan\Dhp\Component;
+namespace Tests\Exan\Finrir\Component;
 
-use Exan\Dhp\Component\Button\DangerButton;
-use Exan\Dhp\Component\Button\LinkButton;
-use Exan\Dhp\Component\Button\PrimaryButton;
-use Exan\Dhp\Component\Button\SecondaryButton;
-use Exan\Dhp\Component\Button\SuccessButton;
-use Exan\Dhp\Enums\Component\ButtonStyle;
-use Exan\Dhp\Parts\Emoji;
-use Exan\Dhp\Rest\Helpers\Emoji\EmojiBuilder;
+use Exan\Finrir\Component\Button\DangerButton;
+use Exan\Finrir\Component\Button\LinkButton;
+use Exan\Finrir\Component\Button\PrimaryButton;
+use Exan\Finrir\Component\Button\SecondaryButton;
+use Exan\Finrir\Component\Button\SuccessButton;
+use Exan\Finrir\Enums\Component\ButtonStyle;
+use Exan\Finrir\Parts\Emoji;
+use Exan\Finrir\Rest\Helpers\Emoji\EmojiBuilder;
 use PHPUnit\Framework\TestCase;
 
 class ButtonTest extends TestCase

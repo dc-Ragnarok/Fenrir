@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Exan\Dhp\Parts;
+namespace Exan\Finrir\Parts;
 
-use Exan\Dhp\Enums\Parts\Scopes;
+use Exan\Finrir\Enums\Parts\Scopes;
 
 class InstallParams
 {
     /**
-     * @var \Exan\Dhp\Enums\Parts\Scopes[]
+     * @var \Exan\Finrir\Enums\Parts\Scopes[]
      */
     public array $scopes;
     public string $permissions;

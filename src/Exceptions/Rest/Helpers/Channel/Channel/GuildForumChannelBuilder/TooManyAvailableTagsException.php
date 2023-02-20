@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Exan\Dhp\Exceptions\Rest\Helpers\Channel\Channel\GuildForumChannelBuilder;
+namespace Exan\Finrir\Exceptions\Rest\Helpers\Channel\Channel\GuildForumChannelBuilder;
 
 use Exception;
 

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Exan\Dhp\Rest\Helpers;
+namespace Exan\Finrir\Rest\Helpers;
 
 use JsonMapper;
 use React\Promise\ExtendedPromiseInterface;

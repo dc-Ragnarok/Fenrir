@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Exan\Dhp\Websocket\Events;
+namespace Exan\Finrir\Websocket\Events;
 
-use Exan\Dhp\Parts\VoiceState;
+use Exan\Finrir\Parts\VoiceState;
 
 /**
  * @see https://discord.com/developers/docs/topics/gateway-events#voice-state-update

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Exan\Dhp\Component;
+namespace Exan\Finrir\Component;
 
 abstract class Component
 {

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Exan\Dhp\Rest\Helpers\Channel\Channel\Shared;
+namespace Exan\Finrir\Rest\Helpers\Channel\Channel\Shared;
 
-use Exan\Dhp\Const\Validation\RateLimit;
+use Exan\Finrir\Const\Validation\RateLimit;
 
 trait SetDefaultThreadRateLimitPerUser
 {

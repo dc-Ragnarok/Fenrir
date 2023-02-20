@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Tests\Exan\Dhp\Component;
+namespace Tests\Exan\Finrir\Component;
 
-use Exan\Dhp\Component\TextInput;
-use Exan\Dhp\Enums\Component\TextInputStyle;
+use Exan\Finrir\Component\TextInput;
+use Exan\Finrir\Enums\Component\TextInputStyle;
 use PHPUnit\Framework\TestCase;
 
 class TextInputTest extends TestCase

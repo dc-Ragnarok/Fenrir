@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Tests\Exan\Dhp\Bitwise;
+namespace Tests\Exan\Finrir\Bitwise;
 
-use Exan\Dhp\Bitwise\Bitwise;
+use Exan\Finrir\Bitwise\Bitwise;
 use PHPUnit\Framework\TestCase;
 
 class BitwiseTest extends TestCase

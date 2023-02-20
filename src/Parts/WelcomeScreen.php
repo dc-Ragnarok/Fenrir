@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Exan\Dhp\Parts;
+namespace Exan\Finrir\Parts;
 
 class WelcomeScreen
 {
     public ?string $description;
     /**
-     * @var \Exan\Dhp\Parts\WelcomeScreenChannel[]
+     * @var \Exan\Finrir\Parts\WelcomeScreenChannel[]
      */
     public array $welcome_channels;
 }

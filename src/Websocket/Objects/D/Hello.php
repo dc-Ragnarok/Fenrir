@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Exan\Dhp\Websocket\Objects\D;
+namespace Exan\Finrir\Websocket\Objects\D;
 
 class Hello
 {

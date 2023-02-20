@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Exan\Dhp\Parts;
+namespace Exan\Finrir\Parts;
 
-use Exan\Dhp\Enums\Parts\ApplicationCommandOptionTypes;
-use Exan\Dhp\Enums\Parts\ChannelTypes;
+use Exan\Finrir\Enums\Parts\ApplicationCommandOptionTypes;
+use Exan\Finrir\Enums\Parts\ChannelTypes;
 
 class ApplicationCommandOptionStructure
 {
@@ -22,15 +22,15 @@ class ApplicationCommandOptionStructure
     public ?array $description_localizations;
     public ?bool $required;
     /**
-     * @var \Exan\Dhp\Parts\ApplicationCommandOptionChoice[]
+     * @var \Exan\Finrir\Parts\ApplicationCommandOptionChoice[]
      */
     public ?array $choices;
     /**
-     * @var \Exan\Dhp\Parts\ApplicationCommandOptionStructure[]
+     * @var \Exan\Finrir\Parts\ApplicationCommandOptionStructure[]
      */
     public ?array $options;
     /**
-     * @var \Exan\Dhp\Enums\Parts\ChannelTypes[]
+     * @var \Exan\Finrir\Enums\Parts\ChannelTypes[]
      */
     public ?array $channel_types;
     public int|float|null $min_value;

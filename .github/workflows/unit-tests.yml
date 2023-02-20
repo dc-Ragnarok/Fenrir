@@ -1,4 +1,4 @@
-name: DHP Unit Tests
+name: Finrir Unit Tests
 run-name: ${{ github.actor }} is running tests
 on: [push, pull_request]
 

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Exan\Dhp\Websocket\Events;
+namespace Exan\Finrir\Websocket\Events;
 
-use Exan\Dhp\Attributes\Intent;
+use Exan\Finrir\Attributes\Intent;
 
 /**
  * @see https://discord.com/developers/docs/topics/gateway-events#thread-members-update
@@ -17,7 +17,7 @@ class ThreadMemberUpdate
     public int $member_count;
 
     /**
-     * @var \Exan\Dhp\Parts\ThreadMember[]
+     * @var \Exan\Finrir\Parts\ThreadMember[]
      */
     public ?array $added_members;
 

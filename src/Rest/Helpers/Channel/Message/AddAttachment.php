@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Exan\Dhp\Rest\Helpers\Channel\Message;
+namespace Exan\Finrir\Rest\Helpers\Channel\Message;
 
-use Exan\Dhp\Rest\Helpers\Channel\AttachmentBuilder;
+use Exan\Finrir\Rest\Helpers\Channel\AttachmentBuilder;
 
 trait AddAttachment
 {

@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Exan\Dhp\Rest\Helpers\Channel\Channel\Shared;
+namespace Exan\Finrir\Rest\Helpers\Channel\Channel\Shared;
 
-use Exan\Dhp\Enums\Parts\ChannelTypes;
-use Exan\Dhp\Exceptions\Rest\Helpers\Channel\Channel\Shared\SetType\UnsupportedConversionException;
+use Exan\Finrir\Enums\Parts\ChannelTypes;
+use Exan\Finrir\Exceptions\Rest\Helpers\Channel\Channel\Shared\SetType\UnsupportedConversionException;
 
 trait SetType
 {

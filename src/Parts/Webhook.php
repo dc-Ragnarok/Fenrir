@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Exan\Dhp\Parts;
+namespace Exan\Finrir\Parts;
 
-use Exan\Dhp\Attributes\Partial;
+use Exan\Finrir\Attributes\Partial;
 
 class Webhook
 {

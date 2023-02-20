@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Exan\Dhp\Enums\Gateway;
+namespace Exan\Finrir\Enums\Gateway;
 
 /**
  * @see https://discord.com/developers/docs/topics/gateway#gateway-intents

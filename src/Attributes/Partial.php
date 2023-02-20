@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Exan\Dhp\Attributes;
+namespace Exan\Finrir\Attributes;
 
 /**
  * Indicates an object or property is partial

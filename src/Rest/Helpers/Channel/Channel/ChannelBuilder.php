@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Exan\Dhp\Rest\Helpers\Channel\Channel;
+namespace Exan\Finrir\Rest\Helpers\Channel\Channel;
 
-use Exan\Dhp\Enums\Parts\ChannelTypes;
-use Exan\Dhp\Parts\Overwrite;
+use Exan\Finrir\Enums\Parts\ChannelTypes;
+use Exan\Finrir\Parts\Overwrite;
 
 /**
  * @see https://discord.com/developers/docs/resources/channel#modify-channel

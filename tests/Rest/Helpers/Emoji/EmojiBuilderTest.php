@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Tests\Exan\Dhp\Rest\Helpers\Emoji;
+namespace Tests\Exan\Finrir\Rest\Helpers\Emoji;
 
-use Exan\Dhp\Enums\ImageData;
-use Exan\Dhp\Parts\Emoji;
-use Exan\Dhp\Rest\Helpers\Emoji\EmojiBuilder;
+use Exan\Finrir\Enums\ImageData;
+use Exan\Finrir\Parts\Emoji;
+use Exan\Finrir\Rest\Helpers\Emoji\EmojiBuilder;
 use PHPUnit\Framework\TestCase;
 
 class EmojiBuilderTest extends TestCase

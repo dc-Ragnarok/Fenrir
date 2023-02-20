@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Exan\Dhp\Parts;
+namespace Exan\Finrir\Parts;
 
 class Presence
 {
@@ -10,7 +10,7 @@ class Presence
     public string $guild_id;
     public string $status;
     /**
-     * @var \Exan\Dhp\Parts\Activity[]
+     * @var \Exan\Finrir\Parts\Activity[]
      */
     public ?array $activities;
     public ClientStatus $client_status;

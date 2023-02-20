@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Exan\Dhp\Parts;
+namespace Exan\Finrir\Parts;
 
-use Exan\Dhp\Enums\Parts\ChannelTypes;
+use Exan\Finrir\Enums\Parts\ChannelTypes;
 use Carbon\Carbon;
-use Exan\Dhp\Enums\Parts\VideoQualityModes;
-use Exan\Dhp\Bitwise\Bitwise;
-use Exan\Dhp\Enums\Parts\SortOrderTypes;
-use Exan\Dhp\Enums\Parts\ForumLayoutTypes;
+use Exan\Finrir\Enums\Parts\VideoQualityModes;
+use Exan\Finrir\Bitwise\Bitwise;
+use Exan\Finrir\Enums\Parts\SortOrderTypes;
+use Exan\Finrir\Enums\Parts\ForumLayoutTypes;
 
 class Channel
 {
@@ -18,7 +18,7 @@ class Channel
     public ?string $guild_id;
     public ?int $position;
     /**
-     * @var \Exan\Dhp\Parts\Overwrite[]
+     * @var \Exan\Finrir\Parts\Overwrite[]
      */
     public ?array $permission_overwrites;
     public ?string $name;
@@ -29,7 +29,7 @@ class Channel
     public ?int $user_limit;
     public ?int $rate_limit_per_user;
     /**
-     * @var \Exan\Dhp\Parts\User[]
+     * @var \Exan\Finrir\Parts\User[]
      */
     public ?array $recipients;
     public ?string $icon;
@@ -48,7 +48,7 @@ class Channel
     public ?Bitwise $flags;
     public ?int $total_message_sent;
     /**
-     * @var \Exan\Dhp\Parts\Tag[]
+     * @var \Exan\Finrir\Parts\Tag[]
      */
     public ?array $available_tags;
     /**

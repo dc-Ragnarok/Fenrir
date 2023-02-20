@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Tests\Exan\Dhp\Discord;
+namespace Tests\Exan\Finrir\Discord;
 
-use Exan\Dhp\Const\Events;
+use Exan\Finrir\Const\Events;
 use Mockery;
 use React\EventLoop\TimerInterface;
-use Tests\Exan\Dhp\Discord\DiscordTestCase;
+use Tests\Exan\Finrir\Discord\DiscordTestCase;
 
 /**
  * @runTestsInSeparateProcesses

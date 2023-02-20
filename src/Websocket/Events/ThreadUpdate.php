@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Exan\Dhp\Websocket\Events;
+namespace Exan\Finrir\Websocket\Events;
 
-use Exan\Dhp\Parts\Channel;
-use Exan\Dhp\Parts\ThreadMember;
+use Exan\Finrir\Parts\Channel;
+use Exan\Finrir\Parts\ThreadMember;
 
 /**
  * @see https://discord.com/developers/docs/topics/gateway-events#thread-update

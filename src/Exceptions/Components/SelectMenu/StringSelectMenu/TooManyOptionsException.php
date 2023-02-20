@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Exan\Dhp\Exceptions\Components\SelectMenu\StringSelectMenu;
+namespace Exan\Finrir\Exceptions\Components\SelectMenu\StringSelectMenu;
 
 use Exception;
 

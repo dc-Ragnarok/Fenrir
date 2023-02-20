@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Exan\Dhp\Websocket\Events;
+namespace Exan\Finrir\Websocket\Events;
 
 /**
  * @see https://discord.com/developers/docs/topics/gateway-events#guild-integrations-update

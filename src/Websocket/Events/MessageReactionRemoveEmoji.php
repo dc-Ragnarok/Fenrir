@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Exan\Dhp\Websocket\Events;
+namespace Exan\Finrir\Websocket\Events;
 
-use Exan\Dhp\Parts\Emoji;
+use Exan\Finrir\Parts\Emoji;
 
 /**
  * @see https://discord.com/developers/docs/topics/gateway-events#message-reaction-remove-emoji

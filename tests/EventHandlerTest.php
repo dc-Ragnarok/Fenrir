@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Tests\Exan\Dhp;
+namespace Tests\Exan\Finrir;
 
-use Exan\Dhp\Const\Events;
-use Exan\Dhp\EventHandler;
-use Exan\Dhp\Websocket\Objects\Payload;
+use Exan\Finrir\Const\Events;
+use Exan\Finrir\EventHandler;
+use Exan\Finrir\Websocket\Objects\Payload;
 use JsonMapper;
 use PHPUnit\Framework\TestCase;
 use React\Promise\Promise;

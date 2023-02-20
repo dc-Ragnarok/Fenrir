@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Exan\Dhp\Parts\Traits;
+namespace Exan\Finrir\Parts\Traits;
 
 /**
  * @todo phase out
@@ -10,7 +10,7 @@ namespace Exan\Dhp\Parts\Traits;
 trait WithMentions
 {
     /**
-     * @var \Exan\Dhp\Parts\UserWithPartialMember[]
+     * @var \Exan\Finrir\Parts\UserWithPartialMember[]
      */
     public array $mentions;
 }

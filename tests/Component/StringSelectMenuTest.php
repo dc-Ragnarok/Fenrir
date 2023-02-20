@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Tests\Exan\Dhp\Component;
+namespace Tests\Exan\Finrir\Component;
 
-use Exan\Dhp\Component\SelectMenu\StringSelectMenu;
-use Exan\Dhp\Enums\Component\SelectMenuType;
-use Exan\Dhp\Exceptions\Components\SelectMenu\StringSelectMenu\NoOptionsException;
-use Exan\Dhp\Exceptions\Components\SelectMenu\StringSelectMenu\TooManyOptionsException;
-use Exan\Dhp\Parts\Emoji;
-use Exan\Dhp\Rest\Helpers\Emoji\EmojiBuilder;
+use Exan\Finrir\Component\SelectMenu\StringSelectMenu;
+use Exan\Finrir\Enums\Component\SelectMenuType;
+use Exan\Finrir\Exceptions\Components\SelectMenu\StringSelectMenu\NoOptionsException;
+use Exan\Finrir\Exceptions\Components\SelectMenu\StringSelectMenu\TooManyOptionsException;
+use Exan\Finrir\Parts\Emoji;
+use Exan\Finrir\Rest\Helpers\Emoji\EmojiBuilder;
 use PHPUnit\Framework\TestCase;
 
 class StringSelectMenuTest extends TestCase

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Exan\Dhp\Parts\Traits;
+namespace Exan\Finrir\Parts\Traits;
 
-use Exan\Dhp\Parts\GuildMember;
+use Exan\Finrir\Parts\GuildMember;
 
 /**
  * @todo phase out

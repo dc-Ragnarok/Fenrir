@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Tests\Exan\Dhp\Rest\Helpers\Channel\Channel\Shared;
+namespace Tests\Exan\Finrir\Rest\Helpers\Channel\Channel\Shared;
 
-use Exan\Dhp\Rest\Helpers\Channel\Channel\Shared\SetRtcRegion;
+use Exan\Finrir\Rest\Helpers\Channel\Channel\Shared\SetRtcRegion;
 use PHPUnit\Framework\TestCase;
 
 class SetRtcRegionTest extends TestCase

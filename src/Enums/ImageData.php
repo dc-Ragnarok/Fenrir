@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Exan\Dhp\Enums;
+namespace Exan\Finrir\Enums;
 
 enum ImageData: string
 {

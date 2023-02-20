@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Exan\Dhp\Parts;
+namespace Exan\Finrir\Parts;
 
 class Team
 {
     public ?string $icon;
     public string $id;
     /**
-     * @var \Exan\Dhp\Parts\TeamMember[]
+     * @var \Exan\Finrir\Parts\TeamMember[]
      */
     public array $members;
     public string $name;

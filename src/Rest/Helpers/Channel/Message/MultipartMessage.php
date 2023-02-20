@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Exan\Dhp\Rest\Helpers\Channel\Message;
+namespace Exan\Finrir\Rest\Helpers\Channel\Message;
 
-use Exan\Dhp\Parts\Multipart;
-use Exan\Dhp\Parts\MultipartField;
+use Exan\Finrir\Parts\Multipart;
+use Exan\Finrir\Parts\MultipartField;
 
 trait MultipartMessage
 {

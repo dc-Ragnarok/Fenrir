@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Tests\Exan\Dhp\Rest\Helpers\Channel;
+namespace Tests\Exan\Finrir\Rest\Helpers\Channel;
 
-use Exan\Dhp\Const\Validation\RateLimit;
-use Exan\Dhp\Enums\Parts\ThreadAutoArchiveDuration;
-use Exan\Dhp\Rest\Helpers\Channel\StartThreadFromMessageBuilder;
+use Exan\Finrir\Const\Validation\RateLimit;
+use Exan\Finrir\Enums\Parts\ThreadAutoArchiveDuration;
+use Exan\Finrir\Rest\Helpers\Channel\StartThreadFromMessageBuilder;
 use PHPUnit\Framework\TestCase;
 
 class StartThreadFromMessageBuilderTest extends TestCase

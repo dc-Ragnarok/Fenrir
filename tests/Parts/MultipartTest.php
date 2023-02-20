@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Tests\Exan\Dhp\Parts;
+namespace Tests\Exan\Finrir\Parts;
 
-use Exan\Dhp\Parts\Multipart;
-use Exan\Dhp\Parts\MultipartField;
+use Exan\Finrir\Parts\Multipart;
+use Exan\Finrir\Parts\MultipartField;
 use Mockery;
 use PHPUnit\Framework\TestCase;
 

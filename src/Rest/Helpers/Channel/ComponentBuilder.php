@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Exan\Dhp\Rest\Helpers\Channel;
+namespace Exan\Finrir\Rest\Helpers\Channel;
 
-use Exan\Dhp\Exceptions\Rest\Helpers\ComponentBuilder\TooManyRowsException;
+use Exan\Finrir\Exceptions\Rest\Helpers\ComponentBuilder\TooManyRowsException;
 
 /**
  * @see https://discord.com/developers/docs/interactions/message-components#component-object

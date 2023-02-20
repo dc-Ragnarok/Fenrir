@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Exan\Dhp\Rest\Helpers\Channel\Channel;
+namespace Exan\Finrir\Rest\Helpers\Channel\Channel;
 
-use Exan\Dhp\Enums\Parts\ChannelTypes;
-use Exan\Dhp\Rest\Helpers\Channel\Channel\Shared\SetBitrate;
-use Exan\Dhp\Rest\Helpers\Channel\Channel\Shared\SetRtcRegion;
+use Exan\Finrir\Enums\Parts\ChannelTypes;
+use Exan\Finrir\Rest\Helpers\Channel\Channel\Shared\SetBitrate;
+use Exan\Finrir\Rest\Helpers\Channel\Channel\Shared\SetRtcRegion;
 
 /**
  * @see https://discord.com/developers/docs/resources/channel#modify-channel

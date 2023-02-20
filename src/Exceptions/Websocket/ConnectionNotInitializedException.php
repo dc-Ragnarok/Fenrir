@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Exan\Dhp\Exceptions\Websocket;
+namespace Exan\Finrir\Exceptions\Websocket;
 
 use Exception;
 

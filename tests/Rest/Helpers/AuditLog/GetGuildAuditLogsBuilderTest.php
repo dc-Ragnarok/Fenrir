@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Tests\Exan\Dhp\Rest\Helpers\AuditLog;
+namespace Tests\Exan\Finrir\Rest\Helpers\AuditLog;
 
-use Exan\Dhp\Rest\Helpers\AuditLog\GetGuildAuditLogsBuilder;
+use Exan\Finrir\Rest\Helpers\AuditLog\GetGuildAuditLogsBuilder;
 use PHPUnit\Framework\TestCase;
 
 class GetGuildAuditLogsBuilderTest extends TestCase
