@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Exan\Finrir\Parts;
+namespace Exan\Fenrir\Parts;
 
 use Ramsey\Uuid\Uuid;
 
@@ -21,7 +21,7 @@ class Multipart
     }
 
     /**
-     * @var \Exan\Finrir\Parts\MultipartField[] $fields
+     * @var \Exan\Fenrir\Parts\MultipartField[] $fields
      */
     public function __construct(private array $fields, private ?string $boundary = null)
     {

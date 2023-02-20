@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Exan\Finrir\Parts;
+namespace Exan\Fenrir\Parts;
 
-use Exan\Finrir\Enums\Parts\InteractionTypes;
-use Exan\Finrir\Attributes\Partial;
+use Exan\Fenrir\Enums\Parts\InteractionTypes;
+use Exan\Fenrir\Attributes\Partial;
 
 class MessageInteraction
 {

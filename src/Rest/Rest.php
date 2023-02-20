@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Exan\Finrir\Rest;
+namespace Exan\Fenrir\Rest;
 
 use Discord\Http\Http;
 use JsonMapper;

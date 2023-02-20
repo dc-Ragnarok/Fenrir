@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Tests\Exan\Finrir\Rest\Helpers\Channel;
+namespace Tests\Exan\Fenrir\Rest\Helpers\Channel;
 
-use Exan\Finrir\Rest\Helpers\Channel\GetReactionsBuilder;
+use Exan\Fenrir\Rest\Helpers\Channel\GetReactionsBuilder;
 use Monolog\Test\TestCase;
 
 class GetReactionsBuilderTest extends TestCase

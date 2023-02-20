@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Exan\Finrir\Websocket\Events;
+namespace Exan\Fenrir\Websocket\Events;
 
-use Exan\Finrir\Parts\Integration;
-use Exan\Finrir\Parts\Traits\WithGuildId;
+use Exan\Fenrir\Parts\Integration;
+use Exan\Fenrir\Parts\Traits\WithGuildId;
 
 /**
  * @see https://discord.com/developers/docs/topics/gateway-events#integration-create

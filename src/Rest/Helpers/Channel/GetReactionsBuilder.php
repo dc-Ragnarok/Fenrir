@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Exan\Finrir\Rest\Helpers\Channel;
+namespace Exan\Fenrir\Rest\Helpers\Channel;
 
-use Exan\Finrir\Const\Validation\ItemLimit;
+use Exan\Fenrir\Const\Validation\ItemLimit;
 
 class GetReactionsBuilder
 {

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Exan\Finrir\Websocket\Events;
+namespace Exan\Fenrir\Websocket\Events;
 
-use Exan\Finrir\Parts\Emoji;
+use Exan\Fenrir\Parts\Emoji;
 
 /**
  * @see https://discord.com/developers/docs/topics/gateway-events#message-reaction-remove

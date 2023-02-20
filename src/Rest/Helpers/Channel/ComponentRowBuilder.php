@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Exan\Finrir\Rest\Helpers\Channel;
+namespace Exan\Fenrir\Rest\Helpers\Channel;
 
-use Exan\Finrir\Component\Component;
-use Exan\Finrir\Exceptions\Rest\Helpers\ComponentRowBuilder\TooManyItemsException;
+use Exan\Fenrir\Component\Component;
+use Exan\Fenrir\Exceptions\Rest\Helpers\ComponentRowBuilder\TooManyItemsException;
 
 /**
  * Can not exceed 9 components

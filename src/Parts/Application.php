@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Exan\Finrir\Parts;
+namespace Exan\Fenrir\Parts;
 
-use Exan\Finrir\Bitwise\Bitwise;
-use Exan\Finrir\Attributes\Partial;
+use Exan\Fenrir\Bitwise\Bitwise;
+use Exan\Fenrir\Attributes\Partial;
 
 class Application
 {

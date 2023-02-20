@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Tests\Exan\Finrir\Rest\Helpers\Channel;
+namespace Tests\Exan\Fenrir\Rest\Helpers\Channel;
 
-use Exan\Finrir\Const\Validation\RateLimit;
-use Exan\Finrir\Enums\Parts\ChannelTypes;
-use Exan\Finrir\Enums\Parts\ThreadAutoArchiveDuration;
-use Exan\Finrir\Rest\Helpers\Channel\StartThreadWithoutMessageBuilder;
+use Exan\Fenrir\Const\Validation\RateLimit;
+use Exan\Fenrir\Enums\Parts\ChannelTypes;
+use Exan\Fenrir\Enums\Parts\ThreadAutoArchiveDuration;
+use Exan\Fenrir\Rest\Helpers\Channel\StartThreadWithoutMessageBuilder;
 use PHPUnit\Framework\TestCase;
 
 class StartThreadWithoutMessageBuilderTest extends TestCase

@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Exan\Finrir\Websocket\Events;
+namespace Exan\Fenrir\Websocket\Events;
 
-use Exan\Finrir\Parts\Message;
-use Exan\Finrir\Attributes\Partial;
-use Exan\Finrir\Attributes\Intent;
+use Exan\Fenrir\Parts\Message;
+use Exan\Fenrir\Attributes\Partial;
+use Exan\Fenrir\Attributes\Intent;
 
 /**
  * @see https://discord.com/developers/docs/topics/gateway-events#message-update

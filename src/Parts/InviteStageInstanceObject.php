@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Exan\Finrir\Parts;
+namespace Exan\Fenrir\Parts;
 
-use Exan\Finrir\Attributes\Partial;
+use Exan\Fenrir\Attributes\Partial;
 
 class InviteStageInstanceObject
 {
     /**
-     * @var \Exan\Finrir\Parts\GuildMember[]
+     * @var \Exan\Fenrir\Parts\GuildMember[]
      */
     #[Partial]
     public array $members;

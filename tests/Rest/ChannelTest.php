@@ -2,26 +2,26 @@
 
 declare(strict_types=1);
 
-namespace Tests\Exan\Finrir\Rest;
+namespace Tests\Exan\Fenrir\Rest;
 
-use Exan\Finrir\Parts\Channel as PartsChannel;
-use Exan\Finrir\Parts\Emoji;
-use Exan\Finrir\Parts\Invite;
-use Exan\Finrir\Parts\Message;
-use Exan\Finrir\Parts\ThreadMember;
-use Exan\Finrir\Parts\User;
-use Exan\Finrir\Rest\Channel;
-use Exan\Finrir\Rest\Helpers\Channel\Channel\GuildAnnouncementChannelBuilder;
-use Exan\Finrir\Rest\Helpers\Channel\Channel\GuildForumChannelBuilder;
-use Exan\Finrir\Rest\Helpers\Channel\Channel\GuildStageVoiceChannelBuilder;
-use Exan\Finrir\Rest\Helpers\Channel\Channel\GuildTextChannelBuilder;
-use Exan\Finrir\Rest\Helpers\Channel\Channel\GuildVoiceChannelBuilder;
-use Exan\Finrir\Rest\Helpers\Channel\EditMessageBuilder;
-use Exan\Finrir\Rest\Helpers\Channel\MessageBuilder;
-use Exan\Finrir\Rest\Helpers\Channel\StartThreadFromMessageBuilder;
-use Exan\Finrir\Rest\Helpers\Channel\StartThreadWithoutMessageBuilder;
-use Exan\Finrir\Rest\Helpers\Emoji\EmojiBuilder;
-use Tests\Exan\Finrir\Rest\HttpHelperTestCase;
+use Exan\Fenrir\Parts\Channel as PartsChannel;
+use Exan\Fenrir\Parts\Emoji;
+use Exan\Fenrir\Parts\Invite;
+use Exan\Fenrir\Parts\Message;
+use Exan\Fenrir\Parts\ThreadMember;
+use Exan\Fenrir\Parts\User;
+use Exan\Fenrir\Rest\Channel;
+use Exan\Fenrir\Rest\Helpers\Channel\Channel\GuildAnnouncementChannelBuilder;
+use Exan\Fenrir\Rest\Helpers\Channel\Channel\GuildForumChannelBuilder;
+use Exan\Fenrir\Rest\Helpers\Channel\Channel\GuildStageVoiceChannelBuilder;
+use Exan\Fenrir\Rest\Helpers\Channel\Channel\GuildTextChannelBuilder;
+use Exan\Fenrir\Rest\Helpers\Channel\Channel\GuildVoiceChannelBuilder;
+use Exan\Fenrir\Rest\Helpers\Channel\EditMessageBuilder;
+use Exan\Fenrir\Rest\Helpers\Channel\MessageBuilder;
+use Exan\Fenrir\Rest\Helpers\Channel\StartThreadFromMessageBuilder;
+use Exan\Fenrir\Rest\Helpers\Channel\StartThreadWithoutMessageBuilder;
+use Exan\Fenrir\Rest\Helpers\Emoji\EmojiBuilder;
+use Tests\Exan\Fenrir\Rest\HttpHelperTestCase;
 
 class ChannelTest extends HttpHelperTestCase
 {

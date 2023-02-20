@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Exan\Finrir\Const\Validation;
+namespace Exan\Fenrir\Const\Validation;
 
-use Exan\Finrir\Const\Validation\Traits\WithinLimit;
+use Exan\Fenrir\Const\Validation\Traits\WithinLimit;
 
 class RateLimit
 {

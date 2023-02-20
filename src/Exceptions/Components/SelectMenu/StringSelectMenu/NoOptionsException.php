@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Exan\Finrir\Exceptions\Components\SelectMenu\StringSelectMenu;
+namespace Exan\Fenrir\Exceptions\Components\SelectMenu\StringSelectMenu;
 
 use Exception;
 

@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Tests\Exan\Finrir\Discord;
+namespace Tests\Exan\Fenrir\Discord;
 
-use Exan\Finrir\Enums\Gateway\StatusType;
-use Exan\Finrir\Websocket\Helpers\ActivityBuilder;
-use Tests\Exan\Finrir\Discord\DiscordTestCase;
+use Exan\Fenrir\Enums\Gateway\StatusType;
+use Exan\Fenrir\Websocket\Helpers\ActivityBuilder;
+use Tests\Exan\Fenrir\Discord\DiscordTestCase;
 
 /**
  * @runTestsInSeparateProcesses

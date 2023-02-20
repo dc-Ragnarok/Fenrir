@@ -1,7 +1,7 @@
 <?php
 
-use Exan\Finrir\Bitwise\Bitwise;
-use Exan\Finrir\Discord;
+use Exan\Fenrir\Bitwise\Bitwise;
+use Exan\Fenrir\Discord;
 use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
 

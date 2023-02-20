@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Tests\Exan\Finrir\Rest\Helpers\Channel;
+namespace Tests\Exan\Fenrir\Rest\Helpers\Channel;
 
-use Exan\Finrir\Exceptions\Rest\Helpers\MessageBuilder\TooManyStickersException;
-use Exan\Finrir\Rest\Helpers\Channel\MessageBuilder;
+use Exan\Fenrir\Exceptions\Rest\Helpers\MessageBuilder\TooManyStickersException;
+use Exan\Fenrir\Rest\Helpers\Channel\MessageBuilder;
 use PHPUnit\Framework\TestCase;
 
 class MessageBuilderTest extends TestCase

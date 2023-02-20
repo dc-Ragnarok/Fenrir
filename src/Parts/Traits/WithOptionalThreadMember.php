@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Exan\Finrir\Parts\Traits;
+namespace Exan\Fenrir\Parts\Traits;
 
-use Exan\Finrir\Parts\ThreadMember;
+use Exan\Fenrir\Parts\ThreadMember;
 
 /**
  * @todo phase out

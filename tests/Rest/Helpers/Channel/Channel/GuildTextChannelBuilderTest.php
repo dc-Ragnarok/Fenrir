@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Tests\Exan\Finrir\Rest\Helpers\Channel\Channel\Shared;
+namespace Tests\Exan\Fenrir\Rest\Helpers\Channel\Channel\Shared;
 
-use Exan\Finrir\Enums\Parts\ChannelTypes;
-use Exan\Finrir\Rest\Helpers\Channel\Channel\GuildTextChannelBuilder;
+use Exan\Fenrir\Enums\Parts\ChannelTypes;
+use Exan\Fenrir\Rest\Helpers\Channel\Channel\GuildTextChannelBuilder;
 use PHPUnit\Framework\TestCase;
 
 class GuildTextChannelBuilderTest extends TestCase

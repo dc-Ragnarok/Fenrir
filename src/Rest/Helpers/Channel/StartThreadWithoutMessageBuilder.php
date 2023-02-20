@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Exan\Finrir\Rest\Helpers\Channel;
+namespace Exan\Fenrir\Rest\Helpers\Channel;
 
-use Exan\Finrir\Const\Validation\RateLimit;
-use Exan\Finrir\Enums\Parts\ChannelTypes;
-use Exan\Finrir\Enums\Parts\ThreadAutoArchiveDuration;
+use Exan\Fenrir\Const\Validation\RateLimit;
+use Exan\Fenrir\Enums\Parts\ChannelTypes;
+use Exan\Fenrir\Enums\Parts\ThreadAutoArchiveDuration;
 
 class StartThreadWithoutMessageBuilder
 {

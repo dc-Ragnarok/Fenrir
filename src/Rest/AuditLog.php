@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Exan\Finrir\Rest;
+namespace Exan\Fenrir\Rest;
 
 use Discord\Http\Endpoint;
 use Discord\Http\Http;
-use Exan\Finrir\Parts\AuditLog as PartsAuditLog;
-use Exan\Finrir\Rest\Helpers\AuditLog\GetGuildAuditLogsBuilder;
-use Exan\Finrir\Rest\Helpers\HttpHelper;
+use Exan\Fenrir\Parts\AuditLog as PartsAuditLog;
+use Exan\Fenrir\Rest\Helpers\AuditLog\GetGuildAuditLogsBuilder;
+use Exan\Fenrir\Rest\Helpers\HttpHelper;
 use JsonMapper;
 use React\Promise\ExtendedPromiseInterface;
 
@@ -23,7 +23,7 @@ class AuditLog
     /**
      * @see https://discord.com/developers/docs/resources/audit-log#get-guild-audit-log
      *
-     * @return ExtendedPromiseInterface<\Exan\Finrir\Parts\AuditLog>
+     * @return ExtendedPromiseInterface<\Exan\Fenrir\Parts\AuditLog>
      */
     public function getGuildAuditLogs(
         string $guildId,

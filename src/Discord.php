@@ -2,18 +2,18 @@
 
 declare(strict_types=1);
 
-namespace Exan\Finrir;
+namespace Exan\Fenrir;
 
 use Discord\Http\Drivers\React;
 use Discord\Http\Http;
-use Exan\Finrir\Bitwise\Bitwise;
-use Exan\Finrir\Const\Events as Events;
-use Exan\Finrir\Const\WebsocketEvents;
-use Exan\Finrir\Enums\Gateway\StatusType;
-use Exan\Finrir\Rest\Rest;
-use Exan\Finrir\Websocket\Helpers\ActivityBuilder;
-use Exan\Finrir\Websocket\Objects\D\Hello;
-use Exan\Finrir\Websocket\Objects\Payload;
+use Exan\Fenrir\Bitwise\Bitwise;
+use Exan\Fenrir\Const\Events as Events;
+use Exan\Fenrir\Const\WebsocketEvents;
+use Exan\Fenrir\Enums\Gateway\StatusType;
+use Exan\Fenrir\Rest\Rest;
+use Exan\Fenrir\Websocket\Helpers\ActivityBuilder;
+use Exan\Fenrir\Websocket\Objects\D\Hello;
+use Exan\Fenrir\Websocket\Objects\Payload;
 use JsonMapper;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
@@ -147,8 +147,8 @@ class Discord
                 'intents' => $this->intents->get(),
                 'properties' => [
                     'os' => PHP_OS,
-                    'browser' => 'Exan\Finrir',
-                    'device' => 'Exan\Finrir',
+                    'browser' => 'Exan\Fenrir',
+                    'device' => 'Exan\Fenrir',
                 ]
             ]
         ]);

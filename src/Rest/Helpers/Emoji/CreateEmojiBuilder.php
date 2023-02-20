@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Exan\Finrir\Rest\Helpers\Emoji;
+namespace Exan\Fenrir\Rest\Helpers\Emoji;
 
-use Exan\Finrir\Enums\ImageData;
+use Exan\Fenrir\Enums\ImageData;
 
 class CreateEmojiBuilder
 {

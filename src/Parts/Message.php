@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Exan\Finrir\Parts;
+namespace Exan\Fenrir\Parts;
 
 use Carbon\Carbon;
-use Exan\Finrir\Enums\Parts\MessageTypes;
-use Exan\Finrir\Bitwise\Bitwise;
-use Exan\Finrir\Enums\Parts\MessageComponentTypes;
-use Exan\Finrir\Attributes\Partial;
+use Exan\Fenrir\Enums\Parts\MessageTypes;
+use Exan\Fenrir\Bitwise\Bitwise;
+use Exan\Fenrir\Enums\Parts\MessageComponentTypes;
+use Exan\Fenrir\Attributes\Partial;
 
 class Message
 {
@@ -21,7 +21,7 @@ class Message
     public bool $tts;
     public bool $mention_everyone;
     /**
-     * @var \Exan\Finrir\Parts\User[]
+     * @var \Exan\Fenrir\Parts\User[]
      */
     public array $mentions;
     /**
@@ -29,19 +29,19 @@ class Message
      */
     public array $mention_roles;
     /**
-     * @var \Exan\Finrir\Parts\ChannelMention[]
+     * @var \Exan\Fenrir\Parts\ChannelMention[]
      */
     public ?array $mention_channels;
     /**
-     * @var \Exan\Finrir\Parts\Attachment[]
+     * @var \Exan\Fenrir\Parts\Attachment[]
      */
     public array $attachments;
     /**
-     * @var \Exan\Finrir\Parts\Embed[]
+     * @var \Exan\Fenrir\Parts\Embed[]
      */
     public array $embeds;
     /**
-     * @var \Exan\Finrir\Parts\Reaction[]
+     * @var \Exan\Fenrir\Parts\Reaction[]
      */
     public ?array $reactions;
     public ?string $nonce;
@@ -58,15 +58,15 @@ class Message
     public ?MessageInteraction $interaction;
     public ?Channel $thread;
     /**
-     * @var \Exan\Finrir\Enums\Parts\MessageComponentTypes[]
+     * @var \Exan\Fenrir\Enums\Parts\MessageComponentTypes[]
      */
     public array $components;
     /**
-     * @var \Exan\Finrir\Parts\MessageStickerItem[]
+     * @var \Exan\Fenrir\Parts\MessageStickerItem[]
      */
     public ?array $sticker_items;
     /**
-     * @var \Exan\Finrir\Parts\Sticker[]
+     * @var \Exan\Fenrir\Parts\Sticker[]
      */
     public ?array $stickers;
     public ?int $position;

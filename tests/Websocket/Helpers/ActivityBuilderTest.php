@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Tests\Exan\Finrir\Websocket\Helpers;
+namespace Tests\Exan\Fenrir\Websocket\Helpers;
 
-use Exan\Finrir\Enums\Gateway\ActivityType;
-use Exan\Finrir\Parts\Emoji;
-use Exan\Finrir\Rest\Helpers\Emoji\EmojiBuilder;
-use Exan\Finrir\Websocket\Helpers\ActivityBuilder;
+use Exan\Fenrir\Enums\Gateway\ActivityType;
+use Exan\Fenrir\Parts\Emoji;
+use Exan\Fenrir\Rest\Helpers\Emoji\EmojiBuilder;
+use Exan\Fenrir\Websocket\Helpers\ActivityBuilder;
 use PHPUnit\Framework\TestCase;
 
 class ActivityBuilderTest extends TestCase

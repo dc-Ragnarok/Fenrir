@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Exan\Finrir\Parts;
+namespace Exan\Fenrir\Parts;
 
-use Exan\Finrir\Enums\Parts\InviteTargetTypes;
+use Exan\Fenrir\Enums\Parts\InviteTargetTypes;
 use Carbon\Carbon;
-use Exan\Finrir\Attributes\Partial;
+use Exan\Fenrir\Attributes\Partial;
 
 class Invite
 {

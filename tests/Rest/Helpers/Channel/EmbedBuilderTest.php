@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Tests\Exan\Finrir\Rest\Helpers\Channel;
+namespace Tests\Exan\Fenrir\Rest\Helpers\Channel;
 
-use Exan\Finrir\Rest\Helpers\Channel\EmbedBuilder;
+use Exan\Fenrir\Rest\Helpers\Channel\EmbedBuilder;
 use PHPUnit\Framework\TestCase;
 
 class EmbedBuilderTest extends TestCase

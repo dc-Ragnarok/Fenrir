@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Exan\Finrir\Parts;
+namespace Exan\Fenrir\Parts;
 
-use Exan\Finrir\Enums\Parts\AutoModerationKeywordPresetTypes;
+use Exan\Fenrir\Enums\Parts\AutoModerationKeywordPresetTypes;
 
 class AutoModerationTriggerMetadata
 {
@@ -17,7 +17,7 @@ class AutoModerationTriggerMetadata
      */
     public array $regex_patterns;
     /**
-     * @var \Exan\Finrir\Enums\Parts\AutoModerationKeywordPresetTypes[]
+     * @var \Exan\Fenrir\Enums\Parts\AutoModerationKeywordPresetTypes[]
      */
     public array $presets;
     /**

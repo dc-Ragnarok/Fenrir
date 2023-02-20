@@ -2,28 +2,28 @@
     <img src="./assets/logo.svg" height="150px">
 </p>
 
-<h2 align="center">Finrir</h2>
+<h2 align="center">Fenrir</h2>
 
 <p align="center">A plain Discord API/Gateway wrapper in PHP.</p>
 
 ## Goal
 
-The goal of Finrir is to provide a mostly plain wrapper over Discords APIs/gateway.
+The goal of Fenrir is to provide a mostly plain wrapper over Discords APIs/gateway.
 There will be no caching built in, this is for the user to implement themselves.
 
 If you're looking for something thats easier to use, try [DiscordPHP](https://github.com/discord-php/DiscordPHP).
 
-Finrir heavily relies on ReactPHP for async operations. Knowing the basics of async PHP is recommended before diving in.
+Fenrir heavily relies on ReactPHP for async operations. Knowing the basics of async PHP is recommended before diving in.
 
 ## Example bot
 
 ```php
-use Exan\Finrir\Bitwise\Bitwise;
-use Exan\Finrir\Const\Events;
-use Exan\Finrir\Discord;
-use Exan\Finrir\Enums\Gateway\Intents;
-use Exan\Finrir\Rest\Helpers\Channel\MessageBuilder;
-use Exan\Finrir\Websocket\Events\MessageCreate;
+use Exan\Fenrir\Bitwise\Bitwise;
+use Exan\Fenrir\Const\Events;
+use Exan\Fenrir\Discord;
+use Exan\Fenrir\Enums\Gateway\Intents;
+use Exan\Fenrir\Rest\Helpers\Channel\MessageBuilder;
+use Exan\Fenrir\Websocket\Events\MessageCreate;
 
 require './vendor/autoload.php';
 

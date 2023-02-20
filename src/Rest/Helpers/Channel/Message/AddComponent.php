@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Exan\Finrir\Rest\Helpers\Channel\Message;
+namespace Exan\Fenrir\Rest\Helpers\Channel\Message;
 
-use Exan\Finrir\Rest\Helpers\Channel\ComponentBuilder;
+use Exan\Fenrir\Rest\Helpers\Channel\ComponentBuilder;
 
 trait AddComponent
 {

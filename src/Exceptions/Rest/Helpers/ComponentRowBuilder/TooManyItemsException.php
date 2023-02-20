@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Exan\Finrir\Exceptions\Rest\Helpers\ComponentRowBuilder;
+namespace Exan\Fenrir\Exceptions\Rest\Helpers\ComponentRowBuilder;
 
 use Exception;
 

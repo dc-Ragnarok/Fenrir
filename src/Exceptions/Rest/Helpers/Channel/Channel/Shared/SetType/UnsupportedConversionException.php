@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Exan\Finrir\Exceptions\Rest\Helpers\Channel\Channel\Shared\SetType;
+namespace Exan\Fenrir\Exceptions\Rest\Helpers\Channel\Channel\Shared\SetType;
 
 use Exception;
 

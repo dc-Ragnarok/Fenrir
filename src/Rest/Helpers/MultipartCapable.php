@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Exan\Finrir\Rest\Helpers;
+namespace Exan\Fenrir\Rest\Helpers;
 
-use Exan\Finrir\Parts\Multipart;
+use Exan\Fenrir\Parts\Multipart;
 
 interface MultipartCapable
 {

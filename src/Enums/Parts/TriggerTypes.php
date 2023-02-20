@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Exan\Finrir\Enums\Parts;
+namespace Exan\Fenrir\Enums\Parts;
 
 enum TriggerTypes: int
 {

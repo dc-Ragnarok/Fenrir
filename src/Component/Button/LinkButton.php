@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Exan\Finrir\Component\Button;
+namespace Exan\Fenrir\Component\Button;
 
-use Exan\Finrir\Component\Component;
-use Exan\Finrir\Enums\Component\ButtonStyle;
-use Exan\Finrir\Rest\Helpers\Emoji\EmojiBuilder;
+use Exan\Fenrir\Component\Component;
+use Exan\Fenrir\Enums\Component\ButtonStyle;
+use Exan\Fenrir\Rest\Helpers\Emoji\EmojiBuilder;
 
 class LinkButton extends Component
 {

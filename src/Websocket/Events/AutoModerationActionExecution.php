@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Exan\Finrir\Websocket\Events;
+namespace Exan\Fenrir\Websocket\Events;
 
-use Exan\Finrir\Enums\Parts\TriggerType;
-use Exan\Finrir\Parts\AutoModeractionAction;
+use Exan\Fenrir\Enums\Parts\TriggerType;
+use Exan\Fenrir\Parts\AutoModeractionAction;
 
 /**
  * @see https://discord.com/developers/docs/topics/gateway-events#auto-moderation-action-execution

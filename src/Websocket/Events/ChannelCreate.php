@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Exan\Finrir\Websocket\Events;
+namespace Exan\Fenrir\Websocket\Events;
 
-use Exan\Finrir\Parts\Channel;
+use Exan\Fenrir\Parts\Channel;
 
 /**
  * @see https://discord.com/developers/docs/topics/gateway-events#channel-create

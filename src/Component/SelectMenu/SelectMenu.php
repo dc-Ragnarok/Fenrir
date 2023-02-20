@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Exan\Finrir\Component\SelectMenu;
+namespace Exan\Fenrir\Component\SelectMenu;
 
-use Exan\Finrir\Component\Component;
-use Exan\Finrir\Enums\Component\SelectMenuType;
+use Exan\Fenrir\Component\Component;
+use Exan\Fenrir\Enums\Component\SelectMenuType;
 
 abstract class SelectMenu extends Component
 {

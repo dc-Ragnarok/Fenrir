@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Exan\Finrir\Parts;
+namespace Exan\Fenrir\Parts;
 
-use Exan\Finrir\Enums\Parts\MessageActivityTypes;
+use Exan\Fenrir\Enums\Parts\MessageActivityTypes;
 
 class MessageActivity
 {

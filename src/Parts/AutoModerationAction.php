@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Exan\Finrir\Parts;
+namespace Exan\Fenrir\Parts;
 
-use Exan\Finrir\Enums\Parts\ActionTypes;
-use Exan\Finrir\Enums\Parts\AutoModeractionActionMetadata;
+use Exan\Fenrir\Enums\Parts\ActionTypes;
+use Exan\Fenrir\Enums\Parts\AutoModeractionActionMetadata;
 
 /**
  * @see https://discord.com/developers/docs/resources/auto-moderation#auto-moderation-action-object

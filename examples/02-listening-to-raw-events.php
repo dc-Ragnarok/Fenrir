@@ -1,9 +1,9 @@
 <?php
 
-use Exan\Finrir\Bitwise\Bitwise;
-use Exan\Finrir\Const\Events;
-use Exan\Finrir\Discord;
-use Exan\Finrir\Websocket\Objects\Payload;
+use Exan\Fenrir\Bitwise\Bitwise;
+use Exan\Fenrir\Const\Events;
+use Exan\Fenrir\Discord;
+use Exan\Fenrir\Websocket\Objects\Payload;
 
 require './vendor/autoload.php';
 

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Exan\Finrir\Rest\Helpers\Channel\Message;
+namespace Exan\Fenrir\Rest\Helpers\Channel\Message;
 
 trait AddFile
 {

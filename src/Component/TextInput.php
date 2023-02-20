@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Exan\Finrir\Component;
+namespace Exan\Fenrir\Component;
 
-use Exan\Finrir\Enums\Component\TextInputStyle;
+use Exan\Fenrir\Enums\Component\TextInputStyle;
 
 class TextInput extends Component
 {

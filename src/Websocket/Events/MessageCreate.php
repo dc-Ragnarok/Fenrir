@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Exan\Finrir\Websocket\Events;
+namespace Exan\Fenrir\Websocket\Events;
 
-use Exan\Finrir\Parts\Message;
-use Exan\Finrir\Parts\Traits\WithMentions;
-use Exan\Finrir\Parts\Traits\WithOptionalGuildId;
-use Exan\Finrir\Parts\Traits\WithOptionalMember;
-use Exan\Finrir\Attributes\Intent;
+use Exan\Fenrir\Parts\Message;
+use Exan\Fenrir\Parts\Traits\WithMentions;
+use Exan\Fenrir\Parts\Traits\WithOptionalGuildId;
+use Exan\Fenrir\Parts\Traits\WithOptionalMember;
+use Exan\Fenrir\Attributes\Intent;
 
 /**
  * @see https://discord.com/developers/docs/topics/gateway-events#message-create

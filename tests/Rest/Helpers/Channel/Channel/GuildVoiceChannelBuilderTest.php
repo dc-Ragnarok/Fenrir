@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Tests\Exan\Finrir\Rest\Helpers\Channel\Channel\Shared;
+namespace Tests\Exan\Fenrir\Rest\Helpers\Channel\Channel\Shared;
 
-use Exan\Finrir\Enums\Parts\ChannelTypes;
-use Exan\Finrir\Enums\Parts\VideoQualityModes;
-use Exan\Finrir\Rest\Helpers\Channel\Channel\GuildVoiceChannelBuilder;
+use Exan\Fenrir\Enums\Parts\ChannelTypes;
+use Exan\Fenrir\Enums\Parts\VideoQualityModes;
+use Exan\Fenrir\Rest\Helpers\Channel\Channel\GuildVoiceChannelBuilder;
 use PHPUnit\Framework\TestCase;
 
 class GuildVoiceChannelBuilderTest extends TestCase

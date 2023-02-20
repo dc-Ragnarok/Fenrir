@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Exan\Finrir\Parts;
+namespace Exan\Fenrir\Parts;
 
-use Exan\Finrir\Enums\Parts\OverwriteTypes;
+use Exan\Fenrir\Enums\Parts\OverwriteTypes;
 
 class Overwrite
 {

@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Tests\Exan\Finrir;
+namespace Tests\Exan\Fenrir;
 
-use Exan\Finrir\Const\Events;
-use Exan\Finrir\EventHandler;
-use Exan\Finrir\Websocket\Objects\Payload;
+use Exan\Fenrir\Const\Events;
+use Exan\Fenrir\EventHandler;
+use Exan\Fenrir\Websocket\Objects\Payload;
 use JsonMapper;
 use PHPUnit\Framework\TestCase;
 use React\Promise\Promise;

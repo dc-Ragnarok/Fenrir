@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Tests\Exan\Finrir\Rest\Helpers\Channel\Channel\Shared;
+namespace Tests\Exan\Fenrir\Rest\Helpers\Channel\Channel\Shared;
 
-use Exan\Finrir\Const\Validation\RateLimit;
-use Exan\Finrir\Rest\Helpers\Channel\Channel\Shared\SetDefaultThreadRateLimitPerUser;
+use Exan\Fenrir\Const\Validation\RateLimit;
+use Exan\Fenrir\Rest\Helpers\Channel\Channel\Shared\SetDefaultThreadRateLimitPerUser;
 use PHPUnit\Framework\TestCase;
 
 class SetDefaultThreadRateLimitPerUserTest extends TestCase

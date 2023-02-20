@@ -1,6 +1,6 @@
 <?php
 
-namespace Exan\Finrir\Enums\Parts;
+namespace Exan\Fenrir\Enums\Parts;
 
 enum ThreadAutoArchiveDuration: int
 {

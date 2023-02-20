@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Tests\Exan\Finrir\Rest\Helpers\Channel;
+namespace Tests\Exan\Fenrir\Rest\Helpers\Channel;
 
-use Exan\Finrir\Component\Component;
-use Exan\Finrir\Exceptions\Rest\Helpers\ComponentRowBuilder\TooManyItemsException;
-use Exan\Finrir\Rest\Helpers\Channel\ComponentRowBuilder;
+use Exan\Fenrir\Component\Component;
+use Exan\Fenrir\Exceptions\Rest\Helpers\ComponentRowBuilder\TooManyItemsException;
+use Exan\Fenrir\Rest\Helpers\Channel\ComponentRowBuilder;
 use PHPUnit\Framework\TestCase;
 
 class ComponentRowBuilderTest extends TestCase

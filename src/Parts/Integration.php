@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Exan\Finrir\Parts;
+namespace Exan\Fenrir\Parts;
 
-use Exan\Finrir\Enums\Parts\IntegrationExpireBehaviors;
+use Exan\Fenrir\Enums\Parts\IntegrationExpireBehaviors;
 use Carbon\Carbon;
-use Exan\Finrir\Enums\Parts\Scopes;
+use Exan\Fenrir\Enums\Parts\Scopes;
 
 class Integration
 {
@@ -26,7 +26,7 @@ class Integration
     public ?bool $revoked;
     public ?Application $application;
     /**
-     * @var \Exan\Finrir\Enums\Parts\Scopes[]
+     * @var \Exan\Fenrir\Enums\Parts\Scopes[]
      */
     public ?array $scopes;
 

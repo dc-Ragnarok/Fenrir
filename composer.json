@@ -5,8 +5,8 @@
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "Exan\\Finrir\\": "src/",
-            "Tests\\Exan\\Finrir\\": "tests/"
+            "Exan\\Fenrir\\": "src/",
+            "Tests\\Exan\\Fenrir\\": "tests/"
         }
     },
     "require": {

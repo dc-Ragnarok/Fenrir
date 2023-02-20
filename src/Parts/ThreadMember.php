@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Exan\Finrir\Parts;
+namespace Exan\Fenrir\Parts;
 
 use Carbon\Carbon;
-use Exan\Finrir\Bitwise\Bitwise;
+use Exan\Fenrir\Bitwise\Bitwise;
 
 class ThreadMember
 {

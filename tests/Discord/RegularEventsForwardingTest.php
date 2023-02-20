@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Tests\Exan\Finrir\Discord;
+namespace Tests\Exan\Fenrir\Discord;
 
-use Exan\Finrir\EventHandler;
+use Exan\Fenrir\EventHandler;
 use Mockery;
-use Tests\Exan\Finrir\Discord\DiscordTestCase;
+use Tests\Exan\Fenrir\Discord\DiscordTestCase;
 
 /**
  * @runTestsInSeparateProcesses

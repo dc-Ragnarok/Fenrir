@@ -1,11 +1,11 @@
 <?php
 
-use Exan\Finrir\Bitwise\Bitwise;
-use Exan\Finrir\Const\Events;
-use Exan\Finrir\Discord;
-use Exan\Finrir\Enums\Gateway\Intents;
-use Exan\Finrir\Rest\Helpers\Channel\MessageBuilder;
-use Exan\Finrir\Websocket\Events\MessageCreate;
+use Exan\Fenrir\Bitwise\Bitwise;
+use Exan\Fenrir\Const\Events;
+use Exan\Fenrir\Discord;
+use Exan\Fenrir\Enums\Gateway\Intents;
+use Exan\Fenrir\Rest\Helpers\Channel\MessageBuilder;
+use Exan\Fenrir\Websocket\Events\MessageCreate;
 
 require './vendor/autoload.php';
 

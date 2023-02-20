@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Exan\Finrir\Rest\Helpers\AuditLog;
+namespace Exan\Fenrir\Rest\Helpers\AuditLog;
 
-use Exan\Finrir\Const\Validation\ItemLimit;
+use Exan\Fenrir\Const\Validation\ItemLimit;
 
 class GetGuildAuditLogsBuilder
 {

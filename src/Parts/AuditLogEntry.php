@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Exan\Finrir\Parts;
+namespace Exan\Fenrir\Parts;
 
-use Exan\Finrir\Enums\Parts\AuditLogEvents;
+use Exan\Fenrir\Enums\Parts\AuditLogEvents;
 
 class AuditLogEntry
 {
     public ?string $target_id;
     /**
-     * @var \Exan\Finrir\Parts\AuditLogChange[]
+     * @var \Exan\Fenrir\Parts\AuditLogChange[]
      */
     public ?array $changes;
     public ?string $user_id;

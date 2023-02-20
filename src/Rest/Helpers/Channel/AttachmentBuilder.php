@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Exan\Finrir\Rest\Helpers\Channel;
+namespace Exan\Fenrir\Rest\Helpers\Channel;
 
 /**
  * @see https://discord.com/developers/docs/resources/channel#attachment-object

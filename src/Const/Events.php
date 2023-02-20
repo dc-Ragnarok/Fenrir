@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Exan\Finrir\Const;
+namespace Exan\Fenrir\Const;
 
 class Events
 {
@@ -87,80 +87,80 @@ class Events
 
     final public const MAPPINGS = [
         self::APPLICATION_COMMAND_PERMISSIONS_UPDATE =>
-            \Exan\Finrir\Websocket\Events\ApplicationCommandPermissionsUpdate::class,
-        self::AUTO_MODERATION_RULE_CREATE => \Exan\Finrir\Websocket\Events\AutoModerationRuleCreate::class,
-        self::AUTO_MODERATION_RULE_UPDATE => \Exan\Finrir\Websocket\Events\AutoModerationRuleUpdate::class,
-        self::AUTO_MODERATION_RULE_DELETE => \Exan\Finrir\Websocket\Events\AutoModerationRuleDelete::class,
-        self::AUTO_MODERATION_ACTION_EXECUTION => \Exan\Finrir\Websocket\Events\AutoModerationActionExecution::class,
+            \Exan\Fenrir\Websocket\Events\ApplicationCommandPermissionsUpdate::class,
+        self::AUTO_MODERATION_RULE_CREATE => \Exan\Fenrir\Websocket\Events\AutoModerationRuleCreate::class,
+        self::AUTO_MODERATION_RULE_UPDATE => \Exan\Fenrir\Websocket\Events\AutoModerationRuleUpdate::class,
+        self::AUTO_MODERATION_RULE_DELETE => \Exan\Fenrir\Websocket\Events\AutoModerationRuleDelete::class,
+        self::AUTO_MODERATION_ACTION_EXECUTION => \Exan\Fenrir\Websocket\Events\AutoModerationActionExecution::class,
 
-        self::CHANNEL_CREATE => \Exan\Finrir\Websocket\Events\ChannelCreate::class,
-        self::CHANNEL_UPDATE => \Exan\Finrir\Websocket\Events\ChannelUpdate::class,
-        self::CHANNEL_DELETE => \Exan\Finrir\Websocket\Events\ChannelDelete::class,
-        self::CHANNEL_PINS_UPDATE => \Exan\Finrir\Websocket\Events\ChannelPinsUpdate::class,
+        self::CHANNEL_CREATE => \Exan\Fenrir\Websocket\Events\ChannelCreate::class,
+        self::CHANNEL_UPDATE => \Exan\Fenrir\Websocket\Events\ChannelUpdate::class,
+        self::CHANNEL_DELETE => \Exan\Fenrir\Websocket\Events\ChannelDelete::class,
+        self::CHANNEL_PINS_UPDATE => \Exan\Fenrir\Websocket\Events\ChannelPinsUpdate::class,
 
-        self::THREAD_CREATE => \Exan\Finrir\Websocket\Events\ThreadCreate::class,
-        self::THREAD_UPDATE => \Exan\Finrir\Websocket\Events\ThreadUpdate::class,
-        self::THREAD_DELETE => \Exan\Finrir\Websocket\Events\ThreadDelete::class,
-        self::THREAD_LIST_SYNC => \Exan\Finrir\Websocket\Events\ThreadListSync::class,
-        self::THREAD_MEMBER_UPDATE => \Exan\Finrir\Websocket\Events\ThreadMemberUpdate::class,
-        self::THREAD_MEMBERS_UPDATE => \Exan\Finrir\Websocket\Events\ThreadMembersUpdate::class,
+        self::THREAD_CREATE => \Exan\Fenrir\Websocket\Events\ThreadCreate::class,
+        self::THREAD_UPDATE => \Exan\Fenrir\Websocket\Events\ThreadUpdate::class,
+        self::THREAD_DELETE => \Exan\Fenrir\Websocket\Events\ThreadDelete::class,
+        self::THREAD_LIST_SYNC => \Exan\Fenrir\Websocket\Events\ThreadListSync::class,
+        self::THREAD_MEMBER_UPDATE => \Exan\Fenrir\Websocket\Events\ThreadMemberUpdate::class,
+        self::THREAD_MEMBERS_UPDATE => \Exan\Fenrir\Websocket\Events\ThreadMembersUpdate::class,
 
-        self::GUILD_CREATE => \Exan\Finrir\Websocket\Events\GuildCreate::class,
-        self::GUILD_UPDATE => \Exan\Finrir\Websocket\Events\GuildUpdate::class,
-        self::GUILD_DELETE => \Exan\Finrir\Websocket\Events\GuildDelete::class,
+        self::GUILD_CREATE => \Exan\Fenrir\Websocket\Events\GuildCreate::class,
+        self::GUILD_UPDATE => \Exan\Fenrir\Websocket\Events\GuildUpdate::class,
+        self::GUILD_DELETE => \Exan\Fenrir\Websocket\Events\GuildDelete::class,
 
-        self::GUILD_BAN_ADD => \Exan\Finrir\Websocket\Events\GuildBanAdd::class,
-        self::GUILD_BAN_REMOVE => \Exan\Finrir\Websocket\Events\GuildBanRemove::class,
+        self::GUILD_BAN_ADD => \Exan\Fenrir\Websocket\Events\GuildBanAdd::class,
+        self::GUILD_BAN_REMOVE => \Exan\Fenrir\Websocket\Events\GuildBanRemove::class,
 
-        self::GUILD_EMOJIS_UPDATE => \Exan\Finrir\Websocket\Events\GuildEmojisUpdate::class,
-        self::GUILD_STICKERS_UPDATE => \Exan\Finrir\Websocket\Events\GuildStickersUpdate::class,
+        self::GUILD_EMOJIS_UPDATE => \Exan\Fenrir\Websocket\Events\GuildEmojisUpdate::class,
+        self::GUILD_STICKERS_UPDATE => \Exan\Fenrir\Websocket\Events\GuildStickersUpdate::class,
 
-        self::GUILD_INTEGRATIONS_UPDATE => \Exan\Finrir\Websocket\Events\GuildIntegrationsUpdate::class,
+        self::GUILD_INTEGRATIONS_UPDATE => \Exan\Fenrir\Websocket\Events\GuildIntegrationsUpdate::class,
 
-        self::GUILD_MEMBER_ADD => \Exan\Finrir\Websocket\Events\GuildMemberAdd::class,
-        self::GUILD_MEMBER_REMOVE => \Exan\Finrir\Websocket\Events\GuildMemberRemove::class,
-        self::GUILD_MEMBER_UPDATE => \Exan\Finrir\Websocket\Events\GuildMemberUpdate::class,
-        self::GUILD_MEMBERS_CHUNK => \Exan\Finrir\Websocket\Events\GuildMembersChunk::class,
+        self::GUILD_MEMBER_ADD => \Exan\Fenrir\Websocket\Events\GuildMemberAdd::class,
+        self::GUILD_MEMBER_REMOVE => \Exan\Fenrir\Websocket\Events\GuildMemberRemove::class,
+        self::GUILD_MEMBER_UPDATE => \Exan\Fenrir\Websocket\Events\GuildMemberUpdate::class,
+        self::GUILD_MEMBERS_CHUNK => \Exan\Fenrir\Websocket\Events\GuildMembersChunk::class,
 
-        self::GUILD_ROLE_CREATE => \Exan\Finrir\Websocket\Events\GuildRoleCreate::class,
-        self::GUILD_ROLE_UPDATE => \Exan\Finrir\Websocket\Events\GuildRoleUpdate::class,
-        self::GUILD_ROLE_DELETE => \Exan\Finrir\Websocket\Events\GuildRoleDelete::class,
+        self::GUILD_ROLE_CREATE => \Exan\Fenrir\Websocket\Events\GuildRoleCreate::class,
+        self::GUILD_ROLE_UPDATE => \Exan\Fenrir\Websocket\Events\GuildRoleUpdate::class,
+        self::GUILD_ROLE_DELETE => \Exan\Fenrir\Websocket\Events\GuildRoleDelete::class,
 
-        self::GUILD_SCHEDULED_EVENT_CREATE => \Exan\Finrir\Websocket\Events\GuildScheduledEventCreate::class,
-        self::GUILD_SCHEDULED_EVENT_UPDATE => \Exan\Finrir\Websocket\Events\GuildScheduledEventUpdate::class,
-        self::GUILD_SCHEDULED_EVENT_DELETE => \Exan\Finrir\Websocket\Events\GuildScheduledEventDelete::class,
-        self::GUILD_SCHEDULED_EVENT_USER_ADD => \Exan\Finrir\Websocket\Events\GuildScheduledEventUserAdd::class,
-        self::GUILD_SCHEDULED_EVENT_USER_REMOVE => \Exan\Finrir\Websocket\Events\GuildScheduledEventUserRemove::class,
+        self::GUILD_SCHEDULED_EVENT_CREATE => \Exan\Fenrir\Websocket\Events\GuildScheduledEventCreate::class,
+        self::GUILD_SCHEDULED_EVENT_UPDATE => \Exan\Fenrir\Websocket\Events\GuildScheduledEventUpdate::class,
+        self::GUILD_SCHEDULED_EVENT_DELETE => \Exan\Fenrir\Websocket\Events\GuildScheduledEventDelete::class,
+        self::GUILD_SCHEDULED_EVENT_USER_ADD => \Exan\Fenrir\Websocket\Events\GuildScheduledEventUserAdd::class,
+        self::GUILD_SCHEDULED_EVENT_USER_REMOVE => \Exan\Fenrir\Websocket\Events\GuildScheduledEventUserRemove::class,
 
-        self::INTEGRATION_CREATE => \Exan\Finrir\Websocket\Events\IntegrationCreate::class,
-        self::INTEGRATION_UPDATE => \Exan\Finrir\Websocket\Events\IntegrationUpdate::class,
-        self::INTEGRATION_DELETE => \Exan\Finrir\Websocket\Events\IntegrationDelete::class,
-        self::INTERACTION_CREATE => \Exan\Finrir\Websocket\Events\InteractionCreate::class,
+        self::INTEGRATION_CREATE => \Exan\Fenrir\Websocket\Events\IntegrationCreate::class,
+        self::INTEGRATION_UPDATE => \Exan\Fenrir\Websocket\Events\IntegrationUpdate::class,
+        self::INTEGRATION_DELETE => \Exan\Fenrir\Websocket\Events\IntegrationDelete::class,
+        self::INTERACTION_CREATE => \Exan\Fenrir\Websocket\Events\InteractionCreate::class,
 
-        self::INVITE_CREATE => \Exan\Finrir\Websocket\Events\InviteCreate::class,
-        self::INVITE_DELETE => \Exan\Finrir\Websocket\Events\InviteDelete::class,
+        self::INVITE_CREATE => \Exan\Fenrir\Websocket\Events\InviteCreate::class,
+        self::INVITE_DELETE => \Exan\Fenrir\Websocket\Events\InviteDelete::class,
 
-        self::MESSAGE_CREATE => \Exan\Finrir\Websocket\Events\MessageCreate::class,
-        self::MESSAGE_UPDATE => \Exan\Finrir\Websocket\Events\MessageUpdate::class,
-        self::MESSAGE_DELETE => \Exan\Finrir\Websocket\Events\MessageDelete::class,
-        self::MESSAGE_DELETE_BULK => \Exan\Finrir\Websocket\Events\MessageDeleteBulk::class,
-        self::MESSAGE_REACTION_ADD => \Exan\Finrir\Websocket\Events\MessageReactionAdd::class,
-        self::MESSAGE_REACTION_REMOVE => \Exan\Finrir\Websocket\Events\MessageReactionRemove::class,
-        self::MESSAGE_REACTION_REMOVE_ALL => \Exan\Finrir\Websocket\Events\MessageReactionRemoveAll::class,
-        self::MESSAGE_REACTION_REMOVE_EMOJI => \Exan\Finrir\Websocket\Events\MessageReactionRemoveEmoji::class,
+        self::MESSAGE_CREATE => \Exan\Fenrir\Websocket\Events\MessageCreate::class,
+        self::MESSAGE_UPDATE => \Exan\Fenrir\Websocket\Events\MessageUpdate::class,
+        self::MESSAGE_DELETE => \Exan\Fenrir\Websocket\Events\MessageDelete::class,
+        self::MESSAGE_DELETE_BULK => \Exan\Fenrir\Websocket\Events\MessageDeleteBulk::class,
+        self::MESSAGE_REACTION_ADD => \Exan\Fenrir\Websocket\Events\MessageReactionAdd::class,
+        self::MESSAGE_REACTION_REMOVE => \Exan\Fenrir\Websocket\Events\MessageReactionRemove::class,
+        self::MESSAGE_REACTION_REMOVE_ALL => \Exan\Fenrir\Websocket\Events\MessageReactionRemoveAll::class,
+        self::MESSAGE_REACTION_REMOVE_EMOJI => \Exan\Fenrir\Websocket\Events\MessageReactionRemoveEmoji::class,
 
-        self::PRESENCE_UPDATE => \Exan\Finrir\Websocket\Events\PresenceUpdate::class,
+        self::PRESENCE_UPDATE => \Exan\Fenrir\Websocket\Events\PresenceUpdate::class,
 
-        self::STAGE_INSTANCE_CREATE => \Exan\Finrir\Websocket\Events\StageInstanceCreate::class,
-        self::STAGE_INSTANCE_UPDATE => \Exan\Finrir\Websocket\Events\StageInstanceUpdate::class,
-        self::STAGE_INSTANCE_DELETE => \Exan\Finrir\Websocket\Events\StageInstanceDelete::class,
+        self::STAGE_INSTANCE_CREATE => \Exan\Fenrir\Websocket\Events\StageInstanceCreate::class,
+        self::STAGE_INSTANCE_UPDATE => \Exan\Fenrir\Websocket\Events\StageInstanceUpdate::class,
+        self::STAGE_INSTANCE_DELETE => \Exan\Fenrir\Websocket\Events\StageInstanceDelete::class,
 
-        self::TYPING_START => \Exan\Finrir\Websocket\Events\TypingStart::class,
-        self::USER_UPDATE => \Exan\Finrir\Websocket\Events\UserUpdate::class,
+        self::TYPING_START => \Exan\Fenrir\Websocket\Events\TypingStart::class,
+        self::USER_UPDATE => \Exan\Fenrir\Websocket\Events\UserUpdate::class,
 
-        self::VOICE_STATE_UPDATE => \Exan\Finrir\Websocket\Events\VoiceStateUpdate::class,
-        self::VOICE_SERVER_UPDATE => \Exan\Finrir\Websocket\Events\VoiceServerUpdate::class,
+        self::VOICE_STATE_UPDATE => \Exan\Fenrir\Websocket\Events\VoiceStateUpdate::class,
+        self::VOICE_SERVER_UPDATE => \Exan\Fenrir\Websocket\Events\VoiceServerUpdate::class,
 
-        self::WEBHOOKS_UPDATE => \Exan\Finrir\Websocket\Events\WebhooksUpdate::class,
+        self::WEBHOOKS_UPDATE => \Exan\Fenrir\Websocket\Events\WebhooksUpdate::class,
     ];
 }

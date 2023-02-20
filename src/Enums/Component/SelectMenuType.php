@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Exan\Finrir\Enums\Component;
+namespace Exan\Fenrir\Enums\Component;
 
 enum SelectMenuType: int
 {

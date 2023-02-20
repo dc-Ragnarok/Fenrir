@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Tests\Exan\Finrir\Parts;
+namespace Tests\Exan\Fenrir\Parts;
 
-use Exan\Finrir\Parts\MultipartField;
+use Exan\Fenrir\Parts\MultipartField;
 use PHPUnit\Framework\TestCase;
 
 class MultipartFieldTest extends TestCase

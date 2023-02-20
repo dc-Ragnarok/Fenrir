@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Exan\Finrir\Websocket\Events;
+namespace Exan\Fenrir\Websocket\Events;
 
-use Exan\Finrir\Parts\User;
+use Exan\Fenrir\Parts\User;
 
 /**
  * @see https://discord.com/developers/docs/topics/gateway-events#user-update

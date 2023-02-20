@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Tests\Exan\Finrir;
+namespace Tests\Exan\Fenrir;
 
-use Exan\Finrir\Bucket;
+use Exan\Fenrir\Bucket;
 use Mockery;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use PHPUnit\Framework\TestCase;

@@ -2,21 +2,21 @@
 
 declare(strict_types=1);
 
-namespace Exan\Finrir\Rest\Helpers\Channel\Channel;
+namespace Exan\Fenrir\Rest\Helpers\Channel\Channel;
 
-use Exan\Finrir\Bitwise\Bitwise;
-use Exan\Finrir\Enums\Flags\ChannelFlags;
-use Exan\Finrir\Enums\Parts\ChannelTypes;
-use Exan\Finrir\Enums\Parts\ForumLayoutTypes;
-use Exan\Finrir\Enums\Parts\SortOrderTypes;
-use Exan\Finrir\Exceptions\Rest\Helpers\Channel\Channel\GuildForumChannelBuilder\TooManyAvailableTagsException;
-use Exan\Finrir\Rest\Helpers\Channel\Channel\Shared\SetDefaultAutoArchiveDuration;
-use Exan\Finrir\Rest\Helpers\Channel\Channel\Shared\SetDefaultThreadRateLimitPerUser;
-use Exan\Finrir\Rest\Helpers\Channel\Channel\Shared\SetNsfw;
-use Exan\Finrir\Rest\Helpers\Channel\Channel\Shared\SetParentId;
-use Exan\Finrir\Rest\Helpers\Channel\Channel\Shared\SetRateLimitPerUser;
-use Exan\Finrir\Rest\Helpers\Channel\Channel\Shared\SetTopic;
-use Exan\Finrir\Rest\Helpers\Emoji\EmojiBuilder;
+use Exan\Fenrir\Bitwise\Bitwise;
+use Exan\Fenrir\Enums\Flags\ChannelFlags;
+use Exan\Fenrir\Enums\Parts\ChannelTypes;
+use Exan\Fenrir\Enums\Parts\ForumLayoutTypes;
+use Exan\Fenrir\Enums\Parts\SortOrderTypes;
+use Exan\Fenrir\Exceptions\Rest\Helpers\Channel\Channel\GuildForumChannelBuilder\TooManyAvailableTagsException;
+use Exan\Fenrir\Rest\Helpers\Channel\Channel\Shared\SetDefaultAutoArchiveDuration;
+use Exan\Fenrir\Rest\Helpers\Channel\Channel\Shared\SetDefaultThreadRateLimitPerUser;
+use Exan\Fenrir\Rest\Helpers\Channel\Channel\Shared\SetNsfw;
+use Exan\Fenrir\Rest\Helpers\Channel\Channel\Shared\SetParentId;
+use Exan\Fenrir\Rest\Helpers\Channel\Channel\Shared\SetRateLimitPerUser;
+use Exan\Fenrir\Rest\Helpers\Channel\Channel\Shared\SetTopic;
+use Exan\Fenrir\Rest\Helpers\Emoji\EmojiBuilder;
 
 /**
  * @see https://discord.com/developers/docs/resources/channel#modify-channel

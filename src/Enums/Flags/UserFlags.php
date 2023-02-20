@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Exan\Finrir\Enums\Flags;
+namespace Exan\Fenrir\Enums\Flags;
 
 enum UserFlags: int
 {

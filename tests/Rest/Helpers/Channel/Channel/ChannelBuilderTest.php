@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Tests\Exan\Finrir\Rest\Helpers\Channel\Channel\Shared;
+namespace Tests\Exan\Fenrir\Rest\Helpers\Channel\Channel\Shared;
 
-use Exan\Finrir\Parts\Overwrite;
-use Exan\Finrir\Enums\Parts\OverwriteTypes;
-use Exan\Finrir\Rest\Helpers\Channel\Channel\ChannelBuilder;
+use Exan\Fenrir\Parts\Overwrite;
+use Exan\Fenrir\Enums\Parts\OverwriteTypes;
+use Exan\Fenrir\Rest\Helpers\Channel\Channel\ChannelBuilder;
 use PHPUnit\Framework\TestCase;
 
 class ChannelBuilderTest extends TestCase

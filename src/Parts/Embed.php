@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Exan\Finrir\Parts;
+namespace Exan\Fenrir\Parts;
 
-use Exan\Finrir\Enums\Parts\EmbedTypes;
+use Exan\Fenrir\Enums\Parts\EmbedTypes;
 use Carbon\Carbon;
 
 class Embed
@@ -22,7 +22,7 @@ class Embed
     public ?EmbedProvider $provider;
     public ?EmbedAuthor $author;
     /**
-     * @var \Exan\Finrir\Parts\EmbedField[]
+     * @var \Exan\Fenrir\Parts\EmbedField[]
      */
     public ?array $fields;
 

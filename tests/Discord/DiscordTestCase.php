@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Tests\Exan\Finrir\Discord;
+namespace Tests\Exan\Fenrir\Discord;
 
-use Exan\Finrir\Bitwise\Bitwise;
-use Exan\Finrir\Const\WebsocketEvents;
-use Exan\Finrir\Discord;
-use Exan\Finrir\EventHandler;
+use Exan\Fenrir\Bitwise\Bitwise;
+use Exan\Fenrir\Const\WebsocketEvents;
+use Exan\Fenrir\Discord;
+use Exan\Fenrir\EventHandler;
 use Mockery;
 use Mockery\Adapter\Phpunit\MockeryTestCase;
 use Mockery\Mock;
@@ -45,10 +45,10 @@ class DiscordTestCase extends MockeryTestCase
             $this->loop
         );
 
-        $bucketMock = Mockery::mock('overload:Exan\Finrir\Bucket');
+        $bucketMock = Mockery::mock('overload:Exan\Fenrir\Bucket');
         $bucketMock->shouldReceive('run')->andReturnUsing(fn ($fn) => $fn());
 
-        $websocketMock = Mockery::mock('overload:Exan\Finrir\Websocket');
+        $websocketMock = Mockery::mock('overload:Exan\Fenrir\Websocket');
         $websocketMock->shouldReceive('on')->andReturnUsing(function (string $event, callable $handler) {
             $this->websocketHandlers[$event] = $handler;
         });

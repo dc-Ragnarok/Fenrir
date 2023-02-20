@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Exan\Finrir\Websocket\Events;
+namespace Exan\Fenrir\Websocket\Events;
 
-use Exan\Finrir\Attributes\Intent;
-use Exan\Finrir\Parts\ClientStatus;
-use Exan\Finrir\Parts\User;
+use Exan\Fenrir\Attributes\Intent;
+use Exan\Fenrir\Parts\ClientStatus;
+use Exan\Fenrir\Parts\User;
 
 /**
  * @see https://discord.com/developers/docs/topics/gateway-events#presence-update
@@ -19,7 +19,7 @@ class PresenceUpdate
     public string $status;
 
     /**
-     * @var \Exan\Finrir\Parts\Activity[]
+     * @var \Exan\Fenrir\Parts\Activity[]
      */
     public array $activities;
 

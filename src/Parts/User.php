@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Exan\Finrir\Parts;
+namespace Exan\Fenrir\Parts;
 
-use Exan\Finrir\Bitwise\Bitwise;
-use Exan\Finrir\Enums\Parts\PremiumTypes;
+use Exan\Fenrir\Bitwise\Bitwise;
+use Exan\Fenrir\Enums\Parts\PremiumTypes;
 
 class User
 {

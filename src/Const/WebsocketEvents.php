@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Exan\Finrir\Const;
+namespace Exan\Fenrir\Const;
 
 class WebsocketEvents
 {
