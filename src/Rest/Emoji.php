@@ -12,6 +12,9 @@ use Exan\Fenrir\Rest\Helpers\HttpHelper;
 use JsonMapper;
 use React\Promise\ExtendedPromiseInterface;
 
+/**
+ * @see https://discord.com/developers/docs/resources/emoji
+ */
 class Emoji
 {
     use HttpHelper;

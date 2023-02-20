@@ -24,6 +24,9 @@ use Exan\Fenrir\Rest\Helpers\HttpHelper;
 use JsonMapper;
 use React\Promise\ExtendedPromiseInterface;
 
+/**
+ * @see https://discord.com/developers/docs/resources/channel
+ */
 class Channel
 {
     use HttpHelper;
@@ -367,7 +370,7 @@ class Channel
     }
 
     /**
-     * @todo
+     * @todo implement call
      */
     public function editChannelPermissions()
     {
@@ -436,7 +439,7 @@ class Channel
     }
 
     /**
-     * @todo
+     * @todo implement call
      */
     public function followAnnouncementChannel()
     {
@@ -551,7 +554,7 @@ class Channel
     }
 
     /**
-     * @todo
+     * @todo implement call
      */
     public function startThreadInForumChannel()
     {
