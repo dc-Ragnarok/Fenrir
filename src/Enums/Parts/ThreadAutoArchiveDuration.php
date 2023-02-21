@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Exan\Fenrir\Enums\Parts;
 
 enum ThreadAutoArchiveDuration: int

@@ -48,7 +48,7 @@ class StartThreadWithoutMessageBuilderTest extends TestCase
         $this->assertEquals(['type' => ChannelTypes::DM->value], $builder->get());
     }
 
-    public function setSetInvitable()
+    public function testSetInvitable()
     {
         $builder = new StartThreadWithoutMessageBuilder();
 

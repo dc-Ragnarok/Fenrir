@@ -75,6 +75,18 @@ class MessageTraitsTest extends TestCase
         $this->assertEquals($mentionBuilder->get(), $traitTester->data['allowed_mentions']);
     }
 
+    public function testNoMentions()
+    {
+        $traitTester = new class {
+            use AllowMentions;
+
+            public $data = [];
+        };
+
+        $traitTester->noMentions();
+        $this->assertEquals((new AllowedMentionsBuilder())->get(), $traitTester->data['allowed_mentions']);
+    }
+
     public function testAddComponent()
     {
         $traitTester = new class {
