@@ -6,12 +6,12 @@
 
 <p align="center">A plain Discord API/Gateway wrapper in PHP.</p>
 
-## Goal
+## About
 
-The goal of Fenrir is to provide a mostly plain wrapper over Discords APIs/gateway.
-There will be no caching built in, this is for the user to implement themselves.
+Fenrir is a mostly plain wrapper over Discords APIs/gateway.
+There is no caching built in, this is for the user to implement themselves.
 
-If you're looking for something thats easier to use, try [DiscordPHP](https://github.com/discord-php/DiscordPHP).
+If you're looking for something thats easier to use, has caching OOTB, try [DiscordPHP](https://github.com/discord-php/DiscordPHP).
 
 Fenrir heavily relies on ReactPHP for async operations. Knowing the basics of async PHP is recommended before diving in.
 
@@ -50,6 +50,18 @@ $discord->connect(); // Nothing after this line is executed
 ```
 
 For more examples, check out the examples directory (todo)
+
+## Support
+
+Fenrir currently supports PHP 8.1 & PHP 8.2.
+Tests should pass nightly 8.3 builds, but this is not a supported usecase.
+
+You should not be using this library on an Apache2/Nginx/etc webserver.
+While there is nothing stopping you from using it on such environments, you should know what you're doing & limit yourself to only use Fenrir's REST capabilities.
+
+If you're using a 32-bit system, you should use the `ext-gmp` extension.
+Supporting 32-bit systems is a low priority.
+If possible, using 64-bit is recommended.
 
 ## Contributing
 
