@@ -6,8 +6,8 @@ namespace Exan\Fenrir\Parts;
 
 class Emoji
 {
-    public string $id;
-    public string $name;
+    public ?string $id;
+    public ?string $name;
     /**
      * @var \Exan\Fenrir\Parts\Role[]
      */

@@ -6,6 +6,7 @@ namespace Exan\Fenrir;
 
 use Closure;
 use Evenement\EventEmitter;
+use Evenement\EventEmitterInterface;
 use React\EventLoop\Loop;
 
 class FilteredEventEmitter extends EventEmitter
@@ -13,7 +14,7 @@ class FilteredEventEmitter extends EventEmitter
     private Closure $listener;
 
     public function __construct(
-        private EventEmitter $eventEmitter,
+        private EventEmitterInterface $eventEmitter,
         private string $event,
         private Closure $filter,
         private ?float $seconds = null,

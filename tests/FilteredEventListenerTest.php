@@ -50,7 +50,8 @@ class FilteredEventListenerTest extends MockeryTestCase
         $filteredEmitter = new FilteredEventEmitter(
             $eventEmitter,
             'event',
-            function () { }
+            function () {
+            }
         );
 
         $filteredEmitter->start();
@@ -105,7 +106,8 @@ class FilteredEventListenerTest extends MockeryTestCase
                     $this->assertEquals(10, $seconds);
 
                     $canceller = $handler;
-            });
+                }
+            );
 
         // </mocking
 
