@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Tests\Exan\Fenrir\Rest\Helpers\Channel\Channel\Shared;
 
-use Exan\Fenrir\Parts\Overwrite;
-use Exan\Fenrir\Enums\Parts\OverwriteTypes;
 use Exan\Fenrir\Rest\Helpers\Channel\Channel\ChannelBuilder;
 use PHPUnit\Framework\TestCase;
 

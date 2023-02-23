@@ -14,7 +14,6 @@ use Exan\Fenrir\Parts\GuildMember;
 #[Intent("MESSAGE_CONTENT")]
 class MessageCreate extends Message
 {
-
     /**
      * @var \Exan\Fenrir\Parts\UserWithPartialMember[]
      */
