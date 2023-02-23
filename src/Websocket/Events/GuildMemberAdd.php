@@ -6,7 +6,6 @@ namespace Exan\Fenrir\Websocket\Events;
 
 use Exan\Fenrir\Attributes\Intent;
 use Exan\Fenrir\Parts\GuildMember;
-use Exan\Fenrir\Parts\Traits\WithGuildId;
 
 /**
  * @see https://discord.com/developers/docs/topics/gateway-events#guild-member-add
@@ -14,5 +13,5 @@ use Exan\Fenrir\Parts\Traits\WithGuildId;
 #[Intent("GUILD_MEMBERS")]
 class GuildMemberAdd extends GuildMember
 {
-    use WithGuildId;
+    public string $guild_id;
 }
