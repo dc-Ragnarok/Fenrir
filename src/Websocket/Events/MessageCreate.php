@@ -15,7 +15,7 @@ use Exan\Fenrir\Parts\GuildMember;
 class MessageCreate extends Message
 {
     /**
-     * @var \Exan\Fenrir\Parts\UserWithPartialMember[]
+     * @var \Exan\Fenrir\Parts\User[]
      */
     public array $mentions;
     public ?string $guild_id;

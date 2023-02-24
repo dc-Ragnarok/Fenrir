@@ -6,6 +6,7 @@ namespace Exan\Fenrir\Parts;
 
 use Exan\Fenrir\Bitwise\Bitwise;
 use Exan\Fenrir\Enums\Parts\PremiumTypes;
+use Exan\Fenrir\Attributes\Partial;
 
 class User
 {
@@ -24,6 +25,8 @@ class User
     public ?Bitwise $flags;
     public ?PremiumTypes $premium_type;
     public ?Bitwise $public_flags;
+    #[Partial]
+    public ?GuildMember $member;
 
     public function setPremiumType(int $value): void
     {
