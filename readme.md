@@ -69,3 +69,8 @@ Contributions are welcome.
 You can look for `@todo` to find something that requires attention.
 Please make sure to write tests where possible & make sure your code matches the phpcs configuration.
 90% code coverage is required.
+
+## Notice
+
+The current underlying HTTP component is subject to change in the future.
+While the accesible API for it will remain similar, you should try to refrain from using it manually in your application.

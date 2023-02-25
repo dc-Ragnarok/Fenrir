@@ -6,12 +6,13 @@ namespace Exan\Fenrir\Websocket\Events;
 
 use Exan\Fenrir\Parts\Message;
 use Exan\Fenrir\Attributes\Intent;
+use Exan\Fenrir\Enums\Gateway\Intents;
 use Exan\Fenrir\Parts\GuildMember;
 
 /**
  * @see https://discord.com/developers/docs/topics/gateway-events#message-create
  */
-#[Intent("MESSAGE_CONTENT")]
+#[Intent(Intents::MESSAGE_CONTENT, Intents::GUILD_MESSAGES, Intents::DIRECT_MESSAGES)]
 class MessageCreate extends Message
 {
     /**

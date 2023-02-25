@@ -44,6 +44,9 @@ class Discord
 
     private bool $shouldIdentify = true;
 
+    /**
+     * @todo switch to own HTTP lib
+     */
     private Http $http;
     public Rest $rest;
 
