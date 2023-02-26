@@ -8,5 +8,4 @@ use Exan\Fenrir\Websocket\Objects\Payload;
 
 class Ready extends Payload
 {
-    
 }

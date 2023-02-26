@@ -13,7 +13,6 @@ class FiredCommand
 {
     public function __construct(public readonly InteractionCreate $interaction, private Discord $discord)
     {
-
     }
 
     public function sendFollowUpMessage(InteractionCallbackBuilder $interactionCallbackBuilder)

@@ -73,7 +73,6 @@ class CommandBuilder
      */
     public function setOptions()
     {
-
     }
 
     /**
@@ -81,7 +80,6 @@ class CommandBuilder
      */
     public function setDefaultMemberPermissions()
     {
-
     }
 
     public function setDmPermission(bool $allow): self

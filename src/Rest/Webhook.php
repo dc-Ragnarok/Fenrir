@@ -45,7 +45,6 @@ class Webhook
      */
     public function editOriginalInteractionResponse()
     {
-
     }
 
     /**
@@ -53,7 +52,6 @@ class Webhook
      */
     public function deleteOriginalInteractionResponse()
     {
-
     }
 
     /**
@@ -61,6 +59,5 @@ class Webhook
      */
     public function editFollowUpMessage()
     {
-
     }
 }

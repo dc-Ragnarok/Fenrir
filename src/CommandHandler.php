@@ -18,7 +18,6 @@ class CommandHandler
 
     public function __construct(private Discord $discord, private string $applicationId)
     {
-        
     }
 
     public function registerCommand(CommandBuilder $commandBuilder, callable $handler): void
