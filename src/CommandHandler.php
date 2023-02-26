@@ -73,7 +73,8 @@ class CommandHandler
         }
 
         $this->discord->gateway->events->on(
-            Events::INTERACTION_CREATE, $this->handleInteraction(...)
+            Events::INTERACTION_CREATE,
+            $this->handleInteraction(...)
         );
     }
 

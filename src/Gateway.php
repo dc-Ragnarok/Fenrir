@@ -61,7 +61,6 @@ class Gateway
 
             $this->handlePayload($payload);
         });
-
     }
 
     public function connect()
