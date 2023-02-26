@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Exan\Fenrir\Rest\Helpers\Channel;
 
+use Discord\Http\Multipart\MultipartBody;
 use Exan\Fenrir\Exceptions\Rest\Helpers\MessageBuilder\TooManyStickersException;
 use Exan\Fenrir\Rest\Helpers\Channel\Message\AddAttachment;
 use Exan\Fenrir\Rest\Helpers\Channel\Message\AddComponent;
@@ -14,12 +15,11 @@ use Exan\Fenrir\Rest\Helpers\Channel\Message\MultipartMessage;
 use Exan\Fenrir\Rest\Helpers\Channel\Message\SetContent;
 use Exan\Fenrir\Rest\Helpers\Channel\Message\SetFlags;
 use Exan\Fenrir\Rest\Helpers\Channel\Message\SetTts;
-use Exan\Fenrir\Rest\Helpers\MultipartCapable;
 
 /**
  * @see https://discord.com/developers/docs/resources/channel#create-message
  */
-class MessageBuilder implements MultipartCapable
+class MessageBuilder
 {
     use AddAttachment;
     use AddComponent;
@@ -84,8 +84,12 @@ class MessageBuilder implements MultipartCapable
         return $this;
     }
 
-    public function get(): array
+    public function get(): MultipartBody|array
     {
+        if ($this->requiresMultipart()) {
+            return $this->getMultipart($this->data);
+        }
+
         return $this->data;
     }
 }

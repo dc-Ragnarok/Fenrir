@@ -68,16 +68,13 @@ class GuildSticker
      */
     public function create(string $guildId, StickerBuilder $stickerBuilder)
     {
-        $multipart = $stickerBuilder->get();
-
         return $this->mapPromise(
             $this->http->post(
                 Endpoint::bind(
                     Endpoint::GUILD_STICKERS,
                     $guildId
                 ),
-                $multipart->getBody(),
-                $multipart->getHeaders()
+                $stickerBuilder->get()
             ),
             Sticker::class
         );
