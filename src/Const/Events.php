@@ -57,6 +57,7 @@ class Events
     final public const INTEGRATION_CREATE = 'INTEGRATION_CREATE';
     final public const INTEGRATION_UPDATE = 'INTEGRATION_UPDATE';
     final public const INTEGRATION_DELETE = 'INTEGRATION_DELETE';
+
     final public const INTERACTION_CREATE = 'INTERACTION_CREATE';
 
     final public const INVITE_CREATE = 'INVITE_CREATE';
@@ -86,6 +87,8 @@ class Events
     final public const WEBHOOKS_UPDATE = 'WEBHOOKS_UPDATE';
 
     final public const MAPPINGS = [
+        self::READY => \Exan\Fenrir\Websocket\Events\ApplicationCommandPermissionsUpdate::class,
+
         self::APPLICATION_COMMAND_PERMISSIONS_UPDATE =>
             \Exan\Fenrir\Websocket\Events\ApplicationCommandPermissionsUpdate::class,
         self::AUTO_MODERATION_RULE_CREATE => \Exan\Fenrir\Websocket\Events\AutoModerationRuleCreate::class,

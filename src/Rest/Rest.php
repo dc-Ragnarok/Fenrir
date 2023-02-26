@@ -18,6 +18,7 @@ class Rest
     public GuildTemplate $guildTemplate;
     public Invite $invite;
     public Sticker $sticker;
+    public GuildCommand $guildCommand;
 
     /**
      * @todo add
@@ -39,5 +40,6 @@ class Rest
         $this->guildTemplate = new GuildTemplate($this->http, $this->jsonMapper);
         $this->invite = new Invite($this->http, $this->jsonMapper);
         $this->sticker = new Sticker($this->http, $this->jsonMapper);
+        $this->guildCommand = new GuildCommand($this->http, $this->jsonMapper);
     }
 }
