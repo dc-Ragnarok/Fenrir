@@ -19,9 +19,9 @@ class CommandHandler
 
     private bool $devMode = false;
 
-    public function __construct(private Discord $discord, private ?string $devGuildId)
+    public function __construct(private Discord $discord, private ?string $devGuildId = null)
     {
-        if (isset($this->devGuildId)) {
+        if (!is_null($this->devGuildId)) {
             $this->devMode = true;
         }
     }
@@ -39,6 +39,7 @@ class CommandHandler
     {
         $this->activateListener();
 
+        /** Ready event includes Application ID */
         $this->discord->gateway->events->once(Events::READY, function (Ready $ready) use ($commandBuilder, $guildId, $handler) {
             $this->discord->rest->guildCommand->createApplicationCommand(
                 $ready->user->id,
@@ -53,6 +54,16 @@ class CommandHandler
     public function registerGlobalCommand(CommandBuilder $commandBuilder, callable $handler): void
     {
         $this->activateListener();
+
+        /** Ready event includes Application ID */
+        $this->discord->gateway->events->once(Events::READY, function (Ready $ready) use ($commandBuilder, $handler) {
+            $this->discord->rest->globalCommand->createApplicationCommand(
+                $ready->user->id,
+                $commandBuilder
+            )->then(
+                fn (ApplicationCommand $applicationCommand) => $this->commands[$applicationCommand->id] = $handler
+            );
+        });
     }
 
     private function activateListener()

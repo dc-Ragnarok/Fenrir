@@ -75,11 +75,11 @@ class Discord
      *  this manually. Explicitly using `registerGlobalCommand` is not effected
      */
     public function withCommandHandler(
-        ?string $devGuildId
+        ?string $devGuildId = null
     ) {
         $args = [$this];
 
-        if (isset($devGuildId) && !empty($devGuildId)) {
+        if (!is_null($devGuildId) && !empty($devGuildId)) {
             $args[] = $devGuildId;
         }
 

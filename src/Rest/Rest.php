@@ -19,6 +19,7 @@ class Rest
     public Invite $invite;
     public Sticker $sticker;
     public GuildCommand $guildCommand;
+    public GlobalCommand $globalCommand;
     public Webhook $webhook;
 
     /**
@@ -28,7 +29,6 @@ class Rest
      * - Guild
      * - Stage Instance
      * - User
-     * - Webhook
      */
     public function __construct(private Http $http, private JsonMapper $jsonMapper)
     {
@@ -42,6 +42,7 @@ class Rest
         $this->invite = new Invite($this->http, $this->jsonMapper);
         $this->sticker = new Sticker($this->http, $this->jsonMapper);
         $this->guildCommand = new GuildCommand($this->http, $this->jsonMapper);
+        $this->globalCommand = new GlobalCommand($this->http, $this->jsonMapper);
         $this->webhook = new Webhook($this->http, $this->jsonMapper);
     }
 }
