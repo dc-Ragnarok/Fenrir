@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-namespace Tests\Exan\Fenrir\Discord;
+namespace Tests\Exan\Fenrir\Gateway;
 
 /**
  * @runTestsInSeparateProcesses
  * @preserveGlobalState disabled
  */
-class RequestGuildMembersTest extends DiscordTestCase
+class RequestGuildMembersTest extends GatewayTestCase
 {
     public function testRequestGuildMembersByQuery()
     {
-        $this->discord->requestGuildMembersByQuery(
+        $this->gateway->requestGuildMembersByQuery(
             '::guild id::',
             '',
             123,
@@ -31,7 +31,7 @@ class RequestGuildMembersTest extends DiscordTestCase
 
     public function testRequestGuildMembersByQueryWithNonce()
     {
-        $this->discord->requestGuildMembersByQuery(
+        $this->gateway->requestGuildMembersByQuery(
             '::guild id::',
             '',
             123,
@@ -52,7 +52,7 @@ class RequestGuildMembersTest extends DiscordTestCase
 
     public function testRequestGuildMembersByUserIds()
     {
-        $this->discord->requestGuildMembersByUserIds(
+        $this->gateway->requestGuildMembersByUserIds(
             '::guild id::',
             ['::user id::'],
             123,
@@ -71,7 +71,7 @@ class RequestGuildMembersTest extends DiscordTestCase
 
     public function testRequestGuildMembersByUserIdsWithNonce()
     {
-        $this->discord->requestGuildMembersByUserIds(
+        $this->gateway->requestGuildMembersByUserIds(
             '::guild id::',
             ['::user id::'],
             123,

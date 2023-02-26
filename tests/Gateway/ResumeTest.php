@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Tests\Exan\Fenrir\Discord;
+namespace Tests\Exan\Fenrir\Gateway;
 
 use Exan\Fenrir\Const\Events;
-use Tests\Exan\Fenrir\Discord\DiscordTestCase;
+use Tests\Exan\Fenrir\Gateway\GatewayTestCase;
 
 /**
  * @runTestsInSeparateProcesses
  * @preserveGlobalState disabled
  */
-final class ResumeTest extends DiscordTestCase
+final class ResumeTest extends GatewayTestCase
 {
     protected function setUp(): void
     {
@@ -36,7 +36,7 @@ final class ResumeTest extends DiscordTestCase
             'op' => 7,
         ]);
 
-        $this->discord->websocket->shouldHaveReceived('close', [1001, 'reconnecting']);
+        $this->gateway->websocket->shouldHaveReceived('close', [1001, 'reconnecting']);
 
         $this->mockIncomingMessage([
             'op' => 10,
@@ -76,7 +76,7 @@ final class ResumeTest extends DiscordTestCase
             'd' => true
         ]);
 
-        $this->discord->websocket->shouldNotHaveReceived('close', [1001, 'reconnecting']);
+        $this->gateway->websocket->shouldNotHaveReceived('close', [1001, 'reconnecting']);
 
         $this->mockIncomingMessage([
             'op' => 10,
@@ -115,7 +115,7 @@ final class ResumeTest extends DiscordTestCase
             'op' => 9,
         ]);
 
-        $this->discord->websocket->shouldNotHaveReceived('close', [1001, 'reconnecting']);
+        $this->gateway->websocket->shouldNotHaveReceived('close', [1001, 'reconnecting']);
 
         $this->mockIncomingMessage([
             'op' => 10,
