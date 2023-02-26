@@ -9,6 +9,7 @@ use Exan\Fenrir\Const\Events;
 use Exan\Fenrir\Parts\ApplicationCommand;
 use Exan\Fenrir\Rest\Helpers\Command\CommandBuilder;
 use Exan\Fenrir\Websocket\Events\InteractionCreate;
+use Exan\Fenrir\Websocket\Events\Ready;
 
 class CommandHandler
 {
@@ -16,42 +17,53 @@ class CommandHandler
 
     private array $commands = [];
 
-    public function __construct(private Discord $discord, private string $applicationId)
+    private bool $devMode = false;
+
+    public function __construct(private Discord $discord, private ?string $devGuildId)
     {
+        if (isset($this->devGuildId)) {
+            $this->devMode = true;
+        }
     }
 
     public function registerCommand(CommandBuilder $commandBuilder, callable $handler): void
     {
-        if ($this->discord->dev) {
-            $this->registerGuildCommand($commandBuilder, $this->discord->devGuild, $handler);
+        if ($this->devMode) {
+            $this->registerGuildCommand($commandBuilder, $this->devGuildId, $handler);
+        } else {
+            $this->registerGlobalCommand($commandBuilder, $handler);
         }
     }
 
     public function registerGuildCommand(CommandBuilder $commandBuilder, string $guildId, callable $handler): void
     {
-        $this->activate();
+        $this->activateListener();
 
-        $this->discord->rest->guildCommand->createApplicationCommand(
-            $this->applicationId,
-            $guildId,
-            $commandBuilder
-        )->then(
-            fn (ApplicationCommand $applicationCommand) => $this->commands[$applicationCommand->id] = $handler
-        );
+        $this->discord->gateway->events->once(Events::READY, function (Ready $ready) use ($commandBuilder, $guildId, $handler) {
+            $this->discord->rest->guildCommand->createApplicationCommand(
+                $ready->user->id,
+                $guildId,
+                $commandBuilder
+            )->then(
+                fn (ApplicationCommand $applicationCommand) => $this->commands[$applicationCommand->id] = $handler
+            );
+        });
     }
 
     public function registerGlobalCommand(CommandBuilder $commandBuilder, callable $handler): void
     {
-        $this->activate();
+        $this->activateListener();
     }
 
-    private function activate()
+    private function activateListener()
     {
         if ($this->activated) {
             return;
         }
 
-        $this->discord->events->on(Events::INTERACTION_CREATE, $this->handleInteraction(...));
+        $this->discord->gateway->events->on(
+            Events::INTERACTION_CREATE, $this->handleInteraction(...)
+        );
     }
 
     private function handleInteraction(InteractionCreate $interactionCreate)

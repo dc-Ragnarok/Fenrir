@@ -35,7 +35,7 @@ class Discord
         $this->mapper->bStrictNullTypes = false;
     }
 
-    public function startGateway(
+    public function withGateway(
         int $timeout = 10,
         bool $raw = false
     ) {
@@ -52,7 +52,7 @@ class Discord
         return $this;
     }
 
-    public function startRest()
+    public function withRest()
     {
         $this->http = new Http(
             'Bot ' . $this->token,
@@ -68,9 +68,22 @@ class Discord
         return $this;
     }
 
-    public function startCommand(string $applicationId)
-    {
-        $this->command = new CommandHandler($this, $applicationId);
+    /**
+     * @param ?string $devGuildId
+     *  When passed, reroute `$this->$command->registerCommand` to be a Guild
+     *  command rather than Global. Useful for testing without having to change
+     *  this manually. Explicitly using `registerGlobalCommand` is not effected
+     */
+    public function withCommandHandler(
+        ?string $devGuildId
+    ) {
+        $args = [$this];
+
+        if (isset($devGuildId) && !empty($devGuildId)) {
+            $args[] = $devGuildId;
+        }
+
+        $this->command = new CommandHandler(...$args);
 
         return $this;
     }

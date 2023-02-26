@@ -87,7 +87,7 @@ class Events
     final public const WEBHOOKS_UPDATE = 'WEBHOOKS_UPDATE';
 
     final public const MAPPINGS = [
-        self::READY => \Exan\Fenrir\Websocket\Events\ApplicationCommandPermissionsUpdate::class,
+        self::READY => \Exan\Fenrir\Websocket\Events\Ready::class,
 
         self::APPLICATION_COMMAND_PERMISSIONS_UPDATE =>
             \Exan\Fenrir\Websocket\Events\ApplicationCommandPermissionsUpdate::class,
