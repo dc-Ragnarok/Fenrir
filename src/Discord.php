@@ -52,6 +52,10 @@ class Discord
 
     private Bucket $activityBucket;
 
+    public bool $dev;
+    public string $devGuild;
+    public CommandHandler $command;
+
     public function __construct(
         private string $token,
         private Bitwise $intents,
@@ -61,7 +65,13 @@ class Discord
         $options = array_merge([
             'timeout' => 10,
             'raw_events' => false,
+            'dev' => false,
+            'devGuild' => '',
+            'applicationId' => '',
         ], $options);
+
+        $this->dev = $options['dev'];
+        $this->devGuild = $options['devGuild'];
 
         $this->mapper = new JsonMapper();
 
@@ -89,6 +99,8 @@ class Discord
 
             $this->handlePayload($payload);
         });
+
+        $this->command = new CommandHandler($this, $options['applicationId']);
     }
 
     public function connect()

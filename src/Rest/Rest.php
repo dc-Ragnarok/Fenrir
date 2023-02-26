@@ -19,6 +19,7 @@ class Rest
     public Invite $invite;
     public Sticker $sticker;
     public GuildCommand $guildCommand;
+    public Webhook $webhook;
 
     /**
      * @todo add
@@ -41,5 +42,6 @@ class Rest
         $this->invite = new Invite($this->http, $this->jsonMapper);
         $this->sticker = new Sticker($this->http, $this->jsonMapper);
         $this->guildCommand = new GuildCommand($this->http, $this->jsonMapper);
+        $this->webhook = new Webhook($this->http, $this->jsonMapper);
     }
 }

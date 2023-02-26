@@ -13,6 +13,7 @@ use Exan\Fenrir\Rest\Helpers\Channel\Message\AllowMentions;
 use Exan\Fenrir\Rest\Helpers\Channel\Message\MultipartMessage;
 use Exan\Fenrir\Rest\Helpers\Channel\Message\SetContent;
 use Exan\Fenrir\Rest\Helpers\Channel\Message\SetFlags;
+use Exan\Fenrir\Rest\Helpers\Channel\Message\SetTts;
 use Exan\Fenrir\Rest\Helpers\MultipartCapable;
 
 /**
@@ -28,6 +29,7 @@ class MessageBuilder implements MultipartCapable
     use SetContent;
     use SetFlags;
     use MultipartMessage;
+    use SetTts;
 
     private $data = [];
 
@@ -36,13 +38,6 @@ class MessageBuilder implements MultipartCapable
     public function setNonce(string $nonce): MessageBuilder
     {
         $this->data['nonce'] = $nonce;
-
-        return $this;
-    }
-
-    public function setTts(bool $tts): MessageBuilder
-    {
-        $this->data['tts'] = $tts;
 
         return $this;
     }
