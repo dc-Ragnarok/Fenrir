@@ -72,7 +72,7 @@ class Discord
      * @param ?string $devGuildId
      *  When passed, reroute `$this->$command->registerCommand` to be a Guild
      *  command rather than Global. Useful for testing without having to change
-     *  this manually. Explicitly using `registerGlobalCommand` is not effected
+     *  this manually. Explicitly using `registerGlobalCommand` is not affected
      */
     public function withCommandHandler(
         ?string $devGuildId = null
