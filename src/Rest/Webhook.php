@@ -7,9 +7,6 @@ namespace Exan\Fenrir\Rest;
 use Discord\Http\Endpoint;
 use Discord\Http\Http;
 use Exan\Fenrir\Command\Helpers\InteractionCallbackBuilder;
-use Exan\Fenrir\Enums\Command\InteractionCallbackTypes;
-use Exan\Fenrir\Parts\AuditLog as PartsAuditLog;
-use Exan\Fenrir\Rest\Helpers\AuditLog\GetGuildAuditLogsBuilder;
 use Exan\Fenrir\Rest\Helpers\HttpHelper;
 use JsonMapper;
 use React\Promise\ExtendedPromiseInterface;
@@ -28,8 +25,11 @@ class Webhook
     /**
      * @see https://discord.com/developers/docs/interactions/receiving-and-responding#create-followup-message
      */
-    public function createFollowUpMessage(string $applicationId, string $interactionToken, InteractionCallbackBuilder $interactionCallbackBuilder)
-    {
+    public function createFollowUpMessage(
+        string $applicationId,
+        string $interactionToken,
+        InteractionCallbackBuilder $interactionCallbackBuilder
+    ): ExtendedPromiseInterface {
         return $this->http->post(
             Endpoint::bind(
                 Endpoint::INTERACTION_RESPONSE,

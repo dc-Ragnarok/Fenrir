@@ -26,8 +26,10 @@ class GlobalCommand
     /**
      * @see https://discord.com/developers/docs/interactions/application-commands#making-a-global-command
      */
-    public function createApplicationCommand(string $applicationId, CommandBuilder $commandBuilder): ExtendedPromiseInterface
-    {
+    public function createApplicationCommand(
+        string $applicationId,
+        CommandBuilder $commandBuilder
+    ): ExtendedPromiseInterface {
         return $this->mapPromise(
             $this->http->post(
                 Endpoint::bind(

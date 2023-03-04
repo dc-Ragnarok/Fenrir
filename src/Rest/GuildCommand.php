@@ -26,8 +26,11 @@ class GuildCommand
     /**
      * @see https://discord.com/developers/docs/interactions/application-commands#create-guild-application-command
      */
-    public function createApplicationCommand(string $applicationId, string $guildId, CommandBuilder $commandBuilder): ExtendedPromiseInterface
-    {
+    public function createApplicationCommand(
+        string $applicationId,
+        string $guildId,
+        CommandBuilder $commandBuilder
+    ): ExtendedPromiseInterface {
         return $this->mapPromise(
             $this->http->post(
                 Endpoint::bind(

@@ -40,15 +40,18 @@ class CommandHandler
         $this->activateListener();
 
         /** Ready event includes Application ID */
-        $this->discord->gateway->events->once(Events::READY, function (Ready $ready) use ($commandBuilder, $guildId, $handler) {
-            $this->discord->rest->guildCommand->createApplicationCommand(
-                $ready->user->id,
-                $guildId,
-                $commandBuilder
-            )->then(
-                fn (ApplicationCommand $applicationCommand) => $this->commands[$applicationCommand->id] = $handler
-            );
-        });
+        $this->discord->gateway->events->once(
+            Events::READY,
+            function (Ready $ready) use ($commandBuilder, $guildId, $handler) {
+                $this->discord->rest->guildCommand->createApplicationCommand(
+                    $ready->user->id,
+                    $guildId,
+                    $commandBuilder
+                )->then(
+                    fn (ApplicationCommand $applicationCommand) => $this->commands[$applicationCommand->id] = $handler
+                );
+            }
+        );
     }
 
     public function registerGlobalCommand(CommandBuilder $commandBuilder, callable $handler): void
