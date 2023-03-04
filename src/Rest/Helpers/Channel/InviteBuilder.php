@@ -4,8 +4,12 @@ declare(strict_types=1);
 
 namespace Exan\Fenrir\Rest\Helpers\Channel;
 
+use Exan\Fenrir\Rest\Helpers\GetNew;
+
 class InviteBuilder
 {
+    use GetNew;
+
     private $data = [];
 
     public function setMaxAge(int $maxAge): InviteBuilder

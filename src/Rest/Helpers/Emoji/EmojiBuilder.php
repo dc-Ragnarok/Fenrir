@@ -5,9 +5,12 @@ declare(strict_types=1);
 namespace Exan\Fenrir\Rest\Helpers\Emoji;
 
 use Exan\Fenrir\Parts\Emoji;
+use Exan\Fenrir\Rest\Helpers\GetNew;
 
 class EmojiBuilder
 {
+    use GetNew;
+
     private $data = [];
 
     public function setName(string $name): EmojiBuilder

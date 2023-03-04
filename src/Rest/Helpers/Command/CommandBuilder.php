@@ -7,10 +7,13 @@ namespace Exan\Fenrir\Rest\Helpers\Command;
 use Exan\Fenrir\Const\Validation\Command;
 use Exan\Fenrir\Enums\Parts\ApplicationCommandTypes;
 use Exan\Fenrir\Exceptions\Rest\Helpers\Command\InvalidCommandNameException;
+use Exan\Fenrir\Rest\Helpers\GetNew;
 use Spatie\Regex\Regex;
 
 class CommandBuilder
 {
+    use GetNew;
+
     private array $data;
 
     /**

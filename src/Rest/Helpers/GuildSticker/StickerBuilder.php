@@ -6,9 +6,12 @@ namespace Exan\Fenrir\Rest\Helpers\GuildSticker;
 
 use Discord\Http\Multipart\MultipartBody;
 use Discord\Http\Multipart\MultipartField;
+use Exan\Fenrir\Rest\Helpers\GetNew;
 
 class StickerBuilder
 {
+    use GetNew;
+
     private array $data = [];
     private array $file;
 

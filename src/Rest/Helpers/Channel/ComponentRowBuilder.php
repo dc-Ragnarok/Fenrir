@@ -6,6 +6,7 @@ namespace Exan\Fenrir\Rest\Helpers\Channel;
 
 use Exan\Fenrir\Component\Component;
 use Exan\Fenrir\Exceptions\Rest\Helpers\ComponentRowBuilder\TooManyItemsException;
+use Exan\Fenrir\Rest\Helpers\GetNew;
 
 /**
  * Can not exceed 9 components
@@ -14,6 +15,8 @@ use Exan\Fenrir\Exceptions\Rest\Helpers\ComponentRowBuilder\TooManyItemsExceptio
  */
 class ComponentRowBuilder
 {
+    use GetNew;
+
     private array $components = [];
 
     public function get(): array

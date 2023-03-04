@@ -15,12 +15,15 @@ use Exan\Fenrir\Rest\Helpers\Channel\Message\MultipartMessage;
 use Exan\Fenrir\Rest\Helpers\Channel\Message\SetContent;
 use Exan\Fenrir\Rest\Helpers\Channel\Message\SetFlags;
 use Exan\Fenrir\Rest\Helpers\Channel\Message\SetTts;
+use Exan\Fenrir\Rest\Helpers\GetNew;
 
 /**
  * @see https://discord.com/developers/docs/resources/channel#create-message
  */
 class MessageBuilder
 {
+    use GetNew;
+
     use AddAttachment;
     use AddComponent;
     use AddEmbed;
