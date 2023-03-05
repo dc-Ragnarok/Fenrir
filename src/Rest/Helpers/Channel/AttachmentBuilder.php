@@ -126,9 +126,9 @@ class AttachmentBuilder
         return $this;
     }
 
-    public function getEphermal(): ?bool
+    public function getEphemeral(): ?bool
     {
-        return isset($this->data['ephermal']) ? $this->data['ephermal'] : null;
+        return isset($this->data['ephemeral']) ? $this->data['ephemeral'] : null;
     }
 
     public function get(): array

@@ -17,7 +17,13 @@ class ComponentBuilderTest extends TestCase
         $componentRow = Mockery::mock(ComponentRowBuilder::class);
         $componentRow->shouldReceive('get')->andReturn(['::row::']);
 
-        $componentBuilder = (new ComponentBuilder())->addRow($componentRow);
+        $componentBuilder = new ComponentBuilder();
+
+        $this->assertEquals([], $componentBuilder->getRows());
+
+        $componentBuilder->addRow($componentRow);
+
+        $this->assertEquals([$componentRow], $componentBuilder->getRows());
 
         $this->assertEquals([[
             'type' => 1,
