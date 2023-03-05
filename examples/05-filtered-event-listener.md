@@ -2,10 +2,10 @@
 
 Sometimes it may be useful to filter events coming in, such as when you're making a poll and want to listen to all incoming reactions for only one message.
 
-For this, you can use `Exan\Fenrir\FilteredEventListener`.
+For this, you can use `Ragnarok\Fenrir\FilteredEventListener`.
 The `FilteredEventListener` has the ability to relay filtered events from the main `EventHandler` (though you can use anything that implements EventEmitterInterface).
 
-The constructor takes 5 parameters, 
+The constructor takes 5 parameters,
 
 1. `$eventEmitter`, this is the object which you'd like to filter events from. This would usually be `$discord->events`
 2. `$event`, the event you'd like to filter

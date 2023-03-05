@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Exan\Fenrir;
+namespace Ragnarok\Fenrir;
 
-use Exan\Fenrir\Rest\Helpers\GetNew;
+use Ragnarok\Fenrir\Rest\Helpers\GetNew;
 use PHPUnit\Framework\TestCase;
 
 class GetNewTest extends TestCase

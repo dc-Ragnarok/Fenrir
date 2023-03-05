@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Exan\Fenrir\Rest\Helpers\Emoji;
+namespace Ragnarok\Fenrir\Rest\Helpers\Emoji;
 
-use Exan\Fenrir\Parts\Emoji;
-use Exan\Fenrir\Rest\Helpers\GetNew;
+use Ragnarok\Fenrir\Parts\Emoji;
+use Ragnarok\Fenrir\Rest\Helpers\GetNew;
 
 class EmojiBuilder
 {

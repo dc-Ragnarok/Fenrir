@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Exan\Fenrir\Attributes;
+namespace Ragnarok\Fenrir\Attributes;
 
 /**
  * Indicates an object or property is partial

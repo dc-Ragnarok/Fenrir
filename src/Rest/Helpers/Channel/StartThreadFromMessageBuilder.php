@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Exan\Fenrir\Rest\Helpers\Channel;
+namespace Ragnarok\Fenrir\Rest\Helpers\Channel;
 
-use Exan\Fenrir\Const\Validation\RateLimit;
-use Exan\Fenrir\Enums\Parts\ThreadAutoArchiveDuration;
-use Exan\Fenrir\Rest\Helpers\GetNew;
+use Ragnarok\Fenrir\Const\Validation\RateLimit;
+use Ragnarok\Fenrir\Enums\Parts\ThreadAutoArchiveDuration;
+use Ragnarok\Fenrir\Rest\Helpers\GetNew;
 
 class StartThreadFromMessageBuilder
 {

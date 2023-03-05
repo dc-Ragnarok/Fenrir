@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Exan\Fenrir\Rest\Helpers\Channel\Channel;
+namespace Ragnarok\Fenrir\Rest\Helpers\Channel\Channel;
 
-use Exan\Fenrir\Enums\Parts\ChannelTypes;
-use Exan\Fenrir\Rest\Helpers\Channel\Channel\Shared\SetDefaultAutoArchiveDuration;
-use Exan\Fenrir\Rest\Helpers\Channel\Channel\Shared\SetNsfw;
-use Exan\Fenrir\Rest\Helpers\Channel\Channel\Shared\SetParentId;
-use Exan\Fenrir\Rest\Helpers\Channel\Channel\Shared\SetTopic;
-use Exan\Fenrir\Rest\Helpers\Channel\Channel\Shared\SetType;
+use Ragnarok\Fenrir\Enums\Parts\ChannelTypes;
+use Ragnarok\Fenrir\Rest\Helpers\Channel\Channel\Shared\SetDefaultAutoArchiveDuration;
+use Ragnarok\Fenrir\Rest\Helpers\Channel\Channel\Shared\SetNsfw;
+use Ragnarok\Fenrir\Rest\Helpers\Channel\Channel\Shared\SetParentId;
+use Ragnarok\Fenrir\Rest\Helpers\Channel\Channel\Shared\SetTopic;
+use Ragnarok\Fenrir\Rest\Helpers\Channel\Channel\Shared\SetType;
 
 /**
  * @see https://discord.com/developers/docs/resources/channel#modify-channel

@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Exan\Fenrir;
+namespace Ragnarok\Fenrir;
 
-use Exan\Fenrir\Command\FiredCommand;
-use Exan\Fenrir\Const\Events;
-use Exan\Fenrir\Parts\ApplicationCommand;
-use Exan\Fenrir\Rest\Helpers\Command\CommandBuilder;
-use Exan\Fenrir\Websocket\Events\InteractionCreate;
-use Exan\Fenrir\Websocket\Events\Ready;
+use Ragnarok\Fenrir\Command\FiredCommand;
+use Ragnarok\Fenrir\Const\Events;
+use Ragnarok\Fenrir\Parts\ApplicationCommand;
+use Ragnarok\Fenrir\Rest\Helpers\Command\CommandBuilder;
+use Ragnarok\Fenrir\Websocket\Events\InteractionCreate;
+use Ragnarok\Fenrir\Websocket\Events\Ready;
 
 class CommandHandler
 {

@@ -1,12 +1,12 @@
 {
-    "name": "exan/fenrir",
+    "name": "dc-ragnarok/fenrir",
     "description": "Discord API & WS wrapper",
     "type": "library",
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "Exan\\Fenrir\\": "src/",
-            "Tests\\Exan\\Fenrir\\": "tests/"
+            "Ragnarok\\Fenrir\\": "src/",
+            "Tests\\Ragnarok\\Fenrir\\": "tests/"
         }
     },
     "minimum-stability": "dev",

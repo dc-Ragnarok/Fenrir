@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Exan\Fenrir\Parts;
+namespace Ragnarok\Fenrir\Parts;
 
 /**
  * @see https://discord.com/developers/docs/resources/channel#default-reaction-object

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Exan\Fenrir\Rest\Helpers\Channel\Channel\Shared;
+namespace Ragnarok\Fenrir\Rest\Helpers\Channel\Channel\Shared;
 
 trait SetTopic
 {

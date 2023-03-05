@@ -2,16 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Exan\Fenrir\Parts;
+namespace Ragnarok\Fenrir\Parts;
 
-use Exan\Fenrir\Enums\Parts\ActionTypes;
-use Exan\Fenrir\Enums\Parts\AutoModeractionActionMetadata;
+use Ragnarok\Fenrir\Enums\Parts\ActionTypes;
 
 /**
  * @see https://discord.com/developers/docs/resources/auto-moderation#auto-moderation-action-object
  */
-class AutoModeractionAction
+class AutoModerationAction
 {
     public ActionTypes $type;
-    public ?AutoModeractionActionMetadata $metadata;
+    public ?AutoModerationActionMetadata $metadata;
 }

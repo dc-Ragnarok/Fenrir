@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Exan\Fenrir\Enums\Parts;
+namespace Ragnarok\Fenrir\Enums\Parts;
 
 enum PremiumTypes: int
 {

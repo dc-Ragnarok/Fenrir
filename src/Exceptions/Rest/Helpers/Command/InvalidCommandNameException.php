@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Exan\Fenrir\Exceptions\Rest\Helpers\Command;
+namespace Ragnarok\Fenrir\Exceptions\Rest\Helpers\Command;
 
-use Exan\Fenrir\Const\Validation\Command;
+use Ragnarok\Fenrir\Const\Validation\Command;
 use Exception;
 
 class InvalidCommandNameException extends Exception

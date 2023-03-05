@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Exan\Fenrir\Command;
+namespace Ragnarok\Fenrir\Command;
 
-use Exan\Fenrir\Command\Helpers\InteractionCallbackBuilder;
-use Exan\Fenrir\Discord;
-use Exan\Fenrir\Enums\Command\InteractionCallbackTypes;
-use Exan\Fenrir\Websocket\Events\InteractionCreate;
+use Ragnarok\Fenrir\Command\Helpers\InteractionCallbackBuilder;
+use Ragnarok\Fenrir\Discord;
+use Ragnarok\Fenrir\Enums\Command\InteractionCallbackTypes;
+use Ragnarok\Fenrir\Websocket\Events\InteractionCreate;
 
 class FiredCommand
 {

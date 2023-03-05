@@ -2,18 +2,18 @@
 
 declare(strict_types=1);
 
-namespace Tests\Exan\Fenrir\Gateway;
+namespace Tests\Ragnarok\Fenrir\Gateway;
 
-use Exan\Fenrir\Const\Events;
+use Ragnarok\Fenrir\Const\Events;
 use Mockery;
 use React\EventLoop\TimerInterface;
-use Tests\Exan\Fenrir\Gateway\GatewayTestCase;
+use Tests\Ragnarok\Fenrir\Gateway\GatewayTestCase;
 
 /**
  * @runTestsInSeparateProcesses
  * @preserveGlobalState disabled
  */
-final class StopsHeartBeatsTest extends GatewayTestCase
+final class MissedHeartBeatTest extends GatewayTestCase
 {
     protected function setUp(): void
     {

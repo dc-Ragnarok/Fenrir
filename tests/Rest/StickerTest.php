@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Tests\Exan\Fenrir\Rest;
+namespace Tests\Ragnarok\Fenrir\Rest;
 
-use Exan\Fenrir\Parts\StickerPack;
-use Exan\Fenrir\Parts\Sticker as PartsSticker;
-use Exan\Fenrir\Rest\Sticker;
-use Tests\Exan\Fenrir\Rest\HttpHelperTestCase;
+use Ragnarok\Fenrir\Parts\StickerPack;
+use Ragnarok\Fenrir\Parts\Sticker as PartsSticker;
+use Ragnarok\Fenrir\Rest\Sticker;
+use Tests\Ragnarok\Fenrir\Rest\HttpHelperTestCase;
 
 class StickerTest extends HttpHelperTestCase
 {

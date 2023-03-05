@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Exan\Fenrir\Parts;
+namespace Ragnarok\Fenrir\Parts;
 
 class StickerPack
 {
     public string $id;
     /**
-     * @var \Exan\Fenrir\Parts\Sticker[]
+     * @var \Ragnarok\Fenrir\Parts\Sticker[]
      */
     public array $stickers;
     public string $name;

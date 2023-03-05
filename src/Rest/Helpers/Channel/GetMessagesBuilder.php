@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Exan\Fenrir\Rest\Helpers\Channel;
+namespace Ragnarok\Fenrir\Rest\Helpers\Channel;
 
-use Exan\Fenrir\Const\Validation\ItemLimit;
-use Exan\Fenrir\Rest\Helpers\GetNew;
+use Ragnarok\Fenrir\Const\Validation\ItemLimit;
+use Ragnarok\Fenrir\Rest\Helpers\GetNew;
 
 class GetMessagesBuilder
 {

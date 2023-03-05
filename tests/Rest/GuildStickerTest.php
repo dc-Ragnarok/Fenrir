@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Tests\Exan\Fenrir\Rest;
+namespace Tests\Ragnarok\Fenrir\Rest;
 
-use Exan\Fenrir\Parts\StickerPack;
-use Exan\Fenrir\Parts\Sticker;
-use Exan\Fenrir\Rest\GuildSticker;
-use Exan\Fenrir\Rest\Helpers\GuildSticker\ModifyStickerBuilder;
-use Exan\Fenrir\Rest\Helpers\GuildSticker\StickerBuilder;
-use Tests\Exan\Fenrir\Rest\HttpHelperTestCase;
+use Ragnarok\Fenrir\Parts\StickerPack;
+use Ragnarok\Fenrir\Parts\Sticker;
+use Ragnarok\Fenrir\Rest\GuildSticker;
+use Ragnarok\Fenrir\Rest\Helpers\GuildSticker\ModifyStickerBuilder;
+use Ragnarok\Fenrir\Rest\Helpers\GuildSticker\StickerBuilder;
+use Tests\Ragnarok\Fenrir\Rest\HttpHelperTestCase;
 
 class GuildStickerTest extends HttpHelperTestCase
 {

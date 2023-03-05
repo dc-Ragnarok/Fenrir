@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Exan\Fenrir\Parts;
+namespace Ragnarok\Fenrir\Parts;
 
-use Exan\Fenrir\Enums\Parts\AutoModerationKeywordPresetTypes;
+use Ragnarok\Fenrir\Enums\Parts\AutoModerationKeywordPresetTypes;
 
 class AutoModerationTriggerMetadata
 {
@@ -17,7 +17,7 @@ class AutoModerationTriggerMetadata
      */
     public array $regex_patterns;
     /**
-     * @var \Exan\Fenrir\Enums\Parts\AutoModerationKeywordPresetTypes[]
+     * @var \Ragnarok\Fenrir\Enums\Parts\AutoModerationKeywordPresetTypes[]
      */
     public array $presets;
     /**

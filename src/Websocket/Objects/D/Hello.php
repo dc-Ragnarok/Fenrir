@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Exan\Fenrir\Websocket\Objects\D;
+namespace Ragnarok\Fenrir\Websocket\Objects\D;
 
 class Hello
 {

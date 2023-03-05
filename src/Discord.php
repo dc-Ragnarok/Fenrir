@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Exan\Fenrir;
+namespace Ragnarok\Fenrir;
 
 use Discord\Http\Drivers\Guzzle;
 use Discord\Http\Http;
-use Exan\Fenrir\Bitwise\Bitwise;
-use Exan\Fenrir\Rest\Rest;
+use Ragnarok\Fenrir\Bitwise\Bitwise;
+use Ragnarok\Fenrir\Rest\Rest;
 use JsonMapper;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;

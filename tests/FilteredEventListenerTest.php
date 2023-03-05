@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Tests\Exan\Fenrir;
+namespace Tests\Ragnarok\Fenrir;
 
 use Evenement\EventEmitter;
-use Exan\Fenrir\Const\Events;
-use Exan\Fenrir\EventHandler;
-use Exan\Fenrir\FilteredEventEmitter;
-use Exan\Fenrir\Websocket\Objects\Payload;
+use Ragnarok\Fenrir\Const\Events;
+use Ragnarok\Fenrir\EventHandler;
+use Ragnarok\Fenrir\FilteredEventEmitter;
+use Ragnarok\Fenrir\Websocket\Objects\Payload;
 use JsonMapper;
 use Mockery;
 use Mockery\Adapter\Phpunit\MockeryTestCase;

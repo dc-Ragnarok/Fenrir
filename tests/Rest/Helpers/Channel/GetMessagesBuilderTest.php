@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Tests\Exan\Fenrir\Rest\Helpers\Channel;
+namespace Tests\Ragnarok\Fenrir\Rest\Helpers\Channel;
 
-use Exan\Fenrir\Rest\Helpers\Channel\GetMessagesBuilder;
+use Ragnarok\Fenrir\Rest\Helpers\Channel\GetMessagesBuilder;
 use PHPUnit\Framework\TestCase;
 
 class GetMessagesBuilderTest extends TestCase

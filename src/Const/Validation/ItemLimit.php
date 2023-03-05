@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Exan\Fenrir\Const\Validation;
+namespace Ragnarok\Fenrir\Const\Validation;
 
-use Exan\Fenrir\Const\Validation\Traits\WithinLimit;
+use Ragnarok\Fenrir\Const\Validation\Traits\WithinLimit;
 
 class ItemLimit
 {

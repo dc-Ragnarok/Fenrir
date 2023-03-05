@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Tests\Exan\Fenrir\Rest\Helpers\AuditLog;
+namespace Tests\Ragnarok\Fenrir\Rest\Helpers\AuditLog;
 
-use Exan\Fenrir\Rest\Helpers\AuditLog\GetGuildAuditLogsBuilder;
+use Ragnarok\Fenrir\Rest\Helpers\AuditLog\GetGuildAuditLogsBuilder;
 use PHPUnit\Framework\TestCase;
 
 class GetGuildAuditLogsBuilderTest extends TestCase

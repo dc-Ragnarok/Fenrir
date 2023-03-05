@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Exan\Fenrir\Rest\Helpers\Command;
+namespace Ragnarok\Fenrir\Rest\Helpers\Command;
 
-use Exan\Fenrir\Const\Validation\Command;
-use Exan\Fenrir\Enums\Parts\ApplicationCommandTypes;
-use Exan\Fenrir\Exceptions\Rest\Helpers\Command\InvalidCommandNameException;
-use Exan\Fenrir\Rest\Helpers\GetNew;
+use Ragnarok\Fenrir\Const\Validation\Command;
+use Ragnarok\Fenrir\Enums\Parts\ApplicationCommandTypes;
+use Ragnarok\Fenrir\Exceptions\Rest\Helpers\Command\InvalidCommandNameException;
+use Ragnarok\Fenrir\Rest\Helpers\GetNew;
 use Spatie\Regex\Regex;
 
 class CommandBuilder

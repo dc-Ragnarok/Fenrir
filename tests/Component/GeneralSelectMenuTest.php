@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Tests\Exan\Fenrir\Component;
+namespace Tests\Ragnarok\Fenrir\Component;
 
-use Exan\Fenrir\Component\SelectMenu\MentionableSelectMenu;
-use Exan\Fenrir\Component\SelectMenu\RoleSelectMenu;
-use Exan\Fenrir\Component\SelectMenu\UserSelectMenu;
-use Exan\Fenrir\Enums\Component\SelectMenuType;
+use Ragnarok\Fenrir\Component\SelectMenu\MentionableSelectMenu;
+use Ragnarok\Fenrir\Component\SelectMenu\RoleSelectMenu;
+use Ragnarok\Fenrir\Component\SelectMenu\UserSelectMenu;
+use Ragnarok\Fenrir\Enums\Component\SelectMenuType;
 use PHPUnit\Framework\TestCase;
 
 class GeneralSelectMenuTest extends TestCase

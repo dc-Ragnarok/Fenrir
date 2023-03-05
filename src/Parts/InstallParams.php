@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Exan\Fenrir\Parts;
+namespace Ragnarok\Fenrir\Parts;
 
-use Exan\Fenrir\Enums\Parts\Scopes;
+use Ragnarok\Fenrir\Enums\Parts\Scopes;
 
 class InstallParams
 {
     /**
-     * @var \Exan\Fenrir\Enums\Parts\Scopes[]
+     * @var \Ragnarok\Fenrir\Enums\Parts\Scopes[]
      */
     public array $scopes;
     public string $permissions;

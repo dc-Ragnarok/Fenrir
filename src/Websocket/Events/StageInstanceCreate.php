@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Exan\Fenrir\Websocket\Events;
+namespace Ragnarok\Fenrir\Websocket\Events;
 
 /**
  * @see https://discord.com/developers/docs/topics/gateway-events#stage-instance-create

@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Exan\Fenrir;
+namespace Ragnarok\Fenrir;
 
 use Evenement\EventEmitter;
-use Exan\Fenrir\Const\Events;
-use Exan\Fenrir\Websocket\Objects\Payload;
+use Ragnarok\Fenrir\Const\Events;
+use Ragnarok\Fenrir\Websocket\Objects\Payload;
 use JsonMapper;
 
 class EventHandler extends EventEmitter
