@@ -15,6 +15,7 @@ class CommandHandler
 {
     private bool $activated = false;
 
+    /** @var array<string, callable> */
     private array $commands = [];
 
     private bool $devMode = false;
