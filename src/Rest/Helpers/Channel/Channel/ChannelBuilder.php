@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Ragnarok\Fenrir\Rest\Helpers\Channel\Channel;
+namespace Exan\Fenrir\Rest\Helpers\Channel\Channel;
 
-use Ragnarok\Fenrir\Enums\Parts\ChannelTypes;
-use Ragnarok\Fenrir\Parts\Overwrite;
-use Ragnarok\Fenrir\Rest\Helpers\GetNew;
+use Exan\Fenrir\Enums\Parts\ChannelTypes;
+use Exan\Fenrir\Parts\Overwrite;
+use Exan\Fenrir\Rest\Helpers\GetNew;
 
 /**
  * @see https://discord.com/developers/docs/resources/channel#modify-channel

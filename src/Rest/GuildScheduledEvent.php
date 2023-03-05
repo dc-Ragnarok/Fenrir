@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Ragnarok\Fenrir\Rest;
+namespace Exan\Fenrir\Rest;
 
 use Discord\Http\Http;
-use Ragnarok\Fenrir\Rest\Helpers\HttpHelper;
+use Exan\Fenrir\Rest\Helpers\HttpHelper;
 use JsonMapper;
 
 /**

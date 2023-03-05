@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Ragnarok\Fenrir\Rest\Helpers\Channel\Message;
+namespace Exan\Fenrir\Rest\Helpers\Channel\Message;
 
-use Ragnarok\Fenrir\Rest\Helpers\Channel\AttachmentBuilder;
+use Exan\Fenrir\Rest\Helpers\Channel\AttachmentBuilder;
 
 trait AddAttachment
 {

@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Tests\Ragnarok\Fenrir\Gateway;
+namespace Tests\Exan\Fenrir\Gateway;
 
-use Ragnarok\Fenrir\Const\Events;
+use Exan\Fenrir\Const\Events;
 use Mockery;
 use React\EventLoop\TimerInterface;
-use Tests\Ragnarok\Fenrir\Gateway\GatewayTestCase;
+use Tests\Exan\Fenrir\Gateway\GatewayTestCase;
 
 /**
  * @runTestsInSeparateProcesses
@@ -52,8 +52,8 @@ final class HandlesHeartbeatTest extends GatewayTestCase
                 'intents' => 123,
                 'properties' => [
                     'os' => PHP_OS,
-                    'browser' => 'Ragnarok\Fenrir',
-                    'device' => 'Ragnarok\Fenrir',
+                    'browser' => 'Exan\Fenrir',
+                    'device' => 'Exan\Fenrir',
                 ]
             ]
         ]);

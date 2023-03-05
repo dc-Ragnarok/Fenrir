@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Tests\Ragnarok\Fenrir\Rest\Helpers\GuildSticker;
+namespace Tests\Exan\Fenrir\Rest\Helpers\GuildSticker;
 
-use Ragnarok\Fenrir\Rest\Helpers\GuildSticker\StickerBuilder;
+use Exan\Fenrir\Rest\Helpers\GuildSticker\StickerBuilder;
 use PHPUnit\Framework\TestCase;
 
 class StickerBuilderTest extends TestCase

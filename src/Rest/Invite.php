@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Ragnarok\Fenrir\Rest;
+namespace Exan\Fenrir\Rest;
 
 use Discord\Http\Endpoint;
 use Discord\Http\Http;
-use Ragnarok\Fenrir\Parts\Invite as PartsInvite;
-use Ragnarok\Fenrir\Rest\Helpers\HttpHelper;
+use Exan\Fenrir\Parts\Invite as PartsInvite;
+use Exan\Fenrir\Rest\Helpers\HttpHelper;
 use JsonMapper;
 use React\Promise\ExtendedPromiseInterface;
 
@@ -25,7 +25,7 @@ class Invite
     /**
      * @see https://discord.com/developers/docs/resources/invite#get-invite
      *
-     * @return ExtendedPromiseInterface<\Ragnarok\Fenrir\Parts\Invite>
+     * @return ExtendedPromiseInterface<\Exan\Fenrir\Parts\Invite>
      */
     public function get(string $code)
     {

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Ragnarok\Fenrir\Websocket\Events;
+namespace Exan\Fenrir\Websocket\Events;
 
-use Ragnarok\Fenrir\Parts\ApplicationCommandPermissions;
+use Exan\Fenrir\Parts\ApplicationCommandPermissions;
 
 /**
  * @see https://discord.com/developers/docs/topics/gateway-events#application-command-permissions-update

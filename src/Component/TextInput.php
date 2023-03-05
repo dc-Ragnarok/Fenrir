@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Ragnarok\Fenrir\Component;
+namespace Exan\Fenrir\Component;
 
-use Ragnarok\Fenrir\Enums\Component\TextInputStyle;
+use Exan\Fenrir\Enums\Component\TextInputStyle;
 
 class TextInput extends Component
 {

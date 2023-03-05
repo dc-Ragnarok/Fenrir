@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Ragnarok\Fenrir\Parts;
+namespace Exan\Fenrir\Parts;
 
-use Ragnarok\Fenrir\Enums\Parts\MessageActivityTypes;
+use Exan\Fenrir\Enums\Parts\MessageActivityTypes;
 
 class MessageActivity
 {

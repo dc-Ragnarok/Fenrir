@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Ragnarok\Fenrir\Exceptions\Websocket;
+namespace Exan\Fenrir\Exceptions\Websocket;
 
 use Exception;
 

@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Ragnarok\Fenrir\Rest\Helpers\Channel\Channel\Shared;
+namespace Exan\Fenrir\Rest\Helpers\Channel\Channel\Shared;
 
-use Ragnarok\Fenrir\Enums\Parts\ChannelTypes;
-use Ragnarok\Fenrir\Exceptions\Rest\Helpers\Channel\Channel\Shared\SetType\UnsupportedConversionException;
+use Exan\Fenrir\Enums\Parts\ChannelTypes;
+use Exan\Fenrir\Exceptions\Rest\Helpers\Channel\Channel\Shared\SetType\UnsupportedConversionException;
 
 trait SetType
 {

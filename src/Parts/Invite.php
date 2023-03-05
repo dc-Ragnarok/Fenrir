@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Ragnarok\Fenrir\Parts;
+namespace Exan\Fenrir\Parts;
 
-use Ragnarok\Fenrir\Enums\Parts\InviteTargetTypes;
+use Exan\Fenrir\Enums\Parts\InviteTargetTypes;
 use Carbon\Carbon;
-use Ragnarok\Fenrir\Attributes\Partial;
+use Exan\Fenrir\Attributes\Partial;
 
 class Invite
 {

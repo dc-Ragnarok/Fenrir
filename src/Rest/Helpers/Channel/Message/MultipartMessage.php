@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Ragnarok\Fenrir\Rest\Helpers\Channel\Message;
+namespace Exan\Fenrir\Rest\Helpers\Channel\Message;
 
 use Discord\Http\Multipart\MultipartBody;
 use Discord\Http\Multipart\MultipartField;

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tests\Ragnarok\Fenrir\Gateway;
+namespace Tests\Exan\Fenrir\Gateway;
 
 /**
  * @runTestsInSeparateProcesses

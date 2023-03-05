@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Ragnarok\Fenrir\Parts;
+namespace Exan\Fenrir\Parts;
 
-use Ragnarok\Fenrir\Enums\Parts\VerificationLevels;
-use Ragnarok\Fenrir\Enums\Parts\MessageNotificationLevels;
-use Ragnarok\Fenrir\Enums\Parts\ExplicitContentFilterLevels;
-use Ragnarok\Fenrir\Enums\Parts\GuildFeatures;
-use Ragnarok\Fenrir\Enums\Parts\MfaLevels;
-use Ragnarok\Fenrir\Bitwise\Bitwise;
-use Ragnarok\Fenrir\Enums\Parts\PremiumTiers;
-use Ragnarok\Fenrir\Enums\Parts\NsfwLevels;
+use Exan\Fenrir\Enums\Parts\VerificationLevels;
+use Exan\Fenrir\Enums\Parts\MessageNotificationLevels;
+use Exan\Fenrir\Enums\Parts\ExplicitContentFilterLevels;
+use Exan\Fenrir\Enums\Parts\GuildFeatures;
+use Exan\Fenrir\Enums\Parts\MfaLevels;
+use Exan\Fenrir\Bitwise\Bitwise;
+use Exan\Fenrir\Enums\Parts\PremiumTiers;
+use Exan\Fenrir\Enums\Parts\NsfwLevels;
 
 class Guild
 {
@@ -33,15 +33,15 @@ class Guild
     public MessageNotificationLevels $default_message_notifications;
     public ExplicitContentFilterLevels $explicit_content_filter;
     /**
-     * @var \Ragnarok\Fenrir\Parts\Role[]
+     * @var \Exan\Fenrir\Parts\Role[]
      */
     public array $roles;
     /**
-     * @var \Ragnarok\Fenrir\Parts\Emoji[]
+     * @var \Exan\Fenrir\Parts\Emoji[]
      */
     public array $emojis;
     /**
-     * @var \Ragnarok\Fenrir\Enums\Parts\GuildFeatures[]
+     * @var \Exan\Fenrir\Enums\Parts\GuildFeatures[]
      */
     public array $features;
     public MfaLevels $mfa_level;
@@ -64,7 +64,7 @@ class Guild
     public ?WelcomeScreen $welcome_screen;
     public NsfwLevels $nsfw_level;
     /**
-     * @var \Ragnarok\Fenrir\Parts\Sticker[]
+     * @var \Exan\Fenrir\Parts\Sticker[]
      */
     public ?array $stickers;
     public bool $premium_progress_bar_enabled;

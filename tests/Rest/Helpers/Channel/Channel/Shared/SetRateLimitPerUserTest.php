@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Tests\Ragnarok\Fenrir\Rest\Helpers\Channel\Channel\Shared;
+namespace Tests\Exan\Fenrir\Rest\Helpers\Channel\Channel\Shared;
 
-use Ragnarok\Fenrir\Const\Validation\RateLimit;
-use Ragnarok\Fenrir\Rest\Helpers\Channel\Channel\Shared\SetRateLimitPerUser;
+use Exan\Fenrir\Const\Validation\RateLimit;
+use Exan\Fenrir\Rest\Helpers\Channel\Channel\Shared\SetRateLimitPerUser;
 use PHPUnit\Framework\TestCase;
 
 class SetRateLimitPerUserTest extends TestCase

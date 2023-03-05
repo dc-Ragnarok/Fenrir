@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Ragnarok\Fenrir\Websocket\Events;
+namespace Exan\Fenrir\Websocket\Events;
 
 use Carbon\Carbon;
-use Ragnarok\Fenrir\Parts\User;
+use Exan\Fenrir\Parts\User;
 
 /**
  * @see https://discord.com/developers/docs/topics/gateway-events#guild-member-update

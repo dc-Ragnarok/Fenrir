@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Ragnarok\Fenrir\Parts;
+namespace Exan\Fenrir\Parts;
 
-use Ragnarok\Fenrir\Enums\Parts\ApplicationCommandPermissionTypes;
+use Exan\Fenrir\Enums\Parts\ApplicationCommandPermissionTypes;
 
 class ApplicationCommandPermissionStructure
 {

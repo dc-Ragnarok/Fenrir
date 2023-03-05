@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Tests\Ragnarok\Fenrir\Rest\Helpers\Channel;
+namespace Tests\Exan\Fenrir\Rest\Helpers\Channel;
 
 use Discord\Http\Multipart\MultipartBody;
-use Ragnarok\Fenrir\Exceptions\Rest\Helpers\MessageBuilder\TooManyStickersException;
-use Ragnarok\Fenrir\Rest\Helpers\Channel\MessageBuilder;
+use Exan\Fenrir\Exceptions\Rest\Helpers\MessageBuilder\TooManyStickersException;
+use Exan\Fenrir\Rest\Helpers\Channel\MessageBuilder;
 use PHPUnit\Framework\TestCase;
 
 class MessageBuilderTest extends TestCase

@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Ragnarok\Fenrir\Websocket\Events;
+namespace Exan\Fenrir\Websocket\Events;
 
-use Ragnarok\Fenrir\Attributes\Intent;
-use Ragnarok\Fenrir\Parts\GuildMember;
+use Exan\Fenrir\Attributes\Intent;
+use Exan\Fenrir\Parts\GuildMember;
 
 /**
  * @see https://discord.com/developers/docs/topics/gateway-events#guild-member-add

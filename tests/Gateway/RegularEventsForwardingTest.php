@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Tests\Ragnarok\Fenrir\Gateway;
+namespace Tests\Exan\Fenrir\Gateway;
 
-use Ragnarok\Fenrir\EventHandler;
+use Exan\Fenrir\EventHandler;
 use Mockery;
-use Tests\Ragnarok\Fenrir\Gateway\GatewayTestCase;
+use Tests\Exan\Fenrir\Gateway\GatewayTestCase;
 
 /**
  * @runTestsInSeparateProcesses

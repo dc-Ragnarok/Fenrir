@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Tests\Ragnarok\Fenrir\Rest;
+namespace Tests\Exan\Fenrir\Rest;
 
-use Ragnarok\Fenrir\Parts\Invite;
-use Ragnarok\Fenrir\Rest\Invite as RestInvite;
+use Exan\Fenrir\Parts\Invite;
+use Exan\Fenrir\Rest\Invite as RestInvite;
 
 class InviteTest extends HttpHelperTestCase
 {

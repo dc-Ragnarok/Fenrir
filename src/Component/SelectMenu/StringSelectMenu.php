@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Ragnarok\Fenrir\Component\SelectMenu;
+namespace Exan\Fenrir\Component\SelectMenu;
 
-use Ragnarok\Fenrir\Enums\Component\SelectMenuType;
-use Ragnarok\Fenrir\Exceptions\Components\SelectMenu\StringSelectMenu\NoOptionsException;
-use Ragnarok\Fenrir\Exceptions\Components\SelectMenu\StringSelectMenu\TooManyOptionsException;
-use Ragnarok\Fenrir\Rest\Helpers\Emoji\EmojiBuilder;
+use Exan\Fenrir\Enums\Component\SelectMenuType;
+use Exan\Fenrir\Exceptions\Components\SelectMenu\StringSelectMenu\NoOptionsException;
+use Exan\Fenrir\Exceptions\Components\SelectMenu\StringSelectMenu\TooManyOptionsException;
+use Exan\Fenrir\Rest\Helpers\Emoji\EmojiBuilder;
 
 class StringSelectMenu extends SelectMenu
 {

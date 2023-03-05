@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Ragnarok\Fenrir\Rest\Helpers\GuildSticker;
+namespace Exan\Fenrir\Rest\Helpers\GuildSticker;
 
-use Ragnarok\Fenrir\Rest\Helpers\GetNew;
+use Exan\Fenrir\Rest\Helpers\GetNew;
 
 class ModifyStickerBuilder
 {

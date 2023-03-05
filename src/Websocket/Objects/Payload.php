@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Ragnarok\Fenrir\Websocket\Objects;
+namespace Exan\Fenrir\Websocket\Objects;
 
 class Payload
 {

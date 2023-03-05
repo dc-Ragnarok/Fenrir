@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Ragnarok\Fenrir;
+namespace Exan\Fenrir;
 
 use Closure;
 use Evenement\EventEmitter;

@@ -6,12 +6,12 @@ namespace Tests\Exan\Fenrir\Command;
 
 use Mockery;
 use Mockery\Adapter\Phpunit\MockeryTestCase;
-use Ragnarok\Fenrir\Command\FiredCommand;
-use Ragnarok\Fenrir\Command\Helpers\InteractionCallbackBuilder;
-use Ragnarok\Fenrir\Discord;
-use Ragnarok\Fenrir\Rest\Rest;
-use Ragnarok\Fenrir\Rest\Webhook;
-use Ragnarok\Fenrir\Websocket\Events\InteractionCreate;
+use Exan\Fenrir\Command\FiredCommand;
+use Exan\Fenrir\Command\Helpers\InteractionCallbackBuilder;
+use Exan\Fenrir\Discord;
+use Exan\Fenrir\Rest\Rest;
+use Exan\Fenrir\Rest\Webhook;
+use Exan\Fenrir\Websocket\Events\InteractionCreate;
 use React\Promise\Promise;
 
 class FiredCommandTest extends MockeryTestCase

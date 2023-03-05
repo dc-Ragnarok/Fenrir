@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Ragnarok\Fenrir\Parts;
+namespace Exan\Fenrir\Parts;
 
-use Ragnarok\Fenrir\Enums\Parts\OverwriteTypes;
+use Exan\Fenrir\Enums\Parts\OverwriteTypes;
 
 class Overwrite
 {

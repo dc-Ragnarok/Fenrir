@@ -6,8 +6,8 @@ namespace Tests\Exan\Fenrir\Command\Helpers;
 
 use Discord\Http\Multipart\MultipartBody;
 use PHPUnit\Framework\TestCase;
-use Ragnarok\Fenrir\Command\Helpers\InteractionCallbackBuilder;
-use Ragnarok\Fenrir\Enums\Command\InteractionCallbackTypes;
+use Exan\Fenrir\Command\Helpers\InteractionCallbackBuilder;
+use Exan\Fenrir\Enums\Command\InteractionCallbackTypes;
 
 class InteractionCallbackBuilderTest extends TestCase
 {

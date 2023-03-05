@@ -1,7 +1,7 @@
 <?php
 
-use Ragnarok\Fenrir\Bitwise\Bitwise;
-use Ragnarok\Fenrir\Discord;
+use Exan\Fenrir\Bitwise\Bitwise;
+use Exan\Fenrir\Discord;
 use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
 

@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Tests\Ragnarok\Fenrir\Rest\Helpers\Channel\Channel;
+namespace Tests\Exan\Fenrir\Rest\Helpers\Channel\Channel;
 
-use Ragnarok\Fenrir\Enums\Parts\ChannelTypes;
-use Ragnarok\Fenrir\Enums\Parts\VideoQualityModes;
-use Ragnarok\Fenrir\Rest\Helpers\Channel\Channel\GuildVoiceChannelBuilder;
+use Exan\Fenrir\Enums\Parts\ChannelTypes;
+use Exan\Fenrir\Enums\Parts\VideoQualityModes;
+use Exan\Fenrir\Rest\Helpers\Channel\Channel\GuildVoiceChannelBuilder;
 use PHPUnit\Framework\TestCase;
 
 class GuildVoiceChannelBuilderTest extends TestCase

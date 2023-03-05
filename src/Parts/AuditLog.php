@@ -2,43 +2,43 @@
 
 declare(strict_types=1);
 
-namespace Ragnarok\Fenrir\Parts;
+namespace Exan\Fenrir\Parts;
 
-use Ragnarok\Fenrir\Attributes\Partial;
+use Exan\Fenrir\Attributes\Partial;
 
 class AuditLog
 {
     /**
-     * @var \Ragnarok\Fenrir\Parts\ApplicationCommandPermissionObject[]
+     * @var \Exan\Fenrir\Parts\ApplicationCommandPermissionObject[]
      */
     public ?array $application_commands;
     /**
-     * @var \Ragnarok\Fenrir\Parts\AuditLogEntry[]
+     * @var \Exan\Fenrir\Parts\AuditLogEntry[]
      */
     public ?array $audit_log_entries;
     /**
-     * @var \Ragnarok\Fenrir\Parts\AutoModerationRule[]
+     * @var \Exan\Fenrir\Parts\AutoModerationRule[]
      */
     public ?array $auto_moderation_rules;
     /**
-     * @var \Ragnarok\Fenrir\Parts\GuildScheduledEvent[]
+     * @var \Exan\Fenrir\Parts\GuildScheduledEvent[]
      */
     public ?array $guild_scheduled_events;
     /**
-     * @var \Ragnarok\Fenrir\Parts\Integration[]
+     * @var \Exan\Fenrir\Parts\Integration[]
      */
     #[Partial]
     public ?array $integrations;
     /**
-     * @var \Ragnarok\Fenrir\Parts\Channel[]
+     * @var \Exan\Fenrir\Parts\Channel[]
      */
     public ?array $threads;
     /**
-     * @var \Ragnarok\Fenrir\Parts\User[]
+     * @var \Exan\Fenrir\Parts\User[]
      */
     public ?array $users;
     /**
-     * @var \Ragnarok\Fenrir\Parts\Webhook[]
+     * @var \Exan\Fenrir\Parts\Webhook[]
      */
     public ?array $webhooks;
 }

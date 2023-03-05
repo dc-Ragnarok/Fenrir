@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Ragnarok\Fenrir\Parts;
+namespace Exan\Fenrir\Parts;
 
-use Ragnarok\Fenrir\Enums\Parts\ApplicationCommandOptionTypes;
-use Ragnarok\Fenrir\Enums\Parts\ChannelTypes;
+use Exan\Fenrir\Enums\Parts\ApplicationCommandOptionTypes;
+use Exan\Fenrir\Enums\Parts\ChannelTypes;
 
 class ApplicationCommandOptionStructure
 {
@@ -22,15 +22,15 @@ class ApplicationCommandOptionStructure
     public ?array $description_localizations;
     public ?bool $required;
     /**
-     * @var \Ragnarok\Fenrir\Parts\ApplicationCommandOptionChoice[]
+     * @var \Exan\Fenrir\Parts\ApplicationCommandOptionChoice[]
      */
     public ?array $choices;
     /**
-     * @var \Ragnarok\Fenrir\Parts\ApplicationCommandOptionStructure[]
+     * @var \Exan\Fenrir\Parts\ApplicationCommandOptionStructure[]
      */
     public ?array $options;
     /**
-     * @var \Ragnarok\Fenrir\Enums\Parts\ChannelTypes[]
+     * @var \Exan\Fenrir\Enums\Parts\ChannelTypes[]
      */
     public ?array $channel_types;
     public int|float|null $min_value;

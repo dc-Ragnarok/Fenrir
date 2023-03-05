@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Tests\Ragnarok\Fenrir\Bitwise;
+namespace Tests\Exan\Fenrir\Bitwise;
 
-use Ragnarok\Fenrir\Bitwise\Bitwise;
+use Exan\Fenrir\Bitwise\Bitwise;
 use PHPUnit\Framework\TestCase;
 
 class BitwiseTest extends TestCase

@@ -1,13 +1,13 @@
 <?php
 
-use Ragnarok\Fenrir\Bitwise\Bitwise;
-use Ragnarok\Fenrir\Const\Events;
-use Ragnarok\Fenrir\Discord;
-use Ragnarok\Fenrir\Enums\Gateway\Intents;
-use Ragnarok\Fenrir\FilteredEventEmitter;
-use Ragnarok\Fenrir\Rest\Helpers\Channel\MessageBuilder;
-use Ragnarok\Fenrir\Websocket\Events\MessageCreate;
-use Ragnarok\Fenrir\Websocket\Events\MessageReactionAdd;
+use Exan\Fenrir\Bitwise\Bitwise;
+use Exan\Fenrir\Const\Events;
+use Exan\Fenrir\Discord;
+use Exan\Fenrir\Enums\Gateway\Intents;
+use Exan\Fenrir\FilteredEventEmitter;
+use Exan\Fenrir\Rest\Helpers\Channel\MessageBuilder;
+use Exan\Fenrir\Websocket\Events\MessageCreate;
+use Exan\Fenrir\Websocket\Events\MessageReactionAdd;
 
 require './vendor/autoload.php';
 

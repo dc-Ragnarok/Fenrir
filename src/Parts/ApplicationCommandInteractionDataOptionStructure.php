@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Ragnarok\Fenrir\Parts;
+namespace Exan\Fenrir\Parts;
 
 class ApplicationCommandInteractionDataOptionStructure
 {
@@ -10,7 +10,7 @@ class ApplicationCommandInteractionDataOptionStructure
     public int $type;
     public string|int|float|bool|null $value;
     /**
-     * @var \Ragnarok\Fenrir\Parts\ApplicationCommandInteractionDataOptionStructure[]
+     * @var \Exan\Fenrir\Parts\ApplicationCommandInteractionDataOptionStructure[]
      */
     public ?array $options;
     public bool $focused;

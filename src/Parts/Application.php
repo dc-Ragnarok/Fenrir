@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Ragnarok\Fenrir\Parts;
+namespace Exan\Fenrir\Parts;
 
-use Ragnarok\Fenrir\Bitwise\Bitwise;
-use Ragnarok\Fenrir\Attributes\Partial;
+use Exan\Fenrir\Bitwise\Bitwise;
+use Exan\Fenrir\Attributes\Partial;
 
 class Application
 {

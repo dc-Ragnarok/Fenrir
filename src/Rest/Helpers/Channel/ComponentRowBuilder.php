@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Ragnarok\Fenrir\Rest\Helpers\Channel;
+namespace Exan\Fenrir\Rest\Helpers\Channel;
 
-use Ragnarok\Fenrir\Component\Component;
-use Ragnarok\Fenrir\Exceptions\Rest\Helpers\ComponentRowBuilder\TooManyItemsException;
-use Ragnarok\Fenrir\Rest\Helpers\GetNew;
+use Exan\Fenrir\Component\Component;
+use Exan\Fenrir\Exceptions\Rest\Helpers\ComponentRowBuilder\TooManyItemsException;
+use Exan\Fenrir\Rest\Helpers\GetNew;
 
 /**
  * Can not exceed 9 components

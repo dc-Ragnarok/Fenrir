@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Tests\Ragnarok\Fenrir\Component;
+namespace Tests\Exan\Fenrir\Component;
 
-use Ragnarok\Fenrir\Component\SelectMenu\ChannelSelectMenu;
-use Ragnarok\Fenrir\Enums\Component\SelectMenuType;
-use Ragnarok\Fenrir\Enums\Parts\ChannelTypes;
+use Exan\Fenrir\Component\SelectMenu\ChannelSelectMenu;
+use Exan\Fenrir\Enums\Component\SelectMenuType;
+use Exan\Fenrir\Enums\Parts\ChannelTypes;
 use PHPUnit\Framework\TestCase;
 
 class ChannelSelectMenuTest extends TestCase

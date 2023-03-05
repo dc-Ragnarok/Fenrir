@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Ragnarok\Fenrir\Rest;
+namespace Exan\Fenrir\Rest;
 
 use Discord\Http\Endpoint;
 use Discord\Http\Http;
-use Ragnarok\Fenrir\Parts\ApplicationCommand;
-use Ragnarok\Fenrir\Rest\Helpers\Command\CommandBuilder;
-use Ragnarok\Fenrir\Rest\Helpers\HttpHelper;
+use Exan\Fenrir\Parts\ApplicationCommand;
+use Exan\Fenrir\Rest\Helpers\Command\CommandBuilder;
+use Exan\Fenrir\Rest\Helpers\HttpHelper;
 use JsonMapper;
 use React\Promise\ExtendedPromiseInterface;
 

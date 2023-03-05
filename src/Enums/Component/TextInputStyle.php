@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Ragnarok\Fenrir\Enums\Component;
+namespace Exan\Fenrir\Enums\Component;
 
 enum TextInputStyle: int
 {

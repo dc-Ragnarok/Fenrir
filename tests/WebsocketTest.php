@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Tests\Ragnarok\Fenrir;
+namespace Tests\Exan\Fenrir;
 
-use Ragnarok\Fenrir\Const\WebsocketEvents;
-use Ragnarok\Fenrir\Exceptions\Websocket\ConnectionNotInitializedException;
-use Ragnarok\Fenrir\Websocket;
+use Exan\Fenrir\Const\WebsocketEvents;
+use Exan\Fenrir\Exceptions\Websocket\ConnectionNotInitializedException;
+use Exan\Fenrir\Websocket;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\NullLogger;
 use Ratchet\RFC6455\Messaging\MessageInterface;

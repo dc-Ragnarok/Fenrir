@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Ragnarok\Fenrir\Enums\Flags;
+namespace Exan\Fenrir\Enums\Flags;
 
 enum ActivityFlags: int
 {

@@ -2,25 +2,25 @@
 
 declare(strict_types=1);
 
-namespace Ragnarok\Fenrir\Rest;
+namespace Exan\Fenrir\Rest;
 
 use Discord\Http\Endpoint;
 use Discord\Http\Http;
-use Ragnarok\Fenrir\Parts\Channel as PartsChannel;
-use Ragnarok\Fenrir\Parts\Invite;
-use Ragnarok\Fenrir\Parts\Message;
-use Ragnarok\Fenrir\Parts\ThreadMember;
-use Ragnarok\Fenrir\Parts\User;
-use Ragnarok\Fenrir\Rest\Helpers\Channel\Channel\ChannelBuilder;
-use Ragnarok\Fenrir\Rest\Helpers\Channel\EditMessageBuilder;
-use Ragnarok\Fenrir\Rest\Helpers\Channel\GetMessagesBuilder;
-use Ragnarok\Fenrir\Rest\Helpers\Channel\GetReactionsBuilder;
-use Ragnarok\Fenrir\Rest\Helpers\Channel\InviteBuilder;
-use Ragnarok\Fenrir\Rest\Helpers\Channel\MessageBuilder;
-use Ragnarok\Fenrir\Rest\Helpers\Channel\StartThreadFromMessageBuilder;
-use Ragnarok\Fenrir\Rest\Helpers\Channel\StartThreadWithoutMessageBuilder;
-use Ragnarok\Fenrir\Rest\Helpers\Emoji\EmojiBuilder;
-use Ragnarok\Fenrir\Rest\Helpers\HttpHelper;
+use Exan\Fenrir\Parts\Channel as PartsChannel;
+use Exan\Fenrir\Parts\Invite;
+use Exan\Fenrir\Parts\Message;
+use Exan\Fenrir\Parts\ThreadMember;
+use Exan\Fenrir\Parts\User;
+use Exan\Fenrir\Rest\Helpers\Channel\Channel\ChannelBuilder;
+use Exan\Fenrir\Rest\Helpers\Channel\EditMessageBuilder;
+use Exan\Fenrir\Rest\Helpers\Channel\GetMessagesBuilder;
+use Exan\Fenrir\Rest\Helpers\Channel\GetReactionsBuilder;
+use Exan\Fenrir\Rest\Helpers\Channel\InviteBuilder;
+use Exan\Fenrir\Rest\Helpers\Channel\MessageBuilder;
+use Exan\Fenrir\Rest\Helpers\Channel\StartThreadFromMessageBuilder;
+use Exan\Fenrir\Rest\Helpers\Channel\StartThreadWithoutMessageBuilder;
+use Exan\Fenrir\Rest\Helpers\Emoji\EmojiBuilder;
+use Exan\Fenrir\Rest\Helpers\HttpHelper;
 use JsonMapper;
 use React\Promise\ExtendedPromiseInterface;
 
@@ -38,7 +38,7 @@ class Channel
     /**
      * @see https://discord.com/developers/docs/resources/channel#get-channel
      *
-     * @return ExtendedPromiseInterface<\Ragnarok\Fenrir\Parts\Channel>
+     * @return ExtendedPromiseInterface<\Exan\Fenrir\Parts\Channel>
      */
     public function get(string $channelId): ExtendedPromiseInterface
     {
@@ -56,7 +56,7 @@ class Channel
     /**
      * @see https://discord.com/developers/docs/resources/channel#modify-channel
      *
-     * @return ExtendedPromiseInterface<\Ragnarok\Fenrir\Parts\Channel>
+     * @return ExtendedPromiseInterface<\Exan\Fenrir\Parts\Channel>
      */
     public function modify(string $channelId, ChannelBuilder $channel, ?string $reason = null)
     {
@@ -76,7 +76,7 @@ class Channel
     /**
      * @see https://discord.com/developers/docs/resources/channel#deleteclose-channel
      *
-     * @return ExtendedPromiseInterface<\Ragnarok\Fenrir\Parts\Channel>
+     * @return ExtendedPromiseInterface<\Exan\Fenrir\Parts\Channel>
      */
     public function delete(string $channelId, ?string $reason = null): ExtendedPromiseInterface
     {
@@ -96,7 +96,7 @@ class Channel
     /**
      * @see https://discord.com/developers/docs/resources/channel#get-channel-messages
      *
-     * @return ExtendedPromiseInterface<\Ragnarok\Fenrir\Parts\Message[]>
+     * @return ExtendedPromiseInterface<\Exan\Fenrir\Parts\Message[]>
      */
     public function getMessages(
         string $channelId,
@@ -117,7 +117,7 @@ class Channel
     /**
      * @see https://discord.com/developers/docs/resources/channel#get-channel-message
      *
-     * @return ExtendedPromiseInterface<\Ragnarok\Fenrir\Parts\Message>
+     * @return ExtendedPromiseInterface<\Exan\Fenrir\Parts\Message>
      */
     public function getMessage(string $channelId, string $messageId): ExtendedPromiseInterface
     {
@@ -136,7 +136,7 @@ class Channel
     /**
      * @see https://discord.com/developers/docs/resources/channel#create-message
      *
-     * @return ExtendedPromiseInterface<\Ragnarok\Fenrir\Parts\Message>
+     * @return ExtendedPromiseInterface<\Exan\Fenrir\Parts\Message>
      */
     public function createMessage(
         string $channelId,
@@ -157,7 +157,7 @@ class Channel
     /**
      * @see https://discord.com/developers/docs/resources/channel#crosspost-message
      *
-     * @return ExtendedPromiseInterface<\Ragnarok\Fenrir\Parts\Message>
+     * @return ExtendedPromiseInterface<\Exan\Fenrir\Parts\Message>
      */
     public function crosspostMessage(string $channelId, string $messageId): ExtendedPromiseInterface
     {
@@ -238,7 +238,7 @@ class Channel
     /**
      * @see https://discord.com/developers/docs/resources/channel#get-reactions
      *
-     * @return ExtendedPromiseInterface<\Ragnarok\Fenrir\Parts\Message>
+     * @return ExtendedPromiseInterface<\Exan\Fenrir\Parts\Message>
      */
     public function getReactions(
         string $channelId,
@@ -299,7 +299,7 @@ class Channel
     /**
      * @see https://discord.com/developers/docs/resources/channel#edit-message
      *
-     * @return ExtendedPromiseInterface<\Ragnarok\Fenrir\Parts\Message>
+     * @return ExtendedPromiseInterface<\Exan\Fenrir\Parts\Message>
      */
     public function editMessage(string $channelId, string $messageId, EditMessageBuilder $message)
     {
@@ -348,7 +348,7 @@ class Channel
     /**
      * @see https://discord.com/developers/docs/resources/invite#invite-object
      *
-     * @return ExtendedPromiseInterface<\Ragnarok\Fenrir\Parts\Invite>
+     * @return ExtendedPromiseInterface<\Exan\Fenrir\Parts\Invite>
      */
     public function getChannelInvites(string $channelId): ExtendedPromiseInterface
     {
@@ -366,7 +366,7 @@ class Channel
     /**
      * @see https://discord.com/developers/docs/resources/channel#get-channel-invites
      *
-     * @return ExtendedPromiseInterface<\Ragnarok\Fenrir\Parts\Invite>
+     * @return ExtendedPromiseInterface<\Exan\Fenrir\Parts\Invite>
      */
     public function createChannelInvite(
         string $channelId,
@@ -432,7 +432,7 @@ class Channel
     /**
      * @see https://discord.com/developers/docs/resources/channel#get-pinned-messages
      *
-     * @return ExtendedPromiseInterface<\Ragnarok\Fenrir\Parts\Message[]>
+     * @return ExtendedPromiseInterface<\Exan\Fenrir\Parts\Message[]>
      */
     public function getPinnedMessages(string $channelId)
     {
@@ -482,7 +482,7 @@ class Channel
     /**
      * @see https://discord.com/developers/docs/resources/channel#start-thread-from-message
      *
-     * @return ExtendedPromiseInterface<\Ragnarok\Fenrir\Parts\Channel>
+     * @return ExtendedPromiseInterface<\Exan\Fenrir\Parts\Channel>
      */
     public function startThreadFromMessage(
         string $channelId,
@@ -505,7 +505,7 @@ class Channel
     /**
      * @see https://discord.com/developers/docs/resources/channel#start-thread-without-message
      *
-     * @return ExtendedPromiseInterface<\Ragnarok\Fenrir\Parts\Channel>
+     * @return ExtendedPromiseInterface<\Exan\Fenrir\Parts\Channel>
      */
     public function startThreadWithoutMessage(
         string $channelId,
@@ -594,7 +594,7 @@ class Channel
     /**
      * @see https://discord.com/developers/docs/resources/channel#get-thread-member
      *
-     * @return ExtendedPromiseInterface<\Ragnarok\Fenrir\Parts\ThreadMember>
+     * @return ExtendedPromiseInterface<\Exan\Fenrir\Parts\ThreadMember>
      */
     public function getThreadMember(string $channelId, string $userId)
     {
@@ -613,7 +613,7 @@ class Channel
     /**
      * @see https://discord.com/developers/docs/resources/channel#list-thread-members
      *
-     * @return ExtendedPromiseInterface<\Ragnarok\Fenrir\Parts\ThreadMember[]>
+     * @return ExtendedPromiseInterface<\Exan\Fenrir\Parts\ThreadMember[]>
      */
     public function listThreadMembers(
         string $channelId,
@@ -642,7 +642,7 @@ class Channel
     /**
      * @see https://discord.com/developers/docs/resources/channel#list-public-archived-threads
      *
-     * @return ExtendedPromiseInterface<\Ragnarok\Fenrir\Parts\Channel[]>
+     * @return ExtendedPromiseInterface<\Exan\Fenrir\Parts\Channel[]>
      */
     public function listPublicArchivedThreads(string $channelId): ExtendedPromiseInterface
     {
@@ -660,7 +660,7 @@ class Channel
     /**
      * @see https://discord.com/developers/docs/resources/channel#list-private-archived-threads
      *
-     * @return ExtendedPromiseInterface<\Ragnarok\Fenrir\Parts\Channel[]>
+     * @return ExtendedPromiseInterface<\Exan\Fenrir\Parts\Channel[]>
      */
     public function listPrivateArchivedThreads(string $channelId): ExtendedPromiseInterface
     {
@@ -678,7 +678,7 @@ class Channel
     /**
      * @see https://discord.com/developers/docs/resources/channel#list-joined-private-archived-threads
      *
-     * @return ExtendedPromiseInterface<\Ragnarok\Fenrir\Parts\Channel[]>
+     * @return ExtendedPromiseInterface<\Exan\Fenrir\Parts\Channel[]>
      */
     public function listJoinedPrivateArchivedThreads(string $channelId): ExtendedPromiseInterface
     {

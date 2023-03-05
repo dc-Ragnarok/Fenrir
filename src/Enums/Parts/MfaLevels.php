@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Ragnarok\Fenrir\Enums\Parts;
+namespace Exan\Fenrir\Enums\Parts;
 
 enum MfaLevels: int
 {

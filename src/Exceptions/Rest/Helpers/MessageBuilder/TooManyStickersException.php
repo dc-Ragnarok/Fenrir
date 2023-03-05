@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Ragnarok\Fenrir\Exceptions\Rest\Helpers\MessageBuilder;
+namespace Exan\Fenrir\Exceptions\Rest\Helpers\MessageBuilder;
 
 use Exception;
 

@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Tests\Ragnarok\Fenrir\Gateway;
+namespace Tests\Exan\Fenrir\Gateway;
 
-use Ragnarok\Fenrir\Bitwise\Bitwise;
-use Ragnarok\Fenrir\Const\WebsocketEvents;
-use Ragnarok\Fenrir\Discord;
-use Ragnarok\Fenrir\EventHandler;
-use Ragnarok\Fenrir\Gateway;
+use Exan\Fenrir\Bitwise\Bitwise;
+use Exan\Fenrir\Const\WebsocketEvents;
+use Exan\Fenrir\Discord;
+use Exan\Fenrir\EventHandler;
+use Exan\Fenrir\Gateway;
 use Mockery;
 use Mockery\Adapter\Phpunit\MockeryTestCase;
 use Mockery\Mock;
@@ -39,10 +39,10 @@ class GatewayTestCase extends MockeryTestCase
          */
         $this->loop = Mockery::mock('React\EventLoop\LoopInterface');
 
-        $bucketMock = Mockery::mock('overload:Ragnarok\Fenrir\Bucket');
+        $bucketMock = Mockery::mock('overload:Exan\Fenrir\Bucket');
         $bucketMock->shouldReceive('run')->andReturnUsing(fn ($fn) => $fn());
 
-        $websocketMock = Mockery::mock('overload:Ragnarok\Fenrir\Websocket');
+        $websocketMock = Mockery::mock('overload:Exan\Fenrir\Websocket');
         $websocketMock->shouldReceive('on')->andReturnUsing(function (string $event, callable $handler) {
             $this->websocketHandlers[$event] = $handler;
         });

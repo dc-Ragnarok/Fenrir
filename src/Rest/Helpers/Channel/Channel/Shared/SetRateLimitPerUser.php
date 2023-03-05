@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Ragnarok\Fenrir\Rest\Helpers\Channel\Channel\Shared;
+namespace Exan\Fenrir\Rest\Helpers\Channel\Channel\Shared;
 
-use Ragnarok\Fenrir\Const\Validation\RateLimit;
+use Exan\Fenrir\Const\Validation\RateLimit;
 
 trait SetRateLimitPerUser
 {

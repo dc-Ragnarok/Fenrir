@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Ragnarok\Fenrir\Parts;
+namespace Exan\Fenrir\Parts;
 
-use Ragnarok\Fenrir\Enums\Parts\StickerFormatTypes;
+use Exan\Fenrir\Enums\Parts\StickerFormatTypes;
 
 class MessageStickerItem
 {

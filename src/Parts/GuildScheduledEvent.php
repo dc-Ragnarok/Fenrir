@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Ragnarok\Fenrir\Parts;
+namespace Exan\Fenrir\Parts;
 
 use Carbon\Carbon;
-use Ragnarok\Fenrir\Enums\Parts\GuildScheduledEventPrivacyLevels;
-use Ragnarok\Fenrir\Enums\Parts\GuildScheduledEventStatus;
-use Ragnarok\Fenrir\Enums\Parts\GuildScheduledEventEntityTypes;
+use Exan\Fenrir\Enums\Parts\GuildScheduledEventPrivacyLevels;
+use Exan\Fenrir\Enums\Parts\GuildScheduledEventStatus;
+use Exan\Fenrir\Enums\Parts\GuildScheduledEventEntityTypes;
 
 class GuildScheduledEvent
 {

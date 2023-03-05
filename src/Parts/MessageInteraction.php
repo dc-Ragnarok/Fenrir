@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Ragnarok\Fenrir\Parts;
+namespace Exan\Fenrir\Parts;
 
-use Ragnarok\Fenrir\Enums\Parts\InteractionTypes;
-use Ragnarok\Fenrir\Attributes\Partial;
+use Exan\Fenrir\Enums\Parts\InteractionTypes;
+use Exan\Fenrir\Attributes\Partial;
 
 class MessageInteraction
 {

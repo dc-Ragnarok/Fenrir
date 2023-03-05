@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Ragnarok\Fenrir\Attributes;
+namespace Exan\Fenrir\Attributes;
 
 /**
  * Indicates related intents

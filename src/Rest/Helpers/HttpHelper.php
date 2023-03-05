@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Ragnarok\Fenrir\Rest\Helpers;
+namespace Exan\Fenrir\Rest\Helpers;
 
 use JsonMapper;
 use React\Promise\ExtendedPromiseInterface;

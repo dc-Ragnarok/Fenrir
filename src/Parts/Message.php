@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Ragnarok\Fenrir\Parts;
+namespace Exan\Fenrir\Parts;
 
 use Carbon\Carbon;
-use Ragnarok\Fenrir\Enums\Parts\MessageTypes;
-use Ragnarok\Fenrir\Bitwise\Bitwise;
-use Ragnarok\Fenrir\Enums\Parts\MessageComponentTypes;
-use Ragnarok\Fenrir\Attributes\Partial;
+use Exan\Fenrir\Enums\Parts\MessageTypes;
+use Exan\Fenrir\Bitwise\Bitwise;
+use Exan\Fenrir\Enums\Parts\MessageComponentTypes;
+use Exan\Fenrir\Attributes\Partial;
 
 class Message
 {
@@ -21,7 +21,7 @@ class Message
     public bool $tts;
     public bool $mention_everyone;
     /**
-     * @var \Ragnarok\Fenrir\Parts\User[]
+     * @var \Exan\Fenrir\Parts\User[]
      */
     public array $mentions;
     /**
@@ -29,19 +29,19 @@ class Message
      */
     public array $mention_roles;
     /**
-     * @var \Ragnarok\Fenrir\Parts\ChannelMention[]
+     * @var \Exan\Fenrir\Parts\ChannelMention[]
      */
     public ?array $mention_channels;
     /**
-     * @var \Ragnarok\Fenrir\Parts\Attachment[]
+     * @var \Exan\Fenrir\Parts\Attachment[]
      */
     public array $attachments;
     /**
-     * @var \Ragnarok\Fenrir\Parts\Embed[]
+     * @var \Exan\Fenrir\Parts\Embed[]
      */
     public array $embeds;
     /**
-     * @var \Ragnarok\Fenrir\Parts\Reaction[]
+     * @var \Exan\Fenrir\Parts\Reaction[]
      */
     public ?array $reactions;
     public ?string $nonce;
@@ -58,15 +58,15 @@ class Message
     public ?MessageInteraction $interaction;
     public ?Channel $thread;
     /**
-     * @var \Ragnarok\Fenrir\Enums\Parts\MessageComponentTypes[]
+     * @var \Exan\Fenrir\Enums\Parts\MessageComponentTypes[]
      */
     public array $components;
     /**
-     * @var \Ragnarok\Fenrir\Parts\MessageStickerItem[]
+     * @var \Exan\Fenrir\Parts\MessageStickerItem[]
      */
     public ?array $sticker_items;
     /**
-     * @var \Ragnarok\Fenrir\Parts\Sticker[]
+     * @var \Exan\Fenrir\Parts\Sticker[]
      */
     public ?array $stickers;
     public ?int $position;

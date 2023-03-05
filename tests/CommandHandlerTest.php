@@ -2,27 +2,27 @@
 
 declare(strict_types=1);
 
-namespace Tests\Ragnarok\Fenrir;
+namespace Tests\Exan\Fenrir;
 
-use Ragnarok\Fenrir\Command\FiredCommand;
-use Ragnarok\Fenrir\CommandHandler;
-use Ragnarok\Fenrir\Const\Events;
-use Ragnarok\Fenrir\Discord;
-use Ragnarok\Fenrir\EventHandler;
-use Ragnarok\Fenrir\Gateway;
-use Ragnarok\Fenrir\Parts\User;
-use Ragnarok\Fenrir\Rest\GlobalCommand;
-use Ragnarok\Fenrir\Rest\GuildCommand;
-use Ragnarok\Fenrir\Rest\Helpers\Command\CommandBuilder;
-use Ragnarok\Fenrir\Rest\Rest;
-use Ragnarok\Fenrir\Websocket\Events\Ready;
-use Ragnarok\Fenrir\Websocket\Objects\Payload;
+use Exan\Fenrir\Command\FiredCommand;
+use Exan\Fenrir\CommandHandler;
+use Exan\Fenrir\Const\Events;
+use Exan\Fenrir\Discord;
+use Exan\Fenrir\EventHandler;
+use Exan\Fenrir\Gateway;
+use Exan\Fenrir\Parts\User;
+use Exan\Fenrir\Rest\GlobalCommand;
+use Exan\Fenrir\Rest\GuildCommand;
+use Exan\Fenrir\Rest\Helpers\Command\CommandBuilder;
+use Exan\Fenrir\Rest\Rest;
+use Exan\Fenrir\Websocket\Events\Ready;
+use Exan\Fenrir\Websocket\Objects\Payload;
 use JsonMapper;
 use Mockery;
 use Mockery\Adapter\Phpunit\MockeryTestCase;
-use Ragnarok\Fenrir\Parts\ApplicationCommand;
-use Ragnarok\Fenrir\Parts\InteractionData;
-use Ragnarok\Fenrir\Websocket\Events\InteractionCreate;
+use Exan\Fenrir\Parts\ApplicationCommand;
+use Exan\Fenrir\Parts\InteractionData;
+use Exan\Fenrir\Websocket\Events\InteractionCreate;
 use React\Promise\Promise;
 
 class CommandHandlerTest extends MockeryTestCase

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Ragnarok\Fenrir\Component\SelectMenu;
+namespace Exan\Fenrir\Component\SelectMenu;
 
-use Ragnarok\Fenrir\Enums\Component\SelectMenuType;
+use Exan\Fenrir\Enums\Component\SelectMenuType;
 
 class RoleSelectMenu extends SelectMenu
 {

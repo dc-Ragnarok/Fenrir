@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Ragnarok\Fenrir\Websocket\Events;
+namespace Exan\Fenrir\Websocket\Events;
 
-use Ragnarok\Fenrir\Parts\GuildScheduledEvent;
+use Exan\Fenrir\Parts\GuildScheduledEvent;
 
 /**
  * @see https://discord.com/developers/docs/topics/gateway-events#guild-scheduled-event-create

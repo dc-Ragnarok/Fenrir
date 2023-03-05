@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Tests\Ragnarok\Fenrir\Rest\Helpers\Channel\Channel\Shared;
+namespace Tests\Exan\Fenrir\Rest\Helpers\Channel\Channel\Shared;
 
-use Ragnarok\Fenrir\Enums\Parts\ChannelTypes;
-use Ragnarok\Fenrir\Rest\Helpers\Channel\Channel\Shared\SetType;
+use Exan\Fenrir\Enums\Parts\ChannelTypes;
+use Exan\Fenrir\Rest\Helpers\Channel\Channel\Shared\SetType;
 use PHPUnit\Framework\TestCase;
-use Ragnarok\Fenrir\Exceptions\Rest\Helpers\Channel\Channel\Shared\SetType\UnsupportedConversionException;
+use Exan\Fenrir\Exceptions\Rest\Helpers\Channel\Channel\Shared\SetType\UnsupportedConversionException;
 
 class SetTypeTest extends TestCase
 {

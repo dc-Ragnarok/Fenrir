@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Ragnarok\Fenrir\Enums\Command;
+namespace Exan\Fenrir\Enums\Command;
 
 enum InteractionCallbackTypes: int
 {

@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Ragnarok\Fenrir\Rest\Helpers\AuditLog;
+namespace Exan\Fenrir\Rest\Helpers\AuditLog;
 
-use Ragnarok\Fenrir\Const\Validation\ItemLimit;
-use Ragnarok\Fenrir\Rest\Helpers\GetNew;
+use Exan\Fenrir\Const\Validation\ItemLimit;
+use Exan\Fenrir\Rest\Helpers\GetNew;
 
 class GetGuildAuditLogsBuilder
 {

@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-namespace Tests\Ragnarok\Fenrir\Rest\Helpers\Channel\Channel;
+namespace Tests\Exan\Fenrir\Rest\Helpers\Channel\Channel;
 
-use Ragnarok\Fenrir\Bitwise\Bitwise;
-use Ragnarok\Fenrir\Enums\Flags\ChannelFlags;
-use Ragnarok\Fenrir\Enums\Parts\ChannelTypes;
-use Ragnarok\Fenrir\Enums\Parts\ForumLayoutTypes;
-use Ragnarok\Fenrir\Enums\Parts\SortOrderTypes;
-use Ragnarok\Fenrir\Exceptions\Rest\Helpers\Channel\Channel\GuildForumChannelBuilder\TooManyAvailableTagsException;
-use Ragnarok\Fenrir\Parts\Emoji;
-use Ragnarok\Fenrir\Rest\Helpers\Channel\Channel\GuildForumChannelBuilder;
-use Ragnarok\Fenrir\Rest\Helpers\Emoji\EmojiBuilder;
+use Exan\Fenrir\Bitwise\Bitwise;
+use Exan\Fenrir\Enums\Flags\ChannelFlags;
+use Exan\Fenrir\Enums\Parts\ChannelTypes;
+use Exan\Fenrir\Enums\Parts\ForumLayoutTypes;
+use Exan\Fenrir\Enums\Parts\SortOrderTypes;
+use Exan\Fenrir\Exceptions\Rest\Helpers\Channel\Channel\GuildForumChannelBuilder\TooManyAvailableTagsException;
+use Exan\Fenrir\Parts\Emoji;
+use Exan\Fenrir\Rest\Helpers\Channel\Channel\GuildForumChannelBuilder;
+use Exan\Fenrir\Rest\Helpers\Emoji\EmojiBuilder;
 use PHPUnit\Framework\TestCase;
 
 class GuildForumChannelBuilderTest extends TestCase
