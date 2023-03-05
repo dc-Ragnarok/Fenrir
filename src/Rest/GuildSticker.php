@@ -84,8 +84,11 @@ class GuildSticker
      * @see https://discord.com/developers/docs/resources/sticker#modify-guild-sticker
      * @return ExtendedPromiseInterface<\Exan\Fenrir\Parts\Sticker>
      */
-    public function modify(string $guildId, string $stickerId, ModifyStickerBuilder $modifyStickerBuilder): ExtendedPromiseInterface
-    {
+    public function modify(
+        string $guildId,
+        string $stickerId,
+        ModifyStickerBuilder $modifyStickerBuilder
+    ): ExtendedPromiseInterface {
         return $this->mapPromise(
             $this->http->patch(
                 Endpoint::bind(
