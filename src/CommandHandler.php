@@ -75,6 +75,8 @@ class CommandHandler
             return;
         }
 
+        $this->activated = true;
+
         $this->discord->gateway->events->on(
             Events::INTERACTION_CREATE,
             $this->handleInteraction(...)

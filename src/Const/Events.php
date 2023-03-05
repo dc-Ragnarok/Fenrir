@@ -94,7 +94,8 @@ class Events
         self::AUTO_MODERATION_RULE_CREATE => \Ragnarok\Fenrir\Websocket\Events\AutoModerationRuleCreate::class,
         self::AUTO_MODERATION_RULE_UPDATE => \Ragnarok\Fenrir\Websocket\Events\AutoModerationRuleUpdate::class,
         self::AUTO_MODERATION_RULE_DELETE => \Ragnarok\Fenrir\Websocket\Events\AutoModerationRuleDelete::class,
-        self::AUTO_MODERATION_ACTION_EXECUTION => \Ragnarok\Fenrir\Websocket\Events\AutoModerationActionExecution::class,
+        self::AUTO_MODERATION_ACTION_EXECUTION =>
+            \Ragnarok\Fenrir\Websocket\Events\AutoModerationActionExecution::class,
 
         self::CHANNEL_CREATE => \Ragnarok\Fenrir\Websocket\Events\ChannelCreate::class,
         self::CHANNEL_UPDATE => \Ragnarok\Fenrir\Websocket\Events\ChannelUpdate::class,
@@ -133,7 +134,8 @@ class Events
         self::GUILD_SCHEDULED_EVENT_UPDATE => \Ragnarok\Fenrir\Websocket\Events\GuildScheduledEventUpdate::class,
         self::GUILD_SCHEDULED_EVENT_DELETE => \Ragnarok\Fenrir\Websocket\Events\GuildScheduledEventDelete::class,
         self::GUILD_SCHEDULED_EVENT_USER_ADD => \Ragnarok\Fenrir\Websocket\Events\GuildScheduledEventUserAdd::class,
-        self::GUILD_SCHEDULED_EVENT_USER_REMOVE => \Ragnarok\Fenrir\Websocket\Events\GuildScheduledEventUserRemove::class,
+        self::GUILD_SCHEDULED_EVENT_USER_REMOVE =>
+            \Ragnarok\Fenrir\Websocket\Events\GuildScheduledEventUserRemove::class,
 
         self::INTEGRATION_CREATE => \Ragnarok\Fenrir\Websocket\Events\IntegrationCreate::class,
         self::INTEGRATION_UPDATE => \Ragnarok\Fenrir\Websocket\Events\IntegrationUpdate::class,

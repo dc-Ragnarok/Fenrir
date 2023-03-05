@@ -7,6 +7,7 @@ namespace Tests\Ragnarok\Fenrir\Rest\Helpers\Channel\Channel\Shared;
 use Ragnarok\Fenrir\Enums\Parts\ChannelTypes;
 use Ragnarok\Fenrir\Rest\Helpers\Channel\Channel\Shared\SetType;
 use PHPUnit\Framework\TestCase;
+use Ragnarok\Fenrir\Exceptions\Rest\Helpers\Channel\Channel\Shared\SetType\UnsupportedConversionException;
 
 class SetTypeTest extends TestCase
 {
@@ -28,7 +29,7 @@ class SetTypeTest extends TestCase
     {
         $class = $this->getClass();
         $this->expectException(
-            \Ragnarok\Fenrir\Exceptions\Rest\Helpers\Channel\Channel\Shared\SetType\UnsupportedConversionException::class
+            UnsupportedConversionException::class
         );
         $class->setType(ChannelTypes::GUILD_VOICE);
     }

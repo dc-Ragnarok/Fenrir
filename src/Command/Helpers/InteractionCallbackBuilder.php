@@ -42,6 +42,11 @@ class InteractionCallbackBuilder
         return $this;
     }
 
+    public function getType(): InteractionCallbackTypes
+    {
+        return $this->type;
+    }
+
     public function get(): array|MultipartBody
     {
         $data = [
