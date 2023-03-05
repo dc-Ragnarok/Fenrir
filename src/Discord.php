@@ -74,9 +74,8 @@ class Discord
      *  command rather than Global. Useful for testing without having to change
      *  this manually. Explicitly using `registerGlobalCommand` is not affected
      */
-    public function withCommandHandler(
-        ?string $devGuildId = null
-    ) {
+    public function withCommandHandler(?string $devGuildId = null): self
+    {
         $args = [$this];
 
         if (!is_null($devGuildId) && !empty($devGuildId)) {
