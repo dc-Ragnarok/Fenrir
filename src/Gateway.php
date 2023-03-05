@@ -63,12 +63,12 @@ class Gateway
         });
     }
 
-    public function connect()
+    public function connect(): void
     {
         $this->websocket->open(self::WEBSOCKET_URL);
     }
 
-    private function reconnect(bool $close, bool $resume)
+    private function reconnect(bool $close, bool $resume): void
     {
         if (isset($this->heartbeatTimer)) {
             $this->stopHeartbeat();
@@ -83,7 +83,7 @@ class Gateway
         $this->websocket->open($this->reconnectUrl);
     }
 
-    private function resume()
+    private function resume(): void
     {
         $this->sendPayload([
             'op' => 6,
@@ -95,14 +95,14 @@ class Gateway
         ]);
     }
 
-    private function scheduleReconnect()
+    private function scheduleReconnect(): void
     {
         $this->scheduledReconnect = $this->loop->addTimer(5, function () {
             $this->reconnect(true, true);
         });
     }
 
-    private function cancelScheduledReconnect()
+    private function cancelScheduledReconnect(): void
     {
         if (!isset($this->scheduledReconnect)) {
             return;
@@ -113,7 +113,7 @@ class Gateway
         $this->scheduledReconnect = null;
     }
 
-    private function identify()
+    private function identify(): void
     {
         $this->sendPayload([
             'op' => 2,
@@ -131,7 +131,7 @@ class Gateway
         $this->shouldIdentify = false;
     }
 
-    private function handlePayload(Payload $payload)
+    private function handlePayload(Payload $payload): void
     {
         switch ($payload->op) {
             /**
@@ -184,14 +184,14 @@ class Gateway
         }
     }
 
-    private function handleHello(Hello $data)
+    private function handleHello(Hello $data): void
     {
         $this->heartbeatInterval = $data->heartbeat_interval;
 
         $this->startHeartbeat();
     }
 
-    private function handleEvent(Payload $payload)
+    private function handleEvent(Payload $payload): void
     {
         if ($payload->t === Events::READY && isset($payload->d->session_id, $payload->d->resume_gateway_url)) {
             $this->sessionId = $payload->d->session_id;
@@ -201,12 +201,12 @@ class Gateway
         $this->events->handle($payload);
     }
 
-    private function sendPayload(array $data, bool $useBucket = true)
+    private function sendPayload(array $data, bool $useBucket = true): void
     {
         $this->websocket->send(json_encode($data), $useBucket);
     }
 
-    private function startHeartbeat()
+    private function startHeartbeat(): void
     {
         $this->heartbeatTimer = $this->loop->addPeriodicTimer($this->heartbeatInterval / 1000, function () {
             $this->sendPayload([
@@ -218,7 +218,7 @@ class Gateway
         });
     }
 
-    private function stopHeartbeat()
+    private function stopHeartbeat(): void
     {
         if ($this->heartbeatTimer) {
             $this->loop->cancelTimer($this->heartbeatTimer);
