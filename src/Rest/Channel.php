@@ -142,31 +142,16 @@ class Channel
         string $channelId,
         MessageBuilder $message
     ): ExtendedPromiseInterface {
-        return $this->mapPromise((function () use ($channelId, $message) {
-            if ($message->requiresMultipart()) {
-                $multipart = $message->getMultipart();
-
-                $body = $multipart->getBody();
-                $headers = $multipart->getHeaders($body);
-
-                return $this->http->post(
-                    Endpoint::bind(
-                        Endpoint::CHANNEL_MESSAGES,
-                        $channelId
-                    ),
-                    $body . "\n",
-                    $headers
-                );
-            }
-
-            return $this->http->post(
+        return $this->mapPromise(
+            $this->http->post(
                 Endpoint::bind(
                     Endpoint::CHANNEL_MESSAGES,
                     $channelId
                 ),
                 $message->get()
-            );
-        })(), Message::class);
+            ),
+            Message::class
+        );
     }
 
     /**
@@ -318,33 +303,17 @@ class Channel
      */
     public function editMessage(string $channelId, string $messageId, EditMessageBuilder $message)
     {
-        return $this->mapPromise((function () use ($channelId, $messageId, $message) {
-            if ($message->requiresMultipart()) {
-                $multipart = $message->getMultipart();
-
-                $body = $multipart->getBody();
-                $headers = $multipart->getHeaders($body);
-
-                return $this->http->patch(
-                    Endpoint::bind(
-                        Endpoint::CHANNEL_MESSAGE,
-                        $channelId,
-                        $messageId
-                    ),
-                    $body . "\n",
-                    $headers
-                );
-            }
-
-            return $this->http->patch(
+        return $this->mapPromise(
+            $this->http->patch(
                 Endpoint::bind(
                     Endpoint::CHANNEL_MESSAGE,
                     $channelId,
                     $messageId
                 ),
                 $message->get()
-            );
-        })(), Message::class);
+            ),
+            Message::class
+        );
     }
 
     /**

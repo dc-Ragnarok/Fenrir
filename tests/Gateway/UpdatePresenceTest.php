@@ -2,21 +2,21 @@
 
 declare(strict_types=1);
 
-namespace Tests\Exan\Fenrir\Discord;
+namespace Tests\Exan\Fenrir\Gateway;
 
 use Exan\Fenrir\Enums\Gateway\StatusType;
 use Exan\Fenrir\Websocket\Helpers\ActivityBuilder;
-use Tests\Exan\Fenrir\Discord\DiscordTestCase;
+use Tests\Exan\Fenrir\Gateway\GatewayTestCase;
 
 /**
  * @runTestsInSeparateProcesses
  * @preserveGlobalState disabled
  */
-class UpdatePresenceTest extends DiscordTestCase
+class UpdatePresenceTest extends GatewayTestCase
 {
     public function testUpdatePresence()
     {
-        $this->discord->updatePresence(
+        $this->gateway->updatePresence(
             StatusType::ONLINE,
             [new ActivityBuilder()],
         );
@@ -30,7 +30,7 @@ class UpdatePresenceTest extends DiscordTestCase
 
     public function testUpdatePresenceWithSince()
     {
-        $this->discord->updatePresence(
+        $this->gateway->updatePresence(
             StatusType::ONLINE,
             [new ActivityBuilder()],
             since: 12345

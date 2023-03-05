@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tests\Exan\Fenrir\Rest\Helpers\Channel\Channel\Shared;
+namespace Tests\Exan\Fenrir\Rest\Helpers\Channel\Channel;
 
 use Exan\Fenrir\Enums\Parts\ChannelTypes;
 use Exan\Fenrir\Rest\Helpers\Channel\Channel\GuildAnnouncementChannelBuilder;

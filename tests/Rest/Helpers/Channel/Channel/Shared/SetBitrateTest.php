@@ -7,7 +7,7 @@ namespace Tests\Exan\Fenrir\Rest\Helpers\Channel\Channel\Shared;
 use Exan\Fenrir\Rest\Helpers\Channel\Channel\Shared\SetBitrate;
 use PHPUnit\Framework\TestCase;
 
-class SetBitRateTest extends TestCase
+class SetBitrateTest extends TestCase
 {
     public function testSetBitRate()
     {

@@ -28,7 +28,7 @@ class Sticker
      *
      * @return ExtendedPromiseInterface<\Exan\Fenrir\Parts\Sticker>
      */
-    public function get(string $stickerId)
+    public function get(string $stickerId): ExtendedPromiseInterface
     {
         return $this->mapPromise(
             $this->http->get(
@@ -46,7 +46,7 @@ class Sticker
      *
      * @return ExtendedPromiseInterface<\Exan\Fenrir\Parts\StickerPack[]>
      */
-    public function listNitroPacks()
+    public function listNitroPacks(): ExtendedPromiseInterface
     {
         return $this->mapArrayPromise(
             $this->http->get(

@@ -2,30 +2,30 @@
 
 declare(strict_types=1);
 
-namespace Tests\Exan\Fenrir\Discord;
+namespace Tests\Exan\Fenrir\Gateway;
 
 use Exan\Fenrir\EventHandler;
 use Mockery;
-use Tests\Exan\Fenrir\Discord\DiscordTestCase;
+use Tests\Exan\Fenrir\Gateway\GatewayTestCase;
 
 /**
  * @runTestsInSeparateProcesses
  * @preserveGlobalState disabled
  */
-class RegularEventsForwardingTest extends DiscordTestCase
+class RegularEventsForwardingTest extends GatewayTestCase
 {
     protected function setUp(): void
     {
         parent::setUp();
 
-        $this->discord->events = Mockery::mock(EventHandler::class);
-        $this->discord->events->shouldReceive('handle');
+        $this->gateway->events = Mockery::mock(EventHandler::class);
+        $this->gateway->events->shouldReceive('handle');
     }
 
     public function testRegularEventsGetForwardedToEventHandler()
     {
         $this->mockIncomingMessage(['op' => 0, 't' => '::some event::']);
 
-        $this->discord->events->shouldHaveReceived('handle');
+        $this->gateway->events->shouldHaveReceived('handle');
     }
 }

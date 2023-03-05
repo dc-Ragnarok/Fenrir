@@ -29,7 +29,7 @@ class GuildSticker
      *
      * @return ExtendedPromiseInterface<\Exan\Fenrir\Parts\Sticker[]>
      */
-    public function list(string $guildId)
+    public function list(string $guildId): ExtendedPromiseInterface
     {
         return $this->mapArrayPromise(
             $this->http->get(
@@ -47,7 +47,7 @@ class GuildSticker
      *
      * @return ExtendedPromiseInterface<\Exan\Fenrir\Parts\Sticker>
      */
-    public function get(string $guildId, string $stickerId)
+    public function get(string $guildId, string $stickerId): ExtendedPromiseInterface
     {
         return $this->mapPromise(
             $this->http->get(
@@ -66,18 +66,15 @@ class GuildSticker
      *
      * @return ExtendedPromiseInterface<\Exan\Fenrir\Parts\Sticker>
      */
-    public function create(string $guildId, StickerBuilder $stickerBuilder)
+    public function create(string $guildId, StickerBuilder $stickerBuilder): ExtendedPromiseInterface
     {
-        $multipart = $stickerBuilder->get();
-
         return $this->mapPromise(
             $this->http->post(
                 Endpoint::bind(
                     Endpoint::GUILD_STICKERS,
                     $guildId
                 ),
-                $multipart->getBody(),
-                $multipart->getHeaders()
+                $stickerBuilder->get()
             ),
             Sticker::class
         );
@@ -85,10 +82,13 @@ class GuildSticker
 
     /**
      * @see https://discord.com/developers/docs/resources/sticker#modify-guild-sticker
-     * @todo implement call
+     * @return ExtendedPromiseInterface<\Exan\Fenrir\Parts\Sticker>
      */
-    public function modify(string $guildId, string $stickerId, ModifyStickerBuilder $modifyStickerBuilder)
-    {
+    public function modify(
+        string $guildId,
+        string $stickerId,
+        ModifyStickerBuilder $modifyStickerBuilder
+    ): ExtendedPromiseInterface {
         return $this->mapPromise(
             $this->http->patch(
                 Endpoint::bind(
@@ -107,7 +107,7 @@ class GuildSticker
      *
      * @return ExtendedPromiseInterface<void>
      */
-    public function delete(string $guildId, string $stickerId)
+    public function delete(string $guildId, string $stickerId): ExtendedPromiseInterface
     {
         return $this->http->delete(
             Endpoint::bind(
