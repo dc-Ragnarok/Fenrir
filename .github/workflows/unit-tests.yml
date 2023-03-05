@@ -1,6 +1,9 @@
 name: Fenrir Unit Tests
 run-name: ${{ github.actor }} is running tests
-on: [push, pull_request]
+on:
+  pull_request:
+  push:
+    branches: master
 
 jobs:
   cs:
