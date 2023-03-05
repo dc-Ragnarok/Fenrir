@@ -11,7 +11,7 @@ class GetMessagesBuilder
 {
     use GetNew;
 
-    private $data = [];
+    private array $data = [];
 
     public function setAround(string $around): GetMessagesBuilder
     {

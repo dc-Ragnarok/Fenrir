@@ -12,7 +12,7 @@ class StartThreadFromMessageBuilder
 {
     use GetNew;
 
-    private $data = [];
+    private array $data = [];
 
     public function setName(string $name): StartThreadFromMessageBuilder
     {

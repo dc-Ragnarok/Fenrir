@@ -30,7 +30,7 @@ class EditMessageBuilder
 
     private $data = [];
 
-    private $files = [];
+    private array $files = [];
 
     public function get(): MultipartBody|array
     {

@@ -11,7 +11,7 @@ class CreateEmojiBuilder
 {
     use GetNew;
 
-    private $data = [];
+    private array $data = [];
 
     public function setName(string $name): CreateEmojiBuilder
     {

@@ -11,7 +11,7 @@ class GetReactionsBuilder
 {
     use GetNew;
 
-    private $data = [];
+    private array $data = [];
 
     public function setAfter(string $after): GetReactionsBuilder
     {

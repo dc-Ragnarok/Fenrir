@@ -13,7 +13,7 @@ class AttachmentBuilder
 {
     use GetNew;
 
-    private $data = [];
+    private array $data = [];
 
     public function setId(string $id): AttachmentBuilder
     {

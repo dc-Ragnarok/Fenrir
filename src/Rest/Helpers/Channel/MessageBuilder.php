@@ -34,7 +34,7 @@ class MessageBuilder
     use MultipartMessage;
     use SetTts;
 
-    private $data = [];
+    private array $data = [];
 
     private $files = [];
 

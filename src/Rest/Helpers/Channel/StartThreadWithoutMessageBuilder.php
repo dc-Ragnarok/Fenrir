@@ -13,7 +13,7 @@ class StartThreadWithoutMessageBuilder
 {
     use GetNew;
 
-    private $data = [];
+    private array $data = [];
 
     public function setName(string $name): StartThreadWithoutMessageBuilder
     {

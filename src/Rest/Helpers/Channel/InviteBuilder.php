@@ -10,7 +10,7 @@ class InviteBuilder
 {
     use GetNew;
 
-    private $data = [];
+    private array $data = [];
 
     public function setMaxAge(int $maxAge): InviteBuilder
     {

@@ -11,7 +11,7 @@ class GetGuildAuditLogsBuilder
 {
     use GetNew;
 
-    private $data = [];
+    private array $data = [];
 
     public function setUserId(string $userId): GetGuildAuditLogsBuilder
     {
