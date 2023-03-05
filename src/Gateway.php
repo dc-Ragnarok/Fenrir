@@ -20,9 +20,9 @@ use React\EventLoop\TimerInterface;
 
 class Gateway
 {
-    public EventHandler $events;
-
     public const WEBSOCKET_URL = 'wss://gateway.discord.gg/?v=10';
+
+    public EventHandler $events;
 
     public Websocket $websocket;
 
