@@ -14,7 +14,7 @@ class CommandBuilder
 {
     use GetNew;
 
-    private array $data;
+    private array $data = [];
 
     /**
      * @see https://discord.com/developers/docs/interactions/application-commands#application-command-object-application-command-naming
