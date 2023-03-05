@@ -31,6 +31,11 @@ class AllowedMentionsBuilder
         return $this;
     }
 
+    public function getRoles(): array
+    {
+        return $this->data['roles'];
+    }
+
     public function addUser(string $userId): AllowedMentionsBuilder
     {
         $this->data['users'][] = $userId;
@@ -42,9 +47,19 @@ class AllowedMentionsBuilder
         return $this;
     }
 
+    public function getUsers(): array
+    {
+        return $this->data['users'];
+    }
+
     public function mentionRepliedUser()
     {
         $this->data['replied_user'] = true;
+    }
+
+    public function mentionsRepliedUser()
+    {
+        return isset($this->data['replied_user']) && $this->data['replied_user'];
     }
 
     public function allowUsers(): AllowedMentionsBuilder

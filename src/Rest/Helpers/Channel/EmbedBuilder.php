@@ -23,15 +23,9 @@ class EmbedBuilder
         return $this;
     }
 
-    /**
-     * @deprecated
-     * @see https://discord.com/developers/docs/resources/channel#embed-object-embed-types
-     */
-    public function setType(string $type): EmbedBuilder
+    public function getTitle(): ?string
     {
-        $this->data['type'] = $type;
-
-        return $this;
+        return isset($this->data['title']) ? $this->data['title'] : null;
     }
 
     /**
@@ -44,11 +38,21 @@ class EmbedBuilder
         return $this;
     }
 
+    public function getDescription(): ?string
+    {
+        return isset($this->data['description']) ? $this->data['description'] : null;
+    }
+
     public function setUrl(string $url): EmbedBuilder
     {
         $this->data['url'] = $url;
 
         return $this;
+    }
+
+    public function getUrl(): ?string
+    {
+        return isset($this->data['url']) ? $this->data['url'] : null;
     }
 
     public function setTimestamp(Carbon $timestamp): EmbedBuilder
@@ -58,6 +62,11 @@ class EmbedBuilder
         return $this;
     }
 
+    public function getTimestamp(): ?Carbon
+    {
+        return isset($this->data['timestamp']) ? new Carbon($this->data['timestamp']) : null;
+    }
+
     public function setColor(int $color): EmbedBuilder
     {
         $this->data['color'] = $color;
@@ -65,9 +74,19 @@ class EmbedBuilder
         return $this;
     }
 
+    public function getColor(): ?int
+    {
+        return isset($this->data['color']) ? $this->data['color'] : null;
+    }
+
     public function setColour(int $color): EmbedBuilder
     {
         return $this->setColor($color);
+    }
+
+    public function getColour(): ?int
+    {
+        return $this->getColor();
     }
 
     /**
@@ -87,6 +106,11 @@ class EmbedBuilder
         }
 
         return $this;
+    }
+
+    public function getFooter(): ?array
+    {
+        return isset($this->data['footer']) ? $this->data['footer'] : null;
     }
 
     /**
@@ -115,6 +139,11 @@ class EmbedBuilder
         return $this;
     }
 
+    public function getImage(): ?array
+    {
+        return isset($this->data['image']) ? $this->data['image'] : null;
+    }
+
     /**
      * @see https://discord.com/developers/docs/resources/channel#embed-object-embed-thumbnail-structure
      */
@@ -139,6 +168,11 @@ class EmbedBuilder
         }
 
         return $this;
+    }
+
+    public function getThumbnail(): ?array
+    {
+        return isset($this->data['thumbnail']) ? $this->data['thumbnail'] : null;
     }
 
     /**
@@ -167,6 +201,11 @@ class EmbedBuilder
         return $this;
     }
 
+    public function getVideo(): ?array
+    {
+        return isset($this->data['video']) ? $this->data['video'] : null;
+    }
+
     /**
      * @see https://discord.com/developers/docs/resources/channel#embed-object-embed-provider-structure
      */
@@ -185,6 +224,11 @@ class EmbedBuilder
         }
 
         return $this;
+    }
+
+    public function getProvider(): ?array
+    {
+        return isset($this->data['provider']) ? $this->data['provider'] : null;
     }
 
     /**
@@ -214,6 +258,11 @@ class EmbedBuilder
         return $this;
     }
 
+    public function getAuthor(): ?array
+    {
+        return isset($this->data['author']) ? $this->data['author'] : null;
+    }
+
     /**
      * @var string $name Up to 256 characters
      * @var string $value Up to 1024 characters
@@ -232,6 +281,11 @@ class EmbedBuilder
         ];
 
         return $this;
+    }
+
+    public function getFields(): ?array
+    {
+        return isset($this->data['fields']) ? $this->data['fields'] : null;
     }
 
     public function get(): array

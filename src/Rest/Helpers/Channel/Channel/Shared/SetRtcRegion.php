@@ -12,4 +12,9 @@ trait SetRtcRegion
 
         return $this;
     }
+
+    public function getRtcRegion(): ?string
+    {
+        return isset($this->data['rtc_region']) ? $this->data['rtc_region'] : null;
+    }
 }

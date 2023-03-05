@@ -31,8 +31,6 @@ class MessageBuilder implements MultipartCapable
 
     private $data = [];
 
-    private $files = [];
-
     public function setNonce(string $nonce): MessageBuilder
     {
         $this->data['nonce'] = $nonce;
@@ -40,11 +38,21 @@ class MessageBuilder implements MultipartCapable
         return $this;
     }
 
+    public function getNonce(): ?string
+    {
+        return isset($this->data['nonce']) ? $this->data['nonce'] : null;
+    }
+
     public function setTts(bool $tts): MessageBuilder
     {
         $this->data['tts'] = $tts;
 
         return $this;
+    }
+
+    public function getTts(): ?bool
+    {
+        return isset($this->data['tts']) ? $this->data['tts'] : null;
     }
 
     /**
@@ -69,6 +77,11 @@ class MessageBuilder implements MultipartCapable
         return $this;
     }
 
+    public function getReference(): ?array
+    {
+        return isset($this->data['message_reference']) ? $this->data['message_reference'] : null;
+    }
+
     /**
      * Up to 3 stickers
      *
@@ -87,6 +100,11 @@ class MessageBuilder implements MultipartCapable
         $this->data['stickers'][] = $stickerId;
 
         return $this;
+    }
+
+    public function getStickers(): ?array
+    {
+        return isset($this->data['stickers']) ? $this->data['stickers'] : null;
     }
 
     public function get(): array

@@ -11,11 +11,15 @@ use Exan\Fenrir\Exceptions\Rest\Helpers\ComponentBuilder\TooManyRowsException;
  */
 class ComponentBuilder
 {
+    /** @var ComponentRowBuilder[] */
     private array $rows = [];
 
     public function get(): array
     {
-        return $this->rows;
+        return array_map(fn (ComponentRowBuilder $row) => [
+            'type' => 1,
+            'components' => $row->get()
+        ], $this->rows);
     }
 
     /**
@@ -29,11 +33,13 @@ class ComponentBuilder
             throw new TooManyRowsException();
         }
 
-        $this->rows[] = [
-            'type' => 1,
-            'components' => $componentRow->get()
-        ];
+        $this->rows[] = $componentRow;
 
         return $this;
+    }
+
+    public function getRows()
+    {
+        return $this->rows;
     }
 }

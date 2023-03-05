@@ -17,7 +17,7 @@ class SetBitRateTest extends TestCase
 
         $class->setBitrate(10000);
 
-        $this->assertEquals(['bitrate' => 10000], $class->get());
+        $this->assertEquals(10000, $class->getBitrate());
     }
 
     public function testSetBitRateLowerThanMinimum()

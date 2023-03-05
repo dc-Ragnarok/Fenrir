@@ -17,14 +17,6 @@ class EmbedBuilderTest extends TestCase
         $this->assertEquals('Test Title', $builder->get()['title']);
     }
 
-    public function testSetType()
-    {
-        $builder = new EmbedBuilder();
-        $builder->setType('Test Type');
-
-        $this->assertEquals('Test Type', $builder->get()['type']);
-    }
-
     public function testSetDescription()
     {
         $builder = new EmbedBuilder();

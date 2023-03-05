@@ -8,6 +8,9 @@ use Exan\Fenrir\Rest\Helpers\Channel\EmbedBuilder;
 
 trait AddEmbed
 {
+    /** @var EmbedBuilder[] */
+    private array $embeds;
+
     /**
      * Deduplicated by url
      * Up to 6000 characters across all text fields
@@ -16,12 +19,23 @@ trait AddEmbed
      */
     public function addEmbed(EmbedBuilder $embed): self
     {
-        if (!isset($this->data['embeds'])) {
-            $this->data['embeds'] = [];
+        if (!isset($this->embeds)) {
+            $this->embeds = [];
         }
 
-        $this->data['embeds'][] = $embed->get();
+        $this->embeds[] = $embed;
 
         return $this;
+    }
+
+    /** @return EmbedBuilder[] */
+    public function getEmbeds(): ?array
+    {
+        return isset($this->embeds) ? $this->embeds : null;
+    }
+
+    public function hasEmbeds(): bool
+    {
+        return isset($this->embeds);
     }
 }
