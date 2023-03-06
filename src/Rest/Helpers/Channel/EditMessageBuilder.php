@@ -32,10 +32,37 @@ class EditMessageBuilder
 
     public function get(): MultipartBody|array
     {
-        if ($this->requiresMultipart()) {
-            return $this->getMultipart($this->data);
+        $data = $this->data;
+
+        if ($this->hasAttachments()) {
+            $data['attachments'] = array_map(
+                fn (AttachmentBuilder $attachment) => $attachment->get(),
+                $this->getAttachments()
+            );
         }
 
-        return $this->data;
+        if ($this->hasComponents()) {
+            $data['components'] = array_map(
+                fn (ComponentBuilder $component) => $component->get(),
+                $this->getComponents()
+            );
+        }
+
+        if ($this->hasEmbeds()) {
+            $data['embeds'] = array_map(
+                fn (EmbedBuilder $embed) => $embed->get(),
+                $this->getEmbeds()
+            );
+        }
+
+        if ($this->hasAllowedMentions()) {
+            $data['allowed_mentions'] = $this->getAllowedMentions()->get();
+        }
+
+        if ($this->requiresMultipart()) {
+            return $this->getMultipart($data);
+        }
+
+        return $data;
     }
 }

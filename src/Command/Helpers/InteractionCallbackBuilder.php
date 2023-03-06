@@ -6,6 +6,8 @@ namespace Exan\Fenrir\Command\Helpers;
 
 use Discord\Http\Multipart\MultipartBody;
 use Exan\Fenrir\Enums\Command\InteractionCallbackTypes;
+use Exan\Fenrir\Rest\Helpers\Channel\ComponentBuilder;
+use Exan\Fenrir\Rest\Helpers\Channel\EmbedBuilder;
 use Exan\Fenrir\Rest\Helpers\Channel\Message\AddComponent;
 use Exan\Fenrir\Rest\Helpers\Channel\Message\AddEmbed;
 use Exan\Fenrir\Rest\Helpers\Channel\Message\AddFile;
@@ -47,9 +49,33 @@ class InteractionCallbackBuilder
 
     public function get(): array|MultipartBody
     {
+        $callbackData = $this->data;
+
+        if ($this->hasComponents()) {
+            $callbackData['components'] = array_map(
+                fn (ComponentBuilder $component) => $component->get(),
+                $this->getComponents()
+            );
+        }
+
+        if ($this->hasEmbeds()) {
+            $callbackData['embeds'] = array_map(
+                fn (EmbedBuilder $embed) => $embed->get(),
+                $this->getEmbeds()
+            );
+        }
+
+        if ($this->hasAllowedMentions()) {
+            $callbackData['allowed_mentions'] = $this->getAllowedMentions()->get();
+        }
+
+        if ($this->requiresMultipart()) {
+            return $this->getMultipart($callbackData);
+        }
+
         $data = [
             'type' => $this->type->value,
-            'data' => $this->data,
+            'data' => $callbackData,
         ];
 
         if ($this->requiresMultipart()) {
