@@ -15,6 +15,7 @@ class GetReactionsBuilderTest extends TestCase
         $builder->setAfter('::after::');
 
         $this->assertEquals(['after' => '::after::'], $builder->get());
+        $this->assertEquals('::after::', $builder->getAfter());
     }
 
     public function testSetLimit()
@@ -23,6 +24,7 @@ class GetReactionsBuilderTest extends TestCase
         $builder->setLimit(25);
 
         $this->assertEquals(['limit' => 25], $builder->get());
+        $this->assertEquals(25, $builder->getLimit());
     }
 
     public function testSetLimitGreaterThan100()
@@ -31,6 +33,7 @@ class GetReactionsBuilderTest extends TestCase
         $builder->setLimit(150);
 
         $this->assertEquals(['limit' => 100], $builder->get());
+        $this->assertEquals(100, $builder->getLimit());
     }
 
     public function testSetLimitLowerThan1()
@@ -39,5 +42,6 @@ class GetReactionsBuilderTest extends TestCase
         $builder->setLimit(-50);
 
         $this->assertEquals(['limit' => 1], $builder->get());
+        $this->assertEquals(1, $builder->getLimit());
     }
 }

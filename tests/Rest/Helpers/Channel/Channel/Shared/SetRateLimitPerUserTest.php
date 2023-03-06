@@ -23,6 +23,7 @@ class SetRateLimitPerUserTest extends TestCase
         $class->setRateLimitPerUser(RateLimit::MIN + 1);
 
         $this->assertEquals(['rate_limit_per_user' => RateLimit::MIN + 1], $class->get());
+        $this->assertEquals(RateLimit::MIN + 1, $class->getRateLimitPerUser());
     }
 
     public function testSetBelowZeroRateLimitPerUser()
@@ -31,6 +32,7 @@ class SetRateLimitPerUserTest extends TestCase
         $class->setRateLimitPerUser(RateLimit::MIN - 1);
 
         $this->assertEquals(['rate_limit_per_user' => RateLimit::MIN], $class->get());
+        $this->assertEquals(RateLimit::MIN, $class->getRateLimitPerUser());
     }
 
     public function testSetAboveMaxRateLimitPerUser()
@@ -39,5 +41,6 @@ class SetRateLimitPerUserTest extends TestCase
         $class->setRateLimitPerUser(RateLimit::MAX + 1);
 
         $this->assertEquals(['rate_limit_per_user' => RateLimit::MAX], $class->get());
+        $this->assertEquals(RateLimit::MAX, $class->getRateLimitPerUser());
     }
 }

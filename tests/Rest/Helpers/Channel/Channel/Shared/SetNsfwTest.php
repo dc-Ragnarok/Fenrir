@@ -18,9 +18,11 @@ class SetNsfwTest extends TestCase
         $class->setNsfw(true);
 
         $this->assertEquals(['nsfw' => true], $class->get());
+        $this->assertEquals(true, $class->getNsfw());
 
         $class->setNsfw(false);
 
         $this->assertEquals(['nsfw' => false], $class->get());
+        $this->assertEquals(false, $class->getNsfw());
     }
 }

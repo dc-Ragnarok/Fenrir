@@ -18,5 +18,6 @@ class SetTopicTest extends TestCase
         $class->setTopic('::topic::');
 
         $this->assertEquals(['topic' => '::topic::'], $class->get());
+        $this->assertEquals('::topic::', $class->getTopic());
     }
 }

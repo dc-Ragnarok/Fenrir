@@ -16,6 +16,7 @@ class MessageBuilderTest extends TestCase
         $builder = new MessageBuilder();
         $builder->setNonce('::nonce::');
         $this->assertEquals('::nonce::', $builder->get()['nonce']);
+        $this->assertEquals('::nonce::', $builder->getNonce());
     }
 
     public function testSetTts()
@@ -23,6 +24,7 @@ class MessageBuilderTest extends TestCase
         $builder = new MessageBuilder();
         $builder->setTts(true);
         $this->assertTrue($builder->get()['tts']);
+        $this->assertTrue($builder->getTts());
     }
 
     public function testSetReference()
@@ -40,6 +42,7 @@ class MessageBuilderTest extends TestCase
         $this->assertEquals('::reference message::', $reference['message_id']);
         $this->assertTrue($reference['fail_if_not_exists']);
         $this->assertEquals('::reference guild::', $reference['guild_id']);
+        $this->assertEquals($reference, $builder->getReference());
     }
 
     public function testAddSticker()
@@ -47,6 +50,7 @@ class MessageBuilderTest extends TestCase
         $builder = new MessageBuilder();
         $builder->addSticker('::sticker id::');
         $this->assertEquals(['::sticker id::'], $builder->get()['stickers']);
+        $this->assertEquals(['::sticker id::'], $builder->getStickers());
     }
 
     public function testAddStickerThrowsException()

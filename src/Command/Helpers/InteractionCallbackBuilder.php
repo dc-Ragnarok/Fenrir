@@ -33,8 +33,6 @@ class InteractionCallbackBuilder
 
     private array $data = [];
 
-    private array $files = [];
-
     public function setType(InteractionCallbackTypes $type): self
     {
         $this->type = $type;

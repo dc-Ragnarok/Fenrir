@@ -23,6 +23,7 @@ class SetTypeTest extends TestCase
         $class = $this->getClass();
         $class->setType(ChannelTypes::GUILD_TEXT);
         $this->assertEquals(['type' => ChannelTypes::GUILD_TEXT->value], $class->get());
+        $this->assertEquals(ChannelTypes::GUILD_TEXT, $class->getType());
     }
 
     public function testSetTypeUnsupportedConversionException()

@@ -19,6 +19,7 @@ class SetDefaultThreadRateLimitPerUserTest extends TestCase
         $class->setDefaultThreadRateLimitPerUser(RateLimit::MIN + 1);
 
         $this->assertEquals(['default_thread_rate_limit_per_user' => RateLimit::MIN + 1], $class->get());
+        $this->assertEquals(RateLimit::MIN + 1, $class->getDefaultThreadRateLimitPerUser());
     }
 
     public function testSetThreadRateLimitAboveMaxPerUser()
@@ -30,6 +31,7 @@ class SetDefaultThreadRateLimitPerUserTest extends TestCase
         $class->setDefaultThreadRateLimitPerUser(RateLimit::MAX + 1);
 
         $this->assertEquals(['default_thread_rate_limit_per_user' => RateLimit::MAX], $class->get());
+        $this->assertEquals(RateLimit::MAX, $class->getDefaultThreadRateLimitPerUser());
     }
 
     public function testSetThreadRateLimitBelowMinPerUser()
@@ -41,5 +43,6 @@ class SetDefaultThreadRateLimitPerUserTest extends TestCase
         $class->setDefaultThreadRateLimitPerUser(RateLimit::MIN - 1);
 
         $this->assertEquals(['default_thread_rate_limit_per_user' => RateLimit::MIN], $class->get());
+        $this->assertEquals(RateLimit::MIN, $class->getDefaultThreadRateLimitPerUser());
     }
 }
