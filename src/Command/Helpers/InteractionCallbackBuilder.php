@@ -69,10 +69,6 @@ class InteractionCallbackBuilder
             $callbackData['allowed_mentions'] = $this->getAllowedMentions()->get();
         }
 
-        if ($this->requiresMultipart()) {
-            return $this->getMultipart($callbackData);
-        }
-
         $data = [
             'type' => $this->type->value,
             'data' => $callbackData,
