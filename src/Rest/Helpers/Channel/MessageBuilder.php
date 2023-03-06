@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Exan\Fenrir\Rest\Helpers\Channel;
 
+use Discord\Http\Multipart\MultipartBody;
 use Exan\Fenrir\Exceptions\Rest\Helpers\MessageBuilder\TooManyStickersException;
 use Exan\Fenrir\Rest\Helpers\Channel\Message\AddAttachment;
 use Exan\Fenrir\Rest\Helpers\Channel\Message\AddComponent;
@@ -13,13 +14,16 @@ use Exan\Fenrir\Rest\Helpers\Channel\Message\AllowMentions;
 use Exan\Fenrir\Rest\Helpers\Channel\Message\MultipartMessage;
 use Exan\Fenrir\Rest\Helpers\Channel\Message\SetContent;
 use Exan\Fenrir\Rest\Helpers\Channel\Message\SetFlags;
-use Exan\Fenrir\Rest\Helpers\MultipartCapable;
+use Exan\Fenrir\Rest\Helpers\Channel\Message\SetTts;
+use Exan\Fenrir\Rest\Helpers\GetNew;
 
 /**
  * @see https://discord.com/developers/docs/resources/channel#create-message
  */
-class MessageBuilder implements MultipartCapable
+class MessageBuilder
 {
+    use GetNew;
+
     use AddAttachment;
     use AddComponent;
     use AddEmbed;
@@ -28,8 +32,9 @@ class MessageBuilder implements MultipartCapable
     use SetContent;
     use SetFlags;
     use MultipartMessage;
+    use SetTts;
 
-    private $data = [];
+    private array $data = [];
 
     public function setNonce(string $nonce): MessageBuilder
     {
@@ -107,8 +112,12 @@ class MessageBuilder implements MultipartCapable
         return isset($this->data['stickers']) ? $this->data['stickers'] : null;
     }
 
-    public function get(): array
+    public function get(): MultipartBody|array
     {
+        if ($this->requiresMultipart()) {
+            return $this->getMultipart($this->data);
+        }
+
         return $this->data;
     }
 }

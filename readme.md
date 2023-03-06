@@ -4,7 +4,7 @@
 
 <h3 align="center">Fenrir</h3>
 
-<p align="center">A plain Discord API/Gateway wrapper in PHP.</p>
+<p align="center">PHP Discord Interface.</p>
 
 ## About
 

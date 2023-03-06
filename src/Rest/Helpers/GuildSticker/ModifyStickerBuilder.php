@@ -4,8 +4,12 @@ declare(strict_types=1);
 
 namespace Exan\Fenrir\Rest\Helpers\GuildSticker;
 
+use Exan\Fenrir\Rest\Helpers\GetNew;
+
 class ModifyStickerBuilder
 {
+    use GetNew;
+
     private array $data = [];
 
     public function setName(string $name): ModifyStickerBuilder

@@ -5,10 +5,13 @@ declare(strict_types=1);
 namespace Exan\Fenrir\Rest\Helpers\Emoji;
 
 use Exan\Fenrir\Enums\ImageData;
+use Exan\Fenrir\Rest\Helpers\GetNew;
 
 class CreateEmojiBuilder
 {
-    private $data = [];
+    use GetNew;
+
+    private array $data = [];
 
     public function setName(string $name): CreateEmojiBuilder
     {

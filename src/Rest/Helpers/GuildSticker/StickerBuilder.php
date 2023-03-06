@@ -4,11 +4,14 @@ declare(strict_types=1);
 
 namespace Exan\Fenrir\Rest\Helpers\GuildSticker;
 
-use Exan\Fenrir\Parts\Multipart;
-use Exan\Fenrir\Parts\MultipartField;
+use Discord\Http\Multipart\MultipartBody;
+use Discord\Http\Multipart\MultipartField;
+use Exan\Fenrir\Rest\Helpers\GetNew;
 
 class StickerBuilder
 {
+    use GetNew;
+
     private array $data = [];
     private array $file;
 
@@ -64,20 +67,20 @@ class StickerBuilder
         return isset($this->file) ? $this->file : null;
     }
 
-    public function get(): Multipart
+    public function get(): MultipartBody
     {
-        return new Multipart([
+        return new MultipartBody([
             new MultipartField(
                 'files[0]',
                 $this->file['content'],
-                'sticker.' . $this->file['extension'],
-                ['Content-Type' => $this->file['content-type']]
+                ['Content-Type' => $this->file['content-type']],
+                'sticker.' . $this->file['extension']
             ),
             new MultipartField(
                 'payload_json',
                 json_encode($this->data),
-                null,
-                ['Content-Type' => 'application/json']
+                ['Content-Type' => 'application/json'],
+                null
             )
         ]);
     }

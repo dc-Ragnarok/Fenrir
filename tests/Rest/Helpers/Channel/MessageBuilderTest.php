@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Exan\Fenrir\Rest\Helpers\Channel;
 
+use Discord\Http\Multipart\MultipartBody;
 use Exan\Fenrir\Exceptions\Rest\Helpers\MessageBuilder\TooManyStickersException;
 use Exan\Fenrir\Rest\Helpers\Channel\MessageBuilder;
 use PHPUnit\Framework\TestCase;
@@ -89,9 +90,10 @@ class MessageBuilderTest extends TestCase
             '::spooky binary data::',
         );
 
-        $multipart = $builder->getMultipart();
+        /** @var MultipartBody */
+        $multipart = $builder->get();
 
-        $body = $multipart->getBody();
+        $body = (string) $multipart;
 
         $this->assertStringContainsString(json_encode(['content' => '::content::']), $body);
         $this->assertStringContainsString('filename="file"', $body);

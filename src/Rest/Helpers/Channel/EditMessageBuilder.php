@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Exan\Fenrir\Rest\Helpers\Channel;
 
+use Discord\Http\Multipart\MultipartBody;
 use Exan\Fenrir\Rest\Helpers\Channel\Message\AddAttachment;
 use Exan\Fenrir\Rest\Helpers\Channel\Message\AddComponent;
 use Exan\Fenrir\Rest\Helpers\Channel\Message\AddEmbed;
@@ -12,10 +13,12 @@ use Exan\Fenrir\Rest\Helpers\Channel\Message\AllowMentions;
 use Exan\Fenrir\Rest\Helpers\Channel\Message\MultipartMessage;
 use Exan\Fenrir\Rest\Helpers\Channel\Message\SetContent;
 use Exan\Fenrir\Rest\Helpers\Channel\Message\SetFlags;
-use Exan\Fenrir\Rest\Helpers\MultipartCapable;
+use Exan\Fenrir\Rest\Helpers\GetNew;
 
-class EditMessageBuilder implements MultipartCapable
+class EditMessageBuilder
 {
+    use GetNew;
+
     use AddAttachment;
     use AddComponent;
     use AddEmbed;
@@ -27,8 +30,12 @@ class EditMessageBuilder implements MultipartCapable
 
     private $data = [];
 
-    public function get(): array
+    public function get(): MultipartBody|array
     {
+        if ($this->requiresMultipart()) {
+            return $this->getMultipart($this->data);
+        }
+
         return $this->data;
     }
 }

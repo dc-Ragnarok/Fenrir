@@ -57,6 +57,7 @@ class Events
     final public const INTEGRATION_CREATE = 'INTEGRATION_CREATE';
     final public const INTEGRATION_UPDATE = 'INTEGRATION_UPDATE';
     final public const INTEGRATION_DELETE = 'INTEGRATION_DELETE';
+
     final public const INTERACTION_CREATE = 'INTERACTION_CREATE';
 
     final public const INVITE_CREATE = 'INVITE_CREATE';
@@ -86,12 +87,15 @@ class Events
     final public const WEBHOOKS_UPDATE = 'WEBHOOKS_UPDATE';
 
     final public const MAPPINGS = [
+        self::READY => \Exan\Fenrir\Websocket\Events\Ready::class,
+
         self::APPLICATION_COMMAND_PERMISSIONS_UPDATE =>
             \Exan\Fenrir\Websocket\Events\ApplicationCommandPermissionsUpdate::class,
         self::AUTO_MODERATION_RULE_CREATE => \Exan\Fenrir\Websocket\Events\AutoModerationRuleCreate::class,
         self::AUTO_MODERATION_RULE_UPDATE => \Exan\Fenrir\Websocket\Events\AutoModerationRuleUpdate::class,
         self::AUTO_MODERATION_RULE_DELETE => \Exan\Fenrir\Websocket\Events\AutoModerationRuleDelete::class,
-        self::AUTO_MODERATION_ACTION_EXECUTION => \Exan\Fenrir\Websocket\Events\AutoModerationActionExecution::class,
+        self::AUTO_MODERATION_ACTION_EXECUTION =>
+            \Exan\Fenrir\Websocket\Events\AutoModerationActionExecution::class,
 
         self::CHANNEL_CREATE => \Exan\Fenrir\Websocket\Events\ChannelCreate::class,
         self::CHANNEL_UPDATE => \Exan\Fenrir\Websocket\Events\ChannelUpdate::class,
@@ -130,7 +134,8 @@ class Events
         self::GUILD_SCHEDULED_EVENT_UPDATE => \Exan\Fenrir\Websocket\Events\GuildScheduledEventUpdate::class,
         self::GUILD_SCHEDULED_EVENT_DELETE => \Exan\Fenrir\Websocket\Events\GuildScheduledEventDelete::class,
         self::GUILD_SCHEDULED_EVENT_USER_ADD => \Exan\Fenrir\Websocket\Events\GuildScheduledEventUserAdd::class,
-        self::GUILD_SCHEDULED_EVENT_USER_REMOVE => \Exan\Fenrir\Websocket\Events\GuildScheduledEventUserRemove::class,
+        self::GUILD_SCHEDULED_EVENT_USER_REMOVE =>
+            \Exan\Fenrir\Websocket\Events\GuildScheduledEventUserRemove::class,
 
         self::INTEGRATION_CREATE => \Exan\Fenrir\Websocket\Events\IntegrationCreate::class,
         self::INTEGRATION_UPDATE => \Exan\Fenrir\Websocket\Events\IntegrationUpdate::class,

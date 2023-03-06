@@ -7,6 +7,7 @@ namespace Tests\Exan\Fenrir\Rest\Helpers\Channel\Channel\Shared;
 use Exan\Fenrir\Enums\Parts\ChannelTypes;
 use Exan\Fenrir\Rest\Helpers\Channel\Channel\Shared\SetType;
 use PHPUnit\Framework\TestCase;
+use Exan\Fenrir\Exceptions\Rest\Helpers\Channel\Channel\Shared\SetType\UnsupportedConversionException;
 
 class SetTypeTest extends TestCase
 {
@@ -28,7 +29,7 @@ class SetTypeTest extends TestCase
     {
         $class = $this->getClass();
         $this->expectException(
-            \Exan\Fenrir\Exceptions\Rest\Helpers\Channel\Channel\Shared\SetType\UnsupportedConversionException::class
+            UnsupportedConversionException::class
         );
         $class->setType(ChannelTypes::GUILD_VOICE);
     }

@@ -2,18 +2,18 @@
 
 declare(strict_types=1);
 
-namespace Tests\Exan\Fenrir\Discord;
+namespace Tests\Exan\Fenrir\Gateway;
 
 use Exan\Fenrir\Const\Events;
 use Mockery;
 use React\EventLoop\TimerInterface;
-use Tests\Exan\Fenrir\Discord\DiscordTestCase;
+use Tests\Exan\Fenrir\Gateway\GatewayTestCase;
 
 /**
  * @runTestsInSeparateProcesses
  * @preserveGlobalState disabled
  */
-final class HandlesHeartbeatTest extends DiscordTestCase
+final class HandlesHeartbeatTest extends GatewayTestCase
 {
     /**
      * @var Mock

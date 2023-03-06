@@ -15,13 +15,13 @@ class StickerBuilderTest extends TestCase
         $stickerBuilder->setFile('::binary data::', 'png');
 
         // Should include raw image data
-        $this->assertStringContainsString('::binary data::', $stickerBuilder->get()->getBody());
+        $this->assertStringContainsString('::binary data::', (string) $stickerBuilder->get());
 
         // Should include filename with provided extension
-        $this->assertStringContainsString('filename="sticker.png"', $stickerBuilder->get()->getBody());
+        $this->assertStringContainsString('filename="sticker.png"', (string) $stickerBuilder->get());
 
         // Should include correct header type
-        $this->assertStringContainsString('Content-Type: image/png', $stickerBuilder->get()->getBody());
+        $this->assertStringContainsString('Content-Type: image/png', (string) $stickerBuilder->get());
     }
 
     public function testSetName()
@@ -30,7 +30,7 @@ class StickerBuilderTest extends TestCase
         $stickerBuilder->setFile('::file::', 'png');
         $stickerBuilder->setName('::name::');
 
-        $this->assertStringContainsString('"name":"::name::"', $stickerBuilder->get()->getBody());
+        $this->assertStringContainsString('"name":"::name::"', (string) $stickerBuilder->get());
     }
 
     public function testSetDescription()
@@ -39,7 +39,7 @@ class StickerBuilderTest extends TestCase
         $stickerBuilder->setFile('::file::', 'png');
         $stickerBuilder->setDescription('::description::');
 
-        $this->assertStringContainsString('"description":"::description::"', $stickerBuilder->get()->getBody());
+        $this->assertStringContainsString('"description":"::description::"', (string) $stickerBuilder->get());
     }
 
     public function testSetTags()
@@ -48,6 +48,6 @@ class StickerBuilderTest extends TestCase
         $stickerBuilder->setFile('::file::', 'png');
         $stickerBuilder->setTags('::tags::');
 
-        $this->assertStringContainsString('"tags":"::tags::"', $stickerBuilder->get()->getBody());
+        $this->assertStringContainsString('"tags":"::tags::"', (string) $stickerBuilder->get());
     }
 }

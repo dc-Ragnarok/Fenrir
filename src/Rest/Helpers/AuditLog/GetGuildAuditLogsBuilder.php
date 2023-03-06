@@ -5,10 +5,13 @@ declare(strict_types=1);
 namespace Exan\Fenrir\Rest\Helpers\AuditLog;
 
 use Exan\Fenrir\Const\Validation\ItemLimit;
+use Exan\Fenrir\Rest\Helpers\GetNew;
 
 class GetGuildAuditLogsBuilder
 {
-    private $data = [];
+    use GetNew;
+
+    private array $data = [];
 
     public function setUserId(string $userId): GetGuildAuditLogsBuilder
     {

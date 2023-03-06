@@ -6,12 +6,15 @@ namespace Exan\Fenrir\Rest\Helpers\Channel\Channel;
 
 use Exan\Fenrir\Enums\Parts\ChannelTypes;
 use Exan\Fenrir\Parts\Overwrite;
+use Exan\Fenrir\Rest\Helpers\GetNew;
 
 /**
  * @see https://discord.com/developers/docs/resources/channel#modify-channel
  */
 abstract class ChannelBuilder
 {
+    use GetNew;
+
     protected array $data = [];
 
     public function get(): array

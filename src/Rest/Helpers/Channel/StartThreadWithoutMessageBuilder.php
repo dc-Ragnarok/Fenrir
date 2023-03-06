@@ -7,10 +7,13 @@ namespace Exan\Fenrir\Rest\Helpers\Channel;
 use Exan\Fenrir\Const\Validation\RateLimit;
 use Exan\Fenrir\Enums\Parts\ChannelTypes;
 use Exan\Fenrir\Enums\Parts\ThreadAutoArchiveDuration;
+use Exan\Fenrir\Rest\Helpers\GetNew;
 
 class StartThreadWithoutMessageBuilder
 {
-    private $data = [];
+    use GetNew;
+
+    private array $data = [];
 
     public function setName(string $name): StartThreadWithoutMessageBuilder
     {

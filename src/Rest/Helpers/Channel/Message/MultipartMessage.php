@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace Exan\Fenrir\Rest\Helpers\Channel\Message;
 
-use Exan\Fenrir\Parts\Multipart;
-use Exan\Fenrir\Parts\MultipartField;
+use Discord\Http\Multipart\MultipartBody;
+use Discord\Http\Multipart\MultipartField;
 
 trait MultipartMessage
 {
-    public function getMultipart(): Multipart
+    public function getMultipart(array $data): MultipartBody
     {
         $fields = array_map(function ($fileData, int $index) {
             $headers = isset($fileData['type'])
@@ -19,19 +19,19 @@ trait MultipartMessage
             return new MultipartField(
                 'files[' . $index . ']',
                 $fileData['content'],
-                $fileData['name'],
-                $headers
+                $headers,
+                $fileData['name']
             );
         }, $this->getFiles(), array_keys($this->getFiles()));
 
         $fields[] = new MultipartField(
             'payload_json',
-            json_encode($this->get()),
-            null,
-            ['Content-Type' => 'application/json']
+            json_encode($data),
+            ['Content-Type' => 'application/json'],
+            null
         );
 
-        return new Multipart($fields);
+        return new MultipartBody($fields);
     }
 
     public function requiresMultipart(): bool

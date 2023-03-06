@@ -4,12 +4,16 @@ declare(strict_types=1);
 
 namespace Exan\Fenrir\Rest\Helpers\Channel;
 
+use Exan\Fenrir\Rest\Helpers\GetNew;
+
 /**
  * @see https://discord.com/developers/docs/resources/channel#attachment-object
  */
 class AttachmentBuilder
 {
-    private $data = [];
+    use GetNew;
+
+    private array $data = [];
 
     public function setId(string $id): AttachmentBuilder
     {

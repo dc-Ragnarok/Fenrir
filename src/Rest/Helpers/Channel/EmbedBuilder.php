@@ -5,12 +5,15 @@ declare(strict_types=1);
 namespace Exan\Fenrir\Rest\Helpers\Channel;
 
 use Carbon\Carbon;
+use Exan\Fenrir\Rest\Helpers\GetNew;
 
 /**
  * @see https://discord.com/developers/docs/resources/channel#embed-object
  */
 class EmbedBuilder
 {
+    use GetNew;
+
     private array $data;
 
     /**
