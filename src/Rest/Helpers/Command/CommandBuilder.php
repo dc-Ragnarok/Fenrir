@@ -36,7 +36,6 @@ class CommandBuilder
      * @see https://discord.com/developers/docs/reference#locales
      *
      * @param array<string, string> $localizedNames `key => locale`, `value => name`
-     *
      */
     public function setNameLocalizations(array $localizedNames): self
     {
