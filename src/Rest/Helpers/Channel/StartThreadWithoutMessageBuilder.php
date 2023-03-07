@@ -24,7 +24,7 @@ class StartThreadWithoutMessageBuilder
 
     public function getName(): ?string
     {
-        return isset($this->data['name']) ? $this->data['name'] : null;
+        return $this->data['name'] ?? null;
     }
 
     public function setAutoArchiveDuration(ThreadAutoArchiveDuration $duration): StartThreadWithoutMessageBuilder
@@ -50,7 +50,7 @@ class StartThreadWithoutMessageBuilder
 
     public function getRateLimitPerUser(): ?int
     {
-        return isset($this->data['rate_limit_per_user']) ? $this->data['rate_limit_per_user'] : null;
+        return $this->data['rate_limit_per_user'] ?? null;
     }
 
     public function setInvitable(bool $invitable): StartThreadWithoutMessageBuilder
@@ -62,7 +62,7 @@ class StartThreadWithoutMessageBuilder
 
     public function getInvitable(): ?bool
     {
-        return isset($this->data['invitable']) ? $this->data['invitable'] : null;
+        return $this->data['invitable'] ?? null;
     }
 
     public function setType(ChannelTypes $type): StartThreadWithoutMessageBuilder

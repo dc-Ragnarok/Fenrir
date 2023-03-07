@@ -15,6 +15,6 @@ trait SetNsfw
 
     public function getNsfw(): ?bool
     {
-        return isset($this->data['nsfw']) ? $this->data['nsfw'] : null;
+        return $this->data['nsfw'] ?? null;
     }
 }

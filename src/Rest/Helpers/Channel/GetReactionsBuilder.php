@@ -22,7 +22,7 @@ class GetReactionsBuilder
 
     public function getAfter(): ?string
     {
-        return isset($this->data['after']) ? $this->data['after'] : null;
+        return $this->data['after'] ?? null;
     }
 
     public function setLimit(int $limit): GetReactionsBuilder
@@ -34,7 +34,7 @@ class GetReactionsBuilder
 
     public function getLimit(): ?int
     {
-        return isset($this->data['limit']) ? $this->data['limit'] : null;
+        return $this->data['limit'] ?? null;
     }
 
     public function get(): array

@@ -28,7 +28,7 @@ class EmbedBuilder
 
     public function getTitle(): ?string
     {
-        return isset($this->data['title']) ? $this->data['title'] : null;
+        return $this->data['title'] ?? null;
     }
 
     /**
@@ -43,7 +43,7 @@ class EmbedBuilder
 
     public function getDescription(): ?string
     {
-        return isset($this->data['description']) ? $this->data['description'] : null;
+        return $this->data['description'] ?? null;
     }
 
     public function setUrl(string $url): EmbedBuilder
@@ -55,7 +55,7 @@ class EmbedBuilder
 
     public function getUrl(): ?string
     {
-        return isset($this->data['url']) ? $this->data['url'] : null;
+        return $this->data['url'] ?? null;
     }
 
     public function setTimestamp(Carbon $timestamp): EmbedBuilder
@@ -79,7 +79,7 @@ class EmbedBuilder
 
     public function getColor(): ?int
     {
-        return isset($this->data['color']) ? $this->data['color'] : null;
+        return $this->data['color'] ?? null;
     }
 
     public function setColour(int $color): EmbedBuilder
@@ -113,7 +113,7 @@ class EmbedBuilder
 
     public function getFooter(): ?array
     {
-        return isset($this->data['footer']) ? $this->data['footer'] : null;
+        return $this->data['footer'] ?? null;
     }
 
     /**
@@ -144,7 +144,7 @@ class EmbedBuilder
 
     public function getImage(): ?array
     {
-        return isset($this->data['image']) ? $this->data['image'] : null;
+        return $this->data['image'] ?? null;
     }
 
     /**
@@ -175,7 +175,7 @@ class EmbedBuilder
 
     public function getThumbnail(): ?array
     {
-        return isset($this->data['thumbnail']) ? $this->data['thumbnail'] : null;
+        return $this->data['thumbnail'] ?? null;
     }
 
     /**
@@ -206,7 +206,7 @@ class EmbedBuilder
 
     public function getVideo(): ?array
     {
-        return isset($this->data['video']) ? $this->data['video'] : null;
+        return $this->data['video'] ?? null;
     }
 
     /**
@@ -231,7 +231,7 @@ class EmbedBuilder
 
     public function getProvider(): ?array
     {
-        return isset($this->data['provider']) ? $this->data['provider'] : null;
+        return $this->data['provider'] ?? null;
     }
 
     /**
@@ -263,7 +263,7 @@ class EmbedBuilder
 
     public function getAuthor(): ?array
     {
-        return isset($this->data['author']) ? $this->data['author'] : null;
+        return $this->data['author'] ?? null;
     }
 
     /**
@@ -288,7 +288,7 @@ class EmbedBuilder
 
     public function getFields(): ?array
     {
-        return isset($this->data['fields']) ? $this->data['fields'] : null;
+        return $this->data['fields'] ?? null;
     }
 
     public function get(): array

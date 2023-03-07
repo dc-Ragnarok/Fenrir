@@ -24,7 +24,7 @@ class AttachmentBuilder
 
     public function getId(): ?string
     {
-        return isset($this->data['id']) ? $this->data['id'] : null;
+        return $this->data['id'] ?? null;
     }
 
     public function setFilename(string $filename): AttachmentBuilder
@@ -36,7 +36,7 @@ class AttachmentBuilder
 
     public function getFilename(): ?string
     {
-        return isset($this->data['filename']) ? $this->data['filename'] : null;
+        return $this->data['filename'] ?? null;
     }
 
     public function setDescription(string $description): AttachmentBuilder
@@ -48,7 +48,7 @@ class AttachmentBuilder
 
     public function getDescription(): ?string
     {
-        return isset($this->data['description']) ? $this->data['description'] : null;
+        return $this->data['description'] ?? null;
     }
 
     public function setContentType(string $contentType): AttachmentBuilder
@@ -60,7 +60,7 @@ class AttachmentBuilder
 
     public function getContentType(): ?string
     {
-        return isset($this->data['content_type']) ? $this->data['content_type'] : null;
+        return $this->data['content_type'] ?? null;
     }
 
     public function setSize(int $size): AttachmentBuilder
@@ -72,7 +72,7 @@ class AttachmentBuilder
 
     public function getSize(): ?int
     {
-        return isset($this->data['size']) ? $this->data['size'] : null;
+        return $this->data['size'] ?? null;
     }
 
     public function setUrl(string $url): AttachmentBuilder
@@ -84,7 +84,7 @@ class AttachmentBuilder
 
     public function getUrl(): ?string
     {
-        return isset($this->data['url']) ? $this->data['url'] : null;
+        return $this->data['url'] ?? null;
     }
 
     public function setProxyUrl(string $proxyUrl): AttachmentBuilder
@@ -96,7 +96,7 @@ class AttachmentBuilder
 
     public function getProxyUrl(): ?string
     {
-        return isset($this->data['proxy_url']) ? $this->data['proxy_url'] : null;
+        return $this->data['proxy_url'] ?? null;
     }
 
     public function setHeight(int $height): AttachmentBuilder
@@ -108,7 +108,7 @@ class AttachmentBuilder
 
     public function getHeight(): ?int
     {
-        return isset($this->data['height']) ? $this->data['height'] : null;
+        return $this->data['height'] ?? null;
     }
 
     public function setWidth(int $width): AttachmentBuilder
@@ -120,7 +120,7 @@ class AttachmentBuilder
 
     public function getWidth(): ?int
     {
-        return isset($this->data['width']) ? $this->data['width'] : null;
+        return $this->data['width'] ?? null;
     }
 
     public function setEphemeral(bool $ephemeral): AttachmentBuilder
@@ -132,7 +132,7 @@ class AttachmentBuilder
 
     public function getEphemeral(): ?bool
     {
-        return isset($this->data['ephemeral']) ? $this->data['ephemeral'] : null;
+        return $this->data['ephemeral'] ?? null;
     }
 
     public function get(): array

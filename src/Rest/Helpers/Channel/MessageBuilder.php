@@ -45,7 +45,7 @@ class MessageBuilder
 
     public function getNonce(): ?string
     {
-        return isset($this->data['nonce']) ? $this->data['nonce'] : null;
+        return $this->data['nonce'] ?? null;
     }
 
     public function setTts(bool $tts): MessageBuilder
@@ -57,7 +57,7 @@ class MessageBuilder
 
     public function getTts(): ?bool
     {
-        return isset($this->data['tts']) ? $this->data['tts'] : null;
+        return $this->data['tts'] ?? null;
     }
 
     /**
@@ -84,7 +84,7 @@ class MessageBuilder
 
     public function getReference(): ?array
     {
-        return isset($this->data['message_reference']) ? $this->data['message_reference'] : null;
+        return $this->data['message_reference'] ?? null;
     }
 
     /**
@@ -109,7 +109,7 @@ class MessageBuilder
 
     public function getStickers(): ?array
     {
-        return isset($this->data['stickers']) ? $this->data['stickers'] : null;
+        return $this->data['stickers'] ?? null;
     }
 
     public function get(): MultipartBody|array

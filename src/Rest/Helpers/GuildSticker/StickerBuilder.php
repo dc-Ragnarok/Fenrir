@@ -24,7 +24,7 @@ class StickerBuilder
 
     public function getName(): ?string
     {
-        return isset($this->data['name']) ? $this->data['name'] : null;
+        return $this->data['name'] ?? null;
     }
 
     public function setDescription(string $description): StickerBuilder
@@ -36,7 +36,7 @@ class StickerBuilder
 
     public function getDescription(): ?string
     {
-        return isset($this->data['description']) ? $this->data['description'] : null;
+        return $this->data['description'] ?? null;
     }
 
     public function setTags(string $tags): StickerBuilder
@@ -48,7 +48,7 @@ class StickerBuilder
 
     public function getTags(): ?string
     {
-        return isset($this->data['tags']) ? $this->data['tags'] : null;
+        return $this->data['tags'] ?? null;
     }
 
     public function setFile(string $content, string $fileExtension): StickerBuilder

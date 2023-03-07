@@ -21,7 +21,7 @@ class ModifyStickerBuilder
 
     public function getName(): ?string
     {
-        return isset($this->data['name']) ? $this->data['name'] : null;
+        return $this->data['name'] ?? null;
     }
 
     public function setDescription(string $description): ModifyStickerBuilder
@@ -33,7 +33,7 @@ class ModifyStickerBuilder
 
     public function getDescription(): ?string
     {
-        return isset($this->data['description']) ? $this->data['description'] : null;
+        return $this->data['description'] ?? null;
     }
 
     public function setTags(string $tags): ModifyStickerBuilder
@@ -45,7 +45,7 @@ class ModifyStickerBuilder
 
     public function getTags(): ?string
     {
-        return isset($this->data['tags']) ? $this->data['tags'] : null;
+        return $this->data['tags'] ?? null;
     }
 
     public function get(): array

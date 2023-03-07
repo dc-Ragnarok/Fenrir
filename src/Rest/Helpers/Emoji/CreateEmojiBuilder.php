@@ -22,7 +22,7 @@ class CreateEmojiBuilder
 
     public function getName(): ?string
     {
-        return isset($this->data['name']) ? $this->data['name'] : null;
+        return $this->data['name'] ?? null;
     }
 
     public function setRoles(array $roles): CreateEmojiBuilder
@@ -35,7 +35,7 @@ class CreateEmojiBuilder
     /** @return ?string[] */
     public function getRoles(): ?array
     {
-        return isset($this->data['roles']) ? $this->data['roles'] : null;
+        return $this->data['roles'] ?? null;
     }
 
     public function setImage(string $content, ImageData $imageData): CreateEmojiBuilder
@@ -47,7 +47,7 @@ class CreateEmojiBuilder
 
     public function getImage(): ?string
     {
-        return isset($this->data['image']) ? $this->data['image'] : null;
+        return $this->data['image'] ?? null;
     }
 
     public function get(): array

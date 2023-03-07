@@ -22,7 +22,7 @@ class EmojiBuilder
 
     public function getName(): ?string
     {
-        return isset($this->data['name']) ? $this->data['name'] : null;
+        return $this->data['name'] ?? null;
     }
 
     public function setAnimated(bool $animated): EmojiBuilder
@@ -34,7 +34,7 @@ class EmojiBuilder
 
     public function getAnimated(): ?string
     {
-        return isset($this->data['animated']) ? $this->data['animated'] : null;
+        return $this->data['animated'] ?? null;
     }
 
     public function setId(string $id): EmojiBuilder
@@ -46,7 +46,7 @@ class EmojiBuilder
 
     public function getId(): ?string
     {
-        return isset($this->data['id']) ? $this->data['id'] : null;
+        return $this->data['id'] ?? null;
     }
 
     public static function fromPart(Emoji $emoji): EmojiBuilder

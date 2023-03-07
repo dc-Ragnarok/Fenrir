@@ -15,6 +15,6 @@ trait SetBitrate
 
     public function getBitrate(): ?int
     {
-        return isset($this->data['bitrate']) ? $this->data['bitrate'] : null;
+        return $this->data['bitrate'] ?? null;
     }
 }

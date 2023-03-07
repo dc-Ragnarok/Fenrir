@@ -15,6 +15,6 @@ trait SetTopic
 
     public function getTopic(): ?string
     {
-        return isset($this->data['topic']) ? $this->data['topic'] : null;
+        return $this->data['topic'] ?? null;
     }
 }

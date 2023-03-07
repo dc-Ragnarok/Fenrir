@@ -15,6 +15,6 @@ trait SetFlags
 
     private function getFlags(): ?int
     {
-        return isset($this->data['flags']) ? $this->data['flags'] : null;
+        return $this->data['flags'] ?? null;
     }
 }

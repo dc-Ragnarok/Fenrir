@@ -17,6 +17,6 @@ trait SetRateLimitPerUser
 
     public function getRateLimitPerUser(): ?int
     {
-        return isset($this->data['rate_limit_per_user']) ? $this->data['rate_limit_per_user'] : null;
+        return $this->data['rate_limit_per_user'] ?? null;
     }
 }

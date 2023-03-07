@@ -15,6 +15,6 @@ trait SetTts
 
     public function getTts(): ?bool
     {
-        return isset($this->data['tts']) ? $this->data['tts'] : null;
+        return $this->data['tts'] ?? null;
     }
 }

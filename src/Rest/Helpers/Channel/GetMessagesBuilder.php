@@ -22,7 +22,7 @@ class GetMessagesBuilder
 
     public function getAround(): ?string
     {
-        return isset($this->data['around']) ? $this->data['around'] : null;
+        return $this->data['around'] ?? null;
     }
 
     public function setBefore(string $before): GetMessagesBuilder
@@ -34,7 +34,7 @@ class GetMessagesBuilder
 
     public function getBefore(): ?string
     {
-        return isset($this->data['before']) ? $this->data['before'] : null;
+        return $this->data['before'] ?? null;
     }
 
     public function setAfter(string $after): GetMessagesBuilder
@@ -46,7 +46,7 @@ class GetMessagesBuilder
 
     public function getAfter(): ?string
     {
-        return isset($this->data['after']) ? $this->data['after'] : null;
+        return $this->data['after'] ?? null;
     }
 
     public function setLimit(int $limit): GetMessagesBuilder
@@ -58,7 +58,7 @@ class GetMessagesBuilder
 
     public function getLimit(): ?int
     {
-        return isset($this->data['limit']) ? $this->data['limit'] : null;
+        return $this->data['limit'] ?? null;
     }
 
     public function get(): array

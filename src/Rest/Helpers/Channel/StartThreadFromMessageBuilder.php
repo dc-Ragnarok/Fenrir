@@ -23,7 +23,7 @@ class StartThreadFromMessageBuilder
 
     public function getName(): ?string
     {
-        return isset($this->data['name']) ? $this->data['name'] : null;
+        return $this->data['name'] ?? null;
     }
 
     public function setAutoArchiveDuration(ThreadAutoArchiveDuration $duration): StartThreadFromMessageBuilder
@@ -49,7 +49,7 @@ class StartThreadFromMessageBuilder
 
     public function getRateLimitPerUser(): ?int
     {
-        return isset($this->data['rate_limit_per_user']) ? $this->data['rate_limit_per_user'] : null;
+        return $this->data['rate_limit_per_user'] ?? null;
     }
 
     public function get(): array

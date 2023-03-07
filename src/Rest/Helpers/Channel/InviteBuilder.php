@@ -21,7 +21,7 @@ class InviteBuilder
 
     public function getMaxAge(): ?int
     {
-        return isset($this->data['max_age']) ? $this->data['max_age'] : null;
+        return $this->data['max_age'] ?? null;
     }
 
     public function setMaxUses(int $maxUses): InviteBuilder
@@ -33,7 +33,7 @@ class InviteBuilder
 
     public function getMaxUses(): ?int
     {
-        return isset($this->data['max_uses']) ? $this->data['max_uses'] : null;
+        return $this->data['max_uses'] ?? null;
     }
 
     public function setTemporary(bool $temporary): InviteBuilder
@@ -45,7 +45,7 @@ class InviteBuilder
 
     public function getTemporary(): ?bool
     {
-        return isset($this->data['temporary']) ? $this->data['temporary'] : null;
+        return $this->data['temporary'] ?? null;
     }
 
     public function setUnique(bool $unique): InviteBuilder
@@ -57,7 +57,7 @@ class InviteBuilder
 
     public function getUnique(): ?bool
     {
-        return isset($this->data['unique']) ? $this->data['unique'] : null;
+        return $this->data['unique'] ?? null;
     }
 
     public function setTargetType(int $targetType): InviteBuilder
@@ -69,7 +69,7 @@ class InviteBuilder
 
     public function getTargetType(): ?int
     {
-        return isset($this->data['target_type']) ? $this->data['target_type'] : null;
+        return $this->data['target_type'] ?? null;
     }
 
     public function setTargetUserId(string $targetUserId): InviteBuilder
@@ -81,7 +81,7 @@ class InviteBuilder
 
     public function getTargetUserId(): ?string
     {
-        return isset($this->data['target_user_id']) ? $this->data['target_user_id'] : null;
+        return $this->data['target_user_id'] ?? null;
     }
 
     public function setTargetApplicationId(string $targetApplicationId): InviteBuilder
@@ -93,7 +93,7 @@ class InviteBuilder
 
     public function getTargetApplicationId(): ?string
     {
-        return isset($this->data['target_application_id']) ? $this->data['target_application_id'] : null;
+        return $this->data['target_application_id'] ?? null;
     }
 
     public function get(): array

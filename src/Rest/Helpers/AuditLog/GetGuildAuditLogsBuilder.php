@@ -22,7 +22,7 @@ class GetGuildAuditLogsBuilder
 
     public function getUserId(): ?string
     {
-        return isset($this->data['user_id']) ? $this->data['user_id'] : null;
+        return $this->data['user_id'] ?? null;
     }
 
     public function setActionType(int $actionType): GetGuildAuditLogsBuilder
@@ -34,7 +34,7 @@ class GetGuildAuditLogsBuilder
 
     public function getActionType(): ?int
     {
-        return isset($this->data['action_type']) ? $this->data['action_type'] : null;
+        return $this->data['action_type'] ?? null;
     }
 
     public function setBefore(string $before): GetGuildAuditLogsBuilder
@@ -46,7 +46,7 @@ class GetGuildAuditLogsBuilder
 
     public function getBefore(): ?string
     {
-        return isset($this->data['before']) ? $this->data['before'] : null;
+        return $this->data['before'] ?? null;
     }
 
     public function setAfter(string $after): GetGuildAuditLogsBuilder
@@ -58,7 +58,7 @@ class GetGuildAuditLogsBuilder
 
     public function getAfter(): ?string
     {
-        return isset($this->data['after']) ? $this->data['after'] : null;
+        return $this->data['after'] ?? null;
     }
 
     public function setLimit(int $limit): GetGuildAuditLogsBuilder
@@ -70,7 +70,7 @@ class GetGuildAuditLogsBuilder
 
     public function getLimit(): ?int
     {
-        return isset($this->data['limit']) ? $this->data['limit'] : null;
+        return $this->data['limit'] ?? null;
     }
 
     public function get(): array
