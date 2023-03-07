@@ -70,6 +70,8 @@ class Gateway
 
     private function reconnect(bool $close, bool $resume): void
     {
+        $this->logger->info('Gateway: attempting reconnect');
+
         if (isset($this->heartbeatTimer)) {
             $this->stopHeartbeat();
         }
@@ -100,6 +102,8 @@ class Gateway
         $this->scheduledReconnect = $this->loop->addTimer(5, function () {
             $this->reconnect(true, true);
         });
+
+        $this->logger->info('Gateway: Scheduled reconnect');
     }
 
     private function cancelScheduledReconnect(): void
@@ -111,6 +115,8 @@ class Gateway
         $this->loop->cancelTimer($this->scheduledReconnect);
 
         $this->scheduledReconnect = null;
+
+        $this->logger->info('Gateway: Cancelled scheduled reconnect');
     }
 
     private function identify(): void
@@ -216,6 +222,8 @@ class Gateway
 
             $this->scheduleReconnect();
         });
+
+        $this->logger->info('Gateway: Started heartbeats');
     }
 
     private function stopHeartbeat(): void
@@ -225,6 +233,8 @@ class Gateway
 
             unset($this->heartbeatTimer);
         }
+
+        $this->logger->info('Gateway: Stopped heartbeats');
     }
 
     /**

@@ -52,9 +52,17 @@ class Websocket extends EventEmitter
 
     public function open(string $url): Promise
     {
+        $this->logger->info(
+            sprintf('WS (C->S): Connecting to %s', $url)
+        );
+
         return new Promise(function (callable $resolver, callable $reject) use ($url) {
-            ($this->connector)($url)->then(function (RatchetWebsocket $connection) use ($resolver) {
+            ($this->connector)($url)->then(function (RatchetWebsocket $connection) use ($resolver, $url) {
                 $this->connection = $connection;
+
+                $this->logger->info(
+                    sprintf('WS (C->S): Connected to %s', $url)
+                );
 
                 $connection->on('message', function (MessageInterface $message) {
                     $this->logger->info('WS(S->C): ' . $message);
@@ -62,7 +70,11 @@ class Websocket extends EventEmitter
                 });
 
                 $resolver();
-            }, function (\Exception $e) use ($reject) {
+            }, function (\Exception $e) use ($reject, $url) {
+                $this->logger->info(
+                    sprintf('WS (C->S): Error connecting to %s. %s', $url, $e->getMessage())
+                );
+
                 $reject($e);
             });
         });
@@ -74,6 +86,10 @@ class Websocket extends EventEmitter
     public function close(int $code, string $reason)
     {
         $this->mustHaveActiveConnection();
+
+        $this->logger->info(
+            sprintf('WS (C->S): Closing connection: code = %d, reason = $s', $code, $reason)
+        );
 
         $this->connection->close($code, $reason);
 
@@ -89,10 +105,16 @@ class Websocket extends EventEmitter
 
         $action = function () use ($message) {
             $this->connection->send($message);
-            $this->logger->info('WS(C->S): ' . $message);
+            $this->logger->info(
+                sprintf('WS(C->S): %s', $message)
+            );
         };
 
         if ($useBucket) {
+            $this->logger->info(
+                sprintf('WS(C->S): (queued) %s', $message)
+            );
+
             $this->bucket->run($action);
         } else {
             $action();
