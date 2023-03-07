@@ -16,6 +16,9 @@ class CommandBuilder
 
     private array $data = [];
 
+    /** @var ?CommandOptionBuilder[] */
+    private array $commandOptionBuilders;
+
     /**
      * @see https://discord.com/developers/docs/interactions/application-commands#application-command-object-application-command-naming
      *
@@ -30,6 +33,11 @@ class CommandBuilder
         $this->data['name'] = $name;
 
         return $this;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->data['name'] ?? null;
     }
 
     /**
@@ -50,12 +58,27 @@ class CommandBuilder
         return $this;
     }
 
+    /**
+     * @see https://discord.com/developers/docs/reference#locales
+     *
+     * @return array<string, string> `key => locale`, `value => name`
+     */
+    public function getNameLocalizations(): ?array
+    {
+        return $this->data['name_localizations'] ?? null;
+    }
+
 
     public function setDescription(string $description): self
     {
         $this->data['description'] = $description;
 
         return $this;
+    }
+
+    public function getDescription(string $description): self
+    {
+        return $this->data['description'] ?? null;
     }
 
     /**
@@ -70,11 +93,21 @@ class CommandBuilder
         return $this;
     }
 
-    /**
-     * @todo add options builder & implement
-     */
-    public function setOptions()
+    public function addOption(CommandOptionBuilder $commandOptionBuilder): self
     {
+        if (!isset($this->commandOptionBuilders)) {
+            $this->commandOptionBuilders = [];
+        }
+
+        $this->commandOptionBuilders[] = $commandOptionBuilder;
+
+        return $this;
+    }
+
+    /** @return ?CommandOptionBuilder[] */
+    public function getOptions(): ?array
+    {
+        return $this->commandOptionBuilders ?? null;
     }
 
     /**
@@ -112,6 +145,15 @@ class CommandBuilder
 
     public function get(): array
     {
-        return $this->data;
+        $data = $this->data;
+
+        if (isset($this->commandOptionBuilders)) {
+            $data['options'] = array_map(
+                fn (CommandOptionBuilder $option) => $option->get(),
+                $this->commandOptionBuilders
+            );
+        }
+
+        return $data;
     }
 }
