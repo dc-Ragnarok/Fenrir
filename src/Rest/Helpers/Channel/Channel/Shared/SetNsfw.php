@@ -12,4 +12,9 @@ trait SetNsfw
 
         return $this;
     }
+
+    public function getNsfw(): ?bool
+    {
+        return $this->data['nsfw'] ?? null;
+    }
 }

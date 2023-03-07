@@ -12,4 +12,9 @@ trait SetTts
 
         return $this;
     }
+
+    public function getTts(): ?bool
+    {
+        return $this->data['tts'] ?? null;
+    }
 }

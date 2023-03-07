@@ -18,5 +18,6 @@ class SetDefaultAutoArchiveDurationTest extends TestCase
         $class->setDefaultAutoArchiveDuration(10);
 
         $this->assertEquals(['default_auto_archive_duration' => 10], $class->get());
+        $this->assertEquals(10, $class->getDefaultAutoArchiveDuration());
     }
 }

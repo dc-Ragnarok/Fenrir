@@ -20,11 +20,21 @@ class GetReactionsBuilder
         return $this;
     }
 
+    public function getAfter(): ?string
+    {
+        return $this->data['after'] ?? null;
+    }
+
     public function setLimit(int $limit): GetReactionsBuilder
     {
         $this->data['limit'] = ItemLimit::withinLimit($limit);
 
         return $this;
+    }
+
+    public function getLimit(): ?int
+    {
+        return $this->data['limit'] ?? null;
     }
 
     public function get(): array

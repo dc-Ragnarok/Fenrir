@@ -14,4 +14,9 @@ trait SetDefaultThreadRateLimitPerUser
 
         return $this;
     }
+
+    public function getDefaultThreadRateLimitPerUser(): ?int
+    {
+        return $this->data['default_thread_rate_limit_per_user'] ?? null;
+    }
 }

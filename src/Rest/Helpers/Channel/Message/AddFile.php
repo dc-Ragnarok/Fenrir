@@ -6,6 +6,8 @@ namespace Exan\Fenrir\Rest\Helpers\Channel\Message;
 
 trait AddFile
 {
+    private array $files;
+
     /**
      * @var string $contentType
      *  Content-Type header to be used for this file.
@@ -14,6 +16,10 @@ trait AddFile
      */
     public function addFile(string $fileName, string $content, ?string $contentType = null): self
     {
+        if (!isset($this->files)) {
+            $this->files = [];
+        }
+
         $file = [
             'name' => $fileName,
             'content' => $content,
@@ -39,5 +45,15 @@ trait AddFile
         }
 
         return $this;
+    }
+
+    public function getFiles(): ?array
+    {
+        return $this->files ?? null;
+    }
+
+    public function hasFiles(): bool
+    {
+        return isset($this->files);
     }
 }

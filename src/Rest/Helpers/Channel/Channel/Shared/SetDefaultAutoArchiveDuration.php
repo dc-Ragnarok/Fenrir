@@ -12,4 +12,9 @@ trait SetDefaultAutoArchiveDuration
 
         return $this;
     }
+
+    public function getDefaultAutoArchiveDuration(): ?int
+    {
+        return $this->data['default_auto_archive_duration'] ?? null;
+    }
 }

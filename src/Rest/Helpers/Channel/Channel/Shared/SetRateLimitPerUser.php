@@ -14,4 +14,9 @@ trait SetRateLimitPerUser
 
         return $this;
     }
+
+    public function getRateLimitPerUser(): ?int
+    {
+        return $this->data['rate_limit_per_user'] ?? null;
+    }
 }

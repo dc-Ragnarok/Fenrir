@@ -20,11 +20,21 @@ class GetGuildAuditLogsBuilder
         return $this;
     }
 
+    public function getUserId(): ?string
+    {
+        return $this->data['user_id'] ?? null;
+    }
+
     public function setActionType(int $actionType): GetGuildAuditLogsBuilder
     {
         $this->data['action_type'] = $actionType;
 
         return $this;
+    }
+
+    public function getActionType(): ?int
+    {
+        return $this->data['action_type'] ?? null;
     }
 
     public function setBefore(string $before): GetGuildAuditLogsBuilder
@@ -34,6 +44,11 @@ class GetGuildAuditLogsBuilder
         return $this;
     }
 
+    public function getBefore(): ?string
+    {
+        return $this->data['before'] ?? null;
+    }
+
     public function setAfter(string $after): GetGuildAuditLogsBuilder
     {
         $this->data['after'] = $after;
@@ -41,11 +56,21 @@ class GetGuildAuditLogsBuilder
         return $this;
     }
 
+    public function getAfter(): ?string
+    {
+        return $this->data['after'] ?? null;
+    }
+
     public function setLimit(int $limit): GetGuildAuditLogsBuilder
     {
         $this->data['limit'] = ItemLimit::withinLimit($limit);
 
         return $this;
+    }
+
+    public function getLimit(): ?int
+    {
+        return $this->data['limit'] ?? null;
     }
 
     public function get(): array

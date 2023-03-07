@@ -22,6 +22,11 @@ class StickerBuilder
         return $this;
     }
 
+    public function getName(): ?string
+    {
+        return $this->data['name'] ?? null;
+    }
+
     public function setDescription(string $description): StickerBuilder
     {
         $this->data['description'] = $description;
@@ -29,11 +34,21 @@ class StickerBuilder
         return $this;
     }
 
+    public function getDescription(): ?string
+    {
+        return $this->data['description'] ?? null;
+    }
+
     public function setTags(string $tags): StickerBuilder
     {
         $this->data['tags'] = $tags;
 
         return $this;
+    }
+
+    public function getTags(): ?string
+    {
+        return $this->data['tags'] ?? null;
     }
 
     public function setFile(string $content, string $fileExtension): StickerBuilder
@@ -45,6 +60,11 @@ class StickerBuilder
         ];
 
         return $this;
+    }
+
+    public function getFile(): ?string
+    {
+        return $this->file ?? null;
     }
 
     public function get(): MultipartBody

@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Tests\Exan\Fenrir\Rest;
 
 use Exan\Fenrir\Parts\Channel as PartsChannel;
-use Exan\Fenrir\Parts\Emoji;
 use Exan\Fenrir\Parts\Invite;
 use Exan\Fenrir\Parts\Message;
 use Exan\Fenrir\Parts\ThreadMember;

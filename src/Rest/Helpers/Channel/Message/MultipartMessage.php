@@ -22,7 +22,7 @@ trait MultipartMessage
                 $headers,
                 $fileData['name']
             );
-        }, $this->files, array_keys($this->files));
+        }, $this->getFiles(), array_keys($this->getFiles()));
 
         $fields[] = new MultipartField(
             'payload_json',
@@ -36,6 +36,6 @@ trait MultipartMessage
 
     public function requiresMultipart(): bool
     {
-        return $this->files !== [];
+        return $this->hasFiles();
     }
 }

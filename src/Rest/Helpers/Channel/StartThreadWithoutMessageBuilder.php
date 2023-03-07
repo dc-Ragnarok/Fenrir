@@ -22,11 +22,23 @@ class StartThreadWithoutMessageBuilder
         return $this;
     }
 
+    public function getName(): ?string
+    {
+        return $this->data['name'] ?? null;
+    }
+
     public function setAutoArchiveDuration(ThreadAutoArchiveDuration $duration): StartThreadWithoutMessageBuilder
     {
         $this->data['auto_archive_duration'] = $duration->value;
 
         return $this;
+    }
+
+    public function getAutoArchiveDuration(): ?ThreadAutoArchiveDuration
+    {
+        return isset($this->data['auto_archive_duration'])
+            ? ThreadAutoArchiveDuration::from($this->data['auto_archive_duration'])
+            : null;
     }
 
     public function setRateLimitPerUser(int $seconds): StartThreadWithoutMessageBuilder
@@ -36,6 +48,11 @@ class StartThreadWithoutMessageBuilder
         return $this;
     }
 
+    public function getRateLimitPerUser(): ?int
+    {
+        return $this->data['rate_limit_per_user'] ?? null;
+    }
+
     public function setInvitable(bool $invitable): StartThreadWithoutMessageBuilder
     {
         $this->data['invitable'] = $invitable;
@@ -43,11 +60,23 @@ class StartThreadWithoutMessageBuilder
         return $this;
     }
 
+    public function getInvitable(): ?bool
+    {
+        return $this->data['invitable'] ?? null;
+    }
+
     public function setType(ChannelTypes $type): StartThreadWithoutMessageBuilder
     {
         $this->data['type'] = $type->value;
 
         return $this;
+    }
+
+    public function getType(): ?ChannelTypes
+    {
+        return isset($this->data['type'])
+            ? ChannelTypes::from($this->data['type'])
+            : null;
     }
 
     public function get(): array

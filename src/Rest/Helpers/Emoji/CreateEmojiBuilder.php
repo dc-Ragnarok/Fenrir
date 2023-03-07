@@ -20,6 +20,11 @@ class CreateEmojiBuilder
         return $this;
     }
 
+    public function getName(): ?string
+    {
+        return $this->data['name'] ?? null;
+    }
+
     public function setRoles(array $roles): CreateEmojiBuilder
     {
         $this->data['roles'] = $roles;
@@ -27,11 +32,22 @@ class CreateEmojiBuilder
         return $this;
     }
 
+    /** @return ?string[] */
+    public function getRoles(): ?array
+    {
+        return $this->data['roles'] ?? null;
+    }
+
     public function setImage(string $content, ImageData $imageData): CreateEmojiBuilder
     {
         $this->data['image'] = 'data:' . $imageData->value . ';base64,' . base64_encode($content);
 
         return $this;
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->data['image'] ?? null;
     }
 
     public function get(): array

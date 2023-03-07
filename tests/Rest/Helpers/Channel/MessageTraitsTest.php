@@ -37,15 +37,16 @@ class MessageTraitsTest extends TestCase
     {
         $traitTester = new class {
             use AddEmbed;
-
-            public $data = [];
         };
+
+        $this->assertFalse($traitTester->hasEmbeds());
 
         $embedBuilder = new EmbedBuilder();
         $embedBuilder->setTitle('::title::');
 
         $traitTester->addEmbed($embedBuilder);
-        $this->assertEquals([$embedBuilder->get()], $traitTester->data['embeds']);
+        $this->assertEquals([$embedBuilder], $traitTester->getEmbeds());
+        $this->assertTrue($traitTester->hasEmbeds());
     }
 
     public function testSetFlags()
@@ -64,36 +65,39 @@ class MessageTraitsTest extends TestCase
     {
         $traitTester = new class {
             use AllowMentions;
-
-            public $data = [];
         };
+
+        $this->assertFalse($traitTester->hasAllowedMentions());
+
 
         $mentionBuilder = new AllowedMentionsBuilder();
         $mentionBuilder->addRole('::role id::');
 
         $traitTester->allowMentions($mentionBuilder);
-        $this->assertEquals($mentionBuilder->get(), $traitTester->data['allowed_mentions']);
+        $this->assertEquals($mentionBuilder, $traitTester->getAllowedMentions());
+        $this->assertTrue($traitTester->hasAllowedMentions());
     }
 
     public function testNoMentions()
     {
         $traitTester = new class {
             use AllowMentions;
-
-            public $data = [];
         };
 
+        $this->assertFalse($traitTester->hasAllowedMentions());
+
         $traitTester->noMentions();
-        $this->assertEquals((new AllowedMentionsBuilder())->get(), $traitTester->data['allowed_mentions']);
+        $this->assertEquals(new AllowedMentionsBuilder(), $traitTester->getAllowedMentions());
+        $this->assertTrue($traitTester->hasAllowedMentions());
     }
 
     public function testAddComponent()
     {
         $traitTester = new class {
             use AddComponent;
-
-            public $data = [];
         };
+
+        $this->assertFalse($traitTester->hasComponents());
 
         $componentBuilder = Mockery::mock(ComponentBuilder::class);
         $componentBuilder
@@ -101,21 +105,21 @@ class MessageTraitsTest extends TestCase
             ->andReturns(['::component::']);
 
         $traitTester->addComponent($componentBuilder);
-        $this->assertEquals([$componentBuilder->get()], $traitTester->data['components']);
+        $this->assertEquals([$componentBuilder], $traitTester->getComponents());
+        $this->assertTrue($traitTester->hasComponents());
     }
 
     private function getClassWithAddFileTrait(): object
     {
         return new class {
             use AddFile;
-
-            public $files = [];
         };
     }
 
     public function testAddFile()
     {
         $traitTester = $this->getClassWithAddFileTrait();
+        $this->assertFalse($traitTester->hasFiles());
 
         $traitTester->addFile(
             'file.jpg',
@@ -129,13 +133,15 @@ class MessageTraitsTest extends TestCase
                 'content' => '::spooky binary data::',
                 'type' => '::type::',
             ],
-            $traitTester->files[0]
+            $traitTester->getFiles()[0]
         );
+        $this->assertTrue($traitTester->hasFiles());
     }
 
     public function testAddFileAndDetectType()
     {
         $traitTester = $this->getClassWithAddFileTrait();
+        $this->assertFalse($traitTester->hasFiles());
 
         $traitTester->addFile(
             'file.jpg',
@@ -148,8 +154,9 @@ class MessageTraitsTest extends TestCase
                 'content' => '::spooky binary data::',
                 'type' => 'image/jpeg',
             ],
-            $traitTester->files[0]
+            $traitTester->getFiles()[0]
         );
+        $this->assertTrue($traitTester->hasFiles());
     }
 
     public function testAddFileAndDetectTypeThatDoesNotExist()
@@ -166,10 +173,10 @@ class MessageTraitsTest extends TestCase
                 'name' => 'file',
                 'content' => '::spooky binary data::',
             ],
-            $traitTester->files[0]
+            $traitTester->getFiles()[0]
         );
 
-        $traitTester->files = [];
+        $traitTester = $this->getClassWithAddFileTrait();
 
         $traitTester->addFile(
             'file.invalid',
@@ -181,7 +188,7 @@ class MessageTraitsTest extends TestCase
                 'name' => 'file.invalid',
                 'content' => '::spooky binary data::',
             ],
-            $traitTester->files[0]
+            $traitTester->getFiles()[0]
         );
     }
 
@@ -189,9 +196,9 @@ class MessageTraitsTest extends TestCase
     {
         $traitTester = new class {
             use AddAttachment;
-
-            public $data = [];
         };
+
+        $this->assertFalse($traitTester->hasAttachments());
 
         $attachment = new AttachmentBuilder();
         $attachment->setId('1234567890');
@@ -199,11 +206,7 @@ class MessageTraitsTest extends TestCase
 
         $traitTester->addAttachment($attachment);
 
-        $this->assertEquals([
-            [
-                'id' => '1234567890',
-                'filename' => 'test.jpg',
-            ]
-        ], $traitTester->data['attachments']);
+        $this->assertEquals([$attachment], $traitTester->getAttachments());
+        $this->assertTrue($traitTester->hasAttachments());
     }
 }

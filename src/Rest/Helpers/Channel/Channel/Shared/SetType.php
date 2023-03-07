@@ -24,4 +24,11 @@ trait SetType
 
         return $this;
     }
+
+    public function getType(): ?ChannelTypes
+    {
+        return isset($this->data['type'])
+            ? ChannelTypes::from($this->data['type'])
+            : null;
+    }
 }

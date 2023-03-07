@@ -36,13 +36,28 @@ class MessageBuilder
 
     private array $data = [];
 
-    private $files = [];
-
     public function setNonce(string $nonce): MessageBuilder
     {
         $this->data['nonce'] = $nonce;
 
         return $this;
+    }
+
+    public function getNonce(): ?string
+    {
+        return $this->data['nonce'] ?? null;
+    }
+
+    public function setTts(bool $tts): MessageBuilder
+    {
+        $this->data['tts'] = $tts;
+
+        return $this;
+    }
+
+    public function getTts(): ?bool
+    {
+        return $this->data['tts'] ?? null;
     }
 
     /**
@@ -67,6 +82,11 @@ class MessageBuilder
         return $this;
     }
 
+    public function getReference(): ?array
+    {
+        return $this->data['message_reference'] ?? null;
+    }
+
     /**
      * Up to 3 stickers
      *
@@ -87,12 +107,44 @@ class MessageBuilder
         return $this;
     }
 
+    public function getStickers(): ?array
+    {
+        return $this->data['stickers'] ?? null;
+    }
+
     public function get(): MultipartBody|array
     {
-        if ($this->requiresMultipart()) {
-            return $this->getMultipart($this->data);
+        $data = $this->data;
+
+        if ($this->hasAttachments()) {
+            $data['attachments'] = array_map(
+                fn (AttachmentBuilder $attachment) => $attachment->get(),
+                $this->getAttachments()
+            );
         }
 
-        return $this->data;
+        if ($this->hasComponents()) {
+            $data['components'] = array_map(
+                fn (ComponentBuilder $component) => $component->get(),
+                $this->getComponents()
+            );
+        }
+
+        if ($this->hasEmbeds()) {
+            $data['embeds'] = array_map(
+                fn (EmbedBuilder $embed) => $embed->get(),
+                $this->getEmbeds()
+            );
+        }
+
+        if ($this->hasAllowedMentions()) {
+            $data['allowed_mentions'] = $this->getAllowedMentions()->get();
+        }
+
+        if ($this->requiresMultipart()) {
+            return $this->getMultipart($data);
+        }
+
+        return $data;
     }
 }

@@ -12,4 +12,9 @@ trait SetBitrate
 
         return $this;
     }
+
+    public function getBitrate(): ?int
+    {
+        return $this->data['bitrate'] ?? null;
+    }
 }

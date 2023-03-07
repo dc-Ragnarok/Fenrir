@@ -17,11 +17,12 @@ class ComponentRowBuilder
 {
     use GetNew;
 
+    /** @var Component[] */
     private array $components = [];
 
     public function get(): array
     {
-        return $this->components;
+        return array_map(fn (Component $component) => $component->get(), $this->components);
     }
 
     /**
@@ -33,7 +34,7 @@ class ComponentRowBuilder
             throw new TooManyItemsException();
         }
 
-        $this->components[] = $component->get();
+        $this->components[] = $component;
 
         return $this;
     }

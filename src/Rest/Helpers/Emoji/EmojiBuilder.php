@@ -20,6 +20,11 @@ class EmojiBuilder
         return $this;
     }
 
+    public function getName(): ?string
+    {
+        return $this->data['name'] ?? null;
+    }
+
     public function setAnimated(bool $animated): EmojiBuilder
     {
         $this->data['animated'] = $animated;
@@ -27,11 +32,21 @@ class EmojiBuilder
         return $this;
     }
 
+    public function getAnimated(): ?string
+    {
+        return $this->data['animated'] ?? null;
+    }
+
     public function setId(string $id): EmojiBuilder
     {
         $this->data['id'] = $id;
 
         return $this;
+    }
+
+    public function getId(): ?string
+    {
+        return $this->data['id'] ?? null;
     }
 
     public static function fromPart(Emoji $emoji): EmojiBuilder

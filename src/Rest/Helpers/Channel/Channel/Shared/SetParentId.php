@@ -12,4 +12,9 @@ trait SetParentId
 
         return $this;
     }
+
+    public function getParentId(): ?string
+    {
+        return $this->data['parent_id'] ?? null;
+    }
 }

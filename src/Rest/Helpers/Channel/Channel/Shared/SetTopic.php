@@ -12,4 +12,9 @@ trait SetTopic
 
         return $this;
     }
+
+    public function getTopic(): ?string
+    {
+        return $this->data['topic'] ?? null;
+    }
 }

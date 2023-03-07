@@ -18,5 +18,6 @@ class SetParentIdTest extends TestCase
         $class->setParentId('::parent id::');
 
         $this->assertEquals(['parent_id' => '::parent id::'], $class->get());
+        $this->assertEquals('::parent id::', $class->getParentId());
     }
 }

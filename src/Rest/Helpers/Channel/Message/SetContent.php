@@ -15,4 +15,9 @@ trait SetContent
 
         return $this;
     }
+
+    public function getContent(): ?string
+    {
+        return $this->data['content'] ?? null;
+    }
 }

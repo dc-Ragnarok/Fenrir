@@ -18,5 +18,6 @@ class SetRtcRegionTest extends TestCase
         $class->setRtcRegion('::rtc region::');
 
         $this->assertEquals(['rtc_region' => '::rtc region::'], $class->get());
+        $this->assertEquals('::rtc region::', $class->getRtcRegion());
     }
 }

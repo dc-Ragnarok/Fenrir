@@ -9,6 +9,12 @@ trait SetFlags
     public function setFlags(int $flags): self
     {
         $this->data['flags'] = $flags;
+
         return $this;
+    }
+
+    private function getFlags(): ?int
+    {
+        return $this->data['flags'] ?? null;
     }
 }
