@@ -31,7 +31,7 @@ trait AddEmbed
     /** @return EmbedBuilder[] */
     public function getEmbeds(): ?array
     {
-        return isset($this->embeds) ? $this->embeds : null;
+        return $this->embeds ?? null;
     }
 
     public function hasEmbeds(): bool

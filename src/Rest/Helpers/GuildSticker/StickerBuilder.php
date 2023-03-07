@@ -64,7 +64,7 @@ class StickerBuilder
 
     public function getFile(): ?string
     {
-        return isset($this->file) ? $this->file : null;
+        return $this->file ?? null;
     }
 
     public function get(): MultipartBody

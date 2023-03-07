@@ -49,7 +49,7 @@ trait AddFile
 
     public function getFiles(): ?array
     {
-        return isset($this->files) ? $this->files : null;
+        return $this->files ?? null;
     }
 
     public function hasFiles(): bool

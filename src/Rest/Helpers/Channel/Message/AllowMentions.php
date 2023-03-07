@@ -30,7 +30,7 @@ trait AllowMentions
 
     public function getAllowedMentions(): ?AllowedMentionsBuilder
     {
-        return isset($this->allowedMentions) ? $this->allowedMentions : null;
+        return $this->allowedMentions ?? null;
     }
 
     public function hasAllowedMentions(): bool

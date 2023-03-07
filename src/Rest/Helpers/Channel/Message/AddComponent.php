@@ -28,7 +28,7 @@ trait AddComponent
     /** @return ComponentBuilder[] */
     public function getComponents(): ?array
     {
-        return isset($this->components) ? $this->components : null;
+        return $this->components ?? null;
     }
 
     public function hasComponents(): bool

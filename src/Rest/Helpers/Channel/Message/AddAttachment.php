@@ -28,7 +28,7 @@ trait AddAttachment
     /** @return AttachmentBuilder[] */
     public function getAttachments(): ?array
     {
-        return isset($this->attachments) ? $this->attachments : null;
+        return $this->attachments ?? null;
     }
 
     public function hasAttachments(): bool
