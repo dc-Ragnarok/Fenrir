@@ -28,7 +28,7 @@ class EditMessageBuilder
     use SetFlags;
     use MultipartMessage;
 
-    private $data = [];
+    private array $data = [];
 
     public function get(): MultipartBody|array
     {
