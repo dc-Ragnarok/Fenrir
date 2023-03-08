@@ -25,7 +25,7 @@ class FiredCommand
         );
     }
 
-    public function createFollowUpMessage(WebhookBuilder $webhookBuilder)
+    public function editInteractionResponse(WebhookBuilder $webhookBuilder)
     {
         return $this->discord->rest->webhook->editOriginalInteractionResponse(
             $this->interaction->application_id,
