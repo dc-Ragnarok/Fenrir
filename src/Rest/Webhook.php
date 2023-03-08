@@ -8,6 +8,7 @@ use Discord\Http\Endpoint;
 use Discord\Http\Http;
 use Exan\Fenrir\Command\Helpers\InteractionCallbackBuilder;
 use Exan\Fenrir\Parts\Message;
+use Exan\Fenrir\Rest\Helpers\Webhook\WebhookBuilder;
 use Exan\Fenrir\Rest\Helpers\HttpHelper;
 use JsonMapper;
 use React\Promise\ExtendedPromiseInterface;
@@ -24,9 +25,9 @@ class Webhook
     }
 
     /**
-     * @see https://discord.com/developers/docs/interactions/receiving-and-responding#create-followup-message
+     * @see https://discord.com/developers/docs/interactions/receiving-and-responding#get-original-interaction-response
      */
-    public function createFollowUpMessage(
+    public function createInteractionResponse(
         string $applicationId,
         string $interactionToken,
         InteractionCallbackBuilder $interactionCallbackBuilder
@@ -47,16 +48,16 @@ class Webhook
     public function editOriginalInteractionResponse(
         string $applicationId,
         string $interactionToken,
-        InteractionCallbackBuilder $interactionCallbackBuilder
+        WebhookBuilder $webhookBuilder
     ): ExtendedPromiseInterface {
         return $this->mapPromise(
-                $this->http->patch(
+            $this->http->patch(
                 Endpoint::bind(
                     Endpoint::ORIGINAL_INTERACTION_RESPONSE,
                     $applicationId,
-                    $interactionToken
+                    $interactionToken,
                 ),
-                $interactionCallbackBuilder->get()
+                $webhookBuilder->get()
             ),
             Message::class
         );
