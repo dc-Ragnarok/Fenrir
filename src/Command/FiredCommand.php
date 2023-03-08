@@ -23,4 +23,13 @@ class FiredCommand
             $interactionCallbackBuilder
         );
     }
+
+    public function editFollowUpMessage(InteractionCallbackBuilder $interactionCallbackBuilder)
+    {
+        return $this->discord->rest->webhook->editOriginalInteractionResponse(
+            $this->interaction->id,
+            $this->interaction->token,
+            $interactionCallbackBuilder
+        );
+    }
 }

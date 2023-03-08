@@ -7,6 +7,7 @@ namespace Exan\Fenrir\Rest;
 use Discord\Http\Endpoint;
 use Discord\Http\Http;
 use Exan\Fenrir\Command\Helpers\InteractionCallbackBuilder;
+use Exan\Fenrir\Parts\Message;
 use Exan\Fenrir\Rest\Helpers\HttpHelper;
 use JsonMapper;
 use React\Promise\ExtendedPromiseInterface;
@@ -43,8 +44,22 @@ class Webhook
     /**
      * @see https://discord.com/developers/docs/interactions/receiving-and-responding#edit-original-interaction-response
      */
-    public function editOriginalInteractionResponse()
-    {
+    public function editOriginalInteractionResponse(
+        string $applicationId,
+        string $interactionToken,
+        InteractionCallbackBuilder $interactionCallbackBuilder
+    ): ExtendedPromiseInterface {
+        return $this->mapPromise(
+                $this->http->patch(
+                Endpoint::bind(
+                    Endpoint::ORIGINAL_INTERACTION_RESPONSE,
+                    $applicationId,
+                    $interactionToken
+                ),
+                $interactionCallbackBuilder->get()
+            ),
+            Message::class
+        );
     }
 
     /**
