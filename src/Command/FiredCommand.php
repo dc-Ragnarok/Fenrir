@@ -6,7 +6,7 @@ namespace Exan\Fenrir\Command;
 
 use Exan\Fenrir\Command\Helpers\InteractionCallbackBuilder;
 use Exan\Fenrir\Discord;
-use Exan\Fenrir\Rest\Helpers\Webhook\WebhookBuilder;
+use Exan\Fenrir\Rest\Helpers\Webhook\EditWebhookBuilder;
 use Exan\Fenrir\Websocket\Events\InteractionCreate;
 use React\Promise\ExtendedPromiseInterface;
 
@@ -25,7 +25,7 @@ class FiredCommand
         );
     }
 
-    public function editInteractionResponse(WebhookBuilder $webhookBuilder)
+    public function editInteractionResponse(EditWebhookBuilder $webhookBuilder)
     {
         return $this->discord->rest->webhook->editOriginalInteractionResponse(
             $this->interaction->application_id,

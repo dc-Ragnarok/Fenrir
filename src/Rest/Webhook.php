@@ -8,8 +8,8 @@ use Discord\Http\Endpoint;
 use Discord\Http\Http;
 use Exan\Fenrir\Command\Helpers\InteractionCallbackBuilder;
 use Exan\Fenrir\Parts\Message;
-use Exan\Fenrir\Rest\Helpers\Webhook\WebhookBuilder;
 use Exan\Fenrir\Rest\Helpers\HttpHelper;
+use Exan\Fenrir\Rest\Helpers\Webhook\EditWebhookBuilder;
 use JsonMapper;
 use React\Promise\ExtendedPromiseInterface;
 
@@ -48,7 +48,7 @@ class Webhook
     public function editOriginalInteractionResponse(
         string $applicationId,
         string $interactionToken,
-        WebhookBuilder $webhookBuilder
+        EditWebhookBuilder $webhookBuilder
     ): ExtendedPromiseInterface {
         return $this->mapPromise(
             $this->http->patch(

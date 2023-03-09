@@ -20,44 +20,21 @@ use Exan\Fenrir\Rest\Helpers\Channel\Message\SetTts;
 use Exan\Fenrir\Rest\Helpers\GetNew;
 
 /**
- * @see https://discord.com/developers/docs/resources/webhook#execute-webhook
+ * @see https://discord.com/developers/docs/resources/webhook#edit-webhook-message
  */
-class WebhookBuilder
+class EditWebhookBuilder
 {
     use GetNew;
 
-    use AddAttachment;
-    use AddComponent;
-    use AddEmbed;
-    use AddFile;
-    use AllowMentions;
     use SetContent;
-    use SetFlags;
+    use AddEmbed;
+    use AllowMentions;
+    use AddComponent;
+    use AddFile;
+    use AddAttachment;
     use MultipartMessage;
-    use SetTts;
 
     private array $data = [];
-
-    public function setUsername(string $username): self
-    {
-        $this->data['username'] = $username;
-
-        return $this;
-    }
-
-    public function setAvatarUrl(string $url): self
-    {
-        $this->data['avatar_url'] = $url;
-
-        return $this;
-    }
-
-    public function setThreadName(string $name): self
-    {
-        $this->data['thread_name'] = $name;
-
-        return $this;
-    }
 
     public function get(): MultipartBody|array
     {
