@@ -22,8 +22,9 @@ class FiredCommand
         }
     }
 
-    public function createInteractionResponse(InteractionCallbackBuilder $interactionCallbackBuilder): ExtendedPromiseInterface
-    {
+    public function createInteractionResponse(
+        InteractionCallbackBuilder $interactionCallbackBuilder
+    ): ExtendedPromiseInterface {
         return $this->discord->rest->webhook->createInteractionResponse(
             $this->interaction->id,
             $this->interaction->token,
@@ -34,8 +35,8 @@ class FiredCommand
     public function getInteractionResponse(): ExtendedPromiseInterface
     {
          return $this->discord->rest->webhook->getOriginalInteractionResponse(
-            $this->interaction->application_id,
-            $this->interaction->token
+             $this->interaction->application_id,
+             $this->interaction->token
          );
     }
 
@@ -53,7 +54,7 @@ class FiredCommand
         return $this->discord->rest->webhook->deleteOriginalInteractionResponse(
             $this->interaction->application_id,
             $this->interaction->token
-         );
+        );
     }
 
     public function getOption($option): string|int|float|bool|null

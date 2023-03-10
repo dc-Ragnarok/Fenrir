@@ -10,14 +10,14 @@ use Exan\Fenrir\Rest\Helpers\Channel\AttachmentBuilder;
 use Exan\Fenrir\Rest\Helpers\Channel\ComponentBuilder;
 use Exan\Fenrir\Rest\Helpers\Channel\ComponentRowBuilder;
 use Exan\Fenrir\Rest\Helpers\Channel\EmbedBuilder;
-use Exan\Fenrir\Rest\Helpers\Webhook\WebhookBuilder;
+use Exan\Fenrir\Rest\Helpers\Webhook\EditWebhookBuilder;
 use PHPUnit\Framework\TestCase;
 
 class EditWebhookBuilderTest extends TestCase
 {
     public function testGetAttachments()
     {
-        $webhookBuilder = WebhookBuilder::new();
+        $webhookBuilder = EditWebhookBuilder::new();
 
         $attachment = AttachmentBuilder::new()
             ->setFilename('::filename::');
@@ -29,7 +29,7 @@ class EditWebhookBuilderTest extends TestCase
 
     public function testGetComponents()
     {
-        $webhookBuilder = WebhookBuilder::new();
+        $webhookBuilder = EditWebhookBuilder::new();
 
         $component = ComponentBuilder::new()
             ->addRow(
@@ -44,7 +44,7 @@ class EditWebhookBuilderTest extends TestCase
 
     public function testGetEmbeds()
     {
-        $webhookBuilder = WebhookBuilder::new();
+        $webhookBuilder = EditWebhookBuilder::new();
 
         $embed = EmbedBuilder::new()
             ->setTitle('::title::');
@@ -56,7 +56,7 @@ class EditWebhookBuilderTest extends TestCase
 
     public function testGetAllowedMentions()
     {
-        $webhookBuilder = WebhookBuilder::new();
+        $webhookBuilder = EditWebhookBuilder::new();
 
         $allowedMentions = AllowedMentionsBuilder::new()
             ->allowUsers('::user id::');
@@ -68,7 +68,7 @@ class EditWebhookBuilderTest extends TestCase
 
     public function testRequiresMultipart()
     {
-        $builder = new WebhookBuilder();
+        $builder = new EditWebhookBuilder();
 
         $builder->addFile(
             'file',
@@ -80,7 +80,7 @@ class EditWebhookBuilderTest extends TestCase
 
     public function testGetMultipart()
     {
-        $builder = new WebhookBuilder();
+        $builder = new EditWebhookBuilder();
 
         $builder->setContent('::content::');
 
