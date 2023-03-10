@@ -45,6 +45,11 @@ class WebhookBuilder
         return $this;
     }
 
+    public function getUsername(): ?string
+    {
+        return $this->data['username'] ?? null;
+    }
+
     public function setAvatarUrl(string $url): self
     {
         $this->data['avatar_url'] = $url;
@@ -52,11 +57,21 @@ class WebhookBuilder
         return $this;
     }
 
+    public function getAvatarUrl(): ?string
+    {
+        return $this->data['avatar_url'] ?? null;
+    }
+
     public function setThreadName(string $name): self
     {
         $this->data['thread_name'] = $name;
 
         return $this;
+    }
+
+    public function getThreadName(): ?string
+    {
+        return $this->data['thread_name'] ?? null;
     }
 
     public function get(): MultipartBody|array

@@ -12,8 +12,14 @@ use React\Promise\ExtendedPromiseInterface;
 
 class FiredCommand
 {
+    private array $options = [];
+
     public function __construct(public readonly InteractionCreate $interaction, private Discord $discord)
     {
+        $options = $this->interaction->data->options ?? [];
+        foreach ($options as $option) {
+            $this->options[$option->name] = $option->value;
+        }
     }
 
     public function createInteractionResponse(InteractionCallbackBuilder $interactionCallbackBuilder): ExtendedPromiseInterface
@@ -25,12 +31,38 @@ class FiredCommand
         );
     }
 
-    public function editInteractionResponse(EditWebhookBuilder $webhookBuilder)
+    public function getInteractionResponse(): ExtendedPromiseInterface
+    {
+         return $this->discord->rest->webhook->getOriginalInteractionResponse(
+            $this->interaction->application_id,
+            $this->interaction->token
+         );
+    }
+
+    public function editInteractionResponse(EditWebhookBuilder $webhookBuilder): ExtendedPromiseInterface
     {
         return $this->discord->rest->webhook->editOriginalInteractionResponse(
             $this->interaction->application_id,
             $this->interaction->token,
             $webhookBuilder
         );
+    }
+
+    public function deleteInteractionResponse(): ExtendedPromiseInterface
+    {
+        return $this->discord->rest->webhook->deleteOriginalInteractionResponse(
+            $this->interaction->application_id,
+            $this->interaction->token
+         );
+    }
+
+    public function getOption($option): string|int|float|bool|null
+    {
+        return $this->options[$option] ?? null;
+    }
+
+    public function hasOption($option): bool
+    {
+        return isset($this->options[$option]);
     }
 }

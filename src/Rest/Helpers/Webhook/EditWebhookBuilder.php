@@ -15,8 +15,6 @@ use Exan\Fenrir\Rest\Helpers\Channel\Message\AddFile;
 use Exan\Fenrir\Rest\Helpers\Channel\Message\AllowMentions;
 use Exan\Fenrir\Rest\Helpers\Channel\Message\MultipartMessage;
 use Exan\Fenrir\Rest\Helpers\Channel\Message\SetContent;
-use Exan\Fenrir\Rest\Helpers\Channel\Message\SetFlags;
-use Exan\Fenrir\Rest\Helpers\Channel\Message\SetTts;
 use Exan\Fenrir\Rest\Helpers\GetNew;
 
 /**

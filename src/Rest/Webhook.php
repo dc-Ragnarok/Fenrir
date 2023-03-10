@@ -25,20 +25,39 @@ class Webhook
     }
 
     /**
-     * @see https://discord.com/developers/docs/interactions/receiving-and-responding#get-original-interaction-response
+     * @see https://discord.com/developers/docs/interactions/receiving-and-responding#create-interaction-response
      */
     public function createInteractionResponse(
-        string $applicationId,
+        string $interactionId,
         string $interactionToken,
         InteractionCallbackBuilder $interactionCallbackBuilder
     ): ExtendedPromiseInterface {
         return $this->http->post(
             Endpoint::bind(
                 Endpoint::INTERACTION_RESPONSE,
-                $applicationId,
+                $interactionId,
                 $interactionToken
             ),
             $interactionCallbackBuilder->get()
+        );
+    }
+
+    /**
+     * @see https://discord.com/developers/docs/interactions/receiving-and-responding#get-original-interaction-response
+     */
+    public function getOriginalInteractionResponse(
+        string $applicationId,
+        string $interactionToken
+    ): ExtendedPromiseInterface {
+        return $this->mapPromise(
+            $this->http->get(
+                Endpoint::bind(
+                    Endpoint::ORIGINAL_INTERACTION_RESPONSE,
+                    $applicationId,
+                    $interactionToken,
+                )
+            ),
+            Message::class
         );
     }
 
@@ -66,14 +85,16 @@ class Webhook
     /**
      * @see https://discord.com/developers/docs/interactions/receiving-and-responding#delete-original-interaction-response
      */
-    public function deleteOriginalInteractionResponse()
-    {
-    }
-
-    /**
-     * @see https://discord.com/developers/docs/interactions/receiving-and-responding#edit-followup-message
-     */
-    public function editFollowUpMessage()
-    {
+    public function deleteOriginalInteractionResponse(
+        string $applicationId,
+        string $interactionToken
+    ): ExtendedPromiseInterface {
+        return $this->http->delete(
+            Endpoint::bind(
+                Endpoint::ORIGINAL_INTERACTION_RESPONSE,
+                $applicationId,
+                $interactionToken
+            )
+        );
     }
 }

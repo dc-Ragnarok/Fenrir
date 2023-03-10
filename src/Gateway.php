@@ -39,10 +39,6 @@ class Gateway
 
     private Bucket $activityBucket;
 
-    public bool $dev;
-    public string $devGuild;
-    public CommandHandler $command;
-
     public function __construct(
         private LoopInterface $loop,
         private string $token,

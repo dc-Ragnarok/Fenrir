@@ -6,6 +6,8 @@ namespace Exan\Fenrir;
 
 use Exan\Fenrir\Command\Helpers\InteractionCallbackBuilder;
 use Exan\Fenrir\Enums\Command\InteractionCallbackTypes;
+use Exan\Fenrir\Parts\Message;
+use Exan\Fenrir\Rest\Helpers\Webhook\EditWebhookBuilder;
 use Exan\Fenrir\Rest\Webhook;
 use Tests\Exan\Fenrir\Rest\HttpHelperTestCase;
 
@@ -21,16 +23,57 @@ class WebhookTest extends HttpHelperTestCase
     public function httpBindingsProvider(): array
     {
         return [
-            'Create follow up message' => [
-                'method' => 'createFollowUpMessage',
+            'Create interaction response' => [
+                'method' => 'createInteractionResponse',
                 'args' => [
-                    '::application id::',
+                    '::interaction id::',
                     '::interaction token::',
                     InteractionCallbackBuilder::new()
                         ->setType(InteractionCallbackTypes::APPLICATION_COMMAND_AUTOCOMPLETE_RESULT),
                 ],
                 'mockOptions' => [
                     'method' => 'post',
+                    'return' => null,
+                ],
+                'validationOptions' => [],
+            ],
+            'Get original interaction response' => [
+                'method' => 'getOriginalInteractionResponse',
+                'args' => [
+                    '::application id::',
+                    '::interaction token::',
+                ],
+                'mockOptions' => [
+                    'method' => 'get',
+                    'return' => (object) [],
+                ],
+                'validationOptions' => [
+                    'returnType' => Message::class,
+                ],
+            ],
+            'Edit original interaction response' => [
+                'method' => 'editOriginalInteractionResponse',
+                'args' => [
+                    '::application id::',
+                    '::interaction token::',
+                    EditWebhookBuilder::new()
+                ],
+                'mockOptions' => [
+                    'method' => 'patch',
+                    'return' => (object) [],
+                ],
+                'validationOptions' => [
+                    'returnType' => Message::class,
+                ],
+            ],
+            'Delete original interaction response' => [
+                'method' => 'deleteOriginalInteractionResponse',
+                'args' => [
+                    '::application id::',
+                    '::interaction token::'
+                ],
+                'mockOptions' => [
+                    'method' => 'delete',
                     'return' => null,
                 ],
                 'validationOptions' => [],
