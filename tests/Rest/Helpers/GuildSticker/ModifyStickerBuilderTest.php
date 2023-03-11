@@ -15,6 +15,7 @@ class ModifyStickerBuilderTest extends TestCase
         $modifyStickerBuilder->setName('::name::');
 
         $this->assertEquals(['name' => '::name::'], $modifyStickerBuilder->get());
+        $this->assertEquals('::name::', $modifyStickerBuilder->getName());
     }
 
     public function testSetDescription()
@@ -23,6 +24,7 @@ class ModifyStickerBuilderTest extends TestCase
         $modifyStickerBuilder->setDescription('::description::');
 
         $this->assertEquals(['description' => '::description::'], $modifyStickerBuilder->get());
+        $this->assertEquals('::description::', $modifyStickerBuilder->getDescription());
     }
 
     public function testSetTags()
@@ -31,5 +33,6 @@ class ModifyStickerBuilderTest extends TestCase
         $modifyStickerBuilder->setTags('::tags::');
 
         $this->assertEquals(['tags' => '::tags::'], $modifyStickerBuilder->get());
+        $this->assertEquals('::tags::', $modifyStickerBuilder->getTags());
     }
 }

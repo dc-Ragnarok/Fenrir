@@ -13,7 +13,7 @@ trait SetFlags
         return $this;
     }
 
-    private function getFlags(): ?int
+    public function getFlags(): ?int
     {
         return $this->data['flags'] ?? null;
     }

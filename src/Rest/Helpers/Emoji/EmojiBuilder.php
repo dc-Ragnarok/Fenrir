@@ -32,7 +32,7 @@ class EmojiBuilder
         return $this;
     }
 
-    public function getAnimated(): ?string
+    public function getAnimated(): ?bool
     {
         return $this->data['animated'] ?? null;
     }
