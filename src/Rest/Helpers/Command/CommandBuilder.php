@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Exan\Fenrir\Rest\Helpers\Command;
 
+use Exan\Fenrir\Bitwise\Bitwise;
 use Exan\Fenrir\Const\Validation\Command;
 use Exan\Fenrir\Enums\Parts\ApplicationCommandTypes;
 use Exan\Fenrir\Exceptions\Rest\Helpers\Command\InvalidCommandNameException;
@@ -68,7 +69,6 @@ class CommandBuilder
         return $this->data['name_localizations'] ?? null;
     }
 
-
     public function setDescription(string $description): self
     {
         $this->data['description'] = $description;
@@ -76,7 +76,7 @@ class CommandBuilder
         return $this;
     }
 
-    public function getDescription(string $description): self
+    public function getDescription(): ?string
     {
         return $this->data['description'] ?? null;
     }
@@ -91,6 +91,14 @@ class CommandBuilder
         $this->data['description_localizations'] = $localizedDescriptions;
 
         return $this;
+    }
+
+    /**
+     * @return array<string, string> `key => locale`, `value => description`
+     */
+    public function getDescriptionLocalizations(): ?array
+    {
+        return $this->data['description_localizations'] ?? null;
     }
 
     public function addOption(CommandOptionBuilder $commandOptionBuilder): self
@@ -111,10 +119,23 @@ class CommandBuilder
     }
 
     /**
-     * @todo implement
+     * @param Bitwise<\Exan\Fenrir\Enums\Permissions> $permissions
      */
-    public function setDefaultMemberPermissions()
+    public function setDefaultMemberPermissions(Bitwise $permissions): self
     {
+        $this->data['default_member_permissions'] = $permissions->getBitSet();
+
+        return $this;
+    }
+
+    /**
+     * @return Bitwise<\Exan\Fenrir\Enums\Permissions>
+     */
+    public function getDefaultMemberPermissions(): ?Bitwise
+    {
+        return isset($this->data['default_member_permissions'])
+            ? Bitwise::fromBitSet($this->data['default_member_permissions'])
+            : null;
     }
 
     public function setDmPermission(bool $allow): self
@@ -124,11 +145,23 @@ class CommandBuilder
         return $this;
     }
 
+    public function getDmPermission(): ?bool
+    {
+        return $this->data['dm_permissions'] ?? null;
+    }
+
     public function setType(ApplicationCommandTypes $type): self
     {
         $this->data['type'] = $type->value;
 
         return $this;
+    }
+
+    public function getType(): ?ApplicationCommandTypes
+    {
+        return isset($this->data['type'])
+            ? ApplicationCommandTypes::from($this->data['type'])
+            : null;
     }
 
     public function setNsfw(bool $nsfw): self
@@ -138,7 +171,12 @@ class CommandBuilder
         return $this;
     }
 
-    public function isAllowedName($name): bool
+    public function getNsfw(): ?bool
+    {
+        return $this->data['nsfw'] ?? null;
+    }
+
+    private function isAllowedName($name): bool
     {
         return Regex::match(Command::NAME_REGEX, $name)->hasMatch();
     }

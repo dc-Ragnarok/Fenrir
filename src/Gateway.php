@@ -39,6 +39,9 @@ class Gateway
 
     private Bucket $activityBucket;
 
+    /**
+     * @param Bitwise<\Exan\Fenrir\Enums\Gateway\Intents> $intents
+     */
     public function __construct(
         private LoopInterface $loop,
         private string $token,

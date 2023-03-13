@@ -34,6 +34,9 @@ class Discord
         $this->mapper->bStrictNullTypes = false;
     }
 
+    /**
+     * @param Bitwise<\Exan\Fenrir\Enums\Gateway\Intents> $intents
+     */
     public function withGateway(
         Bitwise $intents,
         int $timeout = 10,

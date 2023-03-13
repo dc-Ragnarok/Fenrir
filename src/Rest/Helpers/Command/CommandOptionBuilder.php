@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Exan\Fenrir\Rest\Helpers\Command;
 
-use Exan\Fenrir\Enums\Command\OptionTypes;
+use Exan\Fenrir\Enums\Parts\ApplicationCommandOptionTypes;
 use Exan\Fenrir\Enums\Parts\ChannelTypes;
 use Exan\Fenrir\Rest\Helpers\GetNew;
 
@@ -20,17 +20,17 @@ class CommandOptionBuilder
     /** @var ChannelTypes[] */
     private array $channelTypes;
 
-    public function setType(OptionTypes $type): self
+    public function setType(ApplicationCommandOptionTypes $type): self
     {
         $this->data['type'] = $type->value;
 
         return $this;
     }
 
-    public function getType(): ?OptionTypes
+    public function getType(): ?ApplicationCommandOptionTypes
     {
         return isset($this->data['type'])
-            ? OptionTypes::from($this->data['type'])
+            ? ApplicationCommandOptionTypes::from($this->data['type'])
             : null;
     }
 
@@ -75,7 +75,7 @@ class CommandOptionBuilder
         return $this;
     }
 
-    public function getDescription(string $description): self
+    public function getDescription(): ?string
     {
         return $this->data['description'] ?? null;
     }
@@ -119,7 +119,7 @@ class CommandOptionBuilder
      *
      * @param array<string, string> $localizedNames `key => locale`, `value => description`
      */
-    public function addChoice(string $name, array $localizedNames, string|int|float $value)
+    public function addChoice(string $name, string|int|float $value, array $localizedNames = [])
     {
         if (!isset($this->data['choices'])) {
             $this->data['choices'] = [];

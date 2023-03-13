@@ -224,7 +224,6 @@ class CommandHandlerTest extends MockeryTestCase
 
         $discord->gateway->events->emit(Events::INTERACTION_CREATE, [$interactionCreate]);
 
-
         $this->assertTrue($hasRun, 'Command handler has not been run');
     }
 
@@ -265,7 +264,6 @@ class CommandHandlerTest extends MockeryTestCase
         $interactionCreate->data->id = '::other application command id::';
 
         $discord->gateway->events->emit(Events::INTERACTION_CREATE, [$interactionCreate]);
-
 
         $this->assertFalse($hasRun, 'Command handler should not have been run');
     }

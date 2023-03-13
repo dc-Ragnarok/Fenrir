@@ -34,9 +34,13 @@ class Bitwise
         return ($this->flags & $flag) === $flag;
     }
 
+    public function getBitSet(): string
+    {
+        return decbin($this->flags);
+    }
 
     /**
-     * @param (BackedEnum<int>|int)[] $flags
+     * @param (BackedEnum<int>|int)[] ..$flags
      */
     public static function from(BackedEnum|int ...$flags): static
     {
@@ -47,5 +51,10 @@ class Bitwise
         }
 
         return $bitwise;
+    }
+
+    public static function fromBitSet(string $binary): static
+    {
+        return new static(bindec($binary));
     }
 }
