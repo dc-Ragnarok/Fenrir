@@ -15,16 +15,16 @@ class DiscordTest extends TestCase
 {
     public function testItInitializesGateway()
     {
-        $discord = new Discord('::token::', new Bitwise());
+        $discord = new Discord('::token::');
 
-        $discord->withGateway();
+        $discord->withGateway(new Bitwise());
 
         $this->assertInstanceOf(Gateway::class, $discord->gateway);
     }
 
     public function testItInitializesRest()
     {
-        $discord = new Discord('::token::', new Bitwise());
+        $discord = new Discord('::token::');
 
         $discord->withRest();
 
@@ -33,7 +33,7 @@ class DiscordTest extends TestCase
 
     public function testItInitializesCommandHandler()
     {
-        $discord = new Discord('::token::', new Bitwise());
+        $discord = new Discord('::token::');
 
         $discord->withCommandHandler();
 
@@ -42,7 +42,7 @@ class DiscordTest extends TestCase
 
     public function testItInitializesCommandHandlerWithDevGuild()
     {
-        $discord = new Discord('::token::', new Bitwise());
+        $discord = new Discord('::token::');
 
         $discord->withCommandHandler('::dev guild id::');
 

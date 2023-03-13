@@ -26,7 +26,6 @@ class Discord
 
     public function __construct(
         private string $token,
-        private Bitwise $intents,
         private LoggerInterface $logger = new NullLogger()
     ) {
         $this->loop = Loop::get();
@@ -36,13 +35,14 @@ class Discord
     }
 
     public function withGateway(
+        Bitwise $intents,
         int $timeout = 10,
         bool $raw = false
     ) {
         $this->gateway = new Gateway(
             $this->loop,
             $this->token,
-            $this->intents,
+            $intents,
             $this->mapper,
             $this->logger,
             $timeout,
