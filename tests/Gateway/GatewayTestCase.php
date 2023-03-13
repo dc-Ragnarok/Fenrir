@@ -6,7 +6,6 @@ namespace Tests\Exan\Fenrir\Gateway;
 
 use Exan\Fenrir\Bitwise\Bitwise;
 use Exan\Fenrir\Const\WebsocketEvents;
-use Exan\Fenrir\Discord;
 use Exan\Fenrir\EventHandler;
 use Exan\Fenrir\Gateway;
 use Mockery;

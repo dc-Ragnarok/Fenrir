@@ -15,6 +15,7 @@ class CreateEmojiBuilderTest extends TestCase
         $emojiBuilder = new CreateEmojiBuilder();
         $emojiBuilder->setName('::name::');
         $this->assertEquals(['name' => '::name::'], $emojiBuilder->get());
+        $this->assertEquals('::name::', $emojiBuilder->getName());
     }
 
     public function testSetRoles()
@@ -22,6 +23,7 @@ class CreateEmojiBuilderTest extends TestCase
         $emojiBuilder = new CreateEmojiBuilder();
         $emojiBuilder->setRoles(['::role1::', '::role2::']);
         $this->assertEquals(['roles' => ['::role1::', '::role2::']], $emojiBuilder->get());
+        $this->assertEquals(['::role1::', '::role2::'], $emojiBuilder->getRoles());
     }
 
     public function testSetImage()
@@ -30,5 +32,6 @@ class CreateEmojiBuilderTest extends TestCase
         $emojiBuilder->setImage('::image::', ImageData::PNG);
 
         $this->assertEquals(['image' => 'data:image/png;base64,OjppbWFnZTo6'], $emojiBuilder->get());
+        $this->assertEquals('data:image/png;base64,OjppbWFnZTo6', $emojiBuilder->getImage());
     }
 }

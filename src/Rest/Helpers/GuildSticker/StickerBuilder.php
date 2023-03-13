@@ -62,7 +62,7 @@ class StickerBuilder
         return $this;
     }
 
-    public function getFile(): ?string
+    public function getFile(): ?array
     {
         return $this->file ?? null;
     }

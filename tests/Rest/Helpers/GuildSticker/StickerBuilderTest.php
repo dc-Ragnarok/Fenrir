@@ -14,6 +14,12 @@ class StickerBuilderTest extends TestCase
         $stickerBuilder = new StickerBuilder();
         $stickerBuilder->setFile('::binary data::', 'png');
 
+        $this->assertEquals([
+            'content' => '::binary data::',
+            'extension' => 'png',
+            'content-type' => 'image/png'
+        ], $stickerBuilder->getFile());
+
         // Should include raw image data
         $this->assertStringContainsString('::binary data::', (string) $stickerBuilder->get());
 
@@ -31,6 +37,7 @@ class StickerBuilderTest extends TestCase
         $stickerBuilder->setName('::name::');
 
         $this->assertStringContainsString('"name":"::name::"', (string) $stickerBuilder->get());
+        $this->assertEquals('::name::', $stickerBuilder->getName());
     }
 
     public function testSetDescription()
@@ -40,6 +47,7 @@ class StickerBuilderTest extends TestCase
         $stickerBuilder->setDescription('::description::');
 
         $this->assertStringContainsString('"description":"::description::"', (string) $stickerBuilder->get());
+        $this->assertEquals('::description::', $stickerBuilder->getDescription());
     }
 
     public function testSetTags()
@@ -49,5 +57,6 @@ class StickerBuilderTest extends TestCase
         $stickerBuilder->setTags('::tags::');
 
         $this->assertStringContainsString('"tags":"::tags::"', (string) $stickerBuilder->get());
+        $this->assertEquals('::tags::', $stickerBuilder->getTags());
     }
 }
