@@ -10,8 +10,11 @@ $log = new Logger('name', [new StreamHandler('php://stdout')]); // Log to stdout
 
 $discord = new Discord(
     'TOKEN',
-    new Bitwise(), // Enable your desired Gateway intents
     $log
 );
 
-$discord->connect(); // Nothing after this line is executed
+$discord
+    ->withGateway()
+    ->withRest();
+
+$discord->gateway->connect(); // Nothing after this line is executed
