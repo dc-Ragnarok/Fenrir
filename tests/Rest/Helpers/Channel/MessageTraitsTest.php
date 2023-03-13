@@ -15,6 +15,7 @@ use Exan\Fenrir\Rest\Helpers\Channel\Message\AddFile;
 use Exan\Fenrir\Rest\Helpers\Channel\Message\AllowMentions;
 use Exan\Fenrir\Rest\Helpers\Channel\Message\SetContent;
 use Exan\Fenrir\Rest\Helpers\Channel\Message\SetFlags;
+use Exan\Fenrir\Rest\Helpers\Channel\Message\SetTts;
 use Mockery;
 use PHPUnit\Framework\TestCase;
 
@@ -31,6 +32,7 @@ class MessageTraitsTest extends TestCase
         $traitTester->setContent('::content::');
 
         $this->assertEquals(['content' => '::content::'], $traitTester->data);
+        $this->assertEquals('::content::', $traitTester->getContent());
     }
 
     public function testAddEmbed()
@@ -59,6 +61,7 @@ class MessageTraitsTest extends TestCase
 
         $traitTester->setFlags(1);
         $this->assertEquals(1, $traitTester->data['flags']);
+        $this->assertEquals(1, $traitTester->getFlags());
     }
 
     public function testAllowMentions()
@@ -89,6 +92,20 @@ class MessageTraitsTest extends TestCase
         $traitTester->noMentions();
         $this->assertEquals(new AllowedMentionsBuilder(), $traitTester->getAllowedMentions());
         $this->assertTrue($traitTester->hasAllowedMentions());
+    }
+
+    public function testSetTts()
+    {
+        $traitTester = new class {
+            use SetTts;
+
+            public $data = [];
+        };
+
+        $traitTester->setTts(true);
+
+        $this->assertTrue($traitTester->getTts());
+        $this->assertTrue($traitTester->data['tts']);
     }
 
     public function testAddComponent()
