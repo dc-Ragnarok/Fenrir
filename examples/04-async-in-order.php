@@ -9,16 +9,17 @@ use Exan\Fenrir\Websocket\Events\MessageCreate;
 
 require './vendor/autoload.php';
 
-$discord = new Discord(
-    'TOKEN',
-    Bitwise::from(
+$discord = new Discord('TOKEN');
+
+$discord
+    ->withGateway(Bitwise::from(
         Intents::GUILD_MESSAGES,
         Intents::DIRECT_MESSAGES,
         Intents::MESSAGE_CONTENT,
-    )
-);
+    ))
+    ->withRest();
 
-$discord->events->on(Events::MESSAGE_CREATE, function (MessageCreate $message) use ($discord) {
+$discord->gateway->events->on(Events::MESSAGE_CREATE, function (MessageCreate $message) use ($discord) {
     if ($message->content === '!ping') {
         $sendMessages = function (string $channelId, array $items) use (&$sendMessages, $discord) {
             if (count($items) === 0) {
@@ -33,8 +34,8 @@ $discord->events->on(Events::MESSAGE_CREATE, function (MessageCreate $message) u
             )->then(fn () => $sendMessages($channelId, $items));
         };
 
-        $sendMessages($message->channel_id, ['this', 'will', 'send', 'in', 'order']);
+        $sendMessages($message->channel_id, ['this', 'will', 'sent', 'in', 'order']);
     }
 });
 
-$discord->connect(); // Nothing after this line is executed
+$discord->gateway->connect(); // Nothing after this line is executed

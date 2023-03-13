@@ -22,10 +22,10 @@ $discord = new Discord(
     )
 );
 
-$discord->events->on(Events::MESSAGE_CREATE, function (MessageCreate $message) use ($discord) {
+$discord->gateway->events->on(Events::MESSAGE_CREATE, function (MessageCreate $message) use ($discord) {
     if ($message->content === '!createListener') {
         $filteredListener = new FilteredEventEmitter(
-            $discord->events, // Fenrir's `EventHandler`. This can be any `EventEmitterInterface`
+            $discord->gateway->events, // Fenrir's `EventHandler`. This can be any `EventEmitterInterface`
             Events::MESSAGE_REACTION_ADD, // The event to listen to
             fn (MessageReactionAdd $messageReactionAdd) => $messageReactionAdd->message_id === $message->id, // The filter for the event
             20, // Stops the listener automatically after 20 seconds
@@ -47,4 +47,4 @@ $discord->events->on(Events::MESSAGE_CREATE, function (MessageCreate $message) u
     }
 });
 
-$discord->connect();
+$discord->gateway->connect();

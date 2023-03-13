@@ -10,15 +10,18 @@ use Exan\Fenrir\Websocket\Events\MessageCreate;
 require './vendor/autoload.php';
 
 $discord = new Discord(
-    'TOKEN',
-    Bitwise::from(
+    'TOKEN'
+);
+
+$discord
+    ->withGateway(Bitwise::from(
         Intents::GUILD_MESSAGES,
         Intents::DIRECT_MESSAGES,
         Intents::MESSAGE_CONTENT,
-    )
-);
+    ))
+    ->withRest();
 
-$discord->events->on(Events::MESSAGE_CREATE, function (MessageCreate $message) use ($discord) {
+$discord->gateway->events->on(Events::MESSAGE_CREATE, function (MessageCreate $message) use ($discord) {
     if ($message->content === '!ping') {
         $discord->rest->channel->createMessage(
             $message->channel_id,
@@ -28,4 +31,4 @@ $discord->events->on(Events::MESSAGE_CREATE, function (MessageCreate $message) u
     }
 });
 
-$discord->connect(); // Nothing after this line is executed
+$discord->gateway->connect(); // Nothing after this line is executed
