@@ -6,19 +6,23 @@ namespace Exan\Fenrir\Command;
 
 use Exan\Fenrir\Command\Helpers\InteractionCallbackBuilder;
 use Exan\Fenrir\Discord;
+use Exan\Fenrir\Enums\Parts\ApplicationCommandOptionTypes as OptionTypes;
+use Exan\Fenrir\Parts\ApplicationCommandInteractionDataOptionStructure as OptionStructure;
 use Exan\Fenrir\Rest\Helpers\Webhook\EditWebhookBuilder;
 use Exan\Fenrir\Websocket\Events\InteractionCreate;
 use React\Promise\ExtendedPromiseInterface;
 
 class FiredCommand
 {
+    /** @var OptionStructure[] */
     private array $options = [];
 
     public function __construct(public readonly InteractionCreate $interaction, private Discord $discord)
     {
+        /** @var OptionStructure[] */
         $options = $this->interaction->data->options ?? [];
         foreach ($options as $option) {
-            $this->options[$option->name] = $option->value;
+            $this->options[$option->name] = $option;
         }
     }
 
@@ -34,10 +38,10 @@ class FiredCommand
 
     public function getInteractionResponse(): ExtendedPromiseInterface
     {
-         return $this->discord->rest->webhook->getOriginalInteractionResponse(
-             $this->interaction->application_id,
-             $this->interaction->token
-         );
+        return $this->discord->rest->webhook->getOriginalInteractionResponse(
+            $this->interaction->application_id,
+            $this->interaction->token
+        );
     }
 
     public function editInteractionResponse(EditWebhookBuilder $webhookBuilder): ExtendedPromiseInterface
@@ -57,7 +61,7 @@ class FiredCommand
         );
     }
 
-    public function getOption($option): string|int|float|bool|null
+    public function getOption($option): ?OptionStructure
     {
         return $this->options[$option] ?? null;
     }
@@ -65,5 +69,34 @@ class FiredCommand
     public function hasOption($option): bool
     {
         return isset($this->options[$option]);
+    }
+
+    public function getSubCommandName(): ?string
+    {
+        return $this->getSubCommandNameFromOptions(
+            $this->options
+        );
+    }
+
+    /**
+     * @param OptionStructure[] $options
+     */
+    private function getSubCommandNameFromOptions(array $options): ?string
+    {
+        $subItem = array_values(array_filter(
+            $options,
+            fn (OptionStructure $option) => in_array(
+                $option->type,
+                [OptionTypes::SUB_COMMAND, OptionTypes::SUB_COMMAND_GROUP]
+            )
+        ))[0] ?? null;
+
+        if (is_null($subItem)) {
+            return null;
+        }
+
+        return $subItem->type === OptionTypes::SUB_COMMAND
+            ? $subItem->name
+            : $subItem->name . ':' . $this->getSubCommandNameFromOptions($subItem->options);
     }
 }
