@@ -12,6 +12,7 @@ use Exan\Fenrir\Parts\ApplicationCommandInteractionDataOptionStructure;
 use Exan\Fenrir\Parts\InteractionData;
 use Exan\Fenrir\Rest\Helpers\Webhook\EditWebhookBuilder;
 use Exan\Fenrir\Websocket\Events\InteractionCreate;
+use JsonMapper;
 use Tests\Exan\Fenrir\Helpers\FakeComponents;
 
 class FiredCommandTest extends MockeryTestCase
@@ -105,6 +106,64 @@ class FiredCommandTest extends MockeryTestCase
         $this->assertFalse($firedCommand->hasOption('other_name'));
 
         $this->assertNull($firedCommand->getOption('other_name'));
-        $this->assertEquals('::value::', $firedCommand->getOption('funny_name'));
+        $this->assertEquals($interactionCreate->data->options[0], $firedCommand->getOption('funny_name'));
+    }
+
+    public function testGetSubCommandName()
+    {
+        $jsonMapper = new JsonMapper();
+
+        $interactionCreate = $jsonMapper->map(
+            json_decode(json_encode([ // Json mapper requires object instead of array
+                'id' => '::interaction id::',
+                'token' => '::token::',
+                'application_id' => '::application id::',
+                'data' => [
+                    'options' => [
+                        [
+                            'name' => '::option name::',
+                            'type' => 1,
+                        ]
+                    ],
+                ],
+            ])),
+            new InteractionCreate()
+        );
+
+        $firedCommand = new FiredCommand($interactionCreate, FakeComponents::getFakeDiscord());
+
+        $this->assertEquals('::option name::', $firedCommand->getSubCommandName());
+    }
+
+    public function testGetSubCommandGroupName()
+    {
+        $jsonMapper = new JsonMapper();
+
+        $interactionCreate = $jsonMapper->map(
+            json_decode(json_encode([ // Json mapper requires object instead of array
+                'id' => '::interaction id::',
+                'token' => '::token::',
+                'application_id' => '::application id::',
+                'data' => [
+                    'options' => [
+                        [
+                            'name' => 'group_name',
+                            'type' => 2,
+                            'options' => [
+                                [
+                                    'name' => 'option_name',
+                                    'type' => 1,
+                                ]
+                            ],
+                        ],
+                    ],
+                ],
+            ])),
+            new InteractionCreate()
+        );
+
+        $firedCommand = new FiredCommand($interactionCreate, FakeComponents::getFakeDiscord());
+
+        $this->assertEquals('group_name:option_name', $firedCommand->getSubCommandName());
     }
 }
