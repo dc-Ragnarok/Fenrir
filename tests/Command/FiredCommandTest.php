@@ -166,4 +166,30 @@ class FiredCommandTest extends MockeryTestCase
 
         $this->assertEquals('group_name:option_name', $firedCommand->getSubCommandName());
     }
+
+    public function testGetSubCommandNameIsNullForRegularCommands()
+    {
+        $jsonMapper = new JsonMapper();
+
+        $interactionCreate = $jsonMapper->map(
+            json_decode(json_encode([ // Json mapper requires object instead of array
+                'id' => '::interaction id::',
+                'token' => '::token::',
+                'application_id' => '::application id::',
+                'data' => [
+                    'options' => [
+                        [
+                            'name' => '::option name::',
+                            'type' => 3,
+                        ]
+                    ],
+                ],
+            ])),
+            new InteractionCreate()
+        );
+
+        $firedCommand = new FiredCommand($interactionCreate, FakeComponents::getFakeDiscord());
+
+        $this->assertNull($firedCommand->getSubCommandName());
+    }
 }

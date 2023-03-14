@@ -73,27 +73,27 @@ class FiredCommand
 
     public function getSubCommandName(): ?string
     {
-        $subCommandGroups = array_values(array_filter(
-            $this->options,
-            fn (OptionStructure $option) => $option->type === OptionTypes::SUB_COMMAND_GROUP
-        ));
+        return $this->getSubCommandNameFromOptions(
+            $this->options
+        );
+    }
 
-        if (count($subCommandGroups) === 1) {
-            $group = $subCommandGroups[0];
+    /**
+     * @param OptionStructure[] $options
+     */
+    private function getSubCommandNameFromOptions(array $options): ?string
+    {
+        $subItem = array_values(array_filter(
+            $options,
+            fn (OptionStructure $option) => in_array($option->type, [OptionTypes::SUB_COMMAND, OptionTypes::SUB_COMMAND_GROUP])
+        ))[0] ?? null;
 
-            $subCommand = array_values(array_filter(
-                $group->options,
-                fn (OptionStructure $option) => $option->type === OptionTypes::SUB_COMMAND
-            ))[0];
-
-            return sprintf('%s:%s', $group->name, $subCommand->name);
+        if (is_null($subItem)) {
+            return null;
         }
 
-        $subCommands = array_values(array_filter(
-            $this->options,
-            fn (OptionStructure $option) => $option->type === OptionTypes::SUB_COMMAND
-        ));
-
-        return $subCommands[0]->name ?? null;
+        return $subItem->type === OptionTypes::SUB_COMMAND
+            ? $subItem->name
+            : $subItem->name . ':' . $this->getSubCommandNameFromOptions($subItem->options);
     }
 }
