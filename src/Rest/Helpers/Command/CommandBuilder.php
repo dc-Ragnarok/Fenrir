@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Exan\Fenrir\Rest\Helpers\Command;
 
+use Exan\Fenrir\Bitwise\Bitwise;
 use Exan\Fenrir\Const\Validation\Command;
 use Exan\Fenrir\Enums\Parts\ApplicationCommandTypes;
 use Exan\Fenrir\Exceptions\Rest\Helpers\Command\InvalidCommandNameException;
@@ -15,6 +16,9 @@ class CommandBuilder
     use GetNew;
 
     private array $data = [];
+
+    /** @var ?CommandOptionBuilder[] */
+    private array $commandOptionBuilders;
 
     /**
      * @see https://discord.com/developers/docs/interactions/application-commands#application-command-object-application-command-naming
@@ -30,6 +34,11 @@ class CommandBuilder
         $this->data['name'] = $name;
 
         return $this;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->data['name'] ?? null;
     }
 
     /**
@@ -50,12 +59,26 @@ class CommandBuilder
         return $this;
     }
 
+    /**
+     * @see https://discord.com/developers/docs/reference#locales
+     *
+     * @return array<string, string> `key => locale`, `value => name`
+     */
+    public function getNameLocalizations(): ?array
+    {
+        return $this->data['name_localizations'] ?? null;
+    }
 
     public function setDescription(string $description): self
     {
         $this->data['description'] = $description;
 
         return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->data['description'] ?? null;
     }
 
     /**
@@ -71,17 +94,48 @@ class CommandBuilder
     }
 
     /**
-     * @todo add options builder & implement
+     * @return array<string, string> `key => locale`, `value => description`
      */
-    public function setOptions()
+    public function getDescriptionLocalizations(): ?array
     {
+        return $this->data['description_localizations'] ?? null;
+    }
+
+    public function addOption(CommandOptionBuilder $commandOptionBuilder): self
+    {
+        if (!isset($this->commandOptionBuilders)) {
+            $this->commandOptionBuilders = [];
+        }
+
+        $this->commandOptionBuilders[] = $commandOptionBuilder;
+
+        return $this;
+    }
+
+    /** @return ?CommandOptionBuilder[] */
+    public function getOptions(): ?array
+    {
+        return $this->commandOptionBuilders ?? null;
     }
 
     /**
-     * @todo implement
+     * @param Bitwise<\Exan\Fenrir\Enums\Permissions> $permissions
      */
-    public function setDefaultMemberPermissions()
+    public function setDefaultMemberPermissions(Bitwise $permissions): self
     {
+        $this->data['default_member_permissions'] = $permissions->getBitSet();
+
+        return $this;
+    }
+
+    /**
+     * @return Bitwise<\Exan\Fenrir\Enums\Permissions>
+     */
+    public function getDefaultMemberPermissions(): ?Bitwise
+    {
+        return isset($this->data['default_member_permissions'])
+            ? Bitwise::fromBitSet($this->data['default_member_permissions'])
+            : null;
     }
 
     public function setDmPermission(bool $allow): self
@@ -91,11 +145,23 @@ class CommandBuilder
         return $this;
     }
 
+    public function getDmPermission(): ?bool
+    {
+        return $this->data['dm_permissions'] ?? null;
+    }
+
     public function setType(ApplicationCommandTypes $type): self
     {
         $this->data['type'] = $type->value;
 
         return $this;
+    }
+
+    public function getType(): ?ApplicationCommandTypes
+    {
+        return isset($this->data['type'])
+            ? ApplicationCommandTypes::from($this->data['type'])
+            : null;
     }
 
     public function setNsfw(bool $nsfw): self
@@ -105,13 +171,27 @@ class CommandBuilder
         return $this;
     }
 
-    public function isAllowedName($name): bool
+    public function getNsfw(): ?bool
+    {
+        return $this->data['nsfw'] ?? null;
+    }
+
+    private function isAllowedName($name): bool
     {
         return Regex::match(Command::NAME_REGEX, $name)->hasMatch();
     }
 
     public function get(): array
     {
-        return $this->data;
+        $data = $this->data;
+
+        if (isset($this->commandOptionBuilders)) {
+            $data['options'] = array_map(
+                fn (CommandOptionBuilder $option) => $option->get(),
+                $this->commandOptionBuilders
+            );
+        }
+
+        return $data;
     }
 }

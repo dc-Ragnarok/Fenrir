@@ -45,4 +45,24 @@ class BitwiseTest extends TestCase
 
         $this->assertFalse($bitwise->has(1 << 4));
     }
+
+    public function testFromBitSet()
+    {
+        $bitwise = Bitwise::fromBitSet('010');
+
+        $this->assertFalse($bitwise->has(1 << 2));
+        $this->assertFalse($bitwise->has(1 << 0));
+
+        $this->assertTrue($bitwise->has(1 << 1));
+    }
+
+    public function testGetBitSet()
+    {
+        $bitwise = Bitwise::from(
+            1 << 0,
+            1 << 2,
+        );
+
+        $this->assertEquals('101', $bitwise->getBitSet());
+    }
 }

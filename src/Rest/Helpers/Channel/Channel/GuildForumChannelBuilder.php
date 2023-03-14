@@ -88,7 +88,6 @@ class GuildForumChannelBuilder extends ChannelBuilder
             $tag = array_merge($tag, $add);
         }
 
-
         return $this;
     }
 

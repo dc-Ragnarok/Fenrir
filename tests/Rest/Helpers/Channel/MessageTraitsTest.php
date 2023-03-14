@@ -72,7 +72,6 @@ class MessageTraitsTest extends TestCase
 
         $this->assertFalse($traitTester->hasAllowedMentions());
 
-
         $mentionBuilder = new AllowedMentionsBuilder();
         $mentionBuilder->addRole('::role id::');
 

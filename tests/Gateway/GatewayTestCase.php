@@ -53,7 +53,6 @@ class GatewayTestCase extends MockeryTestCase
         $websocketMock->shouldReceive('send')->withAnyArgs();
         $websocketMock->shouldReceive('close')->withAnyArgs();
 
-
         $this->gateway = new Gateway(
             $this->loop,
             '::token::',
