@@ -38,10 +38,10 @@ class FiredCommand
 
     public function getInteractionResponse(): ExtendedPromiseInterface
     {
-         return $this->discord->rest->webhook->getOriginalInteractionResponse(
-             $this->interaction->application_id,
-             $this->interaction->token
-         );
+        return $this->discord->rest->webhook->getOriginalInteractionResponse(
+            $this->interaction->application_id,
+            $this->interaction->token
+        );
     }
 
     public function editInteractionResponse(EditWebhookBuilder $webhookBuilder): ExtendedPromiseInterface
@@ -85,7 +85,10 @@ class FiredCommand
     {
         $subItem = array_values(array_filter(
             $options,
-            fn (OptionStructure $option) => in_array($option->type, [OptionTypes::SUB_COMMAND, OptionTypes::SUB_COMMAND_GROUP])
+            fn (OptionStructure $option) => in_array(
+                $option->type,
+                [OptionTypes::SUB_COMMAND, OptionTypes::SUB_COMMAND_GROUP]
+            )
         ))[0] ?? null;
 
         if (is_null($subItem)) {
