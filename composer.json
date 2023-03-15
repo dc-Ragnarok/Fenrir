@@ -6,7 +6,8 @@
     "autoload": {
         "psr-4": {
             "Exan\\Fenrir\\": "src/",
-            "Tests\\Exan\\Fenrir\\": "tests/"
+            "Tests\\Exan\\Fenrir\\": "tests/",
+            "Fakes\\Exan\\Fenrir\\": "fakes/"
         }
     },
     "minimum-stability": "dev",
@@ -31,8 +32,8 @@
         "cboden/ratchet": "^0.4.4"
     },
     "scripts": {
-        "cs": "./vendor/bin/phpcs --standard=PSR12 src tests",
-        "csf": "./vendor/bin/phpcbf --standard=PSR12 src tests",
+        "cs": "./vendor/bin/phpcs --standard=PSR12 src tests fakes",
+        "csf": "./vendor/bin/phpcbf --standard=PSR12 src tests fakes",
         "phpunit": "./vendor/bin/phpunit",
         "phpunit-coverage": "php -d xdebug.mode=coverage ./vendor/bin/phpunit --coverage-html .phpunit.cache/cov-html",
         "test": "php tests/WebsocketTestServer.php & PID=$!; composer phpunit; kill $PID;",

@@ -13,7 +13,8 @@ use Exan\Fenrir\Parts\InteractionData;
 use Exan\Fenrir\Rest\Helpers\Webhook\EditWebhookBuilder;
 use Exan\Fenrir\Websocket\Events\InteractionCreate;
 use JsonMapper;
-use Tests\Exan\Fenrir\Helpers\FakeComponents;
+use Fakes\Exan\Fenrir\DiscordFake;
+use Fakes\Exan\Fenrir\PromiseFake;
 
 class FiredCommandTest extends MockeryTestCase
 {
@@ -29,13 +30,13 @@ class FiredCommandTest extends MockeryTestCase
 
     public function testCreateInteractionResponse()
     {
-        $discord = FakeComponents::getFakeDiscord();
+        $discord = DiscordFake::get();
         $interactionCallbackBuilder = Mockery::mock(InteractionCallbackBuilder::class);
 
         $discord->rest->webhook
             ->shouldReceive('createInteractionResponse')
             ->with('::interaction id::', '::interaction token::', $interactionCallbackBuilder)
-            ->andReturn(FakeComponents::getFakePromise('::result::'))
+            ->andReturn(PromiseFake::get('::result::'))
             ->once();
 
         $firedCommand = new FiredCommand($this->getInteractionCreate(), $discord);
@@ -45,12 +46,12 @@ class FiredCommandTest extends MockeryTestCase
 
     public function testGetInteractionResponse()
     {
-        $discord = FakeComponents::getFakeDiscord();
+        $discord = DiscordFake::get();
 
         $discord->rest->webhook
             ->shouldReceive('getOriginalInteractionResponse')
             ->with('::application id::', '::interaction token::')
-            ->andReturn(FakeComponents::getFakePromise())
+            ->andReturn(PromiseFake::get())
             ->once();
 
         $firedCommand = new FiredCommand($this->getInteractionCreate(), $discord);
@@ -60,13 +61,13 @@ class FiredCommandTest extends MockeryTestCase
 
     public function testEditOriginalInteractionResponse()
     {
-        $discord = FakeComponents::getFakeDiscord();
+        $discord = DiscordFake::get();
         $editWebhookBuilder = Mockery::mock(EditWebhookBuilder::class);
 
         $discord->rest->webhook
             ->shouldReceive('editOriginalInteractionResponse')
             ->with('::application id::', '::interaction token::', $editWebhookBuilder)
-            ->andReturn(FakeComponents::getFakePromise('::result::'))
+            ->andReturn(PromiseFake::get('::result::'))
             ->once();
 
         $firedCommand = new FiredCommand($this->getInteractionCreate(), $discord);
@@ -76,7 +77,7 @@ class FiredCommandTest extends MockeryTestCase
 
     public function testDeleteInteractionResponse()
     {
-        $discord = FakeComponents::getFakeDiscord();
+        $discord = DiscordFake::get();
 
         $discord->rest->webhook
             ->shouldReceive('deleteOriginalInteractionResponse')
@@ -100,7 +101,7 @@ class FiredCommandTest extends MockeryTestCase
         $interactionCreate->data->options[0]->name = 'funny_name';
         $interactionCreate->data->options[0]->value = '::value::';
 
-        $firedCommand = new FiredCommand($interactionCreate, FakeComponents::getFakeDiscord());
+        $firedCommand = new FiredCommand($interactionCreate, DiscordFake::get());
 
         $this->assertTrue($firedCommand->hasOption('funny_name'));
         $this->assertFalse($firedCommand->hasOption('other_name'));
@@ -130,7 +131,7 @@ class FiredCommandTest extends MockeryTestCase
             new InteractionCreate()
         );
 
-        $firedCommand = new FiredCommand($interactionCreate, FakeComponents::getFakeDiscord());
+        $firedCommand = new FiredCommand($interactionCreate, DiscordFake::get());
 
         $this->assertEquals('::option name::', $firedCommand->getSubCommandName());
     }
@@ -162,7 +163,7 @@ class FiredCommandTest extends MockeryTestCase
             new InteractionCreate()
         );
 
-        $firedCommand = new FiredCommand($interactionCreate, FakeComponents::getFakeDiscord());
+        $firedCommand = new FiredCommand($interactionCreate, DiscordFake::get());
 
         $this->assertEquals('group_name:option_name', $firedCommand->getSubCommandName());
     }
@@ -188,7 +189,7 @@ class FiredCommandTest extends MockeryTestCase
             new InteractionCreate()
         );
 
-        $firedCommand = new FiredCommand($interactionCreate, FakeComponents::getFakeDiscord());
+        $firedCommand = new FiredCommand($interactionCreate, DiscordFake::get());
 
         $this->assertNull($firedCommand->getSubCommandName());
     }
