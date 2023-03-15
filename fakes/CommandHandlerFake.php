@@ -38,10 +38,18 @@ class CommandHandlerFake extends CommandHandler
         $this->globalCommands[] = ['builder' => $commandBuilder, 'handler' => $handler];
     }
 
+    private function getCommandBuilders(array $commands)
+    {
+        return array_map(
+            fn (array $command) => $command['builder'],
+            $commands
+        );
+    }
+
     public function assertHasDynamicCommand(callable $validator)
     {
         Assert::assertNotEmpty(
-            array_filter($this->dynamicCommands, $validator),
+            array_filter($this->getCommandBuilders($this->dynamicCommands), $validator),
             'No commands found with provided filter'
         );
     }
@@ -49,7 +57,7 @@ class CommandHandlerFake extends CommandHandler
     public function assertHasGuildCommand(callable $validator)
     {
         Assert::assertNotEmpty(
-            array_filter($this->guildCommands, $validator),
+            array_filter($this->getCommandBuilders($this->guildCommands), $validator),
             'No commands found with provided filter'
         );
     }
@@ -57,7 +65,7 @@ class CommandHandlerFake extends CommandHandler
     public function assertHasGlobalCommand(callable $validator)
     {
         Assert::assertNotEmpty(
-            array_filter($this->globalCommands, $validator),
+            array_filter($this->getCommandBuilders($this->globalCommands), $validator),
             'No commands found with provided filter'
         );
     }
