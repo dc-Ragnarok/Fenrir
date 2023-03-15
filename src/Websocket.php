@@ -125,7 +125,7 @@ class Websocket extends EventEmitter
     /**
      * @throws ConnectionNotInitializedException
      */
-    public function sendJson(JsonSerializable $item, bool $useBucket): void
+    public function sendAsJson(array|JsonSerializable $item, bool $useBucket): void
     {
         $this->send(json_encode($item), $useBucket);
     }

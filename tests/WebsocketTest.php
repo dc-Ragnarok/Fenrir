@@ -84,7 +84,7 @@ class WebsocketTest extends TestCase
                 $resolve($message);
             });
 
-            $websocket->sendJson($jsonItem, true);
+            $websocket->sendAsJson($jsonItem, true);
         }));
 
         $this->assertEquals('{"hello":"world"}', (string) $message);
