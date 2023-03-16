@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Exan\Fenrir\Gateway;
 
-use Exan\Fenrir\Const\Events;
+use Exan\Fenrir\Constants\Events;
 use Tests\Exan\Fenrir\Gateway\GatewayTestCase;
 
 /**

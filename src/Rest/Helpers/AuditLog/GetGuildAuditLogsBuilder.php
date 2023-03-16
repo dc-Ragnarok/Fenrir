@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Exan\Fenrir\Rest\Helpers\AuditLog;
 
-use Exan\Fenrir\Const\Validation\ItemLimit;
+use Exan\Fenrir\Constants\Validation\ItemLimit;
 use Exan\Fenrir\Rest\Helpers\GetNew;
 
 class GetGuildAuditLogsBuilder

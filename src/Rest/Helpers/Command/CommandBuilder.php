@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Exan\Fenrir\Rest\Helpers\Command;
 
 use Exan\Fenrir\Bitwise\Bitwise;
-use Exan\Fenrir\Const\Validation\Command;
+use Exan\Fenrir\Constants\Validation\Command;
 use Exan\Fenrir\Enums\Parts\ApplicationCommandTypes;
 use Exan\Fenrir\Exceptions\Rest\Helpers\Command\InvalidCommandNameException;
 use Exan\Fenrir\Rest\Helpers\GetNew;

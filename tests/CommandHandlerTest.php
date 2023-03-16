@@ -6,7 +6,7 @@ namespace Tests\Exan\Fenrir;
 
 use Exan\Fenrir\Command\FiredCommand;
 use Exan\Fenrir\CommandHandler;
-use Exan\Fenrir\Const\Events;
+use Exan\Fenrir\Constants\Events;
 use Exan\Fenrir\Discord;
 use Exan\Fenrir\EventHandler;
 use Exan\Fenrir\Gateway;

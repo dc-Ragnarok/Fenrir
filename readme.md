@@ -19,7 +19,7 @@ Fenrir heavily relies on ReactPHP for async operations. Knowing the basics of as
 
 ```php
 use Exan\Fenrir\Bitwise\Bitwise;
-use Exan\Fenrir\Const\Events;
+use Exan\Fenrir\Constants\Events;
 use Exan\Fenrir\Discord;
 use Exan\Fenrir\Enums\Gateway\Intents;
 use Exan\Fenrir\Rest\Helpers\Channel\MessageBuilder;

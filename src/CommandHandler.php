@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Exan\Fenrir;
 
 use Exan\Fenrir\Command\FiredCommand;
-use Exan\Fenrir\Const\Events;
+use Exan\Fenrir\Constants\Events;
 use Exan\Fenrir\Parts\ApplicationCommand;
 use Exan\Fenrir\Rest\Helpers\Command\CommandBuilder;
 use Exan\Fenrir\Websocket\Events\InteractionCreate;

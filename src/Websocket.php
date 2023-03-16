@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Exan\Fenrir;
 
 use Evenement\EventEmitter;
-use Exan\Fenrir\Const\WebsocketEvents;
+use Exan\Fenrir\Constants\WebsocketEvents;
 use Exan\Fenrir\Exceptions\Websocket\ConnectionNotInitializedException;
 use JsonSerializable;
 use Psr\Log\LoggerInterface;

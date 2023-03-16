@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Exan\Fenrir;
 
-use Exan\Fenrir\Const\WebsocketEvents;
+use Exan\Fenrir\Constants\WebsocketEvents;
 use Exan\Fenrir\Exceptions\Websocket\ConnectionNotInitializedException;
 use Exan\Fenrir\Websocket;
 use JsonSerializable;

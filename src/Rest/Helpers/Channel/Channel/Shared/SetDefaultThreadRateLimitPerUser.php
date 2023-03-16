@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Exan\Fenrir\Rest\Helpers\Channel\Channel\Shared;
 
-use Exan\Fenrir\Const\Validation\RateLimit;
+use Exan\Fenrir\Constants\Validation\RateLimit;
 
 trait SetDefaultThreadRateLimitPerUser
 {

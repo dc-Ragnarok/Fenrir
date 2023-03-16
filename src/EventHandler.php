@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Exan\Fenrir;
 
 use Evenement\EventEmitter;
-use Exan\Fenrir\Const\Events;
+use Exan\Fenrir\Constants\Events;
 use Exan\Fenrir\Websocket\Objects\Payload;
 use JsonMapper;
 
