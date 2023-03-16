@@ -7,6 +7,7 @@ namespace Exan\Fenrir;
 use Evenement\EventEmitter;
 use Exan\Fenrir\Const\WebsocketEvents;
 use Exan\Fenrir\Exceptions\Websocket\ConnectionNotInitializedException;
+use JsonSerializable;
 use Psr\Log\LoggerInterface;
 use Ratchet\Client\Connector;
 use Ratchet\Client\WebSocket as RatchetWebsocket;
@@ -43,7 +44,7 @@ class Websocket extends EventEmitter
     /**
      * @throws ConnectionNotInitializedException
      */
-    private function mustHaveActiveConnection()
+    private function mustHaveActiveConnection(): void
     {
         if (!isset($this->connection)) {
             throw new ConnectionNotInitializedException();
@@ -83,7 +84,7 @@ class Websocket extends EventEmitter
     /**
      * @throws ConnectionNotInitializedException
      */
-    public function close(int $code, string $reason)
+    public function close(int $code, string $reason): void
     {
         $this->mustHaveActiveConnection();
 
@@ -99,7 +100,7 @@ class Websocket extends EventEmitter
     /**
      * @throws ConnectionNotInitializedException
      */
-    public function send(string $message, bool $useBucket = true)
+    public function send(string $message, bool $useBucket = true): void
     {
         $this->mustHaveActiveConnection();
 
@@ -119,5 +120,13 @@ class Websocket extends EventEmitter
         } else {
             $action();
         }
+    }
+
+    /**
+     * @throws ConnectionNotInitializedException
+     */
+    public function sendAsJson(array|JsonSerializable $item, bool $useBucket): void
+    {
+        $this->send(json_encode($item), $useBucket);
     }
 }
