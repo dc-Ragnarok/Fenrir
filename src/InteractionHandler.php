@@ -4,10 +4,11 @@ declare(strict_types=1);
 
 namespace Exan\Fenrir;
 
-use Exan\Fenrir\Command\FiredCommand;
 use Exan\Fenrir\Component\Button\InteractionButton;
 use Exan\Fenrir\Const\Events;
 use Exan\Fenrir\Enums\Parts\InteractionTypes;
+use Exan\Fenrir\Interaction\ButtonInteraction;
+use Exan\Fenrir\Interaction\CommandInteraction;
 use Exan\Fenrir\Parts\ApplicationCommand;
 use Exan\Fenrir\Rest\Helpers\Command\CommandBuilder;
 use Exan\Fenrir\Websocket\Events\InteractionCreate;
@@ -16,9 +17,13 @@ use Exan\Fenrir\Websocket\Events\Ready;
 class InteractionHandler
 {
     private FilteredEventEmitter $commandListener;
+    private FilteredEventEmitter $buttonListener;
 
     /** @var array<string, callable> */
-    private array $commands = [];
+    private array $handlersCommand = [];
+
+    /** @var array<string, callable> */
+    private array $handlersButton = [];
 
     private bool $devMode = false;
 
@@ -50,9 +55,9 @@ class InteractionHandler
                     $ready->user->id,
                     $guildId,
                     $commandBuilder
-                )->then(
-                    fn (ApplicationCommand $applicationCommand) => $this->commands[$applicationCommand->id] = $handler
-                );
+                )->then(function (ApplicationCommand $applicationCommand) use ($handler) {
+                    $this->handlersCommand[$applicationCommand->id] = $handler;
+                });
             }
         );
     }
@@ -66,9 +71,9 @@ class InteractionHandler
             $this->discord->rest->globalCommand->createApplicationCommand(
                 $ready->user->id,
                 $commandBuilder
-            )->then(
-                fn (ApplicationCommand $applicationCommand) => $this->commands[$applicationCommand->id] = $handler
-            );
+            )->then(function (ApplicationCommand $applicationCommand) use ($handler) {
+                $this->handlersCommand[$applicationCommand->id] = $handler;
+            });
         });
     }
 
@@ -81,19 +86,64 @@ class InteractionHandler
         $this->commandListener = new FilteredEventEmitter(
             $this->discord->gateway->events,
             Events::INTERACTION_CREATE,
-            fn (InteractionCreate $interactionCreate) => $interactionCreate->type === InteractionTypes::APPLICATION_COMMAND
+            fn (InteractionCreate $interactionCreate) =>
+                $interactionCreate->type === InteractionTypes::APPLICATION_COMMAND
         );
 
-        $this->commandListener->on(Events::INTERACTION_CREATE, function (InteractionCreate $interactionCreate) {
-            if (!isset($this->commands[$interactionCreate->data->id])) {
-                return;
-            }
-
-            $firedCommand = new FiredCommand($interactionCreate, $this->discord);
-
-            $this->commands[$interactionCreate->data->id]($firedCommand);
-        });
+        $this->commandListener->on(Events::INTERACTION_CREATE, $this->handleCommandInteraction(...));
 
         $this->commandListener->start();
+    }
+
+    private function handleCommandInteraction(InteractionCreate $interactionCreate)
+    {
+        if (!isset($this->handlersCommand[$interactionCreate->data->id])) {
+            return;
+        }
+
+        $firedCommand = new CommandInteraction($interactionCreate, $this->discord);
+
+        $this->handlersCommand[$interactionCreate->data->id]($firedCommand);
+    }
+
+    public function onButtonInteraction(InteractionButton $interactionButton, callable $action)
+    {
+        $this->activateButtonListener();
+
+        $this->handlersButton[$interactionButton->customId] = $action;
+    }
+
+    private function activateButtonListener()
+    {
+        if (isset($this->buttonListener)) {
+            return;
+        }
+
+        $this->buttonListener = new FilteredEventEmitter(
+            $this->discord->gateway->events,
+            Events::INTERACTION_CREATE,
+            fn (InteractionCreate $interactionCreate) =>
+            $interactionCreate->type === InteractionTypes::MESSAGE_COMPONENT
+                && $interactionCreate->data->component_type === 2 // @todo enum
+        );
+
+        $this->buttonListener->on(Events::INTERACTION_CREATE, $this->handleButtonInteraction(...));
+
+        $this->buttonListener->start();
+    }
+
+    private function handleButtonInteraction(InteractionCreate $interactionCreate)
+    {
+        if (!isset($this->handlersButton[$interactionCreate->data->custom_id])) {
+            return;
+        }
+
+        $buttonInteraction = new ButtonInteraction($interactionCreate, $this->discord);
+
+        $remove = $this->handlersButton[$interactionCreate->data->custom_id]($buttonInteraction);
+
+        if ($remove) {
+            unset($this->handlersButton[$interactionCreate->data->custom_id]);
+        }
     }
 }

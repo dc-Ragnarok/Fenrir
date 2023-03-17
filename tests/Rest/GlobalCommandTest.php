@@ -4,12 +4,9 @@ declare(strict_types=1);
 
 namespace Exan\Fenrir;
 
-use Exan\Fenrir\Command\Helpers\InteractionCallbackBuilder;
-use Exan\Fenrir\Enums\Command\InteractionCallbackTypes;
 use Exan\Fenrir\Parts\ApplicationCommand;
 use Exan\Fenrir\Rest\GlobalCommand;
 use Exan\Fenrir\Rest\Helpers\Command\CommandBuilder;
-use Exan\Fenrir\Rest\Webhook;
 use Tests\Exan\Fenrir\Rest\HttpHelperTestCase;
 
 class GlobalCommandTest extends HttpHelperTestCase

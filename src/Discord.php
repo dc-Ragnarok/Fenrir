@@ -73,7 +73,7 @@ class Discord
 
     /**
      * @param ?string $devGuildId
-     *  When passed, reroute `$this->$command->registerCommand` to be a Guild
+     *  When passed, reroute `$this->interaction->registerCommand` to be a Guild
      *  command rather than Global. Useful for testing without having to change
      *  this manually. Explicitly using `registerGlobalCommand` is not affected
      */

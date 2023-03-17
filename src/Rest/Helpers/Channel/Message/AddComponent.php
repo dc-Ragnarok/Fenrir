@@ -15,7 +15,7 @@ trait AddComponent
      */
     public function setComponents(ComponentBuilder $components): self
     {
-       $this->components = $components;
+        $this->components = $components;
 
         return $this;
     }
