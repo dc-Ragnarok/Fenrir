@@ -24,7 +24,7 @@ abstract class InteractionButton extends Component
     {
         $data =  [
             'type' => 2,
-            'style' => $this->style,
+            'style' => $this->style->value,
             'custom_id' => $this->customId,
             'disabled' => $this->disabled,
         ];

@@ -5,11 +5,12 @@ declare(strict_types=1);
 namespace Tests\Exan\Fenrir;
 
 use Exan\Fenrir\Command\FiredCommand;
-use Exan\Fenrir\CommandHandler;
 use Exan\Fenrir\Const\Events;
 use Exan\Fenrir\Discord;
+use Exan\Fenrir\Enums\Parts\InteractionTypes;
 use Exan\Fenrir\EventHandler;
 use Exan\Fenrir\Gateway;
+use Exan\Fenrir\InteractionHandler;
 use Exan\Fenrir\Parts\User;
 use Exan\Fenrir\Rest\GlobalCommand;
 use Exan\Fenrir\Rest\GuildCommand;
@@ -25,7 +26,7 @@ use Exan\Fenrir\Parts\InteractionData;
 use Exan\Fenrir\Websocket\Events\InteractionCreate;
 use React\Promise\Promise;
 
-class CommandHandlerTest extends MockeryTestCase
+class InteractionHandlerTest extends MockeryTestCase
 {
     private function getDiscord(): Discord
     {
@@ -66,7 +67,7 @@ class CommandHandlerTest extends MockeryTestCase
     {
         $discord = $this->getDiscord();
 
-        $commandHandler = new CommandHandler($discord);
+        $interactionHandler = new InteractionHandler($discord);
 
         $commandBuilder = CommandBuilder::new()
             ->setName('command')
@@ -78,7 +79,7 @@ class CommandHandlerTest extends MockeryTestCase
             ->andReturn(new Promise(fn ($resolver) => $resolver))
             ->once();
 
-        $commandHandler->registerGlobalCommand(
+        $interactionHandler->registerGlobalCommand(
             $commandBuilder,
             fn (FiredCommand $command) => 1
         );
@@ -90,7 +91,7 @@ class CommandHandlerTest extends MockeryTestCase
     {
         $discord = $this->getDiscord();
 
-        $commandHandler = new CommandHandler($discord);
+        $interactionHandler = new InteractionHandler($discord);
 
         $commandBuilder = CommandBuilder::new()
             ->setName('command')
@@ -102,7 +103,7 @@ class CommandHandlerTest extends MockeryTestCase
             ->andReturn(new Promise(fn ($resolver) => $resolver))
             ->once();
 
-        $commandHandler->registerGuildCommand(
+        $interactionHandler->registerGuildCommand(
             $commandBuilder,
             '::guild id::',
             fn (FiredCommand $command) => 1
@@ -115,19 +116,19 @@ class CommandHandlerTest extends MockeryTestCase
     {
         $discord = $this->getDiscord();
 
-        $commandHandler = new CommandHandler($discord);
+        $interactionHandler = new InteractionHandler($discord);
 
         $commandBuilder = CommandBuilder::new()
             ->setName('command')
             ->setDescription('::description::');
 
-        $commandHandler->registerGuildCommand(
+        $interactionHandler->registerGuildCommand(
             $commandBuilder,
             '::guild id::',
             fn (FiredCommand $command) => 1
         );
 
-        $commandHandler->registerGuildCommand(
+        $interactionHandler->registerGuildCommand(
             $commandBuilder,
             '::guild id::',
             fn (FiredCommand $command) => 1
@@ -140,7 +141,7 @@ class CommandHandlerTest extends MockeryTestCase
     {
         $discord = $this->getDiscord();
 
-        $commandHandler = new CommandHandler($discord);
+        $interactionHandler = new InteractionHandler($discord);
 
         $commandBuilder = CommandBuilder::new()
             ->setName('command')
@@ -152,7 +153,7 @@ class CommandHandlerTest extends MockeryTestCase
             ->andReturn(new Promise(fn ($resolver) => $resolver))
             ->once();
 
-        $commandHandler->registerCommand(
+        $interactionHandler->registerCommand(
             $commandBuilder,
             fn (FiredCommand $command) => 1
         );
@@ -164,18 +165,18 @@ class CommandHandlerTest extends MockeryTestCase
     {
         $discord = $this->getDiscord();
 
-        $commandHandler = new CommandHandler($discord, '::guild id::');
+        $interactionHandler = new InteractionHandler($discord, '::guild id::');
 
         $commandBuilder = CommandBuilder::new()
             ->setName('command')
             ->setDescription('::description::');
 
-        $commandHandler->registerCommand(
+        $interactionHandler->registerCommand(
             $commandBuilder,
             fn (FiredCommand $command) => 1
         );
 
-        $commandHandler->registerGuildCommand(
+        $interactionHandler->registerGuildCommand(
             $commandBuilder,
             '::guild id::',
             fn (FiredCommand $command) => 1
@@ -188,7 +189,7 @@ class CommandHandlerTest extends MockeryTestCase
     {
         $discord = $this->getDiscord();
 
-        $commandHandler = new CommandHandler($discord);
+        $interactionHandler = new InteractionHandler($discord);
 
         $commandBuilder = CommandBuilder::new()
             ->setName('command')
@@ -207,7 +208,7 @@ class CommandHandlerTest extends MockeryTestCase
 
         $hasRun = false;
 
-        $commandHandler->registerGlobalCommand(
+        $interactionHandler->registerGlobalCommand(
             $commandBuilder,
             function ($command) use (&$hasRun) {
                 $hasRun = true;
@@ -219,6 +220,7 @@ class CommandHandlerTest extends MockeryTestCase
         $this->emitReady($discord->gateway->events);
 
         $interactionCreate = new InteractionCreate();
+        $interactionCreate->type = InteractionTypes::APPLICATION_COMMAND;
         $interactionCreate->data = new InteractionData();
         $interactionCreate->data->id = '::application command id::';
 
@@ -231,7 +233,7 @@ class CommandHandlerTest extends MockeryTestCase
     {
         $discord = $this->getDiscord();
 
-        $commandHandler = new CommandHandler($discord);
+        $interactionHandler = new InteractionHandler($discord);
 
         $commandBuilder = CommandBuilder::new()
             ->setName('command')
@@ -250,7 +252,7 @@ class CommandHandlerTest extends MockeryTestCase
 
         $hasRun = false;
 
-        $commandHandler->registerGlobalCommand(
+        $interactionHandler->registerGlobalCommand(
             $commandBuilder,
             function ($command) use (&$hasRun) {
                 $hasRun = true;
@@ -260,6 +262,7 @@ class CommandHandlerTest extends MockeryTestCase
         $this->emitReady($discord->gateway->events);
 
         $interactionCreate = new InteractionCreate();
+        $interactionCreate->type = InteractionTypes::APPLICATION_COMMAND;
         $interactionCreate->data = new InteractionData();
         $interactionCreate->data->id = '::other application command id::';
 

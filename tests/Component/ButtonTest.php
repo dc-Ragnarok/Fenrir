@@ -32,10 +32,10 @@ class ButtonTest extends TestCase
     public function testCorrectlyConverted(array $args, array $expected)
     {
         $buttonTypes = [
-            DangerButton::class => ButtonStyle::Danger,
-            PrimaryButton::class => ButtonStyle::Primary,
-            SecondaryButton::class => ButtonStyle::Secondary,
-            SuccessButton::class => ButtonStyle::Success,
+            DangerButton::class => ButtonStyle::Danger->value,
+            PrimaryButton::class => ButtonStyle::Primary->value,
+            SecondaryButton::class => ButtonStyle::Secondary->value,
+            SuccessButton::class => ButtonStyle::Success->value,
         ];
 
         foreach ($buttonTypes as $buttonClass => $buttonStyle) {

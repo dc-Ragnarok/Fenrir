@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Fakes\Exan\Fenrir;
 
 use Exan\Fenrir\Discord;
-use Exan\Fenrir\Gateway;
 use Mockery;
 use Mockery\Mock;
 
@@ -17,7 +16,7 @@ class DiscordFake
 
         $discord->rest = RestFake::get();
         $discord->gateway = GatewayFake::get();
-        $discord->command = CommandHandlerFake::get();
+        $discord->interaction = InteractionHandlerFake::get();
 
         return $discord;
     }

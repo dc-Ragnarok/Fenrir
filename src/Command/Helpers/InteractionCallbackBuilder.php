@@ -52,10 +52,7 @@ class InteractionCallbackBuilder
         $callbackData = $this->data;
 
         if ($this->hasComponents()) {
-            $callbackData['components'] = array_map(
-                fn (ComponentBuilder $component) => $component->get(),
-                $this->getComponents()
-            );
+            $callbackData['components'] = $this->getComponents()->get();
         }
 
         if ($this->hasEmbeds()) {

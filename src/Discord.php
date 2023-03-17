@@ -22,7 +22,7 @@ class Discord
 
     public Rest $rest;
     public Gateway $gateway;
-    public CommandHandler $command;
+    public InteractionHandler $interaction;
 
     public function __construct(
         private string $token,
@@ -77,7 +77,7 @@ class Discord
      *  command rather than Global. Useful for testing without having to change
      *  this manually. Explicitly using `registerGlobalCommand` is not affected
      */
-    public function withCommandHandler(?string $devGuildId = null): self
+    public function withInteractionHandler(?string $devGuildId = null): self
     {
         $args = [$this];
 
@@ -85,7 +85,7 @@ class Discord
             $args[] = $devGuildId;
         }
 
-        $this->command = new CommandHandler(...$args);
+        $this->interaction = new InteractionHandler(...$args);
 
         return $this;
     }

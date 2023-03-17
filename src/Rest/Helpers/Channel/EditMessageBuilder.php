@@ -42,10 +42,7 @@ class EditMessageBuilder
         }
 
         if ($this->hasComponents()) {
-            $data['components'] = array_map(
-                fn (ComponentBuilder $component) => $component->get(),
-                $this->getComponents()
-            );
+            $data['components'] = $this->getComponents()->get();
         }
 
         if ($this->hasEmbeds()) {

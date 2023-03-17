@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace Tests\Exan\Fenrir;
 
 use Exan\Fenrir\Bitwise\Bitwise;
-use Exan\Fenrir\CommandHandler;
 use Exan\Fenrir\Discord;
 use Exan\Fenrir\Gateway;
+use Exan\Fenrir\InteractionHandler;
 use Exan\Fenrir\Rest\Rest;
 use PHPUnit\Framework\TestCase;
 
@@ -31,21 +31,21 @@ class DiscordTest extends TestCase
         $this->assertInstanceOf(Rest::class, $discord->rest);
     }
 
-    public function testItInitializesCommandHandler()
+    public function testItInitializesInteractionHandler()
     {
         $discord = new Discord('::token::');
 
-        $discord->withCommandHandler();
+        $discord->withInteractionHandler();
 
-        $this->assertInstanceOf(CommandHandler::class, $discord->command);
+        $this->assertInstanceOf(InteractionHandler::class, $discord->interaction);
     }
 
-    public function testItInitializesCommandHandlerWithDevGuild()
+    public function testItInitializesInteractionHandlerWithDevGuild()
     {
         $discord = new Discord('::token::');
 
-        $discord->withCommandHandler('::dev guild id::');
+        $discord->withInteractionHandler('::dev guild id::');
 
-        $this->assertInstanceOf(CommandHandler::class, $discord->command);
+        $this->assertInstanceOf(InteractionHandler::class, $discord->interaction);
     }
 }

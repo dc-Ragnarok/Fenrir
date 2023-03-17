@@ -6,12 +6,13 @@ namespace Exan\Fenrir;
 
 use Exan\Fenrir\Command\FiredCommand;
 use Exan\Fenrir\Const\Events;
+use Exan\Fenrir\Enums\Parts\InteractionTypes;
 use Exan\Fenrir\Parts\ApplicationCommand;
 use Exan\Fenrir\Rest\Helpers\Command\CommandBuilder;
 use Exan\Fenrir\Websocket\Events\InteractionCreate;
 use Exan\Fenrir\Websocket\Events\Ready;
 
-class CommandHandler
+class InteractionHandler
 {
     private bool $activated = false;
 
@@ -86,7 +87,10 @@ class CommandHandler
 
     private function handleInteraction(InteractionCreate $interactionCreate)
     {
-        if (!isset($this->commands[$interactionCreate->data->id])) {
+        if (
+            $interactionCreate->type !== InteractionTypes::APPLICATION_COMMAND
+            || !isset($this->commands[$interactionCreate->data->id])
+        ) {
             return;
         }
 
