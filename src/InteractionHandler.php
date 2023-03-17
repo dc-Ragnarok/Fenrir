@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Exan\Fenrir;
 
 use Exan\Fenrir\Command\FiredCommand;
+use Exan\Fenrir\Component\Button\InteractionButton;
 use Exan\Fenrir\Const\Events;
 use Exan\Fenrir\Enums\Parts\InteractionTypes;
 use Exan\Fenrir\Parts\ApplicationCommand;
@@ -14,7 +15,7 @@ use Exan\Fenrir\Websocket\Events\Ready;
 
 class InteractionHandler
 {
-    private bool $activated = false;
+    private FilteredEventEmitter $commandListener;
 
     /** @var array<string, callable> */
     private array $commands = [];
@@ -39,7 +40,7 @@ class InteractionHandler
 
     public function registerGuildCommand(CommandBuilder $commandBuilder, string $guildId, callable $handler): void
     {
-        $this->activateListener();
+        $this->activateCommandListener();
 
         /** Ready event includes Application ID */
         $this->discord->gateway->events->once(
@@ -58,7 +59,7 @@ class InteractionHandler
 
     public function registerGlobalCommand(CommandBuilder $commandBuilder, callable $handler): void
     {
-        $this->activateListener();
+        $this->activateCommandListener();
 
         /** Ready event includes Application ID */
         $this->discord->gateway->events->once(Events::READY, function (Ready $ready) use ($commandBuilder, $handler) {
@@ -71,31 +72,28 @@ class InteractionHandler
         });
     }
 
-    private function activateListener()
+    private function activateCommandListener()
     {
-        if ($this->activated) {
+        if (isset($this->commandListener)) {
             return;
         }
 
-        $this->activated = true;
-
-        $this->discord->gateway->events->on(
+        $this->commandListener = new FilteredEventEmitter(
+            $this->discord->gateway->events,
             Events::INTERACTION_CREATE,
-            $this->handleInteraction(...)
+            fn (InteractionCreate $interactionCreate) => $interactionCreate->type === InteractionTypes::APPLICATION_COMMAND
         );
-    }
 
-    private function handleInteraction(InteractionCreate $interactionCreate)
-    {
-        if (
-            $interactionCreate->type !== InteractionTypes::APPLICATION_COMMAND
-            || !isset($this->commands[$interactionCreate->data->id])
-        ) {
-            return;
-        }
+        $this->commandListener->on(Events::INTERACTION_CREATE, function (InteractionCreate $interactionCreate) {
+            if (!isset($this->commands[$interactionCreate->data->id])) {
+                return;
+            }
 
-        $firedCommand = new FiredCommand($interactionCreate, $this->discord);
+            $firedCommand = new FiredCommand($interactionCreate, $this->discord);
 
-        $this->commands[$interactionCreate->data->id]($firedCommand);
+            $this->commands[$interactionCreate->data->id]($firedCommand);
+        });
+
+        $this->commandListener->start();
     }
 }
