@@ -6,7 +6,7 @@ namespace Tests\Exan\Fenrir;
 
 use Exan\Fenrir\Component\Button\DangerButton;
 use Exan\Fenrir\Interaction\CommandInteraction;
-use Exan\Fenrir\Const\Events;
+use Exan\Fenrir\Constants\Events;
 use Exan\Fenrir\Discord;
 use Exan\Fenrir\Enums\Parts\InteractionTypes;
 use Exan\Fenrir\EventHandler;

@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Tests\Exan\Fenrir;
 
 use Evenement\EventEmitter;
-use Exan\Fenrir\Const\Events;
+use Exan\Fenrir\Constants\Events;
 use Exan\Fenrir\EventHandler;
 use Exan\Fenrir\FilteredEventEmitter;
 use Exan\Fenrir\Websocket\Objects\Payload;

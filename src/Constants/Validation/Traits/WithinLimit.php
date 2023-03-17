@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Exan\Fenrir\Const\Validation\Traits;
+namespace Exan\Fenrir\Constants\Validation\Traits;
 
 trait WithinLimit
 {

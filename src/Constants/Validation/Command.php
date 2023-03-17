@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Exan\Fenrir\Const\Validation;
+namespace Exan\Fenrir\Constants\Validation;
 
 class Command
 {

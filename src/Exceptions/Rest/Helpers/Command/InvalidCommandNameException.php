@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Exan\Fenrir\Exceptions\Rest\Helpers\Command;
 
-use Exan\Fenrir\Const\Validation\Command;
+use Exan\Fenrir\Constants\Validation\Command;
 use Exception;
 
 class InvalidCommandNameException extends Exception

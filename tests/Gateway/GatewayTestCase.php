@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Tests\Exan\Fenrir\Gateway;
 
 use Exan\Fenrir\Bitwise\Bitwise;
-use Exan\Fenrir\Const\WebsocketEvents;
+use Exan\Fenrir\Constants\WebsocketEvents;
 use Exan\Fenrir\EventHandler;
 use Exan\Fenrir\Gateway;
 use Mockery;

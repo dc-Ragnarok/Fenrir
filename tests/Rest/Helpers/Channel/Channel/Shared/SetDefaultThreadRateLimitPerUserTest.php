@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Exan\Fenrir\Rest\Helpers\Channel\Channel\Shared;
 
-use Exan\Fenrir\Const\Validation\RateLimit;
+use Exan\Fenrir\Constants\Validation\RateLimit;
 use Exan\Fenrir\Rest\Helpers\Channel\Channel\Shared\SetDefaultThreadRateLimitPerUser;
 use PHPUnit\Framework\TestCase;
 

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Exan\Fenrir\Rest\Helpers\Channel;
 
-use Exan\Fenrir\Const\Validation\RateLimit;
+use Exan\Fenrir\Constants\Validation\RateLimit;
 use Exan\Fenrir\Enums\Parts\ThreadAutoArchiveDuration;
 use Exan\Fenrir\Rest\Helpers\Channel\StartThreadFromMessageBuilder;
 use PHPUnit\Framework\TestCase;

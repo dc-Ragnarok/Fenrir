@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Exan\Fenrir;
 
 use Exan\Fenrir\Bitwise\Bitwise;
-use Exan\Fenrir\Const\Events as Events;
-use Exan\Fenrir\Const\WebsocketEvents;
+use Exan\Fenrir\Constants\Events as Events;
+use Exan\Fenrir\Constants\WebsocketEvents;
 use Exan\Fenrir\Enums\Gateway\StatusType;
 use Exan\Fenrir\Websocket\Helpers\ActivityBuilder;
 use Exan\Fenrir\Websocket\Objects\D\Hello;

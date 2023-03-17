@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace Tests\Exan\Fenrir;
 
-use Exan\Fenrir\Const\WebsocketEvents;
+use Exan\Fenrir\Constants\WebsocketEvents;
 use Exan\Fenrir\Exceptions\Websocket\ConnectionNotInitializedException;
 use Exan\Fenrir\Websocket;
+use JsonSerializable;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\NullLogger;
 use Ratchet\RFC6455\Messaging\MessageInterface;
@@ -61,6 +62,32 @@ class WebsocketTest extends TestCase
         }));
 
         $this->assertEquals('::message::', (string) $message);
+
+        $websocket->close(1001, '::reason::');
+    }
+
+    public function testItCanSendJsonSerializableItems()
+    {
+        $websocket = new Websocket(10, new NullLogger());
+
+        await($websocket->open('ws://localhost:8080/echo'));
+
+        $jsonItem = new class implements JsonSerializable {
+            public function jsonSerialize(): mixed
+            {
+                return ['hello' => 'world'];
+            }
+        };
+
+        $message = await(new Promise(function (callable $resolve) use ($websocket, $jsonItem) {
+            $websocket->on(WebsocketEvents::MESSAGE, function (MessageInterface $message) use ($resolve) {
+                $resolve($message);
+            });
+
+            $websocket->sendAsJson($jsonItem, true);
+        }));
+
+        $this->assertEquals('{"hello":"world"}', (string) $message);
 
         $websocket->close(1001, '::reason::');
     }
