@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Exan\Fenrir;
 
 use Exan\Fenrir\Component\Button\InteractionButton;
-use Exan\Fenrir\Const\Events;
+use Exan\Fenrir\Constants\Events;
 use Exan\Fenrir\Enums\Parts\InteractionTypes;
 use Exan\Fenrir\Interaction\ButtonInteraction;
 use Exan\Fenrir\Interaction\CommandInteraction;
