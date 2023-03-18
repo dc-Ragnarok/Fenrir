@@ -13,7 +13,7 @@ abstract class InteractionButton extends Component
     protected ButtonStyle $style;
 
     public function __construct(
-        protected string $customId,
+        public readonly string $customId,
         protected ?string $label = null,
         protected ?EmojiBuilder $emoji = null,
         protected bool $disabled = false
@@ -24,7 +24,7 @@ abstract class InteractionButton extends Component
     {
         $data =  [
             'type' => 2,
-            'style' => $this->style,
+            'style' => $this->style->value,
             'custom_id' => $this->customId,
             'disabled' => $this->disabled,
         ];

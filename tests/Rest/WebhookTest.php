@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Exan\Fenrir;
 
-use Exan\Fenrir\Command\Helpers\InteractionCallbackBuilder;
+use Exan\Fenrir\Interaction\Helpers\InteractionCallbackBuilder;
 use Exan\Fenrir\Enums\Command\InteractionCallbackTypes;
 use Exan\Fenrir\Parts\Message;
 use Exan\Fenrir\Rest\Helpers\Webhook\EditWebhookBuilder;

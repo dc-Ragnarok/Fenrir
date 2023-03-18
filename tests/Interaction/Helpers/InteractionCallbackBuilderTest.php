@@ -6,7 +6,7 @@ namespace Tests\Exan\Fenrir\Command\Helpers;
 
 use Discord\Http\Multipart\MultipartBody;
 use PHPUnit\Framework\TestCase;
-use Exan\Fenrir\Command\Helpers\InteractionCallbackBuilder;
+use Exan\Fenrir\Interaction\Helpers\InteractionCallbackBuilder;
 use Exan\Fenrir\Component\Button\DangerButton;
 use Exan\Fenrir\Enums\Command\InteractionCallbackTypes;
 use Exan\Fenrir\Rest\Helpers\Channel\AllowedMentionsBuilder;
@@ -49,9 +49,9 @@ class InteractionCallbackBuilderTest extends TestCase
                     ->add(new DangerButton('::custom id::'))
             );
 
-        $interactionCallbackBuilder->addComponent($component);
+        $interactionCallbackBuilder->setComponents($component);
 
-        $this->assertEquals([$component->get()], $interactionCallbackBuilder->get()['data']['components']);
+        $this->assertEquals($component->get(), $interactionCallbackBuilder->get()['data']['components']);
     }
 
     public function testGetEmbeds()

@@ -134,9 +134,9 @@ class MessageBuilderTest extends TestCase
                     ->add(new DangerButton('::custom id::'))
             );
 
-        $messageBuilder->addComponent($component);
+        $messageBuilder->setComponents($component);
 
-        $this->assertEquals([$component->get()], $messageBuilder->get()['components']);
+        $this->assertEquals($component->get(), $messageBuilder->get()['components']);
     }
 
     public function testGetEmbeds()

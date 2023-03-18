@@ -120,8 +120,8 @@ class MessageTraitsTest extends TestCase
             ->shouldReceive('get')
             ->andReturns(['::component::']);
 
-        $traitTester->addComponent($componentBuilder);
-        $this->assertEquals([$componentBuilder], $traitTester->getComponents());
+        $traitTester->setComponents($componentBuilder);
+        $this->assertEquals($componentBuilder, $traitTester->getComponents());
         $this->assertTrue($traitTester->hasComponents());
     }
 

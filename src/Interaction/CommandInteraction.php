@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Exan\Fenrir\Command;
+namespace Exan\Fenrir\Interaction;
 
-use Exan\Fenrir\Command\Helpers\InteractionCallbackBuilder;
+use Exan\Fenrir\Interaction\Helpers\InteractionCallbackBuilder;
 use Exan\Fenrir\Discord;
 use Exan\Fenrir\Enums\Parts\ApplicationCommandOptionTypes as OptionTypes;
 use Exan\Fenrir\Parts\ApplicationCommandInteractionDataOptionStructure as OptionStructure;
@@ -12,7 +12,7 @@ use Exan\Fenrir\Rest\Helpers\Webhook\EditWebhookBuilder;
 use Exan\Fenrir\Websocket\Events\InteractionCreate;
 use React\Promise\ExtendedPromiseInterface;
 
-class FiredCommand
+class CommandInteraction
 {
     /** @var OptionStructure[] */
     private array $options = [];

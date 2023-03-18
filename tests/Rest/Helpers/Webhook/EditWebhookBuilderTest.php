@@ -37,9 +37,9 @@ class EditWebhookBuilderTest extends TestCase
                     ->add(new DangerButton('::custom id::'))
             );
 
-        $webhookBuilder->addComponent($component);
+        $webhookBuilder->setComponents($component);
 
-        $this->assertEquals([$component->get()], $webhookBuilder->get()['components']);
+        $this->assertEquals($component->get(), $webhookBuilder->get()['components']);
     }
 
     public function testGetEmbeds()

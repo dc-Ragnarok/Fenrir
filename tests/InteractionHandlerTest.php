@@ -4,12 +4,15 @@ declare(strict_types=1);
 
 namespace Tests\Exan\Fenrir;
 
-use Exan\Fenrir\Command\FiredCommand;
-use Exan\Fenrir\CommandHandler;
+use Exan\Fenrir\Component\Button\DangerButton;
+use Exan\Fenrir\Interaction\CommandInteraction;
 use Exan\Fenrir\Constants\Events;
 use Exan\Fenrir\Discord;
+use Exan\Fenrir\Enums\Parts\InteractionTypes;
 use Exan\Fenrir\EventHandler;
 use Exan\Fenrir\Gateway;
+use Exan\Fenrir\Interaction\ButtonInteraction;
+use Exan\Fenrir\InteractionHandler;
 use Exan\Fenrir\Parts\User;
 use Exan\Fenrir\Rest\GlobalCommand;
 use Exan\Fenrir\Rest\GuildCommand;
@@ -25,7 +28,7 @@ use Exan\Fenrir\Parts\InteractionData;
 use Exan\Fenrir\Websocket\Events\InteractionCreate;
 use React\Promise\Promise;
 
-class CommandHandlerTest extends MockeryTestCase
+class InteractionHandlerTest extends MockeryTestCase
 {
     private function getDiscord(): Discord
     {
@@ -66,7 +69,7 @@ class CommandHandlerTest extends MockeryTestCase
     {
         $discord = $this->getDiscord();
 
-        $commandHandler = new CommandHandler($discord);
+        $interactionHandler = new InteractionHandler($discord);
 
         $commandBuilder = CommandBuilder::new()
             ->setName('command')
@@ -78,9 +81,9 @@ class CommandHandlerTest extends MockeryTestCase
             ->andReturn(new Promise(fn ($resolver) => $resolver))
             ->once();
 
-        $commandHandler->registerGlobalCommand(
+        $interactionHandler->registerGlobalCommand(
             $commandBuilder,
-            fn (FiredCommand $command) => 1
+            fn (CommandInteraction $command) => 1
         );
 
         $this->emitReady($discord->gateway->events);
@@ -90,7 +93,7 @@ class CommandHandlerTest extends MockeryTestCase
     {
         $discord = $this->getDiscord();
 
-        $commandHandler = new CommandHandler($discord);
+        $interactionHandler = new InteractionHandler($discord);
 
         $commandBuilder = CommandBuilder::new()
             ->setName('command')
@@ -102,10 +105,10 @@ class CommandHandlerTest extends MockeryTestCase
             ->andReturn(new Promise(fn ($resolver) => $resolver))
             ->once();
 
-        $commandHandler->registerGuildCommand(
+        $interactionHandler->registerGuildCommand(
             $commandBuilder,
             '::guild id::',
-            fn (FiredCommand $command) => 1
+            fn (CommandInteraction $command) => 1
         );
 
         $this->emitReady($discord->gateway->events);
@@ -115,22 +118,22 @@ class CommandHandlerTest extends MockeryTestCase
     {
         $discord = $this->getDiscord();
 
-        $commandHandler = new CommandHandler($discord);
+        $interactionHandler = new InteractionHandler($discord);
 
         $commandBuilder = CommandBuilder::new()
             ->setName('command')
             ->setDescription('::description::');
 
-        $commandHandler->registerGuildCommand(
+        $interactionHandler->registerGuildCommand(
             $commandBuilder,
             '::guild id::',
-            fn (FiredCommand $command) => 1
+            fn (CommandInteraction $command) => 1
         );
 
-        $commandHandler->registerGuildCommand(
+        $interactionHandler->registerGuildCommand(
             $commandBuilder,
             '::guild id::',
-            fn (FiredCommand $command) => 1
+            fn (CommandInteraction $command) => 1
         );
 
         $this->assertCount(1, $discord->gateway->events->listeners(Events::INTERACTION_CREATE));
@@ -140,7 +143,7 @@ class CommandHandlerTest extends MockeryTestCase
     {
         $discord = $this->getDiscord();
 
-        $commandHandler = new CommandHandler($discord);
+        $interactionHandler = new InteractionHandler($discord);
 
         $commandBuilder = CommandBuilder::new()
             ->setName('command')
@@ -152,9 +155,9 @@ class CommandHandlerTest extends MockeryTestCase
             ->andReturn(new Promise(fn ($resolver) => $resolver))
             ->once();
 
-        $commandHandler->registerCommand(
+        $interactionHandler->registerCommand(
             $commandBuilder,
-            fn (FiredCommand $command) => 1
+            fn (CommandInteraction $command) => 1
         );
 
         $this->emitReady($discord->gateway->events);
@@ -164,21 +167,21 @@ class CommandHandlerTest extends MockeryTestCase
     {
         $discord = $this->getDiscord();
 
-        $commandHandler = new CommandHandler($discord, '::guild id::');
+        $interactionHandler = new InteractionHandler($discord, '::guild id::');
 
         $commandBuilder = CommandBuilder::new()
             ->setName('command')
             ->setDescription('::description::');
 
-        $commandHandler->registerCommand(
+        $interactionHandler->registerCommand(
             $commandBuilder,
-            fn (FiredCommand $command) => 1
+            fn (CommandInteraction $command) => 1
         );
 
-        $commandHandler->registerGuildCommand(
+        $interactionHandler->registerGuildCommand(
             $commandBuilder,
             '::guild id::',
-            fn (FiredCommand $command) => 1
+            fn (CommandInteraction $command) => 1
         );
 
         $this->assertCount(1, $discord->gateway->events->listeners(Events::INTERACTION_CREATE));
@@ -188,7 +191,7 @@ class CommandHandlerTest extends MockeryTestCase
     {
         $discord = $this->getDiscord();
 
-        $commandHandler = new CommandHandler($discord);
+        $interactionHandler = new InteractionHandler($discord);
 
         $commandBuilder = CommandBuilder::new()
             ->setName('command')
@@ -207,18 +210,19 @@ class CommandHandlerTest extends MockeryTestCase
 
         $hasRun = false;
 
-        $commandHandler->registerGlobalCommand(
+        $interactionHandler->registerGlobalCommand(
             $commandBuilder,
             function ($command) use (&$hasRun) {
                 $hasRun = true;
 
-                $this->assertInstanceOf(FiredCommand::class, $command);
+                $this->assertInstanceOf(CommandInteraction::class, $command);
             }
         );
 
         $this->emitReady($discord->gateway->events);
 
         $interactionCreate = new InteractionCreate();
+        $interactionCreate->type = InteractionTypes::APPLICATION_COMMAND;
         $interactionCreate->data = new InteractionData();
         $interactionCreate->data->id = '::application command id::';
 
@@ -231,7 +235,7 @@ class CommandHandlerTest extends MockeryTestCase
     {
         $discord = $this->getDiscord();
 
-        $commandHandler = new CommandHandler($discord);
+        $interactionHandler = new InteractionHandler($discord);
 
         $commandBuilder = CommandBuilder::new()
             ->setName('command')
@@ -250,7 +254,7 @@ class CommandHandlerTest extends MockeryTestCase
 
         $hasRun = false;
 
-        $commandHandler->registerGlobalCommand(
+        $interactionHandler->registerGlobalCommand(
             $commandBuilder,
             function ($command) use (&$hasRun) {
                 $hasRun = true;
@@ -260,11 +264,104 @@ class CommandHandlerTest extends MockeryTestCase
         $this->emitReady($discord->gateway->events);
 
         $interactionCreate = new InteractionCreate();
+        $interactionCreate->type = InteractionTypes::APPLICATION_COMMAND;
         $interactionCreate->data = new InteractionData();
         $interactionCreate->data->id = '::other application command id::';
 
         $discord->gateway->events->emit(Events::INTERACTION_CREATE, [$interactionCreate]);
 
         $this->assertFalse($hasRun, 'Command handler should not have been run');
+    }
+
+    public function testItCanRegisterButtonInteractionHandlers()
+    {
+        $discord = $this->getDiscord();
+        $interactionHandler = new InteractionHandler($discord);
+
+        $button = new DangerButton('::custom id::');
+
+        $hasRun = false;
+        $interactionHandler->onButtonInteraction(
+            $button,
+            function (ButtonInteraction $buttonInteraction) use (&$hasRun) {
+                $hasRun = true;
+            }
+        );
+
+        $this->assertCount(1, $discord->gateway->events->listeners(Events::INTERACTION_CREATE));
+
+        $interactionCreate = (new JsonMapper())->map(
+            json_decode(json_encode([ // Json mapper requires object instead of array
+                'id' => '::interaction id::',
+                'token' => '::token::',
+                'type' => InteractionTypes::MESSAGE_COMPONENT->value,
+                'application_id' => '::application id::',
+                'data' => [
+                    'component_type' => 2, // @todo enum
+                    'custom_id' => '::custom id::',
+                ],
+            ])),
+            new InteractionCreate()
+        );
+
+        $discord->gateway->events->emit(Events::INTERACTION_CREATE, [$interactionCreate]);
+
+        $this->assertTrue($hasRun, 'Handler did not run');
+    }
+
+    public function testItOnlyRegistersASingleListener()
+    {
+        $discord = $this->getDiscord();
+        $interactionHandler = new InteractionHandler($discord);
+
+        $button = new DangerButton('::custom id::');
+        $interactionHandler->onButtonInteraction($button, fn (ButtonInteraction $btnInt) => null);
+
+        $otherButton = new DangerButton('::some other custom id::');
+        $interactionHandler->onButtonInteraction($otherButton, fn (ButtonInteraction $btnInt) => null);
+
+        $this->assertCount(1, $discord->gateway->events->listeners(Events::INTERACTION_CREATE));
+    }
+
+    public function testItRemovesButtonListenerIfHandlerReturnsTrue()
+    {
+        $discord = $this->getDiscord();
+        $interactionHandler = new InteractionHandler($discord);
+
+        $button = new DangerButton('::custom id::');
+
+        $runs = 0;
+        $interactionHandler->onButtonInteraction(
+            $button,
+            function (ButtonInteraction $buttonInteraction) use (&$runs) {
+                $runs++;
+
+                return true;
+            }
+        );
+
+        $this->assertCount(1, $discord->gateway->events->listeners(Events::INTERACTION_CREATE));
+
+        $interactionCreate = (new JsonMapper())->map(
+            json_decode(json_encode([ // Json mapper requires object instead of array
+                'id' => '::interaction id::',
+                'token' => '::token::',
+                'type' => InteractionTypes::MESSAGE_COMPONENT->value,
+                'application_id' => '::application id::',
+                'data' => [
+                    'component_type' => 2, // @todo enum
+                    'custom_id' => '::custom id::',
+                ],
+            ])),
+            new InteractionCreate()
+        );
+
+        $discord->gateway->events->emit(Events::INTERACTION_CREATE, [$interactionCreate]);
+
+        $this->assertEquals(1, $runs, 'Handler did not run');
+
+        $discord->gateway->events->emit(Events::INTERACTION_CREATE, [$interactionCreate]);
+
+        $this->assertEquals(1, $runs, 'Handler ran incorrect number of times');
     }
 }

@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Fakes\Exan\Fenrir;
 
-use Exan\Fenrir\CommandHandler;
+use Exan\Fenrir\InteractionHandler;
 use Exan\Fenrir\Rest\Helpers\Command\CommandBuilder;
 use PHPUnit\Framework\Assert;
 
-class CommandHandlerFake extends CommandHandler
+class InteractionHandlerFake extends InteractionHandler
 {
     public array $dynamicCommands = [];
     public array $guildCommands = [];
@@ -18,7 +18,7 @@ class CommandHandlerFake extends CommandHandler
     {
     }
 
-    public static function get(): CommandHandlerFake
+    public static function get(): InteractionHandler
     {
         return new static();
     }

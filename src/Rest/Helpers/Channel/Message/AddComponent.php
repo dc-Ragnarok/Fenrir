@@ -8,25 +8,19 @@ use Exan\Fenrir\Rest\Helpers\Channel\ComponentBuilder;
 
 trait AddComponent
 {
-    /** @var ComponentBuilder[] */
-    private array $components;
+    private ComponentBuilder $components;
 
     /**
      * @see https://discord.com/developers/docs/interactions/message-components#component-object
      */
-    public function addComponent(ComponentBuilder $component): self
+    public function setComponents(ComponentBuilder $components): self
     {
-        if (!isset($this->components)) {
-            $this->components = [];
-        }
-
-        $this->components[] = $component;
+        $this->components = $components;
 
         return $this;
     }
 
-    /** @return ComponentBuilder[] */
-    public function getComponents(): ?array
+    public function getComponents(): ?ComponentBuilder
     {
         return $this->components ?? null;
     }

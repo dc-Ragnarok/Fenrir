@@ -6,7 +6,7 @@ namespace Exan\Fenrir\Rest;
 
 use Discord\Http\Endpoint;
 use Discord\Http\Http;
-use Exan\Fenrir\Command\Helpers\InteractionCallbackBuilder;
+use Exan\Fenrir\Interaction\Helpers\InteractionCallbackBuilder;
 use Exan\Fenrir\Parts\Message;
 use Exan\Fenrir\Rest\Helpers\HttpHelper;
 use Exan\Fenrir\Rest\Helpers\Webhook\EditWebhookBuilder;

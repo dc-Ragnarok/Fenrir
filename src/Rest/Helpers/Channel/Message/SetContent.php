@@ -9,7 +9,7 @@ trait SetContent
     /**
      * @var string $content Up to 2000 characters
      */
-    public function setContent(string $content): self
+    public function setContent(string $content): static
     {
         $this->data['content'] = $content;
 

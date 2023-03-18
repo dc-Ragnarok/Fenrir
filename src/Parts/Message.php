@@ -58,7 +58,7 @@ class Message
     public ?MessageInteraction $interaction;
     public ?Channel $thread;
     /**
-     * @var \Exan\Fenrir\Enums\Parts\MessageComponentTypes[]
+     * @var \Exan\Fenrir\Parts\Component[]
      */
     public array $components;
     /**
@@ -75,14 +75,5 @@ class Message
     public function setType(int $value): void
     {
         $this->type = MessageTypes::from($value);
-    }
-
-    public function setComponents(array $value): void
-    {
-        $this->components = [];
-
-        foreach ($value as $entry) {
-            $this->components[] = MessageComponentTypes::from($entry);
-        }
     }
 }
