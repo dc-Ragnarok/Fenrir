@@ -57,7 +57,7 @@ class Discord
     }
 
     public function withRest(
-        DriverInterface $driver = null,
+        ?DriverInterface $driver = null,
     ) {
         $driver ??= new Guzzle(
             $this->loop
