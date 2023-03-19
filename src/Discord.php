@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Exan\Fenrir;
 
+use Discord\Http\DriverInterface;
 use Discord\Http\Drivers\Guzzle;
 use Discord\Http\Http;
 use Exan\Fenrir\Bitwise\Bitwise;
@@ -55,15 +56,18 @@ class Discord
         return $this;
     }
 
-    public function withRest()
-    {
+    public function withRest(
+        DriverInterface $driver = null,
+    ) {
+        $driver ??= new Guzzle(
+            $this->loop
+        );
+
         $this->http = new Http(
             'Bot ' . $this->token,
             $this->loop,
             $this->logger,
-            new Guzzle(
-                $this->loop
-            )
+            $driver
         );
 
         $this->rest = new Rest($this->http, $this->mapper);
