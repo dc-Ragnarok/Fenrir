@@ -22,7 +22,8 @@ class DataMapper
 
     /**
      * @param class-string $definition
-     * @return $definition Instance of given definition with provided properties. If no properties are present, the mapping failed
+     * @return $definition Instance of given definition with provided properties.
+     *  If no properties are present, the mapping failed
      */
     public function map(object|array $data, string $definition): mixed
     {
@@ -38,7 +39,8 @@ class DataMapper
     /**
      * @param array<object|array> $data
      * @param class-string $definition
-     * @return array<$definition> Array of instances of given definition with provided properties. If no properties are present, the mapping failed
+     * @return array<$definition> Array of instances of given definition with provided properties.
+     *  If no properties are present in an item of the array, the mapping for this item failed
      */
     public function mapArray(array $data, string $definition): array
     {
