@@ -293,7 +293,7 @@ class InteractionHandlerTest extends MockeryTestCase
         $this->assertCount(1, $discord->gateway->events->listeners(Events::INTERACTION_CREATE));
 
         $interactionCreate = DataMapperFake::get()->map(
-            json_decode(json_encode([ // Json mapper requires object instead of array
+            [
                 'id' => '::interaction id::',
                 'token' => '::token::',
                 'type' => InteractionTypes::MESSAGE_COMPONENT->value,
@@ -302,7 +302,7 @@ class InteractionHandlerTest extends MockeryTestCase
                     'component_type' => 2, // @todo enum
                     'custom_id' => '::custom id::',
                 ],
-            ])),
+            ],
             InteractionCreate::class
         );
 
@@ -345,7 +345,7 @@ class InteractionHandlerTest extends MockeryTestCase
         $this->assertCount(1, $discord->gateway->events->listeners(Events::INTERACTION_CREATE));
 
         $interactionCreate = DataMapperFake::get()->map(
-            json_decode(json_encode([ // Json mapper requires object instead of array
+            [
                 'id' => '::interaction id::',
                 'token' => '::token::',
                 'type' => InteractionTypes::MESSAGE_COMPONENT->value,
@@ -354,7 +354,7 @@ class InteractionHandlerTest extends MockeryTestCase
                     'component_type' => 2, // @todo enum
                     'custom_id' => '::custom id::',
                 ],
-            ])),
+            ],
             InteractionCreate::class
         );
 

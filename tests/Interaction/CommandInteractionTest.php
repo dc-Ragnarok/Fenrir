@@ -116,7 +116,7 @@ class CommandInteractionTest extends MockeryTestCase
 
         /** @var InteractionCreate */
         $interactionCreate = $dataMapper->map(
-            json_decode(json_encode([ // Json mapper requires object instead of array
+            [
                 'id' => '::interaction id::',
                 'token' => '::token::',
                 'application_id' => '::application id::',
@@ -128,7 +128,7 @@ class CommandInteractionTest extends MockeryTestCase
                         ]
                     ],
                 ],
-            ])),
+            ],
             InteractionCreate::class
         );
 
@@ -143,7 +143,7 @@ class CommandInteractionTest extends MockeryTestCase
 
         /** @var InteractionCreate */
         $interactionCreate = $dataMapper->map(
-            json_decode(json_encode([ // Json mapper requires object instead of array
+            [
                 'id' => '::interaction id::',
                 'token' => '::token::',
                 'application_id' => '::application id::',
@@ -161,7 +161,7 @@ class CommandInteractionTest extends MockeryTestCase
                         ],
                     ],
                 ],
-            ])),
+            ],
             InteractionCreate::class
         );
 
@@ -176,7 +176,7 @@ class CommandInteractionTest extends MockeryTestCase
 
         /** @var InteractionCreate */
         $interactionCreate = $dataMapper->map(
-            json_decode(json_encode([ // Json mapper requires object instead of array
+            [
                 'id' => '::interaction id::',
                 'token' => '::token::',
                 'application_id' => '::application id::',
@@ -188,7 +188,7 @@ class CommandInteractionTest extends MockeryTestCase
                         ]
                     ],
                 ],
-            ])),
+            ],
             InteractionCreate::class
         );
 
