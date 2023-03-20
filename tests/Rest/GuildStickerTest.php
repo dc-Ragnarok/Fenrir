@@ -17,7 +17,7 @@ class GuildStickerTest extends HttpHelperTestCase
     {
         parent::setUp();
 
-        $this->httpItem = new GuildSticker($this->http, $this->jsonMapper);
+        $this->httpItem = new GuildSticker($this->http, $this->dataMapper);
     }
 
     public function httpBindingsProvider(): array

@@ -21,7 +21,7 @@ use Exan\Fenrir\Rest\Helpers\Channel\StartThreadFromMessageBuilder;
 use Exan\Fenrir\Rest\Helpers\Channel\StartThreadWithoutMessageBuilder;
 use Exan\Fenrir\Rest\Helpers\Emoji\EmojiBuilder;
 use Exan\Fenrir\Rest\Helpers\HttpHelper;
-use JsonMapper;
+use Exan\Fenrir\DataMapper;
 use React\Promise\ExtendedPromiseInterface;
 
 /**
@@ -31,7 +31,7 @@ class Channel
 {
     use HttpHelper;
 
-    public function __construct(private Http $http, private JsonMapper $jsonMapper)
+    public function __construct(private Http $http, private DataMapper $dataMapper)
     {
     }
 

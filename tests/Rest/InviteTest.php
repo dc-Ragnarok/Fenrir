@@ -13,7 +13,7 @@ class InviteTest extends HttpHelperTestCase
     {
         parent::setUp();
 
-        $this->httpItem = new RestInvite($this->http, $this->jsonMapper);
+        $this->httpItem = new RestInvite($this->http, $this->dataMapper);
     }
 
     public function httpBindingsProvider(): array

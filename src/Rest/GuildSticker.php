@@ -10,7 +10,7 @@ use Exan\Fenrir\Parts\Sticker;
 use Exan\Fenrir\Rest\Helpers\GuildSticker\ModifyStickerBuilder;
 use Exan\Fenrir\Rest\Helpers\GuildSticker\StickerBuilder;
 use Exan\Fenrir\Rest\Helpers\HttpHelper;
-use JsonMapper;
+use Exan\Fenrir\DataMapper;
 use React\Promise\ExtendedPromiseInterface;
 
 /**
@@ -20,7 +20,7 @@ class GuildSticker
 {
     use HttpHelper;
 
-    public function __construct(private Http $http, private JsonMapper $jsonMapper)
+    public function __construct(private Http $http, private DataMapper $dataMapper)
     {
     }
 

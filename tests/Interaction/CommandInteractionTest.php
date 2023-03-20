@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Exan\Fenrir\Interaction;
 
+use Fakes\Exan\Fenrir\DataMapperFake;
 use Mockery;
 use Mockery\Adapter\Phpunit\MockeryTestCase;
 use Exan\Fenrir\Interaction\CommandInteraction;
@@ -12,7 +13,6 @@ use Exan\Fenrir\Parts\ApplicationCommandInteractionDataOptionStructure;
 use Exan\Fenrir\Parts\InteractionData;
 use Exan\Fenrir\Rest\Helpers\Webhook\EditWebhookBuilder;
 use Exan\Fenrir\Websocket\Events\InteractionCreate;
-use JsonMapper;
 use Fakes\Exan\Fenrir\DiscordFake;
 use Fakes\Exan\Fenrir\PromiseFake;
 
@@ -112,9 +112,10 @@ class CommandInteractionTest extends MockeryTestCase
 
     public function testGetSubCommandName()
     {
-        $jsonMapper = new JsonMapper();
+        $dataMapper = DataMapperFake::get();
 
-        $interactionCreate = $jsonMapper->map(
+        /** @var InteractionCreate */
+        $interactionCreate = $dataMapper->map(
             json_decode(json_encode([ // Json mapper requires object instead of array
                 'id' => '::interaction id::',
                 'token' => '::token::',
@@ -128,7 +129,7 @@ class CommandInteractionTest extends MockeryTestCase
                     ],
                 ],
             ])),
-            new InteractionCreate()
+            InteractionCreate::class
         );
 
         $commandInteraction = new CommandInteraction($interactionCreate, DiscordFake::get());
@@ -138,9 +139,10 @@ class CommandInteractionTest extends MockeryTestCase
 
     public function testGetSubCommandGroupName()
     {
-        $jsonMapper = new JsonMapper();
+        $dataMapper = DataMapperFake::get();
 
-        $interactionCreate = $jsonMapper->map(
+        /** @var InteractionCreate */
+        $interactionCreate = $dataMapper->map(
             json_decode(json_encode([ // Json mapper requires object instead of array
                 'id' => '::interaction id::',
                 'token' => '::token::',
@@ -160,7 +162,7 @@ class CommandInteractionTest extends MockeryTestCase
                     ],
                 ],
             ])),
-            new InteractionCreate()
+            InteractionCreate::class
         );
 
         $commandInteraction = new CommandInteraction($interactionCreate, DiscordFake::get());
@@ -170,9 +172,10 @@ class CommandInteractionTest extends MockeryTestCase
 
     public function testGetSubCommandNameIsNullForRegularCommands()
     {
-        $jsonMapper = new JsonMapper();
+        $dataMapper = DataMapperFake::get();
 
-        $interactionCreate = $jsonMapper->map(
+        /** @var InteractionCreate */
+        $interactionCreate = $dataMapper->map(
             json_decode(json_encode([ // Json mapper requires object instead of array
                 'id' => '::interaction id::',
                 'token' => '::token::',
@@ -186,7 +189,7 @@ class CommandInteractionTest extends MockeryTestCase
                     ],
                 ],
             ])),
-            new InteractionCreate()
+            InteractionCreate::class
         );
 
         $commandInteraction = new CommandInteraction($interactionCreate, DiscordFake::get());

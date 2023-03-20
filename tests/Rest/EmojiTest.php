@@ -15,7 +15,7 @@ class EmojiTest extends HttpHelperTestCase
     {
         parent::setUp();
 
-        $this->httpItem = new Emoji($this->http, $this->jsonMapper);
+        $this->httpItem = new Emoji($this->http, $this->dataMapper);
     }
 
     public function httpBindingsProvider(): array
@@ -26,7 +26,7 @@ class EmojiTest extends HttpHelperTestCase
                 'args' => ['::guild id::'],
                 'mockOptions' => [
                     'method' => 'get',
-                    'return' => (object) [],
+                    'return' => [(object) [], (object) [], (object) []],
                 ],
                 'validationOptions' => [
                     'returnType' => PartsEmoji::class,

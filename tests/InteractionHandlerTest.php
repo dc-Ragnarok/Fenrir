@@ -7,6 +7,8 @@ namespace Tests\Exan\Fenrir;
 use Exan\Fenrir\Component\Button\DangerButton;
 use Exan\Fenrir\Interaction\CommandInteraction;
 use Exan\Fenrir\Constants\Events;
+use Exan\Fenrir\DataMapper;
+use Fakes\Exan\Fenrir\DataMapperFake;
 use Exan\Fenrir\Discord;
 use Exan\Fenrir\Enums\Parts\InteractionTypes;
 use Exan\Fenrir\EventHandler;
@@ -20,12 +22,12 @@ use Exan\Fenrir\Rest\Helpers\Command\CommandBuilder;
 use Exan\Fenrir\Rest\Rest;
 use Exan\Fenrir\Websocket\Events\Ready;
 use Exan\Fenrir\Websocket\Objects\Payload;
-use JsonMapper;
 use Mockery;
 use Mockery\Adapter\Phpunit\MockeryTestCase;
 use Exan\Fenrir\Parts\ApplicationCommand;
 use Exan\Fenrir\Parts\InteractionData;
 use Exan\Fenrir\Websocket\Events\InteractionCreate;
+use Psr\Log\NullLogger;
 use React\Promise\Promise;
 
 class InteractionHandlerTest extends MockeryTestCase
@@ -41,7 +43,7 @@ class InteractionHandlerTest extends MockeryTestCase
 
         /** Set up required gateway components */
         $discord->gateway = Mockery::mock(Gateway::class);
-        $discord->gateway->events = new EventHandler(new JsonMapper(), false);
+        $discord->gateway->events = new EventHandler(DataMapperFake::get(), false);
 
         $ready = new Ready();
         $ready->user = new User();
@@ -290,7 +292,7 @@ class InteractionHandlerTest extends MockeryTestCase
 
         $this->assertCount(1, $discord->gateway->events->listeners(Events::INTERACTION_CREATE));
 
-        $interactionCreate = (new JsonMapper())->map(
+        $interactionCreate = DataMapperFake::get()->map(
             json_decode(json_encode([ // Json mapper requires object instead of array
                 'id' => '::interaction id::',
                 'token' => '::token::',
@@ -301,7 +303,7 @@ class InteractionHandlerTest extends MockeryTestCase
                     'custom_id' => '::custom id::',
                 ],
             ])),
-            new InteractionCreate()
+            InteractionCreate::class
         );
 
         $discord->gateway->events->emit(Events::INTERACTION_CREATE, [$interactionCreate]);
@@ -342,7 +344,7 @@ class InteractionHandlerTest extends MockeryTestCase
 
         $this->assertCount(1, $discord->gateway->events->listeners(Events::INTERACTION_CREATE));
 
-        $interactionCreate = (new JsonMapper())->map(
+        $interactionCreate = DataMapperFake::get()->map(
             json_decode(json_encode([ // Json mapper requires object instead of array
                 'id' => '::interaction id::',
                 'token' => '::token::',
@@ -353,7 +355,7 @@ class InteractionHandlerTest extends MockeryTestCase
                     'custom_id' => '::custom id::',
                 ],
             ])),
-            new InteractionCreate()
+            InteractionCreate::class
         );
 
         $discord->gateway->events->emit(Events::INTERACTION_CREATE, [$interactionCreate]);

@@ -10,7 +10,7 @@ use Exan\Fenrir\Interaction\Helpers\InteractionCallbackBuilder;
 use Exan\Fenrir\Parts\Message;
 use Exan\Fenrir\Rest\Helpers\HttpHelper;
 use Exan\Fenrir\Rest\Helpers\Webhook\EditWebhookBuilder;
-use JsonMapper;
+use Exan\Fenrir\DataMapper;
 use React\Promise\ExtendedPromiseInterface;
 
 /**
@@ -20,7 +20,7 @@ class Webhook
 {
     use HttpHelper;
 
-    public function __construct(private Http $http, private JsonMapper $jsonMapper)
+    public function __construct(private Http $http, private DataMapper $dataMapper)
     {
     }
 

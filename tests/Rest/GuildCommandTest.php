@@ -15,7 +15,7 @@ class GuildCommandTest extends HttpHelperTestCase
     {
         parent::setUp();
 
-        $this->httpItem = new GuildCommand($this->http, $this->jsonMapper);
+        $this->httpItem = new GuildCommand($this->http, $this->dataMapper);
     }
 
     public function httpBindingsProvider(): array

@@ -5,10 +5,12 @@ declare(strict_types=1);
 namespace Tests\Exan\Fenrir;
 
 use Exan\Fenrir\Constants\Events;
+use Exan\Fenrir\DataMapper;
+use Fakes\Exan\Fenrir\DataMapperFake;
 use Exan\Fenrir\EventHandler;
 use Exan\Fenrir\Websocket\Objects\Payload;
-use JsonMapper;
 use PHPUnit\Framework\TestCase;
+use Psr\Log\NullLogger;
 use React\Promise\Promise;
 use seregazhuk\React\PromiseTesting\AssertsPromise;
 use stdClass;
@@ -17,14 +19,13 @@ final class EventHandlerTest extends TestCase
 {
     use AssertsPromise;
 
-    private JsonMapper $jsonMapper;
+    private DataMapper $dataMapper;
 
     protected function setUp(): void
     {
         parent::setUp();
 
-        $this->jsonMapper = new JsonMapper();
-        $this->jsonMapper->bStrictNullTypes = false;
+        $this->dataMapper = DataMapperFake::get();
     }
 
     private function awaitResponse(EventHandler $eventHandler, string $event, Payload $payload): Promise
@@ -40,7 +41,7 @@ final class EventHandlerTest extends TestCase
 
     public function testEmitRaw(): void
     {
-        $eventHandler = new EventHandler($this->jsonMapper, true);
+        $eventHandler = new EventHandler($this->dataMapper, true);
 
         $payload = new Payload();
         $payload->t = '::event type::';
@@ -52,7 +53,7 @@ final class EventHandlerTest extends TestCase
 
     public function testDoesNotEmitRawWhenSettingFalse(): void
     {
-        $eventHandler = new EventHandler($this->jsonMapper, false);
+        $eventHandler = new EventHandler($this->dataMapper, false);
 
         $payload = new Payload();
         $payload->t = '::event type::';
@@ -64,7 +65,7 @@ final class EventHandlerTest extends TestCase
 
     public function testDoesNotEmitIfUnknownEvent(): void
     {
-        $eventHandler = new EventHandler($this->jsonMapper, false);
+        $eventHandler = new EventHandler($this->dataMapper, false);
 
         $payload = new Payload();
         $payload->t = '::unknown event::';
@@ -79,7 +80,7 @@ final class EventHandlerTest extends TestCase
      */
     public function testEmitEvent($event, $class): void
     {
-        $eventHandler = new EventHandler($this->jsonMapper, false);
+        $eventHandler = new EventHandler($this->dataMapper, false);
 
         $payload = new Payload();
         $payload->t = $event;
