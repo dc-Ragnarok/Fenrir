@@ -13,18 +13,30 @@ class RestFake
 {
     public static function get(): Rest|Mock
     {
-        $restMock = Mockery::mock(Rest::class);
+        // $reflectionClass = new ReflectionClass(Rest::class);
+        // $instance = ;
+        // $reflectionProperty = $reflection->getProperty('changeMe');
+        // $reflectionProperty->setValue($instance, 33);
 
-        $reflectionClass = new ReflectionClass(Rest::class);
+        // var_dump($reflectionProperty->getValue($instance));
+        // $restMock = Mockery::mock(Rest::class);
 
-        foreach ($reflectionClass->getProperties() as $property) {
+        // $instance = $reflectionClass->newInstanceWithoutConstructor();
+
+
+        $reflection = new ReflectionClass(Rest::class);
+        $instance = $reflection->newInstanceWithoutConstructor();
+        // $reflectionProperty = $reflection->getProperty('changeMe');
+        // $reflectionProperty->setValue($instance, 33);
+
+        foreach ($reflection->getProperties() as $property) {
             if (!$property->isPublic()) {
                 continue;
             }
 
-            $restMock->{$property->getName()} = Mockery::mock($property->getType()->getName());
+            $property->setValue($instance, Mockery::mock($property->getType()->getName()));
         }
 
-        return $restMock;
+        return $instance;
     }
 }

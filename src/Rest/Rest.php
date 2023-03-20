@@ -9,18 +9,18 @@ use Exan\Fenrir\DataMapper;
 
 class Rest
 {
-    public AuditLog $auditLog;
-    public Channel $channel;
-    public Emoji $emoji;
-    public GuildAutoModeration $guildAutoModeration;
-    public GuildScheduledEvent $guildScheduledEvent;
-    public GuildSticker $guildSticker;
-    public GuildTemplate $guildTemplate;
-    public Invite $invite;
-    public Sticker $sticker;
-    public GuildCommand $guildCommand;
-    public GlobalCommand $globalCommand;
-    public Webhook $webhook;
+    public readonly AuditLog $auditLog;
+    public readonly Channel $channel;
+    public readonly Emoji $emoji;
+    public readonly GuildAutoModeration $guildAutoModeration;
+    public readonly GuildScheduledEvent $guildScheduledEvent;
+    public readonly GuildSticker $guildSticker;
+    public readonly GuildTemplate $guildTemplate;
+    public readonly Invite $invite;
+    public readonly Sticker $sticker;
+    public readonly GuildCommand $guildCommand;
+    public readonly GlobalCommand $globalCommand;
+    public readonly Webhook $webhook;
 
     /**
      * @todo add

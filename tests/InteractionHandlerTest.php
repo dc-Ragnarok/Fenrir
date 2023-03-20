@@ -9,58 +9,34 @@ use Exan\Fenrir\Interaction\CommandInteraction;
 use Exan\Fenrir\Constants\Events;
 use Exan\Fenrir\DataMapper;
 use Fakes\Exan\Fenrir\DataMapperFake;
-use Exan\Fenrir\Discord;
 use Exan\Fenrir\Enums\Parts\InteractionTypes;
 use Exan\Fenrir\EventHandler;
-use Exan\Fenrir\Gateway;
 use Exan\Fenrir\Interaction\ButtonInteraction;
 use Exan\Fenrir\InteractionHandler;
-use Exan\Fenrir\Parts\User;
-use Exan\Fenrir\Rest\GlobalCommand;
-use Exan\Fenrir\Rest\GuildCommand;
 use Exan\Fenrir\Rest\Helpers\Command\CommandBuilder;
-use Exan\Fenrir\Rest\Rest;
-use Exan\Fenrir\Websocket\Events\Ready;
 use Exan\Fenrir\Websocket\Objects\Payload;
-use Mockery;
 use Mockery\Adapter\Phpunit\MockeryTestCase;
 use Exan\Fenrir\Parts\ApplicationCommand;
 use Exan\Fenrir\Parts\InteractionData;
 use Exan\Fenrir\Websocket\Events\InteractionCreate;
-use Psr\Log\NullLogger;
+use Fakes\Exan\Fenrir\DiscordFake;
+use Fakes\Exan\Fenrir\PromiseFake;
 use React\Promise\Promise;
 
 class InteractionHandlerTest extends MockeryTestCase
 {
-    private function getDiscord(): Discord
-    {
-        $discord = Mockery::mock(Discord::class);
-
-        /** Set up required rest components */
-        $discord->rest = Mockery::mock(Rest::class);
-        $discord->rest->guildCommand = Mockery::mock(GuildCommand::class);
-        $discord->rest->globalCommand = Mockery::mock(GlobalCommand::class);
-
-        /** Set up required gateway components */
-        $discord->gateway = Mockery::mock(Gateway::class);
-        $discord->gateway->events = new EventHandler(DataMapperFake::get(), false);
-
-        $ready = new Ready();
-        $ready->user = new User();
-        $ready->user->id = '::bot user id::';
-
-        return $discord;
-    }
-
     private function emitReady(EventHandler $eventHandler)
     {
-        $payload = new Payload();
-
-        $payload->op = 0;
-        $payload->t = Events::READY;
-        $payload->d = (object) [
-            'user' => (object) ['id' => '::bot user id::']
-        ];
+        /** @var Payload */
+        $payload = DataMapperFake::get()->map([
+            'op' => 0,
+            't' => Events::READY,
+            'd' => [
+                'user' => [
+                    'id' => '::bot user id::',
+                ],
+            ],
+        ], Payload::class);
 
         $eventHandler->handle(
             $payload
@@ -69,7 +45,7 @@ class InteractionHandlerTest extends MockeryTestCase
 
     public function testRegisterGlobalCommand()
     {
-        $discord = $this->getDiscord();
+        $discord = DiscordFake::get();
 
         $interactionHandler = new InteractionHandler($discord);
 
@@ -80,7 +56,7 @@ class InteractionHandlerTest extends MockeryTestCase
         $discord->rest->globalCommand
             ->shouldReceive('createApplicationCommand')
             ->with('::bot user id::', $commandBuilder)
-            ->andReturn(new Promise(fn ($resolver) => $resolver))
+            ->andReturn(PromiseFake::get())
             ->once();
 
         $interactionHandler->registerGlobalCommand(
@@ -93,7 +69,7 @@ class InteractionHandlerTest extends MockeryTestCase
 
     public function testRegisterGuildCommand()
     {
-        $discord = $this->getDiscord();
+        $discord = DiscordFake::get();
 
         $interactionHandler = new InteractionHandler($discord);
 
@@ -118,7 +94,7 @@ class InteractionHandlerTest extends MockeryTestCase
 
     public function testItOnlySetsASingleListener()
     {
-        $discord = $this->getDiscord();
+        $discord = DiscordFake::get();
 
         $interactionHandler = new InteractionHandler($discord);
 
@@ -143,7 +119,7 @@ class InteractionHandlerTest extends MockeryTestCase
 
     public function testRegisterCommandIsGlobalWithoutDevGuild()
     {
-        $discord = $this->getDiscord();
+        $discord = DiscordFake::get();
 
         $interactionHandler = new InteractionHandler($discord);
 
@@ -167,7 +143,7 @@ class InteractionHandlerTest extends MockeryTestCase
 
     public function testRegisterCommandIsGuildWithDevGuild()
     {
-        $discord = $this->getDiscord();
+        $discord = DiscordFake::get();
 
         $interactionHandler = new InteractionHandler($discord, '::guild id::');
 
@@ -191,7 +167,7 @@ class InteractionHandlerTest extends MockeryTestCase
 
     public function testItHandlesAnInteraction()
     {
-        $discord = $this->getDiscord();
+        $discord = DiscordFake::get();
 
         $interactionHandler = new InteractionHandler($discord);
 
@@ -202,12 +178,11 @@ class InteractionHandlerTest extends MockeryTestCase
         $discord->rest->globalCommand
             ->shouldReceive('createApplicationCommand')
             ->with('::bot user id::', $commandBuilder)
-            ->andReturn(new Promise(function ($resolver) {
-                $applicationCommand = new ApplicationCommand();
-                $applicationCommand->id = '::application command id::';
-
-                $resolver($applicationCommand);
-            }))
+            ->andReturn(PromiseFake::get(
+                DataMapperFake::get()->map([
+                    'id' => '::application command id::',
+                ], ApplicationCommand::class)
+            ))
             ->once();
 
         $hasRun = false;
@@ -223,10 +198,13 @@ class InteractionHandlerTest extends MockeryTestCase
 
         $this->emitReady($discord->gateway->events);
 
-        $interactionCreate = new InteractionCreate();
-        $interactionCreate->type = InteractionTypes::APPLICATION_COMMAND;
-        $interactionCreate->data = new InteractionData();
-        $interactionCreate->data->id = '::application command id::';
+        /** @var InteractionCreate */
+        $interactionCreate = DataMapperFake::get()->map([
+            'type' => InteractionTypes::APPLICATION_COMMAND->value,
+            'data' => [
+                'id' => '::application command id::',
+            ],
+        ], InteractionCreate::class);
 
         $discord->gateway->events->emit(Events::INTERACTION_CREATE, [$interactionCreate]);
 
@@ -235,7 +213,7 @@ class InteractionHandlerTest extends MockeryTestCase
 
     public function testItIgnoresCommandIfNoHanlderIsRegistered()
     {
-        $discord = $this->getDiscord();
+        $discord = DiscordFake::get();
 
         $interactionHandler = new InteractionHandler($discord);
 
@@ -246,12 +224,11 @@ class InteractionHandlerTest extends MockeryTestCase
         $discord->rest->globalCommand
             ->shouldReceive('createApplicationCommand')
             ->with('::bot user id::', $commandBuilder)
-            ->andReturn(new Promise(function ($resolver) {
-                $applicationCommand = new ApplicationCommand();
-                $applicationCommand->id = '::application command id::';
-
-                $resolver($applicationCommand);
-            }))
+            ->andReturn(PromiseFake::get(
+                DataMapperFake::get()->map([
+                    'id' => '::application command id::',
+                ], ApplicationCommand::class)
+            ))
             ->once();
 
         $hasRun = false;
@@ -265,10 +242,13 @@ class InteractionHandlerTest extends MockeryTestCase
 
         $this->emitReady($discord->gateway->events);
 
-        $interactionCreate = new InteractionCreate();
-        $interactionCreate->type = InteractionTypes::APPLICATION_COMMAND;
-        $interactionCreate->data = new InteractionData();
-        $interactionCreate->data->id = '::other application command id::';
+        /** @var InteractionCreate */
+        $interactionCreate = DataMapperFake::get()->map([
+            'type' => InteractionTypes::APPLICATION_COMMAND->value,
+            'data' => [
+                'id' => '::other application command id::',
+            ],
+        ], InteractionCreate::class);
 
         $discord->gateway->events->emit(Events::INTERACTION_CREATE, [$interactionCreate]);
 
@@ -277,7 +257,7 @@ class InteractionHandlerTest extends MockeryTestCase
 
     public function testItCanRegisterButtonInteractionHandlers()
     {
-        $discord = $this->getDiscord();
+        $discord = DiscordFake::get();
         $interactionHandler = new InteractionHandler($discord);
 
         $button = new DangerButton('::custom id::');
@@ -292,8 +272,7 @@ class InteractionHandlerTest extends MockeryTestCase
 
         $this->assertCount(1, $discord->gateway->events->listeners(Events::INTERACTION_CREATE));
 
-        $interactionCreate = DataMapperFake::get()->map(
-            [
+        $interactionCreate = DataMapperFake::get()->map([
                 'id' => '::interaction id::',
                 'token' => '::token::',
                 'type' => InteractionTypes::MESSAGE_COMPONENT->value,
@@ -302,9 +281,7 @@ class InteractionHandlerTest extends MockeryTestCase
                     'component_type' => 2, // @todo enum
                     'custom_id' => '::custom id::',
                 ],
-            ],
-            InteractionCreate::class
-        );
+            ], InteractionCreate::class);
 
         $discord->gateway->events->emit(Events::INTERACTION_CREATE, [$interactionCreate]);
 
@@ -313,7 +290,7 @@ class InteractionHandlerTest extends MockeryTestCase
 
     public function testItOnlyRegistersASingleListener()
     {
-        $discord = $this->getDiscord();
+        $discord = DiscordFake::get();
         $interactionHandler = new InteractionHandler($discord);
 
         $button = new DangerButton('::custom id::');
@@ -327,7 +304,7 @@ class InteractionHandlerTest extends MockeryTestCase
 
     public function testItRemovesButtonListenerIfHandlerReturnsTrue()
     {
-        $discord = $this->getDiscord();
+        $discord = DiscordFake::get();
         $interactionHandler = new InteractionHandler($discord);
 
         $button = new DangerButton('::custom id::');
@@ -344,8 +321,7 @@ class InteractionHandlerTest extends MockeryTestCase
 
         $this->assertCount(1, $discord->gateway->events->listeners(Events::INTERACTION_CREATE));
 
-        $interactionCreate = DataMapperFake::get()->map(
-            [
+        $interactionCreate = DataMapperFake::get()->map([
                 'id' => '::interaction id::',
                 'token' => '::token::',
                 'type' => InteractionTypes::MESSAGE_COMPONENT->value,
@@ -354,9 +330,7 @@ class InteractionHandlerTest extends MockeryTestCase
                     'component_type' => 2, // @todo enum
                     'custom_id' => '::custom id::',
                 ],
-            ],
-            InteractionCreate::class
-        );
+            ], InteractionCreate::class);
 
         $discord->gateway->events->emit(Events::INTERACTION_CREATE, [$interactionCreate]);
 
