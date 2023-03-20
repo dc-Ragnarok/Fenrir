@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace Tests\Exan\Fenrir\Rest;
 
 use Discord\Http\Http;
-use JsonMapper;
+use Exan\Fenrir\DataMapper;
+use Fakes\Exan\Fenrir\DataMapperFake;
 use Mockery;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use PHPUnit\Framework\TestCase;
-use React\EventLoop\Loop;
 use React\Promise\Promise;
 use seregazhuk\React\PromiseTesting\AssertsPromise;
 
@@ -24,14 +24,13 @@ abstract class HttpHelperTestCase extends TestCase
 
     protected Http $http;
 
-    protected JsonMapper $jsonMapper;
+    protected DataMapper $dataMapper;
 
     protected function setUp(): void
     {
         $this->http = Mockery::mock(Http::class);
 
-        $this->jsonMapper = new JsonMapper();
-        $this->jsonMapper->bStrictNullTypes = false;
+        $this->dataMapper = DataMapperFake::get();
     }
 
     abstract public function httpBindingsProvider(): array;

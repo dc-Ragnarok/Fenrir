@@ -6,10 +6,10 @@ namespace Exan\Fenrir\Rest;
 
 use Discord\Http\Endpoint;
 use Discord\Http\Http;
+use Exan\Fenrir\DataMapper;
 use Exan\Fenrir\Parts\AuditLog as PartsAuditLog;
 use Exan\Fenrir\Rest\Helpers\AuditLog\GetGuildAuditLogsBuilder;
 use Exan\Fenrir\Rest\Helpers\HttpHelper;
-use JsonMapper;
 use React\Promise\ExtendedPromiseInterface;
 
 /**
@@ -19,7 +19,7 @@ class AuditLog
 {
     use HttpHelper;
 
-    public function __construct(private Http $http, private JsonMapper $jsonMapper)
+    public function __construct(private Http $http, private DataMapper $dataMapper)
     {
     }
 

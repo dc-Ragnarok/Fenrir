@@ -9,7 +9,6 @@ use Discord\Http\Drivers\Guzzle;
 use Discord\Http\Http;
 use Exan\Fenrir\Bitwise\Bitwise;
 use Exan\Fenrir\Rest\Rest;
-use JsonMapper;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use React\EventLoop\Loop;
@@ -18,7 +17,7 @@ use React\EventLoop\LoopInterface;
 class Discord
 {
     private LoopInterface $loop;
-    private JsonMapper $mapper;
+    private DataMapper $mapper;
     private Http $http;
 
     public Rest $rest;
@@ -31,8 +30,7 @@ class Discord
     ) {
         $this->loop = Loop::get();
 
-        $this->mapper = new JsonMapper();
-        $this->mapper->bStrictNullTypes = false;
+        $this->mapper = new DataMapper($this->logger);
     }
 
     /**

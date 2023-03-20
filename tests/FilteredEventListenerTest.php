@@ -9,7 +9,7 @@ use Exan\Fenrir\Constants\Events;
 use Exan\Fenrir\EventHandler;
 use Exan\Fenrir\FilteredEventEmitter;
 use Exan\Fenrir\Websocket\Objects\Payload;
-use JsonMapper;
+use Fakes\Exan\Fenrir\DataMapperFake;
 use Mockery;
 use Mockery\Adapter\Phpunit\MockeryTestCase;
 
@@ -134,7 +134,7 @@ class FilteredEventListenerTest extends MockeryTestCase
     public function testItAcceptsEventHandler()
     {
         $eventHandler = new EventHandler(
-            new JsonMapper(),
+            DataMapperFake::get(),
             true
         );
 

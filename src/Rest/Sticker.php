@@ -9,7 +9,7 @@ use Discord\Http\Http;
 use Exan\Fenrir\Parts\Sticker as PartsSticker;
 use Exan\Fenrir\Parts\StickerPack;
 use Exan\Fenrir\Rest\Helpers\HttpHelper;
-use JsonMapper;
+use Exan\Fenrir\DataMapper;
 use React\Promise\ExtendedPromiseInterface;
 
 /**
@@ -19,7 +19,7 @@ class Sticker
 {
     use HttpHelper;
 
-    public function __construct(private Http $http, private JsonMapper $jsonMapper)
+    public function __construct(private Http $http, private DataMapper $dataMapper)
     {
     }
 

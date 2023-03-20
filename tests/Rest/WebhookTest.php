@@ -17,7 +17,7 @@ class WebhookTest extends HttpHelperTestCase
     {
         parent::setUp();
 
-        $this->httpItem = new Webhook($this->http, $this->jsonMapper);
+        $this->httpItem = new Webhook($this->http, $this->dataMapper);
     }
 
     public function httpBindingsProvider(): array

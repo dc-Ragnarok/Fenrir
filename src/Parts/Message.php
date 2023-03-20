@@ -7,7 +7,6 @@ namespace Exan\Fenrir\Parts;
 use Carbon\Carbon;
 use Exan\Fenrir\Enums\Parts\MessageTypes;
 use Exan\Fenrir\Bitwise\Bitwise;
-use Exan\Fenrir\Enums\Parts\MessageComponentTypes;
 use Exan\Fenrir\Attributes\Partial;
 
 class Message

@@ -15,7 +15,7 @@ class AuditLogTest extends HttpHelperTestCase
     {
         parent::setUp();
 
-        $this->httpItem = new AuditLog($this->http, $this->jsonMapper);
+        $this->httpItem = new AuditLog($this->http, $this->dataMapper);
     }
 
     public function httpBindingsProvider(): array

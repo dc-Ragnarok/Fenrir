@@ -4,25 +4,25 @@ declare(strict_types=1);
 
 namespace Exan\Fenrir\Rest\Helpers;
 
-use JsonMapper;
+use Exan\Fenrir\DataMapper;
 use React\Promise\ExtendedPromiseInterface;
 use React\Promise\PromiseInterface;
 
 trait HttpHelper
 {
-    private JsonMapper $jsonMapper;
+    private DataMapper $dataMapper;
 
     protected function mapPromise(PromiseInterface $promise, string $class): ExtendedPromiseInterface
     {
         return $promise->then(function ($data) use ($class) {
-            return $this->jsonMapper->map($data, new $class());
+            return $this->dataMapper->map($data, $class);
         });
     }
 
     protected function mapArrayPromise(PromiseInterface $promise, string $class): ExtendedPromiseInterface
     {
         return $promise->then(function ($data) use ($class) {
-            return $this->jsonMapper->mapArray($data, [], $class);
+            return $this->dataMapper->mapArray($data, $class);
         });
     }
 
