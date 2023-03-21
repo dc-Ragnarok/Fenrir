@@ -28,7 +28,7 @@ class ChannelTest extends HttpHelperTestCase
     {
         parent::setUp();
 
-        $this->httpItem = new Channel($this->http, $this->jsonMapper);
+        $this->httpItem = new Channel($this->http, $this->dataMapper);
     }
 
     public function httpBindingsProvider(): array

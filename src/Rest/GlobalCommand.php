@@ -9,7 +9,7 @@ use Discord\Http\Http;
 use Exan\Fenrir\Parts\ApplicationCommand;
 use Exan\Fenrir\Rest\Helpers\Command\CommandBuilder;
 use Exan\Fenrir\Rest\Helpers\HttpHelper;
-use JsonMapper;
+use Exan\Fenrir\DataMapper;
 use Psr\Http\Message\ResponseInterface;
 use React\Promise\ExtendedPromiseInterface;
 use React\Promise\Promise;
@@ -21,7 +21,7 @@ class GlobalCommand
 {
     use HttpHelper;
 
-    public function __construct(private Http $http, private JsonMapper $jsonMapper)
+    public function __construct(private Http $http, private DataMapper $dataMapper)
     {
     }
 

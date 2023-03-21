@@ -7,11 +7,10 @@ namespace Exan\Fenrir;
 use Evenement\EventEmitter;
 use Exan\Fenrir\Constants\Events;
 use Exan\Fenrir\Websocket\Objects\Payload;
-use JsonMapper;
 
 class EventHandler extends EventEmitter
 {
-    public function __construct(private JsonMapper $mapper, private bool $raw = false)
+    public function __construct(private DataMapper $mapper, private bool $raw = false)
     {
     }
 
@@ -36,7 +35,7 @@ class EventHandler extends EventEmitter
             [
                 $this->mapper->map(
                     $payload->d,
-                    new $eventClass()
+                    $eventClass
                 )
             ]
         );

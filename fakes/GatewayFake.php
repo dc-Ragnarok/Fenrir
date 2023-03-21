@@ -4,12 +4,14 @@ declare(strict_types=1);
 
 namespace Fakes\Exan\Fenrir;
 
+use Exan\Fenrir\DataMapper;
+use Fakes\Exan\Fenrir\DataMapperFake;
 use Exan\Fenrir\EventHandler;
 use Exan\Fenrir\Gateway;
 use Exan\Fenrir\Websocket;
-use JsonMapper;
 use Mockery;
 use Mockery\Mock;
+use Psr\Log\NullLogger;
 
 class GatewayFake
 {
@@ -25,7 +27,7 @@ class GatewayFake
     {
         $gateway = Mockery::mock(Gateway::class);
 
-        $gateway->events = new EventHandler(new JsonMapper(), $raw);
+        $gateway->events = new EventHandler(DataMapperFake::get(), $raw);
         $gateway->websocket = Mockery::mock(Websocket::class);
 
         return $gateway;

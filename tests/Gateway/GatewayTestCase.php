@@ -8,6 +8,7 @@ use Exan\Fenrir\Bitwise\Bitwise;
 use Exan\Fenrir\Constants\WebsocketEvents;
 use Exan\Fenrir\EventHandler;
 use Exan\Fenrir\Gateway;
+use Fakes\Exan\Fenrir\DataMapperFake;
 use Mockery;
 use Mockery\Adapter\Phpunit\MockeryTestCase;
 use Mockery\Mock;
@@ -57,6 +58,7 @@ class GatewayTestCase extends MockeryTestCase
             $this->loop,
             '::token::',
             new Bitwise(123),
+            DataMapperFake::get()
         );
 
         $this->gateway->events = Mockery::mock(EventHandler::class);

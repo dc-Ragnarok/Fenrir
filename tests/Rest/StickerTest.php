@@ -15,7 +15,7 @@ class StickerTest extends HttpHelperTestCase
     {
         parent::setUp();
 
-        $this->httpItem = new Sticker($this->http, $this->jsonMapper);
+        $this->httpItem = new Sticker($this->http, $this->dataMapper);
     }
 
     public function httpBindingsProvider(): array

@@ -11,7 +11,6 @@ use Exan\Fenrir\Enums\Gateway\StatusType;
 use Exan\Fenrir\Websocket\Helpers\ActivityBuilder;
 use Exan\Fenrir\Websocket\Objects\D\Hello;
 use Exan\Fenrir\Websocket\Objects\Payload;
-use JsonMapper;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use Ratchet\RFC6455\Messaging\MessageInterface;
@@ -46,7 +45,7 @@ class Gateway
         private LoopInterface $loop,
         private string $token,
         private Bitwise $intents,
-        private JsonMapper $mapper = new JsonMapper(),
+        private DataMapper $mapper,
         private LoggerInterface $logger = new NullLogger(),
         int $timeout = 10,
         bool $rawEvents = false
@@ -56,7 +55,8 @@ class Gateway
         $this->websocket = new Websocket($timeout, $this->logger);
 
         $this->websocket->on(WebsocketEvents::MESSAGE, function (MessageInterface $message) {
-            $payload = $this->mapper->map(json_decode((string) $message), new Payload());
+            /** @var Payload */
+            $payload = $this->mapper->map(json_decode((string) $message), Payload::class);
 
             $this->handlePayload($payload);
         });
@@ -177,7 +177,9 @@ class Gateway
                     $this->resume();
                 }
 
-                $this->handleHello($this->mapper->map($payload->d, new Hello()));
+                /** @var Hello */
+                $hello = $this->mapper->map($payload->d, Hello::class);
+                $this->handleHello($hello);
                 break;
 
             /**

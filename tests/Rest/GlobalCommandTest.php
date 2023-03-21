@@ -15,7 +15,7 @@ class GlobalCommandTest extends HttpHelperTestCase
     {
         parent::setUp();
 
-        $this->httpItem = new GlobalCommand($this->http, $this->jsonMapper);
+        $this->httpItem = new GlobalCommand($this->http, $this->dataMapper);
     }
 
     public function httpBindingsProvider(): array

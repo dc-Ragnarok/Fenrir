@@ -60,9 +60,7 @@ Tests should pass nightly 8.3 builds, but this is not a supported usecase.
 You should not be using this library on an Apache2/Nginx/etc webserver.
 While there is nothing stopping you from using it on such environments, you should know what you're doing & limit yourself to only use Fenrir's REST capabilities.
 
-If you're using a 32-bit system, you should use the `ext-gmp` extension.
-Supporting 32-bit systems is a low priority.
-If possible, using 64-bit is recommended.
+32-bit is not supported, tho no hard limit is in place.
 
 ## Contributing
 
