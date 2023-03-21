@@ -21,6 +21,7 @@ class Rest
     public GuildCommand $guildCommand;
     public GlobalCommand $globalCommand;
     public Webhook $webhook;
+    public User $user;
 
     /**
      * @todo add
@@ -28,7 +29,6 @@ class Rest
      * - Application Role Connection Metadata
      * - Guild
      * - Stage Instance
-     * - User
      */
     public function __construct(private Http $http, private JsonMapper $jsonMapper)
     {
@@ -44,5 +44,6 @@ class Rest
         $this->guildCommand = new GuildCommand($this->http, $this->jsonMapper);
         $this->globalCommand = new GlobalCommand($this->http, $this->jsonMapper);
         $this->webhook = new Webhook($this->http, $this->jsonMapper);
+        $this->user = new User($this->http, $this->jsonMapper);
     }
 }
