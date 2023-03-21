@@ -10,7 +10,9 @@ use Exan\Fenrir\Parts\ApplicationCommand;
 use Exan\Fenrir\Rest\Helpers\Command\CommandBuilder;
 use Exan\Fenrir\Rest\Helpers\HttpHelper;
 use JsonMapper;
+use Psr\Http\Message\ResponseInterface;
 use React\Promise\ExtendedPromiseInterface;
+use React\Promise\Promise;
 
 /**
  * @see https://discord.com/developers/docs/interactions/application-commands
@@ -37,6 +39,45 @@ class GlobalCommand
                     $applicationId
                 ),
                 $commandBuilder->get(),
+            ),
+            ApplicationCommand::class
+        );
+    }
+    
+    /**
+     * @see https://discord.com/developers/docs/interactions/application-commands#making-a-global-command
+     */
+    public function deleteApplicationCommand(string $applicationId, string $applicationCommandId): ExtendedPromiseInterface
+    {
+        return new Promise(function (callable $resolve, callable $reject) use ($applicationCommandId, $applicationId) {
+            $this->http->delete(
+                Endpoint::bind(
+                    Endpoint::GLOBAL_APPLICATION_COMMAND,
+                    $applicationId,
+                    $applicationCommandId
+                )
+            )->then(function (ResponseInterface $response) use ($resolve, $reject) {
+                if ($response->getStatusCode() === 204) {
+                    $resolve();
+                    return;
+                }
+
+                $reject();
+            }, fn($e) => $reject($e));
+        });
+    }
+
+    /**
+     * @see https://discord.com/developers/docs/interactions/application-commands#get-global-application-commands
+     */
+    public function getApplicationCommands(string $applicationId): ExtendedPromiseInterface
+    {
+        return $this->mapArrayPromise(
+            $this->http->get(
+                Endpoint::bind(
+                    Endpoint::GLOBAL_APPLICATION_COMMANDS,
+                    $applicationId
+                )
             ),
             ApplicationCommand::class
         );
