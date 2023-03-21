@@ -11,7 +11,6 @@ use Exan\Fenrir\Enums\Parts\InteractionTypes;
 use Exan\Fenrir\Interaction\ButtonInteraction;
 use Exan\Fenrir\Interaction\CommandInteraction;
 use Exan\Fenrir\Parts\ApplicationCommand;
-use Exan\Fenrir\Parts\User;
 use Exan\Fenrir\Rest\Helpers\Command\CommandBuilder;
 use Exan\Fenrir\Rest\Helpers\Command\QueuedCommand;
 use Exan\Fenrir\Websocket\Events\InteractionCreate;
