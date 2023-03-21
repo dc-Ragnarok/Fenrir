@@ -10,7 +10,9 @@ use Exan\Fenrir\Parts\ApplicationCommand;
 use Exan\Fenrir\Rest\Helpers\Command\CommandBuilder;
 use Exan\Fenrir\Rest\Helpers\HttpHelper;
 use JsonMapper;
+use Psr\Http\Message\ResponseInterface;
 use React\Promise\ExtendedPromiseInterface;
+use React\Promise\Promise;
 
 /**
  * @see https://discord.com/developers/docs/interactions/application-commands
@@ -39,6 +41,46 @@ class GuildCommand
                     $guildId
                 ),
                 $commandBuilder->get(),
+            ),
+            ApplicationCommand::class
+        );
+    }
+
+    /**
+     * @see https://discord.com/developers/docs/interactions/application-commands#delete-guild-application-command
+     */
+    public function deleteApplicationCommand(string $applicationId, string $applicationCommandId, string $guildId): ExtendedPromiseInterface
+    {
+        return new Promise(function (callable $resolve, callable $reject) use ($applicationCommandId, $applicationId, $guildId) {
+            $this->http->delete(
+                Endpoint::bind(
+                    Endpoint::GUILD_APPLICATION_COMMAND,
+                    $applicationId,
+                    $guildId,
+                    $applicationCommandId
+                )
+            )->then(function (ResponseInterface $response) use ($resolve, $reject) {
+                if ($response->getStatusCode() === 204) {
+                    $resolve();
+                }
+
+                $reject();
+            }, fn($e) => $reject($e));
+        });
+    }
+
+    /**
+     * @see https://discord.com/developers/docs/interactions/application-commands#get-guild-application-commands
+     */
+    public function getApplicationCommands(string $applicationId, string $guildId): ExtendedPromiseInterface
+    {
+        return $this->mapArrayPromise(
+            $this->http->get(
+                Endpoint::bind(
+                    Endpoint::GUILD_APPLICATION_COMMANDS,
+                    $applicationId,
+                    $guildId
+                )
             ),
             ApplicationCommand::class
         );
