@@ -8,6 +8,7 @@ use Exan\Fenrir\Bitwise\Bitwise;
 use Exan\Fenrir\Constants\Validation\Command;
 use Exan\Fenrir\Enums\Parts\ApplicationCommandTypes;
 use Exan\Fenrir\Exceptions\Rest\Helpers\Command\InvalidCommandNameException;
+use Exan\Fenrir\Parts\ApplicationCommand;
 use Exan\Fenrir\Rest\Helpers\GetNew;
 use Spatie\Regex\Regex;
 
@@ -193,5 +194,58 @@ class CommandBuilder
         }
 
         return $data;
+    }
+
+    public function matchesApplicationCommand(ApplicationCommand $applicationCommand): bool
+    {
+        $applicationCommandBuilder = self::fromApplicationCommand($applicationCommand)->get();
+
+        foreach ($this->get() as $key => $value) {
+            if ($applicationCommandBuilder[$key] !== $value) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    protected static function fromApplicationCommand(ApplicationCommand $applicationCommand): self
+    {
+        $commandBuilder = new self();
+
+        $commandBuilder->setDefaultMemberPermissions(Bitwise::from((int)$applicationCommand->default_member_permissions));
+        $commandBuilder->setDescription($applicationCommand->description);
+        $commandBuilder->setDmPermission($applicationCommand->dm_permission);
+        $commandBuilder->setName($applicationCommand->name);
+        $commandBuilder->setNameLocalizations($applicationCommand->name_localizations ?? []);
+        $commandBuilder->setNsfw($applicationCommand->nsfw);
+        $commandBuilder->setType($applicationCommand->type);
+
+        foreach ($applicationCommand->options ?? [] as $option) {
+            $builder = CommandOptionBuilder::new();
+
+            foreach ($option->choices as $choice) {
+                $builder->addChoice($choice->name, $choice->value, $choice->name_localizations ?? []);
+            }
+
+            $builder
+                ->setAutoComplete($option->autocomplete)
+                ->setChannelTypes(...$option->channel_types ?? [])
+                ->setDescription($option->description)
+                ->setDescriptionLocalizations($option->description_localizations ?? [])
+                ->setMaxLength($option->max_length)
+                ->setMaxValue($option->max_value)
+                ->setMinLength($option->min_length)
+                ->setMinValue($option->min_value)
+                ->setName($option->name)
+                ->setNameLocalizations($option->name_localizations ?? [])
+                ->setRequired($option->required)
+                ->setType($option->type)
+            ;
+
+            $commandBuilder->addOption($builder);
+        }
+
+        return $commandBuilder;
     }
 }
