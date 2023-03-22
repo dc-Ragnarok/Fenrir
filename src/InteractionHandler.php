@@ -47,49 +47,30 @@ class InteractionHandler
             function (Ready $ready) {
                 $this->applicationId = $ready->user->id;
 
-                $compareCommands = function (array $commands, bool $checkGlobalCommands) {
-                    try {
-                    /** @var ApplicationCommand[] $commands */
-                    foreach ($this->commandQueue as $key => $queuedCommand) {
-                        echo $checkGlobalCommands ? "Checking global commands\n" : "Checking Guild {$queuedCommand->guildId} Commands\n";
-
-                        if (!$queuedCommand->isGlobalCommand() && $checkGlobalCommands) {
-                            echo $queuedCommand->commandBuilder->getName().PHP_EOL;
-                            continue;
+                $compareCommands = function (array $commands, bool $globalCommands) {
+                    foreach ($this->commandQueue as $queuedCommand) {
+                        if ($globalCommands && ($queuedCommand->guildId !== null)) {
+                            return;
                         }
 
                         $needsRegistered = true;
 
-                        foreach ($commands as $key => $command) {
-                            if ($command->guild_id ?? null !== $queuedCommand->guildId) {
-                                continue;
-                            }
-
-                            if ($queuedCommand->commandBuilder->getName() === $command->name) {
-                                $needsRegistered = !$queuedCommand->commandBuilder->matchesApplicationCommand($command);
-
-                                unset($commands[$key]);
-                                unset($this->commandQueue[$key]);
+                        foreach ($commands as $command) {
+                            if ($queuedCommand->commandBuilder->matchesApplicationCommand($command) === true) {
+                                $needsRegistered = false;
                                 break;
                             }
                         }
 
                         if (!$needsRegistered) {
-                            echo "{$queuedCommand->commandBuilder->getName()} does not need registered\n";
-
-                            $this->handlersCommand[$command->id] = $queuedCommand->handler;
-                        } else {
-                            echo "{$queuedCommand->commandBuilder->getName()} does need registered\n";
-
-                            if ($queuedCommand->guildId === null) {
-                                $this->registerGlobalCommand($queuedCommand->commandBuilder, $queuedCommand->handler);
-                            } else {
-                                $this->registerGuildCommand($queuedCommand->commandBuilder, $queuedCommand->guildId, $queuedCommand->handler);
-                            }
+                            continue;
                         }
-                    }
-                    } catch (Throwable $e) {
-                        echo $e;
+
+                        if ($queuedCommand->guildId === null) {
+                            $this->registerGlobalCommand($queuedCommand->commandBuilder, $queuedCommand->handler);
+                        } else {
+                            $this->registerGuildCommand($queuedCommand->commandBuilder, $queuedCommand->guildId, $queuedCommand->handler);
+                        }
                     }
                 };
 
