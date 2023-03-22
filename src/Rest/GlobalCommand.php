@@ -56,14 +56,7 @@ class GlobalCommand
                     $applicationId,
                     $applicationCommandId
                 )
-            )->then(function (ResponseInterface $response) use ($resolve, $reject) {
-                if ($response->getStatusCode() === 204) {
-                    $resolve();
-                    return;
-                }
-
-                $reject();
-            }, fn($e) => $reject($e));
+            );
         });
     }
 

@@ -59,13 +59,7 @@ class GuildCommand
                     $guildId,
                     $applicationCommandId
                 )
-            )->then(function (ResponseInterface $response) use ($resolve, $reject) {
-                if ($response->getStatusCode() === 204) {
-                    $resolve();
-                }
-
-                $reject();
-            }, fn($e) => $reject($e));
+            );
         });
     }
 
