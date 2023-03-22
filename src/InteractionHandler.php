@@ -69,7 +69,11 @@ class InteractionHandler
                         if ($queuedCommand->guildId === null) {
                             $this->registerGlobalCommand($queuedCommand->commandBuilder, $queuedCommand->handler);
                         } else {
-                            $this->registerGuildCommand($queuedCommand->commandBuilder, $queuedCommand->guildId, $queuedCommand->handler);
+                            $this->registerGuildCommand(
+                                $queuedCommand->commandBuilder,
+                                $queuedCommand->guildId,
+                                $queuedCommand->handler
+                            );
                         }
                     }
                 };

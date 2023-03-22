@@ -49,18 +49,23 @@ class GuildCommand
     /**
      * @see https://discord.com/developers/docs/interactions/application-commands#delete-guild-application-command
      */
-    public function deleteApplicationCommand(string $applicationId, string $applicationCommandId, string $guildId): ExtendedPromiseInterface
-    {
-        return new Promise(function (callable $resolve, callable $reject) use ($applicationCommandId, $applicationId, $guildId) {
-            $this->http->delete(
-                Endpoint::bind(
-                    Endpoint::GUILD_APPLICATION_COMMAND,
-                    $applicationId,
-                    $guildId,
-                    $applicationCommandId
-                )
-            );
-        });
+    public function deleteApplicationCommand(
+        string $applicationId,
+        string $applicationCommandId,
+        string $guildId
+    ): ExtendedPromiseInterface {
+        return new Promise(
+            function (callable $resolve, callable $reject) use ($applicationCommandId, $applicationId, $guildId) {
+                $this->http->delete(
+                    Endpoint::bind(
+                        Endpoint::GUILD_APPLICATION_COMMAND,
+                        $applicationId,
+                        $guildId,
+                        $applicationCommandId
+                    )
+                );
+            }
+        );
     }
 
     /**

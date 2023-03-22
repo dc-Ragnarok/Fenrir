@@ -43,12 +43,14 @@ class GlobalCommand
             ApplicationCommand::class
         );
     }
-    
+
     /**
      * @see https://discord.com/developers/docs/interactions/application-commands#making-a-global-command
      */
-    public function deleteApplicationCommand(string $applicationId, string $applicationCommandId): ExtendedPromiseInterface
-    {
+    public function deleteApplicationCommand(
+        string $applicationId,
+        string $applicationCommandId
+    ): ExtendedPromiseInterface {
         return new Promise(function (callable $resolve, callable $reject) use ($applicationCommandId, $applicationId) {
             $this->http->delete(
                 Endpoint::bind(

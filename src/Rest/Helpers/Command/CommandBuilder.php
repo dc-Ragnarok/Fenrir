@@ -213,7 +213,9 @@ class CommandBuilder
     {
         $commandBuilder = new self();
 
-        $commandBuilder->setDefaultMemberPermissions(Bitwise::from((int)$applicationCommand->default_member_permissions));
+        $commandBuilder->setDefaultMemberPermissions(
+            Bitwise::from((int)$applicationCommand->default_member_permissions)
+        );
         $commandBuilder->setDescription($applicationCommand->description);
         $commandBuilder->setDmPermission($applicationCommand->dm_permission);
         $commandBuilder->setName($applicationCommand->name);
