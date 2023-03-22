@@ -18,6 +18,6 @@ class QueuedCommand
 
     public function isGlobalCommand(): bool
     {
-        return ($this->guildId === null);
+        return $this->guildId === null;
     }
 }
