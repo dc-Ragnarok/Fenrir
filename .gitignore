@@ -5,3 +5,4 @@ discord.log
 .php-cs-fixer.cache
 composer.lock
 .vscode
+.idea

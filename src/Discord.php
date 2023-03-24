@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Exan\Fenrir;
 
+use Composer\InstalledVersions;
 use Discord\Http\DriverInterface;
 use Discord\Http\Drivers\Guzzle;
 use Discord\Http\Http;
@@ -90,5 +91,23 @@ class Discord
         $this->interaction = new InteractionHandler(...$args);
 
         return $this;
+    }
+
+    public static function getDebugInfo()
+    {
+        try {
+            $version = InstalledVersions::getVersion('exan\\fenrir');
+        } catch (\OutOfBoundsException) {
+            $version = 'Unknown';
+        }
+
+        return [
+            'fenrir_version' => $version,
+            'php_version' => phpversion(),
+            'bits' => 8 * PHP_INT_SIZE,
+            'uname' => php_uname(),
+            'os' => PHP_OS,
+            'os_family' => PHP_OS_FAMILY,
+        ];
     }
 }
