@@ -12,8 +12,11 @@ use Throwable;
 
 abstract class HttpResource
 {
-    public function __construct(protected Http $http, protected DataMapper $dataMapper, protected LoggerInterface $logger)
-    {
+    public function __construct(
+        protected Http $http,
+        protected DataMapper $dataMapper,
+        protected LoggerInterface $logger
+    ) {
     }
 
     protected function mapPromise(ExtendedPromiseInterface $promise, string $class): ExtendedPromiseInterface
