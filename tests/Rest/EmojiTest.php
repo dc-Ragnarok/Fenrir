@@ -11,12 +11,7 @@ use Tests\Exan\Fenrir\Rest\HttpHelperTestCase;
 
 class EmojiTest extends HttpHelperTestCase
 {
-    protected function setUp(): void
-    {
-        parent::setUp();
-
-        $this->httpItem = new Emoji($this->http, $this->dataMapper);
-    }
+    protected string $httpItemClass = Emoji::class;
 
     public function httpBindingsProvider(): array
     {

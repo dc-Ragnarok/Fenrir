@@ -11,12 +11,7 @@ use Tests\Exan\Fenrir\Rest\HttpHelperTestCase;
 
 class GlobalCommandTest extends HttpHelperTestCase
 {
-    protected function setUp(): void
-    {
-        parent::setUp();
-
-        $this->httpItem = new GlobalCommand($this->http, $this->dataMapper);
-    }
+    protected string $httpItemClass = GlobalCommand::class;
 
     public function httpBindingsProvider(): array
     {

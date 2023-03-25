@@ -15,14 +15,8 @@ use React\Promise\ExtendedPromiseInterface;
 /**
  * @see https://discord.com/developers/docs/interactions/application-commands
  */
-class GuildCommand
+class GuildCommand extends HttpResource
 {
-    use HttpHelper;
-
-    public function __construct(private Http $http, private DataMapper $dataMapper)
-    {
-    }
-
     /**
      * @see https://discord.com/developers/docs/interactions/application-commands#create-guild-application-command
      */
@@ -41,6 +35,6 @@ class GuildCommand
                 $commandBuilder->get(),
             ),
             ApplicationCommand::class
-        );
+        )->otherwise($this->logThrowable(...));
     }
 }

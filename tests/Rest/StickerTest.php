@@ -11,12 +11,7 @@ use Tests\Exan\Fenrir\Rest\HttpHelperTestCase;
 
 class StickerTest extends HttpHelperTestCase
 {
-    protected function setUp(): void
-    {
-        parent::setUp();
-
-        $this->httpItem = new Sticker($this->http, $this->dataMapper);
-    }
+    protected string $httpItemClass = Sticker::class;
 
     public function httpBindingsProvider(): array
     {

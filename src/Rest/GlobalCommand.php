@@ -15,14 +15,8 @@ use React\Promise\ExtendedPromiseInterface;
 /**
  * @see https://discord.com/developers/docs/interactions/application-commands
  */
-class GlobalCommand
+class GlobalCommand extends HttpResource
 {
-    use HttpHelper;
-
-    public function __construct(private Http $http, private DataMapper $dataMapper)
-    {
-    }
-
     /**
      * @see https://discord.com/developers/docs/interactions/application-commands#making-a-global-command
      */
@@ -39,6 +33,6 @@ class GlobalCommand
                 $commandBuilder->get(),
             ),
             ApplicationCommand::class
-        );
+        )->otherwise($this->logThrowable(...));
     }
 }

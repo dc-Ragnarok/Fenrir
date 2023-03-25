@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Exan\Fenrir\Rest;
 
 use Discord\Http\Endpoint;
-use Discord\Http\Http;
 use Exan\Fenrir\Parts\Channel as PartsChannel;
 use Exan\Fenrir\Parts\Invite;
 use Exan\Fenrir\Parts\Message;
@@ -20,21 +19,13 @@ use Exan\Fenrir\Rest\Helpers\Channel\MessageBuilder;
 use Exan\Fenrir\Rest\Helpers\Channel\StartThreadFromMessageBuilder;
 use Exan\Fenrir\Rest\Helpers\Channel\StartThreadWithoutMessageBuilder;
 use Exan\Fenrir\Rest\Helpers\Emoji\EmojiBuilder;
-use Exan\Fenrir\Rest\Helpers\HttpHelper;
-use Exan\Fenrir\DataMapper;
 use React\Promise\ExtendedPromiseInterface;
 
 /**
  * @see https://discord.com/developers/docs/resources/channel
  */
-class Channel
+class Channel extends HttpResource
 {
-    use HttpHelper;
-
-    public function __construct(private Http $http, private DataMapper $dataMapper)
-    {
-    }
-
     /**
      * @see https://discord.com/developers/docs/resources/channel#get-channel
      *
@@ -50,7 +41,7 @@ class Channel
                 )
             ),
             PartsChannel::class
-        );
+        )->otherwise($this->logThrowable(...));
     }
 
     /**
@@ -70,7 +61,7 @@ class Channel
                 $this->getAuditLogReasonHeader($reason)
             ),
             PartsChannel::class
-        );
+        )->otherwise($this->logThrowable(...));
     }
 
     /**
@@ -90,7 +81,7 @@ class Channel
                 $this->getAuditLogReasonHeader($reason)
             ),
             PartsChannel::class
-        );
+        )->otherwise($this->logThrowable(...));
     }
 
     /**
@@ -111,7 +102,7 @@ class Channel
                 $getMessagesBuilder->get()
             ),
             Message::class
-        );
+        )->otherwise($this->logThrowable(...));
     }
 
     /**
@@ -130,7 +121,7 @@ class Channel
                 )
             ),
             Message::class
-        );
+        )->otherwise($this->logThrowable(...));
     }
 
     /**
@@ -151,7 +142,7 @@ class Channel
                 $message->get()
             ),
             Message::class
-        );
+        )->otherwise($this->logThrowable(...));
     }
 
     /**
@@ -170,7 +161,7 @@ class Channel
                 )
             ),
             Message::class,
-        );
+        )->otherwise($this->logThrowable(...));
     }
 
     /**
@@ -190,7 +181,7 @@ class Channel
                 $messageId,
                 (string) $emoji
             )
-        );
+        )->otherwise($this->logThrowable(...));
     }
 
     /**
@@ -210,7 +201,7 @@ class Channel
                 $messageId,
                 (string) $emoji
             )
-        );
+        )->otherwise($this->logThrowable(...));
     }
 
     /**
@@ -232,7 +223,7 @@ class Channel
                 (string) $emoji,
                 $userId
             )
-        );
+        )->otherwise($this->logThrowable(...));
     }
 
     /**
@@ -257,7 +248,7 @@ class Channel
                 $getReactionsBuilder->get()
             ),
             User::class
-        );
+        )->otherwise($this->logThrowable(...));
     }
 
     /**
@@ -273,7 +264,7 @@ class Channel
                 $channelId,
                 $messageId
             )
-        );
+        )->otherwise($this->logThrowable(...));
     }
 
     /**
@@ -293,7 +284,7 @@ class Channel
                 $messageId,
                 (string) $emoji
             )
-        );
+        )->otherwise($this->logThrowable(...));
     }
 
     /**
@@ -313,7 +304,7 @@ class Channel
                 $message->get()
             ),
             Message::class
-        );
+        )->otherwise($this->logThrowable(...));
     }
 
     /**
@@ -335,7 +326,7 @@ class Channel
             ),
             $messageIds,
             $this->getAuditLogReasonHeader($reason)
-        );
+        )->otherwise($this->logThrowable(...));
     }
 
     /**
@@ -360,7 +351,7 @@ class Channel
                 )
             ),
             Invite::class
-        );
+        )->otherwise($this->logThrowable(...));
     }
 
     /**
@@ -383,7 +374,7 @@ class Channel
                 $this->getAuditLogReasonHeader($reason)
             ),
             Invite::class
-        );
+        )->otherwise($this->logThrowable(...));
     }
 
     /**
@@ -404,7 +395,7 @@ class Channel
             ),
             null,
             $this->getAuditLogReasonHeader($reason)
-        );
+        )->otherwise($this->logThrowable(...));
     }
 
     /**
@@ -426,7 +417,7 @@ class Channel
                 Endpoint::CHANNEL_TYPING,
                 $channelId
             )
-        );
+        )->otherwise($this->logThrowable(...));
     }
 
     /**
@@ -444,7 +435,7 @@ class Channel
                 )
             ),
             Message::class
-        );
+        )->otherwise($this->logThrowable(...));
     }
 
     /**
@@ -460,7 +451,7 @@ class Channel
                 $channelId,
                 $messageId
             )
-        );
+        )->otherwise($this->logThrowable(...));
     }
 
     /**
@@ -476,7 +467,7 @@ class Channel
                 $channelId,
                 $messageId
             )
-        );
+        )->otherwise($this->logThrowable(...));
     }
 
     /**
@@ -499,7 +490,7 @@ class Channel
                 $startThreadFromMessageBuilder->get()
             ),
             PartsChannel::class
-        );
+        )->otherwise($this->logThrowable(...));
     }
 
     /**
@@ -519,7 +510,7 @@ class Channel
                 )
             ),
             PartsChannel::class
-        );
+        )->otherwise($this->logThrowable(...));
     }
 
     /**
@@ -541,7 +532,7 @@ class Channel
                 Endpoint::THREAD_MEMBER_ME,
                 $channelId
             )
-        );
+        )->otherwise($this->logThrowable(...));
     }
 
     /**
@@ -557,7 +548,7 @@ class Channel
                 $channelId,
                 $userId
             )
-        );
+        )->otherwise($this->logThrowable(...));
     }
 
     /**
@@ -572,7 +563,7 @@ class Channel
                 Endpoint::THREAD_MEMBER_ME,
                 $channelId
             )
-        );
+        )->otherwise($this->logThrowable(...));
     }
 
     /**
@@ -588,7 +579,7 @@ class Channel
                 $channelId,
                 $userId
             )
-        );
+        )->otherwise($this->logThrowable(...));
     }
 
     /**
@@ -607,7 +598,7 @@ class Channel
                 )
             ),
             ThreadMember::class
-        );
+        )->otherwise($this->logThrowable(...));
     }
 
     /**
@@ -636,7 +627,7 @@ class Channel
                 $options
             ),
             ThreadMember::class
-        );
+        )->otherwise($this->logThrowable(...));
     }
 
     /**
@@ -654,7 +645,7 @@ class Channel
                 )
             ),
             PartsChannel::class
-        );
+        )->otherwise($this->logThrowable(...));
     }
 
     /**
@@ -672,7 +663,7 @@ class Channel
                 )
             ),
             PartsChannel::class
-        );
+        )->otherwise($this->logThrowable(...));
     }
 
     /**
@@ -690,6 +681,6 @@ class Channel
                 )
             ),
             PartsChannel::class
-        );
+        )->otherwise($this->logThrowable(...));
     }
 }

@@ -11,14 +11,8 @@ use Exan\Fenrir\DataMapper;
 /**
  * @see https://discord.com/developers/docs/resources/auto-moderation
  */
-class GuildAutoModeration
+class GuildAutoModeration extends HttpResource
 {
-    use HttpHelper;
-
-    public function __construct(private Http $http, private DataMapper $dataMapper)
-    {
-    }
-
     /**
      * @see https://discord.com/developers/docs/resources/auto-moderation#list-auto-moderation-rules-for-guild
      * @todo implement call

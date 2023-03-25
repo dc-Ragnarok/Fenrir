@@ -11,14 +11,8 @@ use Exan\Fenrir\DataMapper;
 /**
  * @see https://discord.com/developers/docs/resources/guild-template
  */
-class GuildTemplate
+class GuildTemplate extends HttpResource
 {
-    use HttpHelper;
-
-    public function __construct(private Http $http, private DataMapper $dataMapper)
-    {
-    }
-
     /**
      * @see https://discord.com/developers/docs/resources/guild-template#get-guild-templates
      * @todo implement call

@@ -13,12 +13,7 @@ use Tests\Exan\Fenrir\Rest\HttpHelperTestCase;
 
 class GuildStickerTest extends HttpHelperTestCase
 {
-    protected function setUp(): void
-    {
-        parent::setUp();
-
-        $this->httpItem = new GuildSticker($this->http, $this->dataMapper);
-    }
+    protected string $httpItemClass = GuildSticker::class;
 
     public function httpBindingsProvider(): array
     {

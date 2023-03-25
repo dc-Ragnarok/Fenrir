@@ -9,12 +9,7 @@ use Exan\Fenrir\Rest\Invite as RestInvite;
 
 class InviteTest extends HttpHelperTestCase
 {
-    protected function setUp(): void
-    {
-        parent::setUp();
-
-        $this->httpItem = new RestInvite($this->http, $this->dataMapper);
-    }
+    protected string $httpItemClass = RestInvite::class;
 
     public function httpBindingsProvider(): array
     {

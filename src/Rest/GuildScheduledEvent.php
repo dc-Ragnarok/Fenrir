@@ -11,14 +11,8 @@ use Exan\Fenrir\DataMapper;
 /**
  * @see https://discord.com/developers/docs/resources/guild-scheduled-event
  */
-class GuildScheduledEvent
+class GuildScheduledEvent extends HttpResource
 {
-    use HttpHelper;
-
-    public function __construct(private Http $http, private DataMapper $dataMapper)
-    {
-    }
-
     /**
      * @see https://discord.com/developers/docs/resources/guild-scheduled-event#list-scheduled-events-for-guild
      * @todo implement call

@@ -13,12 +13,7 @@ use Tests\Exan\Fenrir\Rest\HttpHelperTestCase;
 
 class WebhookTest extends HttpHelperTestCase
 {
-    protected function setUp(): void
-    {
-        parent::setUp();
-
-        $this->httpItem = new Webhook($this->http, $this->dataMapper);
-    }
+    protected string $httpItemClass = Webhook::class;
 
     public function httpBindingsProvider(): array
     {

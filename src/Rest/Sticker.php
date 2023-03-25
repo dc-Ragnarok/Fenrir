@@ -15,14 +15,8 @@ use React\Promise\ExtendedPromiseInterface;
 /**
  * @see https://discord.com/developers/docs/resources/sticker
  */
-class Sticker
+class Sticker extends HttpResource
 {
-    use HttpHelper;
-
-    public function __construct(private Http $http, private DataMapper $dataMapper)
-    {
-    }
-
     /**
      * @see https://discord.com/developers/docs/resources/sticker#get-sticker
      *
@@ -38,7 +32,7 @@ class Sticker
                 )
             ),
             PartsSticker::class
-        );
+        )->otherwise($this->logThrowable(...));
     }
 
     /**
@@ -55,6 +49,6 @@ class Sticker
                 )
             ),
             StickerPack::class
-        );
+        )->otherwise($this->logThrowable(...));
     }
 }

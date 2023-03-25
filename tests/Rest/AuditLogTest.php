@@ -11,12 +11,7 @@ use Tests\Exan\Fenrir\Rest\HttpHelperTestCase;
 
 class AuditLogTest extends HttpHelperTestCase
 {
-    protected function setUp(): void
-    {
-        parent::setUp();
-
-        $this->httpItem = new AuditLog($this->http, $this->dataMapper);
-    }
+    protected string $httpItemClass = AuditLog::class;
 
     public function httpBindingsProvider(): array
     {
