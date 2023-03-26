@@ -22,6 +22,7 @@ class Rest
     public readonly GuildCommand $guildCommand;
     public readonly GlobalCommand $globalCommand;
     public readonly Webhook $webhook;
+    public readonly Guild $guild;
 
     /**
      * @todo add
@@ -47,5 +48,6 @@ class Rest
         $this->guildCommand = new GuildCommand(...$args);
         $this->globalCommand = new GlobalCommand(...$args);
         $this->webhook = new Webhook(...$args);
+        $this->guild = new Guild(...$args);
     }
 }
