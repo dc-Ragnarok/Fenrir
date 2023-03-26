@@ -6,10 +6,12 @@ namespace Tests\Exan\Fenrir\Rest;
 
 use Discord\Http\Http;
 use Exan\Fenrir\DataMapper;
+use Exan\Fenrir\Rest\HttpResource;
 use Fakes\Exan\Fenrir\DataMapperFake;
 use Mockery;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use PHPUnit\Framework\TestCase;
+use Psr\Log\LoggerInterface;
 use React\Promise\Promise;
 use seregazhuk\React\PromiseTesting\AssertsPromise;
 
@@ -20,17 +22,25 @@ abstract class HttpHelperTestCase extends TestCase
     use AssertsPromise;
     use MockeryPHPUnitIntegration;
 
-    protected $httpItem;
+    protected HttpResource $httpItem;
 
     protected Http $http;
 
     protected DataMapper $dataMapper;
+
+    protected LoggerInterface $mockLog;
+
+    protected string $httpItemClass;
 
     protected function setUp(): void
     {
         $this->http = Mockery::mock(Http::class);
 
         $this->dataMapper = DataMapperFake::get();
+
+        $this->mockLog = Mockery::mock(LoggerInterface::class);
+
+        $this->httpItem = new $this->httpItemClass($this->http, $this->dataMapper, $this->mockLog);
     }
 
     abstract public function httpBindingsProvider(): array;
@@ -61,5 +71,23 @@ abstract class HttpHelperTestCase extends TestCase
         } else {
             $this->assertInstanceOf($validationOptions['returnType'], $response);
         }
+    }
+
+    /**
+     * @dataProvider httpBindingsProvider
+     */
+    public function testItLogsErrors(string $method, array $args, array $mockOptions, array $validationOptions)
+    {
+        $this->mockLog->shouldReceive('error')->once();
+
+        $this->http->shouldReceive($mockOptions['method'])->andReturns(
+            new Promise(static function ($resolve, $reject) {
+                $reject(new \Exception());
+            })
+        )->once();
+
+        $promise = call_user_func_array([$this->httpItem, $method], $args);
+
+        $this->mockLog->shouldHaveReceived('error');
     }
 }

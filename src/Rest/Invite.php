@@ -14,14 +14,8 @@ use React\Promise\ExtendedPromiseInterface;
 /**
  * @see https://discord.com/developers/docs/resources/invite
  */
-class Invite
+class Invite extends HttpResource
 {
-    use HttpHelper;
-
-    public function __construct(private Http $http, private DataMapper $dataMapper)
-    {
-    }
-
     /**
      * @see https://discord.com/developers/docs/resources/invite#get-invite
      *
@@ -37,7 +31,7 @@ class Invite
                 )
             ),
             PartsInvite::class
-        );
+        )->otherwise($this->logThrowable(...));
     }
 
     /**
@@ -52,6 +46,6 @@ class Invite
                 Endpoint::INVITE,
                 $code
             )
-        );
+        )->otherwise($this->logThrowable(...));
     }
 }

@@ -11,12 +11,7 @@ use Tests\Exan\Fenrir\Rest\HttpHelperTestCase;
 
 class GuildCommandTest extends HttpHelperTestCase
 {
-    protected function setUp(): void
-    {
-        parent::setUp();
-
-        $this->httpItem = new GuildCommand($this->http, $this->dataMapper);
-    }
+    protected string $httpItemClass = GuildCommand::class;
 
     public function httpBindingsProvider(): array
     {

@@ -16,14 +16,8 @@ use React\Promise\ExtendedPromiseInterface;
 /**
  * @see https://discord.com/developers/docs/resources/webhook
  */
-class Webhook
+class Webhook extends HttpResource
 {
-    use HttpHelper;
-
-    public function __construct(private Http $http, private DataMapper $dataMapper)
-    {
-    }
-
     /**
      * @see https://discord.com/developers/docs/interactions/receiving-and-responding#create-interaction-response
      */
@@ -39,7 +33,7 @@ class Webhook
                 $interactionToken
             ),
             $interactionCallbackBuilder->get()
-        );
+        )->otherwise($this->logThrowable(...));
     }
 
     /**
@@ -58,7 +52,7 @@ class Webhook
                 )
             ),
             Message::class
-        );
+        )->otherwise($this->logThrowable(...));
     }
 
     /**
@@ -79,7 +73,7 @@ class Webhook
                 $webhookBuilder->get()
             ),
             Message::class
-        );
+        )->otherwise($this->logThrowable(...));
     }
 
     /**
@@ -95,6 +89,6 @@ class Webhook
                 $applicationId,
                 $interactionToken
             )
-        );
+        )->otherwise($this->logThrowable(...));
     }
 }

@@ -16,14 +16,8 @@ use React\Promise\ExtendedPromiseInterface;
 /**
  * @see https://discord.com/developers/docs/resources/sticker
  */
-class GuildSticker
+class GuildSticker extends HttpResource
 {
-    use HttpHelper;
-
-    public function __construct(private Http $http, private DataMapper $dataMapper)
-    {
-    }
-
     /**
      * @see https://discord.com/developers/docs/resources/sticker#list-guild-stickers
      *
@@ -39,7 +33,7 @@ class GuildSticker
                 )
             ),
             Sticker::class
-        );
+        )->otherwise($this->logThrowable(...));
     }
 
     /**
@@ -58,7 +52,7 @@ class GuildSticker
                 )
             ),
             Sticker::class
-        );
+        )->otherwise($this->logThrowable(...));
     }
 
     /**
@@ -77,7 +71,7 @@ class GuildSticker
                 $stickerBuilder->get()
             ),
             Sticker::class
-        );
+        )->otherwise($this->logThrowable(...));
     }
 
     /**
@@ -99,7 +93,7 @@ class GuildSticker
                 $modifyStickerBuilder->get()
             ),
             Sticker::class
-        );
+        )->otherwise($this->logThrowable(...));
     }
 
     /**
@@ -115,6 +109,6 @@ class GuildSticker
                 $guildId,
                 $stickerId
             )
-        );
+        )->otherwise($this->logThrowable(...));
     }
 }

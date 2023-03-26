@@ -40,7 +40,7 @@ class Discord
         Bitwise $intents,
         int $timeout = 10,
         bool $raw = false
-    ) {
+    ): static {
         $this->gateway = new Gateway(
             $this->loop,
             $this->token,
@@ -56,7 +56,7 @@ class Discord
 
     public function withRest(
         ?DriverInterface $driver = null,
-    ) {
+    ): static {
         $driver ??= new Guzzle(
             $this->loop
         );
@@ -68,7 +68,7 @@ class Discord
             $driver
         );
 
-        $this->rest = new Rest($this->http, $this->mapper);
+        $this->rest = new Rest($this->http, $this->mapper, $this->logger);
 
         return $this;
     }
@@ -79,7 +79,7 @@ class Discord
      *  command rather than Global. Useful for testing without having to change
      *  this manually. Explicitly using `registerGlobalCommand` is not affected
      */
-    public function withInteractionHandler(?string $devGuildId = null): self
+    public function withInteractionHandler(?string $devGuildId = null): static
     {
         $args = [$this];
 

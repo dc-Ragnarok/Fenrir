@@ -15,14 +15,8 @@ use React\Promise\ExtendedPromiseInterface;
 /**
  * @see https://discord.com/developers/docs/resources/emoji
  */
-class Emoji
+class Emoji extends HttpResource
 {
-    use HttpHelper;
-
-    public function __construct(private Http $http, private DataMapper $dataMapper)
-    {
-    }
-
     /**
      * @see https://discord.com/developers/docs/resources/emoji#list-guild-emojis
      *
@@ -38,7 +32,7 @@ class Emoji
                 )
             ),
             PartsEmoji::class
-        );
+        )->otherwise($this->logThrowable(...));
     }
 
     /**
@@ -57,7 +51,7 @@ class Emoji
                 )
             ),
             PartsEmoji::class
-        );
+        )->otherwise($this->logThrowable(...));
     }
 
     /**
@@ -80,7 +74,7 @@ class Emoji
                 $this->getAuditLogReasonHeader($reason)
             ),
             PartsEmoji::class
-        );
+        )->otherwise($this->logThrowable(...));
     }
 
     /**
@@ -105,7 +99,7 @@ class Emoji
                 $this->getAuditLogReasonHeader($reason)
             ),
             PartsEmoji::class
-        );
+        )->otherwise($this->logThrowable(...));
     }
 
     /**
@@ -126,6 +120,6 @@ class Emoji
             ),
             null,
             $this->getAuditLogReasonHeader($reason)
-        );
+        )->otherwise($this->logThrowable(...));
     }
 }

@@ -24,12 +24,7 @@ use Tests\Exan\Fenrir\Rest\HttpHelperTestCase;
 
 class ChannelTest extends HttpHelperTestCase
 {
-    protected function setUp(): void
-    {
-        parent::setUp();
-
-        $this->httpItem = new Channel($this->http, $this->dataMapper);
-    }
+    protected string $httpItemClass = Channel::class;
 
     public function httpBindingsProvider(): array
     {

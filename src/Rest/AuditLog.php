@@ -5,24 +5,15 @@ declare(strict_types=1);
 namespace Exan\Fenrir\Rest;
 
 use Discord\Http\Endpoint;
-use Discord\Http\Http;
-use Exan\Fenrir\DataMapper;
 use Exan\Fenrir\Parts\AuditLog as PartsAuditLog;
 use Exan\Fenrir\Rest\Helpers\AuditLog\GetGuildAuditLogsBuilder;
-use Exan\Fenrir\Rest\Helpers\HttpHelper;
 use React\Promise\ExtendedPromiseInterface;
 
 /**
  * @see https://discord.com/developers/docs/resources/audit-log
  */
-class AuditLog
+class AuditLog extends HttpResource
 {
-    use HttpHelper;
-
-    public function __construct(private Http $http, private DataMapper $dataMapper)
-    {
-    }
-
     /**
      * @see https://discord.com/developers/docs/resources/audit-log#get-guild-audit-log
      *
@@ -41,6 +32,6 @@ class AuditLog
                 $getGuildAuditLogsBuilder->get()
             ),
             PartsAuditLog::class
-        );
+        )->otherwise($this->logThrowable(...));
     }
 }
