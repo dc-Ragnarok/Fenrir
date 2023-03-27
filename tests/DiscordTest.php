@@ -48,4 +48,22 @@ class DiscordTest extends TestCase
 
         $this->assertInstanceOf(InteractionHandler::class, $discord->interaction);
     }
+
+    public function testGetDebugInfo()
+    {
+        $debugInfo = Discord::getDebugInfo();
+
+        $requirements = [
+            'fenrir_version',
+            'php_version',
+            'bits',
+            'uname',
+            'os',
+            'os_family',
+        ];
+
+        foreach ($requirements as $requirement) {
+            $this->assertArrayHasKey($requirement, $debugInfo);
+        }
+    }
 }
