@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Exan\Fenrir\Parts;
+namespace Ragnarok\Fenrir\Parts;
 
 class ApplicationCommandPermissionObject
 {
@@ -10,7 +10,7 @@ class ApplicationCommandPermissionObject
     public string $application_id;
     public string $guild_id;
     /**
-     * @var \Exan\Fenrir\Parts\ApplicationCommandPermissionStructure[]
+     * @var \Ragnarok\Fenrir\Parts\ApplicationCommandPermissionStructure[]
      */
     public array $permissions;
 }

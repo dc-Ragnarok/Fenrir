@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Tests\Exan\Fenrir;
+namespace Tests\Ragnarok\Fenrir;
 
-use Exan\Fenrir\Constants\WebsocketEvents;
-use Exan\Fenrir\Exceptions\Websocket\ConnectionNotInitializedException;
-use Exan\Fenrir\Websocket;
+use Ragnarok\Fenrir\Constants\WebsocketEvents;
+use Ragnarok\Fenrir\Exceptions\Websocket\ConnectionNotInitializedException;
+use Ragnarok\Fenrir\Websocket;
 use JsonSerializable;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\NullLogger;

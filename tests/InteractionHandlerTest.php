@@ -2,25 +2,25 @@
 
 declare(strict_types=1);
 
-namespace Tests\Exan\Fenrir;
+namespace Tests\Ragnarok\Fenrir;
 
-use Exan\Fenrir\Component\Button\DangerButton;
-use Exan\Fenrir\Interaction\CommandInteraction;
-use Exan\Fenrir\Constants\Events;
-use Exan\Fenrir\DataMapper;
-use Fakes\Exan\Fenrir\DataMapperFake;
-use Exan\Fenrir\Enums\Parts\InteractionTypes;
-use Exan\Fenrir\EventHandler;
-use Exan\Fenrir\Interaction\ButtonInteraction;
-use Exan\Fenrir\InteractionHandler;
-use Exan\Fenrir\Rest\Helpers\Command\CommandBuilder;
-use Exan\Fenrir\Websocket\Objects\Payload;
+use Ragnarok\Fenrir\Component\Button\DangerButton;
+use Ragnarok\Fenrir\Interaction\CommandInteraction;
+use Ragnarok\Fenrir\Constants\Events;
+use Ragnarok\Fenrir\DataMapper;
+use Fakes\Ragnarok\Fenrir\DataMapperFake;
+use Ragnarok\Fenrir\Enums\Parts\InteractionTypes;
+use Ragnarok\Fenrir\EventHandler;
+use Ragnarok\Fenrir\Interaction\ButtonInteraction;
+use Ragnarok\Fenrir\InteractionHandler;
+use Ragnarok\Fenrir\Rest\Helpers\Command\CommandBuilder;
+use Ragnarok\Fenrir\Websocket\Objects\Payload;
 use Mockery\Adapter\Phpunit\MockeryTestCase;
-use Exan\Fenrir\Parts\ApplicationCommand;
-use Exan\Fenrir\Parts\InteractionData;
-use Exan\Fenrir\Websocket\Events\InteractionCreate;
-use Fakes\Exan\Fenrir\DiscordFake;
-use Fakes\Exan\Fenrir\PromiseFake;
+use Ragnarok\Fenrir\Parts\ApplicationCommand;
+use Ragnarok\Fenrir\Parts\InteractionData;
+use Ragnarok\Fenrir\Websocket\Events\InteractionCreate;
+use Fakes\Ragnarok\Fenrir\DiscordFake;
+use Fakes\Ragnarok\Fenrir\PromiseFake;
 use React\Promise\Promise;
 
 class InteractionHandlerTest extends MockeryTestCase

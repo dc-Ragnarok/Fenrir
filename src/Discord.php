@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Exan\Fenrir;
+namespace Ragnarok\Fenrir;
 
 use Discord\Http\DriverInterface;
 use Discord\Http\Drivers\Guzzle;
 use Discord\Http\Http;
-use Exan\Fenrir\Bitwise\Bitwise;
-use Exan\Fenrir\Rest\Rest;
+use Ragnarok\Fenrir\Bitwise\Bitwise;
+use Ragnarok\Fenrir\Rest\Rest;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use React\EventLoop\Loop;
@@ -34,7 +34,7 @@ class Discord
     }
 
     /**
-     * @param Bitwise<\Exan\Fenrir\Enums\Gateway\Intents> $intents
+     * @param Bitwise<\Ragnarok\Fenrir\Enums\Gateway\Intents> $intents
      */
     public function withGateway(
         Bitwise $intents,

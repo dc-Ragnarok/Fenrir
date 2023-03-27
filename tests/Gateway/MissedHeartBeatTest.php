@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Tests\Exan\Fenrir\Gateway;
+namespace Tests\Ragnarok\Fenrir\Gateway;
 
-use Exan\Fenrir\Constants\Events;
+use Ragnarok\Fenrir\Constants\Events;
 use Mockery;
 use React\EventLoop\TimerInterface;
-use Tests\Exan\Fenrir\Gateway\GatewayTestCase;
+use Tests\Ragnarok\Fenrir\Gateway\GatewayTestCase;
 
 /**
  * @runTestsInSeparateProcesses

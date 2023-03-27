@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Fakes\Exan\Fenrir;
+namespace Fakes\Ragnarok\Fenrir;
 
 use React\Promise\ExtendedPromiseInterface;
 use React\Promise\Promise;

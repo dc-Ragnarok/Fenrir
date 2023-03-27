@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Fakes\Exan\Fenrir;
+namespace Fakes\Ragnarok\Fenrir;
 
-use Exan\Fenrir\Rest\Rest;
+use Ragnarok\Fenrir\Rest\Rest;
 use Mockery;
 use Mockery\Mock;
 use ReflectionClass;

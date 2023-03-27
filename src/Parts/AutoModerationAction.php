@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Exan\Fenrir\Parts;
+namespace Ragnarok\Fenrir\Parts;
 
-use Exan\Fenrir\Enums\Parts\ActionTypes;
+use Ragnarok\Fenrir\Enums\Parts\ActionTypes;
 
 /**
  * @see https://discord.com/developers/docs/resources/auto-moderation#auto-moderation-action-object

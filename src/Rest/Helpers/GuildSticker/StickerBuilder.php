@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Exan\Fenrir\Rest\Helpers\GuildSticker;
+namespace Ragnarok\Fenrir\Rest\Helpers\GuildSticker;
 
 use Discord\Http\Multipart\MultipartBody;
 use Discord\Http\Multipart\MultipartField;
-use Exan\Fenrir\Rest\Helpers\GetNew;
+use Ragnarok\Fenrir\Rest\Helpers\GetNew;
 
 class StickerBuilder
 {

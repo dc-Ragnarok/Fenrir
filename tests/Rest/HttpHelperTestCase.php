@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Tests\Exan\Fenrir\Rest;
+namespace Tests\Ragnarok\Fenrir\Rest;
 
 use Discord\Http\Http;
-use Exan\Fenrir\DataMapper;
-use Exan\Fenrir\Rest\HttpResource;
-use Fakes\Exan\Fenrir\DataMapperFake;
+use Ragnarok\Fenrir\DataMapper;
+use Ragnarok\Fenrir\Rest\HttpResource;
+use Fakes\Ragnarok\Fenrir\DataMapperFake;
 use Mockery;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use PHPUnit\Framework\TestCase;

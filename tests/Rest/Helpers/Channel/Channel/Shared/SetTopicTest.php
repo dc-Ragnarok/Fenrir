@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Tests\Exan\Fenrir\Rest\Helpers\Channel\Channel\Shared;
+namespace Tests\Ragnarok\Fenrir\Rest\Helpers\Channel\Channel\Shared;
 
-use Exan\Fenrir\Rest\Helpers\Channel\Channel\Shared\SetTopic;
+use Ragnarok\Fenrir\Rest\Helpers\Channel\Channel\Shared\SetTopic;
 use PHPUnit\Framework\TestCase;
 
 class SetTopicTest extends TestCase

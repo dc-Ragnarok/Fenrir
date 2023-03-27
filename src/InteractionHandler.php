@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-namespace Exan\Fenrir;
+namespace Ragnarok\Fenrir;
 
-use Exan\Fenrir\Component\Button\InteractionButton;
-use Exan\Fenrir\Constants\Events;
-use Exan\Fenrir\Enums\Parts\InteractionTypes;
-use Exan\Fenrir\Interaction\ButtonInteraction;
-use Exan\Fenrir\Interaction\CommandInteraction;
-use Exan\Fenrir\Parts\ApplicationCommand;
-use Exan\Fenrir\Rest\Helpers\Command\CommandBuilder;
-use Exan\Fenrir\Websocket\Events\InteractionCreate;
-use Exan\Fenrir\Websocket\Events\Ready;
+use Ragnarok\Fenrir\Component\Button\InteractionButton;
+use Ragnarok\Fenrir\Constants\Events;
+use Ragnarok\Fenrir\Enums\Parts\InteractionTypes;
+use Ragnarok\Fenrir\Interaction\ButtonInteraction;
+use Ragnarok\Fenrir\Interaction\CommandInteraction;
+use Ragnarok\Fenrir\Parts\ApplicationCommand;
+use Ragnarok\Fenrir\Rest\Helpers\Command\CommandBuilder;
+use Ragnarok\Fenrir\Websocket\Events\InteractionCreate;
+use Ragnarok\Fenrir\Websocket\Events\Ready;
 
 class InteractionHandler
 {

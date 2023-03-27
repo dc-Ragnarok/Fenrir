@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Exan\Fenrir\Rest\Helpers\Command;
+namespace Ragnarok\Fenrir\Rest\Helpers\Command;
 
-use Exan\Fenrir\Enums\Parts\ApplicationCommandOptionTypes;
-use Exan\Fenrir\Enums\Parts\ChannelTypes;
-use Exan\Fenrir\Rest\Helpers\GetNew;
+use Ragnarok\Fenrir\Enums\Parts\ApplicationCommandOptionTypes;
+use Ragnarok\Fenrir\Enums\Parts\ChannelTypes;
+use Ragnarok\Fenrir\Rest\Helpers\GetNew;
 
 class CommandOptionBuilder
 {

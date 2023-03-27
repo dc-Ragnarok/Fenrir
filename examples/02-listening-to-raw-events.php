@@ -1,9 +1,9 @@
 <?php
 
-use Exan\Fenrir\Bitwise\Bitwise;
-use Exan\Fenrir\Constants\Events;
-use Exan\Fenrir\Discord;
-use Exan\Fenrir\Websocket\Objects\Payload;
+use Ragnarok\Fenrir\Bitwise\Bitwise;
+use Ragnarok\Fenrir\Constants\Events;
+use Ragnarok\Fenrir\Discord;
+use Ragnarok\Fenrir\Websocket\Objects\Payload;
 
 require './vendor/autoload.php';
 

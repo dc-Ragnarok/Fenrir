@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Fakes\Exan\Fenrir;
+namespace Fakes\Ragnarok\Fenrir;
 
-use Exan\Fenrir\InteractionHandler;
-use Exan\Fenrir\Rest\Helpers\Command\CommandBuilder;
+use Ragnarok\Fenrir\InteractionHandler;
+use Ragnarok\Fenrir\Rest\Helpers\Command\CommandBuilder;
 use PHPUnit\Framework\Assert;
 
 class InteractionHandlerFake extends InteractionHandler

@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Tests\Exan\Fenrir;
+namespace Tests\Ragnarok\Fenrir;
 
-use Exan\Fenrir\DataMapper;
-use Exan\Fenrir\Enums\Parts\ApplicationCommandOptionTypes;
-use Exan\Fenrir\Parts\ApplicationCommandInteractionDataOptionStructure;
-use Exan\Fenrir\Parts\InteractionData;
-use Exan\Fenrir\Parts\Message;
-use Exan\Fenrir\Websocket\Events\InteractionCreate;
+use Ragnarok\Fenrir\DataMapper;
+use Ragnarok\Fenrir\Enums\Parts\ApplicationCommandOptionTypes;
+use Ragnarok\Fenrir\Parts\ApplicationCommandInteractionDataOptionStructure;
+use Ragnarok\Fenrir\Parts\InteractionData;
+use Ragnarok\Fenrir\Parts\Message;
+use Ragnarok\Fenrir\Websocket\Events\InteractionCreate;
 use Monolog\Test\TestCase;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;

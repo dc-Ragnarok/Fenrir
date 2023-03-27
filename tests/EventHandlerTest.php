@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Tests\Exan\Fenrir;
+namespace Tests\Ragnarok\Fenrir;
 
-use Exan\Fenrir\Constants\Events;
-use Exan\Fenrir\DataMapper;
-use Fakes\Exan\Fenrir\DataMapperFake;
-use Exan\Fenrir\EventHandler;
-use Exan\Fenrir\Websocket\Objects\Payload;
+use Ragnarok\Fenrir\Constants\Events;
+use Ragnarok\Fenrir\DataMapper;
+use Fakes\Ragnarok\Fenrir\DataMapperFake;
+use Ragnarok\Fenrir\EventHandler;
+use Ragnarok\Fenrir\Websocket\Objects\Payload;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\NullLogger;
 use React\Promise\Promise;

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Exan\Fenrir\Enums;
+namespace Ragnarok\Fenrir\Enums;
 
 enum Permissions: int
 {

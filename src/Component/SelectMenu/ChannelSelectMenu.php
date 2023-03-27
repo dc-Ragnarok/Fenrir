@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Exan\Fenrir\Component\SelectMenu;
+namespace Ragnarok\Fenrir\Component\SelectMenu;
 
-use Exan\Fenrir\Enums\Component\SelectMenuType;
+use Ragnarok\Fenrir\Enums\Component\SelectMenuType;
 
 class ChannelSelectMenu extends SelectMenu
 {

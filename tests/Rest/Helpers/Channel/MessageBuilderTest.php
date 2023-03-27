@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-namespace Tests\Exan\Fenrir\Rest\Helpers\Channel;
+namespace Tests\Ragnarok\Fenrir\Rest\Helpers\Channel;
 
 use Discord\Http\Multipart\MultipartBody;
-use Exan\Fenrir\Component\Button\DangerButton;
-use Exan\Fenrir\Exceptions\Rest\Helpers\MessageBuilder\TooManyStickersException;
-use Exan\Fenrir\Rest\Helpers\Channel\AllowedMentionsBuilder;
-use Exan\Fenrir\Rest\Helpers\Channel\AttachmentBuilder;
-use Exan\Fenrir\Rest\Helpers\Channel\ComponentBuilder;
-use Exan\Fenrir\Rest\Helpers\Channel\ComponentRowBuilder;
-use Exan\Fenrir\Rest\Helpers\Channel\EmbedBuilder;
-use Exan\Fenrir\Rest\Helpers\Channel\MessageBuilder;
+use Ragnarok\Fenrir\Component\Button\DangerButton;
+use Ragnarok\Fenrir\Exceptions\Rest\Helpers\MessageBuilder\TooManyStickersException;
+use Ragnarok\Fenrir\Rest\Helpers\Channel\AllowedMentionsBuilder;
+use Ragnarok\Fenrir\Rest\Helpers\Channel\AttachmentBuilder;
+use Ragnarok\Fenrir\Rest\Helpers\Channel\ComponentBuilder;
+use Ragnarok\Fenrir\Rest\Helpers\Channel\ComponentRowBuilder;
+use Ragnarok\Fenrir\Rest\Helpers\Channel\EmbedBuilder;
+use Ragnarok\Fenrir\Rest\Helpers\Channel\MessageBuilder;
 use PHPUnit\Framework\TestCase;
 
 class MessageBuilderTest extends TestCase

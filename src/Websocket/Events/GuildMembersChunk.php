@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Exan\Fenrir\Websocket\Events;
+namespace Ragnarok\Fenrir\Websocket\Events;
 
 /**
  * @see https://discord.com/developers/docs/topics/gateway-events#guild-members-chunk
@@ -12,7 +12,7 @@ class GuildMembersChunk
     public string $guild_id;
 
     /**
-     * @var \Exan\Fenrir\Parts\GuildMember[]
+     * @var \Ragnarok\Fenrir\Parts\GuildMember[]
      */
     public array $members;
 
@@ -21,7 +21,7 @@ class GuildMembersChunk
     public array $not_found;
 
     /**
-     * @var \Exan\Fenrir\Parts\Presence[]
+     * @var \Ragnarok\Fenrir\Parts\Presence[]
      */
     public array $presences;
 

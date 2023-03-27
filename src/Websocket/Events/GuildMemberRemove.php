@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Exan\Fenrir\Websocket\Events;
+namespace Ragnarok\Fenrir\Websocket\Events;
 
-use Exan\Fenrir\Attributes\Intent;
-use Exan\Fenrir\Parts\User;
+use Ragnarok\Fenrir\Attributes\Intent;
+use Ragnarok\Fenrir\Parts\User;
 
 /**
  * @see https://discord.com/developers/docs/topics/gateway-events#guild-member-remove

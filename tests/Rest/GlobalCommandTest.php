@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Exan\Fenrir;
+namespace Ragnarok\Fenrir;
 
-use Exan\Fenrir\Parts\ApplicationCommand;
-use Exan\Fenrir\Rest\GlobalCommand;
-use Exan\Fenrir\Rest\Helpers\Command\CommandBuilder;
-use Tests\Exan\Fenrir\Rest\HttpHelperTestCase;
+use Ragnarok\Fenrir\Parts\ApplicationCommand;
+use Ragnarok\Fenrir\Rest\GlobalCommand;
+use Ragnarok\Fenrir\Rest\Helpers\Command\CommandBuilder;
+use Tests\Ragnarok\Fenrir\Rest\HttpHelperTestCase;
 
 class GlobalCommandTest extends HttpHelperTestCase
 {

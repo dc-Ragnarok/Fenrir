@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Tests\Exan\Fenrir\Rest\Helpers\Channel;
+namespace Tests\Ragnarok\Fenrir\Rest\Helpers\Channel;
 
 use PHPUnit\Framework\TestCase;
-use Exan\Fenrir\Rest\Helpers\Channel\AttachmentBuilder;
+use Ragnarok\Fenrir\Rest\Helpers\Channel\AttachmentBuilder;
 
 class AttachmentBuilderTest extends TestCase
 {

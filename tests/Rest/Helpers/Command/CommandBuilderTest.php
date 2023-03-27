@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Exan\Fenrir;
+namespace Ragnarok\Fenrir;
 
-use Exan\Fenrir\Bitwise\Bitwise;
-use Exan\Fenrir\Enums\Parts\ApplicationCommandOptionTypes;
-use Exan\Fenrir\Enums\Parts\ApplicationCommandTypes;
-use Exan\Fenrir\Exceptions\Rest\Helpers\Command\InvalidCommandNameException;
-use Exan\Fenrir\Rest\Helpers\Command\CommandBuilder;
-use Exan\Fenrir\Rest\Helpers\Command\CommandOptionBuilder;
+use Ragnarok\Fenrir\Bitwise\Bitwise;
+use Ragnarok\Fenrir\Enums\Parts\ApplicationCommandOptionTypes;
+use Ragnarok\Fenrir\Enums\Parts\ApplicationCommandTypes;
+use Ragnarok\Fenrir\Exceptions\Rest\Helpers\Command\InvalidCommandNameException;
+use Ragnarok\Fenrir\Rest\Helpers\Command\CommandBuilder;
+use Ragnarok\Fenrir\Rest\Helpers\Command\CommandOptionBuilder;
 use PHPUnit\Framework\TestCase;
 
 class CommandBuilderTest extends TestCase

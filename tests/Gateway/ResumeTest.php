@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Tests\Exan\Fenrir\Gateway;
+namespace Tests\Ragnarok\Fenrir\Gateway;
 
-use Exan\Fenrir\Constants\Events;
-use Tests\Exan\Fenrir\Gateway\GatewayTestCase;
+use Ragnarok\Fenrir\Constants\Events;
+use Tests\Ragnarok\Fenrir\Gateway\GatewayTestCase;
 
 /**
  * @runTestsInSeparateProcesses
@@ -62,8 +62,8 @@ final class ResumeTest extends GatewayTestCase
                 'intents' => 123,
                 'properties' => [
                     'os' => PHP_OS,
-                    'browser' => 'Exan\Fenrir',
-                    'device' => 'Exan\Fenrir',
+                    'browser' => 'Ragnarok\Fenrir',
+                    'device' => 'Ragnarok\Fenrir',
                 ]
             ]
         ]);
@@ -102,8 +102,8 @@ final class ResumeTest extends GatewayTestCase
                 'intents' => 123,
                 'properties' => [
                     'os' => PHP_OS,
-                    'browser' => 'Exan\Fenrir',
-                    'device' => 'Exan\Fenrir',
+                    'browser' => 'Ragnarok\Fenrir',
+                    'device' => 'Ragnarok\Fenrir',
                 ]
             ]
         ]);
@@ -141,8 +141,8 @@ final class ResumeTest extends GatewayTestCase
                 'intents' => 123,
                 'properties' => [
                     'os' => PHP_OS,
-                    'browser' => 'Exan\Fenrir',
-                    'device' => 'Exan\Fenrir',
+                    'browser' => 'Ragnarok\Fenrir',
+                    'device' => 'Ragnarok\Fenrir',
                 ]
             ]
         ]);

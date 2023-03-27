@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Exan\Fenrir\Websocket\Events;
+namespace Ragnarok\Fenrir\Websocket\Events;
 
 use Carbon\Carbon;
-use Exan\Fenrir\Parts\GuildMember;
+use Ragnarok\Fenrir\Parts\GuildMember;
 
 /**
  * Note: this event is sent every 5 seconds while a user is typing. It is not

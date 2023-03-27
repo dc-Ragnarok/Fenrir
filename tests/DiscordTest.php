@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Tests\Exan\Fenrir;
+namespace Tests\Ragnarok\Fenrir;
 
-use Exan\Fenrir\Bitwise\Bitwise;
-use Exan\Fenrir\Discord;
-use Exan\Fenrir\Gateway;
-use Exan\Fenrir\InteractionHandler;
-use Exan\Fenrir\Rest\Rest;
+use Ragnarok\Fenrir\Bitwise\Bitwise;
+use Ragnarok\Fenrir\Discord;
+use Ragnarok\Fenrir\Gateway;
+use Ragnarok\Fenrir\InteractionHandler;
+use Ragnarok\Fenrir\Rest\Rest;
 use PHPUnit\Framework\TestCase;
 
 class DiscordTest extends TestCase

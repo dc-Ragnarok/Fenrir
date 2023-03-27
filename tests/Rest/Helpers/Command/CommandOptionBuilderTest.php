@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Exan\Fenrir;
+namespace Ragnarok\Fenrir;
 
-use Exan\Fenrir\Enums\Parts\ApplicationCommandOptionTypes;
-use Exan\Fenrir\Enums\Parts\ChannelTypes;
-use Exan\Fenrir\Rest\Helpers\Command\CommandBuilder;
-use Exan\Fenrir\Rest\Helpers\Command\CommandOptionBuilder;
+use Ragnarok\Fenrir\Enums\Parts\ApplicationCommandOptionTypes;
+use Ragnarok\Fenrir\Enums\Parts\ChannelTypes;
+use Ragnarok\Fenrir\Rest\Helpers\Command\CommandBuilder;
+use Ragnarok\Fenrir\Rest\Helpers\Command\CommandOptionBuilder;
 use Mockery;
 use PHPUnit\Framework\TestCase;
 

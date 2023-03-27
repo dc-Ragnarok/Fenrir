@@ -2,19 +2,19 @@
 
 declare(strict_types=1);
 
-namespace Tests\Exan\Fenrir\Interaction;
+namespace Tests\Ragnarok\Fenrir\Interaction;
 
-use Fakes\Exan\Fenrir\DataMapperFake;
+use Fakes\Ragnarok\Fenrir\DataMapperFake;
 use Mockery;
 use Mockery\Adapter\Phpunit\MockeryTestCase;
-use Exan\Fenrir\Interaction\CommandInteraction;
-use Exan\Fenrir\Interaction\Helpers\InteractionCallbackBuilder;
-use Exan\Fenrir\Parts\ApplicationCommandInteractionDataOptionStructure;
-use Exan\Fenrir\Parts\InteractionData;
-use Exan\Fenrir\Rest\Helpers\Webhook\EditWebhookBuilder;
-use Exan\Fenrir\Websocket\Events\InteractionCreate;
-use Fakes\Exan\Fenrir\DiscordFake;
-use Fakes\Exan\Fenrir\PromiseFake;
+use Ragnarok\Fenrir\Interaction\CommandInteraction;
+use Ragnarok\Fenrir\Interaction\Helpers\InteractionCallbackBuilder;
+use Ragnarok\Fenrir\Parts\ApplicationCommandInteractionDataOptionStructure;
+use Ragnarok\Fenrir\Parts\InteractionData;
+use Ragnarok\Fenrir\Rest\Helpers\Webhook\EditWebhookBuilder;
+use Ragnarok\Fenrir\Websocket\Events\InteractionCreate;
+use Fakes\Ragnarok\Fenrir\DiscordFake;
+use Fakes\Ragnarok\Fenrir\PromiseFake;
 
 class CommandInteractionTest extends MockeryTestCase
 {

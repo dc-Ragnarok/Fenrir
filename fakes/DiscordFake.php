@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Fakes\Exan\Fenrir;
+namespace Fakes\Ragnarok\Fenrir;
 
-use Exan\Fenrir\Discord;
+use Ragnarok\Fenrir\Discord;
 use Mockery;
 use Mockery\Mock;
 

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Tests\Exan\Fenrir\Rest\Helpers\Channel\Channel;
+namespace Tests\Ragnarok\Fenrir\Rest\Helpers\Channel\Channel;
 
-use Exan\Fenrir\Rest\Helpers\Channel\Channel\ChannelBuilder;
+use Ragnarok\Fenrir\Rest\Helpers\Channel\Channel\ChannelBuilder;
 use PHPUnit\Framework\TestCase;
 
 class ChannelBuilderTest extends TestCase

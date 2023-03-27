@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Tests\Exan\Fenrir\Rest\Helpers\Emoji;
+namespace Tests\Ragnarok\Fenrir\Rest\Helpers\Emoji;
 
-use Exan\Fenrir\Enums\ImageData;
-use Exan\Fenrir\Rest\Helpers\Emoji\CreateEmojiBuilder;
+use Ragnarok\Fenrir\Enums\ImageData;
+use Ragnarok\Fenrir\Rest\Helpers\Emoji\CreateEmojiBuilder;
 use PHPUnit\Framework\TestCase;
 
 class CreateEmojiBuilderTest extends TestCase

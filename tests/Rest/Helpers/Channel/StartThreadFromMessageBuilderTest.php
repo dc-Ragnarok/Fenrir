@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Tests\Exan\Fenrir\Rest\Helpers\Channel;
+namespace Tests\Ragnarok\Fenrir\Rest\Helpers\Channel;
 
-use Exan\Fenrir\Constants\Validation\RateLimit;
-use Exan\Fenrir\Enums\Parts\ThreadAutoArchiveDuration;
-use Exan\Fenrir\Rest\Helpers\Channel\StartThreadFromMessageBuilder;
+use Ragnarok\Fenrir\Constants\Validation\RateLimit;
+use Ragnarok\Fenrir\Enums\Parts\ThreadAutoArchiveDuration;
+use Ragnarok\Fenrir\Rest\Helpers\Channel\StartThreadFromMessageBuilder;
 use PHPUnit\Framework\TestCase;
 
 class StartThreadFromMessageBuilderTest extends TestCase

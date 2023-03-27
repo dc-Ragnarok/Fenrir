@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Exan\Fenrir\Websocket\Events;
+namespace Ragnarok\Fenrir\Websocket\Events;
 
-use Exan\Fenrir\Attributes\Partial;
-use Exan\Fenrir\Parts\Application;
-use Exan\Fenrir\Parts\User;
-use Exan\Fenrir\Websocket\Objects\Payload;
+use Ragnarok\Fenrir\Attributes\Partial;
+use Ragnarok\Fenrir\Parts\Application;
+use Ragnarok\Fenrir\Parts\User;
+use Ragnarok\Fenrir\Websocket\Objects\Payload;
 
 class Ready extends Payload
 {

@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Exan\Fenrir\Rest;
+namespace Ragnarok\Fenrir\Rest;
 
 use Discord\Http\Http;
-use Exan\Fenrir\DataMapper;
+use Ragnarok\Fenrir\DataMapper;
 use Psr\Log\LoggerInterface;
 use React\Promise\ExtendedPromiseInterface;
 use Throwable;

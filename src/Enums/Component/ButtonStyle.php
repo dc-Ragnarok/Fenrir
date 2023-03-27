@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Exan\Fenrir\Enums\Component;
+namespace Ragnarok\Fenrir\Enums\Component;
 
 enum ButtonStyle: int
 {

@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Tests\Exan\Fenrir\Component;
+namespace Tests\Ragnarok\Fenrir\Component;
 
-use Exan\Fenrir\Component\TextInput;
-use Exan\Fenrir\Enums\Component\TextInputStyle;
+use Ragnarok\Fenrir\Component\TextInput;
+use Ragnarok\Fenrir\Enums\Component\TextInputStyle;
 use PHPUnit\Framework\TestCase;
 
 class TextInputTest extends TestCase
