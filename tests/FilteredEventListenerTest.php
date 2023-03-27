@@ -10,6 +10,7 @@ use Exan\Fenrir\EventHandler;
 use Exan\Fenrir\FilteredEventEmitter;
 use Exan\Fenrir\Websocket\Objects\Payload;
 use Fakes\Exan\Fenrir\DataMapperFake;
+use Fakes\Exan\Fenrir\PromiseFake;
 use Mockery;
 use Mockery\Adapter\Phpunit\MockeryTestCase;
 
@@ -158,5 +159,29 @@ class FilteredEventListenerTest extends MockeryTestCase
         $eventHandler->handle($payload);
 
         $this->assertCount(1, $container);
+    }
+
+    public function testFilteringEventsAsync()
+    {
+
+        $eventEmitter = new EventEmitter();
+
+        $filteredEmitter = new FilteredEventEmitter(
+            $eventEmitter,
+            'event',
+            fn (int $input) => PromiseFake::get($input === 10)
+        );
+
+        $container = [];
+        $filteredEmitter->on('event', function (int $input) use (&$container) {
+            $container[] = $input;
+        });
+
+        $filteredEmitter->start();
+
+        $eventEmitter->emit('event', [5]);
+        $eventEmitter->emit('event', [10]);
+
+        $this->assertEquals([10], $container);
     }
 }
