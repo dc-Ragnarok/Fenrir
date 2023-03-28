@@ -19,6 +19,30 @@ jobs:
     - name: Run CS
       run: composer cs
 
+  phpmd:
+    runs-on: ubuntu-20.04
+    steps:
+    - uses: actions/checkout@v3
+    - name: Install PHP 8.1
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: 8.1
+    - name: Install packages
+      run: composer install --no-progress
+    - name: Run MD
+      run: composer md
+
+  verify-namespaces:
+    runs-on: ubuntu-20.04
+    steps:
+    - uses: actions/checkout@v3
+    - name: Install PHP 8.1
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: 8.1
+    - name: Verify namespaces
+      run: bash verify-namespacing.sh
+
   test-8_1:
     runs-on: ubuntu-20.04
     steps:
