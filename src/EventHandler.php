@@ -14,7 +14,7 @@ class EventHandler extends EventEmitter
     {
     }
 
-    public function handle(Payload $payload)
+    public function handle(Payload $payload): void
     {
         if ($this->raw) {
             $this->emit(Events::RAW, [$payload]);

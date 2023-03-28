@@ -119,7 +119,7 @@ class CommandOptionBuilder
      *
      * @param array<string, string> $localizedNames `key => locale`, `value => description`
      */
-    public function addChoice(string $name, string|int|float $value, array $localizedNames = [])
+    public function addChoice(string $name, string|int|float $value, array $localizedNames = []): self
     {
         if (!isset($this->data['choices'])) {
             $this->data['choices'] = [];
@@ -130,14 +130,16 @@ class CommandOptionBuilder
             'localized_names' => $localizedNames,
             'value' => $value,
         ];
+
+        return $this;
     }
 
-    public function getChoices()
+    public function getChoices(): ?array
     {
         return $this->data['choices'] ?? null;
     }
 
-    public function addOption(CommandOptionBuilder $commandOptionBuilder)
+    public function addOption(CommandOptionBuilder $commandOptionBuilder): self
     {
         if (!isset($this->options)) {
             $this->options = [];

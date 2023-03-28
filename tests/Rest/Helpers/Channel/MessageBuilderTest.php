@@ -17,7 +17,7 @@ use PHPUnit\Framework\TestCase;
 
 class MessageBuilderTest extends TestCase
 {
-    public function testSetNonce()
+    public function testSetNonce(): void
     {
         $builder = new MessageBuilder();
         $builder->setNonce('::nonce::');
@@ -25,7 +25,7 @@ class MessageBuilderTest extends TestCase
         $this->assertEquals('::nonce::', $builder->getNonce());
     }
 
-    public function testSetTts()
+    public function testSetTts(): void
     {
         $builder = new MessageBuilder();
         $builder->setTts(true);
@@ -33,7 +33,7 @@ class MessageBuilderTest extends TestCase
         $this->assertTrue($builder->getTts());
     }
 
-    public function testSetReference()
+    public function testSetReference(): void
     {
         $builder = new MessageBuilder();
         $builder->setReference(
@@ -51,7 +51,7 @@ class MessageBuilderTest extends TestCase
         $this->assertEquals($reference, $builder->getReference());
     }
 
-    public function testAddSticker()
+    public function testAddSticker(): void
     {
         $builder = new MessageBuilder();
         $builder->addSticker('::sticker id::');
@@ -59,7 +59,7 @@ class MessageBuilderTest extends TestCase
         $this->assertEquals(['::sticker id::'], $builder->getStickers());
     }
 
-    public function testAddStickerThrowsException()
+    public function testAddStickerThrowsException(): void
     {
         $builder = new MessageBuilder();
 
@@ -72,7 +72,7 @@ class MessageBuilderTest extends TestCase
         $builder->addSticker('::sticker id 4::');
     }
 
-    public function testRequiresMultipart()
+    public function testRequiresMultipart(): void
     {
         $builder = new MessageBuilder();
 
@@ -84,7 +84,7 @@ class MessageBuilderTest extends TestCase
         $this->assertEquals(true, $builder->requiresMultipart());
     }
 
-    public function testGetMultipart()
+    public function testGetMultipart(): void
     {
         $builder = new MessageBuilder();
 
@@ -112,7 +112,7 @@ class MessageBuilderTest extends TestCase
         $this->assertStringContainsString('Content-Type: image/jpeg', $body);
     }
 
-    public function testGetAttachments()
+    public function testGetAttachments(): void
     {
         $messageBuilder = MessageBuilder::new();
 
@@ -124,7 +124,7 @@ class MessageBuilderTest extends TestCase
         $this->assertEquals([$attachment->get()], $messageBuilder->get()['attachments']);
     }
 
-    public function testGetComponents()
+    public function testGetComponents(): void
     {
         $messageBuilder = MessageBuilder::new();
 
@@ -139,7 +139,7 @@ class MessageBuilderTest extends TestCase
         $this->assertEquals($component->get(), $messageBuilder->get()['components']);
     }
 
-    public function testGetEmbeds()
+    public function testGetEmbeds(): void
     {
         $messageBuilder = MessageBuilder::new();
 
@@ -151,7 +151,7 @@ class MessageBuilderTest extends TestCase
         $this->assertEquals([$embed->get()], $messageBuilder->get()['embeds']);
     }
 
-    public function testGetAllowedMentions()
+    public function testGetAllowedMentions(): void
     {
         $messageBuilder = MessageBuilder::new();
 

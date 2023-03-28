@@ -12,7 +12,7 @@ use PHPUnit\Framework\TestCase;
 
 class StartThreadWithoutMessageBuilderTest extends TestCase
 {
-    public function testSetName()
+    public function testSetName(): void
     {
         $builder = new StartThreadWithoutMessageBuilder();
         $builder->setName('test name');
@@ -20,7 +20,7 @@ class StartThreadWithoutMessageBuilderTest extends TestCase
         $this->assertEquals('test name', $builder->getName());
     }
 
-    public function testSetAutoArchiveDuration()
+    public function testSetAutoArchiveDuration(): void
     {
         $builder = new StartThreadWithoutMessageBuilder();
         $builder->setAutoArchiveDuration(ThreadAutoArchiveDuration::MINUTES_60);
@@ -28,7 +28,7 @@ class StartThreadWithoutMessageBuilderTest extends TestCase
         $this->assertEquals(ThreadAutoArchiveDuration::MINUTES_60, $builder->getAutoArchiveDuration());
     }
 
-    public function testSetRateLimitPerUser()
+    public function testSetRateLimitPerUser(): void
     {
         $builder = new StartThreadWithoutMessageBuilder();
         $builder->setRateLimitPerUser(RateLimit::MIN - 1);
@@ -44,7 +44,7 @@ class StartThreadWithoutMessageBuilderTest extends TestCase
         $this->assertEquals(100, $builder->getRateLimitPerUser());
     }
 
-    public function testSetType()
+    public function testSetType(): void
     {
         $builder = new StartThreadWithoutMessageBuilder();
 
@@ -54,7 +54,7 @@ class StartThreadWithoutMessageBuilderTest extends TestCase
         $this->assertEquals(ChannelTypes::DM, $builder->getType());
     }
 
-    public function testSetInvitable()
+    public function testSetInvitable(): void
     {
         $builder = new StartThreadWithoutMessageBuilder();
 

@@ -94,12 +94,10 @@ class MessageBuilder
      */
     public function addSticker(string $stickerId): MessageBuilder
     {
-        if (isset($this->data['stickers'])) {
-            if (count($this->data['stickers']) === 3) {
-                throw new TooManyStickersException();
-            }
-        } else {
-            $this->data['stickers'] = [];
+        $this->data['stickers'] ??= [];
+
+        if (count($this->data['stickers']) === 3) {
+            throw new TooManyStickersException();
         }
 
         $this->data['stickers'][] = $stickerId;

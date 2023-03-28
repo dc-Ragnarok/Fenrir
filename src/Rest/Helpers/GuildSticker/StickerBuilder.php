@@ -6,6 +6,7 @@ namespace Ragnarok\Fenrir\Rest\Helpers\GuildSticker;
 
 use Discord\Http\Multipart\MultipartBody;
 use Discord\Http\Multipart\MultipartField;
+use Mimey\MimeTypes;
 use Ragnarok\Fenrir\Rest\Helpers\GetNew;
 
 class StickerBuilder
@@ -56,7 +57,7 @@ class StickerBuilder
         $this->file = [
             'content' => $content,
             'extension' => $fileExtension,
-            'content-type' => (new \Mimey\MimeTypes())->getMimeType($fileExtension)
+            'content-type' => (new MimeTypes())->getMimeType($fileExtension)
         ];
 
         return $this;

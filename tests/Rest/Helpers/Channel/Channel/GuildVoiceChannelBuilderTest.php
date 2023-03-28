@@ -11,7 +11,7 @@ use PHPUnit\Framework\TestCase;
 
 class GuildVoiceChannelBuilderTest extends TestCase
 {
-    public function testConstructorSetsCorrectType()
+    public function testConstructorSetsCorrectType(): void
     {
         $channelBuilder = new GuildVoiceChannelBuilder();
 
@@ -20,7 +20,7 @@ class GuildVoiceChannelBuilderTest extends TestCase
         ], $channelBuilder->get());
     }
 
-    public function testSetUserLimit()
+    public function testSetUserLimit(): void
     {
         $channelBuilder = new GuildVoiceChannelBuilder();
 
@@ -37,7 +37,7 @@ class GuildVoiceChannelBuilderTest extends TestCase
         $this->assertEquals(100, $channelBuilder->get()['user_limit']);
     }
 
-    public function testSetVideoQualityMode()
+    public function testSetVideoQualityMode(): void
     {
         $channelBuilder = new GuildVoiceChannelBuilder();
 

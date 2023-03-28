@@ -10,7 +10,7 @@ use PHPUnit\Framework\TestCase;
 
 class GuildAnnouncementChannelBuilderTest extends TestCase
 {
-    public function testConstructorSetsCorrectType()
+    public function testConstructorSetsCorrectType(): void
     {
         $channelBuilder = new GuildAnnouncementChannelBuilder();
 

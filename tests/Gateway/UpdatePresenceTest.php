@@ -14,7 +14,7 @@ use Tests\Ragnarok\Fenrir\Gateway\GatewayTestCase;
  */
 class UpdatePresenceTest extends GatewayTestCase
 {
-    public function testUpdatePresence()
+    public function testUpdatePresence(): void
     {
         $this->gateway->updatePresence(
             StatusType::ONLINE,
@@ -28,7 +28,7 @@ class UpdatePresenceTest extends GatewayTestCase
         ]);
     }
 
-    public function testUpdatePresenceWithSince()
+    public function testUpdatePresenceWithSince(): void
     {
         $this->gateway->updatePresence(
             StatusType::ONLINE,

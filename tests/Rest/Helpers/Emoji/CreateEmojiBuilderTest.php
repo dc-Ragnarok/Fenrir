@@ -10,7 +10,7 @@ use PHPUnit\Framework\TestCase;
 
 class CreateEmojiBuilderTest extends TestCase
 {
-    public function testSetName()
+    public function testSetName(): void
     {
         $emojiBuilder = new CreateEmojiBuilder();
         $emojiBuilder->setName('::name::');
@@ -18,7 +18,7 @@ class CreateEmojiBuilderTest extends TestCase
         $this->assertEquals('::name::', $emojiBuilder->getName());
     }
 
-    public function testSetRoles()
+    public function testSetRoles(): void
     {
         $emojiBuilder = new CreateEmojiBuilder();
         $emojiBuilder->setRoles(['::role1::', '::role2::']);
@@ -26,7 +26,7 @@ class CreateEmojiBuilderTest extends TestCase
         $this->assertEquals(['::role1::', '::role2::'], $emojiBuilder->getRoles());
     }
 
-    public function testSetImage()
+    public function testSetImage(): void
     {
         $emojiBuilder = new CreateEmojiBuilder();
         $emojiBuilder->setImage('::image::', ImageData::PNG);

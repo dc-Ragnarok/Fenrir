@@ -9,7 +9,7 @@ use PHPUnit\Framework\TestCase;
 
 class AllowedMentionsBuilderTest extends TestCase
 {
-    public function testAddRole()
+    public function testAddRole(): void
     {
         $builder = new AllowedMentionsBuilder();
 
@@ -22,7 +22,7 @@ class AllowedMentionsBuilderTest extends TestCase
         $this->assertEquals(['12345'], $builder->getRoles());
     }
 
-    public function testAddUser()
+    public function testAddUser(): void
     {
         $builder = new AllowedMentionsBuilder();
         $this->assertEquals([], $builder->getUsers());
@@ -33,7 +33,7 @@ class AllowedMentionsBuilderTest extends TestCase
         $this->assertEquals(['54321'], $builder->getUsers());
     }
 
-    public function testMentionRepliedUser()
+    public function testMentionRepliedUser(): void
     {
         $builder = new AllowedMentionsBuilder();
         $this->assertFalse($builder->mentionsRepliedUser());
@@ -43,7 +43,7 @@ class AllowedMentionsBuilderTest extends TestCase
         $this->assertTrue($builder->mentionsRepliedUser());
     }
 
-    public function testAllowUsers()
+    public function testAllowUsers(): void
     {
         $builder = new AllowedMentionsBuilder();
         $builder->allowUsers();
@@ -51,7 +51,7 @@ class AllowedMentionsBuilderTest extends TestCase
         $this->assertContains('users', $builder->get()['parse']);
     }
 
-    public function testAllowRoles()
+    public function testAllowRoles(): void
     {
         $builder = new AllowedMentionsBuilder();
         $builder->allowRoles();

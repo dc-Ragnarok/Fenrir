@@ -13,7 +13,7 @@ use PHPUnit\Framework\TestCase;
 
 class DiscordTest extends TestCase
 {
-    public function testItInitializesGateway()
+    public function testItInitializesGateway(): void
     {
         $discord = new Discord('::token::');
 
@@ -22,7 +22,7 @@ class DiscordTest extends TestCase
         $this->assertInstanceOf(Gateway::class, $discord->gateway);
     }
 
-    public function testItInitializesRest()
+    public function testItInitializesRest(): void
     {
         $discord = new Discord('::token::');
 
@@ -31,7 +31,7 @@ class DiscordTest extends TestCase
         $this->assertInstanceOf(Rest::class, $discord->rest);
     }
 
-    public function testItInitializesInteractionHandler()
+    public function testItInitializesInteractionHandler(): void
     {
         $discord = new Discord('::token::');
 
@@ -40,7 +40,7 @@ class DiscordTest extends TestCase
         $this->assertInstanceOf(InteractionHandler::class, $discord->interaction);
     }
 
-    public function testItInitializesInteractionHandlerWithDevGuild()
+    public function testItInitializesInteractionHandlerWithDevGuild(): void
     {
         $discord = new Discord('::token::');
 
@@ -49,7 +49,7 @@ class DiscordTest extends TestCase
         $this->assertInstanceOf(InteractionHandler::class, $discord->interaction);
     }
 
-    public function testGetDebugInfo()
+    public function testGetDebugInfo(): void
     {
         $debugInfo = Discord::getDebugInfo();
 

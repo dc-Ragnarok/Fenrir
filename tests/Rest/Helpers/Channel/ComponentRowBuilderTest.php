@@ -11,7 +11,7 @@ use PHPUnit\Framework\TestCase;
 
 class ComponentRowBuilderTest extends TestCase
 {
-    public function testGetComponentRow()
+    public function testGetComponentRow(): void
     {
         $component = new class () extends Component {
             public function get(): array
@@ -27,7 +27,7 @@ class ComponentRowBuilderTest extends TestCase
         ], $componentRow->get());
     }
 
-    public function testItThrowsAnErrorOnTooManyComponents()
+    public function testItThrowsAnErrorOnTooManyComponents(): void
     {
         $component = new class () extends Component {
             public function get(): array

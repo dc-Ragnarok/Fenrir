@@ -10,7 +10,7 @@ use PHPUnit\Framework\TestCase;
 
 class SetDefaultThreadRateLimitPerUserTest extends TestCase
 {
-    public function testSetThreadRateLimitPerUser()
+    public function testSetThreadRateLimitPerUser(): void
     {
         $class = new class extends DummyTraitTester {
             use SetDefaultThreadRateLimitPerUser;
@@ -22,7 +22,7 @@ class SetDefaultThreadRateLimitPerUserTest extends TestCase
         $this->assertEquals(RateLimit::MIN + 1, $class->getDefaultThreadRateLimitPerUser());
     }
 
-    public function testSetThreadRateLimitAboveMaxPerUser()
+    public function testSetThreadRateLimitAboveMaxPerUser(): void
     {
         $class = new class extends DummyTraitTester {
             use SetDefaultThreadRateLimitPerUser;
@@ -34,7 +34,7 @@ class SetDefaultThreadRateLimitPerUserTest extends TestCase
         $this->assertEquals(RateLimit::MAX, $class->getDefaultThreadRateLimitPerUser());
     }
 
-    public function testSetThreadRateLimitBelowMinPerUser()
+    public function testSetThreadRateLimitBelowMinPerUser(): void
     {
         $class = new class extends DummyTraitTester {
             use SetDefaultThreadRateLimitPerUser;

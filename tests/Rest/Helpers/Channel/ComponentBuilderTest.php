@@ -12,7 +12,7 @@ use PHPUnit\Framework\TestCase;
 
 class ComponentBuilderTest extends TestCase
 {
-    public function testAddRow()
+    public function testAddRow(): void
     {
         $componentRow = Mockery::mock(ComponentRowBuilder::class);
         $componentRow->shouldReceive('get')->andReturn(['::row::']);
@@ -31,7 +31,7 @@ class ComponentBuilderTest extends TestCase
         ]], $componentBuilder->get());
     }
 
-    public function testItThrowsAnErrorWithTooManyRows()
+    public function testItThrowsAnErrorWithTooManyRows(): void
     {
         $componentRow = Mockery::mock(ComponentRowBuilder::class);
         $componentRow->shouldReceive('get')->andReturn(['::row::']);

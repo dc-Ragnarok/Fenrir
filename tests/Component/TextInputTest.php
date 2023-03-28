@@ -13,7 +13,7 @@ class TextInputTest extends TestCase
     /**
      * @dataProvider convertionExpectationProvider
      */
-    public function testCorrectlyConverted(array $args, array $expected)
+    public function testCorrectlyConverted(array $args, array $expected): void
     {
         $textInput = new TextInput(...$args);
 

@@ -11,14 +11,14 @@ use Ragnarok\Fenrir\Exceptions\Rest\Helpers\Channel\Channel\Shared\SetType\Unsup
 
 class SetTypeTest extends TestCase
 {
-    private function getClass()
+    private function getClass(): DummyTraitTester
     {
         return new class extends DummyTraitTester {
             use SetType;
         };
     }
 
-    public function testSetType()
+    public function testSetType(): void
     {
         $class = $this->getClass();
         $class->setType(ChannelTypes::GUILD_TEXT);
@@ -26,7 +26,7 @@ class SetTypeTest extends TestCase
         $this->assertEquals(ChannelTypes::GUILD_TEXT, $class->getType());
     }
 
-    public function testSetTypeUnsupportedConversionException()
+    public function testSetTypeUnsupportedConversionException(): void
     {
         $class = $this->getClass();
         $this->expectException(

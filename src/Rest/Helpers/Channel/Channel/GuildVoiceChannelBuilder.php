@@ -33,7 +33,7 @@ class GuildVoiceChannelBuilder extends ChannelBuilder
         return $this;
     }
 
-    public function setVideoQualityMode(VideoQualityModes $quality)
+    public function setVideoQualityMode(VideoQualityModes $quality): void
     {
         $this->data['video_quality_mode'] = $quality->value;
     }

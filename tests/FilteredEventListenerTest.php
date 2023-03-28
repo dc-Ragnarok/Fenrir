@@ -20,7 +20,7 @@ use Mockery\Adapter\Phpunit\MockeryTestCase;
  */
 class FilteredEventListenerTest extends MockeryTestCase
 {
-    public function testFilteringEvents()
+    public function testFilteringEvents(): void
     {
 
         $eventEmitter = new EventEmitter();
@@ -44,7 +44,7 @@ class FilteredEventListenerTest extends MockeryTestCase
         $this->assertEquals([10], $container);
     }
 
-    public function testCancelEvent()
+    public function testCancelEvent(): void
     {
         $eventEmitter = new EventEmitter();
 
@@ -62,7 +62,7 @@ class FilteredEventListenerTest extends MockeryTestCase
         $this->assertCount(0, $eventEmitter->listeners('event'));
     }
 
-    public function testCancelByMaxItems()
+    public function testCancelByMaxItems(): void
     {
         $eventEmitter = new EventEmitter();
 
@@ -84,7 +84,7 @@ class FilteredEventListenerTest extends MockeryTestCase
         $this->assertCount(0, $eventEmitter->listeners('event'));
     }
 
-    public function testCancelByTimeout()
+    public function testCancelByTimeout(): void
     {
         /**
          * @var Mock
@@ -132,7 +132,7 @@ class FilteredEventListenerTest extends MockeryTestCase
         $this->assertCount(0, $eventEmitter->listeners('event'));
     }
 
-    public function testItAcceptsEventHandler()
+    public function testItAcceptsEventHandler(): void
     {
         $eventHandler = new EventHandler(
             DataMapperFake::get(),
@@ -161,7 +161,7 @@ class FilteredEventListenerTest extends MockeryTestCase
         $this->assertCount(1, $container);
     }
 
-    public function testFilteringEventsAsync()
+    public function testFilteringEventsAsync(): void
     {
 
         $eventEmitter = new EventEmitter();
