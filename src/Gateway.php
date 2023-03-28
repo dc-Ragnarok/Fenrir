@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Exan\Fenrir;
+namespace Ragnarok\Fenrir;
 
-use Exan\Fenrir\Bitwise\Bitwise;
-use Exan\Fenrir\Constants\Events as Events;
-use Exan\Fenrir\Constants\WebsocketEvents;
-use Exan\Fenrir\Enums\Gateway\StatusType;
-use Exan\Fenrir\Websocket\Helpers\ActivityBuilder;
-use Exan\Fenrir\Websocket\Objects\D\Hello;
-use Exan\Fenrir\Websocket\Objects\Payload;
+use Ragnarok\Fenrir\Bitwise\Bitwise;
+use Ragnarok\Fenrir\Constants\Events as Events;
+use Ragnarok\Fenrir\Constants\WebsocketEvents;
+use Ragnarok\Fenrir\Enums\Gateway\StatusType;
+use Ragnarok\Fenrir\Websocket\Helpers\ActivityBuilder;
+use Ragnarok\Fenrir\Websocket\Objects\D\Hello;
+use Ragnarok\Fenrir\Websocket\Objects\Payload;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use Ratchet\RFC6455\Messaging\MessageInterface;
@@ -39,7 +39,7 @@ class Gateway
     private Bucket $activityBucket;
 
     /**
-     * @param Bitwise<\Exan\Fenrir\Enums\Gateway\Intents> $intents
+     * @param Bitwise<\Ragnarok\Fenrir\Enums\Gateway\Intents> $intents
      */
     public function __construct(
         private LoopInterface $loop,
@@ -127,8 +127,8 @@ class Gateway
                 'intents' => $this->intents->get(),
                 'properties' => [
                     'os' => PHP_OS,
-                    'browser' => 'Exan\Fenrir',
-                    'device' => 'Exan\Fenrir',
+                    'browser' => 'Ragnarok\Fenrir',
+                    'device' => 'Ragnarok\Fenrir',
                 ]
             ]
         ]);
@@ -136,6 +136,9 @@ class Gateway
         $this->shouldIdentify = false;
     }
 
+    /**
+     * @SuppressWarnings(PHPMD.CyclomaticComplexity)
+     */
     private function handlePayload(Payload $payload): void
     {
         switch ($payload->op) {
@@ -171,15 +174,17 @@ class Gateway
              * Hello event
              */
             case 10:
-                if ($this->shouldIdentify) {
-                    $this->identify();
-                } else {
-                    $this->resume();
-                }
-
                 /** @var Hello */
                 $hello = $this->mapper->map($payload->d, Hello::class);
                 $this->handleHello($hello);
+
+                if ($this->shouldIdentify) {
+                    $this->identify();
+                    return;
+                }
+
+                $this->resume();
+
                 break;
 
             /**

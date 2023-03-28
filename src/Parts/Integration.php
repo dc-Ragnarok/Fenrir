@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Exan\Fenrir\Parts;
+namespace Ragnarok\Fenrir\Parts;
 
-use Exan\Fenrir\Enums\Parts\IntegrationExpireBehaviors;
+use Ragnarok\Fenrir\Enums\Parts\IntegrationExpireBehaviors;
 use Carbon\Carbon;
-use Exan\Fenrir\Enums\Parts\Scopes;
+use Ragnarok\Fenrir\Enums\Parts\Scopes;
 
 class Integration
 {
@@ -26,7 +26,7 @@ class Integration
     public ?bool $revoked;
     public ?Application $application;
     /**
-     * @var \Exan\Fenrir\Enums\Parts\Scopes[]
+     * @var \Ragnarok\Fenrir\Enums\Parts\Scopes[]
      */
     public ?array $scopes;
 

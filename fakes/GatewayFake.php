@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Fakes\Exan\Fenrir;
+namespace Fakes\Ragnarok\Fenrir;
 
-use Exan\Fenrir\DataMapper;
-use Fakes\Exan\Fenrir\DataMapperFake;
-use Exan\Fenrir\EventHandler;
-use Exan\Fenrir\Gateway;
-use Exan\Fenrir\Websocket;
+use Ragnarok\Fenrir\DataMapper;
+use Fakes\Ragnarok\Fenrir\DataMapperFake;
+use Ragnarok\Fenrir\EventHandler;
+use Ragnarok\Fenrir\Gateway;
+use Ragnarok\Fenrir\Websocket;
 use Mockery;
 use Mockery\Mock;
 use Psr\Log\NullLogger;

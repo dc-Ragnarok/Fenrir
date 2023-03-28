@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Exan\Fenrir\Parts;
+namespace Ragnarok\Fenrir\Parts;
 
-use Exan\Fenrir\Enums\Parts\ApplicationCommandOptionTypes;
+use Ragnarok\Fenrir\Enums\Parts\ApplicationCommandOptionTypes;
 
 class ApplicationCommandInteractionDataOptionStructure
 {
@@ -12,7 +12,7 @@ class ApplicationCommandInteractionDataOptionStructure
     public ApplicationCommandOptionTypes $type;
     public string|int|float|bool|null $value;
     /**
-     * @var \Exan\Fenrir\Parts\ApplicationCommandInteractionDataOptionStructure[]
+     * @var \Ragnarok\Fenrir\Parts\ApplicationCommandInteractionDataOptionStructure[]
      */
     public ?array $options;
     public bool $focused;

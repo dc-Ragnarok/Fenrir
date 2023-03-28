@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Exan\Fenrir\Websocket\Events;
+namespace Ragnarok\Fenrir\Websocket\Events;
 
-use Exan\Fenrir\Parts\Emoji;
-use Exan\Fenrir\Parts\GuildMember;
+use Ragnarok\Fenrir\Parts\Emoji;
+use Ragnarok\Fenrir\Parts\GuildMember;
 
 /**
  * @see https://discord.com/developers/docs/topics/gateway-events#message-reaction-add

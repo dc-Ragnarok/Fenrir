@@ -2,28 +2,22 @@
 
 declare(strict_types=1);
 
-namespace Exan\Fenrir\Rest;
+namespace Ragnarok\Fenrir\Rest;
 
 use Discord\Http\Http;
-use Exan\Fenrir\Rest\Helpers\HttpHelper;
-use Exan\Fenrir\DataMapper;
+use Ragnarok\Fenrir\Rest\Helpers\HttpHelper;
+use Ragnarok\Fenrir\DataMapper;
 
 /**
  * @see https://discord.com/developers/docs/resources/guild-scheduled-event
  */
-class GuildScheduledEvent
+class GuildScheduledEvent extends HttpResource
 {
-    use HttpHelper;
-
-    public function __construct(private Http $http, private DataMapper $dataMapper)
-    {
-    }
-
     /**
      * @see https://discord.com/developers/docs/resources/guild-scheduled-event#list-scheduled-events-for-guild
      * @todo implement call
      */
-    public function list()
+    public function list(): void
     {
     }
 
@@ -31,7 +25,7 @@ class GuildScheduledEvent
      * @see https://discord.com/developers/docs/resources/guild-scheduled-event#get-guild-scheduled-event
      * @todo implement call
      */
-    public function get()
+    public function get(): void
     {
     }
 
@@ -39,7 +33,7 @@ class GuildScheduledEvent
      * @see https://discord.com/developers/docs/resources/guild-scheduled-event#create-guild-scheduled-event
      * @todo implement call
      */
-    public function create()
+    public function create(): void
     {
     }
 
@@ -47,7 +41,7 @@ class GuildScheduledEvent
      * @see https://discord.com/developers/docs/resources/guild-scheduled-event#modify-guild-scheduled-event
      * @todo implement call
      */
-    public function modify()
+    public function modify(): void
     {
     }
 
@@ -55,7 +49,7 @@ class GuildScheduledEvent
      * @see https://discord.com/developers/docs/resources/guild-scheduled-event#delete-guild-scheduled-event
      * @todo implement call
      */
-    public function delete()
+    public function delete(): void
     {
     }
 
@@ -63,7 +57,7 @@ class GuildScheduledEvent
      * @see https://discord.com/developers/docs/resources/guild-scheduled-event#get-guild-scheduled-event-users
      * @todo implement call
      */
-    public function getUsers()
+    public function getUsers(): void
     {
     }
 }

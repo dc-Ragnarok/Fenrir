@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tests\Exan\Fenrir\Gateway;
+namespace Tests\Ragnarok\Fenrir\Gateway;
 
 /**
  * @runTestsInSeparateProcesses
@@ -10,7 +10,7 @@ namespace Tests\Exan\Fenrir\Gateway;
  */
 class RequestGuildMembersTest extends GatewayTestCase
 {
-    public function testRequestGuildMembersByQuery()
+    public function testRequestGuildMembersByQuery(): void
     {
         $this->gateway->requestGuildMembersByQuery(
             '::guild id::',
@@ -29,7 +29,7 @@ class RequestGuildMembersTest extends GatewayTestCase
         );
     }
 
-    public function testRequestGuildMembersByQueryWithNonce()
+    public function testRequestGuildMembersByQueryWithNonce(): void
     {
         $this->gateway->requestGuildMembersByQuery(
             '::guild id::',
@@ -50,7 +50,7 @@ class RequestGuildMembersTest extends GatewayTestCase
         );
     }
 
-    public function testRequestGuildMembersByUserIds()
+    public function testRequestGuildMembersByUserIds(): void
     {
         $this->gateway->requestGuildMembersByUserIds(
             '::guild id::',
@@ -69,7 +69,7 @@ class RequestGuildMembersTest extends GatewayTestCase
         );
     }
 
-    public function testRequestGuildMembersByUserIdsWithNonce()
+    public function testRequestGuildMembersByUserIdsWithNonce(): void
     {
         $this->gateway->requestGuildMembersByUserIds(
             '::guild id::',

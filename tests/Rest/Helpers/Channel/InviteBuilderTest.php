@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Tests\Exan\Fenrir\Rest\Helpers\Channel;
+namespace Tests\Ragnarok\Fenrir\Rest\Helpers\Channel;
 
-use Exan\Fenrir\Rest\Helpers\Channel\InviteBuilder;
+use Ragnarok\Fenrir\Rest\Helpers\Channel\InviteBuilder;
 use PHPUnit\Framework\TestCase;
 
 class InviteBuilderTest extends TestCase
 {
-    public function testCanSetMaxAge()
+    public function testCanSetMaxAge(): void
     {
         $builder = new InviteBuilder();
         $builder->setMaxAge(3600);
@@ -25,7 +25,7 @@ class InviteBuilderTest extends TestCase
         $this->assertEquals(604800, $builder->getMaxAge());
     }
 
-    public function testCanSetMaxUses()
+    public function testCanSetMaxUses(): void
     {
         $builder = new InviteBuilder();
         $builder->setMaxUses(5);
@@ -41,7 +41,7 @@ class InviteBuilderTest extends TestCase
         $this->assertEquals(100, $builder->getMaxUses());
     }
 
-    public function testCanSetTemporary()
+    public function testCanSetTemporary(): void
     {
         $builder = new InviteBuilder();
         $builder->setTemporary(true);
@@ -50,7 +50,7 @@ class InviteBuilderTest extends TestCase
         $this->assertEquals(true, $builder->getTemporary());
     }
 
-    public function testCanSetUnique()
+    public function testCanSetUnique(): void
     {
         $builder = new InviteBuilder();
         $builder->setUnique(true);
@@ -59,7 +59,7 @@ class InviteBuilderTest extends TestCase
         $this->assertEquals(true, $builder->getUnique());
     }
 
-    public function testCanSetTargetType()
+    public function testCanSetTargetType(): void
     {
         $builder = new InviteBuilder();
         $builder->setTargetType(1);
@@ -68,7 +68,7 @@ class InviteBuilderTest extends TestCase
         $this->assertEquals(1, $builder->getTargetType());
     }
 
-    public function testCanSetTargetUserId()
+    public function testCanSetTargetUserId(): void
     {
         $builder = new InviteBuilder();
         $builder->setTargetUserId('12345');
@@ -77,7 +77,7 @@ class InviteBuilderTest extends TestCase
         $this->assertEquals('12345', $builder->getTargetUserId());
     }
 
-    public function testCanSetTargetApplicationId()
+    public function testCanSetTargetApplicationId(): void
     {
         $builder = new InviteBuilder();
         $builder->setTargetApplicationId('67890');

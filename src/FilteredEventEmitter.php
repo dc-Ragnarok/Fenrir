@@ -2,12 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Exan\Fenrir;
+namespace Ragnarok\Fenrir;
 
 use Closure;
 use Evenement\EventEmitter;
 use Evenement\EventEmitterInterface;
 use React\EventLoop\Loop;
+use React\Promise\PromiseInterface;
+
+use function React\Async\await;
 
 class FilteredEventEmitter extends EventEmitter
 {
@@ -21,7 +24,13 @@ class FilteredEventEmitter extends EventEmitter
         private ?int $maxItems = null,
     ) {
         $this->listener = function (...$args) {
-            if (!($this->filter)(...$args)) {
+            $output = ($this->filter)(...$args);
+
+            $result = $output instanceof PromiseInterface
+                ? await($output)
+                : $output;
+
+            if (!$result) {
                 return;
             }
 
@@ -37,7 +46,7 @@ class FilteredEventEmitter extends EventEmitter
         };
     }
 
-    public function start()
+    public function start(): void
     {
         $this->eventEmitter->on($this->event, $this->listener);
 
@@ -46,7 +55,7 @@ class FilteredEventEmitter extends EventEmitter
         }
     }
 
-    public function cancel()
+    public function cancel(): void
     {
         $this->eventEmitter->removeListener($this->event, $this->listener);
     }

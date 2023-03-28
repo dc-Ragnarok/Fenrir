@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Tests\Exan\Fenrir\Gateway;
+namespace Tests\Ragnarok\Fenrir\Gateway;
 
-use Exan\Fenrir\Enums\Gateway\StatusType;
-use Exan\Fenrir\Websocket\Helpers\ActivityBuilder;
-use Tests\Exan\Fenrir\Gateway\GatewayTestCase;
+use Ragnarok\Fenrir\Enums\Gateway\StatusType;
+use Ragnarok\Fenrir\Websocket\Helpers\ActivityBuilder;
+use Tests\Ragnarok\Fenrir\Gateway\GatewayTestCase;
 
 /**
  * @runTestsInSeparateProcesses
@@ -14,7 +14,7 @@ use Tests\Exan\Fenrir\Gateway\GatewayTestCase;
  */
 class UpdatePresenceTest extends GatewayTestCase
 {
-    public function testUpdatePresence()
+    public function testUpdatePresence(): void
     {
         $this->gateway->updatePresence(
             StatusType::ONLINE,
@@ -28,7 +28,7 @@ class UpdatePresenceTest extends GatewayTestCase
         ]);
     }
 
-    public function testUpdatePresenceWithSince()
+    public function testUpdatePresenceWithSince(): void
     {
         $this->gateway->updatePresence(
             StatusType::ONLINE,

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Exan\Fenrir;
+namespace Ragnarok\Fenrir;
 
 use Evenement\EventEmitter;
 use React\EventLoop\LoopInterface;
@@ -41,13 +41,15 @@ class Bucket extends EventEmitter
 
             if ($this->uses === $this->limit) {
                 $this->queue[] = $wrappedAction;
-            } else {
-                $this->execute($wrappedAction);
+
+                return;
             }
+
+            $this->execute($wrappedAction);
         });
     }
 
-    private function execute(callable $action)
+    private function execute(callable $action): void
     {
         $this->uses++;
 
@@ -56,7 +58,7 @@ class Bucket extends EventEmitter
         $this->setTimer();
     }
 
-    private function setTimer()
+    private function setTimer(): void
     {
         $this->loop->addTimer($this->seconds, function () {
             $this->emit('DECREASE_USES');

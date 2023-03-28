@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Exan\Fenrir\Constants\Validation;
+namespace Ragnarok\Fenrir\Constants\Validation;
 
-use Exan\Fenrir\Constants\Validation\Traits\WithinLimit;
+use Ragnarok\Fenrir\Constants\Validation\Traits\WithinLimit;
 
 class RateLimit
 {

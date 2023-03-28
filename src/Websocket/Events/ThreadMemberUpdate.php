@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Exan\Fenrir\Websocket\Events;
+namespace Ragnarok\Fenrir\Websocket\Events;
 
-use Exan\Fenrir\Attributes\Intent;
+use Ragnarok\Fenrir\Attributes\Intent;
 
 /**
  * @see https://discord.com/developers/docs/topics/gateway-events#thread-members-update
@@ -17,7 +17,7 @@ class ThreadMemberUpdate
     public int $member_count;
 
     /**
-     * @var \Exan\Fenrir\Parts\ThreadMember[]
+     * @var \Ragnarok\Fenrir\Parts\ThreadMember[]
      */
     public ?array $added_members;
 

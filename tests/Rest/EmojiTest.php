@@ -2,21 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Tests\Exan\Fenrir\Rest;
+namespace Tests\Ragnarok\Fenrir\Rest;
 
-use Exan\Fenrir\Parts\Emoji as PartsEmoji;
-use Exan\Fenrir\Rest\Emoji;
-use Exan\Fenrir\Rest\Helpers\Emoji\CreateEmojiBuilder;
-use Tests\Exan\Fenrir\Rest\HttpHelperTestCase;
+use Ragnarok\Fenrir\Parts\Emoji as PartsEmoji;
+use Ragnarok\Fenrir\Rest\Emoji;
+use Ragnarok\Fenrir\Rest\Helpers\Emoji\CreateEmojiBuilder;
+use Tests\Ragnarok\Fenrir\Rest\HttpHelperTestCase;
 
 class EmojiTest extends HttpHelperTestCase
 {
-    protected function setUp(): void
-    {
-        parent::setUp();
-
-        $this->httpItem = new Emoji($this->http, $this->dataMapper);
-    }
+    protected string $httpItemClass = Emoji::class;
 
     public function httpBindingsProvider(): array
     {

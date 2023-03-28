@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Tests\Exan\Fenrir\Rest\Helpers\Channel\Channel;
+namespace Tests\Ragnarok\Fenrir\Rest\Helpers\Channel\Channel;
 
-use Exan\Fenrir\Enums\Parts\ChannelTypes;
-use Exan\Fenrir\Enums\Parts\VideoQualityModes;
-use Exan\Fenrir\Rest\Helpers\Channel\Channel\GuildVoiceChannelBuilder;
+use Ragnarok\Fenrir\Enums\Parts\ChannelTypes;
+use Ragnarok\Fenrir\Enums\Parts\VideoQualityModes;
+use Ragnarok\Fenrir\Rest\Helpers\Channel\Channel\GuildVoiceChannelBuilder;
 use PHPUnit\Framework\TestCase;
 
 class GuildVoiceChannelBuilderTest extends TestCase
 {
-    public function testConstructorSetsCorrectType()
+    public function testConstructorSetsCorrectType(): void
     {
         $channelBuilder = new GuildVoiceChannelBuilder();
 
@@ -20,7 +20,7 @@ class GuildVoiceChannelBuilderTest extends TestCase
         ], $channelBuilder->get());
     }
 
-    public function testSetUserLimit()
+    public function testSetUserLimit(): void
     {
         $channelBuilder = new GuildVoiceChannelBuilder();
 
@@ -37,7 +37,7 @@ class GuildVoiceChannelBuilderTest extends TestCase
         $this->assertEquals(100, $channelBuilder->get()['user_limit']);
     }
 
-    public function testSetVideoQualityMode()
+    public function testSetVideoQualityMode(): void
     {
         $channelBuilder = new GuildVoiceChannelBuilder();
 

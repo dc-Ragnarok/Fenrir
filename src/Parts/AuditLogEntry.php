@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Exan\Fenrir\Parts;
+namespace Ragnarok\Fenrir\Parts;
 
-use Exan\Fenrir\Enums\Parts\AuditLogEvents;
+use Ragnarok\Fenrir\Enums\Parts\AuditLogEvents;
 
 class AuditLogEntry
 {
     public ?string $target_id;
     /**
-     * @var \Exan\Fenrir\Parts\AuditLogChange[]
+     * @var \Ragnarok\Fenrir\Parts\AuditLogChange[]
      */
     public ?array $changes;
     public ?string $user_id;

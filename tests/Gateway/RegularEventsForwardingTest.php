@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Tests\Exan\Fenrir\Gateway;
+namespace Tests\Ragnarok\Fenrir\Gateway;
 
-use Exan\Fenrir\EventHandler;
+use Ragnarok\Fenrir\EventHandler;
 use Mockery;
-use Tests\Exan\Fenrir\Gateway\GatewayTestCase;
+use Tests\Ragnarok\Fenrir\Gateway\GatewayTestCase;
 
 /**
  * @runTestsInSeparateProcesses
@@ -22,7 +22,7 @@ class RegularEventsForwardingTest extends GatewayTestCase
         $this->gateway->events->shouldReceive('handle');
     }
 
-    public function testRegularEventsGetForwardedToEventHandler()
+    public function testRegularEventsGetForwardedToEventHandler(): void
     {
         $this->mockIncomingMessage(['op' => 0, 't' => '::some event::']);
 

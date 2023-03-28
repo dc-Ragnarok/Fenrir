@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Exan\Fenrir\Parts;
+namespace Ragnarok\Fenrir\Parts;
 
 class Emoji
 {
     public ?string $id;
     public ?string $name;
     /**
-     * @var \Exan\Fenrir\Parts\Role[]
+     * @var \Ragnarok\Fenrir\Parts\Role[]
      */
     public ?array $roles;
     public ?User $user;

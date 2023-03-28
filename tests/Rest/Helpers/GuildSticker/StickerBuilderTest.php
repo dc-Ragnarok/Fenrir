@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Tests\Exan\Fenrir\Rest\Helpers\GuildSticker;
+namespace Tests\Ragnarok\Fenrir\Rest\Helpers\GuildSticker;
 
-use Exan\Fenrir\Rest\Helpers\GuildSticker\StickerBuilder;
+use Ragnarok\Fenrir\Rest\Helpers\GuildSticker\StickerBuilder;
 use PHPUnit\Framework\TestCase;
 
 class StickerBuilderTest extends TestCase
 {
-    public function testSetFile()
+    public function testSetFile(): void
     {
         $stickerBuilder = new StickerBuilder();
         $stickerBuilder->setFile('::binary data::', 'png');
@@ -30,7 +30,7 @@ class StickerBuilderTest extends TestCase
         $this->assertStringContainsString('Content-Type: image/png', (string) $stickerBuilder->get());
     }
 
-    public function testSetName()
+    public function testSetName(): void
     {
         $stickerBuilder = new StickerBuilder();
         $stickerBuilder->setFile('::file::', 'png');
@@ -40,7 +40,7 @@ class StickerBuilderTest extends TestCase
         $this->assertEquals('::name::', $stickerBuilder->getName());
     }
 
-    public function testSetDescription()
+    public function testSetDescription(): void
     {
         $stickerBuilder = new StickerBuilder();
         $stickerBuilder->setFile('::file::', 'png');
@@ -50,7 +50,7 @@ class StickerBuilderTest extends TestCase
         $this->assertEquals('::description::', $stickerBuilder->getDescription());
     }
 
-    public function testSetTags()
+    public function testSetTags(): void
     {
         $stickerBuilder = new StickerBuilder();
         $stickerBuilder->setFile('::file::', 'png');

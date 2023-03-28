@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Exan\Fenrir\Rest\Helpers\Channel\Message;
+namespace Ragnarok\Fenrir\Rest\Helpers\Channel\Message;
 
 trait SetContent
 {

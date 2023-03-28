@@ -2,10 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Exan\Fenrir\Rest;
+namespace Ragnarok\Fenrir\Rest;
 
 use Discord\Http\Http;
-use Exan\Fenrir\DataMapper;
+use Ragnarok\Fenrir\DataMapper;
+use Psr\Log\LoggerInterface;
 
 class Rest
 {
@@ -30,20 +31,22 @@ class Rest
      * - Guild
      * - Stage Instance
      */
-    public function __construct(private Http $http, private DataMapper $dataMapper)
+    public function __construct(private Http $http, private DataMapper $dataMapper, private LoggerInterface $logger)
     {
-        $this->auditLog = new AuditLog($this->http, $this->dataMapper);
-        $this->channel = new Channel($this->http, $this->dataMapper);
-        $this->emoji = new Emoji($this->http, $this->dataMapper);
-        $this->guildAutoModeration = new GuildAutoModeration($this->http, $this->dataMapper);
-        $this->guildScheduledEvent = new GuildScheduledEvent($this->http, $this->dataMapper);
-        $this->guildSticker = new GuildSticker($this->http, $this->dataMapper);
-        $this->guildTemplate = new GuildTemplate($this->http, $this->dataMapper);
-        $this->invite = new Invite($this->http, $this->dataMapper);
-        $this->sticker = new Sticker($this->http, $this->dataMapper);
-        $this->guildCommand = new GuildCommand($this->http, $this->dataMapper);
-        $this->globalCommand = new GlobalCommand($this->http, $this->dataMapper);
-        $this->webhook = new Webhook($this->http, $this->dataMapper);
-        $this->user = new User($this->http, $this->dataMapper);
+        $args = [$this->http, $this->dataMapper, $this->logger];
+
+        $this->auditLog = new AuditLog(...$args);
+        $this->channel = new Channel(...$args);
+        $this->emoji = new Emoji(...$args);
+        $this->guildAutoModeration = new GuildAutoModeration(...$args);
+        $this->guildScheduledEvent = new GuildScheduledEvent(...$args);
+        $this->guildSticker = new GuildSticker(...$args);
+        $this->guildTemplate = new GuildTemplate(...$args);
+        $this->invite = new Invite(...$args);
+        $this->sticker = new Sticker(...$args);
+        $this->guildCommand = new GuildCommand(...$args);
+        $this->globalCommand = new GlobalCommand(...$args);
+        $this->webhook = new Webhook(...$args);
+        $this->user = new User(...$args);
     }
 }

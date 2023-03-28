@@ -2,22 +2,22 @@
 
 declare(strict_types=1);
 
-namespace Exan\Fenrir\Rest\Helpers\Webhook;
+namespace Ragnarok\Fenrir\Rest\Helpers\Webhook;
 
 use Discord\Http\Multipart\MultipartBody;
-use Exan\Fenrir\Rest\Helpers\Channel\AttachmentBuilder;
-use Exan\Fenrir\Rest\Helpers\Channel\ComponentBuilder;
-use Exan\Fenrir\Rest\Helpers\Channel\EmbedBuilder;
-use Exan\Fenrir\Rest\Helpers\Channel\Message\AddAttachment;
-use Exan\Fenrir\Rest\Helpers\Channel\Message\AddComponent;
-use Exan\Fenrir\Rest\Helpers\Channel\Message\AddEmbed;
-use Exan\Fenrir\Rest\Helpers\Channel\Message\AddFile;
-use Exan\Fenrir\Rest\Helpers\Channel\Message\AllowMentions;
-use Exan\Fenrir\Rest\Helpers\Channel\Message\MultipartMessage;
-use Exan\Fenrir\Rest\Helpers\Channel\Message\SetContent;
-use Exan\Fenrir\Rest\Helpers\Channel\Message\SetFlags;
-use Exan\Fenrir\Rest\Helpers\Channel\Message\SetTts;
-use Exan\Fenrir\Rest\Helpers\GetNew;
+use Ragnarok\Fenrir\Rest\Helpers\Channel\AttachmentBuilder;
+use Ragnarok\Fenrir\Rest\Helpers\Channel\ComponentBuilder;
+use Ragnarok\Fenrir\Rest\Helpers\Channel\EmbedBuilder;
+use Ragnarok\Fenrir\Rest\Helpers\Channel\Message\AddAttachment;
+use Ragnarok\Fenrir\Rest\Helpers\Channel\Message\AddComponent;
+use Ragnarok\Fenrir\Rest\Helpers\Channel\Message\AddEmbed;
+use Ragnarok\Fenrir\Rest\Helpers\Channel\Message\AddFile;
+use Ragnarok\Fenrir\Rest\Helpers\Channel\Message\AllowMentions;
+use Ragnarok\Fenrir\Rest\Helpers\Channel\Message\MultipartMessage;
+use Ragnarok\Fenrir\Rest\Helpers\Channel\Message\SetContent;
+use Ragnarok\Fenrir\Rest\Helpers\Channel\Message\SetFlags;
+use Ragnarok\Fenrir\Rest\Helpers\Channel\Message\SetTts;
+use Ragnarok\Fenrir\Rest\Helpers\GetNew;
 
 /**
  * @see https://discord.com/developers/docs/resources/webhook#execute-webhook

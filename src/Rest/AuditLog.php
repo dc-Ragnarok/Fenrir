@@ -2,31 +2,22 @@
 
 declare(strict_types=1);
 
-namespace Exan\Fenrir\Rest;
+namespace Ragnarok\Fenrir\Rest;
 
 use Discord\Http\Endpoint;
-use Discord\Http\Http;
-use Exan\Fenrir\DataMapper;
-use Exan\Fenrir\Parts\AuditLog as PartsAuditLog;
-use Exan\Fenrir\Rest\Helpers\AuditLog\GetGuildAuditLogsBuilder;
-use Exan\Fenrir\Rest\Helpers\HttpHelper;
+use Ragnarok\Fenrir\Parts\AuditLog as PartsAuditLog;
+use Ragnarok\Fenrir\Rest\Helpers\AuditLog\GetGuildAuditLogsBuilder;
 use React\Promise\ExtendedPromiseInterface;
 
 /**
  * @see https://discord.com/developers/docs/resources/audit-log
  */
-class AuditLog
+class AuditLog extends HttpResource
 {
-    use HttpHelper;
-
-    public function __construct(private Http $http, private DataMapper $dataMapper)
-    {
-    }
-
     /**
      * @see https://discord.com/developers/docs/resources/audit-log#get-guild-audit-log
      *
-     * @return ExtendedPromiseInterface<\Exan\Fenrir\Parts\AuditLog>
+     * @return ExtendedPromiseInterface<\Ragnarok\Fenrir\Parts\AuditLog>
      */
     public function getGuildAuditLogs(
         string $guildId,
@@ -41,6 +32,6 @@ class AuditLog
                 $getGuildAuditLogsBuilder->get()
             ),
             PartsAuditLog::class
-        );
+        )->otherwise($this->logThrowable(...));
     }
 }

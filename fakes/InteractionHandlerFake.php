@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Fakes\Exan\Fenrir;
+namespace Fakes\Ragnarok\Fenrir;
 
-use Exan\Fenrir\InteractionHandler;
-use Exan\Fenrir\Rest\Helpers\Command\CommandBuilder;
+use Ragnarok\Fenrir\InteractionHandler;
+use Ragnarok\Fenrir\Rest\Helpers\Command\CommandBuilder;
 use PHPUnit\Framework\Assert;
 
 class InteractionHandlerFake extends InteractionHandler
@@ -38,7 +38,10 @@ class InteractionHandlerFake extends InteractionHandler
         $this->globalCommands[] = ['builder' => $commandBuilder, 'handler' => $handler];
     }
 
-    private function getCommandBuilders(array $commands)
+    /**
+     * @return CommandBuilder[]
+     */
+    private function getCommandBuilders(array $commands): array
     {
         return array_map(
             fn (array $command) => $command['builder'],
@@ -46,7 +49,7 @@ class InteractionHandlerFake extends InteractionHandler
         );
     }
 
-    public function assertHasDynamicCommand(callable $validator)
+    public function assertHasDynamicCommand(callable $validator): void
     {
         Assert::assertNotEmpty(
             array_filter($this->getCommandBuilders($this->dynamicCommands), $validator),
@@ -54,7 +57,7 @@ class InteractionHandlerFake extends InteractionHandler
         );
     }
 
-    public function assertHasGuildCommand(callable $validator)
+    public function assertHasGuildCommand(callable $validator): void
     {
         Assert::assertNotEmpty(
             array_filter($this->getCommandBuilders($this->guildCommands), $validator),
@@ -62,7 +65,7 @@ class InteractionHandlerFake extends InteractionHandler
         );
     }
 
-    public function assertHasGlobalCommand(callable $validator)
+    public function assertHasGlobalCommand(callable $validator): void
     {
         Assert::assertNotEmpty(
             array_filter($this->getCommandBuilders($this->globalCommands), $validator),

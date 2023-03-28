@@ -2,28 +2,22 @@
 
 declare(strict_types=1);
 
-namespace Exan\Fenrir\Rest;
+namespace Ragnarok\Fenrir\Rest;
 
 use Discord\Http\Http;
-use Exan\Fenrir\Rest\Helpers\HttpHelper;
-use Exan\Fenrir\DataMapper;
+use Ragnarok\Fenrir\Rest\Helpers\HttpHelper;
+use Ragnarok\Fenrir\DataMapper;
 
 /**
  * @see https://discord.com/developers/docs/resources/guild-template
  */
-class GuildTemplate
+class GuildTemplate extends HttpResource
 {
-    use HttpHelper;
-
-    public function __construct(private Http $http, private DataMapper $dataMapper)
-    {
-    }
-
     /**
      * @see https://discord.com/developers/docs/resources/guild-template#get-guild-templates
      * @todo implement call
      */
-    public function list()
+    public function list(): void
     {
     }
 
@@ -31,7 +25,7 @@ class GuildTemplate
      * @see https://discord.com/developers/docs/resources/guild-template#get-guild-template
      * @todo implement call
      */
-    public function get()
+    public function get(): void
     {
     }
 
@@ -39,7 +33,7 @@ class GuildTemplate
      * @see https://discord.com/developers/docs/resources/guild-template#create-guild-template
      * @todo implement call
      */
-    public function create()
+    public function create(): void
     {
     }
 
@@ -47,7 +41,7 @@ class GuildTemplate
      * @see https://discord.com/developers/docs/resources/guild-template#modify-guild-template
      * @todo implement call
      */
-    public function modify()
+    public function modify(): void
     {
     }
 
@@ -55,7 +49,7 @@ class GuildTemplate
      * @see https://discord.com/developers/docs/resources/guild-template#delete-guild-template
      * @todo implement call
      */
-    public function delete()
+    public function delete(): void
     {
     }
 
@@ -63,7 +57,7 @@ class GuildTemplate
      * @see https://discord.com/developers/docs/resources/guild-template#create-guild-from-guild-template
      * @todo implement call
      */
-    public function createGuildFromTemplate()
+    public function createGuildFromTemplate(): void
     {
     }
 
@@ -71,7 +65,7 @@ class GuildTemplate
      * @see https://discord.com/developers/docs/resources/guild-template#sync-guild-template
      * @todo implement call
      */
-    public function sync()
+    public function sync(): void
     {
     }
 }

@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Exan\Fenrir;
+namespace Ragnarok\Fenrir;
 
 use Evenement\EventEmitter;
-use Exan\Fenrir\Constants\WebsocketEvents;
-use Exan\Fenrir\Exceptions\Websocket\ConnectionNotInitializedException;
+use Ragnarok\Fenrir\Constants\WebsocketEvents;
+use Ragnarok\Fenrir\Exceptions\Websocket\ConnectionNotInitializedException;
 use JsonSerializable;
 use Psr\Log\LoggerInterface;
 use Ratchet\Client\Connector;
@@ -117,9 +117,11 @@ class Websocket extends EventEmitter
             );
 
             $this->bucket->run($action);
-        } else {
-            $action();
+
+            return;
         }
+
+        $action();
     }
 
     /**

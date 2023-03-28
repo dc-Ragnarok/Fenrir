@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Exan\Fenrir\Websocket\Events;
+namespace Ragnarok\Fenrir\Websocket\Events;
 
 use Carbon\Carbon;
 

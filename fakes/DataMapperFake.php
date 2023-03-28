@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Fakes\Exan\Fenrir;
+namespace Fakes\Ragnarok\Fenrir;
 
-use Exan\Fenrir\DataMapper;
+use Ragnarok\Fenrir\DataMapper;
 use Psr\Log\NullLogger;
 
 class DataMapperFake

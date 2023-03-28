@@ -2,21 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Tests\Exan\Fenrir\Rest;
+namespace Tests\Ragnarok\Fenrir\Rest;
 
-use Exan\Fenrir\Parts\AuditLog as PartsAuditLog;
-use Exan\Fenrir\Rest\AuditLog;
-use Exan\Fenrir\Rest\Helpers\AuditLog\GetGuildAuditLogsBuilder;
-use Tests\Exan\Fenrir\Rest\HttpHelperTestCase;
+use Ragnarok\Fenrir\Parts\AuditLog as PartsAuditLog;
+use Ragnarok\Fenrir\Rest\AuditLog;
+use Ragnarok\Fenrir\Rest\Helpers\AuditLog\GetGuildAuditLogsBuilder;
+use Tests\Ragnarok\Fenrir\Rest\HttpHelperTestCase;
 
 class AuditLogTest extends HttpHelperTestCase
 {
-    protected function setUp(): void
-    {
-        parent::setUp();
-
-        $this->httpItem = new AuditLog($this->http, $this->dataMapper);
-    }
+    protected string $httpItemClass = AuditLog::class;
 
     public function httpBindingsProvider(): array
     {

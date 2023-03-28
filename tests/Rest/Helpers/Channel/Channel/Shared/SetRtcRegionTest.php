@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Tests\Exan\Fenrir\Rest\Helpers\Channel\Channel\Shared;
+namespace Tests\Ragnarok\Fenrir\Rest\Helpers\Channel\Channel\Shared;
 
-use Exan\Fenrir\Rest\Helpers\Channel\Channel\Shared\SetRtcRegion;
+use Ragnarok\Fenrir\Rest\Helpers\Channel\Channel\Shared\SetRtcRegion;
 use PHPUnit\Framework\TestCase;
 
 class SetRtcRegionTest extends TestCase
 {
-    public function testSetRtcRegion()
+    public function testSetRtcRegion(): void
     {
         $class = new class extends DummyTraitTester {
             use SetRtcRegion;

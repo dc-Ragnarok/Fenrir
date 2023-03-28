@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Exan\Fenrir\Bitwise;
+namespace Ragnarok\Fenrir\Bitwise;
 
 use BackedEnum;
 

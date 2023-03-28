@@ -2,19 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Tests\Exan\Fenrir\Rest;
+namespace Tests\Ragnarok\Fenrir\Rest;
 
-use Exan\Fenrir\Parts\Invite;
-use Exan\Fenrir\Rest\Invite as RestInvite;
+use Ragnarok\Fenrir\Parts\Invite;
+use Ragnarok\Fenrir\Rest\Invite as RestInvite;
 
 class InviteTest extends HttpHelperTestCase
 {
-    protected function setUp(): void
-    {
-        parent::setUp();
-
-        $this->httpItem = new RestInvite($this->http, $this->dataMapper);
-    }
+    protected string $httpItemClass = RestInvite::class;
 
     public function httpBindingsProvider(): array
     {

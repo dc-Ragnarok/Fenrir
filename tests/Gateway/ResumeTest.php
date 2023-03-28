@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Tests\Exan\Fenrir\Gateway;
+namespace Tests\Ragnarok\Fenrir\Gateway;
 
-use Exan\Fenrir\Constants\Events;
-use Tests\Exan\Fenrir\Gateway\GatewayTestCase;
+use Ragnarok\Fenrir\Constants\Events;
+use Tests\Ragnarok\Fenrir\Gateway\GatewayTestCase;
 
 /**
  * @runTestsInSeparateProcesses
@@ -30,7 +30,7 @@ final class ResumeTest extends GatewayTestCase
         $this->loop->shouldReceive('addTimer', 'addPeriodicTimer');
     }
 
-    public function testResume()
+    public function testResume(): void
     {
         $this->mockIncomingMessage([
             'op' => 7,
@@ -62,14 +62,14 @@ final class ResumeTest extends GatewayTestCase
                 'intents' => 123,
                 'properties' => [
                     'os' => PHP_OS,
-                    'browser' => 'Exan\Fenrir',
-                    'device' => 'Exan\Fenrir',
+                    'browser' => 'Ragnarok\Fenrir',
+                    'device' => 'Ragnarok\Fenrir',
                 ]
             ]
         ]);
     }
 
-    public function testReconnectAndResume()
+    public function testReconnectAndResume(): void
     {
         $this->mockIncomingMessage([
             'op' => 9,
@@ -102,14 +102,14 @@ final class ResumeTest extends GatewayTestCase
                 'intents' => 123,
                 'properties' => [
                     'os' => PHP_OS,
-                    'browser' => 'Exan\Fenrir',
-                    'device' => 'Exan\Fenrir',
+                    'browser' => 'Ragnarok\Fenrir',
+                    'device' => 'Ragnarok\Fenrir',
                 ]
             ]
         ]);
     }
 
-    public function testReconnectAndReidentify()
+    public function testReconnectAndReidentify(): void
     {
         $this->mockIncomingMessage([
             'op' => 9,
@@ -141,8 +141,8 @@ final class ResumeTest extends GatewayTestCase
                 'intents' => 123,
                 'properties' => [
                     'os' => PHP_OS,
-                    'browser' => 'Exan\Fenrir',
-                    'device' => 'Exan\Fenrir',
+                    'browser' => 'Ragnarok\Fenrir',
+                    'device' => 'Ragnarok\Fenrir',
                 ]
             ]
         ]);

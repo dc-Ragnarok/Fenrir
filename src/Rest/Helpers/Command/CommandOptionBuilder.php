@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Exan\Fenrir\Rest\Helpers\Command;
+namespace Ragnarok\Fenrir\Rest\Helpers\Command;
 
-use Exan\Fenrir\Enums\Parts\ApplicationCommandOptionTypes;
-use Exan\Fenrir\Enums\Parts\ChannelTypes;
-use Exan\Fenrir\Rest\Helpers\GetNew;
+use Ragnarok\Fenrir\Enums\Parts\ApplicationCommandOptionTypes;
+use Ragnarok\Fenrir\Enums\Parts\ChannelTypes;
+use Ragnarok\Fenrir\Rest\Helpers\GetNew;
 
 class CommandOptionBuilder
 {
@@ -119,7 +119,7 @@ class CommandOptionBuilder
      *
      * @param array<string, string> $localizedNames `key => locale`, `value => description`
      */
-    public function addChoice(string $name, string|int|float $value, array $localizedNames = [])
+    public function addChoice(string $name, string|int|float $value, array $localizedNames = []): self
     {
         if (!isset($this->data['choices'])) {
             $this->data['choices'] = [];
@@ -130,14 +130,16 @@ class CommandOptionBuilder
             'localized_names' => $localizedNames,
             'value' => $value,
         ];
+
+        return $this;
     }
 
-    public function getChoices()
+    public function getChoices(): ?array
     {
         return $this->data['choices'] ?? null;
     }
 
-    public function addOption(CommandOptionBuilder $commandOptionBuilder)
+    public function addOption(CommandOptionBuilder $commandOptionBuilder): self
     {
         if (!isset($this->options)) {
             $this->options = [];

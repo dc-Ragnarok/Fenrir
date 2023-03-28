@@ -2,34 +2,29 @@
 
 declare(strict_types=1);
 
-namespace Tests\Exan\Fenrir\Rest;
+namespace Tests\Ragnarok\Fenrir\Rest;
 
-use Exan\Fenrir\Parts\Channel as PartsChannel;
-use Exan\Fenrir\Parts\Invite;
-use Exan\Fenrir\Parts\Message;
-use Exan\Fenrir\Parts\ThreadMember;
-use Exan\Fenrir\Parts\User;
-use Exan\Fenrir\Rest\Channel;
-use Exan\Fenrir\Rest\Helpers\Channel\Channel\GuildAnnouncementChannelBuilder;
-use Exan\Fenrir\Rest\Helpers\Channel\Channel\GuildForumChannelBuilder;
-use Exan\Fenrir\Rest\Helpers\Channel\Channel\GuildStageVoiceChannelBuilder;
-use Exan\Fenrir\Rest\Helpers\Channel\Channel\GuildTextChannelBuilder;
-use Exan\Fenrir\Rest\Helpers\Channel\Channel\GuildVoiceChannelBuilder;
-use Exan\Fenrir\Rest\Helpers\Channel\EditMessageBuilder;
-use Exan\Fenrir\Rest\Helpers\Channel\MessageBuilder;
-use Exan\Fenrir\Rest\Helpers\Channel\StartThreadFromMessageBuilder;
-use Exan\Fenrir\Rest\Helpers\Channel\StartThreadWithoutMessageBuilder;
-use Exan\Fenrir\Rest\Helpers\Emoji\EmojiBuilder;
-use Tests\Exan\Fenrir\Rest\HttpHelperTestCase;
+use Ragnarok\Fenrir\Parts\Channel as PartsChannel;
+use Ragnarok\Fenrir\Parts\Invite;
+use Ragnarok\Fenrir\Parts\Message;
+use Ragnarok\Fenrir\Parts\ThreadMember;
+use Ragnarok\Fenrir\Parts\User;
+use Ragnarok\Fenrir\Rest\Channel;
+use Ragnarok\Fenrir\Rest\Helpers\Channel\Channel\GuildAnnouncementChannelBuilder;
+use Ragnarok\Fenrir\Rest\Helpers\Channel\Channel\GuildForumChannelBuilder;
+use Ragnarok\Fenrir\Rest\Helpers\Channel\Channel\GuildStageVoiceChannelBuilder;
+use Ragnarok\Fenrir\Rest\Helpers\Channel\Channel\GuildTextChannelBuilder;
+use Ragnarok\Fenrir\Rest\Helpers\Channel\Channel\GuildVoiceChannelBuilder;
+use Ragnarok\Fenrir\Rest\Helpers\Channel\EditMessageBuilder;
+use Ragnarok\Fenrir\Rest\Helpers\Channel\MessageBuilder;
+use Ragnarok\Fenrir\Rest\Helpers\Channel\StartThreadFromMessageBuilder;
+use Ragnarok\Fenrir\Rest\Helpers\Channel\StartThreadWithoutMessageBuilder;
+use Ragnarok\Fenrir\Rest\Helpers\Emoji\EmojiBuilder;
+use Tests\Ragnarok\Fenrir\Rest\HttpHelperTestCase;
 
 class ChannelTest extends HttpHelperTestCase
 {
-    protected function setUp(): void
-    {
-        parent::setUp();
-
-        $this->httpItem = new Channel($this->http, $this->dataMapper);
-    }
+    protected string $httpItemClass = Channel::class;
 
     public function httpBindingsProvider(): array
     {

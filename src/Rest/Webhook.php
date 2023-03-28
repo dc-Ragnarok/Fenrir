@@ -2,28 +2,22 @@
 
 declare(strict_types=1);
 
-namespace Exan\Fenrir\Rest;
+namespace Ragnarok\Fenrir\Rest;
 
 use Discord\Http\Endpoint;
 use Discord\Http\Http;
-use Exan\Fenrir\Interaction\Helpers\InteractionCallbackBuilder;
-use Exan\Fenrir\Parts\Message;
-use Exan\Fenrir\Rest\Helpers\HttpHelper;
-use Exan\Fenrir\Rest\Helpers\Webhook\EditWebhookBuilder;
-use Exan\Fenrir\DataMapper;
+use Ragnarok\Fenrir\Interaction\Helpers\InteractionCallbackBuilder;
+use Ragnarok\Fenrir\Parts\Message;
+use Ragnarok\Fenrir\Rest\Helpers\HttpHelper;
+use Ragnarok\Fenrir\Rest\Helpers\Webhook\EditWebhookBuilder;
+use Ragnarok\Fenrir\DataMapper;
 use React\Promise\ExtendedPromiseInterface;
 
 /**
  * @see https://discord.com/developers/docs/resources/webhook
  */
-class Webhook
+class Webhook extends HttpResource
 {
-    use HttpHelper;
-
-    public function __construct(private Http $http, private DataMapper $dataMapper)
-    {
-    }
-
     /**
      * @see https://discord.com/developers/docs/interactions/receiving-and-responding#create-interaction-response
      */
@@ -39,7 +33,7 @@ class Webhook
                 $interactionToken
             ),
             $interactionCallbackBuilder->get()
-        );
+        )->otherwise($this->logThrowable(...));
     }
 
     /**
@@ -58,7 +52,7 @@ class Webhook
                 )
             ),
             Message::class
-        );
+        )->otherwise($this->logThrowable(...));
     }
 
     /**
@@ -79,7 +73,7 @@ class Webhook
                 $webhookBuilder->get()
             ),
             Message::class
-        );
+        )->otherwise($this->logThrowable(...));
     }
 
     /**
@@ -95,6 +89,6 @@ class Webhook
                 $applicationId,
                 $interactionToken
             )
-        );
+        )->otherwise($this->logThrowable(...));
     }
 }

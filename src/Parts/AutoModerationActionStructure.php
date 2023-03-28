@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Exan\Fenrir\Parts;
+namespace Ragnarok\Fenrir\Parts;
 
-use Exan\Fenrir\Enums\Parts\AutoModerationActionTypes;
+use Ragnarok\Fenrir\Enums\Parts\AutoModerationActionTypes;
 
 class AutoModerationActionStructure
 {

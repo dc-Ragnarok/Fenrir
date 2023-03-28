@@ -2,18 +2,18 @@
 
 declare(strict_types=1);
 
-namespace Exan\Fenrir\Parts;
+namespace Ragnarok\Fenrir\Parts;
 
-use Exan\Fenrir\Enums\Component\ButtonStyle;
-use Exan\Fenrir\Enums\Parts\ChannelTypes;
-use Exan\Fenrir\Enums\Parts\MessageComponentTypes;
-use Exan\Fenrir\Parts\Emoji;
+use Ragnarok\Fenrir\Enums\Component\ButtonStyle;
+use Ragnarok\Fenrir\Enums\Parts\ChannelTypes;
+use Ragnarok\Fenrir\Enums\Parts\MessageComponentTypes;
+use Ragnarok\Fenrir\Parts\Emoji;
 
 class Component
 {
     public MessageComponentTypes $type;
     /**
-     * @var \Exan\Fenrir\Parts\Component[]
+     * @var \Ragnarok\Fenrir\Parts\Component[]
      */
     public ?array $components;
     public ?ButtonStyle $style;
@@ -23,11 +23,11 @@ class Component
     public ?string $url;
     public ?bool $disabled;
     /**
-     * @var \Exan\Fenrir\Parts\ComponentSelectOptions[]
+     * @var \Ragnarok\Fenrir\Parts\ComponentSelectOptions[]
      */
     public ?array $options; // @todo
     /**
-     * @var \Exan\Fenrir\Enums\Parts\ChannelTypes[]
+     * @var \Ragnarok\Fenrir\Enums\Parts\ChannelTypes[]
      */
     public ?array $channel_types;
     public ?string $placeholder;

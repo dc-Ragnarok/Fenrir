@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Exan\Fenrir\Rest\Helpers;
+namespace Ragnarok\Fenrir\Rest\Helpers;
 
 trait GetNew
 {
-    public static function new()
+    public static function new(): static
     {
         return new static();
     }

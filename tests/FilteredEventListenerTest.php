@@ -2,14 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Tests\Exan\Fenrir;
+namespace Tests\Ragnarok\Fenrir;
 
 use Evenement\EventEmitter;
-use Exan\Fenrir\Constants\Events;
-use Exan\Fenrir\EventHandler;
-use Exan\Fenrir\FilteredEventEmitter;
-use Exan\Fenrir\Websocket\Objects\Payload;
-use Fakes\Exan\Fenrir\DataMapperFake;
+use Ragnarok\Fenrir\Constants\Events;
+use Ragnarok\Fenrir\EventHandler;
+use Ragnarok\Fenrir\FilteredEventEmitter;
+use Ragnarok\Fenrir\Websocket\Objects\Payload;
+use Fakes\Ragnarok\Fenrir\DataMapperFake;
+use Fakes\Ragnarok\Fenrir\PromiseFake;
 use Mockery;
 use Mockery\Adapter\Phpunit\MockeryTestCase;
 
@@ -19,7 +20,7 @@ use Mockery\Adapter\Phpunit\MockeryTestCase;
  */
 class FilteredEventListenerTest extends MockeryTestCase
 {
-    public function testFilteringEvents()
+    public function testFilteringEvents(): void
     {
 
         $eventEmitter = new EventEmitter();
@@ -43,7 +44,7 @@ class FilteredEventListenerTest extends MockeryTestCase
         $this->assertEquals([10], $container);
     }
 
-    public function testCancelEvent()
+    public function testCancelEvent(): void
     {
         $eventEmitter = new EventEmitter();
 
@@ -61,7 +62,7 @@ class FilteredEventListenerTest extends MockeryTestCase
         $this->assertCount(0, $eventEmitter->listeners('event'));
     }
 
-    public function testCancelByMaxItems()
+    public function testCancelByMaxItems(): void
     {
         $eventEmitter = new EventEmitter();
 
@@ -83,7 +84,7 @@ class FilteredEventListenerTest extends MockeryTestCase
         $this->assertCount(0, $eventEmitter->listeners('event'));
     }
 
-    public function testCancelByTimeout()
+    public function testCancelByTimeout(): void
     {
         /**
          * @var Mock
@@ -131,7 +132,7 @@ class FilteredEventListenerTest extends MockeryTestCase
         $this->assertCount(0, $eventEmitter->listeners('event'));
     }
 
-    public function testItAcceptsEventHandler()
+    public function testItAcceptsEventHandler(): void
     {
         $eventHandler = new EventHandler(
             DataMapperFake::get(),
@@ -158,5 +159,29 @@ class FilteredEventListenerTest extends MockeryTestCase
         $eventHandler->handle($payload);
 
         $this->assertCount(1, $container);
+    }
+
+    public function testFilteringEventsAsync(): void
+    {
+
+        $eventEmitter = new EventEmitter();
+
+        $filteredEmitter = new FilteredEventEmitter(
+            $eventEmitter,
+            'event',
+            fn (int $input) => PromiseFake::get($input === 10)
+        );
+
+        $container = [];
+        $filteredEmitter->on('event', function (int $input) use (&$container) {
+            $container[] = $input;
+        });
+
+        $filteredEmitter->start();
+
+        $eventEmitter->emit('event', [5]);
+        $eventEmitter->emit('event', [10]);
+
+        $this->assertEquals([10], $container);
     }
 }

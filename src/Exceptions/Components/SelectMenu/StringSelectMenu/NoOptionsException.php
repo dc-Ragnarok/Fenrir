@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Exan\Fenrir\Exceptions\Components\SelectMenu\StringSelectMenu;
+namespace Ragnarok\Fenrir\Exceptions\Components\SelectMenu\StringSelectMenu;
 
 use Exception;
 

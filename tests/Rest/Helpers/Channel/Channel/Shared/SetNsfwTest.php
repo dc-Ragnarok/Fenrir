@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Tests\Exan\Fenrir\Rest\Helpers\Channel\Channel\Shared;
+namespace Tests\Ragnarok\Fenrir\Rest\Helpers\Channel\Channel\Shared;
 
-use Exan\Fenrir\Rest\Helpers\Channel\Channel\Shared\SetNsfw;
+use Ragnarok\Fenrir\Rest\Helpers\Channel\Channel\Shared\SetNsfw;
 use PHPUnit\Framework\TestCase;
 
 class SetNsfwTest extends TestCase
 {
-    public function testSetNsfw()
+    public function testSetNsfw(): void
     {
         $class = new class extends DummyTraitTester {
             use SetNsfw;

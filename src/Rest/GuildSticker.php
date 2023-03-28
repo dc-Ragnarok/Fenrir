@@ -2,32 +2,26 @@
 
 declare(strict_types=1);
 
-namespace Exan\Fenrir\Rest;
+namespace Ragnarok\Fenrir\Rest;
 
 use Discord\Http\Endpoint;
 use Discord\Http\Http;
-use Exan\Fenrir\Parts\Sticker;
-use Exan\Fenrir\Rest\Helpers\GuildSticker\ModifyStickerBuilder;
-use Exan\Fenrir\Rest\Helpers\GuildSticker\StickerBuilder;
-use Exan\Fenrir\Rest\Helpers\HttpHelper;
-use Exan\Fenrir\DataMapper;
+use Ragnarok\Fenrir\Parts\Sticker;
+use Ragnarok\Fenrir\Rest\Helpers\GuildSticker\ModifyStickerBuilder;
+use Ragnarok\Fenrir\Rest\Helpers\GuildSticker\StickerBuilder;
+use Ragnarok\Fenrir\Rest\Helpers\HttpHelper;
+use Ragnarok\Fenrir\DataMapper;
 use React\Promise\ExtendedPromiseInterface;
 
 /**
  * @see https://discord.com/developers/docs/resources/sticker
  */
-class GuildSticker
+class GuildSticker extends HttpResource
 {
-    use HttpHelper;
-
-    public function __construct(private Http $http, private DataMapper $dataMapper)
-    {
-    }
-
     /**
      * @see https://discord.com/developers/docs/resources/sticker#list-guild-stickers
      *
-     * @return ExtendedPromiseInterface<\Exan\Fenrir\Parts\Sticker[]>
+     * @return ExtendedPromiseInterface<\Ragnarok\Fenrir\Parts\Sticker[]>
      */
     public function list(string $guildId): ExtendedPromiseInterface
     {
@@ -39,13 +33,13 @@ class GuildSticker
                 )
             ),
             Sticker::class
-        );
+        )->otherwise($this->logThrowable(...));
     }
 
     /**
      * @see https://discord.com/developers/docs/resources/sticker#get-guild-sticker
      *
-     * @return ExtendedPromiseInterface<\Exan\Fenrir\Parts\Sticker>
+     * @return ExtendedPromiseInterface<\Ragnarok\Fenrir\Parts\Sticker>
      */
     public function get(string $guildId, string $stickerId): ExtendedPromiseInterface
     {
@@ -58,13 +52,13 @@ class GuildSticker
                 )
             ),
             Sticker::class
-        );
+        )->otherwise($this->logThrowable(...));
     }
 
     /**
      * @see https://discord.com/developers/docs/resources/sticker#get-guild-sticker
      *
-     * @return ExtendedPromiseInterface<\Exan\Fenrir\Parts\Sticker>
+     * @return ExtendedPromiseInterface<\Ragnarok\Fenrir\Parts\Sticker>
      */
     public function create(string $guildId, StickerBuilder $stickerBuilder): ExtendedPromiseInterface
     {
@@ -77,12 +71,12 @@ class GuildSticker
                 $stickerBuilder->get()
             ),
             Sticker::class
-        );
+        )->otherwise($this->logThrowable(...));
     }
 
     /**
      * @see https://discord.com/developers/docs/resources/sticker#modify-guild-sticker
-     * @return ExtendedPromiseInterface<\Exan\Fenrir\Parts\Sticker>
+     * @return ExtendedPromiseInterface<\Ragnarok\Fenrir\Parts\Sticker>
      */
     public function modify(
         string $guildId,
@@ -99,7 +93,7 @@ class GuildSticker
                 $modifyStickerBuilder->get()
             ),
             Sticker::class
-        );
+        )->otherwise($this->logThrowable(...));
     }
 
     /**
@@ -115,6 +109,6 @@ class GuildSticker
                 $guildId,
                 $stickerId
             )
-        );
+        )->otherwise($this->logThrowable(...));
     }
 }

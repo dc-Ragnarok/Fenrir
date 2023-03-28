@@ -2,19 +2,19 @@
 
 declare(strict_types=1);
 
-namespace Exan\Fenrir;
+namespace Ragnarok\Fenrir;
 
 use Closure;
-use Exan\Fenrir\Component\Button\InteractionButton;
-use Exan\Fenrir\Constants\Events;
-use Exan\Fenrir\Enums\Parts\InteractionTypes;
-use Exan\Fenrir\Interaction\ButtonInteraction;
-use Exan\Fenrir\Interaction\CommandInteraction;
-use Exan\Fenrir\Parts\ApplicationCommand;
-use Exan\Fenrir\Rest\Helpers\Command\CommandBuilder;
-use Exan\Fenrir\Rest\Helpers\Command\QueuedCommand;
-use Exan\Fenrir\Websocket\Events\InteractionCreate;
-use Exan\Fenrir\Websocket\Events\Ready;
+use Ragnarok\Fenrir\Component\Button\InteractionButton;
+use Ragnarok\Fenrir\Constants\Events;
+use Ragnarok\Fenrir\Enums\Parts\InteractionTypes;
+use Ragnarok\Fenrir\Interaction\ButtonInteraction;
+use Ragnarok\Fenrir\Interaction\CommandInteraction;
+use Ragnarok\Fenrir\Parts\ApplicationCommand;
+use Ragnarok\Fenrir\Rest\Helpers\Command\CommandBuilder;
+use Ragnarok\Fenrir\Rest\Helpers\Command\QueuedCommand;
+use Ragnarok\Fenrir\Websocket\Events\InteractionCreate;
+use Ragnarok\Fenrir\Websocket\Events\Ready;
 use Throwable;
 
 class InteractionHandler
@@ -101,9 +101,11 @@ class InteractionHandler
 
         if ($this->devMode) {
             $this->registerGuildCommand($commandBuilder, $this->devGuildId, $handler);
-        } else {
-            $this->registerGlobalCommand($commandBuilder, $handler);
+
+            return;
         }
+
+        $this->registerGlobalCommand($commandBuilder, $handler);
     }
 
     public function registerGuildCommand(CommandBuilder $commandBuilder, string $guildId, Closure $handler): void
@@ -145,7 +147,7 @@ class InteractionHandler
         });
     }
 
-    private function activateCommandListener()
+    private function activateCommandListener(): void
     {
         if (isset($this->commandListener)) {
             return;
@@ -163,7 +165,7 @@ class InteractionHandler
         $this->commandListener->start();
     }
 
-    private function handleCommandInteraction(InteractionCreate $interactionCreate)
+    private function handleCommandInteraction(InteractionCreate $interactionCreate): void
     {
         if (!isset($this->handlersCommand[$interactionCreate->data->id])) {
             return;
@@ -174,14 +176,14 @@ class InteractionHandler
         $this->handlersCommand[$interactionCreate->data->id]($firedCommand);
     }
 
-    public function onButtonInteraction(InteractionButton $interactionButton, callable $action)
+    public function onButtonInteraction(InteractionButton $interactionButton, callable $action): void
     {
         $this->activateButtonListener();
 
         $this->handlersButton[$interactionButton->customId] = $action;
     }
 
-    private function activateButtonListener()
+    private function activateButtonListener(): void
     {
         if (isset($this->buttonListener)) {
             return;
@@ -200,7 +202,7 @@ class InteractionHandler
         $this->buttonListener->start();
     }
 
-    private function handleButtonInteraction(InteractionCreate $interactionCreate)
+    private function handleButtonInteraction(InteractionCreate $interactionCreate): void
     {
         if (!isset($this->handlersButton[$interactionCreate->data->custom_id])) {
             return;

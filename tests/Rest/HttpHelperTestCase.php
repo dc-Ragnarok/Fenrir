@@ -2,14 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Tests\Exan\Fenrir\Rest;
+namespace Tests\Ragnarok\Fenrir\Rest;
 
 use Discord\Http\Http;
-use Exan\Fenrir\DataMapper;
-use Fakes\Exan\Fenrir\DataMapperFake;
+use Ragnarok\Fenrir\DataMapper;
+use Ragnarok\Fenrir\Rest\HttpResource;
+use Fakes\Ragnarok\Fenrir\DataMapperFake;
 use Mockery;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use PHPUnit\Framework\TestCase;
+use Psr\Log\LoggerInterface;
 use React\Promise\Promise;
 use seregazhuk\React\PromiseTesting\AssertsPromise;
 
@@ -20,17 +22,25 @@ abstract class HttpHelperTestCase extends TestCase
     use AssertsPromise;
     use MockeryPHPUnitIntegration;
 
-    protected $httpItem;
+    protected HttpResource $httpItem;
 
     protected Http $http;
 
     protected DataMapper $dataMapper;
+
+    protected LoggerInterface $mockLog;
+
+    protected string $httpItemClass;
 
     protected function setUp(): void
     {
         $this->http = Mockery::mock(Http::class);
 
         $this->dataMapper = DataMapperFake::get();
+
+        $this->mockLog = Mockery::mock(LoggerInterface::class);
+
+        $this->httpItem = new $this->httpItemClass($this->http, $this->dataMapper, $this->mockLog);
     }
 
     abstract public function httpBindingsProvider(): array;
@@ -38,7 +48,7 @@ abstract class HttpHelperTestCase extends TestCase
     /**
      * @dataProvider httpBindingsProvider
      */
-    public function testFunctions(string $method, array $args, array $mockOptions, array $validationOptions)
+    public function testFunctions(string $method, array $args, array $mockOptions, array $validationOptions): void
     {
         $this->http->shouldReceive($mockOptions['method'])->andReturns(
             new Promise(function ($resolve) use ($mockOptions) {
@@ -61,5 +71,23 @@ abstract class HttpHelperTestCase extends TestCase
         } else {
             $this->assertInstanceOf($validationOptions['returnType'], $response);
         }
+    }
+
+    /**
+     * @dataProvider httpBindingsProvider
+     */
+    public function testItLogsErrors(string $method, array $args, array $mockOptions, array $validationOptions): void
+    {
+        $this->mockLog->shouldReceive('error')->once();
+
+        $this->http->shouldReceive($mockOptions['method'])->andReturns(
+            new Promise(static function ($resolve, $reject) {
+                $reject(new \Exception());
+            })
+        )->once();
+
+        $promise = call_user_func_array([$this->httpItem, $method], $args);
+
+        $this->mockLog->shouldHaveReceived('error');
     }
 }

@@ -2,22 +2,22 @@
 
 declare(strict_types=1);
 
-namespace Tests\Exan\Fenrir\Rest\Helpers\Channel\Channel\Shared;
+namespace Tests\Ragnarok\Fenrir\Rest\Helpers\Channel\Channel\Shared;
 
-use Exan\Fenrir\Constants\Validation\RateLimit;
-use Exan\Fenrir\Rest\Helpers\Channel\Channel\Shared\SetRateLimitPerUser;
+use Ragnarok\Fenrir\Constants\Validation\RateLimit;
+use Ragnarok\Fenrir\Rest\Helpers\Channel\Channel\Shared\SetRateLimitPerUser;
 use PHPUnit\Framework\TestCase;
 
 class SetRateLimitPerUserTest extends TestCase
 {
-    private function getTestClass()
+    private function getTestClass(): DummyTraitTester
     {
         return new class extends DummyTraitTester {
             use SetRateLimitPerUser;
         };
     }
 
-    public function testSetNormalRateLimitPerUser()
+    public function testSetNormalRateLimitPerUser(): void
     {
         $class = $this->getTestClass();
         $class->setRateLimitPerUser(RateLimit::MIN + 1);
@@ -26,7 +26,7 @@ class SetRateLimitPerUserTest extends TestCase
         $this->assertEquals(RateLimit::MIN + 1, $class->getRateLimitPerUser());
     }
 
-    public function testSetBelowZeroRateLimitPerUser()
+    public function testSetBelowZeroRateLimitPerUser(): void
     {
         $class = $this->getTestClass();
         $class->setRateLimitPerUser(RateLimit::MIN - 1);
@@ -35,7 +35,7 @@ class SetRateLimitPerUserTest extends TestCase
         $this->assertEquals(RateLimit::MIN, $class->getRateLimitPerUser());
     }
 
-    public function testSetAboveMaxRateLimitPerUser()
+    public function testSetAboveMaxRateLimitPerUser(): void
     {
         $class = $this->getTestClass();
         $class->setRateLimitPerUser(RateLimit::MAX + 1);
