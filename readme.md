@@ -60,7 +60,7 @@ Tests should pass nightly 8.3 builds, but this is not a supported usecase.
 You should not be using this library on an Apache2/Nginx/etc webserver.
 While there is nothing stopping you from using it on such environments, you should know what you're doing & limit yourself to only use Fenrir's REST capabilities.
 
-32-bit is not supported, tho no hard limit is in place.
+32-bit is not supported, though no hard limit is in place.
 
 ## Contributing
 
@@ -73,3 +73,6 @@ Please make sure to write tests where possible & make sure your code matches the
 
 The current underlying HTTP component is subject to change in the future.
 While the accesible API for it will remain similar, you should try to refrain from using it manually in your application.
+
+##### Jetbrains oss license
+Thanks to Jetbrains for providing an [OSS license](https://www.jetbrains.com/community/opensource/#support) for this project!
