@@ -9,7 +9,7 @@ use PHPUnit\Framework\TestCase;
 
 class SetParentIdTest extends TestCase
 {
-    public function testSetParentId()
+    public function testSetParentId(): void
     {
         $class = new class extends DummyTraitTester {
             use SetParentId;

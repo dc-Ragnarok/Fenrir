@@ -39,7 +39,7 @@ final class MissedHeartBeatTest extends GatewayTestCase
         $this->loop->shouldReceive('cancelTimer');
     }
 
-    public function testReconnectWhenHeartBeatNotAcknowledged()
+    public function testReconnectWhenHeartBeatNotAcknowledged(): void
     {
         $this->mockIncomingMessage([
             'op' => 10,

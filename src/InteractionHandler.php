@@ -79,7 +79,7 @@ class InteractionHandler
         });
     }
 
-    private function activateCommandListener()
+    private function activateCommandListener(): void
     {
         if (isset($this->commandListener)) {
             return;
@@ -97,7 +97,7 @@ class InteractionHandler
         $this->commandListener->start();
     }
 
-    private function handleCommandInteraction(InteractionCreate $interactionCreate)
+    private function handleCommandInteraction(InteractionCreate $interactionCreate): void
     {
         if (!isset($this->handlersCommand[$interactionCreate->data->id])) {
             return;
@@ -108,14 +108,14 @@ class InteractionHandler
         $this->handlersCommand[$interactionCreate->data->id]($firedCommand);
     }
 
-    public function onButtonInteraction(InteractionButton $interactionButton, callable $action)
+    public function onButtonInteraction(InteractionButton $interactionButton, callable $action): void
     {
         $this->activateButtonListener();
 
         $this->handlersButton[$interactionButton->customId] = $action;
     }
 
-    private function activateButtonListener()
+    private function activateButtonListener(): void
     {
         if (isset($this->buttonListener)) {
             return;
@@ -134,7 +134,7 @@ class InteractionHandler
         $this->buttonListener->start();
     }
 
-    private function handleButtonInteraction(InteractionCreate $interactionCreate)
+    private function handleButtonInteraction(InteractionCreate $interactionCreate): void
     {
         if (!isset($this->handlersButton[$interactionCreate->data->custom_id])) {
             return;

@@ -9,7 +9,7 @@ use PHPUnit\Framework\TestCase;
 
 class GetNewTest extends TestCase
 {
-    public function testGetNew()
+    public function testGetNew(): void
     {
         $class = new class {
             use GetNew;

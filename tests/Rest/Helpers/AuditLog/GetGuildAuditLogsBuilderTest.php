@@ -9,7 +9,7 @@ use PHPUnit\Framework\TestCase;
 
 class GetGuildAuditLogsBuilderTest extends TestCase
 {
-    public function testCanSetUserId()
+    public function testCanSetUserId(): void
     {
         $builder = new GetGuildAuditLogsBuilder();
         $builder->setUserId('::user id::');
@@ -18,7 +18,7 @@ class GetGuildAuditLogsBuilderTest extends TestCase
         $this->assertEquals('::user id::', $builder->getUserId());
     }
 
-    public function testCanSetActionType()
+    public function testCanSetActionType(): void
     {
         $builder = new GetGuildAuditLogsBuilder();
         $builder->setActionType(123);
@@ -27,7 +27,7 @@ class GetGuildAuditLogsBuilderTest extends TestCase
         $this->assertEquals(123, $builder->getActionType());
     }
 
-    public function testCanSetBefore()
+    public function testCanSetBefore(): void
     {
         $builder = new GetGuildAuditLogsBuilder();
         $builder->setBefore('::before::');
@@ -36,7 +36,7 @@ class GetGuildAuditLogsBuilderTest extends TestCase
         $this->assertEquals('::before::', $builder->getBefore());
     }
 
-    public function testCanSetAfter()
+    public function testCanSetAfter(): void
     {
         $builder = new GetGuildAuditLogsBuilder();
         $builder->setAfter('::after::');
@@ -45,7 +45,7 @@ class GetGuildAuditLogsBuilderTest extends TestCase
         $this->assertEquals('::after::', $builder->getAfter());
     }
 
-    public function testCanSetLimit()
+    public function testCanSetLimit(): void
     {
         $builder = new GetGuildAuditLogsBuilder();
         $builder->setLimit(-50);

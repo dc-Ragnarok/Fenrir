@@ -69,7 +69,7 @@ class GatewayTestCase extends MockeryTestCase
         $this->gateway->websocket->shouldHaveReceived('open', [Gateway::WEBSOCKET_URL]);
     }
 
-    protected function mockIncomingMessage(array $message)
+    protected function mockIncomingMessage(array $message): void
     {
         /**
          * @var Mock
@@ -80,12 +80,12 @@ class GatewayTestCase extends MockeryTestCase
         ($this->websocketHandlers[WebsocketEvents::MESSAGE])($messageMock);
     }
 
-    protected function assertMessageSent(array $message, bool $useBucket = true)
+    protected function assertMessageSent(array $message, bool $useBucket = true): void
     {
         $this->gateway->websocket->shouldHaveReceived('send', [json_encode($message), $useBucket]);
     }
 
-    protected function assertMessageNotSent(array $message, bool $useBucket = true)
+    protected function assertMessageNotSent(array $message, bool $useBucket = true): void
     {
         $this->gateway->websocket->shouldNotHaveReceived('send', [json_encode($message), $useBucket]);
     }

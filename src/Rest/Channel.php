@@ -54,7 +54,7 @@ class Channel extends HttpResource
      *
      * @return ExtendedPromiseInterface<\Ragnarok\Fenrir\Parts\Channel>
      */
-    public function modify(string $channelId, ChannelBuilder $channel, ?string $reason = null)
+    public function modify(string $channelId, ChannelBuilder $channel, ?string $reason = null): ExtendedPromiseInterface
     {
         return $this->mapPromise(
             $this->http->post(
@@ -241,7 +241,7 @@ class Channel extends HttpResource
         string $messageId,
         EmojiBuilder $emoji,
         GetReactionsBuilder $getReactionsBuilder = new GetReactionsBuilder()
-    ) {
+    ): ExtendedPromiseInterface {
         return $this->mapArrayPromise(
             $this->http->get(
                 Endpoint::bind(
@@ -297,8 +297,11 @@ class Channel extends HttpResource
      *
      * @return ExtendedPromiseInterface<\Ragnarok\Fenrir\Parts\Message>
      */
-    public function editMessage(string $channelId, string $messageId, EditMessageBuilder $message)
-    {
+    public function editMessage(
+        string $channelId,
+        string $messageId,
+        EditMessageBuilder $message
+    ): ExtendedPromiseInterface {
         return $this->mapPromise(
             $this->http->patch(
                 Endpoint::bind(
@@ -337,7 +340,7 @@ class Channel extends HttpResource
     /**
      * @todo implement call
      */
-    public function editChannelPermissions()
+    public function editChannelPermissions(): void
     {
     }
 
@@ -406,7 +409,7 @@ class Channel extends HttpResource
     /**
      * @todo implement call
      */
-    public function followAnnouncementChannel()
+    public function followAnnouncementChannel(): void
     {
     }
 
@@ -430,7 +433,7 @@ class Channel extends HttpResource
      *
      * @return ExtendedPromiseInterface<\Ragnarok\Fenrir\Parts\Message[]>
      */
-    public function getPinnedMessages(string $channelId)
+    public function getPinnedMessages(string $channelId): ExtendedPromiseInterface
     {
         return $this->mapArrayPromise(
             $this->http->get(
@@ -522,7 +525,7 @@ class Channel extends HttpResource
     /**
      * @todo implement call
      */
-    public function startThreadInForumChannel()
+    public function startThreadInForumChannel(): void
     {
     }
 
@@ -593,7 +596,7 @@ class Channel extends HttpResource
      *
      * @return ExtendedPromiseInterface<\Ragnarok\Fenrir\Parts\ThreadMember>
      */
-    public function getThreadMember(string $channelId, string $userId)
+    public function getThreadMember(string $channelId, string $userId): ExtendedPromiseInterface
     {
         return $this->mapPromise(
             $this->http->get(

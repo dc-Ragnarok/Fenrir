@@ -15,7 +15,7 @@ class GeneralSelectMenuTest extends TestCase
     /**
      * @dataProvider convertionExpectationProvider
      */
-    public function testCorrectlyConverted(array $args, array $expected)
+    public function testCorrectlyConverted(array $args, array $expected): void
     {
         $selectTypes = [
             MentionableSelectMenu::class => SelectMenuType::Mentionable,

@@ -49,7 +49,7 @@ class Bucket extends EventEmitter
         });
     }
 
-    private function execute(callable $action)
+    private function execute(callable $action): void
     {
         $this->uses++;
 
@@ -58,7 +58,7 @@ class Bucket extends EventEmitter
         $this->setTimer();
     }
 
-    private function setTimer()
+    private function setTimer(): void
     {
         $this->loop->addTimer($this->seconds, function () {
             $this->emit('DECREASE_USES');

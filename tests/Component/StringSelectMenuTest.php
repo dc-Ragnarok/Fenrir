@@ -27,7 +27,7 @@ class StringSelectMenuTest extends TestCase
     /**
      * @dataProvider convertionExpectationProvider
      */
-    public function testCorrectlyConverted(array $args, array $expected)
+    public function testCorrectlyConverted(array $args, array $expected): void
     {
         $select = new StringSelectMenu(...$args);
 
@@ -145,7 +145,7 @@ class StringSelectMenuTest extends TestCase
         ];
     }
 
-    public function testItThrowsAnExceptionWhenNoItemsAreSet()
+    public function testItThrowsAnExceptionWhenNoItemsAreSet(): void
     {
         $select = new StringSelectMenu('::custom id::');
 
@@ -153,7 +153,7 @@ class StringSelectMenuTest extends TestCase
         $select->get();
     }
 
-    public function testItThrowsAnExceptionWhenSettingToManyItems()
+    public function testItThrowsAnExceptionWhenSettingToManyItems(): void
     {
         $select = new StringSelectMenu('::custom id::');
 
@@ -174,7 +174,7 @@ class StringSelectMenuTest extends TestCase
     /**
      * @dataProvider optionConversionProvider
      */
-    public function testOptionConversion($args, $expected)
+    public function testOptionConversion($args, $expected): void
     {
         $select = new StringSelectMenu('::custom id::');
 

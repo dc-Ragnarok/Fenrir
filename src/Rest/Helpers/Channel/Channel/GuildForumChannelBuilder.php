@@ -37,7 +37,7 @@ class GuildForumChannelBuilder extends ChannelBuilder
         $this->setChannelType(ChannelTypes::GUILD_FORUM);
     }
 
-    public function addFlag(ChannelFlags $flag)
+    public function addFlag(ChannelFlags $flag): self
     {
         if (!isset($this->channelFlags)) {
             $this->channelFlags = new Bitwise();
@@ -46,6 +46,8 @@ class GuildForumChannelBuilder extends ChannelBuilder
         $this->channelFlags->add($flag);
 
         $this->data['flags'] = $this->channelFlags->get();
+
+        return $this;
     }
 
     /**

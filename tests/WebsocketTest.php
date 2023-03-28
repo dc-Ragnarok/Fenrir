@@ -17,7 +17,7 @@ use function Clue\React\Block\await;
 
 class WebsocketTest extends TestCase
 {
-    public function testItThrowsAnErrorForActionsThatRequireConnection()
+    public function testItThrowsAnErrorForActionsThatRequireConnection(): void
     {
         $websocket = new Websocket(10, new NullLogger());
 
@@ -28,7 +28,7 @@ class WebsocketTest extends TestCase
         $websocket->send('::message::');
     }
 
-    public function testItConnectsToWsAndHasIOMessagesWithoutBucket()
+    public function testItConnectsToWsAndHasIOMessagesWithoutBucket(): void
     {
         $websocket = new Websocket(10, new NullLogger());
 
@@ -47,7 +47,7 @@ class WebsocketTest extends TestCase
         $websocket->close(1001, '::reason::');
     }
 
-    public function testItConnectsToWsAndHasIOMessagesWithBucket()
+    public function testItConnectsToWsAndHasIOMessagesWithBucket(): void
     {
         $websocket = new Websocket(10, new NullLogger());
 
@@ -66,7 +66,7 @@ class WebsocketTest extends TestCase
         $websocket->close(1001, '::reason::');
     }
 
-    public function testItCanSendJsonSerializableItems()
+    public function testItCanSendJsonSerializableItems(): void
     {
         $websocket = new Websocket(10, new NullLogger());
 

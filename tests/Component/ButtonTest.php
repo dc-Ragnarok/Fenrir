@@ -29,7 +29,7 @@ class ButtonTest extends TestCase
     /**
      * @dataProvider convertionExpectationProvider
      */
-    public function testCorrectlyConverted(array $args, array $expected)
+    public function testCorrectlyConverted(array $args, array $expected): void
     {
         $buttonTypes = [
             DangerButton::class => ButtonStyle::Danger->value,
@@ -113,7 +113,7 @@ class ButtonTest extends TestCase
     /**
      * @dataProvider convertionExpectationProviderLinkButton
      */
-    public function testCorrectlyConvertedLinkButton(array $args, array $expected)
+    public function testCorrectlyConvertedLinkButton(array $args, array $expected): void
     {
         $button = new LinkButton(...$args);
 

@@ -9,7 +9,7 @@ use PHPUnit\Framework\TestCase;
 
 class SetBitrateTest extends TestCase
 {
-    public function testSetBitRate()
+    public function testSetBitRate(): void
     {
         $class = new class extends DummyTraitTester {
             use SetBitrate;
@@ -20,7 +20,7 @@ class SetBitrateTest extends TestCase
         $this->assertEquals(10000, $class->getBitrate());
     }
 
-    public function testSetBitRateLowerThanMinimum()
+    public function testSetBitRateLowerThanMinimum(): void
     {
         $class = new class extends DummyTraitTester {
             use SetBitrate;

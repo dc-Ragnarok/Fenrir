@@ -93,7 +93,7 @@ class Discord
         return $this;
     }
 
-    public static function getDebugInfo()
+    public static function getDebugInfo(): array
     {
         try {
             $version = InstalledVersions::getVersion('exan\\fenrir');

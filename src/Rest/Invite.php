@@ -21,7 +21,7 @@ class Invite extends HttpResource
      *
      * @return ExtendedPromiseInterface<\Ragnarok\Fenrir\Parts\Invite>
      */
-    public function get(string $code)
+    public function get(string $code): ExtendedPromiseInterface
     {
         return $this->mapPromise(
             $this->http->get(
@@ -39,7 +39,7 @@ class Invite extends HttpResource
      *
      * @return ExtendedPromiseInterface<void>
      */
-    public function delete(string $code)
+    public function delete(string $code): ExtendedPromiseInterface
     {
         return $this->http->delete(
             Endpoint::bind(

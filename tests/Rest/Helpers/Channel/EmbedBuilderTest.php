@@ -10,7 +10,7 @@ use PHPUnit\Framework\TestCase;
 
 class EmbedBuilderTest extends TestCase
 {
-    public function testSetTitle()
+    public function testSetTitle(): void
     {
         $builder = new EmbedBuilder();
         $this->assertNull($builder->getTitle());
@@ -20,7 +20,7 @@ class EmbedBuilderTest extends TestCase
         $this->assertEquals('Test Title', $builder->getTitle());
     }
 
-    public function testSetDescription()
+    public function testSetDescription(): void
     {
         $builder = new EmbedBuilder();
         $this->assertNull($builder->getDescription());
@@ -30,7 +30,7 @@ class EmbedBuilderTest extends TestCase
         $this->assertEquals('Test Description', $builder->getDescription());
     }
 
-    public function testSetUrl()
+    public function testSetUrl(): void
     {
         $builder = new EmbedBuilder();
         $this->assertNull($builder->getUrl());
@@ -40,7 +40,7 @@ class EmbedBuilderTest extends TestCase
         $this->assertEquals('https://test.com', $builder->getUrl());
     }
 
-    public function testSetTimestamp()
+    public function testSetTimestamp(): void
     {
         $builder = new EmbedBuilder();
         $this->assertNull($builder->getTimestamp());
@@ -51,7 +51,7 @@ class EmbedBuilderTest extends TestCase
         $this->assertEquals(new Carbon($timestamp->toIso8601String()), $builder->getTimestamp());
     }
 
-    public function testSetColor()
+    public function testSetColor(): void
     {
         $builder = new EmbedBuilder();
         $this->assertNull($builder->getColor());
@@ -61,7 +61,7 @@ class EmbedBuilderTest extends TestCase
         $this->assertEquals(123456, $builder->getColor());
     }
 
-    public function testSetColour()
+    public function testSetColour(): void
     {
         $builder = new EmbedBuilder();
         $this->assertNull($builder->getColour());
@@ -71,7 +71,7 @@ class EmbedBuilderTest extends TestCase
         $this->assertEquals(123456, $builder->getColour());
     }
 
-    public function testSetFooter()
+    public function testSetFooter(): void
     {
         $builder = new EmbedBuilder();
         $this->assertNull($builder->getFooter());
@@ -86,7 +86,7 @@ class EmbedBuilderTest extends TestCase
         $this->assertEquals($footer, $builder->getFooter());
     }
 
-    public function testSetImage()
+    public function testSetImage(): void
     {
         $builder = new EmbedBuilder();
         $this->assertNull($builder->getImage());
@@ -101,7 +101,7 @@ class EmbedBuilderTest extends TestCase
         $this->assertEquals($image, $builder->getImage());
     }
 
-    public function testSetThumbnail()
+    public function testSetThumbnail(): void
     {
         $builder = new EmbedBuilder();
         $this->assertNull($builder->getThumbnail());
@@ -116,7 +116,7 @@ class EmbedBuilderTest extends TestCase
         $this->assertEquals($thumbnail, $builder->getThumbnail());
     }
 
-    public function testSetAuthor()
+    public function testSetAuthor(): void
     {
         $builder = new EmbedBuilder();
         $this->assertNull($builder->getAuthor());
@@ -136,7 +136,7 @@ class EmbedBuilderTest extends TestCase
         $this->assertEquals($author, $builder->getAuthor());
     }
 
-    public function testAddField()
+    public function testAddField(): void
     {
         $builder = new EmbedBuilder();
         $this->assertNull($builder->getFields());
@@ -154,7 +154,7 @@ class EmbedBuilderTest extends TestCase
         $this->assertEquals($fields, $builder->getFields());
     }
 
-    public function testSetVideo()
+    public function testSetVideo(): void
     {
         $builder = new EmbedBuilder();
         $this->assertNull($builder->getVideo());
@@ -169,7 +169,7 @@ class EmbedBuilderTest extends TestCase
         $this->assertEquals($video, $builder->getVideo());
     }
 
-    public function testSetProvider()
+    public function testSetProvider(): void
     {
         $builder = new EmbedBuilder();
         $this->assertNull($builder->getProvider());
