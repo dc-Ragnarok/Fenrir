@@ -42,5 +42,5 @@ jobs:
         php-version: 8.1
     - name: Verify namespaces
       run: bash util/verify-namespacing.sh
-    - name: Verify namespaces
+    - name: Ensure no missing scrict types
       run: bash util/missing-strict-types.sh
