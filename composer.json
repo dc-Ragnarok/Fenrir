@@ -35,10 +35,13 @@
     },
     "scripts": {
         "md": "./vendor/bin/phpmd src text ruleset.xml",
+
         "cs": "./vendor/bin/phpcs --standard=PSR12 src tests fakes",
         "csf": "./vendor/bin/phpcbf --standard=PSR12 src tests fakes",
+
         "phpunit": "./vendor/bin/phpunit",
         "phpunit-coverage": "php -d xdebug.mode=coverage ./vendor/bin/phpunit --coverage-html .phpunit.cache/cov-html",
+
         "test": "php tests/WebsocketTestServer.php & PID=$!; composer phpunit; kill $PID;",
         "test-coverage": "php tests/WebsocketTestServer.php & PID=$!; composer phpunit-coverage; kill $PID;"
     },

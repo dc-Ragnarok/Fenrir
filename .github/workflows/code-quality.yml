@@ -1,12 +1,12 @@
 name: Fenrir Unit Tests
-run-name: ${{ github.actor }} is running tests
+run-name: ${{ github.actor }} is running code quality assurance
 on:
   pull_request:
   push:
     branches: master
 
 jobs:
-  test-8_1:
+  cs:
     runs-on: ubuntu-20.04
     steps:
     - uses: actions/checkout@v3
@@ -16,31 +16,40 @@ jobs:
         php-version: 8.1
     - name: Install packages
       run: composer install --no-progress
-    - name: Run tests
-      run: composer test
+    - name: Run CS
+      run: composer cs
 
-  test-8_2:
+  phpmd:
     runs-on: ubuntu-20.04
     steps:
     - uses: actions/checkout@v3
-    - name: Install PHP 8.2
+    - name: Install PHP 8.1
       uses: shivammathur/setup-php@v2
       with:
-        php-version: 8.2
+        php-version: 8.1
     - name: Install packages
       run: composer install --no-progress
-    - name: Run tests
-      run: composer test
+    - name: Run MD
+      run: composer md
 
-  test-8_3:
+  verify-namespaces:
     runs-on: ubuntu-20.04
     steps:
     - uses: actions/checkout@v3
-    - name: Install PHP 8.3
+    - name: Install PHP 8.1
       uses: shivammathur/setup-php@v2
       with:
-        php-version: 8.3
-    - name: Install packages
-      run: composer install --no-progress
-    - name: Run tests
-      run: composer test
+        php-version: 8.1
+    - name: Verify namespaces
+      run: bash util/verify-namespacing.sh
+
+  verify-strict-types:
+    runs-on: ubuntu-20.04
+    steps:
+    - uses: actions/checkout@v3
+    - name: Install PHP 8.1
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: 8.1
+    - name: Verify namespaces
+      run: bash util/missing-strict-types.sh
