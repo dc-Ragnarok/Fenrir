@@ -41,9 +41,11 @@ class Bucket extends EventEmitter
 
             if ($this->uses === $this->limit) {
                 $this->queue[] = $wrappedAction;
-            } else {
-                $this->execute($wrappedAction);
+
+                return;
             }
+
+            $this->execute($wrappedAction);
         });
     }
 

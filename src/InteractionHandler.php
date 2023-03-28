@@ -38,9 +38,11 @@ class InteractionHandler
     {
         if ($this->devMode) {
             $this->registerGuildCommand($commandBuilder, $this->devGuildId, $handler);
-        } else {
-            $this->registerGlobalCommand($commandBuilder, $handler);
+
+            return;
         }
+
+        $this->registerGlobalCommand($commandBuilder, $handler);
     }
 
     public function registerGuildCommand(CommandBuilder $commandBuilder, string $guildId, callable $handler): void

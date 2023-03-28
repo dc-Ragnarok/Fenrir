@@ -23,6 +23,11 @@ use React\Promise\ExtendedPromiseInterface;
 
 /**
  * @see https://discord.com/developers/docs/resources/channel
+ *
+ * @SuppressWarnings(PHPMD.TooManyMethods)
+ * @SuppressWarnings(PHPMD.TooManyPublicMethods)
+ *
+ * @todo seperate calls, `$this->reaction->create(...)` instead of `$this->createReaction(...)` etc
  */
 class Channel extends HttpResource
 {
@@ -507,7 +512,8 @@ class Channel extends HttpResource
                 Endpoint::bind(
                     Endpoint::CHANNEL_THREADS,
                     $channelId
-                )
+                ),
+                $startThreadWithoutMessageBuilder->get()
             ),
             PartsChannel::class
         )->otherwise($this->logThrowable(...));

@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Ragnarok\Fenrir\Rest\Helpers\Channel\Message;
 
+use Mimey\MimeTypes;
+
 trait AddFile
 {
     private array $files;
@@ -38,7 +40,7 @@ trait AddFile
             return $this;
         }
 
-        $type = (new \Mimey\MimeTypes())->getMimeType($fileInfo['extension']);
+        $type = (new MimeTypes())->getMimeType($fileInfo['extension']);
 
         if (!is_null($type)) {
             $file['type'] = $type;

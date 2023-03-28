@@ -30,7 +30,8 @@
         "mockery/mockery": "dev-master",
         "seregazhuk/react-promise-testing": "^0.6.1",
         "squizlabs/php_codesniffer": "^3.7",
-        "cboden/ratchet": "^0.4.4"
+        "cboden/ratchet": "^0.4.4",
+        "phpmd/phpmd": "^2.13"
     },
     "scripts": {
         "cs": "./vendor/bin/phpcs --standard=PSR12 src tests fakes",
