@@ -13,7 +13,7 @@ use React\EventLoop\Loop;
 use function Clue\React\Block\await;
 use function Clue\React\Block\awaitAll;
 
-class BucketTest extends TestCase
+class BucketTTest extends TestCase
 {
     use MockeryPHPUnitIntegration;
 
