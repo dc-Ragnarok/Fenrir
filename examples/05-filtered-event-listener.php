@@ -11,16 +11,15 @@ use Ragnarok\Fenrir\Websocket\Events\MessageReactionAdd;
 
 require './vendor/autoload.php';
 
-$discord = new Discord(
+$discord = (new Discord(
     'TOKEN',
-    Bitwise::from(
-        Intents::GUILD_MESSAGES,
-        Intents::DIRECT_MESSAGES,
-        Intents::MESSAGE_CONTENT,
-        Intents::GUILD_MESSAGE_REACTIONS,
-        Intents::DIRECT_MESSAGE_REACTIONS,
-    )
-);
+))->withGateway(Bitwise::from(
+    Intents::GUILD_MESSAGES,
+    Intents::DIRECT_MESSAGES,
+    Intents::MESSAGE_CONTENT,
+    Intents::GUILD_MESSAGE_REACTIONS,
+    Intents::DIRECT_MESSAGE_REACTIONS,
+))->withRest();
 
 $discord->gateway->events->on(Events::MESSAGE_CREATE, function (MessageCreate $message) use ($discord) {
     if ($message->content === '!createListener') {
