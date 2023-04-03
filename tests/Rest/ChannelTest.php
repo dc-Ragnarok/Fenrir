@@ -16,6 +16,7 @@ use Ragnarok\Fenrir\Rest\Helpers\Channel\Channel\GuildStageVoiceChannelBuilder;
 use Ragnarok\Fenrir\Rest\Helpers\Channel\Channel\GuildTextChannelBuilder;
 use Ragnarok\Fenrir\Rest\Helpers\Channel\Channel\GuildVoiceChannelBuilder;
 use Ragnarok\Fenrir\Rest\Helpers\Channel\EditMessageBuilder;
+use Ragnarok\Fenrir\Rest\Helpers\Channel\EditPermissionsBuilder;
 use Ragnarok\Fenrir\Rest\Helpers\Channel\MessageBuilder;
 use Ragnarok\Fenrir\Rest\Helpers\Channel\StartThreadFromMessageBuilder;
 use Ragnarok\Fenrir\Rest\Helpers\Channel\StartThreadWithoutMessageBuilder;
@@ -254,9 +255,15 @@ class ChannelTest extends HttpHelperTestCase
                 ],
                 'validationOptions' => [],
             ],
-            /**
-             * @todo editChannelPermissions
-             */
+            'Edit channel permissions' => [
+                'method' => 'editChannelPermissions',
+                'args' => ['::channel id::', EditPermissionsBuilder::new()->setMemberId('::member id::')],
+                'mockOptions' => [
+                    'method' => 'put',
+                    'return' => null,
+                ],
+                'validationOptions' => [],
+            ],
             'Get channel invites' => [
                 'method' => 'getChannelInvites',
                 'args' => ['::channel id::'],
@@ -289,9 +296,15 @@ class ChannelTest extends HttpHelperTestCase
                 ],
                 'validationOptions' => [],
             ],
-            /**
-             * @todo followAnnouncementChannel
-             */
+            'Follow announcement channel' => [
+                'method' => 'followAnnouncementChannel',
+                'args' => ['::channel id::', '::webhook channel id::'],
+                'mockOptions' => [
+                    'method' => 'post',
+                    'return' => null,
+                ],
+                'validationOptions' => [],
+            ],
             'Trigger typing indicator' => [
                 'method' => 'triggerTypingIndicator',
                 'args' => ['::channel id::'],

@@ -78,7 +78,7 @@ class InteractionHandlerTest extends MockeryTestCase
         $discord->rest->guildCommand
             ->shouldReceive('createApplicationCommand')
             ->with('::bot user id::', '::guild id::', $commandBuilder)
-            ->andReturn(new Promise(fn ($resolver) => $resolver))
+            ->andReturn(PromiseFake::get())
             ->once();
 
         $interactionHandler->registerGuildCommand(
@@ -183,10 +183,30 @@ class InteractionHandlerTest extends MockeryTestCase
             ))
             ->once();
 
+        $discord->rest->guildCommand
+            ->shouldReceive('createApplicationCommand')
+            ->with('::bot user id::', '::guild id::', $commandBuilder)
+            ->andReturn(PromiseFake::get(
+                DataMapperFake::get()->map([
+                    'id' => '::guild application command id::',
+                ], ApplicationCommand::class)
+            ))
+            ->once();
+
         $hasRun = false;
 
         $interactionHandler->registerGlobalCommand(
             $commandBuilder,
+            function ($command) use (&$hasRun) {
+                $hasRun = true;
+
+                $this->assertInstanceOf(CommandInteraction::class, $command);
+            }
+        );
+
+        $interactionHandler->registerGuildCommand(
+            $commandBuilder,
+            '::guild id::',
             function ($command) use (&$hasRun) {
                 $hasRun = true;
 
