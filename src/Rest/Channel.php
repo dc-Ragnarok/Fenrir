@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Ragnarok\Fenrir\Rest;
 
 use Discord\Http\Endpoint;
+use Ragnarok\Fenrir\Bitwise\Bitwise;
 use Ragnarok\Fenrir\Parts\Channel as PartsChannel;
 use Ragnarok\Fenrir\Parts\Invite;
 use Ragnarok\Fenrir\Parts\Message;
@@ -12,6 +13,7 @@ use Ragnarok\Fenrir\Parts\ThreadMember;
 use Ragnarok\Fenrir\Parts\User;
 use Ragnarok\Fenrir\Rest\Helpers\Channel\Channel\ChannelBuilder;
 use Ragnarok\Fenrir\Rest\Helpers\Channel\EditMessageBuilder;
+use Ragnarok\Fenrir\Rest\Helpers\Channel\EditPermissionsBuilder;
 use Ragnarok\Fenrir\Rest\Helpers\Channel\GetMessagesBuilder;
 use Ragnarok\Fenrir\Rest\Helpers\Channel\GetReactionsBuilder;
 use Ragnarok\Fenrir\Rest\Helpers\Channel\InviteBuilder;
@@ -338,10 +340,21 @@ class Channel extends HttpResource
     }
 
     /**
-     * @todo implement call
+     * @see https://discord.com/developers/docs/resources/channel#edit-channel-permissions
+     *
+     * @return ExtendedPromiseInterface<void>
      */
-    public function editChannelPermissions(): void
+    public function editChannelPermissions(string $channelId, EditPermissionsBuilder $editPermissionsBuilder, ?string $reason = null): ExtendedPromiseInterface
     {
+        return $this->http->put(
+            Endpoint::bind(
+                Endpoint::CHANNEL_PERMISSIONS,
+                $channelId,
+                $editPermissionsBuilder->getOverwriteId()
+            ),
+            $editPermissionsBuilder->get(),
+            $this->getAuditLogReasonHeader($reason)
+        )->otherwise($this->logThrowable(...));
     }
 
     /**
@@ -407,10 +420,19 @@ class Channel extends HttpResource
     }
 
     /**
-     * @todo implement call
+     * @see https://discord.com/developers/docs/resources/channel#follow-announcement-channel
+     *
+     * @return ExtendedPromiseInterface<void>
      */
-    public function followAnnouncementChannel(): void
+    public function followAnnouncementChannel(string $channelId, string $webhookChannelId): ExtendedPromiseInterface
     {
+        return $this->http->post(
+            Endpoint::bind(
+                Endpoint::CHANNEL_FOLLOW,
+                $channelId
+            ),
+            ['webhook_channel_id' => $webhookChannelId]
+        )->otherwise($this->logThrowable(...));
     }
 
     /**
