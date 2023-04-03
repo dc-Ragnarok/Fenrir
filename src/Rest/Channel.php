@@ -344,8 +344,11 @@ class Channel extends HttpResource
      *
      * @return ExtendedPromiseInterface<void>
      */
-    public function editChannelPermissions(string $channelId, EditPermissionsBuilder $editPermissionsBuilder, ?string $reason = null): ExtendedPromiseInterface
-    {
+    public function editChannelPermissions(
+        string $channelId,
+        EditPermissionsBuilder $editPermissionsBuilder,
+        ?string $reason = null
+    ): ExtendedPromiseInterface {
         return $this->http->put(
             Endpoint::bind(
                 Endpoint::CHANNEL_PERMISSIONS,

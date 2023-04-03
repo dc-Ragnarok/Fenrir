@@ -33,7 +33,7 @@ class EditPermissionsBuilderTest extends TestCase
         $this->assertEquals($builder->get()['type'], 0);
     }
 
-    public function testSetAllow()
+    public function testSetAllow(): void
     {
         $builder = EditPermissionsBuilder::new();
 
@@ -50,7 +50,7 @@ class EditPermissionsBuilderTest extends TestCase
         $this->assertEquals($bitwise->get(), $builder->getAllow()->get());
     }
 
-    public function testSetDeny()
+    public function testSetDeny(): void
     {
         $builder = EditPermissionsBuilder::new();
 

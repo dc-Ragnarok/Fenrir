@@ -56,7 +56,7 @@ class EditPermissionsBuilder
         return $this;
     }
 
-    public function getDeny()
+    public function getDeny(): ?Bitwise
     {
         return isset($this->data['deny'])
             ? Bitwise::fromBitSet($this->data['deny'])
