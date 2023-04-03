@@ -136,6 +136,9 @@ class Gateway
         $this->shouldIdentify = false;
     }
 
+    /**
+     * @SuppressWarnings(PHPMD.CyclomaticComplexity)
+     */
     private function handlePayload(Payload $payload): void
     {
         switch ($payload->op) {
@@ -171,15 +174,17 @@ class Gateway
              * Hello event
              */
             case 10:
-                if ($this->shouldIdentify) {
-                    $this->identify();
-                } else {
-                    $this->resume();
-                }
-
                 /** @var Hello */
                 $hello = $this->mapper->map($payload->d, Hello::class);
                 $this->handleHello($hello);
+
+                if ($this->shouldIdentify) {
+                    $this->identify();
+                    return;
+                }
+
+                $this->resume();
+
                 break;
 
             /**

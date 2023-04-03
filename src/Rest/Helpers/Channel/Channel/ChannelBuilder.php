@@ -50,8 +50,10 @@ abstract class ChannelBuilder
     //     return $this;
     // }
 
-    protected function setChannelType(ChannelTypes $type)
+    protected function setChannelType(ChannelTypes $type): self
     {
         $this->data['type'] = $type->value;
+
+        return $this;
     }
 }

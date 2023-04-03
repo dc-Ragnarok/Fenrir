@@ -14,7 +14,7 @@ class ChannelSelectMenuTest extends TestCase
     /**
      * @dataProvider convertionExpectationProvider
      */
-    public function testCorrectlyConverted(array $args, array $expected)
+    public function testCorrectlyConverted(array $args, array $expected): void
     {
         $select = new ChannelSelectMenu(...$args);
 

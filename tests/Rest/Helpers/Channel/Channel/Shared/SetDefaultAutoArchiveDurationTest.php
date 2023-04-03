@@ -9,7 +9,7 @@ use PHPUnit\Framework\TestCase;
 
 class SetDefaultAutoArchiveDurationTest extends TestCase
 {
-    public function testSetArchiveDuration()
+    public function testSetArchiveDuration(): void
     {
         $class = new class extends DummyTraitTester {
             use SetDefaultAutoArchiveDuration;

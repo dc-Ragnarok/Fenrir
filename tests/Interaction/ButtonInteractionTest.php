@@ -24,7 +24,7 @@ class ButtonInteractionTest extends MockeryTestCase
         return $interactionCreate;
     }
 
-    public function testCreateInteractionResponse()
+    public function testCreateInteractionResponse(): void
     {
         $discord = DiscordFake::get();
         $interactionCallbackBuilder = Mockery::mock(InteractionCallbackBuilder::class);

@@ -56,12 +56,14 @@ class AllowedMentionsBuilder
         return $this->data['users'];
     }
 
-    public function mentionRepliedUser()
+    public function mentionRepliedUser(): self
     {
         $this->data['replied_user'] = true;
+
+        return $this;
     }
 
-    public function mentionsRepliedUser()
+    public function mentionsRepliedUser(): bool
     {
         return isset($this->data['replied_user']) && $this->data['replied_user'];
     }

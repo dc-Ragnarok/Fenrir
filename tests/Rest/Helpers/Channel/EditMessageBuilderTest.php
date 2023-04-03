@@ -15,7 +15,7 @@ use PHPUnit\Framework\TestCase;
 
 class EditMessageBuilderTest extends TestCase
 {
-    public function testGetAttachments()
+    public function testGetAttachments(): void
     {
         $messageBuilder = EditMessageBuilder::new();
 
@@ -27,7 +27,7 @@ class EditMessageBuilderTest extends TestCase
         $this->assertEquals([$attachment->get()], $messageBuilder->get()['attachments']);
     }
 
-    public function testGetComponents()
+    public function testGetComponents(): void
     {
         $messageBuilder = EditMessageBuilder::new();
 
@@ -42,7 +42,7 @@ class EditMessageBuilderTest extends TestCase
         $this->assertEquals($component->get(), $messageBuilder->get()['components']);
     }
 
-    public function testGetEmbeds()
+    public function testGetEmbeds(): void
     {
         $messageBuilder = EditMessageBuilder::new();
 
@@ -54,7 +54,7 @@ class EditMessageBuilderTest extends TestCase
         $this->assertEquals([$embed->get()], $messageBuilder->get()['embeds']);
     }
 
-    public function testGetAllowedMentions()
+    public function testGetAllowedMentions(): void
     {
         $messageBuilder = EditMessageBuilder::new();
 

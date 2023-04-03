@@ -46,7 +46,7 @@ class FilteredEventEmitter extends EventEmitter
         };
     }
 
-    public function start()
+    public function start(): void
     {
         $this->eventEmitter->on($this->event, $this->listener);
 
@@ -55,7 +55,7 @@ class FilteredEventEmitter extends EventEmitter
         }
     }
 
-    public function cancel()
+    public function cancel(): void
     {
         $this->eventEmitter->removeListener($this->event, $this->listener);
     }

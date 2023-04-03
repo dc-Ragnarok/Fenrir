@@ -9,7 +9,7 @@ use PHPUnit\Framework\TestCase;
 
 class SetTopicTest extends TestCase
 {
-    public function testSetTopic()
+    public function testSetTopic(): void
     {
         $class = new class extends DummyTraitTester {
             use SetTopic;

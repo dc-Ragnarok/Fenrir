@@ -9,7 +9,7 @@ use PHPUnit\Framework\TestCase;
 
 class ModifyStickerBuilderTest extends TestCase
 {
-    public function testSetName()
+    public function testSetName(): void
     {
         $modifyStickerBuilder = new ModifyStickerBuilder();
         $modifyStickerBuilder->setName('::name::');
@@ -18,7 +18,7 @@ class ModifyStickerBuilderTest extends TestCase
         $this->assertEquals('::name::', $modifyStickerBuilder->getName());
     }
 
-    public function testSetDescription()
+    public function testSetDescription(): void
     {
         $modifyStickerBuilder = new ModifyStickerBuilder();
         $modifyStickerBuilder->setDescription('::description::');
@@ -27,7 +27,7 @@ class ModifyStickerBuilderTest extends TestCase
         $this->assertEquals('::description::', $modifyStickerBuilder->getDescription());
     }
 
-    public function testSetTags()
+    public function testSetTags(): void
     {
         $modifyStickerBuilder = new ModifyStickerBuilder();
         $modifyStickerBuilder->setTags('::tags::');

@@ -117,9 +117,11 @@ class Websocket extends EventEmitter
             );
 
             $this->bucket->run($action);
-        } else {
-            $action();
+
+            return;
         }
+
+        $action();
     }
 
     /**

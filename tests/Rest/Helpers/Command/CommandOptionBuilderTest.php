@@ -13,7 +13,7 @@ use PHPUnit\Framework\TestCase;
 
 class CommandOptionBuilderTest extends TestCase
 {
-    public function testGetType()
+    public function testGetType(): void
     {
         $builder = new CommandOptionBuilder();
         $this->assertNull($builder->getType());
@@ -23,7 +23,7 @@ class CommandOptionBuilderTest extends TestCase
         $this->assertEquals(ApplicationCommandOptionTypes::SUB_COMMAND->value, $builder->get()['type']);
     }
 
-    public function testSetName()
+    public function testSetName(): void
     {
         $builder = new CommandOptionBuilder();
         $this->assertNull($builder->getName());
@@ -33,7 +33,7 @@ class CommandOptionBuilderTest extends TestCase
         $this->assertEquals('option-name', $builder->get()['name']);
     }
 
-    public function testSetNameLocalizations()
+    public function testSetNameLocalizations(): void
     {
         $builder = new CommandOptionBuilder();
         $localizations = [
@@ -47,7 +47,7 @@ class CommandOptionBuilderTest extends TestCase
         $this->assertEquals($localizations, $builder->get()['name_localizations']);
     }
 
-    public function testSetDescription()
+    public function testSetDescription(): void
     {
         $builder = new CommandOptionBuilder();
         $this->assertNull($builder->getDescription());
@@ -57,7 +57,7 @@ class CommandOptionBuilderTest extends TestCase
         $this->assertEquals('option-description', $builder->get()['description']);
     }
 
-    public function testSetDescriptionLocalizations()
+    public function testSetDescriptionLocalizations(): void
     {
         $builder = new CommandOptionBuilder();
         $this->assertNull($builder->getDescriptionLocalizations());
@@ -73,7 +73,7 @@ class CommandOptionBuilderTest extends TestCase
         $this->assertEquals($descriptionLocalizations, $builder->getDescriptionLocalizations());
     }
 
-    public function testSetRequired()
+    public function testSetRequired(): void
     {
         $builder = new CommandOptionBuilder();
         $this->assertNull($builder->getRequired());
@@ -83,7 +83,7 @@ class CommandOptionBuilderTest extends TestCase
         $this->assertTrue($builder->get()['required']);
     }
 
-    public function testAddChoice()
+    public function testAddChoice(): void
     {
         $builder = new CommandOptionBuilder();
         $this->assertEmpty($builder->getChoices());
@@ -101,7 +101,7 @@ class CommandOptionBuilderTest extends TestCase
         ], $builder->get()['choices']);
     }
 
-    public function testAddCommandOption()
+    public function testAddCommandOption(): void
     {
         $commandOptionBuilder = new CommandOptionBuilder();
 
@@ -116,7 +116,7 @@ class CommandOptionBuilderTest extends TestCase
         $this->assertEquals([['::option::']], $commandOptionBuilder->get()['options']);
     }
 
-    public function testSetChannelTypes()
+    public function testSetChannelTypes(): void
     {
         $commandOptionBuilder = CommandOptionBuilder::new();
         $this->assertNull($commandOptionBuilder->getChannelTypes());
@@ -132,7 +132,7 @@ class CommandOptionBuilderTest extends TestCase
         ], $commandOptionBuilder->get()['channel_types']);
     }
 
-    public function testSetMinValue()
+    public function testSetMinValue(): void
     {
         $builder = new CommandOptionBuilder();
         $this->assertNull($builder->getMinValue());
@@ -141,7 +141,7 @@ class CommandOptionBuilderTest extends TestCase
         $this->assertEquals(5, $builder->get()['min_value']);
     }
 
-    public function testSetMaxValue()
+    public function testSetMaxValue(): void
     {
         $builder = new CommandOptionBuilder();
         $this->assertNull($builder->getMaxValue());
@@ -150,7 +150,7 @@ class CommandOptionBuilderTest extends TestCase
         $this->assertEquals(10, $builder->get()['max_value']);
     }
 
-    public function testSetMinLength()
+    public function testSetMinLength(): void
     {
         $builder = new CommandOptionBuilder();
         $this->assertNull($builder->getMinLength());
@@ -159,7 +159,7 @@ class CommandOptionBuilderTest extends TestCase
         $this->assertEquals(3, $builder->get()['min_length']);
     }
 
-    public function testSetMaxLength()
+    public function testSetMaxLength(): void
     {
         $builder = new CommandOptionBuilder();
         $this->assertNull($builder->getMaxLength());
@@ -168,7 +168,7 @@ class CommandOptionBuilderTest extends TestCase
         $this->assertEquals(20, $builder->get()['max_length']);
     }
 
-    public function testSetAutoComplete()
+    public function testSetAutoComplete(): void
     {
         $builder = new CommandOptionBuilder();
 

@@ -15,7 +15,7 @@ class ChannelBuilderTest extends TestCase
         };
     }
 
-    public function testSetName()
+    public function testSetName(): void
     {
         $builder = $this->getBuilder();
         $builder->setName('::name::');
@@ -23,7 +23,7 @@ class ChannelBuilderTest extends TestCase
         $this->assertEquals('::name::', $builder->get()['name']);
     }
 
-    public function testSetPosition()
+    public function testSetPosition(): void
     {
         $builder = $this->getBuilder();
         $builder->setPosition(1);
@@ -34,7 +34,7 @@ class ChannelBuilderTest extends TestCase
     /**
      * @todo Overwrite builder
      */
-    // public function testAddPermissionOverwrites()
+    // public function testAddPermissionOverwrites(): void
     // {
     //     $overwrite = new Overwrite(OverwriteTypes::MEMBER);
     //     $builder = $this->getBuilder();

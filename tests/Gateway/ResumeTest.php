@@ -30,7 +30,7 @@ final class ResumeTest extends GatewayTestCase
         $this->loop->shouldReceive('addTimer', 'addPeriodicTimer');
     }
 
-    public function testResume()
+    public function testResume(): void
     {
         $this->mockIncomingMessage([
             'op' => 7,
@@ -69,7 +69,7 @@ final class ResumeTest extends GatewayTestCase
         ]);
     }
 
-    public function testReconnectAndResume()
+    public function testReconnectAndResume(): void
     {
         $this->mockIncomingMessage([
             'op' => 9,
@@ -109,7 +109,7 @@ final class ResumeTest extends GatewayTestCase
         ]);
     }
 
-    public function testReconnectAndReidentify()
+    public function testReconnectAndReidentify(): void
     {
         $this->mockIncomingMessage([
             'op' => 9,

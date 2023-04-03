@@ -22,7 +22,7 @@ class RegularEventsForwardingTest extends GatewayTestCase
         $this->gateway->events->shouldReceive('handle');
     }
 
-    public function testRegularEventsGetForwardedToEventHandler()
+    public function testRegularEventsGetForwardedToEventHandler(): void
     {
         $this->mockIncomingMessage(['op' => 0, 't' => '::some event::']);
 

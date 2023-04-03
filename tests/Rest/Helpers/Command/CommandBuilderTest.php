@@ -14,7 +14,7 @@ use PHPUnit\Framework\TestCase;
 
 class CommandBuilderTest extends TestCase
 {
-    public function testSetName()
+    public function testSetName(): void
     {
         $commandBuilder = new CommandBuilder();
         $commandBuilder->setName('test_name');
@@ -22,7 +22,7 @@ class CommandBuilderTest extends TestCase
         $this->assertEquals('test_name', $commandBuilder->get()['name']);
     }
 
-    public function testSetNameLocalizations()
+    public function testSetNameLocalizations(): void
     {
         $commandBuilder = new CommandBuilder();
         $localizations = ['en_US' => 'test_name', 'fr_FR' => 'test_name_hon_hon'];
@@ -31,7 +31,7 @@ class CommandBuilderTest extends TestCase
         $this->assertEquals($localizations, $commandBuilder->get()['name_localizations']);
     }
 
-    public function testItValidatesNames()
+    public function testItValidatesNames(): void
     {
         $commandBuilder = new CommandBuilder();
 
@@ -40,7 +40,7 @@ class CommandBuilderTest extends TestCase
         $commandBuilder->setName('::colons arent allowed woo::');
     }
 
-    public function testItValidatesLocalizationNames()
+    public function testItValidatesLocalizationNames(): void
     {
         $commandBuilder = new CommandBuilder();
 
@@ -49,7 +49,7 @@ class CommandBuilderTest extends TestCase
         $commandBuilder->setNameLocalizations(['en' => '::colons arent allowed woo::']);
     }
 
-    public function testSetDescription()
+    public function testSetDescription(): void
     {
         $commandBuilder = new CommandBuilder();
         $commandBuilder->setDescription('::description::');
@@ -57,7 +57,7 @@ class CommandBuilderTest extends TestCase
         $this->assertEquals('::description::', $commandBuilder->get()['description']);
     }
 
-    public function testSetDescriptionLocalizations()
+    public function testSetDescriptionLocalizations(): void
     {
         $commandBuilder = new CommandBuilder();
         $localizations = ['en_US' => '::description::', 'fr_FR' => '::baguette::'];
@@ -66,7 +66,7 @@ class CommandBuilderTest extends TestCase
         $this->assertEquals($localizations, $commandBuilder->get()['description_localizations']);
     }
 
-    public function testAddOption()
+    public function testAddOption(): void
     {
         $commandBuilder = new CommandBuilder();
 
@@ -79,7 +79,7 @@ class CommandBuilderTest extends TestCase
         $this->assertEquals($optionBuilder->get(), $commandBuilder->get()['options'][0]);
     }
 
-    public function testSetDefaultMemberPermissions()
+    public function testSetDefaultMemberPermissions(): void
     {
         $commandBuilder = new CommandBuilder();
         $permissions = Bitwise::from(
@@ -93,7 +93,7 @@ class CommandBuilderTest extends TestCase
         $this->assertEquals($permissions->getBitSet(), $commandBuilder->get()['default_member_permissions']);
     }
 
-    public function testSetDmPermission()
+    public function testSetDmPermission(): void
     {
         $commandBuilder = new CommandBuilder();
         $commandBuilder->setDmPermission(true);
@@ -101,7 +101,7 @@ class CommandBuilderTest extends TestCase
         $this->assertTrue($commandBuilder->get()['dm_permissions']);
     }
 
-    public function testSetType()
+    public function testSetType(): void
     {
         $commandBuilder = new CommandBuilder();
         $type = ApplicationCommandTypes::CHAT_INPUT;
@@ -111,7 +111,7 @@ class CommandBuilderTest extends TestCase
         $this->assertEquals($type->value, $commandBuilder->get()['type']);
     }
 
-    public function testSetNsfw()
+    public function testSetNsfw(): void
     {
         $commandBuilder = new CommandBuilder();
         $commandBuilder->setNsfw(true);

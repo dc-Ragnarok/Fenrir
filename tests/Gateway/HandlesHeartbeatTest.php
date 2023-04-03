@@ -36,7 +36,7 @@ final class HandlesHeartbeatTest extends GatewayTestCase
         $this->loop->shouldReceive('cancelTimer');
     }
 
-    public function testHandlesHello()
+    public function testHandlesHello(): void
     {
         $this->mockIncomingMessage([
             'op' => 10,
@@ -64,7 +64,7 @@ final class HandlesHeartbeatTest extends GatewayTestCase
         ], false);
     }
 
-    public function testAcknowledgesHearbeat()
+    public function testAcknowledgesHearbeat(): void
     {
         // 10 starts sending heartbeats, which starts a timer to reconnect
         $this->mockIncomingMessage([
@@ -82,7 +82,7 @@ final class HandlesHeartbeatTest extends GatewayTestCase
         $this->loop->shouldHaveReceived('cancelTimer', [$this->timerInterface]);
     }
 
-    public function testShouldNotCancelTimerIfNoneIsSet()
+    public function testShouldNotCancelTimerIfNoneIsSet(): void
     {
         // 11 acknowledges the hearbeat send by client
         $this->mockIncomingMessage([
@@ -92,7 +92,7 @@ final class HandlesHeartbeatTest extends GatewayTestCase
         $this->loop->shouldNotHaveReceived('cancelTimer');
     }
 
-    public function testShouldStopHeartBeatForReconnect()
+    public function testShouldStopHeartBeatForReconnect(): void
     {
         $this->mockIncomingMessage([
             'op' => 10,

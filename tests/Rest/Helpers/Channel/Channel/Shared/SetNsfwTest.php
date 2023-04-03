@@ -9,7 +9,7 @@ use PHPUnit\Framework\TestCase;
 
 class SetNsfwTest extends TestCase
 {
-    public function testSetNsfw()
+    public function testSetNsfw(): void
     {
         $class = new class extends DummyTraitTester {
             use SetNsfw;

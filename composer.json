@@ -30,13 +30,18 @@
         "mockery/mockery": "dev-master",
         "seregazhuk/react-promise-testing": "^0.6.1",
         "squizlabs/php_codesniffer": "^3.7",
-        "cboden/ratchet": "^0.4.4"
+        "cboden/ratchet": "^0.4.4",
+        "phpmd/phpmd": "^2.13"
     },
     "scripts": {
-        "cs": "./vendor/bin/phpcs --standard=PSR12 src tests fakes",
-        "csf": "./vendor/bin/phpcbf --standard=PSR12 src tests fakes",
+        "md": "./vendor/bin/phpmd src text ruleset.xml",
+
+        "cs": "./vendor/bin/phpcs --standard=phpcs src tests fakes phpcs",
+        "csf": "./vendor/bin/phpcbf --standard=phpcs src tests fakes phpcs",
+
         "phpunit": "./vendor/bin/phpunit",
         "phpunit-coverage": "php -d xdebug.mode=coverage ./vendor/bin/phpunit --coverage-html .phpunit.cache/cov-html",
+
         "test": "php tests/WebsocketTestServer.php & PID=$!; composer phpunit; kill $PID;",
         "test-coverage": "php tests/WebsocketTestServer.php & PID=$!; composer phpunit-coverage; kill $PID;"
     },

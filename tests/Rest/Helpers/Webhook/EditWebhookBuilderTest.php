@@ -15,7 +15,7 @@ use PHPUnit\Framework\TestCase;
 
 class EditWebhookBuilderTest extends TestCase
 {
-    public function testGetAttachments()
+    public function testGetAttachments(): void
     {
         $webhookBuilder = EditWebhookBuilder::new();
 
@@ -27,7 +27,7 @@ class EditWebhookBuilderTest extends TestCase
         $this->assertEquals([$attachment->get()], $webhookBuilder->get()['attachments']);
     }
 
-    public function testGetComponents()
+    public function testGetComponents(): void
     {
         $webhookBuilder = EditWebhookBuilder::new();
 
@@ -42,7 +42,7 @@ class EditWebhookBuilderTest extends TestCase
         $this->assertEquals($component->get(), $webhookBuilder->get()['components']);
     }
 
-    public function testGetEmbeds()
+    public function testGetEmbeds(): void
     {
         $webhookBuilder = EditWebhookBuilder::new();
 
@@ -54,7 +54,7 @@ class EditWebhookBuilderTest extends TestCase
         $this->assertEquals([$embed->get()], $webhookBuilder->get()['embeds']);
     }
 
-    public function testGetAllowedMentions()
+    public function testGetAllowedMentions(): void
     {
         $webhookBuilder = EditWebhookBuilder::new();
 
@@ -66,7 +66,7 @@ class EditWebhookBuilderTest extends TestCase
         $this->assertEquals($allowedMentions->get(), $webhookBuilder->get()['allowed_mentions']);
     }
 
-    public function testRequiresMultipart()
+    public function testRequiresMultipart(): void
     {
         $builder = new EditWebhookBuilder();
 
@@ -78,7 +78,7 @@ class EditWebhookBuilderTest extends TestCase
         $this->assertEquals(true, $builder->requiresMultipart());
     }
 
-    public function testGetMultipart()
+    public function testGetMultipart(): void
     {
         $builder = new EditWebhookBuilder();
 

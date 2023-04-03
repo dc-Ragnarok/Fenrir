@@ -17,7 +17,7 @@ class BucketTest extends TestCase
 {
     use MockeryPHPUnitIntegration;
 
-    public function testLimit()
+    public function testLimit(): void
     {
         $bucket = new Bucket(Loop::get(), 2, 1);
 
@@ -39,7 +39,7 @@ class BucketTest extends TestCase
         $this->assertGreaterThanOrEqual(0.99, $end - $mid);
     }
 
-    public function testRejectsPromiseOnError()
+    public function testRejectsPromiseOnError(): void
     {
         $bucket = new Bucket(Loop::get(), 2, 1);
 

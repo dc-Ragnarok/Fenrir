@@ -26,7 +26,7 @@ class StringSelectMenu extends SelectMenu
         ?string $description = null,
         ?EmojiBuilder $emoji = null,
         ?bool $default = null
-    ) {
+    ): self {
         if (count($this->items) === 25) {
             throw new TooManyOptionsException();
         }
@@ -49,6 +49,8 @@ class StringSelectMenu extends SelectMenu
         }
 
         $this->items[] = $item;
+
+        return $this;
     }
 
     /**

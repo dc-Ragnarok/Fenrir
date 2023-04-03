@@ -21,7 +21,7 @@ use PHPUnit\Framework\TestCase;
 
 class MessageTraitsTest extends TestCase
 {
-    public function testSetContent()
+    public function testSetContent(): void
     {
         $traitTester = new class {
             use SetContent;
@@ -35,7 +35,7 @@ class MessageTraitsTest extends TestCase
         $this->assertEquals('::content::', $traitTester->getContent());
     }
 
-    public function testAddEmbed()
+    public function testAddEmbed(): void
     {
         $traitTester = new class {
             use AddEmbed;
@@ -51,7 +51,7 @@ class MessageTraitsTest extends TestCase
         $this->assertTrue($traitTester->hasEmbeds());
     }
 
-    public function testSetFlags()
+    public function testSetFlags(): void
     {
         $traitTester = new class {
             use SetFlags;
@@ -64,7 +64,7 @@ class MessageTraitsTest extends TestCase
         $this->assertEquals(1, $traitTester->getFlags());
     }
 
-    public function testAllowMentions()
+    public function testAllowMentions(): void
     {
         $traitTester = new class {
             use AllowMentions;
@@ -80,7 +80,7 @@ class MessageTraitsTest extends TestCase
         $this->assertTrue($traitTester->hasAllowedMentions());
     }
 
-    public function testNoMentions()
+    public function testNoMentions(): void
     {
         $traitTester = new class {
             use AllowMentions;
@@ -93,7 +93,7 @@ class MessageTraitsTest extends TestCase
         $this->assertTrue($traitTester->hasAllowedMentions());
     }
 
-    public function testSetTts()
+    public function testSetTts(): void
     {
         $traitTester = new class {
             use SetTts;
@@ -107,7 +107,7 @@ class MessageTraitsTest extends TestCase
         $this->assertTrue($traitTester->data['tts']);
     }
 
-    public function testAddComponent()
+    public function testAddComponent(): void
     {
         $traitTester = new class {
             use AddComponent;
@@ -132,7 +132,7 @@ class MessageTraitsTest extends TestCase
         };
     }
 
-    public function testAddFile()
+    public function testAddFile(): void
     {
         $traitTester = $this->getClassWithAddFileTrait();
         $this->assertFalse($traitTester->hasFiles());
@@ -154,7 +154,7 @@ class MessageTraitsTest extends TestCase
         $this->assertTrue($traitTester->hasFiles());
     }
 
-    public function testAddFileAndDetectType()
+    public function testAddFileAndDetectType(): void
     {
         $traitTester = $this->getClassWithAddFileTrait();
         $this->assertFalse($traitTester->hasFiles());
@@ -175,7 +175,7 @@ class MessageTraitsTest extends TestCase
         $this->assertTrue($traitTester->hasFiles());
     }
 
-    public function testAddFileAndDetectTypeThatDoesNotExist()
+    public function testAddFileAndDetectTypeThatDoesNotExist(): void
     {
         $traitTester = $this->getClassWithAddFileTrait();
 
@@ -208,7 +208,7 @@ class MessageTraitsTest extends TestCase
         );
     }
 
-    public function testAddAttachment()
+    public function testAddAttachment(): void
     {
         $traitTester = new class {
             use AddAttachment;

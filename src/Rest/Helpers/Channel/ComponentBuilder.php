@@ -41,7 +41,10 @@ class ComponentBuilder
         return $this;
     }
 
-    public function getRows()
+    /**
+     * @return ComponentRowBuilder[]
+     */
+    public function getRows(): array
     {
         return $this->rows;
     }
