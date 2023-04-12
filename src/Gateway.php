@@ -13,13 +13,16 @@ use Ragnarok\Fenrir\Websocket\Objects\D\Hello;
 use Ragnarok\Fenrir\Websocket\Objects\Payload;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
+use Ragnarok\Fenrir\Exceptions\Retrier\TooManyRetriesException;
 use Ratchet\RFC6455\Messaging\MessageInterface;
 use React\EventLoop\LoopInterface;
 use React\EventLoop\TimerInterface;
+use React\Promise\ExtendedPromiseInterface;
 
 class Gateway
 {
     public const WEBSOCKET_URL = 'wss://gateway.discord.gg/?v=10';
+    private const MAX_RECONNECT_ATTEMPTS = 3;
 
     public EventHandler $events;
 
@@ -62,11 +65,25 @@ class Gateway
         });
     }
 
-    public function connect(): void
+    /**
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
+     */
+    public function connect(): ExtendedPromiseInterface
     {
-        $this->websocket->open(self::WEBSOCKET_URL);
+        return Retrier::retryAsync(self::MAX_RECONNECT_ATTEMPTS, function (int $attempt) {
+            $this->logger->info(
+                sprintf('Attempt #%d connecting to %s', $attempt, self::WEBSOCKET_URL)
+            );
+
+            return $this->websocket->open(self::WEBSOCKET_URL);
+        })->otherwise(function (TooManyRetriesException $e) {
+            $this->logger->emergency('Unable to connect to Discord.');
+        });
     }
 
+    /**
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
+     */
     private function reconnect(bool $close, bool $resume): void
     {
         $this->logger->info('Gateway: attempting reconnect');
@@ -81,7 +98,33 @@ class Gateway
 
         $this->shouldIdentify = !$resume;
 
-        $this->websocket->open($this->reconnectUrl);
+        Retrier::retryAsync(self::MAX_RECONNECT_ATTEMPTS, function (int $attempt) {
+            $this->logger->info(
+                sprintf('Attempt #%d connecting to %s', $attempt, self::WEBSOCKET_URL)
+            );
+
+            return $this->websocket->open($this->reconnectUrl);
+        })->otherwise(function (TooManyRetriesException $e) {
+            $this->logger->error('Failed reconnecting to Discord. Resetting and creating new connection instead.');
+
+            $this->reset();
+            $this->connect();
+        });
+    }
+
+    private function reset(): void
+    {
+        $this->shouldIdentify = true;
+        $this->sequence = null;
+
+        unset(
+            $this->websocket,
+            $this->heartbeatInterval,
+            $this->heartbeatTimer,
+            $this->scheduledReconnect,
+            $this->sessionId,
+            $this->reconnectUrl
+        );
     }
 
     private function resume(): void
