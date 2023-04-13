@@ -8,7 +8,7 @@ use Ragnarok\Fenrir\Constants\Events;
 use Ragnarok\Fenrir\DataMapper;
 use Fakes\Ragnarok\Fenrir\DataMapperFake;
 use Ragnarok\Fenrir\EventHandler;
-use Ragnarok\Fenrir\Websocket\Objects\Payload;
+use Ragnarok\Fenrir\Gateway\Objects\Payload;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\NullLogger;
 use React\Promise\Promise;

@@ -8,7 +8,7 @@ use Evenement\EventEmitter;
 use Ragnarok\Fenrir\Constants\Events;
 use Ragnarok\Fenrir\EventHandler;
 use Ragnarok\Fenrir\FilteredEventEmitter;
-use Ragnarok\Fenrir\Websocket\Objects\Payload;
+use Ragnarok\Fenrir\Gateway\Objects\Payload;
 use Fakes\Ragnarok\Fenrir\DataMapperFake;
 use Fakes\Ragnarok\Fenrir\PromiseFake;
 use Mockery;

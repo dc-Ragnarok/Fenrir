@@ -6,7 +6,7 @@ namespace Ragnarok\Fenrir;
 
 use Evenement\EventEmitter;
 use Ragnarok\Fenrir\Constants\Events;
-use Ragnarok\Fenrir\Websocket\Objects\Payload;
+use Ragnarok\Fenrir\Gateway\Objects\Payload;
 
 class EventHandler extends EventEmitter
 {

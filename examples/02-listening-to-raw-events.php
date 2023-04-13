@@ -3,7 +3,7 @@
 use Ragnarok\Fenrir\Bitwise\Bitwise;
 use Ragnarok\Fenrir\Constants\Events;
 use Ragnarok\Fenrir\Discord;
-use Ragnarok\Fenrir\Websocket\Objects\Payload;
+use Ragnarok\Fenrir\Gateway\Objects\Payload;
 
 require './vendor/autoload.php';
 

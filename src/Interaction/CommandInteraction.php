@@ -9,7 +9,7 @@ use Ragnarok\Fenrir\Discord;
 use Ragnarok\Fenrir\Enums\Parts\ApplicationCommandOptionTypes as OptionTypes;
 use Ragnarok\Fenrir\Parts\ApplicationCommandInteractionDataOptionStructure as OptionStructure;
 use Ragnarok\Fenrir\Rest\Helpers\Webhook\EditWebhookBuilder;
-use Ragnarok\Fenrir\Websocket\Events\InteractionCreate;
+use Ragnarok\Fenrir\Gateway\Events\InteractionCreate;
 use React\Promise\ExtendedPromiseInterface;
 
 class CommandInteraction

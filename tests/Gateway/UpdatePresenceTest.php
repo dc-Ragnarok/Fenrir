@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Tests\Ragnarok\Fenrir\Gateway;
 
 use Ragnarok\Fenrir\Enums\Gateway\StatusType;
-use Ragnarok\Fenrir\Websocket\Helpers\ActivityBuilder;
+use Ragnarok\Fenrir\Gateway\Helpers\ActivityBuilder;
 use Tests\Ragnarok\Fenrir\Gateway\GatewayTestCase;
 
 /**

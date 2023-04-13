@@ -11,8 +11,8 @@ use Ragnarok\Fenrir\Interaction\ButtonInteraction;
 use Ragnarok\Fenrir\Interaction\CommandInteraction;
 use Ragnarok\Fenrir\Parts\ApplicationCommand;
 use Ragnarok\Fenrir\Rest\Helpers\Command\CommandBuilder;
-use Ragnarok\Fenrir\Websocket\Events\InteractionCreate;
-use Ragnarok\Fenrir\Websocket\Events\Ready;
+use Ragnarok\Fenrir\Gateway\Events\InteractionCreate;
+use Ragnarok\Fenrir\Gateway\Events\Ready;
 
 class InteractionHandler
 {

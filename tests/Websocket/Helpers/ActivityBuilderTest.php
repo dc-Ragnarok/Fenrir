@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Tests\Ragnarok\Fenrir\Websocket\Helpers;
+namespace Tests\Ragnarok\Fenrir\Gateway\Helpers;
 
 use Ragnarok\Fenrir\Enums\Gateway\ActivityType;
 use Ragnarok\Fenrir\Parts\Emoji;
 use Ragnarok\Fenrir\Rest\Helpers\Emoji\EmojiBuilder;
-use Ragnarok\Fenrir\Websocket\Helpers\ActivityBuilder;
+use Ragnarok\Fenrir\Gateway\Helpers\ActivityBuilder;
 use PHPUnit\Framework\TestCase;
 
 class ActivityBuilderTest extends TestCase

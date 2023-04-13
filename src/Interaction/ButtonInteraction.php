@@ -6,7 +6,7 @@ namespace Ragnarok\Fenrir\Interaction;
 
 use Ragnarok\Fenrir\Discord;
 use Ragnarok\Fenrir\Interaction\Helpers\InteractionCallbackBuilder;
-use Ragnarok\Fenrir\Websocket\Events\InteractionCreate;
+use Ragnarok\Fenrir\Gateway\Events\InteractionCreate;
 use React\Promise\ExtendedPromiseInterface;
 
 class ButtonInteraction
