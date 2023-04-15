@@ -10,16 +10,12 @@ use Ragnarok\Fenrir\Gateway\Objects\Payload;
 
 class EventHandler extends EventEmitter
 {
-    public function __construct(private DataMapper $mapper, private bool $raw = false)
+    public function __construct(private DataMapper $mapper)
     {
     }
 
     public function handle(Payload $payload): void
     {
-        if ($this->raw) {
-            $this->emit(Events::RAW, [$payload]);
-        }
-
         if (!$this->hasListener($payload->t)) {
             return;
         }
