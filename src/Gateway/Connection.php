@@ -101,7 +101,7 @@ class Connection
             $this->stopHeartbeat();
         }
 
-        $this->puppet->terminate(1001, 'reconnecting');
+        $this->puppet->terminate(1004, 'reconnecting');
 
         $this->puppet->connect($this->reconnectUrl)
             ->then(fn () => $this->raw->once(10, $this->resume(...)))
@@ -144,7 +144,7 @@ class Connection
 
     private function scheduleReconnect(): void
     {
-        $this->scheduledReconnect = $this->loop->addTimer(1.5, function () {
+        $this->scheduledReconnect = $this->loop->addTimer(0.5, function () {
             $this->reconnect();
         });
 

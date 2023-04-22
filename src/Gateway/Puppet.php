@@ -33,9 +33,9 @@ class Puppet
         });
     }
 
-    public function terminate()
+    public function terminate(int $code, string $reason = '')
     {
-
+        $this->websocket->close($code, $reason);
     }
 
     public function sendHeartBeat(?int $sequence)
