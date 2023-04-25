@@ -9,7 +9,7 @@
     </description>
 
     <exclude-pattern>src/Parts/*</exclude-pattern>
-    <exclude-pattern>src/Websocket/Events/*</exclude-pattern>
+    <exclude-pattern>src/Gateway/Events/*</exclude-pattern>
     <exclude-pattern>src/Websocket/Objects/*</exclude-pattern>
 
     <rule ref="rulesets/codesize.xml">

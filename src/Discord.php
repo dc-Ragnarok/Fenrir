@@ -40,8 +40,7 @@ class Discord
      */
     public function withGateway(
         Bitwise $intents,
-        int $timeout = 10,
-        bool $raw = false
+        int $timeout = 10
     ): static {
         $this->gateway = new Connection(
             $this->loop,
