@@ -11,6 +11,7 @@ use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use Ragnarok\Fenrir\Retrier;
 use Ragnarok\Fenrir\Websocket;
+use React\Promise\PromiseInterface;
 
 class Puppet
 {
@@ -22,7 +23,7 @@ class Puppet
     ) {
     }
 
-    public function connect(string $url)
+    public function connect(string $url): PromiseInterface
     {
         return Retrier::retryAsync(self::MAX_RECONNECT_ATTEMPTS, function (int $attempt) use ($url) {
             $this->logger->info(
@@ -33,12 +34,12 @@ class Puppet
         });
     }
 
-    public function terminate(int $code, string $reason = '')
+    public function terminate(int $code, string $reason = ''): void
     {
         $this->websocket->close($code, $reason);
     }
 
-    public function sendHeartBeat(?int $sequence)
+    public function sendHeartBeat(?int $sequence): void
     {
         $this->sendPayload([
             'op' => 1,
@@ -84,17 +85,17 @@ class Puppet
         $this->sendPayload(['op' => 3, 'd' => $presenceUpdate]);
     }
 
-     public function resume(string $token, string $sessionId, ?int $sequence = null): void
-     {
-         $this->sendPayload([
-             'op' => 6,
-             'd' => [
-                 'token' => $token,
-                 'session_id' => $sessionId,
-                 'seq' => $sequence,
-             ]
-         ]);
-     }
+    public function resume(string $token, string $sessionId, ?int $sequence = null): void
+    {
+        $this->sendPayload([
+            'op' => 6,
+            'd' => [
+                'token' => $token,
+                'session_id' => $sessionId,
+                'seq' => $sequence,
+            ]
+        ]);
+    }
 
      /**
      * @see https://discord.com/developers/docs/topics/gateway-events#request-guild-members

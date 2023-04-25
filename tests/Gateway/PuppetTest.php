@@ -7,6 +7,7 @@ namespace Ragnarok\Fenrir;
 use Closure;
 use Mockery;
 use Mockery\Adapter\Phpunit\MockeryTestCase;
+use Mockery\CompositeExpectation;
 use Mockery\MockInterface;
 use Ragnarok\Fenrir\Bitwise\Bitwise;
 use Ragnarok\Fenrir\Enums\Gateway\ActivityType;
@@ -25,7 +26,7 @@ class PuppetTest extends MockeryTestCase
         $this->puppet = new Puppet($this->websocket);
     }
 
-    private function expectMessage(Closure $fn, bool $useBucket = false)
+    private function expectMessage(Closure $fn, bool $useBucket = false): CompositeExpectation
     {
         return $this->websocket->expects()
             ->send()
@@ -36,7 +37,7 @@ class PuppetTest extends MockeryTestCase
             }), $useBucket);
     }
 
-    public function testConnect()
+    public function testConnect(): void
     {
         $this->websocket->expects()
             ->open()
@@ -46,7 +47,7 @@ class PuppetTest extends MockeryTestCase
         $this->puppet->connect('::url::');
     }
 
-    public function testTerminate()
+    public function testTerminate(): void
     {
         $this->websocket->expects()
             ->close()
@@ -56,7 +57,7 @@ class PuppetTest extends MockeryTestCase
         $this->puppet->terminate(1234, '::reason::');
     }
 
-    public function testSendHeatbeat()
+    public function testSendHeatbeat(): void
     {
         $this->expectMessage(function ($payload) {
             $this->assertEquals(1, $payload['op']);
@@ -68,7 +69,7 @@ class PuppetTest extends MockeryTestCase
         $this->puppet->sendHeartBeat(123);
     }
 
-    public function testIdentify()
+    public function testIdentify(): void
     {
         $this->expectMessage(function ($payload) {
             $this->assertEquals(2, $payload['op']);
@@ -81,7 +82,7 @@ class PuppetTest extends MockeryTestCase
         $this->puppet->identify('::token::', new Bitwise(123));
     }
 
-    public function testUpdatePresence()
+    public function testUpdatePresence(): void
     {
         $activityBuilder = ActivityBuilder::new()
             ->setType(ActivityType::GAME)
@@ -99,7 +100,7 @@ class PuppetTest extends MockeryTestCase
         $this->puppet->updatePresence(StatusType::AFK, [$activityBuilder], false);
     }
 
-    public function testUpdatePresenceWithSince()
+    public function testUpdatePresenceWithSince(): void
     {
         $activityBuilder = ActivityBuilder::new()
             ->setType(ActivityType::GAME)
@@ -117,7 +118,7 @@ class PuppetTest extends MockeryTestCase
         $this->puppet->updatePresence(StatusType::AFK, [$activityBuilder], false, 456);
     }
 
-    public function testResume()
+    public function testResume(): void
     {
         $this->expectMessage(function ($payload) {
             $this->assertEquals(6, $payload['op']);
@@ -131,7 +132,7 @@ class PuppetTest extends MockeryTestCase
         $this->puppet->resume('::token::', '::session id::', 123);
     }
 
-    public function testRequestGuildMembersByQuery()
+    public function testRequestGuildMembersByQuery(): void
     {
         $this->expectMessage(function ($payload) {
             $this->assertEquals(8, $payload['op']);
@@ -147,7 +148,7 @@ class PuppetTest extends MockeryTestCase
         $this->puppet->requestGuildMembersByQuery('::guild id::', '::query::', 1234, true);
     }
 
-    public function testRequestGuildMembersByQueryWithNonce()
+    public function testRequestGuildMembersByQueryWithNonce(): void
     {
         $this->expectMessage(function ($payload) {
             $this->assertEquals(8, $payload['op']);
@@ -163,7 +164,7 @@ class PuppetTest extends MockeryTestCase
         $this->puppet->requestGuildMembersByQuery('::guild id::', '::query::', 1234, true, '::nonce::');
     }
 
-    public function testRequestGuildMembersByUserIds()
+    public function testRequestGuildMembersByUserIds(): void
     {
         $this->expectMessage(function ($payload) {
             $this->assertEquals(8, $payload['op']);
@@ -179,7 +180,7 @@ class PuppetTest extends MockeryTestCase
         $this->puppet->requestGuildMembersByUserIds('::guild id::', ['::user id::'], 1234, true);
     }
 
-    public function testRequestGuildMembersByUserIdsWithNonce()
+    public function testRequestGuildMembersByUserIdsWithNonce(): void
     {
         $this->expectMessage(function ($payload) {
             $this->assertEquals(8, $payload['op']);

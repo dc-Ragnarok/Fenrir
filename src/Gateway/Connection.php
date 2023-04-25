@@ -93,7 +93,7 @@ class Connection
         $this->raw->on(11, $this->cancelScheduledReconnect(...));
     }
 
-    private function reconnect()
+    private function reconnect(): void
     {
         $this->logger->info('Gateway: attempting reconnect');
 
@@ -108,7 +108,7 @@ class Connection
             ->otherwise(fn () => $this->forceReconnect());
     }
 
-    private function forceReconnect()
+    private function forceReconnect(): void
     {
         $this->logger->info('Gateway: forcefully reconnecting');
 
@@ -123,7 +123,7 @@ class Connection
             });
     }
 
-    private function connect(Payload $payload)
+    private function connect(Payload $payload): void
     {
         $this->logger->info('Gateway: connecting');
 
@@ -136,7 +136,7 @@ class Connection
         });
     }
 
-    private function resume(Payload $payload)
+    private function resume(Payload $payload): void
     {
         $this->startHeartbeat($payload->d->heartbeat_interval);
         $this->puppet->resume($this->token, $this->sessionId, $this->sequence);
@@ -183,7 +183,7 @@ class Connection
         $this->logger->info('Gateway: Stopped heartbeats');
     }
 
-    public function open()
+    public function open(): void
     {
         $this->raw->once(10, $this->connect(...));
 

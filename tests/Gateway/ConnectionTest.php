@@ -61,8 +61,10 @@ class ConnectionTest extends MockeryTestCase
         );
     }
 
-    private function expectConnect($url = Connection::DEFAULT_WEBSOCKET_URL, ?ExtendedPromiseInterface $return = null): CompositeExpectation
-    {
+    private function expectConnect(
+        $url = Connection::DEFAULT_WEBSOCKET_URL,
+        ?ExtendedPromiseInterface $return = null
+    ): CompositeExpectation {
         $return ??= PromiseFake::get();
 
         return $this->puppet->expects()
@@ -92,16 +94,22 @@ class ConnectionTest extends MockeryTestCase
             ->with($token, $sessionId, $sequence);
     }
 
-    private function expectReconnectTimer(LoopInterface&MockInterface $loop, TimerInterface $return): CompositeExpectation
-    {
+    private function expectReconnectTimer(
+        LoopInterface&MockInterface $loop,
+        TimerInterface $return
+    ): CompositeExpectation {
         return $loop->expects()
             ->addTimer()
             ->with(0.5, Mockery::on(fn () => true))
             ->andReturns($return);
     }
 
-    private function expectHeartbeatTimer(LoopInterface&MockInterface $loop, float $time, bool $executeImmediately = false, ?TimerInterface $return = null): CompositeExpectation
-    {
+    private function expectHeartbeatTimer(
+        LoopInterface&MockInterface $loop,
+        float $time,
+        bool $executeImmediately = false,
+        ?TimerInterface $return = null
+    ): CompositeExpectation {
         $return ??= Mockery::mock(TimerInterface::class);
 
         return $loop->expects()
@@ -116,7 +124,7 @@ class ConnectionTest extends MockeryTestCase
             ->andReturns($return);
     }
 
-    private function sendPayload(EventEmitter $emitter, array $payload)
+    private function sendPayload(EventEmitter $emitter, array $payload): void
     {
         $emitter->emit(
             $payload['op'],
@@ -124,7 +132,7 @@ class ConnectionTest extends MockeryTestCase
         );
     }
 
-    private function expectTerminate(int $code, string $reason = '')
+    private function expectTerminate(int $code, string $reason = ''): CompositeExpectation
     {
         return $this->puppet->expects()
             ->terminate()
@@ -132,7 +140,7 @@ class ConnectionTest extends MockeryTestCase
     }
 
 
-    public function testItOpensAConnection()
+    public function testItOpensAConnection(): void
     {
         $this->expectConnect()->once();
 
@@ -154,7 +162,7 @@ class ConnectionTest extends MockeryTestCase
         ]);
     }
 
-    public function testItDoesNotReconnectIfHeartbeatAcknowledged()
+    public function testItDoesNotReconnectIfHeartbeatAcknowledged(): void
     {
         $this->expectConnect()->once();
 
@@ -191,7 +199,7 @@ class ConnectionTest extends MockeryTestCase
     /**
      * @dataProvider resumeDataProvider
      */
-    public function testItResumes(array $payload)
+    public function testItResumes(array $payload): void
     {
         $this->expectConnect()->once();
         $this->expectTerminate(1004, 'reconnecting')->once();
@@ -248,7 +256,7 @@ class ConnectionTest extends MockeryTestCase
     /**
      * @dataProvider resumeDataProvider
      */
-    public function testItInitializesANewConnectionOnResumeFailure(array $payload)
+    public function testItInitializesANewConnectionOnResumeFailure(array $payload): void
     {
         $this->expectConnect()->twice();
         $this->expectTerminate(1004, 'reconnecting')->once();
@@ -348,7 +356,7 @@ class ConnectionTest extends MockeryTestCase
     // {
     // }
 
-    public function testItSendsAForcedHeartbeat()
+    public function testItSendsAForcedHeartbeat(): void
     {
         $this->expectConnect()->once();
 
