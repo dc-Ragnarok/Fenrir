@@ -6,12 +6,15 @@ namespace Ragnarok\Fenrir\Gateway\Helpers;
 
 use Ragnarok\Fenrir\Enums\Gateway\ActivityType;
 use Ragnarok\Fenrir\Rest\Helpers\Emoji\EmojiBuilder;
+use Ragnarok\Fenrir\Rest\Helpers\GetNew;
 
 /**
  * @see https://discord.com/developers/docs/topics/gateway-events#activity-object
  */
 class ActivityBuilder
 {
+    use GetNew;
+
     private $data = [];
 
     public function setName(string $name): ActivityBuilder

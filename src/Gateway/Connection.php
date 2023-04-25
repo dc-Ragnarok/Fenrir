@@ -27,6 +27,8 @@ class Connection
 
     public Websocket $websocket;
 
+    public EventEmitter $raw;
+
     private ?TimerInterface $heartbeatTimer;
 
     private ?int $sequence = null;
@@ -36,8 +38,6 @@ class Connection
     private string $reconnectUrl;
 
     private Puppet $puppet;
-
-    public EventEmitter $raw;
 
     /**
      * @param Bitwise<\Ragnarok\Fenrir\Enums\Gateway\Intents> $intents

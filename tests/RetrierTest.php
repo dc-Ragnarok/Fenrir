@@ -19,12 +19,12 @@ class RetrierTest extends MockeryTestCase
     {
         $gateway = GatewayFake::get();
         $gateway->expects()
-            ->connect()
+            ->open()
             ->andReturns(PromiseFake::get('I promise this will work'))
             ->once();
 
         $result = await(Retrier::retryAsync(3, function () use ($gateway) {
-            return $gateway->connect();
+            return $gateway->open();
         }));
 
         $this->assertEquals('I promise this will work', $result);
@@ -34,14 +34,14 @@ class RetrierTest extends MockeryTestCase
     {
         $gateway = GatewayFake::get();
         $gateway->expects()
-            ->connect()
+            ->open()
             ->andReturns(PromiseFake::reject(new Exception('Wow, this is an exception')))
             ->times(3);
 
         $this->expectException(TooManyRetriesException::class);
 
         await(Retrier::retryAsync(3, function () use ($gateway) {
-            return $gateway->connect();
+            return $gateway->open();
         }));
     }
 
@@ -49,7 +49,7 @@ class RetrierTest extends MockeryTestCase
     {
         $gateway = GatewayFake::get();
         $gateway->expects()
-            ->connect()
+            ->open()
             ->andReturns(PromiseFake::reject(new Exception('Wow, this is an exception')))
             ->times(3);
 
@@ -58,7 +58,7 @@ class RetrierTest extends MockeryTestCase
         try {
             await(Retrier::retryAsync(3, function (int $attempt) use ($gateway, &$attempts) {
                 $attempts[] = $attempt;
-                return $gateway->connect();
+                return $gateway->open();
             }));
         } catch (TooManyRetriesException) {
         }

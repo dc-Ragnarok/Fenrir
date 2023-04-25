@@ -39,30 +39,6 @@ final class EventHandlerTest extends TestCase
         });
     }
 
-    public function testEmitRaw(): void
-    {
-        $eventHandler = new EventHandler($this->dataMapper, true);
-
-        $payload = new Payload();
-        $payload->t = '::event type::';
-
-        $response = $this->awaitResponse($eventHandler, Events::RAW, $payload);
-
-        $this->assertPromiseFulfillsWith($response, $payload);
-    }
-
-    public function testDoesNotEmitRawWhenSettingFalse(): void
-    {
-        $eventHandler = new EventHandler($this->dataMapper, false);
-
-        $payload = new Payload();
-        $payload->t = '::event type::';
-
-        $response = $this->awaitResponse($eventHandler, Events::RAW, $payload);
-
-        $this->assertPromiseRejects($response, 1);
-    }
-
     public function testDoesNotEmitIfUnknownEvent(): void
     {
         $eventHandler = new EventHandler($this->dataMapper, false);

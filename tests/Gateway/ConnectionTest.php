@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Ragnarok\Fenrir;
 
-use Closure;
 use Evenement\EventEmitter;
 use Fakes\Ragnarok\Fenrir\DataMapperFake;
 use Fakes\Ragnarok\Fenrir\PromiseFake;
@@ -22,6 +21,7 @@ use Ragnarok\Fenrir\Gateway\Puppet;
 use React\EventLoop\LoopInterface;
 use React\EventLoop\TimerInterface;
 use React\Promise\ExtendedPromiseInterface;
+use React\Promise\Promise;
 
 use function React\Async\await;
 
@@ -188,13 +188,16 @@ class ConnectionTest extends MockeryTestCase
         ]);
     }
 
-    public function testItResumes()
+    /**
+     * @dataProvider resumeDataProvider
+     */
+    public function testItResumes(array $payload)
     {
         $this->expectConnect()->once();
-        $this->expectTerminate(1004, 'reconnecting');
+        $this->expectTerminate(1004, 'reconnecting')->once();
         $promise = PromiseFake::get();
         $this->expectConnect('::reconnect url::', $promise)->once();
-        $this->expectResume('::token::', '::session id::', 1);
+        $this->expectResume('::token::', '::session id::', 1)->once();
 
         $intents = new Bitwise(123);
         $this->expectIdentify('::token::', $intents)->once();
@@ -230,9 +233,7 @@ class ConnectionTest extends MockeryTestCase
             ->with($timer)
             ->once();
 
-        $this->sendPayload($connection->raw, [
-            'op' => 7
-        ]);
+        $this->sendPayload($connection->raw, $payload);
 
         await($promise);
 
@@ -244,9 +245,92 @@ class ConnectionTest extends MockeryTestCase
         ]);
     }
 
-    // public function testItInitializesANewConnectionOnResumeFailure()
-    // {
-    // }
+    /**
+     * @dataProvider resumeDataProvider
+     */
+    public function testItInitializesANewConnectionOnResumeFailure(array $payload)
+    {
+        $this->expectConnect()->twice();
+        $this->expectTerminate(1004, 'reconnecting')->once();
+
+        $promise = Mockery::mock(Promise::class);
+        $promise->expects()
+            ->then()
+            ->withAnyArgs()
+            ->andReturnSelf()
+            ->once();
+
+        $promise->expects()
+            ->otherwise()
+            ->with(Mockery::on(function ($fn) {
+                $fn();
+
+                return true;
+            }))
+            ->once();
+
+        $this->expectConnect('::reconnect url::', $promise)->once();
+
+        $intents = new Bitwise(123);
+        $this->expectIdentify('::token::', $intents)->twice();
+
+        /** @var LoopInterface&MockInterface */
+        $loop = Mockery::mock(LoopInterface::class);
+        $timer = Mockery::mock(TimerInterface::class);
+        $this->expectHeartbeatTimer($loop, 1.234, return: $timer)->once();
+        $this->expectHeartbeatTimer($loop, 5.678)->once();
+
+        $connection = $this->getConnection($loop, intents: $intents);
+        $connection->open();
+
+        $this->sendPayload($connection->raw, [
+            'op' => 10,
+            'd' => (object) [
+                'heartbeat_interval' => 1234,
+            ],
+        ]);
+
+        $this->sendPayload($connection->raw, [
+            'op' => 0,
+            's' => 1,
+            't' => Events::READY,
+            'd' => (object) [
+                'resume_gateway_url' => '::reconnect url::',
+                'session_id' => '::session id::',
+            ],
+        ]);
+
+        $loop->expects()
+            ->cancelTimer()
+            ->with($timer)
+            ->once();
+
+        $this->sendPayload($connection->raw, $payload);
+
+        $this->sendPayload($connection->raw, [
+            'op' => 10,
+            'd' => (object) [
+                'heartbeat_interval' => 5678,
+            ],
+        ]);
+    }
+
+    public function resumeDataProvider(): array
+    {
+        return [
+            'OP 7' => [
+                'payload' => [
+                    'op' => 7
+                ],
+            ],
+            'OP 9, D = true' => [
+                'payload' => [
+                    'op' => 9,
+                    'd' => true,
+                ],
+            ]
+        ];
+    }
 
     // public function testItResumesOnInvalidSession()
     // {

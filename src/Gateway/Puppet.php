@@ -81,10 +81,10 @@ class Puppet
             $presenceUpdate['since'] = $since;
         }
 
-        $this->sendPayload($presenceUpdate);
+        $this->sendPayload(['op' => 3, 'd' => $presenceUpdate]);
     }
 
-     public function resume(string $token, string $sessionId, ?int $sequence): void
+     public function resume(string $token, string $sessionId, ?int $sequence = null): void
      {
          $this->sendPayload([
              'op' => 6,
@@ -117,7 +117,7 @@ class Puppet
             $guildMemberRequest['nonce'] = $nonce;
         }
 
-        $this->sendPayload($guildMemberRequest);
+        $this->sendPayload(['op' => 8, 'd' => $guildMemberRequest]);
     }
 
     /**
@@ -141,7 +141,7 @@ class Puppet
             $guildMemberRequest['nonce'] = $nonce;
         }
 
-        $this->sendPayload($guildMemberRequest);
+        $this->sendPayload(['op' => 8, 'd' => $guildMemberRequest]);
     }
 
     private function sendPayload(array $data, bool $useBucket = true): void

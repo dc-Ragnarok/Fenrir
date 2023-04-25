@@ -6,10 +6,10 @@ namespace Tests\Ragnarok\Fenrir;
 
 use Ragnarok\Fenrir\Bitwise\Bitwise;
 use Ragnarok\Fenrir\Discord;
-use Ragnarok\Fenrir\Gateway;
 use Ragnarok\Fenrir\InteractionHandler;
 use Ragnarok\Fenrir\Rest\Rest;
 use PHPUnit\Framework\TestCase;
+use Ragnarok\Fenrir\Gateway\Connection;
 
 class DiscordTest extends TestCase
 {
@@ -19,7 +19,7 @@ class DiscordTest extends TestCase
 
         $discord->withGateway(new Bitwise());
 
-        $this->assertInstanceOf(Gateway::class, $discord->gateway);
+        $this->assertInstanceOf(Connection::class, $discord->gateway);
     }
 
     public function testItInitializesRest(): void
