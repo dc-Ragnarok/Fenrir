@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Tests\Ragnarok\Fenrir;
 
 use Exception;
-use Fakes\Ragnarok\Fenrir\GatewayFake;
 use Fakes\Ragnarok\Fenrir\PromiseFake;
 use Mockery\Adapter\Phpunit\MockeryTestCase;
 use Ragnarok\Fenrir\Exceptions\Retrier\TooManyRetriesException;
@@ -17,48 +16,30 @@ class RetrierTest extends MockeryTestCase
 {
     public function testItDoesNotRunTheActionMultipleTimesForHappyFlowAsync(): void
     {
-        $gateway = GatewayFake::get();
-        $gateway->expects()
-            ->open()
-            ->andReturns(PromiseFake::get('I promise this will work'))
-            ->once();
-
-        $result = await(Retrier::retryAsync(3, function () use ($gateway) {
-            return $gateway->open();
+        $result = await(Retrier::retryAsync(3, function () {
+            return PromiseFake::get('Success');
         }));
 
-        $this->assertEquals('I promise this will work', $result);
+        $this->assertEquals('Success', $result);
     }
 
     public function testItRetriesTheSetNumberOfTimesAsync(): void
     {
-        $gateway = GatewayFake::get();
-        $gateway->expects()
-            ->open()
-            ->andReturns(PromiseFake::reject(new Exception('Wow, this is an exception')))
-            ->times(3);
-
         $this->expectException(TooManyRetriesException::class);
 
-        await(Retrier::retryAsync(3, function () use ($gateway) {
-            return $gateway->open();
+        await(Retrier::retryAsync(3, function () {
+            return PromiseFake::reject(new Exception('Oh no, it went wrong :('));
         }));
     }
 
     public function testItIndicatesWhatAttemptItIsOn(): void
     {
-        $gateway = GatewayFake::get();
-        $gateway->expects()
-            ->open()
-            ->andReturns(PromiseFake::reject(new Exception('Wow, this is an exception')))
-            ->times(3);
-
         $attempts = [];
 
         try {
-            await(Retrier::retryAsync(3, function (int $attempt) use ($gateway, &$attempts) {
+            await(Retrier::retryAsync(3, function (int $attempt) use (&$attempts) {
                 $attempts[] = $attempt;
-                return $gateway->open();
+                return PromiseFake::reject(new Exception('Sad times'));
             }));
         } catch (TooManyRetriesException) {
         }

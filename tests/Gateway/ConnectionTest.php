@@ -340,22 +340,6 @@ class ConnectionTest extends MockeryTestCase
         ];
     }
 
-    // public function testItResumesOnInvalidSession()
-    // {
-    // }
-
-    // public function testItReconnectsOnInvalidSession()
-    // {
-    // }
-
-    // public function testItResumesIfNoHeartbeatsAreAcknowledged()
-    // {
-    // }
-
-    // public function testItReconnectsIfTheConnectionIsKilled()
-    // {
-    // }
-
     public function testItSendsAForcedHeartbeat(): void
     {
         $this->expectConnect()->once();
