@@ -40,7 +40,7 @@ class RequireReturnTypesSniff implements Sniff
         } while (!in_array($returnTypeIndicator['type'], ['T_OPEN_CURLY_BRACKET', "T_COLON"]));
 
         if ($returnTypeIndicator['type'] === 'T_OPEN_CURLY_BRACKET') {
-            $phpcsFile->addError('Return type is require', $stackPtr, 'Not found');
+            $phpcsFile->addError('Return type is required', $stackPtr, 'Not found');
         }
     }
 }

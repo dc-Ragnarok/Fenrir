@@ -6,8 +6,8 @@ use Ragnarok\Fenrir\Discord;
 use Ragnarok\Fenrir\Enums\Gateway\Intents;
 use Ragnarok\Fenrir\FilteredEventEmitter;
 use Ragnarok\Fenrir\Rest\Helpers\Channel\MessageBuilder;
-use Ragnarok\Fenrir\Websocket\Events\MessageCreate;
-use Ragnarok\Fenrir\Websocket\Events\MessageReactionAdd;
+use Ragnarok\Fenrir\Gateway\Events\MessageCreate;
+use Ragnarok\Fenrir\Gateway\Events\MessageReactionAdd;
 
 require './vendor/autoload.php';
 

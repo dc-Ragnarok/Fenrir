@@ -12,6 +12,7 @@ use Ragnarok\Fenrir\Bitwise\Bitwise;
 use Ragnarok\Fenrir\Rest\Rest;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
+use Ragnarok\Fenrir\Gateway\Connection;
 use React\EventLoop\Loop;
 use React\EventLoop\LoopInterface;
 
@@ -22,7 +23,7 @@ class Discord
     private Http $http;
 
     public Rest $rest;
-    public Gateway $gateway;
+    public Connection $gateway;
     public InteractionHandler $interaction;
 
     public function __construct(
@@ -39,17 +40,15 @@ class Discord
      */
     public function withGateway(
         Bitwise $intents,
-        int $timeout = 10,
-        bool $raw = false
+        int $timeout = 10
     ): static {
-        $this->gateway = new Gateway(
+        $this->gateway = new Connection(
             $this->loop,
             $this->token,
             $intents,
             $this->mapper,
             $this->logger,
-            $timeout,
-            $raw
+            $timeout
         );
 
         return $this;

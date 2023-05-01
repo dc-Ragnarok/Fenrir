@@ -23,7 +23,7 @@ use Ragnarok\Fenrir\Constants\Events;
 use Ragnarok\Fenrir\Discord;
 use Ragnarok\Fenrir\Enums\Gateway\Intents;
 use Ragnarok\Fenrir\Rest\Helpers\Channel\MessageBuilder;
-use Ragnarok\Fenrir\Websocket\Events\MessageCreate;
+use Ragnarok\Fenrir\Gateway\Events\MessageCreate;
 
 require './vendor/autoload.php';
 

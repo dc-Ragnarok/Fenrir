@@ -8,7 +8,7 @@ use Evenement\EventEmitter;
 use Ragnarok\Fenrir\Constants\Events;
 use Ragnarok\Fenrir\EventHandler;
 use Ragnarok\Fenrir\FilteredEventEmitter;
-use Ragnarok\Fenrir\Websocket\Objects\Payload;
+use Ragnarok\Fenrir\Gateway\Objects\Payload;
 use Fakes\Ragnarok\Fenrir\DataMapperFake;
 use Fakes\Ragnarok\Fenrir\PromiseFake;
 use Mockery;
@@ -134,29 +134,22 @@ class FilteredEventListenerTest extends MockeryTestCase
 
     public function testItAcceptsEventHandler(): void
     {
-        $eventHandler = new EventHandler(
-            DataMapperFake::get(),
-            true
-        );
+        $eventHandler = new EventHandler(DataMapperFake::get());
 
         $filteredEmitter = new FilteredEventEmitter(
             $eventHandler,
-            Events::RAW,
-            fn (Payload $payload) => $payload->s === 10,
+            Events::MESSAGE_CREATE,
+            fn ($item) => $item === '::item::',
         );
 
         $container = [];
-        $filteredEmitter->on(Events::RAW, function (Payload $payload) use (&$container) {
-            $container[] = $payload;
+        $filteredEmitter->on(Events::MESSAGE_CREATE, function ($item) use (&$container) {
+            $container[] = $item;
         });
 
         $filteredEmitter->start();
 
-        $payload = new Payload();
-        $payload->t = 'something';
-        $payload->s = 10;
-
-        $eventHandler->handle($payload);
+        $eventHandler->emit(Events::MESSAGE_CREATE, ['::item::']);
 
         $this->assertCount(1, $container);
     }

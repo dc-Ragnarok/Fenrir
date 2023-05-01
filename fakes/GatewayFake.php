@@ -4,14 +4,12 @@ declare(strict_types=1);
 
 namespace Fakes\Ragnarok\Fenrir;
 
-use Ragnarok\Fenrir\DataMapper;
 use Fakes\Ragnarok\Fenrir\DataMapperFake;
 use Ragnarok\Fenrir\EventHandler;
-use Ragnarok\Fenrir\Gateway;
 use Ragnarok\Fenrir\Websocket;
 use Mockery;
-use Mockery\Mock;
-use Psr\Log\NullLogger;
+use Mockery\MockInterface;
+use Ragnarok\Fenrir\Gateway\Connection;
 
 class GatewayFake
 {
@@ -20,14 +18,15 @@ class GatewayFake
      *  `$gateway->events` is a real `EventHandler` as events
      *  can be emitted with `->emit`. This is often more convenient
      *  than a mock implementation.
-     *
-     * @param bool $raw Whether the EventHandler should emit raw events
      */
-    public static function get(bool $raw = true): Mock|Gateway
+    public static function get(): Connection&MockInterface
     {
-        $gateway = Mockery::mock(Gateway::class);
+        /** @var Connection&MockInterface */
+        $gateway = Mockery::mock(Connection::class);
 
-        $gateway->events = new EventHandler(DataMapperFake::get(), $raw);
+        $gateway->events = new EventHandler(DataMapperFake::get());
+        $gateway->raw = new EventHandler(DataMapperFake::get());
+
         $gateway->websocket = Mockery::mock(Websocket::class);
 
         return $gateway;

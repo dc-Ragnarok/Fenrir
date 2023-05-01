@@ -8,7 +8,7 @@ use Ragnarok\Fenrir\Interaction\ButtonInteraction;
 use Mockery;
 use Mockery\Adapter\Phpunit\MockeryTestCase;
 use Ragnarok\Fenrir\Interaction\Helpers\InteractionCallbackBuilder;
-use Ragnarok\Fenrir\Websocket\Events\InteractionCreate;
+use Ragnarok\Fenrir\Gateway\Events\InteractionCreate;
 use Fakes\Ragnarok\Fenrir\DiscordFake;
 use Fakes\Ragnarok\Fenrir\PromiseFake;
 

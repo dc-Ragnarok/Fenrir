@@ -9,11 +9,13 @@ use Ragnarok\Fenrir\Constants\WebsocketEvents;
 use Ragnarok\Fenrir\Exceptions\Websocket\ConnectionNotInitializedException;
 use JsonSerializable;
 use Psr\Log\LoggerInterface;
+use Ragnarok\Fenrir\Exceptions\Websocket\ConnectionFailedException;
 use Ratchet\Client\Connector;
 use Ratchet\Client\WebSocket as RatchetWebsocket;
 use Ratchet\RFC6455\Messaging\MessageInterface;
 use React\EventLoop\Loop;
 use React\EventLoop\LoopInterface;
+use React\Promise\ExtendedPromiseInterface;
 use React\Promise\Promise;
 use React\Socket\Connector as SocketConnector;
 
@@ -51,7 +53,7 @@ class Websocket extends EventEmitter
         }
     }
 
-    public function open(string $url): Promise
+    public function open(string $url): ExtendedPromiseInterface
     {
         $this->logger->info(
             sprintf('WS (C->S): Connecting to %s', $url)
@@ -76,7 +78,7 @@ class Websocket extends EventEmitter
                     sprintf('WS (C->S): Error connecting to %s. %s', $url, $e->getMessage())
                 );
 
-                $reject($e);
+                $reject(new ConnectionFailedException(previous: $e));
             });
         });
     }

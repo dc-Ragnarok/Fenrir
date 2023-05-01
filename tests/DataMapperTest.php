@@ -9,7 +9,7 @@ use Ragnarok\Fenrir\Enums\Parts\ApplicationCommandOptionTypes;
 use Ragnarok\Fenrir\Parts\ApplicationCommandInteractionDataOptionStructure;
 use Ragnarok\Fenrir\Parts\InteractionData;
 use Ragnarok\Fenrir\Parts\Message;
-use Ragnarok\Fenrir\Websocket\Events\InteractionCreate;
+use Ragnarok\Fenrir\Gateway\Events\InteractionCreate;
 use Monolog\Test\TestCase;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;

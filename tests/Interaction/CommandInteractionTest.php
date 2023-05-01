@@ -12,7 +12,7 @@ use Ragnarok\Fenrir\Interaction\Helpers\InteractionCallbackBuilder;
 use Ragnarok\Fenrir\Parts\ApplicationCommandInteractionDataOptionStructure;
 use Ragnarok\Fenrir\Parts\InteractionData;
 use Ragnarok\Fenrir\Rest\Helpers\Webhook\EditWebhookBuilder;
-use Ragnarok\Fenrir\Websocket\Events\InteractionCreate;
+use Ragnarok\Fenrir\Gateway\Events\InteractionCreate;
 use Fakes\Ragnarok\Fenrir\DiscordFake;
 use Fakes\Ragnarok\Fenrir\PromiseFake;
 

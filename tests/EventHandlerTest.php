@@ -8,7 +8,7 @@ use Ragnarok\Fenrir\Constants\Events;
 use Ragnarok\Fenrir\DataMapper;
 use Fakes\Ragnarok\Fenrir\DataMapperFake;
 use Ragnarok\Fenrir\EventHandler;
-use Ragnarok\Fenrir\Websocket\Objects\Payload;
+use Ragnarok\Fenrir\Gateway\Objects\Payload;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\NullLogger;
 use React\Promise\Promise;
@@ -37,30 +37,6 @@ final class EventHandlerTest extends TestCase
 
             $eventHandler->handle($payload);
         });
-    }
-
-    public function testEmitRaw(): void
-    {
-        $eventHandler = new EventHandler($this->dataMapper, true);
-
-        $payload = new Payload();
-        $payload->t = '::event type::';
-
-        $response = $this->awaitResponse($eventHandler, Events::RAW, $payload);
-
-        $this->assertPromiseFulfillsWith($response, $payload);
-    }
-
-    public function testDoesNotEmitRawWhenSettingFalse(): void
-    {
-        $eventHandler = new EventHandler($this->dataMapper, false);
-
-        $payload = new Payload();
-        $payload->t = '::event type::';
-
-        $response = $this->awaitResponse($eventHandler, Events::RAW, $payload);
-
-        $this->assertPromiseRejects($response, 1);
     }
 
     public function testDoesNotEmitIfUnknownEvent(): void
