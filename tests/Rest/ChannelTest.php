@@ -425,18 +425,6 @@ class ChannelTest extends HttpHelperTestCase
                     'array' => true
                 ],
             ],
-            'Get thread members 2' => [
-                'method' => 'listThreadMembers',
-                'args' => ['::channel id::'],
-                'mockOptions' => [
-                    'method' => 'get',
-                    'return' => [(object) [], (object) [], (object) []],
-                ],
-                'validationOptions' => [
-                    'returnType' => ThreadMember::class,
-                    'array' => true
-                ],
-            ],
             'List public archived threads' => [
                 'method' => 'listPublicArchivedThreads',
                 'args' => ['::channel id::'],
