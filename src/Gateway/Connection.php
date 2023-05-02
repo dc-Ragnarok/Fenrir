@@ -6,7 +6,7 @@ namespace Ragnarok\Fenrir\Gateway;
 
 use Evenement\EventEmitter;
 use Ragnarok\Fenrir\Bitwise\Bitwise;
-use Ragnarok\Fenrir\Constants\Events as Events;
+use Ragnarok\Fenrir\Constants\Events;
 use Ragnarok\Fenrir\Constants\WebsocketEvents;
 use Ragnarok\Fenrir\Enums\Gateway\Intents;
 use Ragnarok\Fenrir\Gateway\Objects\Payload;
