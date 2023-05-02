@@ -68,8 +68,7 @@ class MessageBuilder
         string $messageId,
         bool $failIfNotExists,
         ?string $guildId = null
-    ): self
-    {
+    ): self {
         $this->data['message_reference'] = [
             'channel_id' => $channelId,
             'message_id' => $messageId,

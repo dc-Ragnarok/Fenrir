@@ -124,8 +124,7 @@ class EmbedBuilder
         ?string $proxyUrl = null,
         ?int $height = null,
         ?int $width = null
-    ): self
-    {
+    ): self {
         $this->data['image'] = compact('url');
 
         if (!is_null($proxyUrl)) {
@@ -156,8 +155,7 @@ class EmbedBuilder
         ?string $proxyUrl = null,
         ?int $height = null,
         ?int $width = null
-    ): self
-    {
+    ): self {
         $this->data['thumbnail'] = compact('url');
 
         if (!is_null($proxyUrl)) {
@@ -188,8 +186,7 @@ class EmbedBuilder
         ?string $proxyUrl = null,
         ?int $height = null,
         ?int $width = null
-    ): self
-    {
+    ): self {
         $this->data['video'] = compact('url');
 
         if (!is_null($proxyUrl)) {
@@ -246,8 +243,7 @@ class EmbedBuilder
         ?string $url = null,
         ?string $iconUrl = null,
         ?string $proxyIconUrl = null
-    ): self
-    {
+    ): self {
         $this->data['author'] = compact('name');
 
         if (!is_null($url)) {

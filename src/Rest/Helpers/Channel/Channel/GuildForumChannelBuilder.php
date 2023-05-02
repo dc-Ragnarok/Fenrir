@@ -61,8 +61,7 @@ class GuildForumChannelBuilder extends ChannelBuilder
         string $name,
         ?bool $moderated = null,
         ?EmojiBuilder $emoji = null
-    ): self
-    {
+    ): self {
         if (!isset($this->data['available_tags'])) {
             $this->data['available_tags'] = [];
         } elseif (count($this->data['available_tags']) === 20) {
