@@ -32,6 +32,9 @@ class ChannelSelectMenu extends SelectMenu
 
     public function get(): array
     {
-        return [...parent::get(), ...is_null($this->channelTypes) ? [] : ['channel_types' => $this->channelTypes]];
+        return [
+            ...parent::get(),
+            ...(is_null($this->channelTypes) ? [] : ['channel_types' => $this->channelTypes])
+        ];
     }
 }

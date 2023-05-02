@@ -16,9 +16,8 @@ class GetNewTest extends TestCase
         };
 
         $this->assertInstanceOf(
-            $class,
-            $class::new(),
-            'Class is not correct instance'
+            $class::class,
+            $class::new()
         );
     }
 }
