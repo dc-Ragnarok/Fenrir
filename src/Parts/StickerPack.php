@@ -8,7 +8,7 @@ class StickerPack
 {
     public string $id;
     /**
-     * @var \Ragnarok\Fenrir\Parts\Sticker[]
+     * @var Sticker[]
      */
     public array $stickers;
     public string $name;

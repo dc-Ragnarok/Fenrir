@@ -21,7 +21,7 @@ class GuildSticker extends HttpResource
     /**
      * @see https://discord.com/developers/docs/resources/sticker#list-guild-stickers
      *
-     * @return ExtendedPromiseInterface<\Ragnarok\Fenrir\Parts\Sticker[]>
+     * @return ExtendedPromiseInterface<Sticker[]>
      */
     public function list(string $guildId): ExtendedPromiseInterface
     {
@@ -39,7 +39,7 @@ class GuildSticker extends HttpResource
     /**
      * @see https://discord.com/developers/docs/resources/sticker#get-guild-sticker
      *
-     * @return ExtendedPromiseInterface<\Ragnarok\Fenrir\Parts\Sticker>
+     * @return ExtendedPromiseInterface<Sticker>
      */
     public function get(string $guildId, string $stickerId): ExtendedPromiseInterface
     {
@@ -58,7 +58,7 @@ class GuildSticker extends HttpResource
     /**
      * @see https://discord.com/developers/docs/resources/sticker#get-guild-sticker
      *
-     * @return ExtendedPromiseInterface<\Ragnarok\Fenrir\Parts\Sticker>
+     * @return ExtendedPromiseInterface<Sticker>
      */
     public function create(string $guildId, StickerBuilder $stickerBuilder): ExtendedPromiseInterface
     {
@@ -76,7 +76,7 @@ class GuildSticker extends HttpResource
 
     /**
      * @see https://discord.com/developers/docs/resources/sticker#modify-guild-sticker
-     * @return ExtendedPromiseInterface<\Ragnarok\Fenrir\Parts\Sticker>
+     * @return ExtendedPromiseInterface<Sticker>
      */
     public function modify(
         string $guildId,

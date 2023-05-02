@@ -10,7 +10,7 @@ class ApplicationCommandPermissionObject
     public string $application_id;
     public string $guild_id;
     /**
-     * @var \Ragnarok\Fenrir\Parts\ApplicationCommandPermissionStructure[]
+     * @var ApplicationCommandPermissionStructure[]
      */
     public array $permissions;
 }

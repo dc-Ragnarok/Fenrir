@@ -17,7 +17,7 @@ class AutoModerationTriggerMetadata
      */
     public array $regex_patterns;
     /**
-     * @var \Ragnarok\Fenrir\Enums\Parts\AutoModerationKeywordPresetTypes[]
+     * @var AutoModerationKeywordPresetTypes[]
      */
     public array $presets;
     /**

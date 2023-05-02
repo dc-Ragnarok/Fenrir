@@ -9,7 +9,7 @@ use Ragnarok\Fenrir\Attributes\Partial;
 class InviteStageInstanceObject
 {
     /**
-     * @var \Ragnarok\Fenrir\Parts\GuildMember[]
+     * @var GuildMember[]
      */
     #[Partial]
     public array $members;

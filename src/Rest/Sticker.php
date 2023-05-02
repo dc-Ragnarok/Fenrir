@@ -20,7 +20,7 @@ class Sticker extends HttpResource
     /**
      * @see https://discord.com/developers/docs/resources/sticker#get-sticker
      *
-     * @return ExtendedPromiseInterface<\Ragnarok\Fenrir\Parts\Sticker>
+     * @return ExtendedPromiseInterface<PartsSticker>
      */
     public function get(string $stickerId): ExtendedPromiseInterface
     {
@@ -38,7 +38,7 @@ class Sticker extends HttpResource
     /**
      * @see https://discord.com/developers/docs/resources/sticker#list-nitro-sticker-packs
      *
-     * @return ExtendedPromiseInterface<\Ragnarok\Fenrir\Parts\StickerPack[]>
+     * @return ExtendedPromiseInterface<StickerPack[]>
      */
     public function listNitroPacks(): ExtendedPromiseInterface
     {

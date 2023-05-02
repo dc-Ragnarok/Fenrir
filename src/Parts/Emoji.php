@@ -9,7 +9,7 @@ class Emoji
     public ?string $id;
     public ?string $name;
     /**
-     * @var \Ragnarok\Fenrir\Parts\Role[]
+     * @var Role[]
      */
     public ?array $roles;
     public ?User $user;

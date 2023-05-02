@@ -17,7 +17,7 @@ class AutoModerationRuleObject
     public AutoModerationTriggerTypes $trigger_type;
     public AutoModerationTriggerMetadata $trigger_metadata;
     /**
-     * @var \Ragnarok\Fenrir\Parts\AutoModerationActionStructure[]
+     * @var AutoModerationActionStructure[]
      */
     public array $actions;
     public bool $enabled;

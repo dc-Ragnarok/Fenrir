@@ -11,7 +11,7 @@ class InteractionData
     public int $type; // @todo enum
     public ?InteractionDataResolved $resolved;
     /**
-     * @var \Ragnarok\Fenrir\Parts\ApplicationCommandInteractionDataOptionStructure[]
+     * @var ApplicationCommandInteractionDataOptionStructure[]
      */
     public ?array $options;
     public ?string $guild_id;
@@ -19,7 +19,7 @@ class InteractionData
     public ?string $custom_id;
     public ?int $component_type; // @todo enum
     /**
-     * @var \Ragnarok\Fenrir\Parts\ComponentSelectOptions[]
+     * @var ComponentSelectOptions[]
      */
     public ?array $values;
 }
