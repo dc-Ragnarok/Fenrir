@@ -17,7 +17,7 @@
         "netresearch/jsonmapper": "^4.1",
         "evenement/evenement": "^3.0.0",
         "nesbot/carbon": "^2.64",
-        "discord-php/http": "master@dev",
+        "discord-php/http": "v10.2.0",
         "monolog/monolog": "^3.2",
         "ramsey/uuid": "^4.7",
         "ralouphie/mimey": "^1.0",
