@@ -98,7 +98,7 @@ class EmbedBuilder
      */
     public function setFooter(string $text, ?string $iconUrl = null, ?string $proxyIconUrl = null): self
     {
-        $this->data['footer'] = compact('text');
+        $this->data['footer'] = ['text' => $text];
 
         if (!is_null($iconUrl)) {
             $this->data['footer']['icon_url'] = $iconUrl;
@@ -125,7 +125,7 @@ class EmbedBuilder
         ?int $height = null,
         ?int $width = null
     ): self {
-        $this->data['image'] = compact('url');
+        $this->data['image'] = ['url' => $url];
 
         if (!is_null($proxyUrl)) {
             $this->data['image']['proxy_url'] = $proxyUrl;
@@ -156,7 +156,7 @@ class EmbedBuilder
         ?int $height = null,
         ?int $width = null
     ): self {
-        $this->data['thumbnail'] = compact('url');
+        $this->data['thumbnail'] = ['url' => $url];
 
         if (!is_null($proxyUrl)) {
             $this->data['thumbnail']['proxy_url'] = $proxyUrl;
@@ -187,7 +187,7 @@ class EmbedBuilder
         ?int $height = null,
         ?int $width = null
     ): self {
-        $this->data['video'] = compact('url');
+        $this->data['video'] = ['url' => $url];
 
         if (!is_null($proxyUrl)) {
             $this->data['video']['proxy_url'] = $proxyUrl;
@@ -244,7 +244,7 @@ class EmbedBuilder
         ?string $iconUrl = null,
         ?string $proxyIconUrl = null
     ): self {
-        $this->data['author'] = compact('name');
+        $this->data['author'] = ['name' => $name];
 
         if (!is_null($url)) {
             $this->data['author']['url'] = $url;
@@ -277,7 +277,11 @@ class EmbedBuilder
             $this->data['fields'] = [];
         }
 
-        $this->data['fields'][] = compact('name', 'value', 'inline');
+        $this->data['fields'][] = [
+            'name' => $name,
+            'value' => $value,
+            'inline' => $inline
+        ];
 
         return $this;
     }

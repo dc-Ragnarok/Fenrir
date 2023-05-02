@@ -34,7 +34,7 @@ class Websocket extends EventEmitter
     public function __construct(private int $timeout, private LoggerInterface $logger)
     {
         $this->loop = Loop::get();
-        $this->socketConnector = new SocketConnector(compact('timeout'));
+        $this->socketConnector = new SocketConnector(['timeout' => $timeout]);
 
         $this->connector = new Connector(
             $this->loop,

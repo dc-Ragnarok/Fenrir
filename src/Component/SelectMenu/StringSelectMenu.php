@@ -31,7 +31,10 @@ class StringSelectMenu extends SelectMenu
             throw new TooManyOptionsException();
         }
 
-        $item = compact('label', 'value');
+        $item = [
+            'label' => $label,
+            'value' => $value,
+        ];
 
         if (!is_null($description)) {
             $item['description'] = $description;
