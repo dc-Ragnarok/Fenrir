@@ -10,7 +10,7 @@ class Presence
     public string $guild_id;
     public string $status;
     /**
-     * @var Activity[]
+     * @var \Ragnarok\Fenrir\Parts\Activity[]
      */
     public ?array $activities;
     public ClientStatus $client_status;

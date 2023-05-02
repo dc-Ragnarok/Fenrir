@@ -19,7 +19,7 @@ class Invite extends HttpResource
     /**
      * @see https://discord.com/developers/docs/resources/invite#get-invite
      *
-     * @return ExtendedPromiseInterface<PartsInvite>
+     * @return ExtendedPromiseInterface<\Ragnarok\Fenrir\Parts\Invite>
      */
     public function get(string $code): ExtendedPromiseInterface
     {

@@ -17,7 +17,7 @@ class AuditLog extends HttpResource
     /**
      * @see https://discord.com/developers/docs/resources/audit-log#get-guild-audit-log
      *
-     * @return ExtendedPromiseInterface<PartsAuditLog>
+     * @return ExtendedPromiseInterface<\Ragnarok\Fenrir\Parts\AuditLog>
      */
     public function getGuildAuditLogs(
         string $guildId,

@@ -23,7 +23,7 @@ class ApplicationCommand
      */
     public ?array $description_localizations;
     /**
-     * @var ApplicationCommandOptionStructure[]
+     * @var \Ragnarok\Fenrir\Parts\ApplicationCommandOptionStructure[]
      */
     public ?array $options;
     public ?string $default_member_permissions;

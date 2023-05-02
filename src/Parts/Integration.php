@@ -26,7 +26,7 @@ class Integration
     public ?bool $revoked;
     public ?Application $application;
     /**
-     * @var Scopes[]
+     * @var \Ragnarok\Fenrir\Enums\Parts\Scopes[]
      */
     public ?array $scopes;
 

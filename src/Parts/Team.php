@@ -9,7 +9,7 @@ class Team
     public ?string $icon;
     public string $id;
     /**
-     * @var TeamMember[]
+     * @var \Ragnarok\Fenrir\Parts\TeamMember[]
      */
     public array $members;
     public string $name;

@@ -25,7 +25,7 @@ class Activity
     public bool $instance;
     public ?Bitwise $flags;
     /**
-     * @var ActivityButton[]
+     * @var \Ragnarok\Fenrir\Parts\ActivityButton[]
      */
     public ?array $buttons;
 

@@ -8,7 +8,7 @@ class WelcomeScreen
 {
     public ?string $description;
     /**
-     * @var WelcomeScreenChannel[]
+     * @var \Ragnarok\Fenrir\Parts\WelcomeScreenChannel[]
      */
     public array $welcome_channels;
 }

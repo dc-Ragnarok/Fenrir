@@ -10,7 +10,7 @@ class AuditLogEntry
 {
     public ?string $target_id;
     /**
-     * @var AuditLogChange[]
+     * @var \Ragnarok\Fenrir\Parts\AuditLogChange[]
      */
     public ?array $changes;
     public ?string $user_id;

@@ -9,36 +9,36 @@ use Ragnarok\Fenrir\Attributes\Partial;
 class AuditLog
 {
     /**
-     * @var ApplicationCommandPermissionObject[]
+     * @var \Ragnarok\Fenrir\Parts\ApplicationCommandPermissionObject[]
      */
     public ?array $application_commands;
     /**
-     * @var AuditLogEntry[]
+     * @var \Ragnarok\Fenrir\Parts\AuditLogEntry[]
      */
     public ?array $audit_log_entries;
     /**
-     * @var AutoModerationRule[]
+     * @var \Ragnarok\Fenrir\Parts\AutoModerationRule[]
      */
     public ?array $auto_moderation_rules;
     /**
-     * @var GuildScheduledEvent[]
+     * @var \Ragnarok\Fenrir\Parts\GuildScheduledEvent[]
      */
     public ?array $guild_scheduled_events;
     /**
-     * @var Integration[]
+     * @var \Ragnarok\Fenrir\Parts\Integration[]
      */
     #[Partial]
     public ?array $integrations;
     /**
-     * @var Channel[]
+     * @var \Ragnarok\Fenrir\Parts\Channel[]
      */
     public ?array $threads;
     /**
-     * @var User[]
+     * @var \Ragnarok\Fenrir\Parts\User[]
      */
     public ?array $users;
     /**
-     * @var Webhook[]
+     * @var \Ragnarok\Fenrir\Parts\Webhook[]
      */
     public ?array $webhooks;
 }

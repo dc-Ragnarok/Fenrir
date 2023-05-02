@@ -20,7 +20,7 @@ class Emoji extends HttpResource
     /**
      * @see https://discord.com/developers/docs/resources/emoji#list-guild-emojis
      *
-     * @return ExtendedPromiseInterface<PartsEmoji[]>
+     * @return ExtendedPromiseInterface<\Ragnarok\Fenrir\Parts\Emoji[]>
      */
     public function listGuildEmojis(string $guildId): ExtendedPromiseInterface
     {
@@ -38,7 +38,7 @@ class Emoji extends HttpResource
     /**
      * @see https://discord.com/developers/docs/resources/emoji#get-guild-emoji
      *
-     * @return ExtendedPromiseInterface<PartsEmoji>
+     * @return ExtendedPromiseInterface<\Ragnarok\Fenrir\Parts\Emoji>
      */
     public function getGuildEmoji(string $guildId, string $emojiId): ExtendedPromiseInterface
     {
@@ -57,7 +57,7 @@ class Emoji extends HttpResource
     /**
      * @see https://discord.com/developers/docs/resources/emoji#create-guild-emoji
      *
-     * @return ExtendedPromiseInterface<PartsEmoji>
+     * @return ExtendedPromiseInterface<\Ragnarok\Fenrir\Parts\Emoji>
      */
     public function createGuildEmoji(
         string $guildId,
@@ -80,7 +80,7 @@ class Emoji extends HttpResource
     /**
      * @see https://discord.com/developers/docs/resources/emoji#modify-guild-emoji
      *
-     * @return ExtendedPromiseInterface<PartsEmoji>
+     * @return ExtendedPromiseInterface<\Ragnarok\Fenrir\Parts\Emoji>
      */
     public function modifyGuildEmoji(
         string $guildId,

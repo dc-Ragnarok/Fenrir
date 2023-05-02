@@ -33,15 +33,15 @@ class Guild
     public MessageNotificationLevels $default_message_notifications;
     public ExplicitContentFilterLevels $explicit_content_filter;
     /**
-     * @var Role[]
+     * @var \Ragnarok\Fenrir\Parts\Role[]
      */
     public array $roles;
     /**
-     * @var Emoji[]
+     * @var \Ragnarok\Fenrir\Parts\Emoji[]
      */
     public array $emojis;
     /**
-     * @var GuildFeatures[]
+     * @var \Ragnarok\Fenrir\Enums\Parts\GuildFeatures[]
      */
     public array $features;
     public MfaLevels $mfa_level;
@@ -64,7 +64,7 @@ class Guild
     public ?WelcomeScreen $welcome_screen;
     public NsfwLevels $nsfw_level;
     /**
-     * @var Sticker[]
+     * @var \Ragnarok\Fenrir\Parts\Sticker[]
      */
     public ?array $stickers;
     public bool $premium_progress_bar_enabled;

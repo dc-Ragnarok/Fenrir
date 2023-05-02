@@ -13,7 +13,7 @@ class Component
 {
     public MessageComponentTypes $type;
     /**
-     * @var Component[]
+     * @var \Ragnarok\Fenrir\Parts\Component[]
      */
     public ?array $components;
     public ?ButtonStyle $style;
@@ -23,11 +23,11 @@ class Component
     public ?string $url;
     public ?bool $disabled;
     /**
-     * @var ComponentSelectOptions[]
+     * @var \Ragnarok\Fenrir\Parts\ComponentSelectOptions[]
      */
     public ?array $options; // @todo
     /**
-     * @var ChannelTypes[]
+     * @var \Ragnarok\Fenrir\Enums\Parts\ChannelTypes[]
      */
     public ?array $channel_types;
     public ?string $placeholder;

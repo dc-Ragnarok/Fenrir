@@ -22,7 +22,7 @@ class Embed
     public ?EmbedProvider $provider;
     public ?EmbedAuthor $author;
     /**
-     * @var EmbedField[]
+     * @var \Ragnarok\Fenrir\Parts\EmbedField[]
      */
     public ?array $fields;
 

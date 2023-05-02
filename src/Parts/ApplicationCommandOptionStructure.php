@@ -22,15 +22,15 @@ class ApplicationCommandOptionStructure
     public ?array $description_localizations;
     public ?bool $required;
     /**
-     * @var ApplicationCommandOptionChoice[]
+     * @var \Ragnarok\Fenrir\Parts\ApplicationCommandOptionChoice[]
      */
     public ?array $choices;
     /**
-     * @var ApplicationCommandOptionStructure[]
+     * @var \Ragnarok\Fenrir\Parts\ApplicationCommandOptionStructure[]
      */
     public ?array $options;
     /**
-     * @var ChannelTypes[]
+     * @var \Ragnarok\Fenrir\Enums\Parts\ChannelTypes[]
      */
     public ?array $channel_types;
     public int|float|null $min_value;

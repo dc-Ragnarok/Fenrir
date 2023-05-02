@@ -9,7 +9,7 @@ use Ragnarok\Fenrir\Enums\Parts\Scopes;
 class InstallParams
 {
     /**
-     * @var Scopes[]
+     * @var \Ragnarok\Fenrir\Enums\Parts\Scopes[]
      */
     public array $scopes;
     public string $permissions;

@@ -12,7 +12,7 @@ class ApplicationCommandInteractionDataOptionStructure
     public ApplicationCommandOptionTypes $type;
     public string|int|float|bool|null $value;
     /**
-     * @var ApplicationCommandInteractionDataOptionStructure[]
+     * @var \Ragnarok\Fenrir\Parts\ApplicationCommandInteractionDataOptionStructure[]
      */
     public ?array $options;
     public bool $focused;

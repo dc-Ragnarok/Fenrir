@@ -20,7 +20,7 @@ class Message
     public bool $tts;
     public bool $mention_everyone;
     /**
-     * @var User[]
+     * @var \Ragnarok\Fenrir\Parts\User[]
      */
     public array $mentions;
     /**
@@ -28,19 +28,19 @@ class Message
      */
     public array $mention_roles;
     /**
-     * @var ChannelMention[]
+     * @var \Ragnarok\Fenrir\Parts\ChannelMention[]
      */
     public ?array $mention_channels;
     /**
-     * @var Attachment[]
+     * @var \Ragnarok\Fenrir\Parts\Attachment[]
      */
     public array $attachments;
     /**
-     * @var Embed[]
+     * @var \Ragnarok\Fenrir\Parts\Embed[]
      */
     public array $embeds;
     /**
-     * @var Reaction[]
+     * @var \Ragnarok\Fenrir\Parts\Reaction[]
      */
     public ?array $reactions;
     public ?string $nonce;
@@ -57,15 +57,15 @@ class Message
     public ?MessageInteraction $interaction;
     public ?Channel $thread;
     /**
-     * @var Component[]
+     * @var \Ragnarok\Fenrir\Parts\Component[]
      */
     public array $components;
     /**
-     * @var MessageStickerItem[]
+     * @var \Ragnarok\Fenrir\Parts\MessageStickerItem[]
      */
     public ?array $sticker_items;
     /**
-     * @var Sticker[]
+     * @var \Ragnarok\Fenrir\Parts\Sticker[]
      */
     public ?array $stickers;
     public ?int $position;
