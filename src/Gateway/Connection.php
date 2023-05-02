@@ -8,6 +8,7 @@ use Evenement\EventEmitter;
 use Ragnarok\Fenrir\Bitwise\Bitwise;
 use Ragnarok\Fenrir\Constants\Events as Events;
 use Ragnarok\Fenrir\Constants\WebsocketEvents;
+use Ragnarok\Fenrir\Enums\Gateway\Intents;
 use Ragnarok\Fenrir\Gateway\Objects\Payload;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
@@ -40,7 +41,7 @@ class Connection
     private Puppet $puppet;
 
     /**
-     * @param Bitwise<\Ragnarok\Fenrir\Enums\Gateway\Intents> $intents
+     * @param Bitwise<Intents> $intents
      */
     public function __construct(
         private LoopInterface $loop,

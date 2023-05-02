@@ -8,6 +8,7 @@ use Ragnarok\Fenrir\Parts\Message;
 use Ragnarok\Fenrir\Attributes\Intent;
 use Ragnarok\Fenrir\Enums\Gateway\Intents;
 use Ragnarok\Fenrir\Parts\GuildMember;
+use Ragnarok\Fenrir\Parts\User;
 
 /**
  * @see https://discord.com/developers/docs/topics/gateway-events#message-create
@@ -16,7 +17,7 @@ use Ragnarok\Fenrir\Parts\GuildMember;
 class MessageCreate extends Message
 {
     /**
-     * @var \Ragnarok\Fenrir\Parts\User[]
+     * @var User[]
      */
     public array $mentions;
     public ?string $guild_id;

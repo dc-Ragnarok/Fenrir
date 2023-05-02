@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Ragnarok\Fenrir;
 
 use Evenement\EventEmitter;
+use Exception;
 use Ragnarok\Fenrir\Constants\WebsocketEvents;
 use Ragnarok\Fenrir\Exceptions\Websocket\ConnectionNotInitializedException;
 use JsonSerializable;
@@ -73,7 +74,7 @@ class Websocket extends EventEmitter
                 });
 
                 $resolver();
-            }, function (\Exception $e) use ($url, $reject) {
+            }, function (Exception $e) use ($url, $reject) {
                 $this->logger->info(
                     sprintf('WS (C->S): Error connecting to %s. %s', $url, $e->getMessage())
                 );

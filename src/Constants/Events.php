@@ -4,6 +4,66 @@ declare(strict_types=1);
 
 namespace Ragnarok\Fenrir\Constants;
 
+use Ragnarok\Fenrir\Gateway\Events\ApplicationCommandPermissionsUpdate;
+use Ragnarok\Fenrir\Gateway\Events\AutoModerationActionExecution;
+use Ragnarok\Fenrir\Gateway\Events\AutoModerationRuleCreate;
+use Ragnarok\Fenrir\Gateway\Events\AutoModerationRuleDelete;
+use Ragnarok\Fenrir\Gateway\Events\AutoModerationRuleUpdate;
+use Ragnarok\Fenrir\Gateway\Events\ChannelCreate;
+use Ragnarok\Fenrir\Gateway\Events\ChannelDelete;
+use Ragnarok\Fenrir\Gateway\Events\ChannelPinsUpdate;
+use Ragnarok\Fenrir\Gateway\Events\ChannelUpdate;
+use Ragnarok\Fenrir\Gateway\Events\GuildBanAdd;
+use Ragnarok\Fenrir\Gateway\Events\GuildBanRemove;
+use Ragnarok\Fenrir\Gateway\Events\GuildCreate;
+use Ragnarok\Fenrir\Gateway\Events\GuildDelete;
+use Ragnarok\Fenrir\Gateway\Events\GuildEmojisUpdate;
+use Ragnarok\Fenrir\Gateway\Events\GuildIntegrationsUpdate;
+use Ragnarok\Fenrir\Gateway\Events\GuildMemberAdd;
+use Ragnarok\Fenrir\Gateway\Events\GuildMemberRemove;
+use Ragnarok\Fenrir\Gateway\Events\GuildMembersChunk;
+use Ragnarok\Fenrir\Gateway\Events\GuildMemberUpdate;
+use Ragnarok\Fenrir\Gateway\Events\GuildRoleCreate;
+use Ragnarok\Fenrir\Gateway\Events\GuildRoleDelete;
+use Ragnarok\Fenrir\Gateway\Events\GuildRoleUpdate;
+use Ragnarok\Fenrir\Gateway\Events\GuildScheduledEventCreate;
+use Ragnarok\Fenrir\Gateway\Events\GuildScheduledEventDelete;
+use Ragnarok\Fenrir\Gateway\Events\GuildScheduledEventUpdate;
+use Ragnarok\Fenrir\Gateway\Events\GuildScheduledEventUserAdd;
+use Ragnarok\Fenrir\Gateway\Events\GuildScheduledEventUserRemove;
+use Ragnarok\Fenrir\Gateway\Events\GuildStickersUpdate;
+use Ragnarok\Fenrir\Gateway\Events\GuildUpdate;
+use Ragnarok\Fenrir\Gateway\Events\IntegrationCreate;
+use Ragnarok\Fenrir\Gateway\Events\IntegrationDelete;
+use Ragnarok\Fenrir\Gateway\Events\IntegrationUpdate;
+use Ragnarok\Fenrir\Gateway\Events\InteractionCreate;
+use Ragnarok\Fenrir\Gateway\Events\InviteCreate;
+use Ragnarok\Fenrir\Gateway\Events\InviteDelete;
+use Ragnarok\Fenrir\Gateway\Events\MessageCreate;
+use Ragnarok\Fenrir\Gateway\Events\MessageDelete;
+use Ragnarok\Fenrir\Gateway\Events\MessageDeleteBulk;
+use Ragnarok\Fenrir\Gateway\Events\MessageReactionAdd;
+use Ragnarok\Fenrir\Gateway\Events\MessageReactionRemove;
+use Ragnarok\Fenrir\Gateway\Events\MessageReactionRemoveAll;
+use Ragnarok\Fenrir\Gateway\Events\MessageReactionRemoveEmoji;
+use Ragnarok\Fenrir\Gateway\Events\MessageUpdate;
+use Ragnarok\Fenrir\Gateway\Events\PresenceUpdate;
+use Ragnarok\Fenrir\Gateway\Events\Ready;
+use Ragnarok\Fenrir\Gateway\Events\StageInstanceCreate;
+use Ragnarok\Fenrir\Gateway\Events\StageInstanceDelete;
+use Ragnarok\Fenrir\Gateway\Events\StageInstanceUpdate;
+use Ragnarok\Fenrir\Gateway\Events\ThreadCreate;
+use Ragnarok\Fenrir\Gateway\Events\ThreadDelete;
+use Ragnarok\Fenrir\Gateway\Events\ThreadListSync;
+use Ragnarok\Fenrir\Gateway\Events\ThreadMembersUpdate;
+use Ragnarok\Fenrir\Gateway\Events\ThreadMemberUpdate;
+use Ragnarok\Fenrir\Gateway\Events\ThreadUpdate;
+use Ragnarok\Fenrir\Gateway\Events\TypingStart;
+use Ragnarok\Fenrir\Gateway\Events\UserUpdate;
+use Ragnarok\Fenrir\Gateway\Events\VoiceServerUpdate;
+use Ragnarok\Fenrir\Gateway\Events\VoiceStateUpdate;
+use Ragnarok\Fenrir\Gateway\Events\WebhooksUpdate;
+
 class Events
 {
     final public const RAW = 'RAW';
@@ -87,85 +147,85 @@ class Events
     final public const WEBHOOKS_UPDATE = 'WEBHOOKS_UPDATE';
 
     final public const MAPPINGS = [
-        self::READY => \Ragnarok\Fenrir\Gateway\Events\Ready::class,
+        self::READY => Ready::class,
 
         self::APPLICATION_COMMAND_PERMISSIONS_UPDATE =>
-            \Ragnarok\Fenrir\Gateway\Events\ApplicationCommandPermissionsUpdate::class,
-        self::AUTO_MODERATION_RULE_CREATE => \Ragnarok\Fenrir\Gateway\Events\AutoModerationRuleCreate::class,
-        self::AUTO_MODERATION_RULE_UPDATE => \Ragnarok\Fenrir\Gateway\Events\AutoModerationRuleUpdate::class,
-        self::AUTO_MODERATION_RULE_DELETE => \Ragnarok\Fenrir\Gateway\Events\AutoModerationRuleDelete::class,
+            ApplicationCommandPermissionsUpdate::class,
+        self::AUTO_MODERATION_RULE_CREATE => AutoModerationRuleCreate::class,
+        self::AUTO_MODERATION_RULE_UPDATE => AutoModerationRuleUpdate::class,
+        self::AUTO_MODERATION_RULE_DELETE => AutoModerationRuleDelete::class,
         self::AUTO_MODERATION_ACTION_EXECUTION =>
-            \Ragnarok\Fenrir\Gateway\Events\AutoModerationActionExecution::class,
+            AutoModerationActionExecution::class,
 
-        self::CHANNEL_CREATE => \Ragnarok\Fenrir\Gateway\Events\ChannelCreate::class,
-        self::CHANNEL_UPDATE => \Ragnarok\Fenrir\Gateway\Events\ChannelUpdate::class,
-        self::CHANNEL_DELETE => \Ragnarok\Fenrir\Gateway\Events\ChannelDelete::class,
-        self::CHANNEL_PINS_UPDATE => \Ragnarok\Fenrir\Gateway\Events\ChannelPinsUpdate::class,
+        self::CHANNEL_CREATE => ChannelCreate::class,
+        self::CHANNEL_UPDATE => ChannelUpdate::class,
+        self::CHANNEL_DELETE => ChannelDelete::class,
+        self::CHANNEL_PINS_UPDATE => ChannelPinsUpdate::class,
 
-        self::THREAD_CREATE => \Ragnarok\Fenrir\Gateway\Events\ThreadCreate::class,
-        self::THREAD_UPDATE => \Ragnarok\Fenrir\Gateway\Events\ThreadUpdate::class,
-        self::THREAD_DELETE => \Ragnarok\Fenrir\Gateway\Events\ThreadDelete::class,
-        self::THREAD_LIST_SYNC => \Ragnarok\Fenrir\Gateway\Events\ThreadListSync::class,
-        self::THREAD_MEMBER_UPDATE => \Ragnarok\Fenrir\Gateway\Events\ThreadMemberUpdate::class,
-        self::THREAD_MEMBERS_UPDATE => \Ragnarok\Fenrir\Gateway\Events\ThreadMembersUpdate::class,
+        self::THREAD_CREATE => ThreadCreate::class,
+        self::THREAD_UPDATE => ThreadUpdate::class,
+        self::THREAD_DELETE => ThreadDelete::class,
+        self::THREAD_LIST_SYNC => ThreadListSync::class,
+        self::THREAD_MEMBER_UPDATE => ThreadMemberUpdate::class,
+        self::THREAD_MEMBERS_UPDATE => ThreadMembersUpdate::class,
 
-        self::GUILD_CREATE => \Ragnarok\Fenrir\Gateway\Events\GuildCreate::class,
-        self::GUILD_UPDATE => \Ragnarok\Fenrir\Gateway\Events\GuildUpdate::class,
-        self::GUILD_DELETE => \Ragnarok\Fenrir\Gateway\Events\GuildDelete::class,
+        self::GUILD_CREATE => GuildCreate::class,
+        self::GUILD_UPDATE => GuildUpdate::class,
+        self::GUILD_DELETE => GuildDelete::class,
 
-        self::GUILD_BAN_ADD => \Ragnarok\Fenrir\Gateway\Events\GuildBanAdd::class,
-        self::GUILD_BAN_REMOVE => \Ragnarok\Fenrir\Gateway\Events\GuildBanRemove::class,
+        self::GUILD_BAN_ADD => GuildBanAdd::class,
+        self::GUILD_BAN_REMOVE => GuildBanRemove::class,
 
-        self::GUILD_EMOJIS_UPDATE => \Ragnarok\Fenrir\Gateway\Events\GuildEmojisUpdate::class,
-        self::GUILD_STICKERS_UPDATE => \Ragnarok\Fenrir\Gateway\Events\GuildStickersUpdate::class,
+        self::GUILD_EMOJIS_UPDATE => GuildEmojisUpdate::class,
+        self::GUILD_STICKERS_UPDATE => GuildStickersUpdate::class,
 
-        self::GUILD_INTEGRATIONS_UPDATE => \Ragnarok\Fenrir\Gateway\Events\GuildIntegrationsUpdate::class,
+        self::GUILD_INTEGRATIONS_UPDATE => GuildIntegrationsUpdate::class,
 
-        self::GUILD_MEMBER_ADD => \Ragnarok\Fenrir\Gateway\Events\GuildMemberAdd::class,
-        self::GUILD_MEMBER_REMOVE => \Ragnarok\Fenrir\Gateway\Events\GuildMemberRemove::class,
-        self::GUILD_MEMBER_UPDATE => \Ragnarok\Fenrir\Gateway\Events\GuildMemberUpdate::class,
-        self::GUILD_MEMBERS_CHUNK => \Ragnarok\Fenrir\Gateway\Events\GuildMembersChunk::class,
+        self::GUILD_MEMBER_ADD => GuildMemberAdd::class,
+        self::GUILD_MEMBER_REMOVE => GuildMemberRemove::class,
+        self::GUILD_MEMBER_UPDATE => GuildMemberUpdate::class,
+        self::GUILD_MEMBERS_CHUNK => GuildMembersChunk::class,
 
-        self::GUILD_ROLE_CREATE => \Ragnarok\Fenrir\Gateway\Events\GuildRoleCreate::class,
-        self::GUILD_ROLE_UPDATE => \Ragnarok\Fenrir\Gateway\Events\GuildRoleUpdate::class,
-        self::GUILD_ROLE_DELETE => \Ragnarok\Fenrir\Gateway\Events\GuildRoleDelete::class,
+        self::GUILD_ROLE_CREATE => GuildRoleCreate::class,
+        self::GUILD_ROLE_UPDATE => GuildRoleUpdate::class,
+        self::GUILD_ROLE_DELETE => GuildRoleDelete::class,
 
-        self::GUILD_SCHEDULED_EVENT_CREATE => \Ragnarok\Fenrir\Gateway\Events\GuildScheduledEventCreate::class,
-        self::GUILD_SCHEDULED_EVENT_UPDATE => \Ragnarok\Fenrir\Gateway\Events\GuildScheduledEventUpdate::class,
-        self::GUILD_SCHEDULED_EVENT_DELETE => \Ragnarok\Fenrir\Gateway\Events\GuildScheduledEventDelete::class,
-        self::GUILD_SCHEDULED_EVENT_USER_ADD => \Ragnarok\Fenrir\Gateway\Events\GuildScheduledEventUserAdd::class,
+        self::GUILD_SCHEDULED_EVENT_CREATE => GuildScheduledEventCreate::class,
+        self::GUILD_SCHEDULED_EVENT_UPDATE => GuildScheduledEventUpdate::class,
+        self::GUILD_SCHEDULED_EVENT_DELETE => GuildScheduledEventDelete::class,
+        self::GUILD_SCHEDULED_EVENT_USER_ADD => GuildScheduledEventUserAdd::class,
         self::GUILD_SCHEDULED_EVENT_USER_REMOVE =>
-            \Ragnarok\Fenrir\Gateway\Events\GuildScheduledEventUserRemove::class,
+            GuildScheduledEventUserRemove::class,
 
-        self::INTEGRATION_CREATE => \Ragnarok\Fenrir\Gateway\Events\IntegrationCreate::class,
-        self::INTEGRATION_UPDATE => \Ragnarok\Fenrir\Gateway\Events\IntegrationUpdate::class,
-        self::INTEGRATION_DELETE => \Ragnarok\Fenrir\Gateway\Events\IntegrationDelete::class,
-        self::INTERACTION_CREATE => \Ragnarok\Fenrir\Gateway\Events\InteractionCreate::class,
+        self::INTEGRATION_CREATE => IntegrationCreate::class,
+        self::INTEGRATION_UPDATE => IntegrationUpdate::class,
+        self::INTEGRATION_DELETE => IntegrationDelete::class,
+        self::INTERACTION_CREATE => InteractionCreate::class,
 
-        self::INVITE_CREATE => \Ragnarok\Fenrir\Gateway\Events\InviteCreate::class,
-        self::INVITE_DELETE => \Ragnarok\Fenrir\Gateway\Events\InviteDelete::class,
+        self::INVITE_CREATE => InviteCreate::class,
+        self::INVITE_DELETE => InviteDelete::class,
 
-        self::MESSAGE_CREATE => \Ragnarok\Fenrir\Gateway\Events\MessageCreate::class,
-        self::MESSAGE_UPDATE => \Ragnarok\Fenrir\Gateway\Events\MessageUpdate::class,
-        self::MESSAGE_DELETE => \Ragnarok\Fenrir\Gateway\Events\MessageDelete::class,
-        self::MESSAGE_DELETE_BULK => \Ragnarok\Fenrir\Gateway\Events\MessageDeleteBulk::class,
-        self::MESSAGE_REACTION_ADD => \Ragnarok\Fenrir\Gateway\Events\MessageReactionAdd::class,
-        self::MESSAGE_REACTION_REMOVE => \Ragnarok\Fenrir\Gateway\Events\MessageReactionRemove::class,
-        self::MESSAGE_REACTION_REMOVE_ALL => \Ragnarok\Fenrir\Gateway\Events\MessageReactionRemoveAll::class,
-        self::MESSAGE_REACTION_REMOVE_EMOJI => \Ragnarok\Fenrir\Gateway\Events\MessageReactionRemoveEmoji::class,
+        self::MESSAGE_CREATE => MessageCreate::class,
+        self::MESSAGE_UPDATE => MessageUpdate::class,
+        self::MESSAGE_DELETE => MessageDelete::class,
+        self::MESSAGE_DELETE_BULK => MessageDeleteBulk::class,
+        self::MESSAGE_REACTION_ADD => MessageReactionAdd::class,
+        self::MESSAGE_REACTION_REMOVE => MessageReactionRemove::class,
+        self::MESSAGE_REACTION_REMOVE_ALL => MessageReactionRemoveAll::class,
+        self::MESSAGE_REACTION_REMOVE_EMOJI => MessageReactionRemoveEmoji::class,
 
-        self::PRESENCE_UPDATE => \Ragnarok\Fenrir\Gateway\Events\PresenceUpdate::class,
+        self::PRESENCE_UPDATE => PresenceUpdate::class,
 
-        self::STAGE_INSTANCE_CREATE => \Ragnarok\Fenrir\Gateway\Events\StageInstanceCreate::class,
-        self::STAGE_INSTANCE_UPDATE => \Ragnarok\Fenrir\Gateway\Events\StageInstanceUpdate::class,
-        self::STAGE_INSTANCE_DELETE => \Ragnarok\Fenrir\Gateway\Events\StageInstanceDelete::class,
+        self::STAGE_INSTANCE_CREATE => StageInstanceCreate::class,
+        self::STAGE_INSTANCE_UPDATE => StageInstanceUpdate::class,
+        self::STAGE_INSTANCE_DELETE => StageInstanceDelete::class,
 
-        self::TYPING_START => \Ragnarok\Fenrir\Gateway\Events\TypingStart::class,
-        self::USER_UPDATE => \Ragnarok\Fenrir\Gateway\Events\UserUpdate::class,
+        self::TYPING_START => TypingStart::class,
+        self::USER_UPDATE => UserUpdate::class,
 
-        self::VOICE_STATE_UPDATE => \Ragnarok\Fenrir\Gateway\Events\VoiceStateUpdate::class,
-        self::VOICE_SERVER_UPDATE => \Ragnarok\Fenrir\Gateway\Events\VoiceServerUpdate::class,
+        self::VOICE_STATE_UPDATE => VoiceStateUpdate::class,
+        self::VOICE_SERVER_UPDATE => VoiceServerUpdate::class,
 
-        self::WEBHOOKS_UPDATE => \Ragnarok\Fenrir\Gateway\Events\WebhooksUpdate::class,
+        self::WEBHOOKS_UPDATE => WebhooksUpdate::class,
     ];
 }

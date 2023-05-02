@@ -8,7 +8,9 @@ use Composer\InstalledVersions;
 use Discord\Http\DriverInterface;
 use Discord\Http\Drivers\Guzzle;
 use Discord\Http\Http;
+use OutOfBoundsException;
 use Ragnarok\Fenrir\Bitwise\Bitwise;
+use Ragnarok\Fenrir\Enums\Gateway\Intents;
 use Ragnarok\Fenrir\Rest\Rest;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
@@ -36,7 +38,7 @@ class Discord
     }
 
     /**
-     * @param Bitwise<\Ragnarok\Fenrir\Enums\Gateway\Intents> $intents
+     * @param Bitwise<Intents> $intents
      */
     public function withGateway(
         Bitwise $intents,
@@ -96,7 +98,7 @@ class Discord
     {
         try {
             $version = InstalledVersions::getVersion('exan\\fenrir');
-        } catch (\OutOfBoundsException) {
+        } catch (OutOfBoundsException) {
             $version = 'Unknown';
         }
 
