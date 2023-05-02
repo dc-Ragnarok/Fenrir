@@ -62,7 +62,7 @@ class Emoji extends HttpResource
     public function createGuildEmoji(
         string $guildId,
         CreateEmojiBuilder $emojiBuilder,
-        string|null $reason = null
+        ?string $reason = null
     ): ExtendedPromiseInterface {
         return $this->mapPromise(
             $this->http->post(
@@ -86,7 +86,7 @@ class Emoji extends HttpResource
         string $guildId,
         string $emojiId,
         CreateEmojiBuilder $emojiBuilder,
-        string|null $reason = null
+        ?string $reason = null
     ): ExtendedPromiseInterface {
         return $this->mapPromise(
             $this->http->patch(
@@ -110,7 +110,7 @@ class Emoji extends HttpResource
     public function deleteGuildEmoji(
         string $guildId,
         string $emojiId,
-        string|null $reason = null
+        ?string $reason = null
     ): ExtendedPromiseInterface {
         return $this->http->delete(
             Endpoint::bind(
