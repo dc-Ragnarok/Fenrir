@@ -104,7 +104,7 @@ class Discord
 
         return [
             'fenrir_version' => $version,
-            'php_version' => phpversion(),
+            'php_version' => PHP_VERSION,
             'bits' => 8 * PHP_INT_SIZE,
             'uname' => php_uname(),
             'os' => PHP_OS,
