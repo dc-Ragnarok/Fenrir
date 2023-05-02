@@ -85,7 +85,7 @@ class Discord
     {
         $args = [$this];
 
-        if (!is_null($devGuildId) && !empty($devGuildId)) {
+        if (!empty($devGuildId)) {
             $args[] = $devGuildId;
         }
 
