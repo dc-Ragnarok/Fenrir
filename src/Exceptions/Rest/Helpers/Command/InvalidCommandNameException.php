@@ -14,7 +14,7 @@ class InvalidCommandNameException extends Exception
         parent::__construct(sprintf(
             'Command name "%s" does not match required pattern "%s"',
             $this->name,
-            (string) Command::NAME_REGEX
+            Command::NAME_REGEX
         ));
     }
 }
