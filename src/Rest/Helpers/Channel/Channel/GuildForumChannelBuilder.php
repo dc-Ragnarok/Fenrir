@@ -69,7 +69,7 @@ class GuildForumChannelBuilder extends ChannelBuilder
             throw new TooManyAvailableTagsException();
         }
 
-        $tag = ['name' => $name];
+        $tag = compact('name');
 
         $this->data['available_tags'][] = &$tag;
 

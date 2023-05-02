@@ -76,10 +76,7 @@ final class EventHandlerTest extends TestCase
         $array = [];
 
         foreach (Events::MAPPINGS as $event => $class) {
-            $array[$event] = [
-                'event' => $event,
-                'class' => $class,
-            ];
+            $array[$event] = compact('event', 'class');
         }
 
         return $array;
