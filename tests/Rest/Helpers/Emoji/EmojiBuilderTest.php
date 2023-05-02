@@ -82,9 +82,7 @@ class EmojiBuilderTest extends TestCase
             ],
             'No properties' => [
                 'emoji' => (static function () {
-                    $emoji = new Emoji();
-
-                    return $emoji;
+                    return new Emoji();
                 })(),
                 'result' => [],
             ],
