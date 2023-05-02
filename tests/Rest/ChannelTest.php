@@ -425,7 +425,7 @@ class ChannelTest extends HttpHelperTestCase
                     'array' => true
                 ],
             ],
-            'Get thread members' => [
+            'Get thread members 2' => [
                 'method' => 'listThreadMembers',
                 'args' => ['::channel id::'],
                 'mockOptions' => [

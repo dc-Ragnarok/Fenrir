@@ -220,7 +220,7 @@ class StringSelectMenuTest extends TestCase
                     'default' => true,
                 ],
             ],
-            'Completely filled' => [
+            'Completely filled 2' => [
                 'args' => [
                     '::label::',
                     '::value::',
@@ -235,7 +235,7 @@ class StringSelectMenuTest extends TestCase
                     'default' => true,
                 ],
             ],
-            'Completely filled' => [
+            'Completely filled 3' => [
                 'args' => [
                     '::label::',
                     '::value::',
