@@ -13,7 +13,7 @@ class GetGuildAuditLogsBuilder
 
     private array $data = [];
 
-    public function setUserId(string $userId): GetGuildAuditLogsBuilder
+    public function setUserId(string $userId): self
     {
         $this->data['user_id'] = $userId;
 
@@ -25,7 +25,7 @@ class GetGuildAuditLogsBuilder
         return $this->data['user_id'] ?? null;
     }
 
-    public function setActionType(int $actionType): GetGuildAuditLogsBuilder
+    public function setActionType(int $actionType): self
     {
         $this->data['action_type'] = $actionType;
 
@@ -37,7 +37,7 @@ class GetGuildAuditLogsBuilder
         return $this->data['action_type'] ?? null;
     }
 
-    public function setBefore(string $before): GetGuildAuditLogsBuilder
+    public function setBefore(string $before): self
     {
         $this->data['before'] = $before;
 
@@ -49,7 +49,7 @@ class GetGuildAuditLogsBuilder
         return $this->data['before'] ?? null;
     }
 
-    public function setAfter(string $after): GetGuildAuditLogsBuilder
+    public function setAfter(string $after): self
     {
         $this->data['after'] = $after;
 
@@ -61,7 +61,7 @@ class GetGuildAuditLogsBuilder
         return $this->data['after'] ?? null;
     }
 
-    public function setLimit(int $limit): GetGuildAuditLogsBuilder
+    public function setLimit(int $limit): self
     {
         $this->data['limit'] = ItemLimit::withinLimit($limit);
 

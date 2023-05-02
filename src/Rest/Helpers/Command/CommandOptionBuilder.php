@@ -139,7 +139,7 @@ class CommandOptionBuilder
         return $this->data['choices'] ?? null;
     }
 
-    public function addOption(CommandOptionBuilder $commandOptionBuilder): self
+    public function addOption(self $commandOptionBuilder): self
     {
         if (!isset($this->options)) {
             $this->options = [];
@@ -235,7 +235,7 @@ class CommandOptionBuilder
 
         if (isset($this->options)) {
             $data['options'] = array_map(
-                static fn (CommandOptionBuilder $option) => $option->get(),
+                static fn (self $option) => $option->get(),
                 $this->options
             );
         }

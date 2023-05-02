@@ -16,7 +16,7 @@ class StickerBuilder
     private array $data = [];
     private array $file;
 
-    public function setName(string $name): StickerBuilder
+    public function setName(string $name): self
     {
         $this->data['name'] = $name;
 
@@ -28,7 +28,7 @@ class StickerBuilder
         return $this->data['name'] ?? null;
     }
 
-    public function setDescription(string $description): StickerBuilder
+    public function setDescription(string $description): self
     {
         $this->data['description'] = $description;
 
@@ -40,7 +40,7 @@ class StickerBuilder
         return $this->data['description'] ?? null;
     }
 
-    public function setTags(string $tags): StickerBuilder
+    public function setTags(string $tags): self
     {
         $this->data['tags'] = $tags;
 
@@ -52,7 +52,7 @@ class StickerBuilder
         return $this->data['tags'] ?? null;
     }
 
-    public function setFile(string $content, string $fileExtension): StickerBuilder
+    public function setFile(string $content, string $fileExtension): self
     {
         $this->file = [
             'content' => $content,

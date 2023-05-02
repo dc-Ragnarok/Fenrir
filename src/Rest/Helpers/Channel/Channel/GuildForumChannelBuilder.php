@@ -61,7 +61,8 @@ class GuildForumChannelBuilder extends ChannelBuilder
         string $name,
         ?bool $moderated = null,
         ?EmojiBuilder $emoji = null
-    ): GuildForumChannelBuilder {
+    ): self
+    {
         if (!isset($this->data['available_tags'])) {
             $this->data['available_tags'] = [];
         } elseif (count($this->data['available_tags']) === 20) {
@@ -93,7 +94,7 @@ class GuildForumChannelBuilder extends ChannelBuilder
         return $this;
     }
 
-    public function setDefaultReactionEmoji(EmojiBuilder $emoji): GuildForumChannelBuilder
+    public function setDefaultReactionEmoji(EmojiBuilder $emoji): self
     {
         $emojiData = $emoji->get();
 
@@ -104,14 +105,14 @@ class GuildForumChannelBuilder extends ChannelBuilder
         return $this;
     }
 
-    public function setDefaultSortOrder(SortOrderTypes $sortOrderType): GuildForumChannelBuilder
+    public function setDefaultSortOrder(SortOrderTypes $sortOrderType): self
     {
         $this->data['default_sort_order'] = $sortOrderType->value;
 
         return $this;
     }
 
-    public function setDefaultForumLayout(ForumLayoutTypes $formLayoutType): GuildForumChannelBuilder
+    public function setDefaultForumLayout(ForumLayoutTypes $formLayoutType): self
     {
         $this->data['default_forum_layout'] = $formLayoutType->value;
 

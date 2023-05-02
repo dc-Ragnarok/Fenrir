@@ -26,7 +26,7 @@ class GuildVoiceChannelBuilder extends ChannelBuilder
         $this->setChannelType(ChannelTypes::GUILD_VOICE);
     }
 
-    public function setUserLimit(int $limit): GuildVoiceChannelBuilder
+    public function setUserLimit(int $limit): self
     {
         $this->data['user_limit'] = min(max($limit, 0), 100);
 

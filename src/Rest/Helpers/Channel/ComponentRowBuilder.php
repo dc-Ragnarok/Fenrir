@@ -28,7 +28,7 @@ class ComponentRowBuilder
     /**
      * @throws TooManyItemsException
      */
-    public function add(Component $component): ComponentRowBuilder
+    public function add(Component $component): self
     {
         if (count($this->components) === 9) {
             throw new TooManyItemsException();

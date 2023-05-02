@@ -17,7 +17,7 @@ class ActivityBuilder
 
     private $data = [];
 
-    public function setName(string $name): ActivityBuilder
+    public function setName(string $name): self
     {
         $this->data['name'] = $name;
 
@@ -27,7 +27,7 @@ class ActivityBuilder
     /**
      * @see https://discord.com/developers/docs/topics/gateway-events#activity-object-activity-types
      */
-    public function setType(ActivityType $type): ActivityBuilder
+    public function setType(ActivityType $type): self
     {
         $this->data['type'] = $type->value;
 
@@ -38,14 +38,14 @@ class ActivityBuilder
      * Only for streaming activity type
      * Supports youtube & twitch
      */
-    public function setUrl(string $url): ActivityBuilder
+    public function setUrl(string $url): self
     {
         $this->data['url'] = $url;
 
         return $this;
     }
 
-    public function setEmoji(EmojiBuilder $emoji): ActivityBuilder
+    public function setEmoji(EmojiBuilder $emoji): self
     {
         $this->data['emoji'] = $emoji->get();
 

@@ -24,7 +24,7 @@ class AllowedMentionsBuilder
         return $this->data;
     }
 
-    public function addRole(string $roleId): AllowedMentionsBuilder
+    public function addRole(string $roleId): self
     {
         $this->data['roles'][] = $roleId;
 
@@ -40,7 +40,7 @@ class AllowedMentionsBuilder
         return $this->data['roles'];
     }
 
-    public function addUser(string $userId): AllowedMentionsBuilder
+    public function addUser(string $userId): self
     {
         $this->data['users'][] = $userId;
 
@@ -68,7 +68,7 @@ class AllowedMentionsBuilder
         return isset($this->data['replied_user']) && $this->data['replied_user'];
     }
 
-    public function allowUsers(): AllowedMentionsBuilder
+    public function allowUsers(): self
     {
         $this->data['parse'][] = 'users';
 
@@ -80,7 +80,7 @@ class AllowedMentionsBuilder
         return in_array('users', $this->data['parse']);
     }
 
-    public function allowRoles(): AllowedMentionsBuilder
+    public function allowRoles(): self
     {
         $this->data['parse'][] = 'roles';
 

@@ -12,7 +12,7 @@ class InviteBuilder
 
     private array $data = [];
 
-    public function setMaxAge(int $maxAge): InviteBuilder
+    public function setMaxAge(int $maxAge): self
     {
         $this->data['max_age'] = min(max($maxAge, 0), 604800);
 
@@ -24,7 +24,7 @@ class InviteBuilder
         return $this->data['max_age'] ?? null;
     }
 
-    public function setMaxUses(int $maxUses): InviteBuilder
+    public function setMaxUses(int $maxUses): self
     {
         $this->data['max_uses'] = min(max($maxUses, 0), 100);
 
@@ -36,7 +36,7 @@ class InviteBuilder
         return $this->data['max_uses'] ?? null;
     }
 
-    public function setTemporary(bool $temporary): InviteBuilder
+    public function setTemporary(bool $temporary): self
     {
         $this->data['temporary'] = $temporary;
 
@@ -48,7 +48,7 @@ class InviteBuilder
         return $this->data['temporary'] ?? null;
     }
 
-    public function setUnique(bool $unique): InviteBuilder
+    public function setUnique(bool $unique): self
     {
         $this->data['unique'] = $unique;
 
@@ -60,7 +60,7 @@ class InviteBuilder
         return $this->data['unique'] ?? null;
     }
 
-    public function setTargetType(int $targetType): InviteBuilder
+    public function setTargetType(int $targetType): self
     {
         $this->data['target_type'] = $targetType;
 
@@ -72,7 +72,7 @@ class InviteBuilder
         return $this->data['target_type'] ?? null;
     }
 
-    public function setTargetUserId(string $targetUserId): InviteBuilder
+    public function setTargetUserId(string $targetUserId): self
     {
         $this->data['target_user_id'] = $targetUserId;
 
@@ -84,7 +84,7 @@ class InviteBuilder
         return $this->data['target_user_id'] ?? null;
     }
 
-    public function setTargetApplicationId(string $targetApplicationId): InviteBuilder
+    public function setTargetApplicationId(string $targetApplicationId): self
     {
         $this->data['target_application_id'] = $targetApplicationId;
 

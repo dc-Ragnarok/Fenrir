@@ -30,7 +30,7 @@ class ComponentBuilder
      *
      * @throws TooManyRowsException
      */
-    public function addRow(ComponentRowBuilder $componentRow): ComponentBuilder
+    public function addRow(ComponentRowBuilder $componentRow): self
     {
         if (count($this->rows) === 5) {
             throw new TooManyRowsException();

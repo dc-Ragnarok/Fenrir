@@ -19,7 +19,7 @@ class EmbedBuilder
     /**
      * @param string $title Up to 256 characters
      */
-    public function setTitle(string $title): EmbedBuilder
+    public function setTitle(string $title): self
     {
         $this->data['title'] = $title;
 
@@ -34,7 +34,7 @@ class EmbedBuilder
     /**
      * @var string $description Up to 4096 characters
      */
-    public function setDescription(string $description): EmbedBuilder
+    public function setDescription(string $description): self
     {
         $this->data['description'] = $description;
 
@@ -46,7 +46,7 @@ class EmbedBuilder
         return $this->data['description'] ?? null;
     }
 
-    public function setUrl(string $url): EmbedBuilder
+    public function setUrl(string $url): self
     {
         $this->data['url'] = $url;
 
@@ -58,7 +58,7 @@ class EmbedBuilder
         return $this->data['url'] ?? null;
     }
 
-    public function setTimestamp(Carbon $timestamp): EmbedBuilder
+    public function setTimestamp(Carbon $timestamp): self
     {
         $this->data['timestamp'] = $timestamp->toIso8601String();
 
@@ -70,7 +70,7 @@ class EmbedBuilder
         return isset($this->data['timestamp']) ? new Carbon($this->data['timestamp']) : null;
     }
 
-    public function setColor(int $color): EmbedBuilder
+    public function setColor(int $color): self
     {
         $this->data['color'] = $color;
 
@@ -82,7 +82,7 @@ class EmbedBuilder
         return $this->data['color'] ?? null;
     }
 
-    public function setColour(int $color): EmbedBuilder
+    public function setColour(int $color): self
     {
         return $this->setColor($color);
     }
@@ -96,7 +96,7 @@ class EmbedBuilder
      * @var string $text Up to 2048 characters
      * @see https://discord.com/developers/docs/resources/channel#embed-object-embed-footer-structure
      */
-    public function setFooter(string $text, ?string $iconUrl = null, ?string $proxyIconUrl = null): EmbedBuilder
+    public function setFooter(string $text, ?string $iconUrl = null, ?string $proxyIconUrl = null): self
     {
         $this->data['footer'] = ['text' => $text];
 
@@ -124,7 +124,8 @@ class EmbedBuilder
         ?string $proxyUrl = null,
         ?int $height = null,
         ?int $width = null
-    ): EmbedBuilder {
+    ): self
+    {
         $this->data['image'] = ['url' => $url];
 
         if (!is_null($proxyUrl)) {
@@ -155,7 +156,8 @@ class EmbedBuilder
         ?string $proxyUrl = null,
         ?int $height = null,
         ?int $width = null
-    ): EmbedBuilder {
+    ): self
+    {
         $this->data['thumbnail'] = ['url' => $url];
 
         if (!is_null($proxyUrl)) {
@@ -186,7 +188,8 @@ class EmbedBuilder
         ?string $proxyUrl = null,
         ?int $height = null,
         ?int $width = null
-    ): EmbedBuilder {
+    ): self
+    {
         $this->data['video'] = ['url' => $url];
 
         if (!is_null($proxyUrl)) {
@@ -212,7 +215,7 @@ class EmbedBuilder
     /**
      * @see https://discord.com/developers/docs/resources/channel#embed-object-embed-provider-structure
      */
-    public function setProvider(?string $name = null, ?string $url = null): EmbedBuilder
+    public function setProvider(?string $name = null, ?string $url = null): self
     {
         if (!isset($this->data['provider'])) {
             $this->data['provider'] = [];
@@ -243,7 +246,8 @@ class EmbedBuilder
         ?string $url = null,
         ?string $iconUrl = null,
         ?string $proxyIconUrl = null
-    ): EmbedBuilder {
+    ): self
+    {
         $this->data['author'] = ['name' => $name];
 
         if (!is_null($url)) {
@@ -271,7 +275,7 @@ class EmbedBuilder
      * @var string $value Up to 1024 characters
      * @see https://discord.com/developers/docs/resources/channel#embed-object-embed-field-structure
      */
-    public function addField(string $name, string $value, bool $inline = false): EmbedBuilder
+    public function addField(string $name, string $value, bool $inline = false): self
     {
         if (!isset($this->data['fields'])) {
             $this->data['fields'] = [];

@@ -15,7 +15,7 @@ class AttachmentBuilder
 
     private array $data = [];
 
-    public function setId(string $id): AttachmentBuilder
+    public function setId(string $id): self
     {
         $this->data['id'] = $id;
 
@@ -27,7 +27,7 @@ class AttachmentBuilder
         return $this->data['id'] ?? null;
     }
 
-    public function setFilename(string $filename): AttachmentBuilder
+    public function setFilename(string $filename): self
     {
         $this->data['filename'] = $filename;
 
@@ -39,7 +39,7 @@ class AttachmentBuilder
         return $this->data['filename'] ?? null;
     }
 
-    public function setDescription(string $description): AttachmentBuilder
+    public function setDescription(string $description): self
     {
         $this->data['description'] = $description;
 
@@ -51,7 +51,7 @@ class AttachmentBuilder
         return $this->data['description'] ?? null;
     }
 
-    public function setContentType(string $contentType): AttachmentBuilder
+    public function setContentType(string $contentType): self
     {
         $this->data['content_type'] = $contentType;
 
@@ -63,7 +63,7 @@ class AttachmentBuilder
         return $this->data['content_type'] ?? null;
     }
 
-    public function setSize(int $size): AttachmentBuilder
+    public function setSize(int $size): self
     {
         $this->data['size'] = $size;
 
@@ -75,7 +75,7 @@ class AttachmentBuilder
         return $this->data['size'] ?? null;
     }
 
-    public function setUrl(string $url): AttachmentBuilder
+    public function setUrl(string $url): self
     {
         $this->data['url'] = $url;
 
@@ -87,7 +87,7 @@ class AttachmentBuilder
         return $this->data['url'] ?? null;
     }
 
-    public function setProxyUrl(string $proxyUrl): AttachmentBuilder
+    public function setProxyUrl(string $proxyUrl): self
     {
         $this->data['proxy_url'] = $proxyUrl;
 
@@ -99,7 +99,7 @@ class AttachmentBuilder
         return $this->data['proxy_url'] ?? null;
     }
 
-    public function setHeight(int $height): AttachmentBuilder
+    public function setHeight(int $height): self
     {
         $this->data['height'] = $height;
 
@@ -111,7 +111,7 @@ class AttachmentBuilder
         return $this->data['height'] ?? null;
     }
 
-    public function setWidth(int $width): AttachmentBuilder
+    public function setWidth(int $width): self
     {
         $this->data['width'] = $width;
 
@@ -123,7 +123,7 @@ class AttachmentBuilder
         return $this->data['width'] ?? null;
     }
 
-    public function setEphemeral(bool $ephemeral): AttachmentBuilder
+    public function setEphemeral(bool $ephemeral): self
     {
         $this->data['ephemeral'] = $ephemeral;
 
