@@ -90,7 +90,7 @@ class PuppetTest extends MockeryTestCase
         $this->expectMessage(function ($payload) use ($activityBuilder) {
             $this->assertEquals(3, $payload['op']);
             $this->assertEquals(StatusType::AFK->value, $payload['d']['status']);
-            $this->assertEquals(false, $payload['d']['afk']);
+            $this->assertFalse($payload['d']['afk']);
             $this->assertEquals([$activityBuilder->get()], $payload['d']['activities']);
             $this->assertFalse(isset($payload['d']['since']));
 
@@ -108,7 +108,7 @@ class PuppetTest extends MockeryTestCase
         $this->expectMessage(function ($payload) use ($activityBuilder) {
             $this->assertEquals(3, $payload['op']);
             $this->assertEquals(StatusType::AFK->value, $payload['d']['status']);
-            $this->assertEquals(false, $payload['d']['afk']);
+            $this->assertFalse($payload['d']['afk']);
             $this->assertEquals([$activityBuilder->get()], $payload['d']['activities']);
             $this->assertEquals(456, $payload['d']['since']);
 
@@ -138,7 +138,7 @@ class PuppetTest extends MockeryTestCase
             $this->assertEquals(8, $payload['op']);
             $this->assertEquals('::guild id::', $payload['d']['guild_id']);
             $this->assertEquals('::query::', $payload['d']['query']);
-            $this->assertEquals(true, $payload['d']['presences']);
+            $this->assertTrue($payload['d']['presences']);
             $this->assertEquals(1234, $payload['d']['limit']);
             $this->assertFalse(isset($payload['d']['nonce']));
 
@@ -154,7 +154,7 @@ class PuppetTest extends MockeryTestCase
             $this->assertEquals(8, $payload['op']);
             $this->assertEquals('::guild id::', $payload['d']['guild_id']);
             $this->assertEquals('::query::', $payload['d']['query']);
-            $this->assertEquals(true, $payload['d']['presences']);
+            $this->assertTrue($payload['d']['presences']);
             $this->assertEquals(1234, $payload['d']['limit']);
             $this->assertEquals('::nonce::', $payload['d']['nonce']);
 
@@ -170,7 +170,7 @@ class PuppetTest extends MockeryTestCase
             $this->assertEquals(8, $payload['op']);
             $this->assertEquals('::guild id::', $payload['d']['guild_id']);
             $this->assertEquals(['::user id::'], $payload['d']['user_ids']);
-            $this->assertEquals(true, $payload['d']['presences']);
+            $this->assertTrue($payload['d']['presences']);
             $this->assertEquals(1234, $payload['d']['limit']);
             $this->assertFalse(isset($payload['d']['nonce']));
 
@@ -186,7 +186,7 @@ class PuppetTest extends MockeryTestCase
             $this->assertEquals(8, $payload['op']);
             $this->assertEquals('::guild id::', $payload['d']['guild_id']);
             $this->assertEquals(['::user id::'], $payload['d']['user_ids']);
-            $this->assertEquals(true, $payload['d']['presences']);
+            $this->assertTrue($payload['d']['presences']);
             $this->assertEquals(1234, $payload['d']['limit']);
             $this->assertEquals('::nonce::', $payload['d']['nonce']);
 

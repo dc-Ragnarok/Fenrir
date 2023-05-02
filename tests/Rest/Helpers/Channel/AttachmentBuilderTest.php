@@ -95,7 +95,7 @@ class AttachmentBuilderTest extends TestCase
         $builder = new AttachmentBuilder();
         $this->assertNull($builder->getWidth());
         $builder->setEphemeral(true);
-        $this->assertEquals(true, $builder->get()['ephemeral']);
-        $this->assertEquals(true, $builder->getEphemeral());
+        $this->assertTrue($builder->get()['ephemeral']);
+        $this->assertTrue($builder->getEphemeral());
     }
 }

@@ -32,7 +32,7 @@ class EmojiBuilderTest extends TestCase
         $emojiBuilder = new EmojiBuilder();
         $emojiBuilder->setAnimated(true);
         $this->assertEquals(['animated' => true], $emojiBuilder->get());
-        $this->assertEquals(true, $emojiBuilder->getAnimated());
+        $this->assertTrue($emojiBuilder->getAnimated());
     }
 
     public function testCreateEmojiFromId(): void

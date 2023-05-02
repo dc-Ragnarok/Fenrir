@@ -102,7 +102,7 @@ class WebhookBuilderTest extends TestCase
             '::spooky binary data::',
         );
 
-        $this->assertEquals(true, $builder->requiresMultipart());
+        $this->assertTrue($builder->requiresMultipart());
     }
 
     public function testGetMultipart(): void

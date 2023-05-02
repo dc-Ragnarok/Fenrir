@@ -61,6 +61,6 @@ class StartThreadWithoutMessageBuilderTest extends TestCase
         $builder->setInvitable(false);
 
         $this->assertEquals(['invitable' => false], $builder->get());
-        $this->assertEquals(false, $builder->getInvitable());
+        $this->assertFalse($builder->getInvitable());
     }
 }
