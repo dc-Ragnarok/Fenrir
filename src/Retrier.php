@@ -22,13 +22,7 @@ class Retrier
 
             $executeAction = static function (
                 callable $action
-            ) use (
-                $resolve,
-                $shouldReject,
-                $reject,
-                &$executeAction,
-                &$retries
-            ) {
+            ) use (&$retries, $resolve, $shouldReject, $reject, &$executeAction) {
                 $action($retries)
                     ->then($resolve)
                     ->otherwise(static fn () => $shouldReject()

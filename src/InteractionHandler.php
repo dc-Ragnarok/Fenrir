@@ -52,7 +52,7 @@ class InteractionHandler
         /** Ready event includes Application ID */
         $this->discord->gateway->events->once(
             Events::READY,
-            function (Ready $ready) use ($commandBuilder, $guildId, $handler) {
+            function (Ready $ready) use ($guildId, $commandBuilder, $handler) {
                 $this->discord->rest->guildCommand->createApplicationCommand(
                     $ready->user->id,
                     $guildId,
