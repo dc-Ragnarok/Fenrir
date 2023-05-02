@@ -40,7 +40,7 @@ class EditWebhookBuilder
 
         if ($this->hasAttachments()) {
             $data['attachments'] = array_map(
-                fn (AttachmentBuilder $attachment) => $attachment->get(),
+                static fn (AttachmentBuilder $attachment) => $attachment->get(),
                 $this->getAttachments()
             );
         }
@@ -51,7 +51,7 @@ class EditWebhookBuilder
 
         if ($this->hasEmbeds()) {
             $data['embeds'] = array_map(
-                fn (EmbedBuilder $embed) => $embed->get(),
+                static fn (EmbedBuilder $embed) => $embed->get(),
                 $this->getEmbeds()
             );
         }

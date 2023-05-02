@@ -16,7 +16,7 @@ class RetrierTest extends MockeryTestCase
 {
     public function testItDoesNotRunTheActionMultipleTimesForHappyFlowAsync(): void
     {
-        $result = await(Retrier::retryAsync(3, function () {
+        $result = await(Retrier::retryAsync(3, static function () {
             return PromiseFake::get('Success');
         }));
 
@@ -27,7 +27,7 @@ class RetrierTest extends MockeryTestCase
     {
         $this->expectException(TooManyRetriesException::class);
 
-        await(Retrier::retryAsync(3, function () {
+        await(Retrier::retryAsync(3, static function () {
             return PromiseFake::reject(new Exception('Oh no, it went wrong :('));
         }));
     }
@@ -37,7 +37,7 @@ class RetrierTest extends MockeryTestCase
         $attempts = [];
 
         try {
-            await(Retrier::retryAsync(3, function (int $attempt) use (&$attempts) {
+            await(Retrier::retryAsync(3, static function (int $attempt) use (&$attempts) {
                 $attempts[] = $attempt;
                 return PromiseFake::reject(new Exception('Sad times'));
             }));

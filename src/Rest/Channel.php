@@ -650,7 +650,7 @@ class Channel extends HttpResource
             'with_member' => $withMember,
             'after' => $after,
             'limit' => $limit,
-        ], fn ($value) => !is_null($value));
+        ], static fn ($value) => !is_null($value));
 
         return $this->mapArrayPromise(
             $this->http->get(

@@ -52,7 +52,7 @@ class InteractionHandler
         /** Ready event includes Application ID */
         $this->discord->gateway->events->once(
             Events::READY,
-            function (Ready $ready) use ($commandBuilder, $guildId, $handler) {
+            function (Ready $ready) use ($guildId, $commandBuilder, $handler) {
                 $this->discord->rest->guildCommand->createApplicationCommand(
                     $ready->user->id,
                     $guildId,
@@ -88,7 +88,7 @@ class InteractionHandler
         $this->commandListener = new FilteredEventEmitter(
             $this->discord->gateway->events,
             Events::INTERACTION_CREATE,
-            fn (InteractionCreate $interactionCreate) =>
+            static fn (InteractionCreate $interactionCreate) =>
                 $interactionCreate->type === InteractionTypes::APPLICATION_COMMAND
         );
 
@@ -124,7 +124,7 @@ class InteractionHandler
         $this->buttonListener = new FilteredEventEmitter(
             $this->discord->gateway->events,
             Events::INTERACTION_CREATE,
-            fn (InteractionCreate $interactionCreate) =>
+            static fn (InteractionCreate $interactionCreate) =>
             $interactionCreate->type === InteractionTypes::MESSAGE_COMPONENT
                 && $interactionCreate->data->component_type === 2 // @todo enum
         );

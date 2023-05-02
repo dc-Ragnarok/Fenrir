@@ -220,7 +220,7 @@ class StringSelectMenuTest extends TestCase
                     'default' => true,
                 ],
             ],
-            'Completely filled' => [
+            'No emoji' => [
                 'args' => [
                     '::label::',
                     '::value::',
@@ -235,7 +235,7 @@ class StringSelectMenuTest extends TestCase
                     'default' => true,
                 ],
             ],
-            'Completely filled' => [
+            'No default' => [
                 'args' => [
                     '::label::',
                     '::value::',

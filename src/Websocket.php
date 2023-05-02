@@ -60,7 +60,7 @@ class Websocket extends EventEmitter
         );
 
         return new Promise(function (callable $resolver, callable $reject) use ($url) {
-            ($this->connector)($url)->then(function (RatchetWebsocket $connection) use ($resolver, $url) {
+            ($this->connector)($url)->then(function (RatchetWebsocket $connection) use ($url, $resolver) {
                 $this->connection = $connection;
 
                 $this->logger->info(
@@ -73,7 +73,7 @@ class Websocket extends EventEmitter
                 });
 
                 $resolver();
-            }, function (\Exception $e) use ($reject, $url) {
+            }, function (\Exception $e) use ($url, $reject) {
                 $this->logger->info(
                     sprintf('WS (C->S): Error connecting to %s. %s', $url, $e->getMessage())
                 );

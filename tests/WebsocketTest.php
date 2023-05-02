@@ -34,8 +34,8 @@ class WebsocketTest extends TestCase
 
         await($websocket->open('ws://localhost:8080/echo'));
 
-        $message = await(new Promise(function (callable $resolve) use ($websocket) {
-            $websocket->on(WebsocketEvents::MESSAGE, function (MessageInterface $message) use ($resolve) {
+        $message = await(new Promise(static function (callable $resolve) use ($websocket) {
+            $websocket->on(WebsocketEvents::MESSAGE, static function (MessageInterface $message) use ($resolve) {
                 $resolve($message);
             });
 
@@ -53,8 +53,8 @@ class WebsocketTest extends TestCase
 
         await($websocket->open('ws://localhost:8080/echo'));
 
-        $message = await(new Promise(function (callable $resolve) use ($websocket) {
-            $websocket->on(WebsocketEvents::MESSAGE, function (MessageInterface $message) use ($resolve) {
+        $message = await(new Promise(static function (callable $resolve) use ($websocket) {
+            $websocket->on(WebsocketEvents::MESSAGE, static function (MessageInterface $message) use ($resolve) {
                 $resolve($message);
             });
 
@@ -73,14 +73,14 @@ class WebsocketTest extends TestCase
         await($websocket->open('ws://localhost:8080/echo'));
 
         $jsonItem = new class implements JsonSerializable {
-            public function jsonSerialize(): mixed
+            public function jsonSerialize(): array
             {
                 return ['hello' => 'world'];
             }
         };
 
-        $message = await(new Promise(function (callable $resolve) use ($websocket, $jsonItem) {
-            $websocket->on(WebsocketEvents::MESSAGE, function (MessageInterface $message) use ($resolve) {
+        $message = await(new Promise(static function (callable $resolve) use ($websocket, $jsonItem) {
+            $websocket->on(WebsocketEvents::MESSAGE, static function (MessageInterface $message) use ($resolve) {
                 $resolve($message);
             });
 

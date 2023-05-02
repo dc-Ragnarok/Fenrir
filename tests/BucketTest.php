@@ -21,7 +21,7 @@ class BucketTest extends TestCase
     {
         $bucket = new Bucket(Loop::get(), 2, 1);
 
-        $spy = Mockery::spy(function () {
+        $spy = Mockery::spy(static function () {
         });
 
         $start = microtime(true);
@@ -43,7 +43,7 @@ class BucketTest extends TestCase
     {
         $bucket = new Bucket(Loop::get(), 2, 1);
 
-        $errorThrower = function () {
+        $errorThrower = static function () {
             throw new \Exception('::exception::');
         };
 

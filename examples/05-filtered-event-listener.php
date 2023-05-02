@@ -21,17 +21,17 @@ $discord = (new Discord(
     Intents::DIRECT_MESSAGE_REACTIONS,
 ))->withRest();
 
-$discord->gateway->events->on(Events::MESSAGE_CREATE, function (MessageCreate $message) use ($discord) {
+$discord->gateway->events->on(Events::MESSAGE_CREATE, static function (MessageCreate $message) use ($discord) {
     if ($message->content === '!createListener') {
         $filteredListener = new FilteredEventEmitter(
             $discord->gateway->events, // Fenrir's `EventHandler`. This can be any `EventEmitterInterface`
             Events::MESSAGE_REACTION_ADD, // The event to listen to
-            fn (MessageReactionAdd $messageReactionAdd) => $messageReactionAdd->message_id === $message->id, // The filter for the event
+            static fn (MessageReactionAdd $messageReactionAdd) => $messageReactionAdd->message_id === $message->id, // The filter for the event
             20, // Stops the listener automatically after 20 seconds
             1 // Only allow 1 event to go through
         );
 
-        $filteredListener->on(Events::MESSAGE_REACTION_ADD, function (MessageReactionAdd $messageReactionAdd) use ($discord) {
+        $filteredListener->on(Events::MESSAGE_REACTION_ADD, static function (MessageReactionAdd $messageReactionAdd) use ($discord) {
             $discord->rest->channel->createMessage(
                 $messageReactionAdd->channel_id,
                 (new MessageBuilder())

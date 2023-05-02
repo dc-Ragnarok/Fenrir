@@ -19,7 +19,7 @@ class ComponentBuilder
 
     public function get(): array
     {
-        return array_map(fn (ComponentRowBuilder $row) => [
+        return array_map(static fn (ComponentRowBuilder $row) => [
             'type' => 1,
             'components' => $row->get()
         ], $this->rows);
@@ -30,7 +30,7 @@ class ComponentBuilder
      *
      * @throws TooManyRowsException
      */
-    public function addRow(ComponentRowBuilder $componentRow): ComponentBuilder
+    public function addRow(ComponentRowBuilder $componentRow): self
     {
         if (count($this->rows) === 5) {
             throw new TooManyRowsException();

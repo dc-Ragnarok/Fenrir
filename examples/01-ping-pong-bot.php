@@ -21,7 +21,7 @@ $discord
     ))
     ->withRest();
 
-$discord->gateway->events->on(Events::MESSAGE_CREATE, function (MessageCreate $message) use ($discord) {
+$discord->gateway->events->on(Events::MESSAGE_CREATE, static function (MessageCreate $message) use ($discord) {
     if ($message->content === '!ping') {
         $discord->rest->channel->createMessage(
             $message->channel_id,

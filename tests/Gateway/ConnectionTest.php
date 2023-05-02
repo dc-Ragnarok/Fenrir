@@ -100,7 +100,7 @@ class ConnectionTest extends MockeryTestCase
     ): CompositeExpectation {
         return $loop->expects()
             ->addTimer()
-            ->with(0.5, Mockery::on(fn () => true))
+            ->with(0.5, Mockery::on(static fn () => true))
             ->andReturns($return);
     }
 
@@ -114,7 +114,7 @@ class ConnectionTest extends MockeryTestCase
 
         return $loop->expects()
             ->addPeriodicTimer()
-            ->with($time, Mockery::on(function ($fn) use ($executeImmediately) {
+            ->with($time, Mockery::on(static function ($fn) use ($executeImmediately) {
                 if ($executeImmediately) {
                     $fn();
                 }
@@ -270,7 +270,7 @@ class ConnectionTest extends MockeryTestCase
 
         $promise->expects()
             ->otherwise()
-            ->with(Mockery::on(function ($fn) {
+            ->with(Mockery::on(static function ($fn) {
                 $fn();
 
                 return true;

@@ -14,24 +14,24 @@ class Retrier
         int $attempts,
         callable $action
     ): ExtendedPromiseInterface {
-        return new Promise(function (callable $resolve, callable $reject) use ($attempts, $action) {
+        return new Promise(static function (callable $resolve, callable $reject) use ($attempts, $action) {
             $retries = 0;
-            $shouldReject = function () use (&$retries, $attempts) {
+            $shouldReject = static function () use (&$retries, $attempts) {
                 return ++$retries >= $attempts;
             };
 
-            $executeAction = function (
+            $executeAction = static function (
                 callable $action
             ) use (
+                &$retries,
                 $resolve,
                 $shouldReject,
                 $reject,
-                &$executeAction,
-                &$retries
+                &$executeAction
             ) {
                 $action($retries)
                     ->then($resolve)
-                    ->otherwise(fn () => $shouldReject()
+                    ->otherwise(static fn () => $shouldReject()
                         ? $reject(new TooManyRetriesException())
                         : $executeAction($action));
             };

@@ -46,8 +46,8 @@ class InviteBuilderTest extends TestCase
         $builder = new InviteBuilder();
         $builder->setTemporary(true);
         $this->assertArrayHasKey('temporary', $builder->get());
-        $this->assertEquals(true, $builder->get()['temporary']);
-        $this->assertEquals(true, $builder->getTemporary());
+        $this->assertTrue($builder->get()['temporary']);
+        $this->assertTrue($builder->getTemporary());
     }
 
     public function testCanSetUnique(): void
@@ -55,8 +55,8 @@ class InviteBuilderTest extends TestCase
         $builder = new InviteBuilder();
         $builder->setUnique(true);
         $this->assertArrayHasKey('unique', $builder->get());
-        $this->assertEquals(true, $builder->get()['unique']);
-        $this->assertEquals(true, $builder->getUnique());
+        $this->assertTrue($builder->get()['unique']);
+        $this->assertTrue($builder->getUnique());
     }
 
     public function testCanSetTargetType(): void

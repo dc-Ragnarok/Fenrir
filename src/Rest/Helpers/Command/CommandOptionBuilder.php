@@ -139,7 +139,7 @@ class CommandOptionBuilder
         return $this->data['choices'] ?? null;
     }
 
-    public function addOption(CommandOptionBuilder $commandOptionBuilder): self
+    public function addOption(self $commandOptionBuilder): self
     {
         if (!isset($this->options)) {
             $this->options = [];
@@ -176,7 +176,7 @@ class CommandOptionBuilder
         return $this;
     }
 
-    public function getMinValue(): null|float|int
+    public function getMinValue(): float|int|null
     {
         return $this->data['min_value'] ?? null;
     }
@@ -188,7 +188,7 @@ class CommandOptionBuilder
         return $this;
     }
 
-    public function getMaxValue(): null|float|int
+    public function getMaxValue(): float|int|null
     {
         return $this->data['max_value'] ?? null;
     }
@@ -235,14 +235,14 @@ class CommandOptionBuilder
 
         if (isset($this->options)) {
             $data['options'] = array_map(
-                fn (CommandOptionBuilder $option) => $option->get(),
+                static fn (self $option) => $option->get(),
                 $this->options
             );
         }
 
         if (isset($this->channelTypes)) {
             $data['channel_types'] = array_map(
-                fn (ChannelTypes $type) => $type->value,
+                static fn (ChannelTypes $type) => $type->value,
                 $this->channelTypes
             );
         }

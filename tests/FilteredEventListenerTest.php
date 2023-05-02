@@ -13,6 +13,7 @@ use Fakes\Ragnarok\Fenrir\DataMapperFake;
 use Fakes\Ragnarok\Fenrir\PromiseFake;
 use Mockery;
 use Mockery\Adapter\Phpunit\MockeryTestCase;
+use React\EventLoop\LoopInterface;
 
 /**
  * @runTestsInSeparateProcesses
@@ -28,11 +29,11 @@ class FilteredEventListenerTest extends MockeryTestCase
         $filteredEmitter = new FilteredEventEmitter(
             $eventEmitter,
             'event',
-            fn (int $input) => $input === 10
+            static fn (int $input) => $input === 10
         );
 
         $container = [];
-        $filteredEmitter->on('event', function (int $input) use (&$container) {
+        $filteredEmitter->on('event', static function (int $input) use (&$container) {
             $container[] = $input;
         });
 
@@ -51,7 +52,7 @@ class FilteredEventListenerTest extends MockeryTestCase
         $filteredEmitter = new FilteredEventEmitter(
             $eventEmitter,
             'event',
-            function () {
+            static function () {
             }
         );
 
@@ -69,7 +70,7 @@ class FilteredEventListenerTest extends MockeryTestCase
         $filteredEmitter = new FilteredEventEmitter(
             $eventEmitter,
             'event',
-            fn (int $input) => $input === 10,
+            static fn (int $input) => $input === 10,
             maxItems: 3
         );
 
@@ -89,7 +90,7 @@ class FilteredEventListenerTest extends MockeryTestCase
         /**
          * @var Mock
          */
-        $loop = Mockery::mock('React\EventLoop\LoopInterface');
+        $loop = Mockery::mock(LoopInterface::class);
 
         /**
          * @var Mock
@@ -117,7 +118,7 @@ class FilteredEventListenerTest extends MockeryTestCase
         $filteredEmitter = new FilteredEventEmitter(
             $eventEmitter,
             'event',
-            fn (int $input) => $input === 10,
+            static fn (int $input) => $input === 10,
             10
         );
 
@@ -139,11 +140,11 @@ class FilteredEventListenerTest extends MockeryTestCase
         $filteredEmitter = new FilteredEventEmitter(
             $eventHandler,
             Events::MESSAGE_CREATE,
-            fn ($item) => $item === '::item::',
+            static fn ($item) => $item === '::item::',
         );
 
         $container = [];
-        $filteredEmitter->on(Events::MESSAGE_CREATE, function ($item) use (&$container) {
+        $filteredEmitter->on(Events::MESSAGE_CREATE, static function ($item) use (&$container) {
             $container[] = $item;
         });
 
@@ -162,11 +163,11 @@ class FilteredEventListenerTest extends MockeryTestCase
         $filteredEmitter = new FilteredEventEmitter(
             $eventEmitter,
             'event',
-            fn (int $input) => PromiseFake::get($input === 10)
+            static fn (int $input) => PromiseFake::get($input === 10)
         );
 
         $container = [];
-        $filteredEmitter->on('event', function (int $input) use (&$container) {
+        $filteredEmitter->on('event', static function (int $input) use (&$container) {
             $container[] = $input;
         });
 

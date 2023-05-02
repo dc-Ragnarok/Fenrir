@@ -11,7 +11,7 @@ trait MultipartMessage
 {
     public function getMultipart(array $data): MultipartBody
     {
-        $fields = array_map(function ($fileData, int $index) {
+        $fields = array_map(static function ($fileData, int $index) {
             $headers = isset($fileData['type'])
                 ? ['Content-Type' => $fileData['type']]
                 : [];

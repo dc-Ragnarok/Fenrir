@@ -22,13 +22,13 @@ class ComponentRowBuilder
 
     public function get(): array
     {
-        return array_map(fn (Component $component) => $component->get(), $this->components);
+        return array_map(static fn (Component $component) => $component->get(), $this->components);
     }
 
     /**
      * @throws TooManyItemsException
      */
-    public function add(Component $component): ComponentRowBuilder
+    public function add(Component $component): self
     {
         if (count($this->components) === 9) {
             throw new TooManyItemsException();

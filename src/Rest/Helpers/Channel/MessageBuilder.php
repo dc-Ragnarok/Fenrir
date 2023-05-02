@@ -36,7 +36,7 @@ class MessageBuilder
 
     private array $data = [];
 
-    public function setNonce(string $nonce): MessageBuilder
+    public function setNonce(string $nonce): self
     {
         $this->data['nonce'] = $nonce;
 
@@ -48,7 +48,7 @@ class MessageBuilder
         return $this->data['nonce'] ?? null;
     }
 
-    public function setTts(bool $tts): MessageBuilder
+    public function setTts(bool $tts): self
     {
         $this->data['tts'] = $tts;
 
@@ -68,7 +68,7 @@ class MessageBuilder
         string $messageId,
         bool $failIfNotExists,
         ?string $guildId = null
-    ): MessageBuilder {
+    ): self {
         $this->data['message_reference'] = [
             'channel_id' => $channelId,
             'message_id' => $messageId,
@@ -92,7 +92,7 @@ class MessageBuilder
      *
      * @throws TooManyStickersException
      */
-    public function addSticker(string $stickerId): MessageBuilder
+    public function addSticker(string $stickerId): self
     {
         $this->data['stickers'] ??= [];
 
@@ -116,7 +116,7 @@ class MessageBuilder
 
         if ($this->hasAttachments()) {
             $data['attachments'] = array_map(
-                fn (AttachmentBuilder $attachment) => $attachment->get(),
+                static fn (AttachmentBuilder $attachment) => $attachment->get(),
                 $this->getAttachments()
             );
         }
@@ -127,7 +127,7 @@ class MessageBuilder
 
         if ($this->hasEmbeds()) {
             $data['embeds'] = array_map(
-                fn (EmbedBuilder $embed) => $embed->get(),
+                static fn (EmbedBuilder $embed) => $embed->get(),
                 $this->getEmbeds()
             );
         }

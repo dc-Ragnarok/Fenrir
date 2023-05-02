@@ -20,8 +20,8 @@ class EditPermissionsBuilderTest extends TestCase
         $builder = EditPermissionsBuilder::new()
             ->setMemberId('::member id::');
 
-        $this->assertEquals($builder->getOverwriteId(), '::member id::');
-        $this->assertEquals($builder->get()['type'], 1);
+        $this->assertEquals('::member id::', $builder->getOverwriteId());
+        $this->assertEquals(1, $builder->get()['type']);
     }
 
     public function testSetRoleId(): void
@@ -29,8 +29,8 @@ class EditPermissionsBuilderTest extends TestCase
         $builder = EditPermissionsBuilder::new()
             ->setRoleId('::role id::');
 
-        $this->assertEquals($builder->getOverwriteId(), '::role id::');
-        $this->assertEquals($builder->get()['type'], 0);
+        $this->assertEquals('::role id::', $builder->getOverwriteId());
+        $this->assertEquals(0, $builder->get()['type']);
     }
 
     public function testSetAllow(): void

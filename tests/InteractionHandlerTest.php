@@ -59,7 +59,7 @@ class InteractionHandlerTest extends MockeryTestCase
 
         $interactionHandler->registerGlobalCommand(
             $commandBuilder,
-            fn (CommandInteraction $command) => 1
+            static fn (CommandInteraction $command) => 1
         );
 
         $this->emitReady($discord->gateway->events);
@@ -84,7 +84,7 @@ class InteractionHandlerTest extends MockeryTestCase
         $interactionHandler->registerGuildCommand(
             $commandBuilder,
             '::guild id::',
-            fn (CommandInteraction $command) => 1
+            static fn (CommandInteraction $command) => 1
         );
 
         $this->emitReady($discord->gateway->events);
@@ -103,13 +103,13 @@ class InteractionHandlerTest extends MockeryTestCase
         $interactionHandler->registerGuildCommand(
             $commandBuilder,
             '::guild id::',
-            fn (CommandInteraction $command) => 1
+            static fn (CommandInteraction $command) => 1
         );
 
         $interactionHandler->registerGuildCommand(
             $commandBuilder,
             '::guild id::',
-            fn (CommandInteraction $command) => 1
+            static fn (CommandInteraction $command) => 1
         );
 
         $this->assertCount(1, $discord->gateway->events->listeners(Events::INTERACTION_CREATE));
@@ -128,12 +128,12 @@ class InteractionHandlerTest extends MockeryTestCase
         $discord->rest->globalCommand
             ->shouldReceive('createApplicationCommand')
             ->with('::bot user id::', $commandBuilder)
-            ->andReturn(new Promise(fn ($resolver) => $resolver))
+            ->andReturn(new Promise(static fn ($resolver) => $resolver))
             ->once();
 
         $interactionHandler->registerCommand(
             $commandBuilder,
-            fn (CommandInteraction $command) => 1
+            static fn (CommandInteraction $command) => 1
         );
 
         $this->emitReady($discord->gateway->events);
@@ -151,13 +151,13 @@ class InteractionHandlerTest extends MockeryTestCase
 
         $interactionHandler->registerCommand(
             $commandBuilder,
-            fn (CommandInteraction $command) => 1
+            static fn (CommandInteraction $command) => 1
         );
 
         $interactionHandler->registerGuildCommand(
             $commandBuilder,
             '::guild id::',
-            fn (CommandInteraction $command) => 1
+            static fn (CommandInteraction $command) => 1
         );
 
         $this->assertCount(1, $discord->gateway->events->listeners(Events::INTERACTION_CREATE));
@@ -253,7 +253,7 @@ class InteractionHandlerTest extends MockeryTestCase
 
         $interactionHandler->registerGlobalCommand(
             $commandBuilder,
-            function ($command) use (&$hasRun) {
+            static function ($command) use (&$hasRun) {
                 $hasRun = true;
             }
         );
@@ -283,7 +283,7 @@ class InteractionHandlerTest extends MockeryTestCase
         $hasRun = false;
         $interactionHandler->onButtonInteraction(
             $button,
-            function (ButtonInteraction $buttonInteraction) use (&$hasRun) {
+            static function (ButtonInteraction $buttonInteraction) use (&$hasRun) {
                 $hasRun = true;
             }
         );
@@ -312,10 +312,10 @@ class InteractionHandlerTest extends MockeryTestCase
         $interactionHandler = new InteractionHandler($discord);
 
         $button = new DangerButton('::custom id::');
-        $interactionHandler->onButtonInteraction($button, fn (ButtonInteraction $btnInt) => null);
+        $interactionHandler->onButtonInteraction($button, static fn (ButtonInteraction $btnInt) => null);
 
         $otherButton = new DangerButton('::some other custom id::');
-        $interactionHandler->onButtonInteraction($otherButton, fn (ButtonInteraction $btnInt) => null);
+        $interactionHandler->onButtonInteraction($otherButton, static fn (ButtonInteraction $btnInt) => null);
 
         $this->assertCount(1, $discord->gateway->events->listeners(Events::INTERACTION_CREATE));
     }
@@ -330,7 +330,7 @@ class InteractionHandlerTest extends MockeryTestCase
         $runs = 0;
         $interactionHandler->onButtonInteraction(
             $button,
-            function (ButtonInteraction $buttonInteraction) use (&$runs) {
+            static function (ButtonInteraction $buttonInteraction) use (&$runs) {
                 $runs++;
 
                 return true;

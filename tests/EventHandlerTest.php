@@ -30,8 +30,8 @@ final class EventHandlerTest extends TestCase
 
     private function awaitResponse(EventHandler $eventHandler, string $event, Payload $payload): Promise
     {
-        return new Promise(function ($resolve) use ($eventHandler, $event, $payload) {
-            $eventHandler->on($event, function (mixed $eventResponse) use ($resolve) {
+        return new Promise(static function ($resolve) use ($eventHandler, $event, $payload) {
+            $eventHandler->on($event, static function (mixed $eventResponse) use ($resolve) {
                 $resolve($eventResponse);
             });
 

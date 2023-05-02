@@ -56,7 +56,7 @@ class InteractionCallbackBuilder
 
         if ($this->hasEmbeds()) {
             $callbackData['embeds'] = array_map(
-                fn (EmbedBuilder $embed) => $embed->get(),
+                static fn (EmbedBuilder $embed) => $embed->get(),
                 $this->getEmbeds()
             );
         }

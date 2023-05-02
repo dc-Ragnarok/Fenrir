@@ -62,6 +62,9 @@ class StringSelectMenu extends SelectMenu
             throw new NoOptionsException();
         }
 
-        return array_merge(parent::get(), ['options' => $this->items]);
+        return [
+            ...parent::get(),
+            'options' => $this->items
+        ];
     }
 }
