@@ -16,7 +16,7 @@ class EventHandler extends EventEmitter
 
     public function handle(Payload $payload): void
     {
-        if (!$this->hasListener($payload->t) || !isset(Events::MAPPINGS[$payload->t])) {
+        if (!isset(Events::MAPPINGS[$payload->t]) || !$this->hasListener($payload->t)) {
             return;
         }
 
