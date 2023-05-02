@@ -88,7 +88,7 @@ class GuildForumChannelBuilder extends ChannelBuilder
                 ? ['emoji_id' => $emojiData['id']]
                 : ['emoji_name' => $emojiData['id']];
 
-            $tag = array_merge($tag, $add);
+            $tag = [...$tag, ...$add];
         }
 
         return $this;
