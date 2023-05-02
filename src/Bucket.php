@@ -7,7 +7,6 @@ namespace Ragnarok\Fenrir;
 use Evenement\EventEmitter;
 use React\EventLoop\LoopInterface;
 use React\Promise\Promise;
-use Throwable;
 
 class Bucket extends EventEmitter
 {
@@ -35,7 +34,7 @@ class Bucket extends EventEmitter
                 try {
                     $result = $action();
                     $resolver($result);
-                } catch (Throwable $e) {
+                } catch (\Throwable $e) {
                     $reject($e);
                 }
             };

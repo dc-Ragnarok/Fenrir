@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Ragnarok\Fenrir\Gateway\Events;
 
 use Ragnarok\Fenrir\Attributes\Intent;
-use Ragnarok\Fenrir\Parts\Activity;
 use Ragnarok\Fenrir\Parts\ClientStatus;
 use Ragnarok\Fenrir\Parts\User;
 
@@ -20,7 +19,7 @@ class PresenceUpdate
     public string $status;
 
     /**
-     * @var Activity[]
+     * @var \Ragnarok\Fenrir\Parts\Activity[]
      */
     public array $activities;
 

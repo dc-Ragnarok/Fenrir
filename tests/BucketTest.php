@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Tests\Ragnarok\Fenrir;
 
-use Exception;
 use Ragnarok\Fenrir\Bucket;
 use Mockery;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
@@ -45,10 +44,10 @@ class BucketTest extends TestCase
         $bucket = new Bucket(Loop::get(), 2, 1);
 
         $errorThrower = static function () {
-            throw new Exception('::exception::');
+            throw new \Exception('::exception::');
         };
 
-        $this->expectException(Exception::class);
+        $this->expectException(\Exception::class);
         $this->expectExceptionMessage('::exception::');
 
         await($bucket->run($errorThrower));

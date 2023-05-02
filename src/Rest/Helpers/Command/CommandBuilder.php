@@ -7,7 +7,6 @@ namespace Ragnarok\Fenrir\Rest\Helpers\Command;
 use Ragnarok\Fenrir\Bitwise\Bitwise;
 use Ragnarok\Fenrir\Constants\Validation\Command;
 use Ragnarok\Fenrir\Enums\Parts\ApplicationCommandTypes;
-use Ragnarok\Fenrir\Enums\Permissions;
 use Ragnarok\Fenrir\Exceptions\Rest\Helpers\Command\InvalidCommandNameException;
 use Ragnarok\Fenrir\Rest\Helpers\GetNew;
 use Spatie\Regex\Regex;
@@ -120,7 +119,7 @@ class CommandBuilder
     }
 
     /**
-     * @param Bitwise<Permissions> $permissions
+     * @param Bitwise<\Ragnarok\Fenrir\Enums\Permissions> $permissions
      */
     public function setDefaultMemberPermissions(Bitwise $permissions): self
     {
@@ -130,7 +129,7 @@ class CommandBuilder
     }
 
     /**
-     * @return Bitwise<Permissions>
+     * @return Bitwise<\Ragnarok\Fenrir\Enums\Permissions>
      */
     public function getDefaultMemberPermissions(): ?Bitwise
     {

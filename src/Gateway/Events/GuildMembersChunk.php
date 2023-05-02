@@ -4,9 +4,6 @@ declare(strict_types=1);
 
 namespace Ragnarok\Fenrir\Gateway\Events;
 
-use Ragnarok\Fenrir\Parts\GuildMember;
-use Ragnarok\Fenrir\Parts\Presence;
-
 /**
  * @see https://discord.com/developers/docs/topics/gateway-events#guild-members-chunk
  */
@@ -15,7 +12,7 @@ class GuildMembersChunk
     public string $guild_id;
 
     /**
-     * @var GuildMember[]
+     * @var \Ragnarok\Fenrir\Parts\GuildMember[]
      */
     public array $members;
 
@@ -24,7 +21,7 @@ class GuildMembersChunk
     public array $not_found;
 
     /**
-     * @var Presence[]
+     * @var \Ragnarok\Fenrir\Parts\Presence[]
      */
     public array $presences;
 

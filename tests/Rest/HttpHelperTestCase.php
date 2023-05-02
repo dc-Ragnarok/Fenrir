@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Tests\Ragnarok\Fenrir\Rest;
 
 use Discord\Http\Http;
-use Exception;
 use Ragnarok\Fenrir\DataMapper;
 use Ragnarok\Fenrir\Rest\HttpResource;
 use Fakes\Ragnarok\Fenrir\DataMapperFake;
@@ -83,7 +82,7 @@ abstract class HttpHelperTestCase extends TestCase
 
         $this->http->shouldReceive($mockOptions['method'])->andReturns(
             new Promise(static function ($resolve, $reject) {
-                $reject(new Exception());
+                $reject(new \Exception());
             })
         )->once();
 

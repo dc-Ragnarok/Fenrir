@@ -6,7 +6,6 @@ namespace Ragnarok\Fenrir;
 
 use JsonMapper;
 use Psr\Log\LoggerInterface;
-use Throwable;
 
 class DataMapper
 {
@@ -30,7 +29,7 @@ class DataMapper
     {
         try {
             return $this->jsonMapper->map($data, new $definition());
-        } catch (Throwable $e) {
+        } catch (\Throwable $e) {
             $this->logger->error($e->getMessage());
         }
 
