@@ -13,6 +13,7 @@ use Fakes\Ragnarok\Fenrir\DataMapperFake;
 use Fakes\Ragnarok\Fenrir\PromiseFake;
 use Mockery;
 use Mockery\Adapter\Phpunit\MockeryTestCase;
+use React\EventLoop\LoopInterface;
 
 /**
  * @runTestsInSeparateProcesses
@@ -89,7 +90,7 @@ class FilteredEventListenerTest extends MockeryTestCase
         /**
          * @var Mock
          */
-        $loop = Mockery::mock('React\EventLoop\LoopInterface');
+        $loop = Mockery::mock(LoopInterface::class);
 
         /**
          * @var Mock
