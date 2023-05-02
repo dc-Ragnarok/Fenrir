@@ -235,14 +235,14 @@ class CommandOptionBuilder
 
         if (isset($this->options)) {
             $data['options'] = array_map(
-                fn (CommandOptionBuilder $option) => $option->get(),
+                static fn (CommandOptionBuilder $option) => $option->get(),
                 $this->options
             );
         }
 
         if (isset($this->channelTypes)) {
             $data['channel_types'] = array_map(
-                fn (ChannelTypes $type) => $type->value,
+                static fn (ChannelTypes $type) => $type->value,
                 $this->channelTypes
             );
         }

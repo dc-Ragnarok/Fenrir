@@ -85,7 +85,7 @@ class CommandInteraction
     {
         $subItem = array_values(array_filter(
             $options,
-            fn (OptionStructure $option) => in_array(
+            static fn (OptionStructure $option) => in_array(
                 $option->type,
                 [OptionTypes::SUB_COMMAND, OptionTypes::SUB_COMMAND_GROUP]
             )

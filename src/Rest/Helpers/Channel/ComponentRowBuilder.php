@@ -22,7 +22,7 @@ class ComponentRowBuilder
 
     public function get(): array
     {
-        return array_map(fn (Component $component) => $component->get(), $this->components);
+        return array_map(static fn (Component $component) => $component->get(), $this->components);
     }
 
     /**

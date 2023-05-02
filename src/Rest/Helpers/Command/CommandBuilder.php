@@ -187,7 +187,7 @@ class CommandBuilder
 
         if (isset($this->commandOptionBuilders)) {
             $data['options'] = array_map(
-                fn (CommandOptionBuilder $option) => $option->get(),
+                static fn (CommandOptionBuilder $option) => $option->get(),
                 $this->commandOptionBuilders
             );
         }

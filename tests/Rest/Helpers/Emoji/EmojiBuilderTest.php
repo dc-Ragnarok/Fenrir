@@ -65,7 +65,7 @@ class EmojiBuilderTest extends TestCase
     {
         return [
             'All properties' => [
-                'emoji' => (function () {
+                'emoji' => (static function () {
                     $emoji = new Emoji();
 
                     $emoji->id = '::id::';
@@ -81,7 +81,7 @@ class EmojiBuilderTest extends TestCase
                 ],
             ],
             'No properties' => [
-                'emoji' => (function () {
+                'emoji' => (static function () {
                     $emoji = new Emoji();
 
                     return $emoji;

@@ -17,7 +17,7 @@ class PromiseFake
      */
     public static function get(mixed $return = null): ExtendedPromiseInterface
     {
-        return new Promise(function ($resolve) use ($return) {
+        return new Promise(static function ($resolve) use ($return) {
             $resolve($return);
         });
     }
@@ -29,7 +29,7 @@ class PromiseFake
      */
     public static function reject(Throwable $e): ExtendedPromiseInterface
     {
-        return new Promise(function ($resolve, $reject) use ($e) {
+        return new Promise(static function ($resolve, $reject) use ($e) {
             $reject($e);
         });
     }

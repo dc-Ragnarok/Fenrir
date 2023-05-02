@@ -44,7 +44,7 @@ class InteractionHandlerFake extends InteractionHandler
     private function getCommandBuilders(array $commands): array
     {
         return array_map(
-            fn (array $command) => $command['builder'],
+            static fn (array $command) => $command['builder'],
             $commands
         );
     }

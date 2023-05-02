@@ -19,7 +19,7 @@ class ComponentBuilder
 
     public function get(): array
     {
-        return array_map(fn (ComponentRowBuilder $row) => [
+        return array_map(static fn (ComponentRowBuilder $row) => [
             'type' => 1,
             'components' => $row->get()
         ], $this->rows);

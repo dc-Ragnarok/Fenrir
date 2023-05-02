@@ -30,7 +30,7 @@ class PuppetTest extends MockeryTestCase
     {
         return $this->websocket->expects()
             ->send()
-            ->with(Mockery::on(function ($payload) use ($fn) {
+            ->with(Mockery::on(static function ($payload) use ($fn) {
                 $message = json_decode($payload, true);
 
                 return $fn($message);

@@ -74,7 +74,7 @@ class Puppet
     ): void {
         $presenceUpdate = [
             'status' => $status->value,
-            'activities' => array_map(fn (ActivityBuilder $builder) => $builder->get(), $activities),
+            'activities' => array_map(static fn (ActivityBuilder $builder) => $builder->get(), $activities),
             'afk' => $afk,
         ];
 

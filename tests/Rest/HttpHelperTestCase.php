@@ -51,7 +51,7 @@ abstract class HttpHelperTestCase extends TestCase
     public function testFunctions(string $method, array $args, array $mockOptions, array $validationOptions): void
     {
         $this->http->shouldReceive($mockOptions['method'])->andReturns(
-            new Promise(function ($resolve) use ($mockOptions) {
+            new Promise(static function ($resolve) use ($mockOptions) {
                 $resolve($mockOptions['return']);
             })
         )->once();

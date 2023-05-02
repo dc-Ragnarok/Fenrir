@@ -30,7 +30,7 @@ class Bucket extends EventEmitter
     public function run(callable $action): Promise
     {
         return new Promise(function (callable $resolver, callable $reject) use ($action) {
-            $wrappedAction = function () use ($action, $resolver, $reject) {
+            $wrappedAction = static function () use ($action, $resolver, $reject) {
                 try {
                     $result = $action();
                     $resolver($result);

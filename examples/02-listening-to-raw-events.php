@@ -13,7 +13,7 @@ $discord
     ->withGateway(new Bitwise(), raw: true)// Enable your desired Gateway intents
     ->withRest();
 
-$discord->gateway->events->on(Events::RAW, function (Payload $payload) {
+$discord->gateway->events->on(Events::RAW, static function (Payload $payload) {
     echo 'Received event ', $payload->t, PHP_EOL;
 });
 
