@@ -176,7 +176,7 @@ class CommandOptionBuilder
         return $this;
     }
 
-    public function getMinValue(): null|float|int
+    public function getMinValue(): float|int|null
     {
         return $this->data['min_value'] ?? null;
     }
@@ -188,7 +188,7 @@ class CommandOptionBuilder
         return $this;
     }
 
-    public function getMaxValue(): null|float|int
+    public function getMaxValue(): float|int|null
     {
         return $this->data['max_value'] ?? null;
     }
