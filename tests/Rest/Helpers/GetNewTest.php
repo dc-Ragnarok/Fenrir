@@ -15,9 +15,8 @@ class GetNewTest extends TestCase
             use GetNew;
         };
 
-        $this->assertTrue(
-            $class::new() instanceof $class,
-            'Class is not correct instance'
+        $this->assertInstanceOf(
+            $class, $class::new(), 'Class is not correct instance'
         );
     }
 }
