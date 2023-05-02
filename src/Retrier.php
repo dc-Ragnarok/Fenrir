@@ -28,7 +28,7 @@ class Retrier
                 $shouldReject,
                 $reject,
                 &$executeAction
-) {
+            ) {
                 $action($retries)
                     ->then($resolve)
                     ->otherwise(static fn () => $shouldReject()
