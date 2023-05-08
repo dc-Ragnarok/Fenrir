@@ -23,7 +23,9 @@
         "ralouphie/mimey": "^1.0",
         "spatie/regex": "^3.1",
         "guzzlehttp/guzzle": "^7.0",
-        "react/async": "^4.0.0"
+        "react/async": "^4.0.0",
+        "exan/eventer": "^1.0.1",
+        "exan/reactphp-retrier": "^1.0"
     },
     "require-dev": {
         "phpunit/phpunit": "^9.5",
@@ -31,7 +33,8 @@
         "seregazhuk/react-promise-testing": "^0.6.1",
         "squizlabs/php_codesniffer": "^3.7",
         "cboden/ratchet": "^0.4.4",
-        "phpmd/phpmd": "^2.13"
+        "phpmd/phpmd": "^2.13",
+        "symfony/var-dumper": "^6.2"
     },
     "scripts": {
         "md": "phpmd src text ruleset.xml",
