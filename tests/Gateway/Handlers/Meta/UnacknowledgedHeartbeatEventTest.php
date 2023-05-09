@@ -14,12 +14,9 @@ use Psr\Log\NullLogger;
 use Ragnarok\Fenrir\Constants\MetaEvents;
 use Ragnarok\Fenrir\DataMapper;
 use Ragnarok\Fenrir\Gateway\ConnectionInterface;
-use Ragnarok\Fenrir\Gateway\Events\Meta\MetaEvent;
 use Ragnarok\Fenrir\Gateway\Handlers\IdentifyHelloEvent;
 use Ragnarok\Fenrir\Gateway\Handlers\IdentifyResumeEvent;
 use Ragnarok\Fenrir\Gateway\Handlers\Meta\UnacknowledgedHeartbeatEvent;
-use Ragnarok\Fenrir\Gateway\Handlers\ReconnectEvent;
-use Ragnarok\Fenrir\Gateway\Objects\Payload;
 
 class UnacknowledgedHeartbeatEventTest extends MockeryTestCase
 {
