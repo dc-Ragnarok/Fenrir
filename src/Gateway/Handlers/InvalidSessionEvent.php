@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Ragnarok\Fenrir\Gateway\Handlers;
 
 use Ragnarok\Fenrir\Gateway\Objects\Payload;
+use React\Promise\ExtendedPromiseInterface;
+use Throwable;
 
 class InvalidSessionEvent extends GatewayEvent
 {
@@ -38,10 +40,10 @@ class InvalidSessionEvent extends GatewayEvent
             return $this->connection->connect(
                 $this->connection->getDefaultUrl()
             );
-        })->otherwise(function () {
-            $this->logger->critical('Unable to establish a new connection to Discord.');
-        })->then(function () {
+        })->done(function () {
             $this->connection->getRawHandler()->registerOnce(IdentifyHelloEvent::class);
+        }, function (Throwable $e) {
+            $this->logger->critical('Unable to establish a new connection to Discord.', [$e]);
         });
     }
 }

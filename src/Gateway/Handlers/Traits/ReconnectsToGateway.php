@@ -13,7 +13,7 @@ use React\Promise\ExtendedPromiseInterface;
 
 trait ReconnectsToGateway
 {
-    public function reconnect(ConnectionInterface $connection, LoggerInterface $logger, Retrier $retrier): void
+    public function reconnect(ConnectionInterface $connection, LoggerInterface $logger, Retrier $retrier): ExtendedPromiseInterface
     {
         $connection->stopAutomaticHeartbeats();
 
@@ -22,16 +22,14 @@ trait ReconnectsToGateway
             $logger->warning($reason);
             $connection->disconnect(1001, $reason);
 
-            $this->new($connection, $logger, $retrier);
-
-            return;
+            return $this->new($connection, $logger, $retrier);
         }
 
         $reason = 'Attempting reconnect';
         $logger->warning($reason);
         $connection->disconnect(1004, $reason);
 
-        $this->resume($connection, $logger, $retrier)->otherwise(function () use ($connection, $logger, $retrier) {
+        return $this->resume($connection, $logger, $retrier)->otherwise(function () use ($connection, $logger, $retrier) {
             $logger->error('Failed to reconnect and resume session, attempting forceful reconnect');
 
             return $this->new($connection, $logger, $retrier);
@@ -61,7 +59,7 @@ trait ReconnectsToGateway
             $logger->warning(sprintf('Forceful rennection attempt %d.', $i));
 
             return $connection->connect(
-                $connection->getResumeUrl()
+                $connection->getDefaultUrl()
             )->then(function () use ($connection) {
                 $connection->getRawHandler()->registerOnce(IdentifyHelloEvent::class);
             });

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Fakes\Ragnarok\Fenrir;
 
+use Exan\Eventer\Eventer;
 use Fakes\Ragnarok\Fenrir\DataMapperFake;
 use Ragnarok\Fenrir\EventHandler;
 use Ragnarok\Fenrir\Websocket;
@@ -25,9 +26,7 @@ class GatewayFake
         $gateway = Mockery::mock(Connection::class);
 
         $gateway->events = new EventHandler(DataMapperFake::get());
-        $gateway->raw = new EventHandler(DataMapperFake::get());
-
-        $gateway->websocket = Mockery::mock(Websocket::class);
+        $gateway->raw = new Eventer();
 
         return $gateway;
     }

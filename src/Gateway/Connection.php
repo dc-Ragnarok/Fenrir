@@ -26,7 +26,7 @@ use Ragnarok\Fenrir\Websocket;
 use Ratchet\RFC6455\Messaging\MessageInterface;
 use React\EventLoop\LoopInterface;
 use React\EventLoop\TimerInterface;
-use React\Promise\PromiseInterface;
+use React\Promise\ExtendedPromiseInterface;
 
 class Connection implements ConnectionInterface
 {
@@ -118,7 +118,7 @@ class Connection implements ConnectionInterface
         $this->sequence = null;
     }
 
-    public function connect(string $url): PromiseInterface
+    public function connect(string $url): ExtendedPromiseInterface
     {
         return $this->websocket->open($url);
     }

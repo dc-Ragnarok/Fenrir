@@ -10,12 +10,6 @@ use Ragnarok\Fenrir\Gateway\ConnectionInterface;
 
 abstract class UnacknowledgedHeartbeatEvent extends MetaEvent
 {
-    public function __construct(
-        protected ConnectionInterface $connection,
-        protected LoggerInterface $logger,
-    ) {
-    }
-
     public static function getEventName(): string
     {
         return MetaEvents::UNACKNOWLEDGED_HEARTBEAT;

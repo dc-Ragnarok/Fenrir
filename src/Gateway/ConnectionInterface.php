@@ -4,10 +4,9 @@ declare(strict_types=1);
 
 namespace Ragnarok\Fenrir\Gateway;
 
-use DateInterval;
 use Exan\Eventer\Eventer;
 use Ragnarok\Fenrir\EventHandler;
-use React\Promise\PromiseInterface;
+use React\Promise\ExtendedPromiseInterface;
 
 interface ConnectionInterface
 {
@@ -17,7 +16,7 @@ interface ConnectionInterface
     public function setSequence(int $sequence);
     public function resetSequence(): void;
 
-    public function connect(string $url): PromiseInterface;
+    public function connect(string $url): ExtendedPromiseInterface;
     public function disconnect(int $code, string $reason): void;
 
     public function setSessionId(string $sessionId): void;

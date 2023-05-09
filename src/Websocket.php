@@ -55,28 +55,22 @@ class Websocket extends EventEmitter
 
     public function open(string $url): ExtendedPromiseInterface
     {
-        $this->logger->info(
-            sprintf('WS (C->S): Connecting to %s', $url)
-        );
+        $this->logger->debug('Client: Attempting connection', ['url' => $url]);
 
         return new Promise(function (callable $resolver, callable $reject) use ($url) {
             ($this->connector)($url)->then(function (RatchetWebsocket $connection) use ($url, $resolver) {
                 $this->connection = $connection;
 
-                $this->logger->info(
-                    sprintf('WS (C->S): Connected to %s', $url)
-                );
+                $this->logger->info('Client: Connection esablished', ['url' => $url]);
 
                 $connection->on('message', function (MessageInterface $message) {
-                    $this->logger->info('WS(S->C): ' . $message);
+                    $this->logger->debug('Server: New message', ['message' => $message]);
                     $this->emit(WebsocketEvents::MESSAGE, [$message]);
                 });
 
                 $resolver();
             }, function (\Exception $e) use ($url, $reject) {
-                $this->logger->info(
-                    sprintf('WS (C->S): Error connecting to %s. %s', $url, $e->getMessage())
-                );
+                $this->logger->error('Client: Error connecting to server', ['url' => $url, 'error' => $e->getMessage()]);
 
                 $reject(new ConnectionFailedException(previous: $e));
             });
@@ -90,9 +84,7 @@ class Websocket extends EventEmitter
     {
         $this->mustHaveActiveConnection();
 
-        $this->logger->info(
-            sprintf('WS (C->S): Closing connection: code = %d, reason = $s', $code, $reason)
-        );
+        $this->logger->info('Client: Closing connection', ['code' => $code, 'reason' => $reason]);
 
         $this->connection->close($code, $reason);
 
@@ -108,15 +100,11 @@ class Websocket extends EventEmitter
 
         $action = function () use ($message) {
             $this->connection->send($message);
-            $this->logger->info(
-                sprintf('WS(C->S): %s', $message)
-            );
+            $this->logger->debug('Client: New message', [$message]);
         };
 
         if ($useBucket) {
-            $this->logger->info(
-                sprintf('WS(C->S): (queued) %s', $message)
-            );
+            $this->logger->debug('Client: Queued message', [$message]);
 
             $this->bucket->run($action);
 

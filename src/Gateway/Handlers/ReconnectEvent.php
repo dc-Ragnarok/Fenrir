@@ -21,6 +21,8 @@ class ReconnectEvent extends GatewayEvent
             $this->connection,
             $this->logger,
             $this->retrier,
-        );
+        )->done(function () {
+            $this->logger->info('Finished reconnecting');
+        });
     }
 }
