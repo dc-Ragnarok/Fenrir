@@ -70,7 +70,10 @@ class Websocket extends EventEmitter
 
                 $resolver();
             }, function (\Exception $e) use ($url, $reject) {
-                $this->logger->error('Client: Error connecting to server', ['url' => $url, 'error' => $e->getMessage()]);
+                $this->logger->error(
+                    'Client: Error connecting to server',
+                    ['url' => $url, 'error' => $e->getMessage()]
+                );
 
                 $reject(new ConnectionFailedException(previous: $e));
             });
@@ -84,7 +87,10 @@ class Websocket extends EventEmitter
     {
         $this->mustHaveActiveConnection();
 
-        $this->logger->info('Client: Closing connection', ['code' => $code, 'reason' => $reason]);
+        $this->logger->info(
+            'Client: Closing connection',
+            ['code' => $code, 'reason' => $reason]
+        );
 
         $this->connection->close($code, $reason);
 

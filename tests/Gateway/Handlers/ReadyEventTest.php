@@ -28,7 +28,7 @@ class ReadyEventTest extends MockeryTestCase
     /**
      * @dataProvider listenerDataProvider
      */
-    public function testItListensToTheCorrectEvent(array $payload, bool $expectation)
+    public function testItListensToTheCorrectEvent(array $payload, bool $expectation): void
     {
         $event = new ReadyEvent(
             Mockery::mock(ConnectionInterface::class),
@@ -64,7 +64,7 @@ class ReadyEventTest extends MockeryTestCase
     /**
      * @dataProvider payloadProvider
      */
-    public function testItSetsResumeUrlAndSessionId(array $payload, bool $shouldSet)
+    public function testItSetsResumeUrlAndSessionId(array $payload, bool $shouldSet): void
     {
         /** @var MockInterface&ConnectionInterface */
         $connection = Mockery::mock(ConnectionInterface::class);

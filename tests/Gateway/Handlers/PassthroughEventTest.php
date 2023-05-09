@@ -24,12 +24,12 @@ class PassthroughEventTest extends MockeryTestCase
 
         $this->mapper = new DataMapper(new NullLogger());
     }
-    public function testItListensTo11()
+    public function testItListensTo11(): void
     {
         $this->assertEquals('0', PassthroughEvent::getEventName());
     }
 
-    public function testItForwardsEvents()
+    public function testItForwardsEvents(): void
     {
         /** @var MockInterface&ConnectionInterface */
         $connection = Mockery::mock(ConnectionInterface::class);
@@ -60,7 +60,7 @@ class PassthroughEventTest extends MockeryTestCase
         $event->execute();
     }
 
-    public function testItUpdatesSequence()
+    public function testItUpdatesSequence(): void
     {
         /** @var MockInterface&ConnectionInterface */
         $connection = Mockery::mock(ConnectionInterface::class);
@@ -96,7 +96,7 @@ class PassthroughEventTest extends MockeryTestCase
         $event->execute();
     }
 
-    public function testItDoesNotUpdateSequenceIfCurrentSequenceIsHigherThanIncoming()
+    public function testItDoesNotUpdateSequenceIfCurrentSequenceIsHigherThanIncoming(): void
     {
         /** @var MockInterface&ConnectionInterface */
         $connection = Mockery::mock(ConnectionInterface::class);
@@ -133,7 +133,7 @@ class PassthroughEventTest extends MockeryTestCase
         $event->execute();
     }
 
-    public function testItSetsSequenceIfNoCurrentSequenceIsSet()
+    public function testItSetsSequenceIfNoCurrentSequenceIsSet(): void
     {
         /** @var MockInterface&ConnectionInterface */
         $connection = Mockery::mock(ConnectionInterface::class);

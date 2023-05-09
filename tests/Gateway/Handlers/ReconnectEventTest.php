@@ -29,12 +29,12 @@ class ReconnectEventTest extends MockeryTestCase
         $this->mapper = new DataMapper(new NullLogger());
     }
 
-    public function testItListensTo7()
+    public function testItListensTo7(): void
     {
         $this->assertEquals('7', ReconnectEvent::getEventName());
     }
 
-    public function testItReconnectsToDiscord()
+    public function testItReconnectsToDiscord(): void
     {
         /** @var ConnectionInterface&MockInterface */
         $connection = Mockery::mock(ConnectionInterface::class);
@@ -85,7 +85,7 @@ class ReconnectEventTest extends MockeryTestCase
         $event->execute();
     }
 
-    public function testItOpensAFreshConnectionIfItCantResume()
+    public function testItOpensAFreshConnectionIfItCantResume(): void
     {
         /** @var ConnectionInterface&MockInterface */
         $connection = Mockery::mock(ConnectionInterface::class);
@@ -136,7 +136,7 @@ class ReconnectEventTest extends MockeryTestCase
         $event->execute();
     }
 
-    public function testItOpensAFreshConnectionIfResumingFails()
+    public function testItOpensAFreshConnectionIfResumingFails(): void
     {
         /** @var ConnectionInterface&MockInterface */
         $connection = Mockery::mock(ConnectionInterface::class);

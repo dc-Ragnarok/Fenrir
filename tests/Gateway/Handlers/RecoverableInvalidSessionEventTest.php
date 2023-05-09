@@ -29,7 +29,7 @@ class RecoverableInvalidSessionEventTest extends MockeryTestCase
         $this->mapper = new DataMapper(new NullLogger());
     }
 
-    public function testItListensTo9()
+    public function testItListensTo9(): void
     {
         $this->assertEquals('9', RecoverableInvalidSessionEvent::getEventName());
     }
@@ -37,7 +37,7 @@ class RecoverableInvalidSessionEventTest extends MockeryTestCase
         /**
      * @dataProvider listenerDataProvider
      */
-    public function testItListensToTheCorrectRequirements(array $payload, bool $expect)
+    public function testItListensToTheCorrectRequirements(array $payload, bool $expect): void
     {
         $event = new RecoverableInvalidSessionEvent(
             Mockery::mock(ConnectionInterface::class),
@@ -66,7 +66,7 @@ class RecoverableInvalidSessionEventTest extends MockeryTestCase
         ];
     }
 
-    public function testItReconnectsToDiscord()
+    public function testItReconnectsToDiscord(): void
     {
         /** @var ConnectionInterface&MockInterface */
         $connection = Mockery::mock(ConnectionInterface::class);
@@ -117,7 +117,7 @@ class RecoverableInvalidSessionEventTest extends MockeryTestCase
         $event->execute();
     }
 
-    public function testItOpensAFreshConnectionIfItCantResume()
+    public function testItOpensAFreshConnectionIfItCantResume(): void
     {
         /** @var ConnectionInterface&MockInterface */
         $connection = Mockery::mock(ConnectionInterface::class);
@@ -168,7 +168,7 @@ class RecoverableInvalidSessionEventTest extends MockeryTestCase
         $event->execute();
     }
 
-    public function testItOpensAFreshConnectionIfResumingFails()
+    public function testItOpensAFreshConnectionIfResumingFails(): void
     {
         /** @var ConnectionInterface&MockInterface */
         $connection = Mockery::mock(ConnectionInterface::class);

@@ -14,12 +14,12 @@ use Ragnarok\Fenrir\Gateway\Objects\Payload;
 
 class RequestHeartbeatEventTest extends MockeryTestCase
 {
-    public function testItListensTo1()
+    public function testItListensTo1(): void
     {
         $this->assertEquals('1', RequestHeartbeatEvent::getEventName());
     }
 
-    public function testItAcknowledgesAHeartbeat()
+    public function testItAcknowledgesAHeartbeat(): void
     {
         /** @var MockInterface&ConnectionInterface */
         $connection = Mockery::mock(ConnectionInterface::class);

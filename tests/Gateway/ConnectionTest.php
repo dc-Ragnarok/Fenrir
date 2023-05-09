@@ -26,7 +26,7 @@ use function React\Async\await;
 
 class ConnectionTest extends MockeryTestCase
 {
-    public function testGetDefaultUrl()
+    public function testGetDefaultUrl(): void
     {
         $connection = new Connection(
             Mockery::mock(LoopInterface::class),
@@ -38,7 +38,7 @@ class ConnectionTest extends MockeryTestCase
         $this->assertMatchesRegularExpression('/wss:\/\/gateway.discord.gg\/\?v=(\d+)/', $connection->getDefaultUrl());
     }
 
-    public function testSequence()
+    public function testSequence(): void
     {
         $connection = new Connection(
             Mockery::mock(LoopInterface::class),
@@ -56,7 +56,7 @@ class ConnectionTest extends MockeryTestCase
         $this->assertNull($connection->getSequence());
     }
 
-    public function testConnect()
+    public function testConnect(): void
     {
         $connection = new Connection(
             Mockery::mock(LoopInterface::class),
@@ -78,7 +78,7 @@ class ConnectionTest extends MockeryTestCase
         $this->assertEquals('::return::', await($connection->connect('::ws url::')));
     }
 
-    public function testDisconnect()
+    public function testDisconnect(): void
     {
         $connection = new Connection(
             Mockery::mock(LoopInterface::class),
@@ -99,7 +99,7 @@ class ConnectionTest extends MockeryTestCase
         $connection->disconnect(1234, '::reason::');
     }
 
-    public function testSessionId()
+    public function testSessionId(): void
     {
         $connection = new Connection(
             Mockery::mock(LoopInterface::class),
@@ -114,7 +114,7 @@ class ConnectionTest extends MockeryTestCase
         $this->assertEquals('::session id::', $connection->getSessionId());
     }
 
-    public function testResumeUrl()
+    public function testResumeUrl(): void
     {
         $connection = new Connection(
             Mockery::mock(LoopInterface::class),
@@ -129,7 +129,7 @@ class ConnectionTest extends MockeryTestCase
         $this->assertEquals('::resume url::', $connection->getResumeUrl());
     }
 
-    public function testSendHeartbeat()
+    public function testSendHeartbeat(): void
     {
         /** @var LoopInterface&MockInterface */
         $loop = Mockery::mock(LoopInterface::class);
@@ -168,7 +168,7 @@ class ConnectionTest extends MockeryTestCase
         $connection->sendHeartbeat();
     }
 
-    public function testItEmitsAnEventForMissedHeartbeatAcknowledgement()
+    public function testItEmitsAnEventForMissedHeartbeatAcknowledgement(): void
     {
         /** @var LoopInterface&MockInterface */
         $loop = Mockery::mock(LoopInterface::class);
@@ -212,7 +212,7 @@ class ConnectionTest extends MockeryTestCase
         $connection->sendHeartbeat();
     }
 
-    public function testItCanAcknowledgeHeartbeats()
+    public function testItCanAcknowledgeHeartbeats(): void
     {
         /** @var LoopInterface&MockInterface */
         $loop = Mockery::mock(LoopInterface::class);
@@ -250,7 +250,7 @@ class ConnectionTest extends MockeryTestCase
         $connection->acknowledgeHeartbeat();
     }
 
-    public function testItCanSendHeartbeatsAutomatically()
+    public function testItCanSendHeartbeatsAutomatically(): void
     {
         /** @var LoopInterface&MockInterface */
         $loop = Mockery::mock(LoopInterface::class);
@@ -299,7 +299,7 @@ class ConnectionTest extends MockeryTestCase
         $connection->stopAutomaticHeartbeats();
     }
 
-    public function testItReturnsEventHandlers()
+    public function testItReturnsEventHandlers(): void
     {
         $connection = new Connection(
             Mockery::mock(LoopInterface::class),
@@ -313,7 +313,7 @@ class ConnectionTest extends MockeryTestCase
         $this->assertInstanceOf(Eventer::class, $connection->getMetaHandler());
     }
 
-    public function testItIdentifies()
+    public function testItIdentifies(): void
     {
         $connection = new Connection(
             Mockery::mock(LoopInterface::class),
@@ -340,7 +340,7 @@ class ConnectionTest extends MockeryTestCase
         $connection->identify();
     }
 
-    public function testItResumes()
+    public function testItResumes(): void
     {
         $connection = new Connection(
             Mockery::mock(LoopInterface::class),
@@ -386,7 +386,7 @@ class ConnectionTest extends MockeryTestCase
         $connection->resume();
     }
 
-    public function testOpen()
+    public function testOpen(): void
     {
         $connection = new Connection(
             Mockery::mock(LoopInterface::class),
@@ -411,7 +411,7 @@ class ConnectionTest extends MockeryTestCase
         $connection->open();
     }
 
-    public function testItEmitsGatewayMessagesAsEvents()
+    public function testItEmitsGatewayMessagesAsEvents(): void
     {
         $connection = new Connection(
             Mockery::mock(LoopInterface::class),

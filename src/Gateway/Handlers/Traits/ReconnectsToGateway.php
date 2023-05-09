@@ -13,8 +13,11 @@ use React\Promise\ExtendedPromiseInterface;
 
 trait ReconnectsToGateway
 {
-    public function reconnect(ConnectionInterface $connection, LoggerInterface $logger, Retrier $retrier): ExtendedPromiseInterface
-    {
+    public function reconnect(
+        ConnectionInterface $connection,
+        LoggerInterface $logger,
+        Retrier $retrier
+    ): ExtendedPromiseInterface {
         $connection->stopAutomaticHeartbeats();
 
         if (is_null($connection->getResumeUrl()) || is_null($connection->getSessionId())) {
@@ -29,7 +32,11 @@ trait ReconnectsToGateway
         $logger->warning($reason);
         $connection->disconnect(1004, $reason);
 
-        return $this->resume($connection, $logger, $retrier)->otherwise(function () use ($connection, $logger, $retrier) {
+        return $this->resume(
+            $connection,
+            $logger,
+            $retrier
+        )->otherwise(function () use ($connection, $logger, $retrier) {
             $logger->error('Failed to reconnect and resume session, attempting forceful reconnect');
 
             return $this->new($connection, $logger, $retrier);

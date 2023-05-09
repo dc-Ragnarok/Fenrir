@@ -32,12 +32,12 @@ class UnacknowledgedHeartbeatEventTest extends MockeryTestCase
         $this->mapper = new DataMapper(new NullLogger());
     }
 
-    public function testItListensToUnacknowledgedHeartbeat()
+    public function testItListensToUnacknowledgedHeartbeat(): void
     {
         $this->assertEquals(MetaEvents::UNACKNOWLEDGED_HEARTBEAT, UnacknowledgedHeartbeatEvent::getEventName());
     }
 
-    public function testItReconnectsToDiscord()
+    public function testItReconnectsToDiscord(): void
     {
         /** @var ConnectionInterface&MockInterface */
         $connection = Mockery::mock(ConnectionInterface::class);
@@ -89,7 +89,7 @@ class UnacknowledgedHeartbeatEventTest extends MockeryTestCase
         $this->assertTrue($event->filter());
     }
 
-    public function testItOpensAFreshConnectionIfItCantResume()
+    public function testItOpensAFreshConnectionIfItCantResume(): void
     {
         /** @var ConnectionInterface&MockInterface */
         $connection = Mockery::mock(ConnectionInterface::class);
@@ -139,7 +139,7 @@ class UnacknowledgedHeartbeatEventTest extends MockeryTestCase
         $event->execute();
     }
 
-    public function testItOpensAFreshConnectionIfResumingFails()
+    public function testItOpensAFreshConnectionIfResumingFails(): void
     {
         /** @var ConnectionInterface&MockInterface */
         $connection = Mockery::mock(ConnectionInterface::class);

@@ -28,6 +28,9 @@ use React\EventLoop\LoopInterface;
 use React\EventLoop\TimerInterface;
 use React\Promise\ExtendedPromiseInterface;
 
+/**
+ * @SuppressWarnings(PHPMD.TooManyPublicMethods)
+ */
 class Connection implements ConnectionInterface
 {
     public const DEFAULT_WEBSOCKET_URL = 'wss://gateway.discord.gg/?v=10';
@@ -225,7 +228,7 @@ class Connection implements ConnectionInterface
         ], true);
     }
 
-    public function open()
+    public function open(): ExtendedPromiseInterface
     {
         return $this->connect(self::DEFAULT_WEBSOCKET_URL);
     }

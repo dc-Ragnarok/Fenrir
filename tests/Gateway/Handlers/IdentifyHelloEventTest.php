@@ -24,12 +24,12 @@ class IdentifyHelloEventTest extends MockeryTestCase
         $this->mapper = new DataMapper(new NullLogger());
     }
 
-    public function testItListensTo10()
+    public function testItListensTo10(): void
     {
         $this->assertEquals('10', IdentifyHelloEvent::getEventName());
     }
 
-    public function testItAcknowledgesAHeartbeat()
+    public function testItAcknowledgesAHeartbeat(): void
     {
         /** @var MockInterface&ConnectionInterface */
         $connection = Mockery::mock(ConnectionInterface::class);

@@ -31,7 +31,7 @@ class InvalidSessionEventTest extends MockeryTestCase
     /**
      * @dataProvider listenerDataProvider
      */
-    public function testItListensToTheCorrectRequirements(array $payload, bool $expect)
+    public function testItListensToTheCorrectRequirements(array $payload, bool $expect): void
     {
         $event = new InvalidSessionEvent(
             Mockery::mock(ConnectionInterface::class),
@@ -60,7 +60,7 @@ class InvalidSessionEventTest extends MockeryTestCase
         ];
     }
 
-    public function testItReconnects()
+    public function testItReconnects(): void
     {
         /** @var MockInterface&ConnectionInterface */
         $connection = Mockery::mock(ConnectionInterface::class);
@@ -110,7 +110,7 @@ class InvalidSessionEventTest extends MockeryTestCase
         $event->execute();
     }
 
-    public function testItTriesConnectingSeveralTimes()
+    public function testItTriesConnectingSeveralTimes(): void
     {
         /** @var MockInterface&ConnectionInterface */
         $connection = Mockery::mock(ConnectionInterface::class);
