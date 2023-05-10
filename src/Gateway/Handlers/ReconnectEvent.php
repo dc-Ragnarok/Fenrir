@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Ragnarok\Fenrir\Gateway\Handlers;
 
+use Ragnarok\Fenrir\Constants\OpCodes;
 use Ragnarok\Fenrir\Gateway\Handlers\Traits\ReconnectsToGateway;
 
 class ReconnectEvent extends GatewayEvent
@@ -12,7 +13,7 @@ class ReconnectEvent extends GatewayEvent
 
     public static function getEventName(): string
     {
-        return '7';
+        return OpCodes::RECONNECT;
     }
 
     public function execute(): void

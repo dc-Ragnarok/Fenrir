@@ -4,11 +4,13 @@ declare(strict_types=1);
 
 namespace Ragnarok\Fenrir\Gateway\Handlers;
 
+use Ragnarok\Fenrir\Constants\OpCodes;
+
 class PassthroughEvent extends GatewayEvent
 {
     public static function getEventName(): string
     {
-        return '0';
+        return OpCodes::EVENTS;
     }
 
     public function execute(): void

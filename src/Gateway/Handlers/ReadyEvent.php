@@ -5,13 +5,14 @@ declare(strict_types=1);
 namespace Ragnarok\Fenrir\Gateway\Handlers;
 
 use Ragnarok\Fenrir\Constants\Events;
+use Ragnarok\Fenrir\Constants\OpCodes;
 use Ragnarok\Fenrir\Gateway\Handlers\GatewayEvent;
 
 class ReadyEvent extends GatewayEvent
 {
     public static function getEventName(): string
     {
-        return '0';
+        return OpCodes::EVENTS;
     }
 
     public function filter(): bool

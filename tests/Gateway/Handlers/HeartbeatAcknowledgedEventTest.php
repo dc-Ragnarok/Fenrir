@@ -8,6 +8,7 @@ use Mockery;
 use Mockery\Adapter\Phpunit\MockeryTestCase;
 use Mockery\MockInterface;
 use Psr\Log\NullLogger;
+use Ragnarok\Fenrir\Constants\OpCodes;
 use Ragnarok\Fenrir\Gateway\ConnectionInterface;
 use Ragnarok\Fenrir\Gateway\Handlers\HeartbeatAcknowledgedEvent;
 use Ragnarok\Fenrir\Gateway\Objects\Payload;
@@ -16,7 +17,7 @@ class HeartbeatAcknowledgedEventTest extends MockeryTestCase
 {
     public function testItListensTo11(): void
     {
-        $this->assertEquals('11', HeartbeatAcknowledgedEvent::getEventName());
+        $this->assertEquals(OpCodes::HEARTBEAT_ACKNOWLEDGEMENT, HeartbeatAcknowledgedEvent::getEventName());
     }
 
     public function testItAcknowledgesAHeartbeat(): void

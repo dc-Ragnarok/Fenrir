@@ -11,6 +11,7 @@ use Mockery;
 use Mockery\Adapter\Phpunit\MockeryTestCase;
 use Mockery\MockInterface;
 use Psr\Log\NullLogger;
+use Ragnarok\Fenrir\Constants\OpCodes;
 use Ragnarok\Fenrir\DataMapper;
 use Ragnarok\Fenrir\Gateway\ConnectionInterface;
 use Ragnarok\Fenrir\Gateway\Handlers\IdentifyHelloEvent;
@@ -31,7 +32,7 @@ class ReconnectEventTest extends MockeryTestCase
 
     public function testItListensTo7(): void
     {
-        $this->assertEquals('7', ReconnectEvent::getEventName());
+        $this->assertEquals(OpCodes::RECONNECT, ReconnectEvent::getEventName());
     }
 
     public function testItReconnectsToDiscord(): void

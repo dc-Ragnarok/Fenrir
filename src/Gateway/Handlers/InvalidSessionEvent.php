@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Ragnarok\Fenrir\Gateway\Handlers;
 
+use Ragnarok\Fenrir\Constants\OpCodes;
 use Ragnarok\Fenrir\Gateway\Objects\Payload;
 use React\Promise\ExtendedPromiseInterface;
 use Throwable;
@@ -12,7 +13,7 @@ class InvalidSessionEvent extends GatewayEvent
 {
     public static function getEventName(): string
     {
-        return '9';
+        return OpCodes::INVALID_SESSION;
     }
 
     public static function isRecoverable(Payload $payload): bool

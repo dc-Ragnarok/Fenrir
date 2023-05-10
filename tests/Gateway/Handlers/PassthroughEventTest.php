@@ -8,6 +8,7 @@ use Mockery;
 use Mockery\Adapter\Phpunit\MockeryTestCase;
 use Mockery\MockInterface;
 use Psr\Log\NullLogger;
+use Ragnarok\Fenrir\Constants\OpCodes;
 use Ragnarok\Fenrir\DataMapper;
 use Ragnarok\Fenrir\EventHandler;
 use Ragnarok\Fenrir\Gateway\ConnectionInterface;
@@ -26,7 +27,7 @@ class PassthroughEventTest extends MockeryTestCase
     }
     public function testItListensTo11(): void
     {
-        $this->assertEquals('0', PassthroughEvent::getEventName());
+        $this->assertEquals(OpCodes::EVENTS, PassthroughEvent::getEventName());
     }
 
     public function testItForwardsEvents(): void

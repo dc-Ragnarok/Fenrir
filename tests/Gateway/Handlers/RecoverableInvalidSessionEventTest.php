@@ -11,6 +11,7 @@ use Mockery;
 use Mockery\Adapter\Phpunit\MockeryTestCase;
 use Mockery\MockInterface;
 use Psr\Log\NullLogger;
+use Ragnarok\Fenrir\Constants\OpCodes;
 use Ragnarok\Fenrir\DataMapper;
 use Ragnarok\Fenrir\Gateway\ConnectionInterface;
 use Ragnarok\Fenrir\Gateway\Handlers\IdentifyHelloEvent;
@@ -31,7 +32,7 @@ class RecoverableInvalidSessionEventTest extends MockeryTestCase
 
     public function testItListensTo9(): void
     {
-        $this->assertEquals('9', RecoverableInvalidSessionEvent::getEventName());
+        $this->assertEquals(OpCodes::INVALID_SESSION, RecoverableInvalidSessionEvent::getEventName());
     }
 
         /**
