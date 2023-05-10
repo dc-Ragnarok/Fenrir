@@ -7,7 +7,9 @@ namespace Ragnarok\Fenrir\Rest;
 use Discord\Http\Endpoint;
 use Ragnarok\Fenrir\Parts\Channel;
 use Ragnarok\Fenrir\Parts\Guild as PartsGuild;
+use Ragnarok\Fenrir\Parts\GuildMember;
 use Ragnarok\Fenrir\Parts\GuildPreview;
+use Ragnarok\Fenrir\Rest\Helpers\Guild\ModifyChannelPositionsBuilder;
 use Ragnarok\Fenrir\Rest\HttpResource;
 use React\Promise\ExtendedPromiseInterface;
 
@@ -80,9 +82,18 @@ class Guild extends HttpResource
 
     }
 
-    public function modifyChannelPositions()
+    /**
+     * @param ModifyChannelPositionsBuilder[] $modifyChannelPositionsBuilders
+     */
+    public function modifyChannelPositions(string $guildId, array $modifyChannelPositionsBuilders)
     {
-
+        return $this->http->patch(
+            Endpoint::bind(
+                Endpoint::GUILD_CHANNELS,
+                $guildId,
+            ),
+            array_map(fn (ModifyChannelPositionsBuilder $builder) => $builder->get(), $modifyChannelPositionsBuilders)
+        )->otherwise($this->logThrowable(...));
     }
 
     public function listActiveThreads()
@@ -90,9 +101,18 @@ class Guild extends HttpResource
 
     }
 
-    public function getMember()
+    public function getMember(string $guildId, string $memberId)
     {
-
+        return $this->mapPromise(
+            $this->http->get(
+                Endpoint::bind(
+                    Endpoint::GUILD_MEMBER,
+                    $guildId,
+                    $memberId
+                ),
+            ),
+            GuildMember::class
+        )->otherwise($this->logThrowable(...));
     }
 
     public function listMembers()
