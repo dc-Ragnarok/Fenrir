@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Tests\Exan\Fenrir\Rest\Helpers\Channel;
+namespace Tests\Ragnarok\Fenrir\Rest\Helpers\Channel;
 
-use Exan\Fenrir\Constants\Validation\RateLimit;
-use Exan\Fenrir\Enums\Parts\ThreadAutoArchiveDuration;
-use Exan\Fenrir\Rest\Helpers\Channel\StartThreadFromMessageBuilder;
+use Ragnarok\Fenrir\Constants\Validation\RateLimit;
+use Ragnarok\Fenrir\Enums\Parts\ThreadAutoArchiveDuration;
+use Ragnarok\Fenrir\Rest\Helpers\Channel\StartThreadFromMessageBuilder;
 use PHPUnit\Framework\TestCase;
 
 class StartThreadFromMessageBuilderTest extends TestCase
 {
-    public function testSetName()
+    public function testSetName(): void
     {
         $builder = new StartThreadFromMessageBuilder();
         $builder->setName('test name');
@@ -19,7 +19,7 @@ class StartThreadFromMessageBuilderTest extends TestCase
         $this->assertEquals('test name', $builder->getName());
     }
 
-    public function testSetAutoArchiveDuration()
+    public function testSetAutoArchiveDuration(): void
     {
         $builder = new StartThreadFromMessageBuilder();
         $builder->setAutoArchiveDuration(ThreadAutoArchiveDuration::MINUTES_60);
@@ -27,7 +27,7 @@ class StartThreadFromMessageBuilderTest extends TestCase
         $this->assertEquals(ThreadAutoArchiveDuration::MINUTES_60, $builder->getAutoArchiveDuration());
     }
 
-    public function testSetRateLimitPerUser()
+    public function testSetRateLimitPerUser(): void
     {
         $builder = new StartThreadFromMessageBuilder();
         $builder->setRateLimitPerUser(RateLimit::MIN - 1);

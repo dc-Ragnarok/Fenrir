@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Exan\Fenrir\Rest\Helpers\Emoji;
+namespace Ragnarok\Fenrir\Rest\Helpers\Emoji;
 
-use Exan\Fenrir\Enums\ImageData;
-use Exan\Fenrir\Rest\Helpers\GetNew;
+use Ragnarok\Fenrir\Enums\ImageData;
+use Ragnarok\Fenrir\Rest\Helpers\GetNew;
 
 class CreateEmojiBuilder
 {
@@ -13,7 +13,7 @@ class CreateEmojiBuilder
 
     private array $data = [];
 
-    public function setName(string $name): CreateEmojiBuilder
+    public function setName(string $name): self
     {
         $this->data['name'] = $name;
 
@@ -25,7 +25,7 @@ class CreateEmojiBuilder
         return $this->data['name'] ?? null;
     }
 
-    public function setRoles(array $roles): CreateEmojiBuilder
+    public function setRoles(array $roles): self
     {
         $this->data['roles'] = $roles;
 
@@ -38,7 +38,7 @@ class CreateEmojiBuilder
         return $this->data['roles'] ?? null;
     }
 
-    public function setImage(string $content, ImageData $imageData): CreateEmojiBuilder
+    public function setImage(string $content, ImageData $imageData): self
     {
         $this->data['image'] = 'data:' . $imageData->value . ';base64,' . base64_encode($content);
 

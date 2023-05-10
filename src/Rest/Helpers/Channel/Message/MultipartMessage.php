@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Exan\Fenrir\Rest\Helpers\Channel\Message;
+namespace Ragnarok\Fenrir\Rest\Helpers\Channel\Message;
 
 use Discord\Http\Multipart\MultipartBody;
 use Discord\Http\Multipart\MultipartField;
@@ -11,7 +11,7 @@ trait MultipartMessage
 {
     public function getMultipart(array $data): MultipartBody
     {
-        $fields = array_map(function ($fileData, int $index) {
+        $fields = array_map(static function ($fileData, int $index) {
             $headers = isset($fileData['type'])
                 ? ['Content-Type' => $fileData['type']]
                 : [];

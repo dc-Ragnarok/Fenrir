@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Exan\Fenrir\Rest\Helpers\Channel;
+namespace Ragnarok\Fenrir\Rest\Helpers\Channel;
 
-use Exan\Fenrir\Constants\Validation\RateLimit;
-use Exan\Fenrir\Enums\Parts\ThreadAutoArchiveDuration;
-use Exan\Fenrir\Rest\Helpers\GetNew;
+use Ragnarok\Fenrir\Constants\Validation\RateLimit;
+use Ragnarok\Fenrir\Enums\Parts\ThreadAutoArchiveDuration;
+use Ragnarok\Fenrir\Rest\Helpers\GetNew;
 
 class StartThreadFromMessageBuilder
 {
@@ -14,7 +14,7 @@ class StartThreadFromMessageBuilder
 
     private array $data = [];
 
-    public function setName(string $name): StartThreadFromMessageBuilder
+    public function setName(string $name): self
     {
         $this->data['name'] = $name;
 
@@ -26,7 +26,7 @@ class StartThreadFromMessageBuilder
         return $this->data['name'] ?? null;
     }
 
-    public function setAutoArchiveDuration(ThreadAutoArchiveDuration $duration): StartThreadFromMessageBuilder
+    public function setAutoArchiveDuration(ThreadAutoArchiveDuration $duration): self
     {
         $this->data['auto_archive_duration'] = $duration->value;
 
@@ -40,7 +40,7 @@ class StartThreadFromMessageBuilder
             : null;
     }
 
-    public function setRateLimitPerUser(int $seconds): StartThreadFromMessageBuilder
+    public function setRateLimitPerUser(int $seconds): self
     {
         $this->data['rate_limit_per_user'] = RateLimit::withinLimit($seconds);
 

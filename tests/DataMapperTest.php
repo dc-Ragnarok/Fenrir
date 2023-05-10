@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Tests\Exan\Fenrir;
+namespace Tests\Ragnarok\Fenrir;
 
-use Exan\Fenrir\DataMapper;
-use Exan\Fenrir\Enums\Parts\ApplicationCommandOptionTypes;
-use Exan\Fenrir\Parts\ApplicationCommandInteractionDataOptionStructure;
-use Exan\Fenrir\Parts\InteractionData;
-use Exan\Fenrir\Parts\Message;
-use Exan\Fenrir\Websocket\Events\InteractionCreate;
+use Ragnarok\Fenrir\DataMapper;
+use Ragnarok\Fenrir\Enums\Parts\ApplicationCommandOptionTypes;
+use Ragnarok\Fenrir\Parts\ApplicationCommandInteractionDataOptionStructure;
+use Ragnarok\Fenrir\Parts\InteractionData;
+use Ragnarok\Fenrir\Parts\Message;
+use Ragnarok\Fenrir\Gateway\Events\InteractionCreate;
 use Monolog\Test\TestCase;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
@@ -23,7 +23,7 @@ class DataMapperTest extends TestCase
         );
     }
 
-    public function testItMapsDataFromObject()
+    public function testItMapsDataFromObject(): void
     {
         $data = (object) [
             'id' => '::id::',
@@ -40,7 +40,7 @@ class DataMapperTest extends TestCase
         $this->assertEquals('::channel id::', $output->channel_id);
     }
 
-    public function testItMapsDataFromArray()
+    public function testItMapsDataFromArray(): void
     {
         $data = [
             'id' => '::id::',
@@ -57,7 +57,7 @@ class DataMapperTest extends TestCase
         $this->assertEquals('::channel id::', $output->channel_id);
     }
 
-    public function testItJugglesDataTypes()
+    public function testItJugglesDataTypes(): void
     {
         $data = [
             'id' => 123,
@@ -74,7 +74,7 @@ class DataMapperTest extends TestCase
         $this->assertFalse($output->tts);
     }
 
-    public function testItDoesNotFailOnImpossibleJuggles()
+    public function testItDoesNotFailOnImpossibleJuggles(): void
     {
         $data = [
             'reactions' => 'this is supposed to be an array',
@@ -89,7 +89,7 @@ class DataMapperTest extends TestCase
         $this->assertEquals(new Message(), $output);
     }
 
-    public function testItMapsRecursively()
+    public function testItMapsRecursively(): void
     {
         $data = [
             'id' => '::interaction id::',
@@ -108,7 +108,7 @@ class DataMapperTest extends TestCase
         $this->assertEquals('::interaction data id::', $output->data->id);
     }
 
-    public function testItMapsArrays()
+    public function testItMapsArrays(): void
     {
         $data = [
             'id' => '::interaction id::',
@@ -143,7 +143,7 @@ class DataMapperTest extends TestCase
         }
     }
 
-    public function testItUsesSettersWhenAvailable()
+    public function testItUsesSettersWhenAvailable(): void
     {
         $data = [
             'type' => ApplicationCommandOptionTypes::INTEGER->value

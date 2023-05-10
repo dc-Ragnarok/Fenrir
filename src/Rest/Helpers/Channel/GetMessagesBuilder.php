@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Exan\Fenrir\Rest\Helpers\Channel;
+namespace Ragnarok\Fenrir\Rest\Helpers\Channel;
 
-use Exan\Fenrir\Constants\Validation\ItemLimit;
-use Exan\Fenrir\Rest\Helpers\GetNew;
+use Ragnarok\Fenrir\Constants\Validation\ItemLimit;
+use Ragnarok\Fenrir\Rest\Helpers\GetNew;
 
 class GetMessagesBuilder
 {
@@ -13,7 +13,7 @@ class GetMessagesBuilder
 
     private array $data = [];
 
-    public function setAround(string $around): GetMessagesBuilder
+    public function setAround(string $around): self
     {
         $this->data['around'] = $around;
 
@@ -25,7 +25,7 @@ class GetMessagesBuilder
         return $this->data['around'] ?? null;
     }
 
-    public function setBefore(string $before): GetMessagesBuilder
+    public function setBefore(string $before): self
     {
         $this->data['before'] = $before;
 
@@ -37,7 +37,7 @@ class GetMessagesBuilder
         return $this->data['before'] ?? null;
     }
 
-    public function setAfter(string $after): GetMessagesBuilder
+    public function setAfter(string $after): self
     {
         $this->data['after'] = $after;
 
@@ -49,7 +49,7 @@ class GetMessagesBuilder
         return $this->data['after'] ?? null;
     }
 
-    public function setLimit(int $limit): GetMessagesBuilder
+    public function setLimit(int $limit): self
     {
         $this->data['limit'] = ItemLimit::withinLimit($limit);
 

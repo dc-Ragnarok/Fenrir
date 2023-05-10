@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-namespace Tests\Exan\Fenrir\Rest\Helpers\Channel;
+namespace Tests\Ragnarok\Fenrir\Rest\Helpers\Channel;
 
-use Exan\Fenrir\Exceptions\Rest\Helpers\ComponentBuilder\TooManyRowsException;
-use Exan\Fenrir\Rest\Helpers\Channel\ComponentBuilder;
-use Exan\Fenrir\Rest\Helpers\Channel\ComponentRowBuilder;
+use Ragnarok\Fenrir\Exceptions\Rest\Helpers\ComponentBuilder\TooManyRowsException;
+use Ragnarok\Fenrir\Rest\Helpers\Channel\ComponentBuilder;
+use Ragnarok\Fenrir\Rest\Helpers\Channel\ComponentRowBuilder;
 use Mockery;
 use PHPUnit\Framework\TestCase;
 
 class ComponentBuilderTest extends TestCase
 {
-    public function testAddRow()
+    public function testAddRow(): void
     {
         $componentRow = Mockery::mock(ComponentRowBuilder::class);
         $componentRow->shouldReceive('get')->andReturn(['::row::']);
@@ -31,7 +31,7 @@ class ComponentBuilderTest extends TestCase
         ]], $componentBuilder->get());
     }
 
-    public function testItThrowsAnErrorWithTooManyRows()
+    public function testItThrowsAnErrorWithTooManyRows(): void
     {
         $componentRow = Mockery::mock(ComponentRowBuilder::class);
         $componentRow->shouldReceive('get')->andReturn(['::row::']);

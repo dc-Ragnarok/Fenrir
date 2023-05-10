@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Exan\Fenrir\Parts;
+namespace Ragnarok\Fenrir\Parts;
 
-use Exan\Fenrir\Enums\Parts\ApplicationCommandTypes;
+use Ragnarok\Fenrir\Enums\Parts\ApplicationCommandTypes;
 
 class ApplicationCommand
 {
@@ -23,7 +23,7 @@ class ApplicationCommand
      */
     public ?array $description_localizations;
     /**
-     * @var \Exan\Fenrir\Parts\ApplicationCommandOptionStructure[]
+     * @var \Ragnarok\Fenrir\Parts\ApplicationCommandOptionStructure[]
      */
     public ?array $options;
     public ?string $default_member_permissions;

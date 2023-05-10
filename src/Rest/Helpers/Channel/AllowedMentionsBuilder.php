@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Exan\Fenrir\Rest\Helpers\Channel;
+namespace Ragnarok\Fenrir\Rest\Helpers\Channel;
 
-use Exan\Fenrir\Rest\Helpers\GetNew;
+use Ragnarok\Fenrir\Rest\Helpers\GetNew;
 
 /**
  * @see https://discord.com/developers/docs/resources/channel#allowed-mentions-object
@@ -24,7 +24,7 @@ class AllowedMentionsBuilder
         return $this->data;
     }
 
-    public function addRole(string $roleId): AllowedMentionsBuilder
+    public function addRole(string $roleId): self
     {
         $this->data['roles'][] = $roleId;
 
@@ -40,7 +40,7 @@ class AllowedMentionsBuilder
         return $this->data['roles'];
     }
 
-    public function addUser(string $userId): AllowedMentionsBuilder
+    public function addUser(string $userId): self
     {
         $this->data['users'][] = $userId;
 
@@ -56,17 +56,19 @@ class AllowedMentionsBuilder
         return $this->data['users'];
     }
 
-    public function mentionRepliedUser()
+    public function mentionRepliedUser(): self
     {
         $this->data['replied_user'] = true;
+
+        return $this;
     }
 
-    public function mentionsRepliedUser()
+    public function mentionsRepliedUser(): bool
     {
         return isset($this->data['replied_user']) && $this->data['replied_user'];
     }
 
-    public function allowUsers(): AllowedMentionsBuilder
+    public function allowUsers(): self
     {
         $this->data['parse'][] = 'users';
 
@@ -78,7 +80,7 @@ class AllowedMentionsBuilder
         return in_array('users', $this->data['parse']);
     }
 
-    public function allowRoles(): AllowedMentionsBuilder
+    public function allowRoles(): self
     {
         $this->data['parse'][] = 'roles';
 

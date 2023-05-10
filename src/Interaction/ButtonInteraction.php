@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Exan\Fenrir\Interaction;
+namespace Ragnarok\Fenrir\Interaction;
 
-use Exan\Fenrir\Discord;
-use Exan\Fenrir\Interaction\Helpers\InteractionCallbackBuilder;
-use Exan\Fenrir\Websocket\Events\InteractionCreate;
+use Ragnarok\Fenrir\Discord;
+use Ragnarok\Fenrir\Interaction\Helpers\InteractionCallbackBuilder;
+use Ragnarok\Fenrir\Gateway\Events\InteractionCreate;
 use React\Promise\ExtendedPromiseInterface;
 
 class ButtonInteraction

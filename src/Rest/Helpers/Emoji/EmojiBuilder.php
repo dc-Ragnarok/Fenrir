@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Exan\Fenrir\Rest\Helpers\Emoji;
+namespace Ragnarok\Fenrir\Rest\Helpers\Emoji;
 
-use Exan\Fenrir\Parts\Emoji;
-use Exan\Fenrir\Rest\Helpers\GetNew;
+use Ragnarok\Fenrir\Parts\Emoji;
+use Ragnarok\Fenrir\Rest\Helpers\GetNew;
 
 class EmojiBuilder
 {
@@ -13,7 +13,7 @@ class EmojiBuilder
 
     private array $data = [];
 
-    public function setName(string $name): EmojiBuilder
+    public function setName(string $name): self
     {
         $this->data['name'] = $name;
 
@@ -25,7 +25,7 @@ class EmojiBuilder
         return $this->data['name'] ?? null;
     }
 
-    public function setAnimated(bool $animated): EmojiBuilder
+    public function setAnimated(bool $animated): self
     {
         $this->data['animated'] = $animated;
 
@@ -37,7 +37,7 @@ class EmojiBuilder
         return $this->data['animated'] ?? null;
     }
 
-    public function setId(string $id): EmojiBuilder
+    public function setId(string $id): self
     {
         $this->data['id'] = $id;
 
@@ -49,9 +49,9 @@ class EmojiBuilder
         return $this->data['id'] ?? null;
     }
 
-    public static function fromPart(Emoji $emoji): EmojiBuilder
+    public static function fromPart(Emoji $emoji): self
     {
-        $builder = new EmojiBuilder();
+        $builder = new self();
 
         if (isset($emoji->animated)) {
             $builder->setAnimated($emoji->animated);

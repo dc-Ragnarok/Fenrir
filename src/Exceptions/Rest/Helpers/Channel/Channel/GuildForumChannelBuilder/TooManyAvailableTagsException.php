@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Exan\Fenrir\Exceptions\Rest\Helpers\Channel\Channel\GuildForumChannelBuilder;
+namespace Ragnarok\Fenrir\Exceptions\Rest\Helpers\Channel\Channel\GuildForumChannelBuilder;
 
 use Exception;
 

@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Exan\Fenrir\Component\SelectMenu;
+namespace Ragnarok\Fenrir\Component\SelectMenu;
 
-use Exan\Fenrir\Enums\Component\SelectMenuType;
-use Exan\Fenrir\Exceptions\Components\SelectMenu\StringSelectMenu\NoOptionsException;
-use Exan\Fenrir\Exceptions\Components\SelectMenu\StringSelectMenu\TooManyOptionsException;
-use Exan\Fenrir\Rest\Helpers\Emoji\EmojiBuilder;
+use Ragnarok\Fenrir\Enums\Component\SelectMenuType;
+use Ragnarok\Fenrir\Exceptions\Components\SelectMenu\StringSelectMenu\NoOptionsException;
+use Ragnarok\Fenrir\Exceptions\Components\SelectMenu\StringSelectMenu\TooManyOptionsException;
+use Ragnarok\Fenrir\Rest\Helpers\Emoji\EmojiBuilder;
 
 class StringSelectMenu extends SelectMenu
 {
@@ -26,7 +26,7 @@ class StringSelectMenu extends SelectMenu
         ?string $description = null,
         ?EmojiBuilder $emoji = null,
         ?bool $default = null
-    ) {
+    ): self {
         if (count($this->items) === 25) {
             throw new TooManyOptionsException();
         }
@@ -49,6 +49,8 @@ class StringSelectMenu extends SelectMenu
         }
 
         $this->items[] = $item;
+
+        return $this;
     }
 
     /**
@@ -60,6 +62,9 @@ class StringSelectMenu extends SelectMenu
             throw new NoOptionsException();
         }
 
-        return array_merge(parent::get(), ['options' => $this->items]);
+        return [
+            ...parent::get(),
+            'options' => $this->items
+        ];
     }
 }

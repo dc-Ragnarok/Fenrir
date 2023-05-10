@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Exan\Fenrir\Rest\Helpers\Channel;
+namespace Ragnarok\Fenrir\Rest\Helpers\Channel;
 
-use Exan\Fenrir\Component\Component;
-use Exan\Fenrir\Exceptions\Rest\Helpers\ComponentRowBuilder\TooManyItemsException;
-use Exan\Fenrir\Rest\Helpers\GetNew;
+use Ragnarok\Fenrir\Component\Component;
+use Ragnarok\Fenrir\Exceptions\Rest\Helpers\ComponentRowBuilder\TooManyItemsException;
+use Ragnarok\Fenrir\Rest\Helpers\GetNew;
 
 /**
  * Can not exceed 9 components
@@ -22,13 +22,13 @@ class ComponentRowBuilder
 
     public function get(): array
     {
-        return array_map(fn (Component $component) => $component->get(), $this->components);
+        return array_map(static fn (Component $component) => $component->get(), $this->components);
     }
 
     /**
      * @throws TooManyItemsException
      */
-    public function add(Component $component): ComponentRowBuilder
+    public function add(Component $component): self
     {
         if (count($this->components) === 9) {
             throw new TooManyItemsException();

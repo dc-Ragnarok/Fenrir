@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Tests\Exan\Fenrir\Rest\Helpers\Emoji;
+namespace Tests\Ragnarok\Fenrir\Rest\Helpers\Emoji;
 
-use Exan\Fenrir\Enums\ImageData;
-use Exan\Fenrir\Parts\Emoji;
-use Exan\Fenrir\Rest\Helpers\Emoji\EmojiBuilder;
+use Ragnarok\Fenrir\Enums\ImageData;
+use Ragnarok\Fenrir\Parts\Emoji;
+use Ragnarok\Fenrir\Rest\Helpers\Emoji\EmojiBuilder;
 use PHPUnit\Framework\TestCase;
 
 class EmojiBuilderTest extends TestCase
 {
-    public function testSetName()
+    public function testSetName(): void
     {
         $emojiBuilder = new EmojiBuilder();
         $emojiBuilder->setName('::name::');
@@ -19,7 +19,7 @@ class EmojiBuilderTest extends TestCase
         $this->assertEquals('::name::', $emojiBuilder->getName());
     }
 
-    public function testSetId()
+    public function testSetId(): void
     {
         $emojiBuilder = new EmojiBuilder();
         $emojiBuilder->setId('::id::');
@@ -27,15 +27,15 @@ class EmojiBuilderTest extends TestCase
         $this->assertEquals('::id::', $emojiBuilder->getId());
     }
 
-    public function testSetAnimated()
+    public function testSetAnimated(): void
     {
         $emojiBuilder = new EmojiBuilder();
         $emojiBuilder->setAnimated(true);
         $this->assertEquals(['animated' => true], $emojiBuilder->get());
-        $this->assertEquals(true, $emojiBuilder->getAnimated());
+        $this->assertTrue($emojiBuilder->getAnimated());
     }
 
-    public function testCreateEmojiFromId()
+    public function testCreateEmojiFromId(): void
     {
         $emojiBuilder = new EmojiBuilder();
         $stringEmoji = '✅';
@@ -44,7 +44,7 @@ class EmojiBuilderTest extends TestCase
         $this->assertEquals(urlencode($stringEmoji), (string) $emojiBuilder);
     }
 
-    public function testCreateEmojiFromIdAndName()
+    public function testCreateEmojiFromIdAndName(): void
     {
         $emojiBuilder = new EmojiBuilder();
         $emojiBuilder->setName('name');
@@ -56,7 +56,7 @@ class EmojiBuilderTest extends TestCase
     /**
      * @dataProvider getFromPartProvider
      */
-    public function testGetFromPart(Emoji $emoji, array $result)
+    public function testGetFromPart(Emoji $emoji, array $result): void
     {
         $this->assertEquals(EmojiBuilder::fromPart($emoji)->get(), $result);
     }
@@ -65,7 +65,7 @@ class EmojiBuilderTest extends TestCase
     {
         return [
             'All properties' => [
-                'emoji' => (function () {
+                'emoji' => (static function () {
                     $emoji = new Emoji();
 
                     $emoji->id = '::id::';
@@ -81,11 +81,7 @@ class EmojiBuilderTest extends TestCase
                 ],
             ],
             'No properties' => [
-                'emoji' => (function () {
-                    $emoji = new Emoji();
-
-                    return $emoji;
-                })(),
+                'emoji' => (static fn () => new Emoji())(),
                 'result' => [],
             ],
         ];

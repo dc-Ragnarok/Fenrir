@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Exan\Fenrir\Enums\Gateway;
+namespace Ragnarok\Fenrir\Enums\Gateway;
 
 enum StatusType: string
 {

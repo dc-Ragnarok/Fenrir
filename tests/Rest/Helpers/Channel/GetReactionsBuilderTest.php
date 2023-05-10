@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Tests\Exan\Fenrir\Rest\Helpers\Channel;
+namespace Tests\Ragnarok\Fenrir\Rest\Helpers\Channel;
 
-use Exan\Fenrir\Rest\Helpers\Channel\GetReactionsBuilder;
+use Ragnarok\Fenrir\Rest\Helpers\Channel\GetReactionsBuilder;
 use Monolog\Test\TestCase;
 
 class GetReactionsBuilderTest extends TestCase
 {
-    public function testSetAfter()
+    public function testSetAfter(): void
     {
         $builder = new GetReactionsBuilder();
         $builder->setAfter('::after::');
@@ -18,7 +18,7 @@ class GetReactionsBuilderTest extends TestCase
         $this->assertEquals('::after::', $builder->getAfter());
     }
 
-    public function testSetLimit()
+    public function testSetLimit(): void
     {
         $builder = new GetReactionsBuilder();
         $builder->setLimit(25);
@@ -27,7 +27,7 @@ class GetReactionsBuilderTest extends TestCase
         $this->assertEquals(25, $builder->getLimit());
     }
 
-    public function testSetLimitGreaterThan100()
+    public function testSetLimitGreaterThan100(): void
     {
         $builder = new GetReactionsBuilder();
         $builder->setLimit(150);
@@ -36,7 +36,7 @@ class GetReactionsBuilderTest extends TestCase
         $this->assertEquals(100, $builder->getLimit());
     }
 
-    public function testSetLimitLowerThan1()
+    public function testSetLimitLowerThan1(): void
     {
         $builder = new GetReactionsBuilder();
         $builder->setLimit(-50);

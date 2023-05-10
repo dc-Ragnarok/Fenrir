@@ -2,29 +2,21 @@
 
 declare(strict_types=1);
 
-namespace Exan\Fenrir;
+namespace Ragnarok\Fenrir;
 
 use Evenement\EventEmitter;
-use Exan\Fenrir\Constants\Events;
-use Exan\Fenrir\Websocket\Objects\Payload;
+use Ragnarok\Fenrir\Constants\Events;
+use Ragnarok\Fenrir\Gateway\Objects\Payload;
 
 class EventHandler extends EventEmitter
 {
-    public function __construct(private DataMapper $mapper, private bool $raw = false)
+    public function __construct(private DataMapper $mapper)
     {
     }
 
-    public function handle(Payload $payload)
+    public function handle(Payload $payload): void
     {
-        if ($this->raw) {
-            $this->emit(Events::RAW, [$payload]);
-        }
-
-        if (!$this->hasListener($payload->t)) {
-            return;
-        }
-
-        if (!isset(Events::MAPPINGS[$payload->t])) {
+        if (!isset(Events::MAPPINGS[$payload->t]) || !$this->hasListener($payload->t)) {
             return;
         }
 

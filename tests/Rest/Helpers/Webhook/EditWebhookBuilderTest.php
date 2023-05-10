@@ -2,20 +2,20 @@
 
 declare(strict_types=1);
 
-namespace Tests\Exan\Fenrir\Rest\Helpers\Webhook;
+namespace Tests\Ragnarok\Fenrir\Rest\Helpers\Webhook;
 
-use Exan\Fenrir\Component\Button\DangerButton;
-use Exan\Fenrir\Rest\Helpers\Channel\AllowedMentionsBuilder;
-use Exan\Fenrir\Rest\Helpers\Channel\AttachmentBuilder;
-use Exan\Fenrir\Rest\Helpers\Channel\ComponentBuilder;
-use Exan\Fenrir\Rest\Helpers\Channel\ComponentRowBuilder;
-use Exan\Fenrir\Rest\Helpers\Channel\EmbedBuilder;
-use Exan\Fenrir\Rest\Helpers\Webhook\EditWebhookBuilder;
+use Ragnarok\Fenrir\Component\Button\DangerButton;
+use Ragnarok\Fenrir\Rest\Helpers\Channel\AllowedMentionsBuilder;
+use Ragnarok\Fenrir\Rest\Helpers\Channel\AttachmentBuilder;
+use Ragnarok\Fenrir\Rest\Helpers\Channel\ComponentBuilder;
+use Ragnarok\Fenrir\Rest\Helpers\Channel\ComponentRowBuilder;
+use Ragnarok\Fenrir\Rest\Helpers\Channel\EmbedBuilder;
+use Ragnarok\Fenrir\Rest\Helpers\Webhook\EditWebhookBuilder;
 use PHPUnit\Framework\TestCase;
 
 class EditWebhookBuilderTest extends TestCase
 {
-    public function testGetAttachments()
+    public function testGetAttachments(): void
     {
         $webhookBuilder = EditWebhookBuilder::new();
 
@@ -27,7 +27,7 @@ class EditWebhookBuilderTest extends TestCase
         $this->assertEquals([$attachment->get()], $webhookBuilder->get()['attachments']);
     }
 
-    public function testGetComponents()
+    public function testGetComponents(): void
     {
         $webhookBuilder = EditWebhookBuilder::new();
 
@@ -42,7 +42,7 @@ class EditWebhookBuilderTest extends TestCase
         $this->assertEquals($component->get(), $webhookBuilder->get()['components']);
     }
 
-    public function testGetEmbeds()
+    public function testGetEmbeds(): void
     {
         $webhookBuilder = EditWebhookBuilder::new();
 
@@ -54,7 +54,7 @@ class EditWebhookBuilderTest extends TestCase
         $this->assertEquals([$embed->get()], $webhookBuilder->get()['embeds']);
     }
 
-    public function testGetAllowedMentions()
+    public function testGetAllowedMentions(): void
     {
         $webhookBuilder = EditWebhookBuilder::new();
 
@@ -66,7 +66,7 @@ class EditWebhookBuilderTest extends TestCase
         $this->assertEquals($allowedMentions->get(), $webhookBuilder->get()['allowed_mentions']);
     }
 
-    public function testRequiresMultipart()
+    public function testRequiresMultipart(): void
     {
         $builder = new EditWebhookBuilder();
 
@@ -75,10 +75,10 @@ class EditWebhookBuilderTest extends TestCase
             '::spooky binary data::',
         );
 
-        $this->assertEquals(true, $builder->requiresMultipart());
+        $this->assertTrue($builder->requiresMultipart());
     }
 
-    public function testGetMultipart()
+    public function testGetMultipart(): void
     {
         $builder = new EditWebhookBuilder();
 

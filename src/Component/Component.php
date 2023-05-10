@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Exan\Fenrir\Component;
+namespace Ragnarok\Fenrir\Component;
 
 abstract class Component
 {

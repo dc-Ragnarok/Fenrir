@@ -2,22 +2,22 @@
 
 declare(strict_types=1);
 
-namespace Tests\Exan\Fenrir\Rest\Helpers\Channel\Channel;
+namespace Tests\Ragnarok\Fenrir\Rest\Helpers\Channel\Channel;
 
-use Exan\Fenrir\Bitwise\Bitwise;
-use Exan\Fenrir\Enums\Flags\ChannelFlags;
-use Exan\Fenrir\Enums\Parts\ChannelTypes;
-use Exan\Fenrir\Enums\Parts\ForumLayoutTypes;
-use Exan\Fenrir\Enums\Parts\SortOrderTypes;
-use Exan\Fenrir\Exceptions\Rest\Helpers\Channel\Channel\GuildForumChannelBuilder\TooManyAvailableTagsException;
-use Exan\Fenrir\Parts\Emoji;
-use Exan\Fenrir\Rest\Helpers\Channel\Channel\GuildForumChannelBuilder;
-use Exan\Fenrir\Rest\Helpers\Emoji\EmojiBuilder;
+use Ragnarok\Fenrir\Bitwise\Bitwise;
+use Ragnarok\Fenrir\Enums\Flags\ChannelFlags;
+use Ragnarok\Fenrir\Enums\Parts\ChannelTypes;
+use Ragnarok\Fenrir\Enums\Parts\ForumLayoutTypes;
+use Ragnarok\Fenrir\Enums\Parts\SortOrderTypes;
+use Ragnarok\Fenrir\Exceptions\Rest\Helpers\Channel\Channel\GuildForumChannelBuilder\TooManyAvailableTagsException;
+use Ragnarok\Fenrir\Parts\Emoji;
+use Ragnarok\Fenrir\Rest\Helpers\Channel\Channel\GuildForumChannelBuilder;
+use Ragnarok\Fenrir\Rest\Helpers\Emoji\EmojiBuilder;
 use PHPUnit\Framework\TestCase;
 
 class GuildForumChannelBuilderTest extends TestCase
 {
-    public function testConstructorSetsCorrectType()
+    public function testConstructorSetsCorrectType(): void
     {
         $channelBuilder = new GuildForumChannelBuilder();
 
@@ -26,7 +26,7 @@ class GuildForumChannelBuilderTest extends TestCase
         ], $channelBuilder->get());
     }
 
-    public function testSetFlags()
+    public function testSetFlags(): void
     {
         $builder = new GuildForumChannelBuilder();
         $builder->addFlag(ChannelFlags::PINNED);
@@ -35,7 +35,7 @@ class GuildForumChannelBuilderTest extends TestCase
         $this->assertEquals($bitwise->get(), $builder->get()['flags']);
     }
 
-    public function testAddAvailableTag()
+    public function testAddAvailableTag(): void
     {
         $builder = new GuildForumChannelBuilder();
         $builder->addAvailableTag(
@@ -63,7 +63,7 @@ class GuildForumChannelBuilderTest extends TestCase
         ], $builder->get()['available_tags'][1]);
     }
 
-    public function testAddTooManyAvailableTags()
+    public function testAddTooManyAvailableTags(): void
     {
         $builder = new GuildForumChannelBuilder();
 
@@ -74,7 +74,7 @@ class GuildForumChannelBuilderTest extends TestCase
         $builder->addAvailableTag('::tag::');
     }
 
-    public function testSetDefaultReactionEmoji()
+    public function testSetDefaultReactionEmoji(): void
     {
         $builder = new GuildForumChannelBuilder();
         $emoji = (new EmojiBuilder())->setId('::id::')->setName('emoji')->setAnimated(false); // Guild emoji
@@ -88,7 +88,7 @@ class GuildForumChannelBuilderTest extends TestCase
         $this->assertEquals(['emoji_name' => '::name::'], $builder->get()['default_reaction_emoji']);
     }
 
-    public function testSetDefaultSortOrder()
+    public function testSetDefaultSortOrder(): void
     {
         $builder = new GuildForumChannelBuilder();
         $builder->setDefaultSortOrder(SortOrderTypes::LATEST_ACTIVITY);
@@ -96,7 +96,7 @@ class GuildForumChannelBuilderTest extends TestCase
         $this->assertEquals(SortOrderTypes::LATEST_ACTIVITY->value, $builder->get()['default_sort_order']);
     }
 
-    public function testSetDefaultForumLayout()
+    public function testSetDefaultForumLayout(): void
     {
         $builder = new GuildForumChannelBuilder();
         $builder->setDefaultForumLayout(ForumLayoutTypes::NOT_SET);

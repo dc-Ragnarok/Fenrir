@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Tests\Exan\Fenrir\Rest;
+namespace Tests\Ragnarok\Fenrir\Rest;
 
 use Discord\Http\Http;
-use Exan\Fenrir\DataMapper;
-use Exan\Fenrir\Rest\HttpResource;
-use Fakes\Exan\Fenrir\DataMapperFake;
+use Ragnarok\Fenrir\DataMapper;
+use Ragnarok\Fenrir\Rest\HttpResource;
+use Fakes\Ragnarok\Fenrir\DataMapperFake;
 use Mockery;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use PHPUnit\Framework\TestCase;
@@ -48,10 +48,10 @@ abstract class HttpHelperTestCase extends TestCase
     /**
      * @dataProvider httpBindingsProvider
      */
-    public function testFunctions(string $method, array $args, array $mockOptions, array $validationOptions)
+    public function testFunctions(string $method, array $args, array $mockOptions, array $validationOptions): void
     {
         $this->http->shouldReceive($mockOptions['method'])->andReturns(
-            new Promise(function ($resolve) use ($mockOptions) {
+            new Promise(static function ($resolve) use ($mockOptions) {
                 $resolve($mockOptions['return']);
             })
         )->once();
@@ -76,7 +76,7 @@ abstract class HttpHelperTestCase extends TestCase
     /**
      * @dataProvider httpBindingsProvider
      */
-    public function testItLogsErrors(string $method, array $args, array $mockOptions, array $validationOptions)
+    public function testItLogsErrors(string $method, array $args, array $mockOptions, array $validationOptions): void
     {
         $this->mockLog->shouldReceive('error')->once();
 

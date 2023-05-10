@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Tests\Exan\Fenrir\Rest\Helpers\Channel\Channel;
+namespace Tests\Ragnarok\Fenrir\Rest\Helpers\Channel\Channel;
 
-use Exan\Fenrir\Enums\Parts\ChannelTypes;
-use Exan\Fenrir\Rest\Helpers\Channel\Channel\GuildAnnouncementChannelBuilder;
+use Ragnarok\Fenrir\Enums\Parts\ChannelTypes;
+use Ragnarok\Fenrir\Rest\Helpers\Channel\Channel\GuildAnnouncementChannelBuilder;
 use PHPUnit\Framework\TestCase;
 
 class GuildAnnouncementChannelBuilderTest extends TestCase
 {
-    public function testConstructorSetsCorrectType()
+    public function testConstructorSetsCorrectType(): void
     {
         $channelBuilder = new GuildAnnouncementChannelBuilder();
 

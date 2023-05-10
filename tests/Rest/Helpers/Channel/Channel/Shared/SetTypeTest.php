@@ -2,23 +2,23 @@
 
 declare(strict_types=1);
 
-namespace Tests\Exan\Fenrir\Rest\Helpers\Channel\Channel\Shared;
+namespace Tests\Ragnarok\Fenrir\Rest\Helpers\Channel\Channel\Shared;
 
-use Exan\Fenrir\Enums\Parts\ChannelTypes;
-use Exan\Fenrir\Rest\Helpers\Channel\Channel\Shared\SetType;
+use Ragnarok\Fenrir\Enums\Parts\ChannelTypes;
+use Ragnarok\Fenrir\Rest\Helpers\Channel\Channel\Shared\SetType;
 use PHPUnit\Framework\TestCase;
-use Exan\Fenrir\Exceptions\Rest\Helpers\Channel\Channel\Shared\SetType\UnsupportedConversionException;
+use Ragnarok\Fenrir\Exceptions\Rest\Helpers\Channel\Channel\Shared\SetType\UnsupportedConversionException;
 
 class SetTypeTest extends TestCase
 {
-    private function getClass()
+    private function getClass(): DummyTraitTester
     {
         return new class extends DummyTraitTester {
             use SetType;
         };
     }
 
-    public function testSetType()
+    public function testSetType(): void
     {
         $class = $this->getClass();
         $class->setType(ChannelTypes::GUILD_TEXT);
@@ -26,7 +26,7 @@ class SetTypeTest extends TestCase
         $this->assertEquals(ChannelTypes::GUILD_TEXT, $class->getType());
     }
 
-    public function testSetTypeUnsupportedConversionException()
+    public function testSetTypeUnsupportedConversionException(): void
     {
         $class = $this->getClass();
         $this->expectException(

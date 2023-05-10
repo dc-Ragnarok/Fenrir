@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Exan\Fenrir\Parts;
+namespace Ragnarok\Fenrir\Parts;
 
 class InteractionData
 {
@@ -11,7 +11,7 @@ class InteractionData
     public int $type; // @todo enum
     public ?InteractionDataResolved $resolved;
     /**
-     * @var \Exan\Fenrir\Parts\ApplicationCommandInteractionDataOptionStructure[]
+     * @var \Ragnarok\Fenrir\Parts\ApplicationCommandInteractionDataOptionStructure[]
      */
     public ?array $options;
     public ?string $guild_id;
@@ -19,7 +19,7 @@ class InteractionData
     public ?string $custom_id;
     public ?int $component_type; // @todo enum
     /**
-     * @var \Exan\Fenrir\Parts\ComponentSelectOptions[]
+     * @var \Ragnarok\Fenrir\Parts\ComponentSelectOptions[]
      */
     public ?array $values;
 }

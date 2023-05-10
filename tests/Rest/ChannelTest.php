@@ -2,25 +2,26 @@
 
 declare(strict_types=1);
 
-namespace Tests\Exan\Fenrir\Rest;
+namespace Tests\Ragnarok\Fenrir\Rest;
 
-use Exan\Fenrir\Parts\Channel as PartsChannel;
-use Exan\Fenrir\Parts\Invite;
-use Exan\Fenrir\Parts\Message;
-use Exan\Fenrir\Parts\ThreadMember;
-use Exan\Fenrir\Parts\User;
-use Exan\Fenrir\Rest\Channel;
-use Exan\Fenrir\Rest\Helpers\Channel\Channel\GuildAnnouncementChannelBuilder;
-use Exan\Fenrir\Rest\Helpers\Channel\Channel\GuildForumChannelBuilder;
-use Exan\Fenrir\Rest\Helpers\Channel\Channel\GuildStageVoiceChannelBuilder;
-use Exan\Fenrir\Rest\Helpers\Channel\Channel\GuildTextChannelBuilder;
-use Exan\Fenrir\Rest\Helpers\Channel\Channel\GuildVoiceChannelBuilder;
-use Exan\Fenrir\Rest\Helpers\Channel\EditMessageBuilder;
-use Exan\Fenrir\Rest\Helpers\Channel\MessageBuilder;
-use Exan\Fenrir\Rest\Helpers\Channel\StartThreadFromMessageBuilder;
-use Exan\Fenrir\Rest\Helpers\Channel\StartThreadWithoutMessageBuilder;
-use Exan\Fenrir\Rest\Helpers\Emoji\EmojiBuilder;
-use Tests\Exan\Fenrir\Rest\HttpHelperTestCase;
+use Ragnarok\Fenrir\Parts\Channel as PartsChannel;
+use Ragnarok\Fenrir\Parts\Invite;
+use Ragnarok\Fenrir\Parts\Message;
+use Ragnarok\Fenrir\Parts\ThreadMember;
+use Ragnarok\Fenrir\Parts\User;
+use Ragnarok\Fenrir\Rest\Channel;
+use Ragnarok\Fenrir\Rest\Helpers\Channel\Channel\GuildAnnouncementChannelBuilder;
+use Ragnarok\Fenrir\Rest\Helpers\Channel\Channel\GuildForumChannelBuilder;
+use Ragnarok\Fenrir\Rest\Helpers\Channel\Channel\GuildStageVoiceChannelBuilder;
+use Ragnarok\Fenrir\Rest\Helpers\Channel\Channel\GuildTextChannelBuilder;
+use Ragnarok\Fenrir\Rest\Helpers\Channel\Channel\GuildVoiceChannelBuilder;
+use Ragnarok\Fenrir\Rest\Helpers\Channel\EditMessageBuilder;
+use Ragnarok\Fenrir\Rest\Helpers\Channel\EditPermissionsBuilder;
+use Ragnarok\Fenrir\Rest\Helpers\Channel\MessageBuilder;
+use Ragnarok\Fenrir\Rest\Helpers\Channel\StartThreadFromMessageBuilder;
+use Ragnarok\Fenrir\Rest\Helpers\Channel\StartThreadWithoutMessageBuilder;
+use Ragnarok\Fenrir\Rest\Helpers\Emoji\EmojiBuilder;
+use Tests\Ragnarok\Fenrir\Rest\HttpHelperTestCase;
 
 class ChannelTest extends HttpHelperTestCase
 {
@@ -254,9 +255,15 @@ class ChannelTest extends HttpHelperTestCase
                 ],
                 'validationOptions' => [],
             ],
-            /**
-             * @todo editChannelPermissions
-             */
+            'Edit channel permissions' => [
+                'method' => 'editChannelPermissions',
+                'args' => ['::channel id::', EditPermissionsBuilder::new()->setMemberId('::member id::')],
+                'mockOptions' => [
+                    'method' => 'put',
+                    'return' => null,
+                ],
+                'validationOptions' => [],
+            ],
             'Get channel invites' => [
                 'method' => 'getChannelInvites',
                 'args' => ['::channel id::'],
@@ -289,9 +296,15 @@ class ChannelTest extends HttpHelperTestCase
                 ],
                 'validationOptions' => [],
             ],
-            /**
-             * @todo followAnnouncementChannel
-             */
+            'Follow announcement channel' => [
+                'method' => 'followAnnouncementChannel',
+                'args' => ['::channel id::', '::webhook channel id::'],
+                'mockOptions' => [
+                    'method' => 'post',
+                    'return' => null,
+                ],
+                'validationOptions' => [],
+            ],
             'Trigger typing indicator' => [
                 'method' => 'triggerTypingIndicator',
                 'args' => ['::channel id::'],
@@ -398,18 +411,6 @@ class ChannelTest extends HttpHelperTestCase
                 ],
                 'validationOptions' => [
                     'returnType' => ThreadMember::class,
-                ],
-            ],
-            'Get thread members' => [
-                'method' => 'listThreadMembers',
-                'args' => ['::channel id::'],
-                'mockOptions' => [
-                    'method' => 'get',
-                    'return' => [(object) [], (object) [], (object) []],
-                ],
-                'validationOptions' => [
-                    'returnType' => ThreadMember::class,
-                    'array' => true
                 ],
             ],
             'Get thread members' => [

@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Exan\Fenrir\Interaction;
+namespace Ragnarok\Fenrir\Interaction;
 
-use Exan\Fenrir\Interaction\Helpers\InteractionCallbackBuilder;
-use Exan\Fenrir\Discord;
-use Exan\Fenrir\Enums\Parts\ApplicationCommandOptionTypes as OptionTypes;
-use Exan\Fenrir\Parts\ApplicationCommandInteractionDataOptionStructure as OptionStructure;
-use Exan\Fenrir\Rest\Helpers\Webhook\EditWebhookBuilder;
-use Exan\Fenrir\Websocket\Events\InteractionCreate;
+use Ragnarok\Fenrir\Interaction\Helpers\InteractionCallbackBuilder;
+use Ragnarok\Fenrir\Discord;
+use Ragnarok\Fenrir\Enums\Parts\ApplicationCommandOptionTypes as OptionTypes;
+use Ragnarok\Fenrir\Parts\ApplicationCommandInteractionDataOptionStructure as OptionStructure;
+use Ragnarok\Fenrir\Rest\Helpers\Webhook\EditWebhookBuilder;
+use Ragnarok\Fenrir\Gateway\Events\InteractionCreate;
 use React\Promise\ExtendedPromiseInterface;
 
 class CommandInteraction
@@ -85,7 +85,7 @@ class CommandInteraction
     {
         $subItem = array_values(array_filter(
             $options,
-            fn (OptionStructure $option) => in_array(
+            static fn (OptionStructure $option) => in_array(
                 $option->type,
                 [OptionTypes::SUB_COMMAND, OptionTypes::SUB_COMMAND_GROUP]
             )

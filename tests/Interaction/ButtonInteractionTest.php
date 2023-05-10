@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Tests\Exan\Fenrir\Interaction;
+namespace Tests\Ragnarok\Fenrir\Interaction;
 
-use Exan\Fenrir\Interaction\ButtonInteraction;
+use Ragnarok\Fenrir\Interaction\ButtonInteraction;
 use Mockery;
 use Mockery\Adapter\Phpunit\MockeryTestCase;
-use Exan\Fenrir\Interaction\Helpers\InteractionCallbackBuilder;
-use Exan\Fenrir\Websocket\Events\InteractionCreate;
-use Fakes\Exan\Fenrir\DiscordFake;
-use Fakes\Exan\Fenrir\PromiseFake;
+use Ragnarok\Fenrir\Interaction\Helpers\InteractionCallbackBuilder;
+use Ragnarok\Fenrir\Gateway\Events\InteractionCreate;
+use Fakes\Ragnarok\Fenrir\DiscordFake;
+use Fakes\Ragnarok\Fenrir\PromiseFake;
 
 class ButtonInteractionTest extends MockeryTestCase
 {
@@ -24,7 +24,7 @@ class ButtonInteractionTest extends MockeryTestCase
         return $interactionCreate;
     }
 
-    public function testCreateInteractionResponse()
+    public function testCreateInteractionResponse(): void
     {
         $discord = DiscordFake::get();
         $interactionCallbackBuilder = Mockery::mock(InteractionCallbackBuilder::class);

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Exan\Fenrir\Component\SelectMenu;
+namespace Ragnarok\Fenrir\Component\SelectMenu;
 
-use Exan\Fenrir\Enums\Component\SelectMenuType;
+use Ragnarok\Fenrir\Enums\Component\SelectMenuType;
 
 class ChannelSelectMenu extends SelectMenu
 {
@@ -32,9 +32,9 @@ class ChannelSelectMenu extends SelectMenu
 
     public function get(): array
     {
-        return array_merge(
-            parent::get(),
-            is_null($this->channelTypes) ? [] : ['channel_types' => $this->channelTypes]
-        );
+        return [
+            ...parent::get(),
+            ...(is_null($this->channelTypes) ? [] : ['channel_types' => $this->channelTypes])
+        ];
     }
 }

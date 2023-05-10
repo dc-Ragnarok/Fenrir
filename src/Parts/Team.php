@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Exan\Fenrir\Parts;
+namespace Ragnarok\Fenrir\Parts;
 
 class Team
 {
     public ?string $icon;
     public string $id;
     /**
-     * @var \Exan\Fenrir\Parts\TeamMember[]
+     * @var \Ragnarok\Fenrir\Parts\TeamMember[]
      */
     public array $members;
     public string $name;

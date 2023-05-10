@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Exan\Fenrir\Parts;
+namespace Ragnarok\Fenrir\Parts;
 
-use Exan\Fenrir\Enums\Parts\ActivityTypes;
+use Ragnarok\Fenrir\Enums\Parts\ActivityTypes;
 use Carbon\Carbon;
-use Exan\Fenrir\Bitwise\Bitwise;
+use Ragnarok\Fenrir\Bitwise\Bitwise;
 
 class Activity
 {
@@ -25,7 +25,7 @@ class Activity
     public bool $instance;
     public ?Bitwise $flags;
     /**
-     * @var \Exan\Fenrir\Parts\ActivityButton[]
+     * @var \Ragnarok\Fenrir\Parts\ActivityButton[]
      */
     public ?array $buttons;
 

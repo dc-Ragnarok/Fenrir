@@ -2,18 +2,20 @@
 
 declare(strict_types=1);
 
-namespace Exan\Fenrir;
+namespace Ragnarok\Fenrir;
 
 use Evenement\EventEmitter;
-use Exan\Fenrir\Constants\WebsocketEvents;
-use Exan\Fenrir\Exceptions\Websocket\ConnectionNotInitializedException;
+use Ragnarok\Fenrir\Constants\WebsocketEvents;
+use Ragnarok\Fenrir\Exceptions\Websocket\ConnectionNotInitializedException;
 use JsonSerializable;
 use Psr\Log\LoggerInterface;
+use Ragnarok\Fenrir\Exceptions\Websocket\ConnectionFailedException;
 use Ratchet\Client\Connector;
 use Ratchet\Client\WebSocket as RatchetWebsocket;
 use Ratchet\RFC6455\Messaging\MessageInterface;
 use React\EventLoop\Loop;
 use React\EventLoop\LoopInterface;
+use React\Promise\ExtendedPromiseInterface;
 use React\Promise\Promise;
 use React\Socket\Connector as SocketConnector;
 
@@ -51,14 +53,14 @@ class Websocket extends EventEmitter
         }
     }
 
-    public function open(string $url): Promise
+    public function open(string $url): ExtendedPromiseInterface
     {
         $this->logger->info(
             sprintf('WS (C->S): Connecting to %s', $url)
         );
 
         return new Promise(function (callable $resolver, callable $reject) use ($url) {
-            ($this->connector)($url)->then(function (RatchetWebsocket $connection) use ($resolver, $url) {
+            ($this->connector)($url)->then(function (RatchetWebsocket $connection) use ($url, $resolver) {
                 $this->connection = $connection;
 
                 $this->logger->info(
@@ -71,12 +73,12 @@ class Websocket extends EventEmitter
                 });
 
                 $resolver();
-            }, function (\Exception $e) use ($reject, $url) {
+            }, function (\Exception $e) use ($url, $reject) {
                 $this->logger->info(
                     sprintf('WS (C->S): Error connecting to %s. %s', $url, $e->getMessage())
                 );
 
-                $reject($e);
+                $reject(new ConnectionFailedException(previous: $e));
             });
         });
     }
@@ -117,9 +119,11 @@ class Websocket extends EventEmitter
             );
 
             $this->bucket->run($action);
-        } else {
-            $action();
+
+            return;
         }
+
+        $action();
     }
 
     /**

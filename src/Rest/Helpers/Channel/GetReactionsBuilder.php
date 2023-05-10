@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Exan\Fenrir\Rest\Helpers\Channel;
+namespace Ragnarok\Fenrir\Rest\Helpers\Channel;
 
-use Exan\Fenrir\Constants\Validation\ItemLimit;
-use Exan\Fenrir\Rest\Helpers\GetNew;
+use Ragnarok\Fenrir\Constants\Validation\ItemLimit;
+use Ragnarok\Fenrir\Rest\Helpers\GetNew;
 
 class GetReactionsBuilder
 {
@@ -13,7 +13,7 @@ class GetReactionsBuilder
 
     private array $data = [];
 
-    public function setAfter(string $after): GetReactionsBuilder
+    public function setAfter(string $after): self
     {
         $this->data['after'] = $after;
 
@@ -25,7 +25,7 @@ class GetReactionsBuilder
         return $this->data['after'] ?? null;
     }
 
-    public function setLimit(int $limit): GetReactionsBuilder
+    public function setLimit(int $limit): self
     {
         $this->data['limit'] = ItemLimit::withinLimit($limit);
 

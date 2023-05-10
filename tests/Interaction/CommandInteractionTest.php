@@ -2,19 +2,19 @@
 
 declare(strict_types=1);
 
-namespace Tests\Exan\Fenrir\Interaction;
+namespace Tests\Ragnarok\Fenrir\Interaction;
 
-use Fakes\Exan\Fenrir\DataMapperFake;
+use Fakes\Ragnarok\Fenrir\DataMapperFake;
 use Mockery;
 use Mockery\Adapter\Phpunit\MockeryTestCase;
-use Exan\Fenrir\Interaction\CommandInteraction;
-use Exan\Fenrir\Interaction\Helpers\InteractionCallbackBuilder;
-use Exan\Fenrir\Parts\ApplicationCommandInteractionDataOptionStructure;
-use Exan\Fenrir\Parts\InteractionData;
-use Exan\Fenrir\Rest\Helpers\Webhook\EditWebhookBuilder;
-use Exan\Fenrir\Websocket\Events\InteractionCreate;
-use Fakes\Exan\Fenrir\DiscordFake;
-use Fakes\Exan\Fenrir\PromiseFake;
+use Ragnarok\Fenrir\Interaction\CommandInteraction;
+use Ragnarok\Fenrir\Interaction\Helpers\InteractionCallbackBuilder;
+use Ragnarok\Fenrir\Parts\ApplicationCommandInteractionDataOptionStructure;
+use Ragnarok\Fenrir\Parts\InteractionData;
+use Ragnarok\Fenrir\Rest\Helpers\Webhook\EditWebhookBuilder;
+use Ragnarok\Fenrir\Gateway\Events\InteractionCreate;
+use Fakes\Ragnarok\Fenrir\DiscordFake;
+use Fakes\Ragnarok\Fenrir\PromiseFake;
 
 class CommandInteractionTest extends MockeryTestCase
 {
@@ -28,7 +28,7 @@ class CommandInteractionTest extends MockeryTestCase
         return $interactionCreate;
     }
 
-    public function testCreateInteractionResponse()
+    public function testCreateInteractionResponse(): void
     {
         $discord = DiscordFake::get();
         $interactionCallbackBuilder = Mockery::mock(InteractionCallbackBuilder::class);
@@ -44,7 +44,7 @@ class CommandInteractionTest extends MockeryTestCase
         $commandInteraction->createInteractionResponse($interactionCallbackBuilder);
     }
 
-    public function testGetInteractionResponse()
+    public function testGetInteractionResponse(): void
     {
         $discord = DiscordFake::get();
 
@@ -59,7 +59,7 @@ class CommandInteractionTest extends MockeryTestCase
         $commandInteraction->getInteractionResponse();
     }
 
-    public function testEditOriginalInteractionResponse()
+    public function testEditOriginalInteractionResponse(): void
     {
         $discord = DiscordFake::get();
         $editWebhookBuilder = Mockery::mock(EditWebhookBuilder::class);
@@ -75,7 +75,7 @@ class CommandInteractionTest extends MockeryTestCase
         $commandInteraction->editInteractionResponse($editWebhookBuilder);
     }
 
-    public function testDeleteInteractionResponse()
+    public function testDeleteInteractionResponse(): void
     {
         $discord = DiscordFake::get();
 
@@ -89,7 +89,7 @@ class CommandInteractionTest extends MockeryTestCase
         $commandInteraction->deleteInteractionResponse();
     }
 
-    public function testParsesOptions()
+    public function testParsesOptions(): void
     {
         $interactionCreate = $this->getInteractionCreate();
 
@@ -110,7 +110,7 @@ class CommandInteractionTest extends MockeryTestCase
         $this->assertEquals($interactionCreate->data->options[0], $commandInteraction->getOption('funny_name'));
     }
 
-    public function testGetSubCommandName()
+    public function testGetSubCommandName(): void
     {
         $dataMapper = DataMapperFake::get();
 
@@ -137,7 +137,7 @@ class CommandInteractionTest extends MockeryTestCase
         $this->assertEquals('::option name::', $commandInteraction->getSubCommandName());
     }
 
-    public function testGetSubCommandGroupName()
+    public function testGetSubCommandGroupName(): void
     {
         $dataMapper = DataMapperFake::get();
 
@@ -170,7 +170,7 @@ class CommandInteractionTest extends MockeryTestCase
         $this->assertEquals('group_name:option_name', $commandInteraction->getSubCommandName());
     }
 
-    public function testGetSubCommandNameIsNullForRegularCommands()
+    public function testGetSubCommandNameIsNullForRegularCommands(): void
     {
         $dataMapper = DataMapperFake::get();
 

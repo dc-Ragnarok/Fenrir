@@ -2,16 +2,18 @@
 
 declare(strict_types=1);
 
-namespace Tests\Exan\Fenrir;
+namespace Tests\Ragnarok\Fenrir;
 
 use Evenement\EventEmitter;
-use Exan\Fenrir\Constants\Events;
-use Exan\Fenrir\EventHandler;
-use Exan\Fenrir\FilteredEventEmitter;
-use Exan\Fenrir\Websocket\Objects\Payload;
-use Fakes\Exan\Fenrir\DataMapperFake;
+use Ragnarok\Fenrir\Constants\Events;
+use Ragnarok\Fenrir\EventHandler;
+use Ragnarok\Fenrir\FilteredEventEmitter;
+use Ragnarok\Fenrir\Gateway\Objects\Payload;
+use Fakes\Ragnarok\Fenrir\DataMapperFake;
+use Fakes\Ragnarok\Fenrir\PromiseFake;
 use Mockery;
 use Mockery\Adapter\Phpunit\MockeryTestCase;
+use React\EventLoop\LoopInterface;
 
 /**
  * @runTestsInSeparateProcesses
@@ -19,7 +21,7 @@ use Mockery\Adapter\Phpunit\MockeryTestCase;
  */
 class FilteredEventListenerTest extends MockeryTestCase
 {
-    public function testFilteringEvents()
+    public function testFilteringEvents(): void
     {
 
         $eventEmitter = new EventEmitter();
@@ -27,11 +29,11 @@ class FilteredEventListenerTest extends MockeryTestCase
         $filteredEmitter = new FilteredEventEmitter(
             $eventEmitter,
             'event',
-            fn (int $input) => $input === 10
+            static fn (int $input) => $input === 10
         );
 
         $container = [];
-        $filteredEmitter->on('event', function (int $input) use (&$container) {
+        $filteredEmitter->on('event', static function (int $input) use (&$container) {
             $container[] = $input;
         });
 
@@ -43,14 +45,14 @@ class FilteredEventListenerTest extends MockeryTestCase
         $this->assertEquals([10], $container);
     }
 
-    public function testCancelEvent()
+    public function testCancelEvent(): void
     {
         $eventEmitter = new EventEmitter();
 
         $filteredEmitter = new FilteredEventEmitter(
             $eventEmitter,
             'event',
-            function () {
+            static function () {
             }
         );
 
@@ -61,14 +63,14 @@ class FilteredEventListenerTest extends MockeryTestCase
         $this->assertCount(0, $eventEmitter->listeners('event'));
     }
 
-    public function testCancelByMaxItems()
+    public function testCancelByMaxItems(): void
     {
         $eventEmitter = new EventEmitter();
 
         $filteredEmitter = new FilteredEventEmitter(
             $eventEmitter,
             'event',
-            fn (int $input) => $input === 10,
+            static fn (int $input) => $input === 10,
             maxItems: 3
         );
 
@@ -83,12 +85,12 @@ class FilteredEventListenerTest extends MockeryTestCase
         $this->assertCount(0, $eventEmitter->listeners('event'));
     }
 
-    public function testCancelByTimeout()
+    public function testCancelByTimeout(): void
     {
         /**
          * @var Mock
          */
-        $loop = Mockery::mock('React\EventLoop\LoopInterface');
+        $loop = Mockery::mock(LoopInterface::class);
 
         /**
          * @var Mock
@@ -116,7 +118,7 @@ class FilteredEventListenerTest extends MockeryTestCase
         $filteredEmitter = new FilteredEventEmitter(
             $eventEmitter,
             'event',
-            fn (int $input) => $input === 10,
+            static fn (int $input) => $input === 10,
             10
         );
 
@@ -131,32 +133,49 @@ class FilteredEventListenerTest extends MockeryTestCase
         $this->assertCount(0, $eventEmitter->listeners('event'));
     }
 
-    public function testItAcceptsEventHandler()
+    public function testItAcceptsEventHandler(): void
     {
-        $eventHandler = new EventHandler(
-            DataMapperFake::get(),
-            true
-        );
+        $eventHandler = new EventHandler(DataMapperFake::get());
 
         $filteredEmitter = new FilteredEventEmitter(
             $eventHandler,
-            Events::RAW,
-            fn (Payload $payload) => $payload->s === 10,
+            Events::MESSAGE_CREATE,
+            static fn ($item) => $item === '::item::',
         );
 
         $container = [];
-        $filteredEmitter->on(Events::RAW, function (Payload $payload) use (&$container) {
-            $container[] = $payload;
+        $filteredEmitter->on(Events::MESSAGE_CREATE, static function ($item) use (&$container) {
+            $container[] = $item;
         });
 
         $filteredEmitter->start();
 
-        $payload = new Payload();
-        $payload->t = 'something';
-        $payload->s = 10;
-
-        $eventHandler->handle($payload);
+        $eventHandler->emit(Events::MESSAGE_CREATE, ['::item::']);
 
         $this->assertCount(1, $container);
+    }
+
+    public function testFilteringEventsAsync(): void
+    {
+
+        $eventEmitter = new EventEmitter();
+
+        $filteredEmitter = new FilteredEventEmitter(
+            $eventEmitter,
+            'event',
+            static fn (int $input) => PromiseFake::get($input === 10)
+        );
+
+        $container = [];
+        $filteredEmitter->on('event', static function (int $input) use (&$container) {
+            $container[] = $input;
+        });
+
+        $filteredEmitter->start();
+
+        $eventEmitter->emit('event', [5]);
+        $eventEmitter->emit('event', [10]);
+
+        $this->assertEquals([10], $container);
     }
 }

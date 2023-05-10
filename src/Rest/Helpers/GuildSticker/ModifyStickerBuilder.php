@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Exan\Fenrir\Rest\Helpers\GuildSticker;
+namespace Ragnarok\Fenrir\Rest\Helpers\GuildSticker;
 
-use Exan\Fenrir\Rest\Helpers\GetNew;
+use Ragnarok\Fenrir\Rest\Helpers\GetNew;
 
 class ModifyStickerBuilder
 {
@@ -12,7 +12,7 @@ class ModifyStickerBuilder
 
     private array $data = [];
 
-    public function setName(string $name): ModifyStickerBuilder
+    public function setName(string $name): self
     {
         $this->data['name'] = $name;
 
@@ -24,7 +24,7 @@ class ModifyStickerBuilder
         return $this->data['name'] ?? null;
     }
 
-    public function setDescription(string $description): ModifyStickerBuilder
+    public function setDescription(string $description): self
     {
         $this->data['description'] = $description;
 
@@ -36,7 +36,7 @@ class ModifyStickerBuilder
         return $this->data['description'] ?? null;
     }
 
-    public function setTags(string $tags): ModifyStickerBuilder
+    public function setTags(string $tags): self
     {
         $this->data['tags'] = $tags;
 

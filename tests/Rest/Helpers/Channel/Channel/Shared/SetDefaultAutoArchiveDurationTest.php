@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Tests\Exan\Fenrir\Rest\Helpers\Channel\Channel\Shared;
+namespace Tests\Ragnarok\Fenrir\Rest\Helpers\Channel\Channel\Shared;
 
-use Exan\Fenrir\Rest\Helpers\Channel\Channel\Shared\SetDefaultAutoArchiveDuration;
+use Ragnarok\Fenrir\Rest\Helpers\Channel\Channel\Shared\SetDefaultAutoArchiveDuration;
 use PHPUnit\Framework\TestCase;
 
 class SetDefaultAutoArchiveDurationTest extends TestCase
 {
-    public function testSetArchiveDuration()
+    public function testSetArchiveDuration(): void
     {
         $class = new class extends DummyTraitTester {
             use SetDefaultAutoArchiveDuration;

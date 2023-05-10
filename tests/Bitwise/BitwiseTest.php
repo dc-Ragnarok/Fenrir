@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Tests\Exan\Fenrir\Bitwise;
+namespace Tests\Ragnarok\Fenrir\Bitwise;
 
-use Exan\Fenrir\Bitwise\Bitwise;
+use Ragnarok\Fenrir\Bitwise\Bitwise;
 use PHPUnit\Framework\TestCase;
 
 class BitwiseTest extends TestCase
 {
-    public function testAddAndGet()
+    public function testAddAndGet(): void
     {
         $bitwise = new Bitwise();
 
@@ -23,7 +23,7 @@ class BitwiseTest extends TestCase
         $this->assertEquals($expected, $result);
     }
 
-    public function testHas()
+    public function testHas(): void
     {
         $bitwise = new Bitwise();
         $bitwise->add(1 << 1);
@@ -36,7 +36,7 @@ class BitwiseTest extends TestCase
         $this->assertTrue($bitwise->has(1 << 3));
     }
 
-    public function testFrom()
+    public function testFrom(): void
     {
         $bitwise = Bitwise::from(1 << 1, 1 << 2);
 
@@ -46,7 +46,7 @@ class BitwiseTest extends TestCase
         $this->assertFalse($bitwise->has(1 << 4));
     }
 
-    public function testFromBitSet()
+    public function testFromBitSet(): void
     {
         $bitwise = Bitwise::fromBitSet('010');
 
@@ -56,7 +56,7 @@ class BitwiseTest extends TestCase
         $this->assertTrue($bitwise->has(1 << 1));
     }
 
-    public function testGetBitSet()
+    public function testGetBitSet(): void
     {
         $bitwise = Bitwise::from(
             1 << 0,

@@ -18,12 +18,12 @@ Fenrir heavily relies on ReactPHP for async operations. Knowing the basics of as
 ## Example bot
 
 ```php
-use Exan\Fenrir\Bitwise\Bitwise;
-use Exan\Fenrir\Constants\Events;
-use Exan\Fenrir\Discord;
-use Exan\Fenrir\Enums\Gateway\Intents;
-use Exan\Fenrir\Rest\Helpers\Channel\MessageBuilder;
-use Exan\Fenrir\Websocket\Events\MessageCreate;
+use Ragnarok\Fenrir\Bitwise\Bitwise;
+use Ragnarok\Fenrir\Constants\Events;
+use Ragnarok\Fenrir\Discord;
+use Ragnarok\Fenrir\Enums\Gateway\Intents;
+use Ragnarok\Fenrir\Rest\Helpers\Channel\MessageBuilder;
+use Ragnarok\Fenrir\Gateway\Events\MessageCreate;
 
 require './vendor/autoload.php';
 
@@ -60,7 +60,7 @@ Tests should pass nightly 8.3 builds, but this is not a supported usecase.
 You should not be using this library on an Apache2/Nginx/etc webserver.
 While there is nothing stopping you from using it on such environments, you should know what you're doing & limit yourself to only use Fenrir's REST capabilities.
 
-32-bit is not supported, tho no hard limit is in place.
+32-bit is not supported, though no hard limit is in place.
 
 ## Contributing
 
@@ -73,3 +73,6 @@ Please make sure to write tests where possible & make sure your code matches the
 
 The current underlying HTTP component is subject to change in the future.
 While the accesible API for it will remain similar, you should try to refrain from using it manually in your application.
+
+##### Jetbrains oss license
+Thanks to Jetbrains for providing an [OSS license](https://www.jetbrains.com/community/opensource/#support) for this project!

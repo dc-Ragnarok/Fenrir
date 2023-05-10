@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Exan\Fenrir\Rest;
+namespace Ragnarok\Fenrir\Rest;
 
 use Discord\Http\Endpoint;
 use Discord\Http\Http;
-use Exan\Fenrir\Parts\Sticker as PartsSticker;
-use Exan\Fenrir\Parts\StickerPack;
-use Exan\Fenrir\Rest\Helpers\HttpHelper;
-use Exan\Fenrir\DataMapper;
+use Ragnarok\Fenrir\Parts\Sticker as PartsSticker;
+use Ragnarok\Fenrir\Parts\StickerPack;
+use Ragnarok\Fenrir\Rest\Helpers\HttpHelper;
+use Ragnarok\Fenrir\DataMapper;
 use React\Promise\ExtendedPromiseInterface;
 
 /**
@@ -20,7 +20,7 @@ class Sticker extends HttpResource
     /**
      * @see https://discord.com/developers/docs/resources/sticker#get-sticker
      *
-     * @return ExtendedPromiseInterface<\Exan\Fenrir\Parts\Sticker>
+     * @return ExtendedPromiseInterface<\Ragnarok\Fenrir\Parts\Sticker>
      */
     public function get(string $stickerId): ExtendedPromiseInterface
     {
@@ -38,7 +38,7 @@ class Sticker extends HttpResource
     /**
      * @see https://discord.com/developers/docs/resources/sticker#list-nitro-sticker-packs
      *
-     * @return ExtendedPromiseInterface<\Exan\Fenrir\Parts\StickerPack[]>
+     * @return ExtendedPromiseInterface<\Ragnarok\Fenrir\Parts\StickerPack[]>
      */
     public function listNitroPacks(): ExtendedPromiseInterface
     {

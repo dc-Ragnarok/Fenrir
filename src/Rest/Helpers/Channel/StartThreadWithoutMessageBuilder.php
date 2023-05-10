@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Exan\Fenrir\Rest\Helpers\Channel;
+namespace Ragnarok\Fenrir\Rest\Helpers\Channel;
 
-use Exan\Fenrir\Constants\Validation\RateLimit;
-use Exan\Fenrir\Enums\Parts\ChannelTypes;
-use Exan\Fenrir\Enums\Parts\ThreadAutoArchiveDuration;
-use Exan\Fenrir\Rest\Helpers\GetNew;
+use Ragnarok\Fenrir\Constants\Validation\RateLimit;
+use Ragnarok\Fenrir\Enums\Parts\ChannelTypes;
+use Ragnarok\Fenrir\Enums\Parts\ThreadAutoArchiveDuration;
+use Ragnarok\Fenrir\Rest\Helpers\GetNew;
 
 class StartThreadWithoutMessageBuilder
 {
@@ -15,7 +15,7 @@ class StartThreadWithoutMessageBuilder
 
     private array $data = [];
 
-    public function setName(string $name): StartThreadWithoutMessageBuilder
+    public function setName(string $name): self
     {
         $this->data['name'] = $name;
 
@@ -27,7 +27,7 @@ class StartThreadWithoutMessageBuilder
         return $this->data['name'] ?? null;
     }
 
-    public function setAutoArchiveDuration(ThreadAutoArchiveDuration $duration): StartThreadWithoutMessageBuilder
+    public function setAutoArchiveDuration(ThreadAutoArchiveDuration $duration): self
     {
         $this->data['auto_archive_duration'] = $duration->value;
 
@@ -41,7 +41,7 @@ class StartThreadWithoutMessageBuilder
             : null;
     }
 
-    public function setRateLimitPerUser(int $seconds): StartThreadWithoutMessageBuilder
+    public function setRateLimitPerUser(int $seconds): self
     {
         $this->data['rate_limit_per_user'] = RateLimit::withinLimit($seconds);
 
@@ -53,7 +53,7 @@ class StartThreadWithoutMessageBuilder
         return $this->data['rate_limit_per_user'] ?? null;
     }
 
-    public function setInvitable(bool $invitable): StartThreadWithoutMessageBuilder
+    public function setInvitable(bool $invitable): self
     {
         $this->data['invitable'] = $invitable;
 
@@ -65,7 +65,7 @@ class StartThreadWithoutMessageBuilder
         return $this->data['invitable'] ?? null;
     }
 
-    public function setType(ChannelTypes $type): StartThreadWithoutMessageBuilder
+    public function setType(ChannelTypes $type): self
     {
         $this->data['type'] = $type->value;
 

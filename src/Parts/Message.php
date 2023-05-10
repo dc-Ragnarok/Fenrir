@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Exan\Fenrir\Parts;
+namespace Ragnarok\Fenrir\Parts;
 
 use Carbon\Carbon;
-use Exan\Fenrir\Enums\Parts\MessageTypes;
-use Exan\Fenrir\Bitwise\Bitwise;
-use Exan\Fenrir\Attributes\Partial;
+use Ragnarok\Fenrir\Enums\Parts\MessageTypes;
+use Ragnarok\Fenrir\Bitwise\Bitwise;
+use Ragnarok\Fenrir\Attributes\Partial;
 
 class Message
 {
@@ -20,7 +20,7 @@ class Message
     public bool $tts;
     public bool $mention_everyone;
     /**
-     * @var \Exan\Fenrir\Parts\User[]
+     * @var \Ragnarok\Fenrir\Parts\User[]
      */
     public array $mentions;
     /**
@@ -28,19 +28,19 @@ class Message
      */
     public array $mention_roles;
     /**
-     * @var \Exan\Fenrir\Parts\ChannelMention[]
+     * @var \Ragnarok\Fenrir\Parts\ChannelMention[]
      */
     public ?array $mention_channels;
     /**
-     * @var \Exan\Fenrir\Parts\Attachment[]
+     * @var \Ragnarok\Fenrir\Parts\Attachment[]
      */
     public array $attachments;
     /**
-     * @var \Exan\Fenrir\Parts\Embed[]
+     * @var \Ragnarok\Fenrir\Parts\Embed[]
      */
     public array $embeds;
     /**
-     * @var \Exan\Fenrir\Parts\Reaction[]
+     * @var \Ragnarok\Fenrir\Parts\Reaction[]
      */
     public ?array $reactions;
     public ?string $nonce;
@@ -53,19 +53,19 @@ class Message
     public ?string $application_id;
     public ?MessageReference $message_reference;
     public ?Bitwise $flags;
-    public ?Message $referenced_message;
+    public ?self $referenced_message;
     public ?MessageInteraction $interaction;
     public ?Channel $thread;
     /**
-     * @var \Exan\Fenrir\Parts\Component[]
+     * @var \Ragnarok\Fenrir\Parts\Component[]
      */
     public array $components;
     /**
-     * @var \Exan\Fenrir\Parts\MessageStickerItem[]
+     * @var \Ragnarok\Fenrir\Parts\MessageStickerItem[]
      */
     public ?array $sticker_items;
     /**
-     * @var \Exan\Fenrir\Parts\Sticker[]
+     * @var \Ragnarok\Fenrir\Parts\Sticker[]
      */
     public ?array $stickers;
     public ?int $position;

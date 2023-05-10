@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Exan\Fenrir\Constants\Validation\Traits;
+namespace Ragnarok\Fenrir\Constants\Validation\Traits;
 
 trait WithinLimit
 {
-    public static function withinLimit(int $input)
+    public static function withinLimit(int $input): int
     {
         return min(max($input, static::MIN), static::MAX);
     }

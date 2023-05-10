@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Tests\Exan\Fenrir\Component;
+namespace Tests\Ragnarok\Fenrir\Component;
 
-use Exan\Fenrir\Component\SelectMenu\StringSelectMenu;
-use Exan\Fenrir\Enums\Component\SelectMenuType;
-use Exan\Fenrir\Exceptions\Components\SelectMenu\StringSelectMenu\NoOptionsException;
-use Exan\Fenrir\Exceptions\Components\SelectMenu\StringSelectMenu\TooManyOptionsException;
-use Exan\Fenrir\Parts\Emoji;
-use Exan\Fenrir\Rest\Helpers\Emoji\EmojiBuilder;
+use Ragnarok\Fenrir\Component\SelectMenu\StringSelectMenu;
+use Ragnarok\Fenrir\Enums\Component\SelectMenuType;
+use Ragnarok\Fenrir\Exceptions\Components\SelectMenu\StringSelectMenu\NoOptionsException;
+use Ragnarok\Fenrir\Exceptions\Components\SelectMenu\StringSelectMenu\TooManyOptionsException;
+use Ragnarok\Fenrir\Parts\Emoji;
+use Ragnarok\Fenrir\Rest\Helpers\Emoji\EmojiBuilder;
 use PHPUnit\Framework\TestCase;
 
 class StringSelectMenuTest extends TestCase
@@ -27,7 +27,7 @@ class StringSelectMenuTest extends TestCase
     /**
      * @dataProvider convertionExpectationProvider
      */
-    public function testCorrectlyConverted(array $args, array $expected)
+    public function testCorrectlyConverted(array $args, array $expected): void
     {
         $select = new StringSelectMenu(...$args);
 
@@ -145,7 +145,7 @@ class StringSelectMenuTest extends TestCase
         ];
     }
 
-    public function testItThrowsAnExceptionWhenNoItemsAreSet()
+    public function testItThrowsAnExceptionWhenNoItemsAreSet(): void
     {
         $select = new StringSelectMenu('::custom id::');
 
@@ -153,7 +153,7 @@ class StringSelectMenuTest extends TestCase
         $select->get();
     }
 
-    public function testItThrowsAnExceptionWhenSettingToManyItems()
+    public function testItThrowsAnExceptionWhenSettingToManyItems(): void
     {
         $select = new StringSelectMenu('::custom id::');
 
@@ -174,7 +174,7 @@ class StringSelectMenuTest extends TestCase
     /**
      * @dataProvider optionConversionProvider
      */
-    public function testOptionConversion($args, $expected)
+    public function testOptionConversion($args, $expected): void
     {
         $select = new StringSelectMenu('::custom id::');
 
@@ -220,7 +220,7 @@ class StringSelectMenuTest extends TestCase
                     'default' => true,
                 ],
             ],
-            'Completely filled' => [
+            'No emoji' => [
                 'args' => [
                     '::label::',
                     '::value::',
@@ -235,7 +235,7 @@ class StringSelectMenuTest extends TestCase
                     'default' => true,
                 ],
             ],
-            'Completely filled' => [
+            'No default' => [
                 'args' => [
                     '::label::',
                     '::value::',

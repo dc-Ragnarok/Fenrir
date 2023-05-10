@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Tests\Exan\Fenrir\Rest\Helpers\Channel;
+namespace Tests\Ragnarok\Fenrir\Rest\Helpers\Channel;
 
-use Exan\Fenrir\Rest\Helpers\Channel\GetMessagesBuilder;
+use Ragnarok\Fenrir\Rest\Helpers\Channel\GetMessagesBuilder;
 use PHPUnit\Framework\TestCase;
 
 class GetMessagesBuilderTest extends TestCase
 {
-    public function testSetAround()
+    public function testSetAround(): void
     {
         $builder = new GetMessagesBuilder();
         $builder->setAround('::around::');
@@ -18,7 +18,7 @@ class GetMessagesBuilderTest extends TestCase
         $this->assertEquals('::around::', $builder->getAround());
     }
 
-    public function testSetBefore()
+    public function testSetBefore(): void
     {
         $builder = new GetMessagesBuilder();
         $builder->setBefore('::before::');
@@ -27,7 +27,7 @@ class GetMessagesBuilderTest extends TestCase
         $this->assertEquals('::before::', $builder->getBefore());
     }
 
-    public function testSetAfter()
+    public function testSetAfter(): void
     {
         $builder = new GetMessagesBuilder();
         $builder->setAfter('::after::');
@@ -36,7 +36,7 @@ class GetMessagesBuilderTest extends TestCase
         $this->assertEquals('::after::', $builder->getAfter());
     }
 
-    public function testSetLimit()
+    public function testSetLimit(): void
     {
         $builder = new GetMessagesBuilder();
         $builder->setLimit(50);
@@ -45,7 +45,7 @@ class GetMessagesBuilderTest extends TestCase
         $this->assertEquals(50, $builder->getLimit());
     }
 
-    public function testSetLimitGreaterThan100()
+    public function testSetLimitGreaterThan100(): void
     {
         $builder = new GetMessagesBuilder();
         $builder->setLimit(150);
@@ -54,7 +54,7 @@ class GetMessagesBuilderTest extends TestCase
         $this->assertEquals(100, $builder->getLimit());
     }
 
-    public function testSetLimitLowerThan1()
+    public function testSetLimitLowerThan1(): void
     {
         $builder = new GetMessagesBuilder();
         $builder->setLimit(-50);

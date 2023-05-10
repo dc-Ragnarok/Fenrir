@@ -2,7 +2,7 @@
 
 Sometimes it may be useful to filter events coming in, such as when you're making a poll and want to listen to all incoming reactions for only one message.
 
-For this, you can use `Exan\Fenrir\FilteredEventListener`.
+For this, you can use `Ragnarok\Fenrir\FilteredEventListener`.
 The `FilteredEventListener` has the ability to relay filtered events from the main `EventHandler` (though you can use anything that implements EventEmitterInterface).
 
 The constructor takes 5 parameters,

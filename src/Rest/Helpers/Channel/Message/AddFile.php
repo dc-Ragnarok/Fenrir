@@ -2,7 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Exan\Fenrir\Rest\Helpers\Channel\Message;
+namespace Ragnarok\Fenrir\Rest\Helpers\Channel\Message;
+
+use Mimey\MimeTypes;
 
 trait AddFile
 {
@@ -38,7 +40,7 @@ trait AddFile
             return $this;
         }
 
-        $type = (new \Mimey\MimeTypes())->getMimeType($fileInfo['extension']);
+        $type = (new MimeTypes())->getMimeType($fileInfo['extension']);
 
         if (!is_null($type)) {
             $file['type'] = $type;

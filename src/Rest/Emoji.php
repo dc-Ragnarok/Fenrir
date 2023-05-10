@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Exan\Fenrir\Rest;
+namespace Ragnarok\Fenrir\Rest;
 
 use Discord\Http\Endpoint;
 use Discord\Http\Http;
-use Exan\Fenrir\Parts\Emoji as PartsEmoji;
-use Exan\Fenrir\Rest\Helpers\Emoji\CreateEmojiBuilder;
-use Exan\Fenrir\Rest\Helpers\HttpHelper;
-use Exan\Fenrir\DataMapper;
+use Ragnarok\Fenrir\Parts\Emoji as PartsEmoji;
+use Ragnarok\Fenrir\Rest\Helpers\Emoji\CreateEmojiBuilder;
+use Ragnarok\Fenrir\Rest\Helpers\HttpHelper;
+use Ragnarok\Fenrir\DataMapper;
 use React\Promise\ExtendedPromiseInterface;
 
 /**
@@ -20,7 +20,7 @@ class Emoji extends HttpResource
     /**
      * @see https://discord.com/developers/docs/resources/emoji#list-guild-emojis
      *
-     * @return ExtendedPromiseInterface<\Exan\Fenrir\Parts\Emoji[]>
+     * @return ExtendedPromiseInterface<\Ragnarok\Fenrir\Parts\Emoji[]>
      */
     public function listGuildEmojis(string $guildId): ExtendedPromiseInterface
     {
@@ -38,7 +38,7 @@ class Emoji extends HttpResource
     /**
      * @see https://discord.com/developers/docs/resources/emoji#get-guild-emoji
      *
-     * @return ExtendedPromiseInterface<\Exan\Fenrir\Parts\Emoji>
+     * @return ExtendedPromiseInterface<\Ragnarok\Fenrir\Parts\Emoji>
      */
     public function getGuildEmoji(string $guildId, string $emojiId): ExtendedPromiseInterface
     {
@@ -57,12 +57,12 @@ class Emoji extends HttpResource
     /**
      * @see https://discord.com/developers/docs/resources/emoji#create-guild-emoji
      *
-     * @return ExtendedPromiseInterface<\Exan\Fenrir\Parts\Emoji>
+     * @return ExtendedPromiseInterface<\Ragnarok\Fenrir\Parts\Emoji>
      */
     public function createGuildEmoji(
         string $guildId,
         CreateEmojiBuilder $emojiBuilder,
-        string $reason = null
+        ?string $reason = null
     ): ExtendedPromiseInterface {
         return $this->mapPromise(
             $this->http->post(
@@ -80,13 +80,13 @@ class Emoji extends HttpResource
     /**
      * @see https://discord.com/developers/docs/resources/emoji#modify-guild-emoji
      *
-     * @return ExtendedPromiseInterface<\Exan\Fenrir\Parts\Emoji>
+     * @return ExtendedPromiseInterface<\Ragnarok\Fenrir\Parts\Emoji>
      */
     public function modifyGuildEmoji(
         string $guildId,
         string $emojiId,
         CreateEmojiBuilder $emojiBuilder,
-        string $reason = null
+        ?string $reason = null
     ): ExtendedPromiseInterface {
         return $this->mapPromise(
             $this->http->patch(
@@ -110,7 +110,7 @@ class Emoji extends HttpResource
     public function deleteGuildEmoji(
         string $guildId,
         string $emojiId,
-        string $reason = null
+        ?string $reason = null
     ): ExtendedPromiseInterface {
         return $this->http->delete(
             Endpoint::bind(

@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Tests\Exan\Fenrir\Rest\Helpers\Channel\Channel\Shared;
+namespace Tests\Ragnarok\Fenrir\Rest\Helpers\Channel\Channel\Shared;
 
-use Exan\Fenrir\Rest\Helpers\Channel\Channel\Shared\SetBitrate;
+use Ragnarok\Fenrir\Rest\Helpers\Channel\Channel\Shared\SetBitrate;
 use PHPUnit\Framework\TestCase;
 
 class SetBitrateTest extends TestCase
 {
-    public function testSetBitRate()
+    public function testSetBitRate(): void
     {
         $class = new class extends DummyTraitTester {
             use SetBitrate;
@@ -20,7 +20,7 @@ class SetBitrateTest extends TestCase
         $this->assertEquals(10000, $class->getBitrate());
     }
 
-    public function testSetBitRateLowerThanMinimum()
+    public function testSetBitRateLowerThanMinimum(): void
     {
         $class = new class extends DummyTraitTester {
             use SetBitrate;

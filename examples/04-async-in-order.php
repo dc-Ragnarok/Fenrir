@@ -1,11 +1,11 @@
 <?php
 
-use Exan\Fenrir\Bitwise\Bitwise;
-use Exan\Fenrir\Constants\Events;
-use Exan\Fenrir\Discord;
-use Exan\Fenrir\Enums\Gateway\Intents;
-use Exan\Fenrir\Rest\Helpers\Channel\MessageBuilder;
-use Exan\Fenrir\Websocket\Events\MessageCreate;
+use Ragnarok\Fenrir\Bitwise\Bitwise;
+use Ragnarok\Fenrir\Constants\Events;
+use Ragnarok\Fenrir\Discord;
+use Ragnarok\Fenrir\Enums\Gateway\Intents;
+use Ragnarok\Fenrir\Rest\Helpers\Channel\MessageBuilder;
+use Ragnarok\Fenrir\Gateway\Events\MessageCreate;
 
 require './vendor/autoload.php';
 
@@ -19,9 +19,9 @@ $discord
     ))
     ->withRest();
 
-$discord->gateway->events->on(Events::MESSAGE_CREATE, function (MessageCreate $message) use ($discord) {
+$discord->gateway->events->on(Events::MESSAGE_CREATE, static function (MessageCreate $message) use ($discord) {
     if ($message->content === '!ping') {
-        $sendMessages = function (string $channelId, array $items) use (&$sendMessages, $discord) {
+        $sendMessages = static function (string $channelId, array $items) use ($discord, &$sendMessages) {
             if (count($items) === 0) {
                 return;
             }
@@ -31,7 +31,7 @@ $discord->gateway->events->on(Events::MESSAGE_CREATE, function (MessageCreate $m
             $discord->rest->channel->createMessage(
                 $channelId,
                 (new MessageBuilder())->setContent($messageToSend)
-            )->then(fn () => $sendMessages($channelId, $items));
+            )->then(static fn () => $sendMessages($channelId, $items));
         };
 
         $sendMessages($message->channel_id, ['this', 'will', 'sent', 'in', 'order']);

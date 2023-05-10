@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Tests\Exan\Fenrir;
+namespace Tests\Ragnarok\Fenrir;
 
-use Exan\Fenrir\Constants\WebsocketEvents;
-use Exan\Fenrir\Exceptions\Websocket\ConnectionNotInitializedException;
-use Exan\Fenrir\Websocket;
+use Ragnarok\Fenrir\Constants\WebsocketEvents;
+use Ragnarok\Fenrir\Exceptions\Websocket\ConnectionNotInitializedException;
+use Ragnarok\Fenrir\Websocket;
 use JsonSerializable;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\NullLogger;
@@ -17,7 +17,7 @@ use function Clue\React\Block\await;
 
 class WebsocketTest extends TestCase
 {
-    public function testItThrowsAnErrorForActionsThatRequireConnection()
+    public function testItThrowsAnErrorForActionsThatRequireConnection(): void
     {
         $websocket = new Websocket(10, new NullLogger());
 
@@ -28,14 +28,14 @@ class WebsocketTest extends TestCase
         $websocket->send('::message::');
     }
 
-    public function testItConnectsToWsAndHasIOMessagesWithoutBucket()
+    public function testItConnectsToWsAndHasIOMessagesWithoutBucket(): void
     {
         $websocket = new Websocket(10, new NullLogger());
 
         await($websocket->open('ws://localhost:8080/echo'));
 
-        $message = await(new Promise(function (callable $resolve) use ($websocket) {
-            $websocket->on(WebsocketEvents::MESSAGE, function (MessageInterface $message) use ($resolve) {
+        $message = await(new Promise(static function (callable $resolve) use ($websocket) {
+            $websocket->on(WebsocketEvents::MESSAGE, static function (MessageInterface $message) use ($resolve) {
                 $resolve($message);
             });
 
@@ -47,14 +47,14 @@ class WebsocketTest extends TestCase
         $websocket->close(1001, '::reason::');
     }
 
-    public function testItConnectsToWsAndHasIOMessagesWithBucket()
+    public function testItConnectsToWsAndHasIOMessagesWithBucket(): void
     {
         $websocket = new Websocket(10, new NullLogger());
 
         await($websocket->open('ws://localhost:8080/echo'));
 
-        $message = await(new Promise(function (callable $resolve) use ($websocket) {
-            $websocket->on(WebsocketEvents::MESSAGE, function (MessageInterface $message) use ($resolve) {
+        $message = await(new Promise(static function (callable $resolve) use ($websocket) {
+            $websocket->on(WebsocketEvents::MESSAGE, static function (MessageInterface $message) use ($resolve) {
                 $resolve($message);
             });
 
@@ -66,21 +66,21 @@ class WebsocketTest extends TestCase
         $websocket->close(1001, '::reason::');
     }
 
-    public function testItCanSendJsonSerializableItems()
+    public function testItCanSendJsonSerializableItems(): void
     {
         $websocket = new Websocket(10, new NullLogger());
 
         await($websocket->open('ws://localhost:8080/echo'));
 
         $jsonItem = new class implements JsonSerializable {
-            public function jsonSerialize(): mixed
+            public function jsonSerialize(): array
             {
                 return ['hello' => 'world'];
             }
         };
 
-        $message = await(new Promise(function (callable $resolve) use ($websocket, $jsonItem) {
-            $websocket->on(WebsocketEvents::MESSAGE, function (MessageInterface $message) use ($resolve) {
+        $message = await(new Promise(static function (callable $resolve) use ($websocket, $jsonItem) {
+            $websocket->on(WebsocketEvents::MESSAGE, static function (MessageInterface $message) use ($resolve) {
                 $resolve($message);
             });
 

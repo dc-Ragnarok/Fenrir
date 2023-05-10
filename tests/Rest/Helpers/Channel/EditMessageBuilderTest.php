@@ -2,20 +2,20 @@
 
 declare(strict_types=1);
 
-namespace Tests\Exan\Fenrir\Rest\Helpers\Channel;
+namespace Tests\Ragnarok\Fenrir\Rest\Helpers\Channel;
 
-use Exan\Fenrir\Component\Button\DangerButton;
-use Exan\Fenrir\Rest\Helpers\Channel\AllowedMentionsBuilder;
-use Exan\Fenrir\Rest\Helpers\Channel\AttachmentBuilder;
-use Exan\Fenrir\Rest\Helpers\Channel\ComponentBuilder;
-use Exan\Fenrir\Rest\Helpers\Channel\ComponentRowBuilder;
-use Exan\Fenrir\Rest\Helpers\Channel\EditMessageBuilder;
-use Exan\Fenrir\Rest\Helpers\Channel\EmbedBuilder;
+use Ragnarok\Fenrir\Component\Button\DangerButton;
+use Ragnarok\Fenrir\Rest\Helpers\Channel\AllowedMentionsBuilder;
+use Ragnarok\Fenrir\Rest\Helpers\Channel\AttachmentBuilder;
+use Ragnarok\Fenrir\Rest\Helpers\Channel\ComponentBuilder;
+use Ragnarok\Fenrir\Rest\Helpers\Channel\ComponentRowBuilder;
+use Ragnarok\Fenrir\Rest\Helpers\Channel\EditMessageBuilder;
+use Ragnarok\Fenrir\Rest\Helpers\Channel\EmbedBuilder;
 use PHPUnit\Framework\TestCase;
 
 class EditMessageBuilderTest extends TestCase
 {
-    public function testGetAttachments()
+    public function testGetAttachments(): void
     {
         $messageBuilder = EditMessageBuilder::new();
 
@@ -27,7 +27,7 @@ class EditMessageBuilderTest extends TestCase
         $this->assertEquals([$attachment->get()], $messageBuilder->get()['attachments']);
     }
 
-    public function testGetComponents()
+    public function testGetComponents(): void
     {
         $messageBuilder = EditMessageBuilder::new();
 
@@ -42,7 +42,7 @@ class EditMessageBuilderTest extends TestCase
         $this->assertEquals($component->get(), $messageBuilder->get()['components']);
     }
 
-    public function testGetEmbeds()
+    public function testGetEmbeds(): void
     {
         $messageBuilder = EditMessageBuilder::new();
 
@@ -54,7 +54,7 @@ class EditMessageBuilderTest extends TestCase
         $this->assertEquals([$embed->get()], $messageBuilder->get()['embeds']);
     }
 
-    public function testGetAllowedMentions()
+    public function testGetAllowedMentions(): void
     {
         $messageBuilder = EditMessageBuilder::new();
 

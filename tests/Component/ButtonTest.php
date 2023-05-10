@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Tests\Exan\Fenrir\Component;
+namespace Tests\Ragnarok\Fenrir\Component;
 
-use Exan\Fenrir\Component\Button\DangerButton;
-use Exan\Fenrir\Component\Button\LinkButton;
-use Exan\Fenrir\Component\Button\PrimaryButton;
-use Exan\Fenrir\Component\Button\SecondaryButton;
-use Exan\Fenrir\Component\Button\SuccessButton;
-use Exan\Fenrir\Enums\Component\ButtonStyle;
-use Exan\Fenrir\Parts\Emoji;
-use Exan\Fenrir\Rest\Helpers\Emoji\EmojiBuilder;
+use Ragnarok\Fenrir\Component\Button\DangerButton;
+use Ragnarok\Fenrir\Component\Button\LinkButton;
+use Ragnarok\Fenrir\Component\Button\PrimaryButton;
+use Ragnarok\Fenrir\Component\Button\SecondaryButton;
+use Ragnarok\Fenrir\Component\Button\SuccessButton;
+use Ragnarok\Fenrir\Enums\Component\ButtonStyle;
+use Ragnarok\Fenrir\Parts\Emoji;
+use Ragnarok\Fenrir\Rest\Helpers\Emoji\EmojiBuilder;
 use PHPUnit\Framework\TestCase;
 
 class ButtonTest extends TestCase
@@ -29,7 +29,7 @@ class ButtonTest extends TestCase
     /**
      * @dataProvider convertionExpectationProvider
      */
-    public function testCorrectlyConverted(array $args, array $expected)
+    public function testCorrectlyConverted(array $args, array $expected): void
     {
         $buttonTypes = [
             DangerButton::class => ButtonStyle::Danger->value,
@@ -113,7 +113,7 @@ class ButtonTest extends TestCase
     /**
      * @dataProvider convertionExpectationProviderLinkButton
      */
-    public function testCorrectlyConvertedLinkButton(array $args, array $expected)
+    public function testCorrectlyConvertedLinkButton(array $args, array $expected): void
     {
         $button = new LinkButton(...$args);
 

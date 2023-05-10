@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Exan\Fenrir\Rest\Helpers\Command;
+namespace Ragnarok\Fenrir\Rest\Helpers\Command;
 
-use Exan\Fenrir\Bitwise\Bitwise;
-use Exan\Fenrir\Constants\Validation\Command;
-use Exan\Fenrir\Enums\Parts\ApplicationCommandTypes;
-use Exan\Fenrir\Exceptions\Rest\Helpers\Command\InvalidCommandNameException;
-use Exan\Fenrir\Rest\Helpers\GetNew;
+use Ragnarok\Fenrir\Bitwise\Bitwise;
+use Ragnarok\Fenrir\Constants\Validation\Command;
+use Ragnarok\Fenrir\Enums\Parts\ApplicationCommandTypes;
+use Ragnarok\Fenrir\Exceptions\Rest\Helpers\Command\InvalidCommandNameException;
+use Ragnarok\Fenrir\Rest\Helpers\GetNew;
 use Spatie\Regex\Regex;
 
 class CommandBuilder
@@ -119,7 +119,7 @@ class CommandBuilder
     }
 
     /**
-     * @param Bitwise<\Exan\Fenrir\Enums\Permissions> $permissions
+     * @param Bitwise<\Ragnarok\Fenrir\Enums\Permissions> $permissions
      */
     public function setDefaultMemberPermissions(Bitwise $permissions): self
     {
@@ -129,7 +129,7 @@ class CommandBuilder
     }
 
     /**
-     * @return Bitwise<\Exan\Fenrir\Enums\Permissions>
+     * @return Bitwise<\Ragnarok\Fenrir\Enums\Permissions>
      */
     public function getDefaultMemberPermissions(): ?Bitwise
     {
@@ -187,7 +187,7 @@ class CommandBuilder
 
         if (isset($this->commandOptionBuilders)) {
             $data['options'] = array_map(
-                fn (CommandOptionBuilder $option) => $option->get(),
+                static fn (CommandOptionBuilder $option) => $option->get(),
                 $this->commandOptionBuilders
             );
         }
