@@ -76,29 +76,19 @@ class Connection implements ConnectionInterface
 
     private function registerEvents(): void
     {
-        foreach (
-            [
-                HeartbeatAcknowledgedEvent::class,
-                InvalidSessionEvent::class,
-                PassthroughEvent::class,
-                ReadyEvent::class,
-                ReconnectEvent::class,
-                RecoverableInvalidSessionEvent::class,
-                RequestHeartbeatEvent::class,
-            ] as $event
-        ) {
-            $this->raw->register($event);
-        }
-
-        foreach (
-            [
-                UnacknowledgedHeartbeatEvent::class
-            ] as $event
-        ) {
-            $this->meta->register($event);
-        }
+        $this->raw->register(
+            HeartbeatAcknowledgedEvent::class,
+            InvalidSessionEvent::class,
+            PassthroughEvent::class,
+            ReadyEvent::class,
+            ReconnectEvent::class,
+            RecoverableInvalidSessionEvent::class,
+            RequestHeartbeatEvent::class
+        );
 
         $this->raw->registerOnce(IdentifyHelloEvent::class);
+
+        $this->meta->register(UnacknowledgedHeartbeatEvent::class);
     }
 
     public function getDefaultUrl(): string

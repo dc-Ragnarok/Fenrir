@@ -20,15 +20,6 @@ use Ragnarok\Fenrir\Gateway\Handlers\Meta\UnacknowledgedHeartbeatEvent;
 
 class UnacknowledgedHeartbeatEventTest extends MockeryTestCase
 {
-    private DataMapper $mapper;
-
-    protected function setUp(): void
-    {
-        parent::setUp();
-
-        $this->mapper = new DataMapper(new NullLogger());
-    }
-
     public function testItListensToUnacknowledgedHeartbeat(): void
     {
         $this->assertEquals(MetaEvents::UNACKNOWLEDGED_HEARTBEAT, UnacknowledgedHeartbeatEvent::getEventName());
