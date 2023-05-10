@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Ragnarok\Fenrir\Rest;
 
 use Discord\Http\Http;
+use Ragnarok\Fenrir\Rest\Guild;
 use Ragnarok\Fenrir\DataMapper;
 use Psr\Log\LoggerInterface;
 

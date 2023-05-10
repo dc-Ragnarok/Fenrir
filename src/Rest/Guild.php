@@ -2,12 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Exan\Fenrir\Rest;
+namespace Ragnarok\Fenrir\Rest;
 
 use Discord\Http\Endpoint;
-use Exan\Fenrir\Parts\Channel;
-use Exan\Fenrir\Parts\Guild as PartsGuild;
-use Exan\Fenrir\Parts\GuildPreview;
+use Ragnarok\Fenrir\Parts\Channel;
+use Ragnarok\Fenrir\Parts\Guild as PartsGuild;
+use Ragnarok\Fenrir\Parts\GuildPreview;
+use Ragnarok\Fenrir\Rest\HttpResource;
 use React\Promise\ExtendedPromiseInterface;
 
 class Guild extends HttpResource

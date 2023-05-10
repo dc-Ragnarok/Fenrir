@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Exan\Fenrir\Parts;
+namespace Ragnarok\Fenrir\Parts;
 
-use Exan\Fenrir\Enums\Parts\GuildFeatures;
+use Ragnarok\Fenrir\Enums\Parts\GuildFeatures;
 
 class GuildPreview
 {
@@ -15,14 +15,14 @@ class GuildPreview
     public ?string $discovery_splash;
     public array $emojis;
     /**
-     * @var \Exan\Fenrir\Enums\Parts\GuildFeatures[]
+     * @var \Ragnarok\Fenrir\Enums\Parts\GuildFeatures[]
      */
     public array $features;
     public ?int $approximate_member_count;
     public ?int $approximate_presence_count;
     public ?string $description;
     /**
-     * @var \Exan\Fenrir\Parts\Sticker[]
+     * @var \Ragnarok\Fenrir\Parts\Sticker[]
      */
     public ?array $stickers;
 
