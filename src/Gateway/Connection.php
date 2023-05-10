@@ -4,189 +4,222 @@ declare(strict_types=1);
 
 namespace Ragnarok\Fenrir\Gateway;
 
-use Evenement\EventEmitter;
+use Exan\Eventer\Eventer;
 use Ragnarok\Fenrir\Bitwise\Bitwise;
-use Ragnarok\Fenrir\Constants\Events;
-use Ragnarok\Fenrir\Constants\WebsocketEvents;
-use Ragnarok\Fenrir\Gateway\Objects\Payload;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
+use Ragnarok\Fenrir\Constants\MetaEvents;
+use Ragnarok\Fenrir\Constants\WebsocketEvents;
 use Ragnarok\Fenrir\DataMapper;
 use Ragnarok\Fenrir\EventHandler;
-use Ragnarok\Fenrir\Gateway\Events\Ready;
+use Ragnarok\Fenrir\Gateway\Handlers\HeartbeatAcknowledgedEvent;
+use Ragnarok\Fenrir\Gateway\Handlers\IdentifyHelloEvent;
+use Ragnarok\Fenrir\Gateway\Handlers\InvalidSessionEvent;
+use Ragnarok\Fenrir\Gateway\Handlers\Meta\UnacknowledgedHeartbeatEvent;
+use Ragnarok\Fenrir\Gateway\Handlers\PassthroughEvent;
+use Ragnarok\Fenrir\Gateway\Handlers\ReadyEvent;
+use Ragnarok\Fenrir\Gateway\Handlers\ReconnectEvent;
+use Ragnarok\Fenrir\Gateway\Handlers\RecoverableInvalidSessionEvent;
+use Ragnarok\Fenrir\Gateway\Handlers\RequestHeartbeatEvent;
+use Ragnarok\Fenrir\Gateway\Objects\Payload;
 use Ragnarok\Fenrir\Websocket;
 use Ratchet\RFC6455\Messaging\MessageInterface;
 use React\EventLoop\LoopInterface;
 use React\EventLoop\TimerInterface;
+use React\Promise\ExtendedPromiseInterface;
 
-class Connection
+/**
+ * @SuppressWarnings(PHPMD.TooManyPublicMethods)
+ */
+class Connection implements ConnectionInterface
 {
     public const DEFAULT_WEBSOCKET_URL = 'wss://gateway.discord.gg/?v=10';
 
-    public EventHandler $events;
-
-    public Websocket $websocket;
-
-    public EventEmitter $raw;
-
-    private ?TimerInterface $heartbeatTimer;
+    private const HEARTBEAT_ACK_TIMEOUT = 2.5;
 
     private ?int $sequence = null;
 
-    private ?TimerInterface $scheduledReconnect;
-    private string $sessionId;
-    private string $reconnectUrl;
+    private Websocket $websocket;
 
-    private Puppet $puppet;
+    private ?string $sessionId = null;
+    private ?string $resumeUrl = null;
 
-    /**
-     * @param Bitwise<\Ragnarok\Fenrir\Enums\Gateway\Intents> $intents
-     */
+    public EventHandler $events;
+    public Eventer $raw;
+    public Eventer $meta;
+
+    private TimerInterface $heartbeatTimer;
+    private TimerInterface $unacknowledgedHeartbeatTimer;
+
     public function __construct(
         private LoopInterface $loop,
         private string $token,
         private Bitwise $intents,
         private DataMapper $mapper,
         private LoggerInterface $logger = new NullLogger(),
-        int $timeout = 10
+        int $timeout = 10,
     ) {
-        $this->raw = new EventEmitter();
-        $this->events = new EventHandler($this->mapper);
+        $this->websocket = new Websocket($timeout, $logger);
+        $this->events = new EventHandler($mapper);
 
-        $this->websocket = new Websocket($timeout, $this->logger);
-        $this->puppet = new Puppet($this->websocket, $this->logger);
+        $this->raw = new Eventer();
+        $this->meta = new Eventer();
 
         $this->websocket->on(WebsocketEvents::MESSAGE, function (MessageInterface $message) {
-            /** @var Payload */
             $payload = $this->mapper->map(json_decode((string) $message), Payload::class);
 
-            $this->raw->emit($payload->op, [$payload]);
+            $this->raw->emit((string) $payload->op, [$this, $payload, $this->logger]);
         });
 
-        $this->setListeners();
+        $this->registerEvents();
     }
 
-    private function setListeners(): void
+    private function registerEvents(): void
     {
-        $this->raw->on(0, function (Payload $payload) {
-            if (isset($payload->s) && $payload->s > $this->sequence) {
-                $this->sequence = $payload->s;
-            }
+        $this->raw->register(
+            HeartbeatAcknowledgedEvent::class,
+            InvalidSessionEvent::class,
+            PassthroughEvent::class,
+            ReadyEvent::class,
+            ReconnectEvent::class,
+            RecoverableInvalidSessionEvent::class,
+            RequestHeartbeatEvent::class
+        );
 
-            $this->events->handle($payload);
-        });
+        $this->raw->registerOnce(IdentifyHelloEvent::class);
 
-        $this->raw->on(1, fn () => $this->puppet->sendHeartBeat($this->sequence));
-
-        $this->raw->on(7, $this->reconnect(...));
-
-        $this->raw->on(9, function (Payload $payload) {
-            $recoverable = isset($payload->d) && $payload->d === true;
-            if ($recoverable) {
-                $this->reconnect();
-                return;
-            }
-
-            $this->forceReconnect();
-        });
-
-        $this->raw->on(11, $this->cancelScheduledReconnect(...));
+        $this->meta->register(UnacknowledgedHeartbeatEvent::class);
     }
 
-    private function reconnect(): void
+    public function getDefaultUrl(): string
     {
-        $this->logger->info('Gateway: attempting reconnect');
-
-        if (isset($this->heartbeatTimer)) {
-            $this->stopHeartbeat();
-        }
-
-        $this->puppet->terminate(1004, 'reconnecting');
-
-        $this->puppet->connect($this->reconnectUrl)
-            ->then(fn () => $this->raw->once(10, $this->resume(...)))
-            ->otherwise(fn () => $this->forceReconnect());
+        return self::DEFAULT_WEBSOCKET_URL;
     }
 
-    private function forceReconnect(): void
+    public function getSequence(): ?int
     {
-        $this->logger->info('Gateway: forcefully reconnecting');
+        return $this->sequence;
+    }
 
+    public function setSequence(int $sequence): void
+    {
+        $this->sequence = $sequence;
+    }
+
+    public function resetSequence(): void
+    {
         $this->sequence = null;
-
-        unset($this->sessionId, $this->reconnectUrl);
-
-        $this->puppet->connect(self::DEFAULT_WEBSOCKET_URL)
-            ->then(fn () => $this->raw->once(10, $this->connect(...)))
-            ->otherwise(fn () => function () {
-                $this->logger->critical('Unable to connect to Discord');
-            });
     }
 
-    private function connect(Payload $payload): void
+    public function connect(string $url): ExtendedPromiseInterface
     {
-        $this->logger->info('Gateway: connecting');
+        return $this->websocket->open($url);
+    }
 
-        $this->startHeartbeat($payload->d->heartbeat_interval);
-        $this->puppet->identify($this->token, $this->intents);
+    public function disconnect(int $code, string $reason): void
+    {
+        $this->websocket->close($code, $reason);
+    }
 
-        $this->events->once(Events::READY, function (Ready $ready) {
-            $this->sessionId = $ready->session_id;
-            $this->reconnectUrl = $ready->resume_gateway_url;
+    public function setSessionId(string $sessionId): void
+    {
+        $this->sessionId = $sessionId;
+    }
+
+    public function getSessionId(): ?string
+    {
+        return $this->sessionId;
+    }
+
+    public function setResumeUrl(string $resumeUrl): void
+    {
+        $this->resumeUrl = $resumeUrl;
+    }
+
+    public function getResumeUrl(): ?string
+    {
+        return $this->resumeUrl;
+    }
+
+    public function sendHeartbeat(): void
+    {
+        $this->websocket->sendAsJson([
+            'op' => 1,
+            'd' => $this->sequence
+        ], false);
+
+        $this->expectHeartbeatAcknowledgement();
+    }
+
+    private function expectHeartbeatAcknowledgement(): void
+    {
+        $this->unacknowledgedHeartbeatTimer = $this->loop->addTimer(self::HEARTBEAT_ACK_TIMEOUT, function () {
+            $this->meta->emit(MetaEvents::UNACKNOWLEDGED_HEARTBEAT, [$this, $this->logger]);
         });
     }
 
-    private function resume(Payload $payload): void
+    public function acknowledgeHeartbeat(): void
     {
-        $this->startHeartbeat($payload->d->heartbeat_interval);
-        $this->puppet->resume($this->token, $this->sessionId, $this->sequence);
+        $this->loop->cancelTimer($this->unacknowledgedHeartbeatTimer);
     }
 
-    private function scheduleReconnect(): void
+    public function startAutomaticHeartbeats(int $ms): void
     {
-        $this->scheduledReconnect = $this->loop->addTimer(0.5, function () {
-            $this->reconnect();
-        });
-
-        $this->logger->info('Gateway: Scheduled reconnect');
+        $this->heartbeatTimer = $this->loop->addPeriodicTimer($ms / 1000, $this->sendHeartbeat(...));
+        $this->logger->debug('Started heartbeat timer', ['ms' => $ms]);
     }
 
-    private function cancelScheduledReconnect(): void
+    public function stopAutomaticHeartbeats(): void
     {
-        if (!isset($this->scheduledReconnect)) {
-            return;
-        }
-
-        $this->loop->cancelTimer($this->scheduledReconnect);
-        $this->scheduledReconnect = null;
-
-        $this->logger->info('Gateway: Cancelled scheduled reconnect');
+        $this->loop->cancelTimer($this->heartbeatTimer);
+        $this->logger->debug('Cancelled heartbeat timer');
     }
 
-    private function startHeartbeat(float $interval): void
+    public function getEventHandler(): EventHandler
     {
-        $this->heartbeatTimer = $this->loop->addPeriodicTimer($interval / 1000, function () {
-            $this->puppet->sendHeartBeat($this->sequence);
-            $this->scheduleReconnect();
-        });
-
-        $this->logger->info('Gateway: Started heartbeats');
+        return $this->events;
     }
 
-    private function stopHeartbeat(): void
+    public function getRawHandler(): Eventer
     {
-        if ($this->heartbeatTimer) {
-            $this->loop->cancelTimer($this->heartbeatTimer);
-            unset($this->heartbeatTimer);
-        }
-
-        $this->logger->info('Gateway: Stopped heartbeats');
+        return $this->raw;
     }
 
-    public function open(): void
+    public function getMetaHandler(): Eventer
     {
-        $this->raw->once(10, $this->connect(...));
+        return $this->meta;
+    }
 
-        $this->puppet->connect(self::DEFAULT_WEBSOCKET_URL);
+    public function identify(): void
+    {
+        $this->websocket->sendAsJson([
+            'op' => 2,
+            'd' => [
+                'token' => $this->token,
+                'intents' => $this->intents->get(),
+                'properties' => [
+                    'os' => PHP_OS,
+                    'browser' => 'Ragnarok\Fenrir',
+                    'device' => 'Ragnarok\Fenrir',
+                ]
+            ]
+        ], true);
+    }
+
+    public function resume(): void
+    {
+        $this->websocket->sendAsJson([
+            'op' => 6,
+            'd' => [
+                'token' => $this->token,
+                'session_id' => $this->sessionId,
+                'seq' => $this->sequence,
+            ]
+        ], true);
+    }
+
+    public function open(): ExtendedPromiseInterface
+    {
+        return $this->connect(self::DEFAULT_WEBSOCKET_URL);
     }
 }

@@ -21,8 +21,10 @@ class DataMapper
     }
 
     /**
-     * @param class-string $definition
-     * @return $definition Instance of given definition with provided properties.
+     * @template T of object
+     * @param class-string<T> $definition
+     *
+     * @return T Instance of given definition with provided properties.
      *  If no properties are present, the mapping failed
      */
     public function map(object|array $data, string $definition): mixed

@@ -1,4 +1,4 @@
-name: Fenrir Unit Tests
+name: Fenrir Code Quality
 run-name: ${{ github.actor }} is running code quality assurance
 on:
   pull_request:

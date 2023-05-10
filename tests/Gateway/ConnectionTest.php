@@ -4,379 +4,444 @@ declare(strict_types=1);
 
 namespace Ragnarok\Fenrir;
 
-use Evenement\EventEmitter;
-use Fakes\Ragnarok\Fenrir\DataMapperFake;
+use Exan\Eventer\Eventer;
 use Fakes\Ragnarok\Fenrir\PromiseFake;
 use Mockery;
 use Mockery\Adapter\Phpunit\MockeryTestCase;
-use Mockery\CompositeExpectation;
+use Mockery\Mock;
 use Mockery\MockInterface;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use Ragnarok\Fenrir\Bitwise\Bitwise;
-use Ragnarok\Fenrir\Constants\Events;
+use Ragnarok\Fenrir\Constants\MetaEvents;
+use Ragnarok\Fenrir\Constants\WebsocketEvents;
 use Ragnarok\Fenrir\Gateway\Connection;
 use Ragnarok\Fenrir\Gateway\Objects\Payload;
-use Ragnarok\Fenrir\Gateway\Puppet;
+use Ratchet\RFC6455\Messaging\MessageInterface;
 use React\EventLoop\LoopInterface;
 use React\EventLoop\TimerInterface;
-use React\Promise\ExtendedPromiseInterface;
-use React\Promise\Promise;
+use ReflectionProperty;
 
 use function React\Async\await;
 
-/**
- * @runTestsInSeparateProcesses
- * @preserveGlobalState disabled
- */
 class ConnectionTest extends MockeryTestCase
 {
-    private Puppet&MockInterface $puppet;
-    private DataMapper $dataMapper;
-
-    protected function setUp(): void
+    public function testGetDefaultUrl(): void
     {
-        parent::setUp();
-
-        $this->puppet = Mockery::mock('overload:Ragnarok\Fenrir\Gateway\Puppet');
-        $this->dataMapper = DataMapperFake::get();
-    }
-    private function getConnection(
-        ?LoopInterface $loopInterface = null,
-        string $token = '::token::',
-        Bitwise $intents = new Bitwise(),
-        DataMapper $dataMapper = new DataMapper(new NullLogger()),
-        LoggerInterface $logger = new NullLogger(),
-        int $timeout = 10,
-    ): Connection {
-        $loopInterface ??= Mockery::mock(LoopInterface::class);
-
-        return new Connection(
-            $loopInterface,
-            $token,
-            $intents,
-            $dataMapper,
-            $logger,
-            $timeout
+        $connection = new Connection(
+            Mockery::mock(LoopInterface::class),
+            '::token::',
+            new Bitwise(),
+            new DataMapper(new NullLogger())
         );
+
+        $this->assertMatchesRegularExpression('/wss:\/\/gateway.discord.gg\/\?v=(\d+)/', $connection->getDefaultUrl());
     }
 
-    private function expectConnect(
-        $url = Connection::DEFAULT_WEBSOCKET_URL,
-        ?ExtendedPromiseInterface $return = null
-    ): CompositeExpectation {
-        $return ??= PromiseFake::get();
-
-        return $this->puppet->expects()
-            ->connect()
-            ->with($url)
-            ->andReturn($return);
-    }
-
-    private function expectIdentify($token, Bitwise $intents): CompositeExpectation
+    public function testSequence(): void
     {
-        return $this->puppet->expects()
-            ->identify()
-            ->with($token, $intents);
+        $connection = new Connection(
+            Mockery::mock(LoopInterface::class),
+            '::token::',
+            new Bitwise(),
+            new DataMapper(new NullLogger())
+        );
+
+        $this->assertNull($connection->getSequence());
+
+        $connection->setSequence(123);
+        $this->assertEquals(123, $connection->getSequence());
+
+        $connection->resetSequence();
+        $this->assertNull($connection->getSequence());
     }
 
-    private function expectHeartbeat(?string $sequence = null): CompositeExpectation
+    public function testConnect(): void
     {
-        return $this->puppet->expects()
-            ->sendHeartBeat()
-            ->with($sequence);
+        $connection = new Connection(
+            Mockery::mock(LoopInterface::class),
+            '::token::',
+            new Bitwise(),
+            new DataMapper(new NullLogger())
+        );
+
+        /** @var MockInterface&Websocket */
+        $websocket = Mockery::mock(Websocket::class);
+        (new ReflectionProperty($connection, 'websocket'))->setValue($connection, $websocket);
+
+        $websocket->expects()
+            ->open()
+            ->with('::ws url::')
+            ->andReturns(PromiseFake::get('::return::'))
+            ->once();
+
+        $this->assertEquals('::return::', await($connection->connect('::ws url::')));
     }
 
-    private function expectResume(string $token, string $sessionId, ?int $sequence = null): CompositeExpectation
+    public function testDisconnect(): void
     {
-        return $this->puppet->expects()
-            ->resume()
-            ->with($token, $sessionId, $sequence);
+        $connection = new Connection(
+            Mockery::mock(LoopInterface::class),
+            '::token::',
+            new Bitwise(),
+            new DataMapper(new NullLogger())
+        );
+
+        /** @var MockInterface&Websocket */
+        $websocket = Mockery::mock(Websocket::class);
+        (new ReflectionProperty($connection, 'websocket'))->setValue($connection, $websocket);
+
+        $websocket->expects()
+            ->close()
+            ->with(1234, '::reason::')
+            ->once();
+
+        $connection->disconnect(1234, '::reason::');
     }
 
-    private function expectReconnectTimer(
-        LoopInterface&MockInterface $loop,
-        TimerInterface $return
-    ): CompositeExpectation {
-        return $loop->expects()
+    public function testSessionId(): void
+    {
+        $connection = new Connection(
+            Mockery::mock(LoopInterface::class),
+            '::token::',
+            new Bitwise(),
+            new DataMapper(new NullLogger())
+        );
+
+        $this->assertNull($connection->getSessionId());
+
+        $connection->setSessionId('::session id::');
+        $this->assertEquals('::session id::', $connection->getSessionId());
+    }
+
+    public function testResumeUrl(): void
+    {
+        $connection = new Connection(
+            Mockery::mock(LoopInterface::class),
+            '::token::',
+            new Bitwise(),
+            new DataMapper(new NullLogger())
+        );
+
+        $this->assertNull($connection->getResumeUrl());
+
+        $connection->setResumeUrl('::resume url::');
+        $this->assertEquals('::resume url::', $connection->getResumeUrl());
+    }
+
+    public function testSendHeartbeat(): void
+    {
+        /** @var LoopInterface&MockInterface */
+        $loop = Mockery::mock(LoopInterface::class);
+
+        $loop->expects()
             ->addTimer()
-            ->with(0.5, Mockery::on(static fn () => true))
-            ->andReturns($return);
-    }
-
-    private function expectHeartbeatTimer(
-        LoopInterface&MockInterface $loop,
-        float $time,
-        bool $executeImmediately = false,
-        ?TimerInterface $return = null
-    ): CompositeExpectation {
-        $return ??= Mockery::mock(TimerInterface::class);
-
-        return $loop->expects()
-            ->addPeriodicTimer()
-            ->with($time, Mockery::on(static function ($fn) use ($executeImmediately) {
-                if ($executeImmediately) {
-                    $fn();
-                }
-
-                return true;
-            }))
-            ->andReturns($return);
-    }
-
-    private function sendPayload(EventEmitter $emitter, array $payload): void
-    {
-        $emitter->emit(
-            $payload['op'],
-            [$this->dataMapper->map((object) $payload, Payload::class)]
-        );
-    }
-
-    private function expectTerminate(int $code, string $reason = ''): CompositeExpectation
-    {
-        return $this->puppet->expects()
-            ->terminate()
-            ->with($code, $reason);
-    }
-
-
-    public function testItOpensAConnection(): void
-    {
-        $this->expectConnect()->once();
-
-        $intents = new Bitwise(123);
-        $this->expectIdentify('::token::', $intents)->once();
-
-        /** @var LoopInterface&MockInterface */
-        $loop = Mockery::mock(LoopInterface::class);
-        $this->expectHeartbeatTimer($loop, 1.234)->once();
-
-        $connection = $this->getConnection($loop, intents: $intents);
-        $connection->open();
-
-        $this->sendPayload($connection->raw, [
-            'op' => 10,
-            'd' => (object) [
-                'heartbeat_interval' => 1234,
-            ]
-        ]);
-    }
-
-    public function testItDoesNotReconnectIfHeartbeatAcknowledged(): void
-    {
-        $this->expectConnect()->once();
-
-        $intents = new Bitwise(123);
-        $this->expectIdentify('::token::', $intents)->once();
-
-        /** @var LoopInterface&MockInterface */
-        $loop = Mockery::mock(LoopInterface::class);
-        $this->expectHeartbeatTimer($loop, 1.234, true);
-        $this->expectHeartbeat();
-
-        $timerInterface = Mockery::mock(TimerInterface::class);
-        $this->expectReconnectTimer($loop, $timerInterface);
-
-        $connection = $this->getConnection($loop, intents: $intents);
-        $connection->open();
-
-        $this->sendPayload($connection->raw, [
-            'op' => 10,
-            'd' => (object) [
-                'heartbeat_interval' => 1234,
-            ]
-        ]);
-
-        $loop->expects()
-            ->cancelTimer($timerInterface)
-            ->once();
-
-        $this->sendPayload($connection->raw, [
-            'op' => 11,
-        ]);
-    }
-
-    /**
-     * @dataProvider resumeDataProvider
-     */
-    public function testItResumes(array $payload): void
-    {
-        $this->expectConnect()->once();
-        $this->expectTerminate(1004, 'reconnecting')->once();
-        $promise = PromiseFake::get();
-        $this->expectConnect('::reconnect url::', $promise)->once();
-        $this->expectResume('::token::', '::session id::', 1)->once();
-
-        $intents = new Bitwise(123);
-        $this->expectIdentify('::token::', $intents)->once();
-
-        /** @var LoopInterface&MockInterface */
-        $loop = Mockery::mock(LoopInterface::class);
-        $timer = Mockery::mock(TimerInterface::class);
-        $this->expectHeartbeatTimer($loop, 1.234, return: $timer)->once();
-        $this->expectHeartbeatTimer($loop, 5.678)->once();
-
-        $connection = $this->getConnection($loop, intents: $intents);
-        $connection->open();
-
-        $this->sendPayload($connection->raw, [
-            'op' => 10,
-            'd' => (object) [
-                'heartbeat_interval' => 1234,
-            ],
-        ]);
-
-        $this->sendPayload($connection->raw, [
-            'op' => 0,
-            's' => 1,
-            't' => Events::READY,
-            'd' => (object) [
-                'resume_gateway_url' => '::reconnect url::',
-                'session_id' => '::session id::',
-            ],
-        ]);
-
-        $loop->expects()
-            ->cancelTimer()
-            ->with($timer)
-            ->once();
-
-        $this->sendPayload($connection->raw, $payload);
-
-        await($promise);
-
-        $this->sendPayload($connection->raw, [
-            'op' => 10,
-            'd' => (object) [
-                'heartbeat_interval' => 5678,
-            ],
-        ]);
-    }
-
-    /**
-     * @dataProvider resumeDataProvider
-     */
-    public function testItInitializesANewConnectionOnResumeFailure(array $payload): void
-    {
-        $this->expectConnect()->twice();
-        $this->expectTerminate(1004, 'reconnecting')->once();
-
-        $promise = Mockery::mock(Promise::class);
-        $promise->expects()
-            ->then()
             ->withAnyArgs()
-            ->andReturnSelf()
+            ->andReturns(Mockery::mock(TimerInterface::class))
+            ->twice();
+
+        $connection = new Connection(
+            $loop,
+            '::token::',
+            new Bitwise(),
+            new DataMapper(new NullLogger())
+        );
+
+        /** @var MockInterface&Websocket */
+        $websocket = Mockery::mock(Websocket::class);
+        (new ReflectionProperty($connection, 'websocket'))->setValue($connection, $websocket);
+
+        $websocket->expects()
+            ->sendAsJson()
+            ->with(['op' => 1, 'd' => null], false)
             ->once();
 
-        $promise->expects()
-            ->otherwise()
-            ->with(Mockery::on(static function ($fn) {
-                $fn();
+        $connection->sendHeartbeat();
 
-                return true;
-            }))
+        $connection->setSequence(123);
+
+        $websocket->expects()
+            ->sendAsJson()
+            ->with(['op' => 1, 'd' => 123], false)
             ->once();
 
-        $this->expectConnect('::reconnect url::', $promise)->once();
+        $connection->sendHeartbeat();
+    }
 
-        $intents = new Bitwise(123);
-        $this->expectIdentify('::token::', $intents)->twice();
-
+    public function testItEmitsAnEventForMissedHeartbeatAcknowledgement(): void
+    {
         /** @var LoopInterface&MockInterface */
         $loop = Mockery::mock(LoopInterface::class);
+
+        $loop->expects()
+            ->addTimer()
+            ->withAnyArgs()
+            ->andReturnUsing(function (float|int $seconds, callable $handler) {
+                $handler();
+
+                return Mockery::mock(TimerInterface::class);
+            })
+            ->once();
+
+        $logger = new NullLogger();
+        $connection = new Connection(
+            $loop,
+            '::token::',
+            new Bitwise(),
+            new DataMapper(new NullLogger()),
+            $logger
+        );
+
+        /** @var MockInterface&Websocket */
+        $websocket = Mockery::mock(Websocket::class);
+        (new ReflectionProperty($connection, 'websocket'))->setValue($connection, $websocket);
+
+        $websocket->expects()
+            ->sendAsJson()
+            ->withAnyArgs()
+            ->once();
+
+        /** @var Eventer&MockInterface */
+        $connection->meta = Mockery::mock(Eventer::class);
+
+        $connection->meta->expects()
+            ->emit()
+            ->with(MetaEvents::UNACKNOWLEDGED_HEARTBEAT, [$connection, $logger])
+            ->once();
+
+        $connection->sendHeartbeat();
+    }
+
+    public function testItCanAcknowledgeHeartbeats(): void
+    {
+        /** @var LoopInterface&MockInterface */
+        $loop = Mockery::mock(LoopInterface::class);
+
         $timer = Mockery::mock(TimerInterface::class);
-        $this->expectHeartbeatTimer($loop, 1.234, return: $timer)->once();
-        $this->expectHeartbeatTimer($loop, 5.678)->once();
+        $loop->expects()
+            ->addTimer()
+            ->withAnyArgs()
+            ->andReturns($timer)
+            ->once();
 
-        $connection = $this->getConnection($loop, intents: $intents);
-        $connection->open();
+        $connection = new Connection(
+            $loop,
+            '::token::',
+            new Bitwise(),
+            new DataMapper(new NullLogger())
+        );
 
-        $this->sendPayload($connection->raw, [
-            'op' => 10,
-            'd' => (object) [
-                'heartbeat_interval' => 1234,
-            ],
-        ]);
+        /** @var MockInterface&Websocket */
+        $websocket = Mockery::mock(Websocket::class);
+        (new ReflectionProperty($connection, 'websocket'))->setValue($connection, $websocket);
 
-        $this->sendPayload($connection->raw, [
-            'op' => 0,
-            's' => 1,
-            't' => Events::READY,
-            'd' => (object) [
-                'resume_gateway_url' => '::reconnect url::',
-                'session_id' => '::session id::',
-            ],
-        ]);
+        $websocket->expects()
+            ->sendAsJson()
+            ->withAnyArgs()
+            ->once();
+
+        $connection->sendHeartbeat();
 
         $loop->expects()
             ->cancelTimer()
             ->with($timer)
             ->once();
 
-        $this->sendPayload($connection->raw, $payload);
-
-        $this->sendPayload($connection->raw, [
-            'op' => 10,
-            'd' => (object) [
-                'heartbeat_interval' => 5678,
-            ],
-        ]);
+        $connection->acknowledgeHeartbeat();
     }
 
-    public function resumeDataProvider(): array
+    public function testItCanSendHeartbeatsAutomatically(): void
     {
-        return [
-            'OP 7' => [
-                'payload' => [
-                    'op' => 7
-                ],
-            ],
-            'OP 9, D = true' => [
-                'payload' => [
-                    'op' => 9,
-                    'd' => true,
-                ],
-            ]
-        ];
-    }
-
-    public function testItSendsAForcedHeartbeat(): void
-    {
-        $this->expectConnect()->once();
-
-        $intents = new Bitwise(123);
-        $this->expectIdentify('::token::', $intents)->once();
-
         /** @var LoopInterface&MockInterface */
         $loop = Mockery::mock(LoopInterface::class);
-        $this->expectHeartbeatTimer($loop, 1.234)->once();
 
-        $this->expectHeartbeat(null)->once();
-        $this->expectHeartbeat('1')->once();
+        $loop->expects()
+            ->addTimer()
+            ->withAnyArgs()
+            ->andReturns(Mockery::mock(TimerInterface::class))
+            ->once();
 
-        $connection = $this->getConnection($loop, intents: $intents);
+        $timer = Mockery::mock(TimerInterface::class);
+        $loop->expects()
+            ->addPeriodicTimer()
+            ->withAnyArgs()
+            ->andReturnUsing(function (float|int $seconds, callable $handler) use ($timer) {
+                $this->assertEquals(10, $seconds);
+                $handler();
+
+                return $timer;
+            })
+            ->once();
+
+        $connection = new Connection(
+            $loop,
+            '::token::',
+            new Bitwise(),
+            new DataMapper(new NullLogger()),
+        );
+
+        /** @var MockInterface&Websocket */
+        $websocket = Mockery::mock(Websocket::class);
+        (new ReflectionProperty($connection, 'websocket'))->setValue($connection, $websocket);
+
+        $websocket->expects()
+            ->sendAsJson()
+            ->with(['op' => 1, 'd' => null], false)
+            ->once();
+
+        $connection->startAutomaticHeartbeats(10000);
+
+        $loop->expects()
+            ->cancelTimer()
+            ->with($timer)
+            ->once();
+
+        $connection->stopAutomaticHeartbeats();
+    }
+
+    public function testItReturnsEventHandlers(): void
+    {
+        $connection = new Connection(
+            Mockery::mock(LoopInterface::class),
+            '::token::',
+            new Bitwise(),
+            new DataMapper(new NullLogger()),
+        );
+
+        $this->assertInstanceOf(EventHandler::class, $connection->getEventHandler());
+        $this->assertInstanceOf(Eventer::class, $connection->getRawHandler());
+        $this->assertInstanceOf(Eventer::class, $connection->getMetaHandler());
+    }
+
+    public function testItIdentifies(): void
+    {
+        $connection = new Connection(
+            Mockery::mock(LoopInterface::class),
+            '::token::',
+            new Bitwise(123),
+            new DataMapper(new NullLogger())
+        );
+
+        /** @var MockInterface&Websocket */
+        $websocket = Mockery::mock(Websocket::class);
+        (new ReflectionProperty($connection, 'websocket'))->setValue($connection, $websocket);
+
+        $websocket->expects()
+            ->sendAsJson()
+            ->with(Mockery::on(function ($payload) {
+                $this->assertEquals(2, $payload['op']);
+                $this->assertEquals('::token::', $payload['d']['token']);
+                $this->assertEquals(123, $payload['d']['intents']);
+
+                return true;
+            }), true)
+            ->once();
+
+        $connection->identify();
+    }
+
+    public function testItResumes(): void
+    {
+        $connection = new Connection(
+            Mockery::mock(LoopInterface::class),
+            '::token::',
+            new Bitwise(123),
+            new DataMapper(new NullLogger())
+        );
+
+        /** @var MockInterface&Websocket */
+        $websocket = Mockery::mock(Websocket::class);
+        (new ReflectionProperty($connection, 'websocket'))->setValue($connection, $websocket);
+
+        $websocket->expects()
+            ->sendAsJson()
+            ->with(Mockery::on(function ($payload) {
+                $this->assertEquals(6, $payload['op']);
+                $this->assertEquals('::token::', $payload['d']['token']);
+                $this->assertEquals('::session id::', $payload['d']['session_id']);
+                $this->assertNull($payload['d']['seq']);
+
+                return true;
+            }), true)
+            ->once();
+
+        $connection->setSessionId('::session id::');
+
+        $connection->resume();
+
+        $websocket->expects()
+            ->sendAsJson()
+            ->with(Mockery::on(function ($payload) {
+                $this->assertEquals(6, $payload['op']);
+                $this->assertEquals('::token::', $payload['d']['token']);
+                $this->assertEquals('::session id::', $payload['d']['session_id']);
+                $this->assertEquals(123, $payload['d']['seq']);
+
+                return true;
+            }), true)
+            ->once();
+
+        $connection->setSequence(123);
+
+        $connection->resume();
+    }
+
+    public function testOpen(): void
+    {
+        $connection = new Connection(
+            Mockery::mock(LoopInterface::class),
+            '::token::',
+            new Bitwise(),
+            new DataMapper(new NullLogger())
+        );
+
+        /** @var MockInterface&Websocket */
+        $websocket = Mockery::mock(Websocket::class);
+        (new ReflectionProperty($connection, 'websocket'))->setValue($connection, $websocket);
+
+        $websocket->expects()
+            ->open()
+            ->with(Mockery::on(function (string $url) {
+                $this->assertMatchesRegularExpression('/wss:\/\/gateway.discord.gg\/\?v=(\d+)/', $url);
+
+                return true;
+            }))
+            ->once();
+
         $connection->open();
+    }
 
-        $this->sendPayload($connection->raw, [
-            'op' => 10,
-            'd' => (object) [
-                'heartbeat_interval' => 1234,
-            ]
-        ]);
+    public function testItEmitsGatewayMessagesAsEvents(): void
+    {
+        $connection = new Connection(
+            Mockery::mock(LoopInterface::class),
+            '::token::',
+            new Bitwise(),
+            new DataMapper(new NullLogger())
+        );
 
-        $this->sendPayload($connection->raw, [
-            'op' => 1,
-        ]);
+        $websocket = (new ReflectionProperty($connection, 'websocket'))->getValue($connection);
 
-        $this->sendPayload($connection->raw, [
-            'op' => 0,
-            's' => 1,
-            't' => Events::CHANNEL_CREATE,
-            'd' => (object) [],
-        ]);
+        /** @var Eventer&MockInterface */
+        $connection->raw = Mockery::mock(Eventer::class);
 
-        $this->sendPayload($connection->raw, [
-            'op' => 1,
-        ]);
+        $connection->raw->expects()
+            ->emit()
+            ->with('1', Mockery::on(function ($args) use ($connection) {
+                $this->assertEquals($connection, $args[0]);
+                $this->assertInstanceOf(Payload::class, $args[1]);
+                $this->assertInstanceOf(LoggerInterface::class, $args[2]);
+
+                return true;
+            }));
+
+        /** @var MessageInterface&MockInterface */
+        $message = Mockery::mock(MessageInterface::class);
+        $message->expects()
+            ->__toString()
+            ->andReturns('{"op": 1}')
+            ->once();
+
+        $websocket->emit(WebsocketEvents::MESSAGE, [$message]);
     }
 }
