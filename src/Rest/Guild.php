@@ -7,6 +7,7 @@ namespace Ragnarok\Fenrir\Rest;
 use Discord\Http\Endpoint;
 use Ragnarok\Fenrir\Parts\Channel;
 use Ragnarok\Fenrir\Parts\Guild as PartsGuild;
+use Ragnarok\Fenrir\Parts\GuildBan;
 use Ragnarok\Fenrir\Parts\GuildMember;
 use Ragnarok\Fenrir\Parts\GuildPreview;
 use Ragnarok\Fenrir\Rest\Helpers\Guild\ModifyChannelPositionsBuilder;
@@ -150,14 +151,31 @@ class Guild extends HttpResource
 
     }
 
-    public function getBans()
+    public function getBans(string $guildId)
     {
-
+        return $this->mapArrayPromise(
+            $this->http->get(
+                Endpoint::bind(
+                    Endpoint::GUILD_BANS,
+                    $guildId,
+                )
+            ),
+            GuildBan::class
+        )->otherwise($this->logThrowable(...));
     }
 
-    public function getBan()
+    public function getBan(string $guildId, string $userId)
     {
-
+        return $this->mapPromise(
+            $this->http->get(
+                Endpoint::bind(
+                    Endpoint::GUILD_BAN,
+                    $guildId,
+                    $userId
+                )
+            ),
+            GuildBan::class
+        )->otherwise($this->logThrowable(...));
     }
 
     public function createBan()

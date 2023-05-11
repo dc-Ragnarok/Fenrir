@@ -6,13 +6,11 @@ namespace Tests\Ragnarok\Fenrir\Rest;
 
 use Ragnarok\Fenrir\Parts\Channel;
 use Ragnarok\Fenrir\Parts\Guild as PartsGuild;
+use Ragnarok\Fenrir\Parts\GuildBan;
 use Ragnarok\Fenrir\Parts\GuildMember;
 use Ragnarok\Fenrir\Parts\GuildPreview;
-use Ragnarok\Fenrir\Parts\StickerPack;
-use Ragnarok\Fenrir\Parts\Sticker as PartsSticker;
 use Ragnarok\Fenrir\Rest\Guild;
 use Ragnarok\Fenrir\Rest\Helpers\Guild\ModifyChannelPositionsBuilder;
-use Ragnarok\Fenrir\Rest\Sticker;
 use Tests\Ragnarok\Fenrir\Rest\HttpHelperTestCase;
 
 class GuildTest extends HttpHelperTestCase
@@ -91,6 +89,29 @@ class GuildTest extends HttpHelperTestCase
                 ],
                 'validationOptions' => [
                     'returnType' => GuildMember::class,
+                ]
+            ],
+            'Get bans' => [
+                'method' => 'getBans',
+                'args' => ['::guild id::'],
+                'mockOptions' => [
+                    'method' => 'get',
+                    'return' => [(object) [], (object) []],
+                ],
+                'validationOptions' => [
+                    'returnType' => GuildBan::class,
+                    'array' => true,
+                ]
+            ],
+            'Get ban' => [
+                'method' => 'getBan',
+                'args' => ['::guild id::', '::member id::'],
+                'mockOptions' => [
+                    'method' => 'get',
+                    'return' => (object) [],
+                ],
+                'validationOptions' => [
+                    'returnType' => GuildBan::class,
                 ]
             ],
         ];
