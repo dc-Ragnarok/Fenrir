@@ -41,6 +41,17 @@ class AllowedMentionsBuilderTest extends TestCase
                     'users' => ['::user 1::', '::user 2::'],
                 ]
             ],
+            'Empty users + empty roles' => [
+                'args' => [
+                    'roles' => [],
+                    'users' => [],
+                ],
+                'expected' => [
+                    'parse' => [AllowedMentionType::ROLES->value, AllowedMentionType::USERS->value],
+                    'roles' => [],
+                    'users' => [],
+                ]
+            ],
             'Users + everyone' => [
                 'args' => [
                     'users' => ['::user 1::', '::user 2::'],

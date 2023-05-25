@@ -29,9 +29,7 @@ class AllowedMentionsBuilder
         public readonly ?bool $everyone = null,
     ) {
         if (!is_null($this->roles)) {
-            if (count($this->roles) > 0) {
-                $this->parse[] = AllowedMentionType::ROLES->value;
-            }
+            $this->parse[] = AllowedMentionType::ROLES->value;
 
             if (count($this->roles) > 100) {
                 throw new EagerDiscordValidationException('Max of 100 roles exceeded');
@@ -39,9 +37,7 @@ class AllowedMentionsBuilder
         }
 
         if (!is_null($this->users)) {
-            if (count($this->users) > 0) {
-                $this->parse[] = AllowedMentionType::USERS->value;
-            }
+            $this->parse[] = AllowedMentionType::USERS->value;
 
             if (count($this->users) > 100) {
                 throw new EagerDiscordValidationException('Max of 100 users exceeded');
