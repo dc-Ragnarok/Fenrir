@@ -6,56 +6,92 @@ namespace Tests\Ragnarok\Fenrir\Rest\Helpers\Channel;
 
 use Ragnarok\Fenrir\Rest\Helpers\Channel\AllowedMentionsBuilder;
 use PHPUnit\Framework\TestCase;
+use Ragnarok\Fenrir\Enums\AllowedMentionType;
+use Ragnarok\Fenrir\Exceptions\Rest\EagerDiscordValidationException;
 
 class AllowedMentionsBuilderTest extends TestCase
 {
-    public function testAddRole(): void
+    protected function getBuilder(): string
     {
-        $builder = new AllowedMentionsBuilder();
-
-        $this->assertEquals([], $builder->getRoles());
-
-        $builder->addRole('12345');
-
-        $this->assertContains('12345', $builder->get()['roles']);
-        $this->assertContains('roles', $builder->get()['parse']);
-        $this->assertEquals(['12345'], $builder->getRoles());
+        return AllowedMentionsBuilder::class;
     }
 
-    public function testAddUser(): void
+    /**
+     * @dataProvider happyBuilderProvider
+     */
+    public function testHappyBuilder(array $args, array $expected)
     {
-        $builder = new AllowedMentionsBuilder();
-        $this->assertEquals([], $builder->getUsers());
-        $builder->addUser('54321');
-
-        $this->assertContains('54321', $builder->get()['users']);
-        $this->assertContains('users', $builder->get()['parse']);
-        $this->assertEquals(['54321'], $builder->getUsers());
+        $this->assertEquals(
+            $expected,
+            (new ($this->getBuilder())(...$args))->get()
+        );
     }
 
-    public function testMentionRepliedUser(): void
+    public function happyBuilderProvider(): array
     {
-        $builder = new AllowedMentionsBuilder();
-        $this->assertFalse($builder->mentionsRepliedUser());
-        $builder->mentionRepliedUser();
-
-        $this->assertTrue($builder->get()['replied_user']);
-        $this->assertTrue($builder->mentionsRepliedUser());
+        return [
+            'Users + roles' => [
+                'args' => [
+                    'roles' => ['::role 1::', '::role 2::'],
+                    'users' => ['::user 1::', '::user 2::'],
+                ],
+                'expected' => [
+                    'parse' => [AllowedMentionType::ROLES->value, AllowedMentionType::USERS->value],
+                    'roles' => ['::role 1::', '::role 2::'],
+                    'users' => ['::user 1::', '::user 2::'],
+                ]
+            ],
+            'Users + everyone' => [
+                'args' => [
+                    'users' => ['::user 1::', '::user 2::'],
+                    'everyone' => true,
+                ],
+                'expected' => [
+                    'parse' => [
+                        AllowedMentionType::USERS->value,
+                        AllowedMentionType::EVERYONE->value
+                    ],
+                    'users' => ['::user 1::', '::user 2::'],
+                ]
+            ],
+            'Replied user + everyone' => [
+                'args' => [
+                    'replied_user' => true,
+                    'everyone' => true,
+                ],
+                'expected' => [
+                    'parse' => [
+                        AllowedMentionType::EVERYONE->value
+                    ],
+                    'replied_user' => true,
+                ]
+            ],
+        ];
     }
 
-    public function testAllowUsers(): void
+    /**
+     * @dataProvider errorBuilderProvider
+     */
+    public function testErrorBuilder(array $args)
     {
-        $builder = new AllowedMentionsBuilder();
-        $builder->allowUsers();
+        $this->expectException(EagerDiscordValidationException::class);
 
-        $this->assertContains('users', $builder->get()['parse']);
+        new ($this->getBuilder())(...$args);
     }
 
-    public function testAllowRoles(): void
+    public function errorBuilderProvider(): array
     {
-        $builder = new AllowedMentionsBuilder();
-        $builder->allowRoles();
-
-        $this->assertContains('roles', $builder->get()['parse']);
+        return [
+            'Too many users' => [
+                'args' => [
+                    'users' => array_map(fn (int $i) => (string) $i, range(1, 101)),
+                ]
+            ],
+            'Too many roles' => [
+                'args' => [
+                    'roles' => array_map(fn (int $i) => (string) $i, range(1, 101)),
+                ]
+            ],
+        ];
     }
 }

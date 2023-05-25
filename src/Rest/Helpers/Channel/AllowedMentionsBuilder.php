@@ -4,91 +4,73 @@ declare(strict_types=1);
 
 namespace Ragnarok\Fenrir\Rest\Helpers\Channel;
 
-use Ragnarok\Fenrir\Rest\Helpers\GetNew;
+use Ragnarok\Fenrir\Enums\AllowedMentionType;
+use Ragnarok\Fenrir\Exceptions\Rest\EagerDiscordValidationException;
 
 /**
  * @see https://discord.com/developers/docs/resources/channel#allowed-mentions-object
  */
 class AllowedMentionsBuilder
 {
-    use GetNew;
+    private array $parse = [];
 
-    private array $data = [
-        'parse' => [],
-        'roles' => [],
-        'users' => [],
-    ];
+    /**
+     * @param string[] $roles Array of role_ids to mention (Max size of 100)
+     * @param string[] $users Array of user_ids to mention (Max size of 100)
+     * @param bool $replied_user For replies, whether to mention the author of the message being replied to
+     * @param bool $everyone Whether to mention users with @everyone and @here
+     *
+     * @throws EagerDiscordValidationException
+     */
+    public function __construct(
+        public readonly ?array $roles = null,
+        public readonly ?array $users = null,
+        public readonly ?bool $replied_user = null,
+        public readonly ?bool $everyone = null,
+    ) {
+        if (!is_null($this->roles)) {
+            if (count($this->roles) > 0) {
+                $this->parse[] = AllowedMentionType::ROLES->value;
+            }
+
+            if (count($this->roles) > 100) {
+                throw new EagerDiscordValidationException('Max of 100 roles exceeded');
+            }
+        }
+
+        if (!is_null($this->users)) {
+            if (count($this->users) > 0) {
+                $this->parse[] = AllowedMentionType::USERS->value;
+            }
+
+            if (count($this->users) > 100) {
+                throw new EagerDiscordValidationException('Max of 100 users exceeded');
+            }
+        }
+
+        if ($this->everyone) {
+            $this->parse[] = AllowedMentionType::EVERYONE->value;
+        }
+    }
 
     public function get(): array
     {
-        return $this->data;
-    }
+        $formatted = [
+            'parse' => $this->parse,
+        ];
 
-    public function addRole(string $roleId): self
-    {
-        $this->data['roles'][] = $roleId;
-
-        if (!$this->allowsRoles()) {
-            $this->allowRoles();
+        if (isset($this->roles)) {
+            $formatted['roles'] = $this->roles;
         }
 
-        return $this;
-    }
-
-    public function getRoles(): array
-    {
-        return $this->data['roles'];
-    }
-
-    public function addUser(string $userId): self
-    {
-        $this->data['users'][] = $userId;
-
-        if (!$this->allowsUsers()) {
-            $this->allowUsers();
+        if (isset($this->users)) {
+            $formatted['users'] = $this->users;
         }
 
-        return $this;
-    }
+        if (isset($this->replied_user)) {
+            $formatted['replied_user'] = $this->replied_user;
+        }
 
-    public function getUsers(): array
-    {
-        return $this->data['users'];
-    }
-
-    public function mentionRepliedUser(): self
-    {
-        $this->data['replied_user'] = true;
-
-        return $this;
-    }
-
-    public function mentionsRepliedUser(): bool
-    {
-        return isset($this->data['replied_user']) && $this->data['replied_user'];
-    }
-
-    public function allowUsers(): self
-    {
-        $this->data['parse'][] = 'users';
-
-        return $this;
-    }
-
-    protected function allowsUsers(): bool
-    {
-        return in_array('users', $this->data['parse']);
-    }
-
-    public function allowRoles(): self
-    {
-        $this->data['parse'][] = 'roles';
-
-        return $this;
-    }
-
-    protected function allowsRoles(): bool
-    {
-        return in_array('roles', $this->data['parse']);
+        return $formatted;
     }
 }
