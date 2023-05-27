@@ -91,17 +91,23 @@ class GuildTest extends HttpHelperTestCase
                     'returnType' => GuildMember::class,
                 ]
             ],
-            'Get bans' => [
-                'method' => 'getBans',
-                'args' => ['::guild id::'],
+            'Add member role' => [
+                'method' => 'addMemberRole',
+                'args' => ['::guild id::', '::member id::', '::role id::'],
                 'mockOptions' => [
-                    'method' => 'get',
-                    'return' => [(object) [], (object) []],
+                    'method' => 'put',
+                    'return' => null,
                 ],
-                'validationOptions' => [
-                    'returnType' => GuildBan::class,
-                    'array' => true,
-                ]
+                'validationOptions' => []
+            ],
+            'Remove member role' => [
+                'method' => 'removeMemberRole',
+                'args' => ['::guild id::', '::member id::', '::role id::'],
+                'mockOptions' => [
+                    'method' => 'delete',
+                    'return' => null,
+                ],
+                'validationOptions' => []
             ],
             'Get ban' => [
                 'method' => 'getBan',
