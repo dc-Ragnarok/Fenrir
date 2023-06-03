@@ -239,16 +239,65 @@ class Guild extends HttpResource
         )->otherwise($this->logThrowable(...));
     }
 
-    public function addMember()
+    /**
+     * @see https://discord.com/developers/docs/resources/guild#add-guild-member
+     *
+     * @return ExtendedPromiseInterface<\Ragnarok\Fenrir\Parts\GuildMember>
+     *
+     * @todo Convert to builder
+     */
+    public function addMember(string $guildId, string $userId, array $params): ExtendedPromiseInterface
     {
+        return $this->mapPromise(
+            $this->http->put(
+                Endpoint::bind(
+                    Endpoint::GUILD_MEMBER,
+                    $guildId,
+                    $userId,
+                ),
+                $params,
+            ),
+            GuildMember::class,
+        )->otherwise($this->logThrowable(...));
     }
 
-    public function modifyMember()
+    /**
+     * @see https://discord.com/developers/docs/resources/guild#modify-guild-member
+     *
+     * @return ExtendedPromiseInterface<void>
+     *
+     * @todo Convert to builder
+     */
+    public function modifyMember(string $guildId, string $userId, array $params, ?string $reason = null): ExtendedPromiseInterface
     {
+        return $this->http->patch(
+            Endpoint::bind(
+                Endpoint::GUILD_MEMBER,
+                $guildId,
+                $userId,
+            ),
+            $params,
+            $this->getAuditLogReasonHeader($reason),
+        )->otherwise($this->logThrowable(...));
     }
 
-    public function modifyCurrentMember()
+    /**
+     * @see https://discord.com/developers/docs/resources/guild#modify-current-member
+     *
+     * @return ExtendedPromiseInterface<void>
+     *
+     * @todo Convert to builder
+     */
+    public function modifyCurrentMember(string $guildId, array $params, ?string $reason = null): ExtendedPromiseInterface
     {
+        return $this->http->patch(
+            Endpoint::bind(
+                Endpoint::GUILD_MEMBER_SELF,
+                $guildId,
+            ),
+            $params,
+            $this->getAuditLogReasonHeader($reason),
+        )->otherwise($this->logThrowable(...));
     }
 
     /**
@@ -287,14 +336,27 @@ class Guild extends HttpResource
         )->otherwise($this->logThrowable(...));
     }
 
-    public function removeGuildMember()
+    /**
+     * @see https://discord.com/developers/docs/resources/guild#remove-guild-member
+     *
+     * @return ExtendedPromiseInterface<void>
+     */
+    public function removeGuildMember(string $guildId, string $userId, ?string $reason = null): ExtendedPromiseInterface
     {
+        return $this->http->delete(
+            Endpoint::bind(
+                Endpoint::GUILD_MEMBER,
+                $guildId,
+                $userId,
+            ),
+            headers: $this->getAuditLogReasonHeader($reason),
+        )->otherwise($this->logThrowable(...));
     }
 
     /**
      * @see https://discord.com/developers/docs/resources/guild#get-guild-bans
      *
-     * @return ExtendedPromiseInterface<\Ragnarok\Fenrir\Parts\GuildBan>
+     * @return ExtendedPromiseInterface<\Ragnarok\Fenrir\Parts\GuildBan[]>
      */
     public function getBans(string $guildId)
     {
@@ -311,6 +373,8 @@ class Guild extends HttpResource
 
     /**
      * @see https://discord.com/developers/docs/resources/guild#get-guild-ban
+     *
+     * @return ExtendedPromiseInterface<\Ragnarok\Fenrir\Parts\GuildBan[]>
      */
     public function getBan(string $guildId, string $userId)
     {
