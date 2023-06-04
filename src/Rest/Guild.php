@@ -10,6 +10,7 @@ use Ragnarok\Fenrir\Parts\Guild as PartsGuild;
 use Ragnarok\Fenrir\Parts\GuildBan;
 use Ragnarok\Fenrir\Parts\GuildMember;
 use Ragnarok\Fenrir\Parts\GuildPreview;
+use Ragnarok\Fenrir\Parts\Role;
 use Ragnarok\Fenrir\Rest\Helpers\Guild\ModifyChannelPositionsBuilder;
 use Ragnarok\Fenrir\Rest\HttpResource;
 use React\Promise\ExtendedPromiseInterface;
@@ -425,8 +426,22 @@ class Guild extends HttpResource
         )->otherwise($this->logThrowable(...));
     }
 
-    public function getRoles()
+    /**
+     * @see https://discord.com/developers/docs/resources/guild#get-guild-roles
+     *
+     * @return ExtendedPromiseInterface<\Ragnarok\Fenrir\Parts\Role[]>
+     */
+    public function getRoles(string $guildId)
     {
+        return $this->mapArrayPromise(
+            $this->http->get(
+                Endpoint::bind(
+                    Endpoint::GUILD_ROLES,
+                    $guildId
+                )
+            ),
+            Role::class,
+        );
     }
 
     public function createRole()
