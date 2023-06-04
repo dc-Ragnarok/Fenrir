@@ -390,12 +390,39 @@ class Guild extends HttpResource
         )->otherwise($this->logThrowable(...));
     }
 
-    public function createBan()
+    /**
+     * @see https://discord.com/developers/docs/resources/guild#create-guild-ban
+     *
+     * @return ExtendedPromiseInterface<void>
+     */
+    public function createBan(string $guildId, string $userId, array $params, ?string $reason = null): ExtendedPromiseInterface
     {
+        return $this->http->put(
+            Endpoint::bind(
+                Endpoint::GUILD_BAN,
+                $guildId,
+                $userId,
+            ),
+            $params,
+            $this->getAuditLogReasonHeader($reason)
+        )->otherwise($this->logThrowable(...));
     }
 
-    public function removeBan()
+    /**
+     * @see https://discord.com/developers/docs/resources/guild#remove-guild-ban
+     *
+     * @return ExtendedPromiseInterface<void>
+     */
+    public function removeBan(string $guildId, string $userId, ?string $reason = null): ExtendedPromiseInterface
     {
+        return $this->http->delete(
+            Endpoint::bind(
+                Endpoint::GUILD_BAN,
+                $guildId,
+                $userId,
+            ),
+            headers: $this->getAuditLogReasonHeader($reason)
+        )->otherwise($this->logThrowable(...));
     }
 
     public function getRoles()
