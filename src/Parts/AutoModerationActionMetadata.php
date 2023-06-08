@@ -6,6 +6,7 @@ namespace Ragnarok\Fenrir\Parts;
 
 class AutoModerationActionMetadata
 {
-    public string $channel_id;
-    public int $duration_seconds;
+    public ?string $channel_id;
+    public ?int $duration_seconds;
+    public ?string $custom_message;
 }
