@@ -25,6 +25,7 @@ class AutoModerationTriggerMetadata
      */
     public array $allow_list;
     public int $mention_total_limit;
+    public bool $mention_raid_protection_enabled;
 
     public function setPresets(array $value): void
     {

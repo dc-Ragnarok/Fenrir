@@ -68,6 +68,7 @@ class Guild
      */
     public ?array $stickers;
     public bool $premium_progress_bar_enabled;
+    public ?string $safety_alerts_channel_id;
 
     public function setVerificationLevel(int $value): void
     {
