@@ -444,16 +444,65 @@ class Guild extends HttpResource
         );
     }
 
-    public function createRole()
+    /**
+     * @see https://discord.com/developers/docs/resources/guild#create-guild-role
+     *
+     * @return ExtendedPromiseInterface<\Ragnarok\Fenrir\Parts\Role>
+     */
+    public function createRole(string $guildId, array $params, ?string $reason = null): ExtendedPromiseInterface
     {
+        return $this->mapPromise(
+            $this->http->post(
+                Endpoint::bind(
+                    Endpoint::GUILD_ROLES,
+                    $guildId
+                ),
+                $params,
+                $this->getAuditLogReasonHeader($reason),
+            ),
+            Role::class,
+        )->otherwise($this->logThrowable(...));
     }
 
-    public function modifyRolePositions()
+    /**
+     * @see https://discord.com/developers/docs/resources/guild#modify-guild-role-positions
+     *
+     * @return ExtendedPromiseInterface<\Ragnarok\Fenrir\Parts\Role[]>
+     */
+    public function modifyRolePositions(string $guildId, array $params, ?string $reason = null)
     {
+        return $this->mapArrayPromise(
+            $this->http->patch(
+                Endpoint::bind(
+                    Endpoint::GUILD_ROLES,
+                    $guildId,
+                ),
+                $params,
+                $this->getAuditLogReasonHeader($reason),
+            ),
+            Role::class,
+        )->otherwise($this->logThrowable(...));
     }
 
-    public function modifyRole()
+    /**
+     * @see https://discord.com/developers/docs/resources/guild#modify-guild-role
+     *
+     * @return ExtendedPromiseInterface<\Ragnarok\Fenrir\Parts\Role>
+     */
+    public function modifyRole(string $guildId, string $roleId, array $params, ?string $reason = null)
     {
+        return $this->mapPromise(
+            $this->http->patch(
+                Endpoint::bind(
+                    Endpoint::GUILD_ROLE,
+                    $guildId,
+                    $roleId
+                ),
+                $params,
+                $this->getAuditLogReasonHeader($reason),
+            ),
+            Role::class,
+        )->otherwise($this->logThrowable(...));
     }
 
     public function modifyMfaLevel()
