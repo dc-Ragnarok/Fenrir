@@ -53,7 +53,7 @@ class Message
     public ?string $application_id;
     public ?MessageReference $message_reference;
     public ?Bitwise $flags;
-    public ?self $referenced_message;
+    public ?Message $referenced_message;
     public ?MessageInteraction $interaction;
     public ?Channel $thread;
     /**
