@@ -19,6 +19,8 @@ class GlobalCommand extends HttpResource
 {
     /**
      * @see https://discord.com/developers/docs/interactions/application-commands#making-a-global-command
+     *
+     * @return ExtendedPromiseInterface<\Ragnarok\Fenrir\Parts\ApplicationCommand>
      */
     public function createApplicationCommand(
         string $applicationId,
@@ -33,6 +35,25 @@ class GlobalCommand extends HttpResource
                 $commandBuilder->get(),
             ),
             ApplicationCommand::class
+        )->otherwise($this->logThrowable(...));
+    }
+
+
+    /**
+     * @see https://discord.com/developers/docs/interactions/application-commands#delete-global-application-command
+     *
+     * @return ExtendedPromiseInterface<void>
+     */
+    public function deleteApplicationCommand(
+        string $applicationId,
+        string $commandId
+    ): ExtendedPromiseInterface {
+        return $this->http->delete(
+            Endpoint::bind(
+                Endpoint::GLOBAL_APPLICATION_COMMAND,
+                $applicationId,
+                $commandId,
+            ),
         )->otherwise($this->logThrowable(...));
     }
 }

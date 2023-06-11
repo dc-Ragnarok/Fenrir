@@ -19,6 +19,8 @@ class GuildCommand extends HttpResource
 {
     /**
      * @see https://discord.com/developers/docs/interactions/application-commands#create-guild-application-command
+     *
+     * @return ExtendedPromiseInterface<\Ragnarok\Fenrir\Parts\ApplicationCommand>
      */
     public function createApplicationCommand(
         string $applicationId,
@@ -35,6 +37,26 @@ class GuildCommand extends HttpResource
                 $commandBuilder->get(),
             ),
             ApplicationCommand::class
+        )->otherwise($this->logThrowable(...));
+    }
+
+    /**
+     * @see https://discord.com/developers/docs/interactions/application-commands#delete-guild-application-command
+     *
+     * @return ExtendedPromiseInterface<void>
+     */
+    public function deleteApplicationCommand(
+        string $applicationId,
+        string $guildId,
+        string $commandId
+    ): ExtendedPromiseInterface {
+        return $this->http->delete(
+            Endpoint::bind(
+                Endpoint::GUILD_APPLICATION_COMMAND,
+                $applicationId,
+                $guildId,
+                $commandId,
+            ),
         )->otherwise($this->logThrowable(...));
     }
 }
