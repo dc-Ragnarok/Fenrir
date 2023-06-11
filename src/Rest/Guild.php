@@ -20,6 +20,12 @@ use Ragnarok\Fenrir\Rest\Helpers\Guild\ModifyChannelPositionsBuilder;
 use Ragnarok\Fenrir\Rest\HttpResource;
 use React\Promise\ExtendedPromiseInterface;
 
+/**
+ * @see https://discord.com/developers/docs/resources/guild
+ *
+ * @SuppressWarnings(PHPMD.TooManyMethods)
+ * @SuppressWarnings(PHPMD.TooManyPublicMethods)
+ */
 class Guild extends HttpResource
 {
     /**
@@ -138,7 +144,7 @@ class Guild extends HttpResource
      *
      * @todo Convert to builder
      */
-    public function createChannel(string $guildId, array $params, ?string $reason = null)
+    public function createChannel(string $guildId, array $params, ?string $reason = null): ExtendedPromiseInterface
     {
         return $this->mapArrayPromise(
             $this->http->post(
@@ -158,8 +164,10 @@ class Guild extends HttpResource
      *
      * @return ExtendedPromiseInterface<void>
      */
-    public function modifyChannelPositions(string $guildId, array $modifyChannelPositionsBuilders)
-    {
+    public function modifyChannelPositions(
+        string $guildId,
+        array $modifyChannelPositionsBuilders
+    ): ExtendedPromiseInterface {
         return $this->http->patch(
             Endpoint::bind(
                 Endpoint::GUILD_CHANNELS,
@@ -174,7 +182,7 @@ class Guild extends HttpResource
      *
      * @todo This request isn't restful, wtf discord
      */
-    public function listActiveThreads(string $guildId)
+    public function listActiveThreads(string $guildId): void
     {
     }
 
@@ -183,7 +191,7 @@ class Guild extends HttpResource
      *
      * @return ExtendedPromiseInterface<\Ragnarok\Fenrir\Parts\GuildMember>
      */
-    public function getMember(string $guildId, string $memberId)
+    public function getMember(string $guildId, string $memberId): ExtendedPromiseInterface
     {
         return $this->mapPromise(
             $this->http->get(
@@ -228,7 +236,7 @@ class Guild extends HttpResource
      *
      * @todo Convert to builder
      */
-    public function searchMembers(string $guildId, array $queryParams)
+    public function searchMembers(string $guildId, array $queryParams): ExtendedPromiseInterface
     {
         $endpoint = Endpoint::bind(
             Endpoint::GUILD_MEMBERS_SEARCH,
@@ -274,8 +282,12 @@ class Guild extends HttpResource
      *
      * @todo Convert to builder
      */
-    public function modifyMember(string $guildId, string $userId, array $params, ?string $reason = null): ExtendedPromiseInterface
-    {
+    public function modifyMember(
+        string $guildId,
+        string $userId,
+        array $params,
+        ?string $reason = null
+    ): ExtendedPromiseInterface {
         return $this->http->patch(
             Endpoint::bind(
                 Endpoint::GUILD_MEMBER,
@@ -294,8 +306,11 @@ class Guild extends HttpResource
      *
      * @todo Convert to builder
      */
-    public function modifyCurrentMember(string $guildId, array $params, ?string $reason = null): ExtendedPromiseInterface
-    {
+    public function modifyCurrentMember(
+        string $guildId,
+        array $params,
+        ?string $reason = null
+    ): ExtendedPromiseInterface {
         return $this->http->patch(
             Endpoint::bind(
                 Endpoint::GUILD_MEMBER_SELF,
@@ -311,8 +326,12 @@ class Guild extends HttpResource
      *
      * @return ExtendedPromiseInterface<void>
      */
-    public function addMemberRole(string $guildId, string $userId, string $roleId, ?string $reason = null): ExtendedPromiseInterface
-    {
+    public function addMemberRole(
+        string $guildId,
+        string $userId,
+        string $roleId,
+        ?string $reason = null
+    ): ExtendedPromiseInterface {
         return $this->http->put(
             Endpoint::bind(
                 Endpoint::GUILD_MEMBER_ROLE,
@@ -329,8 +348,12 @@ class Guild extends HttpResource
      *
      * @return ExtendedPromiseInterface<void>
      */
-    public function removeMemberRole(string $guildId, string $userId, string $roleId, ?string $reason = null): ExtendedPromiseInterface
-    {
+    public function removeMemberRole(
+        string $guildId,
+        string $userId,
+        string $roleId,
+        ?string $reason = null
+    ): ExtendedPromiseInterface {
         return $this->http->delete(
             Endpoint::bind(
                 Endpoint::GUILD_MEMBER_ROLE,
@@ -364,7 +387,7 @@ class Guild extends HttpResource
      *
      * @return ExtendedPromiseInterface<\Ragnarok\Fenrir\Parts\GuildBan[]>
      */
-    public function getBans(string $guildId)
+    public function getBans(string $guildId): ExtendedPromiseInterface
     {
         return $this->mapArrayPromise(
             $this->http->get(
@@ -382,7 +405,7 @@ class Guild extends HttpResource
      *
      * @return ExtendedPromiseInterface<\Ragnarok\Fenrir\Parts\GuildBan[]>
      */
-    public function getBan(string $guildId, string $userId)
+    public function getBan(string $guildId, string $userId): ExtendedPromiseInterface
     {
         return $this->mapPromise(
             $this->http->get(
@@ -401,8 +424,12 @@ class Guild extends HttpResource
      *
      * @return ExtendedPromiseInterface<void>
      */
-    public function createBan(string $guildId, string $userId, array $params, ?string $reason = null): ExtendedPromiseInterface
-    {
+    public function createBan(
+        string $guildId,
+        string $userId,
+        array $params,
+        ?string $reason = null
+    ): ExtendedPromiseInterface {
         return $this->http->put(
             Endpoint::bind(
                 Endpoint::GUILD_BAN,
@@ -436,7 +463,7 @@ class Guild extends HttpResource
      *
      * @return ExtendedPromiseInterface<\Ragnarok\Fenrir\Parts\Role[]>
      */
-    public function getRoles(string $guildId)
+    public function getRoles(string $guildId): ExtendedPromiseInterface
     {
         return $this->mapArrayPromise(
             $this->http->get(
@@ -474,8 +501,11 @@ class Guild extends HttpResource
      *
      * @return ExtendedPromiseInterface<\Ragnarok\Fenrir\Parts\Role[]>
      */
-    public function modifyRolePositions(string $guildId, array $params, ?string $reason = null)
-    {
+    public function modifyRolePositions(
+        string $guildId,
+        array $params,
+        ?string $reason = null
+    ): ExtendedPromiseInterface {
         return $this->mapArrayPromise(
             $this->http->patch(
                 Endpoint::bind(
@@ -494,8 +524,12 @@ class Guild extends HttpResource
      *
      * @return ExtendedPromiseInterface<\Ragnarok\Fenrir\Parts\Role>
      */
-    public function modifyRole(string $guildId, string $roleId, array $params, ?string $reason = null)
-    {
+    public function modifyRole(
+        string $guildId,
+        string $roleId,
+        array $params,
+        ?string $reason = null
+    ): ExtendedPromiseInterface {
         return $this->mapPromise(
             $this->http->patch(
                 Endpoint::bind(
@@ -515,8 +549,11 @@ class Guild extends HttpResource
      *
      * @return ExtendedPromiseInterface<void>
      */
-    public function modifyMfaLevel(string $guildId, MfaLevels $mfaLevel, ?string $reason = null): ExtendedPromiseInterface
-    {
+    public function modifyMfaLevel(
+        string $guildId,
+        MfaLevels $mfaLevel,
+        ?string $reason = null
+    ): ExtendedPromiseInterface {
         return $this->http->post(
             Endpoint::bind(
                 Endpoint::GUILD_MFA,
@@ -573,7 +610,7 @@ class Guild extends HttpResource
      *
      * @return ExtendedPromiseInterface<\Ragnarok\Fenrir\Parts\PruneCount>
      */
-    public function beginPrune(string $guildId, array $params, ?string $reason = null)
+    public function beginPrune(string $guildId, array $params, ?string $reason = null): ExtendedPromiseInterface
     {
         return $this->mapPromise(
             $this->http->post(
@@ -611,7 +648,7 @@ class Guild extends HttpResource
      *
      * @return ExtendedPromiseInterface<\Ragnarok\Fenrir\Parts\Invite>
      */
-    public function getInvites(string $guildId)
+    public function getInvites(string $guildId): ExtendedPromiseInterface
     {
         return $this->mapArrayPromise(
             $this->http->get(
@@ -629,7 +666,7 @@ class Guild extends HttpResource
      *
      * @return ExtendedPromiseInterface<\Ragnarok\Fenrir\Parts\Integration>
      */
-    public function getIntegrations(string $guildId)
+    public function getIntegrations(string $guildId): ExtendedPromiseInterface
     {
         return $this->mapArrayPromise(
             $this->http->get(
