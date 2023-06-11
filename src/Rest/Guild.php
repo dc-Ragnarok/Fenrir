@@ -6,6 +6,7 @@ namespace Ragnarok\Fenrir\Rest;
 
 use Discord\Http\Endpoint;
 use Ragnarok\Fenrir\Enums\Parts\MfaLevels;
+use Ragnarok\Fenrir\Parts\ActiveGuildThreads;
 use Ragnarok\Fenrir\Parts\Channel;
 use Ragnarok\Fenrir\Parts\Guild as PartsGuild;
 use Ragnarok\Fenrir\Parts\GuildBan;
@@ -16,6 +17,9 @@ use Ragnarok\Fenrir\Parts\Invite;
 use Ragnarok\Fenrir\Parts\PruneCount;
 use Ragnarok\Fenrir\Parts\Role;
 use Ragnarok\Fenrir\Parts\VoiceRegion;
+use Ragnarok\Fenrir\Parts\WelcomeScreen;
+use Ragnarok\Fenrir\Parts\Widget;
+use Ragnarok\Fenrir\Parts\WidgetSettings;
 use Ragnarok\Fenrir\Rest\Helpers\Guild\ModifyChannelPositionsBuilder;
 use Ragnarok\Fenrir\Rest\HttpResource;
 use React\Promise\ExtendedPromiseInterface;
@@ -180,10 +184,19 @@ class Guild extends HttpResource
     /**
      * @see https://discord.com/developers/docs/resources/guild#list-active-guild-threads
      *
-     * @todo This request isn't restful, wtf discord
+     * @return ExtendedPromiseInterface<\Ragnarok\Fenrir\Parts\ActiveGuildThreads>
      */
-    public function listActiveThreads(string $guildId): void
+    public function listActiveThreads(string $guildId): ExtendedPromiseInterface
     {
+        return $this->mapPromise(
+            $this->http->get(
+                Endpoint::bind(
+                    Endpoint::GUILD_THREADS_ACTIVE,
+                    $guildId,
+                )
+            ),
+            ActiveGuildThreads::class,
+        );
     }
 
     /**
@@ -233,8 +246,6 @@ class Guild extends HttpResource
      * @see https://discord.com/developers/docs/resources/guild#search-guild-members
      *
      * @return ExtendedPromiseInterface<\Ragnarok\Fenrir\Parts\GuildMember[]>
-     *
-     * @todo Convert to builder
      */
     public function searchMembers(string $guildId, array $queryParams): ExtendedPromiseInterface
     {
@@ -257,8 +268,6 @@ class Guild extends HttpResource
      * @see https://discord.com/developers/docs/resources/guild#add-guild-member
      *
      * @return ExtendedPromiseInterface<\Ragnarok\Fenrir\Parts\GuildMember>
-     *
-     * @todo Convert to builder
      */
     public function addMember(string $guildId, string $userId, array $params): ExtendedPromiseInterface
     {
@@ -279,8 +288,6 @@ class Guild extends HttpResource
      * @see https://discord.com/developers/docs/resources/guild#modify-guild-member
      *
      * @return ExtendedPromiseInterface<void>
-     *
-     * @todo Convert to builder
      */
     public function modifyMember(
         string $guildId,
@@ -303,8 +310,6 @@ class Guild extends HttpResource
      * @see https://discord.com/developers/docs/resources/guild#modify-current-member
      *
      * @return ExtendedPromiseInterface<void>
-     *
-     * @todo Convert to builder
      */
     public function modifyCurrentMember(
         string $guildId,
@@ -473,7 +478,7 @@ class Guild extends HttpResource
                 )
             ),
             Role::class,
-        );
+        )->otherwise($this->logThrowable(...));
     }
 
     /**
@@ -578,7 +583,7 @@ class Guild extends HttpResource
                 $roleId,
             ),
             headers: $this->getAuditLogReasonHeader($reason),
-        );
+        )->otherwise($this->logThrowable(...));
     }
 
     /**
@@ -640,7 +645,7 @@ class Guild extends HttpResource
                 ),
             ),
             VoiceRegion::class
-        );
+        )->otherwise($this->logThrowable(...));
     }
 
     /**
@@ -658,7 +663,7 @@ class Guild extends HttpResource
                 ),
             ),
             Invite::class
-        );
+        )->otherwise($this->logThrowable(...));
     }
 
     /**
@@ -676,42 +681,170 @@ class Guild extends HttpResource
                 ),
             ),
             Integration::class
+        )->otherwise($this->logThrowable(...));
+    }
+
+    /**
+     * @see https://discord.com/developers/docs/resources/guild#delete-guild-integration
+     *
+     * @return ExtendedPromiseInterface<void>
+     */
+    public function deleteIntegration(
+        string $guildId,
+        string $integrationId,
+        ?string $reason = null
+    ): ExtendedPromiseInterface {
+        return $this->http->delete(
+            Endpoint::bind(
+                Endpoint::GUILD_INTEGRATION,
+                $guildId,
+                $integrationId,
+            ),
+            headers: $this->getAuditLogReasonHeader($reason),
+        )->otherwise($this->logThrowable(...));
+    }
+
+    /**
+     * @see https://discord.com/developers/docs/resources/guild#get-guild-widget-settings
+     *
+     * @return ExtendedPromiseInterface<\Ragnarok\Fenrir\Parts\WidgetSettings>
+     */
+    public function getWidgetSettings(string $guildId): ExtendedPromiseInterface
+    {
+        return $this->mapPromise(
+            $this->http->get(
+                Endpoint::bind(
+                    Endpoint::GUILD_WIDGET_SETTINGS,
+                    $guildId,
+                ),
+            ),
+            WidgetSettings::class,
+        )->otherwise($this->logThrowable(...));
+    }
+
+    /**
+     * @see https://discord.com/developers/docs/resources/guild#modify-guild-widget
+     *
+     * @return ExtendedPromiseInterface<\Ragnarok\Fenrir\Parts\WidgetSettings>
+     */
+    public function modifyWidget(string $guildId, array $params, ?string $reason = null): ExtendedPromiseInterface
+    {
+        return $this->mapPromise(
+            $this->http->patch(
+                Endpoint::bind(
+                    Endpoint::GUILD_WIDGET_SETTINGS,
+                    $guildId,
+                ),
+                $params,
+                $this->getAuditLogReasonHeader($reason),
+            ),
+            WidgetSettings::class,
+        )->otherwise($this->logThrowable(...));
+    }
+
+    /**
+     * @see https://discord.com/developers/docs/resources/guild#get-guild-widget
+     *
+     * @return ExtendedPromiseInterface<\Ragnarok\Fenrir\Parts\Widget>
+     */
+    public function getWidget(string $guildId): ExtendedPromiseInterface
+    {
+        return $this->mapPromise(
+            $this->http->get(
+                Endpoint::bind(
+                    Endpoint::GUILD_WIDGET,
+                    $guildId,
+                )
+            ),
+            Widget::class,
+        )->otherwise($this->logThrowable(...));
+    }
+
+    /**
+     * @see https://discord.com/developers/docs/resources/guild#get-guild-vanity-url
+     *
+     * @return ExtendedPromiseInterface<\Ragnarok\Fenrir\Parts\Invite>
+     */
+    public function getVanityUrl(string $guildId): ExtendedPromiseInterface
+    {
+        return $this->mapPromise(
+            $this->http->get(
+                Endpoint::bind(
+                    Endpoint::GUILD_VANITY_URL,
+                    $guildId,
+                )
+            ),
+            Invite::class,
+        )->otherwise($this->logThrowable(...));
+    }
+
+    /**
+     * @see https://discord.com/developers/docs/resources/guild#get-guild-widget-image
+     *
+     * @return string The url of the guild widget image
+     */
+    public function getWidgetImage(string $guildId, array $queryParams): string
+    {
+        $endpoint = Endpoint::bind(
+            Endpoint::GUILD_WIDGET_IMAGE,
+            $guildId,
         );
+
+        foreach ($queryParams as $key => $value) {
+            $endpoint->addQuery($key, $value);
+        }
+
+        return (string) $endpoint;
     }
 
-    public function deleteIntegration()
+    /**
+     * @see https://discord.com/developers/docs/resources/guild#get-guild-welcome-screen
+     *
+     * @return ExtendedPromiseInterface<\Ragnarok\Fenrir\Parts\WelcomeScreen>
+     */
+    public function getWelcomeScreen(string $guildId): ExtendedPromiseInterface
     {
+        return $this->mapPromise(
+            $this->http->get(
+                Endpoint::bind(
+                    Endpoint::GUILD_WELCOME_SCREEN,
+                    $guildId,
+                ),
+            ),
+            WelcomeScreen::class,
+        )->otherwise($this->logThrowable(...));
     }
 
-    public function getWidgetSettings()
+    /**
+     * @see https://discord.com/developers/docs/resources/guild#modify-current-user-voice-state
+     *
+     * @return ExtendedPromiseInterface<void>
+     */
+    public function modifyCurrentUserVoiceState(string $guildId, array $params): ExtendedPromiseInterface
     {
+        return $this->http->patch(
+            Endpoint::bind(
+                Endpoint::GUILD_USER_CURRENT_VOICE_STATE,
+                $guildId,
+            ),
+            $params,
+        )->otherwise($this->logThrowable(...));
     }
 
-    public function modifyWidget()
+    /**
+     * @see https://discord.com/developers/docs/resources/guild#modify-user-voice-state
+     *
+     * @return ExtendedPromiseInterface<void>
+     */
+    public function modifyUserVoiceState(string $guildId, string $userId, array $params): ExtendedPromiseInterface
     {
-    }
-
-    public function getWidget()
-    {
-    }
-
-    public function getVanityUrl()
-    {
-    }
-
-    public function getWidgetImage()
-    {
-    }
-
-    public function getWelcomeScreen()
-    {
-    }
-
-    public function modifyCurrentUserVoiceState()
-    {
-    }
-
-    public function modifyUserVoiceState()
-    {
+        return $this->http->patch(
+            Endpoint::bind(
+                Endpoint::GUILD_USER_CURRENT_VOICE_STATE,
+                $guildId,
+                $userId
+            ),
+            $params,
+        )->otherwise($this->logThrowable(...));
     }
 }
