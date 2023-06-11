@@ -5,12 +5,17 @@ declare(strict_types=1);
 namespace Ragnarok\Fenrir\Rest;
 
 use Discord\Http\Endpoint;
+use Ragnarok\Fenrir\Enums\Parts\MfaLevels;
 use Ragnarok\Fenrir\Parts\Channel;
 use Ragnarok\Fenrir\Parts\Guild as PartsGuild;
 use Ragnarok\Fenrir\Parts\GuildBan;
 use Ragnarok\Fenrir\Parts\GuildMember;
 use Ragnarok\Fenrir\Parts\GuildPreview;
+use Ragnarok\Fenrir\Parts\Integration;
+use Ragnarok\Fenrir\Parts\Invite;
+use Ragnarok\Fenrir\Parts\PruneCount;
 use Ragnarok\Fenrir\Parts\Role;
+use Ragnarok\Fenrir\Parts\VoiceRegion;
 use Ragnarok\Fenrir\Rest\Helpers\Guild\ModifyChannelPositionsBuilder;
 use Ragnarok\Fenrir\Rest\HttpResource;
 use React\Promise\ExtendedPromiseInterface;
@@ -505,32 +510,136 @@ class Guild extends HttpResource
         )->otherwise($this->logThrowable(...));
     }
 
-    public function modifyMfaLevel()
+    /**
+     * @see https://discord.com/developers/docs/resources/guild#modify-guild-mfa-level
+     *
+     * @return ExtendedPromiseInterface<void>
+     */
+    public function modifyMfaLevel(string $guildId, MfaLevels $mfaLevel, ?string $reason = null): ExtendedPromiseInterface
     {
+        return $this->http->post(
+            Endpoint::bind(
+                Endpoint::GUILD_MFA,
+                $guildId,
+            ),
+            ['level' => $mfaLevel->value],
+            $this->getAuditLogReasonHeader($reason),
+        )->otherwise($this->logThrowable(...));
     }
 
-    public function deleteRole()
+    /**
+     * @see https://discord.com/developers/docs/resources/guild#delete-guild-role
+     *
+     * @return ExtendedPromiseInterface<void>
+     */
+    public function deleteRole(string $guildId, string $roleId, ?string $reason = null): ExtendedPromiseInterface
     {
+        return $this->http->delete(
+            Endpoint::bind(
+                Endpoint::GUILD_ROLE,
+                $guildId,
+                $roleId,
+            ),
+            headers: $this->getAuditLogReasonHeader($reason),
+        );
     }
 
-    public function getPruneCount()
+    /**
+     * @see https://discord.com/developers/docs/resources/guild#get-guild-prune-count
+     *
+     * @return ExtendedPromiseInterface<\Ragnarok\Fenrir\Parts\PruneCount>
+     */
+    public function getPruneCount(string $guildId, array $queryParams): ExtendedPromiseInterface
     {
+        $endpoint = Endpoint::bind(
+            Endpoint::GUILD_PRUNE,
+            $guildId,
+        );
+
+        foreach ($queryParams as $key => $value) {
+            $endpoint->addQuery($key, $value);
+        }
+
+        return $this->mapPromise(
+            $this->http->get(
+                $endpoint,
+            ),
+            PruneCount::class,
+        )->otherwise($this->logThrowable(...));
     }
 
-    public function beginPrune()
+    /**
+     * @see https://discord.com/developers/docs/resources/guild#begin-guild-prune
+     *
+     * @return ExtendedPromiseInterface<\Ragnarok\Fenrir\Parts\PruneCount>
+     */
+    public function beginPrune(string $guildId, array $params, ?string $reason = null)
     {
+        return $this->mapPromise(
+            $this->http->post(
+                Endpoint::bind(
+                    Endpoint::GUILD_PRUNE,
+                    $guildId,
+                ),
+                $params,
+                headers: $this->getAuditLogReasonHeader($reason)
+            ),
+            PruneCount::class,
+        )->otherwise($this->logThrowable(...));
     }
 
-    public function getVoiceRegions()
+    /**
+     * @see https://discord.com/developers/docs/resources/guild#get-guild-voice-regions
+     *
+     * @return ExtendedPromiseInterface<\Ragnarok\Fenrir\Parts\VoiceRegion>
+     */
+    public function getVoiceRegions(string $guildId): ExtendedPromiseInterface
     {
+        return $this->mapArrayPromise(
+            $this->http->get(
+                Endpoint::bind(
+                    Endpoint::GUILD_REGIONS,
+                    $guildId,
+                ),
+            ),
+            VoiceRegion::class
+        );
     }
 
-    public function getInvites()
+    /**
+     * @see https://discord.com/developers/docs/resources/guild#get-guild-invites
+     *
+     * @return ExtendedPromiseInterface<\Ragnarok\Fenrir\Parts\Invite>
+     */
+    public function getInvites(string $guildId)
     {
+        return $this->mapArrayPromise(
+            $this->http->get(
+                Endpoint::bind(
+                    Endpoint::GUILD_REGIONS,
+                    $guildId,
+                ),
+            ),
+            Invite::class
+        );
     }
 
-    public function getIntegrations()
+    /**
+     * @see https://discord.com/developers/docs/resources/guild#get-guild-integrations
+     *
+     * @return ExtendedPromiseInterface<\Ragnarok\Fenrir\Parts\Integration>
+     */
+    public function getIntegrations(string $guildId)
     {
+        return $this->mapArrayPromise(
+            $this->http->get(
+                Endpoint::bind(
+                    Endpoint::GUILD_INTEGRATIONS,
+                    $guildId,
+                ),
+            ),
+            Integration::class
+        );
     }
 
     public function deleteIntegration()
