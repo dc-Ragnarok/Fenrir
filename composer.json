@@ -45,8 +45,8 @@
         "phpunit": "phpunit",
         "phpunit-coverage": "@php -d xdebug.mode=coverage ./vendor/bin/phpunit --coverage-html .phpunit.cache/cov-html",
 
-        "test": "@php tests/WebsocketTestServer.php & PID=$!; composer phpunit; kill $PID;",
-        "test-coverage": "@php tests/WebsocketTestServer.php & PID=$!; composer phpunit-coverage; kill $PID;"
+        "test": "php tests/WebsocketTestServer.php & PID=$!; composer phpunit; kill $PID;",
+        "test-coverage": "php tests/WebsocketTestServer.php & PID=$!; composer phpunit-coverage; kill $PID;"
     },
     "config": {
         "allow-plugins": {
