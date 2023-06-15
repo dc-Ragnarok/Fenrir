@@ -30,6 +30,8 @@ class Discord
         private string $token,
         private LoggerInterface $logger = new NullLogger()
     ) {
+        $this->logger->info('Fenrir initialized. Discriminators > usernames');
+
         $this->loop = Loop::get();
 
         $this->mapper = new DataMapper($this->logger);
