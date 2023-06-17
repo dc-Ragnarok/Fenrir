@@ -124,7 +124,7 @@ class Discord
      *
      * @throws ExtensionNotFoundException
      */
-    public function getExtension(string $id)
+    public function getExtension(string $id): Extension
     {
         if (!$this->hasExtension($id)) {
             throw new ExtensionNotFoundException(sprintf('Extension %s not found', $id));
@@ -138,7 +138,7 @@ class Discord
         return isset($this->extensions[$id]);
     }
 
-    public function registerExtension(Extension $extension)
+    public function registerExtension(Extension $extension): void
     {
         $extension->initialize($this);
 

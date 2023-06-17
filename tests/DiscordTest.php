@@ -71,7 +71,7 @@ class DiscordTest extends MockeryTestCase
         }
     }
 
-    public function testItCanInitializeExtensions()
+    public function testItCanInitializeExtensions(): void
     {
         /**
          * @var Extension|MockInterface
@@ -88,7 +88,7 @@ class DiscordTest extends MockeryTestCase
         $discord->registerExtension($extension);
     }
 
-    public function testItTellsYouWhetherExtensionsAreInstalled()
+    public function testItTellsYouWhetherExtensionsAreInstalled(): void
     {
         $extension = new class implements Extension {
             public function initialize(Discord $discord): void
@@ -105,7 +105,7 @@ class DiscordTest extends MockeryTestCase
         $this->assertTrue($discord->hasExtension(get_class($extension)));
     }
 
-    public function testItReturnsTheExtension()
+    public function testItReturnsTheExtension(): void
     {
         $extension = new class implements Extension {
             public function initialize(Discord $discord): void
@@ -120,7 +120,7 @@ class DiscordTest extends MockeryTestCase
         $this->assertEquals($extension, $discord->getExtension(get_class($extension)));
     }
 
-    public function testItYellsWhenYouTryToReturnANonRegisteredExtension()
+    public function testItYellsWhenYouTryToReturnANonRegisteredExtension(): void
     {
         $extension = new class implements Extension {
             public function initialize(Discord $discord): void
