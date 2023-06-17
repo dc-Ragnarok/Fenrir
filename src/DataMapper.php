@@ -39,9 +39,11 @@ class DataMapper
     }
 
     /**
+     * @template T of object
+     *
      * @param array<object|array> $data
-     * @param class-string $definition
-     * @return array<$definition> Array of instances of given definition with provided properties.
+     * @param class-string<T> $definition
+     * @return array<T> Array of instances of given definition with provided properties.
      *  If no properties are present in an item of the array, the mapping for this item failed
      */
     public function mapArray(array $data, string $definition): array
