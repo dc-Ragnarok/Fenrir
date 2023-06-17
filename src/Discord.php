@@ -26,7 +26,8 @@ class Discord
 
     public Rest $rest;
     public Connection $gateway;
-    public InteractionHandler $interaction;
+
+    private array $extensions;
 
     private array $extensions;
 
@@ -75,25 +76,6 @@ class Discord
         );
 
         $this->rest = new Rest($this->http, $this->mapper, $this->logger);
-
-        return $this;
-    }
-
-    /**
-     * @param ?string $devGuildId
-     *  When passed, reroute `$this->interaction->registerCommand` to be a Guild
-     *  command rather than Global. Useful for testing without having to change
-     *  this manually. Explicitly using `registerGlobalCommand` is not affected
-     */
-    public function withInteractionHandler(?string $devGuildId = null): static
-    {
-        $args = [$this];
-
-        if (!empty($devGuildId)) {
-            $args[] = $devGuildId;
-        }
-
-        $this->interaction = new InteractionHandler(...$args);
 
         return $this;
     }

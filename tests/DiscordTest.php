@@ -35,24 +35,6 @@ class DiscordTest extends MockeryTestCase
         $this->assertInstanceOf(Rest::class, $discord->rest);
     }
 
-    public function testItInitializesInteractionHandler(): void
-    {
-        $discord = new Discord('::token::');
-
-        $discord->withInteractionHandler();
-
-        $this->assertInstanceOf(InteractionHandler::class, $discord->interaction);
-    }
-
-    public function testItInitializesInteractionHandlerWithDevGuild(): void
-    {
-        $discord = new Discord('::token::');
-
-        $discord->withInteractionHandler('::dev guild id::');
-
-        $this->assertInstanceOf(InteractionHandler::class, $discord->interaction);
-    }
-
     public function testGetDebugInfo(): void
     {
         $debugInfo = Discord::getDebugInfo();

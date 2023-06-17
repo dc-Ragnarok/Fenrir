@@ -45,7 +45,8 @@ class InteractionHandlerTest extends MockeryTestCase
     {
         $discord = DiscordFake::get();
 
-        $interactionHandler = new InteractionHandler($discord);
+        $interactionHandler = new InteractionHandler();
+        $interactionHandler->initialize($discord);
 
         $commandBuilder = CommandBuilder::new()
             ->setName('command')
@@ -69,7 +70,8 @@ class InteractionHandlerTest extends MockeryTestCase
     {
         $discord = DiscordFake::get();
 
-        $interactionHandler = new InteractionHandler($discord);
+        $interactionHandler = new InteractionHandler();
+        $interactionHandler->initialize($discord);
 
         $commandBuilder = CommandBuilder::new()
             ->setName('command')
@@ -90,36 +92,12 @@ class InteractionHandlerTest extends MockeryTestCase
         $this->emitReady($discord->gateway->events);
     }
 
-    public function testItOnlySetsASingleListener(): void
-    {
-        $discord = DiscordFake::get();
-
-        $interactionHandler = new InteractionHandler($discord);
-
-        $commandBuilder = CommandBuilder::new()
-            ->setName('command')
-            ->setDescription('::description::');
-
-        $interactionHandler->registerGuildCommand(
-            $commandBuilder,
-            '::guild id::',
-            static fn (CommandInteraction $command) => 1
-        );
-
-        $interactionHandler->registerGuildCommand(
-            $commandBuilder,
-            '::guild id::',
-            static fn (CommandInteraction $command) => 1
-        );
-
-        $this->assertCount(1, $discord->gateway->events->listeners(Events::INTERACTION_CREATE));
-    }
-
     public function testRegisterCommandIsGlobalWithoutDevGuild(): void
     {
         $discord = DiscordFake::get();
 
-        $interactionHandler = new InteractionHandler($discord);
+        $interactionHandler = new InteractionHandler();
+        $interactionHandler->initialize($discord);
 
         $commandBuilder = CommandBuilder::new()
             ->setName('command')
@@ -139,35 +117,12 @@ class InteractionHandlerTest extends MockeryTestCase
         $this->emitReady($discord->gateway->events);
     }
 
-    public function testRegisterCommandIsGuildWithDevGuild(): void
-    {
-        $discord = DiscordFake::get();
-
-        $interactionHandler = new InteractionHandler($discord, '::guild id::');
-
-        $commandBuilder = CommandBuilder::new()
-            ->setName('command')
-            ->setDescription('::description::');
-
-        $interactionHandler->registerCommand(
-            $commandBuilder,
-            static fn (CommandInteraction $command) => 1
-        );
-
-        $interactionHandler->registerGuildCommand(
-            $commandBuilder,
-            '::guild id::',
-            static fn (CommandInteraction $command) => 1
-        );
-
-        $this->assertCount(1, $discord->gateway->events->listeners(Events::INTERACTION_CREATE));
-    }
-
     public function testItHandlesAnInteraction(): void
     {
         $discord = DiscordFake::get();
 
-        $interactionHandler = new InteractionHandler($discord);
+        $interactionHandler = new InteractionHandler();
+        $interactionHandler->initialize($discord);
 
         $commandBuilder = CommandBuilder::new()
             ->setName('command')
@@ -233,7 +188,8 @@ class InteractionHandlerTest extends MockeryTestCase
     {
         $discord = DiscordFake::get();
 
-        $interactionHandler = new InteractionHandler($discord);
+        $interactionHandler = new InteractionHandler();
+        $interactionHandler->initialize($discord);
 
         $commandBuilder = CommandBuilder::new()
             ->setName('command')
@@ -276,7 +232,8 @@ class InteractionHandlerTest extends MockeryTestCase
     public function testItCanRegisterButtonInteractionHandlers(): void
     {
         $discord = DiscordFake::get();
-        $interactionHandler = new InteractionHandler($discord);
+        $interactionHandler = new InteractionHandler();
+        $interactionHandler->initialize($discord);
 
         $button = new DangerButton('::custom id::');
 
@@ -287,8 +244,6 @@ class InteractionHandlerTest extends MockeryTestCase
                 $hasRun = true;
             }
         );
-
-        $this->assertCount(1, $discord->gateway->events->listeners(Events::INTERACTION_CREATE));
 
         $interactionCreate = DataMapperFake::get()->map([
                 'id' => '::interaction id::',
@@ -306,24 +261,11 @@ class InteractionHandlerTest extends MockeryTestCase
         $this->assertTrue($hasRun, 'Handler did not run');
     }
 
-    public function testItOnlyRegistersASingleListener(): void
-    {
-        $discord = DiscordFake::get();
-        $interactionHandler = new InteractionHandler($discord);
-
-        $button = new DangerButton('::custom id::');
-        $interactionHandler->onButtonInteraction($button, static fn (ButtonInteraction $btnInt) => null);
-
-        $otherButton = new DangerButton('::some other custom id::');
-        $interactionHandler->onButtonInteraction($otherButton, static fn (ButtonInteraction $btnInt) => null);
-
-        $this->assertCount(1, $discord->gateway->events->listeners(Events::INTERACTION_CREATE));
-    }
-
     public function testItRemovesButtonListenerIfHandlerReturnsTrue(): void
     {
         $discord = DiscordFake::get();
-        $interactionHandler = new InteractionHandler($discord);
+        $interactionHandler = new InteractionHandler();
+        $interactionHandler->initialize($discord);
 
         $button = new DangerButton('::custom id::');
 
@@ -336,8 +278,6 @@ class InteractionHandlerTest extends MockeryTestCase
                 return true;
             }
         );
-
-        $this->assertCount(1, $discord->gateway->events->listeners(Events::INTERACTION_CREATE));
 
         $interactionCreate = DataMapperFake::get()->map([
                 'id' => '::interaction id::',
