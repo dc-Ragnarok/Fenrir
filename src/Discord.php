@@ -12,6 +12,8 @@ use Ragnarok\Fenrir\Bitwise\Bitwise;
 use Ragnarok\Fenrir\Rest\Rest;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
+use Ragnarok\Fenrir\Exceptions\Extension\ExtensionNotFoundException;
+use Ragnarok\Fenrir\Extension\Extension;
 use Ragnarok\Fenrir\Gateway\Connection;
 use React\EventLoop\Loop;
 use React\EventLoop\LoopInterface;
@@ -25,6 +27,8 @@ class Discord
     public Rest $rest;
     public Connection $gateway;
     public InteractionHandler $interaction;
+
+    private array $extensions;
 
     public function __construct(
         private string $token,
@@ -110,5 +114,34 @@ class Discord
             'os' => PHP_OS,
             'os_family' => PHP_OS_FAMILY,
         ];
+    }
+
+    /**
+     * @template Extension
+     *
+     * @param class-string<Extension>
+     * @return Extension
+     *
+     * @throws ExtensionNotFoundException
+     */
+    public function getExtension(string $id)
+    {
+        if (!$this->hasExtension($id)) {
+            throw new ExtensionNotFoundException(sprintf('Extension %s not found', $id));
+        }
+
+        return $this->extensions[$id];
+    }
+
+    public function hasExtension(string $id): bool
+    {
+        return isset($this->extensions[$id]);
+    }
+
+    public function registerExtension(Extension $extension)
+    {
+        $extension->initialize($this);
+
+        $this->extensions[get_class($extension)] = $extension;
     }
 }
