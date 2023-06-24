@@ -12,6 +12,7 @@ class User
 {
     public string $id;
     public string $username;
+    public ?string $global_name;
     public string $discriminator;
     public ?string $avatar;
     public ?bool $bot;
