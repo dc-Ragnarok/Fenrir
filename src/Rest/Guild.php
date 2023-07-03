@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Ragnarok\Fenrir\Rest;
 
 use Discord\Http\Endpoint;
-use Ragnarok\Fenrir\Enums\Parts\MfaLevels;
+use Ragnarok\Fenrir\Enums\MfaLevel;
 use Ragnarok\Fenrir\Parts\ActiveGuildThreads;
 use Ragnarok\Fenrir\Parts\Channel;
 use Ragnarok\Fenrir\Parts\Guild as PartsGuild;
@@ -21,7 +21,6 @@ use Ragnarok\Fenrir\Parts\WelcomeScreen;
 use Ragnarok\Fenrir\Parts\Widget;
 use Ragnarok\Fenrir\Parts\WidgetSettings;
 use Ragnarok\Fenrir\Rest\Helpers\Guild\ModifyChannelPositionsBuilder;
-use Ragnarok\Fenrir\Rest\HttpResource;
 use React\Promise\ExtendedPromiseInterface;
 
 /**
@@ -555,9 +554,9 @@ class Guild extends HttpResource
      * @return ExtendedPromiseInterface<void>
      */
     public function modifyMfaLevel(
-        string $guildId,
-        MfaLevels $mfaLevel,
-        ?string $reason = null
+        string   $guildId,
+        MfaLevel $mfaLevel,
+        ?string  $reason = null
     ): ExtendedPromiseInterface {
         return $this->http->post(
             Endpoint::bind(

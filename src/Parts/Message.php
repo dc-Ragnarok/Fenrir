@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace Ragnarok\Fenrir\Parts;
 
 use Carbon\Carbon;
-use Ragnarok\Fenrir\Enums\Parts\MessageTypes;
-use Ragnarok\Fenrir\Bitwise\Bitwise;
 use Ragnarok\Fenrir\Attributes\Partial;
+use Ragnarok\Fenrir\Bitwise\Bitwise;
+use Ragnarok\Fenrir\Enums\MessageType;
 
 class Message
 {
@@ -46,7 +46,7 @@ class Message
     public ?string $nonce;
     public bool $pinned;
     public ?string $webhook_id;
-    public MessageTypes $type;
+    public MessageType $type;
     public ?MessageActivity $activity;
     #[Partial]
     public ?Application $application;
@@ -73,6 +73,6 @@ class Message
 
     public function setType(int $value): void
     {
-        $this->type = MessageTypes::from($value);
+        $this->type = MessageType::from($value);
     }
 }

@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace Ragnarok\Fenrir\Parts;
 
-use Ragnarok\Fenrir\Enums\Parts\ChannelTypes;
 use Carbon\Carbon;
-use Ragnarok\Fenrir\Enums\Parts\VideoQualityModes;
 use Ragnarok\Fenrir\Bitwise\Bitwise;
-use Ragnarok\Fenrir\Enums\Parts\SortOrderTypes;
-use Ragnarok\Fenrir\Enums\Parts\ForumLayoutTypes;
+use Ragnarok\Fenrir\Enums\ChannelTypes;
+use Ragnarok\Fenrir\Enums\ForumLayoutType;
+use Ragnarok\Fenrir\Enums\SortOrderType;
+use Ragnarok\Fenrir\Enums\VideoQualityMode;
 
 class Channel
 {
@@ -38,7 +38,7 @@ class Channel
     public ?string $parent_id;
     public ?Carbon $last_pin_timestamp;
     public ?string $rtc_region;
-    public ?VideoQualityModes $video_quality_mode;
+    public ?VideoQualityMode $video_quality_mode;
     public ?int $message_count;
     public ?int $member_count;
     public ?ThreadMetadata $thread_metadata;
@@ -57,8 +57,8 @@ class Channel
     public ?array $applied_tags;
     public ?DefaultReaction $default_reaction_emoji;
     public ?int $default_thread_rate_limit_per_user;
-    public ?SortOrderTypes $default_sort_order;
-    public ?ForumLayoutTypes $default_forum_layout;
+    public ?SortOrderType $default_sort_order;
+    public ?ForumLayoutType $default_forum_layout;
 
     public function setType(int $value): void
     {
@@ -67,16 +67,16 @@ class Channel
 
     public function setVideoQualityMode(int $value): void
     {
-        $this->video_quality_mode = VideoQualityModes::from($value);
+        $this->video_quality_mode = VideoQualityMode::from($value);
     }
 
     public function setDefaultSortOrder(int $value): void
     {
-        $this->default_sort_order = SortOrderTypes::from($value);
+        $this->default_sort_order = SortOrderType::from($value);
     }
 
     public function setDefaultForumLayout(int $value): void
     {
-        $this->default_forum_layout = ForumLayoutTypes::from($value);
+        $this->default_forum_layout = ForumLayoutType::from($value);
     }
 }

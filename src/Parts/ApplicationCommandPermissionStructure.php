@@ -4,16 +4,16 @@ declare(strict_types=1);
 
 namespace Ragnarok\Fenrir\Parts;
 
-use Ragnarok\Fenrir\Enums\Parts\ApplicationCommandPermissionTypes;
+use Ragnarok\Fenrir\Enums\ApplicationCommandPermissionType;
 
 class ApplicationCommandPermissionStructure
 {
     public string $id;
-    public ApplicationCommandPermissionTypes $type;
+    public ApplicationCommandPermissionType $type;
     public bool $permission;
 
     public function setType(int $value): void
     {
-        $this->type = ApplicationCommandPermissionTypes::from($value);
+        $this->type = ApplicationCommandPermissionType::from($value);
     }
 }

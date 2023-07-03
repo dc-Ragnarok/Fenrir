@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Ragnarok\Fenrir\Interaction\Helpers;
 
 use Discord\Http\Multipart\MultipartBody;
-use Ragnarok\Fenrir\Enums\Command\InteractionCallbackTypes;
+use Ragnarok\Fenrir\Enums\InteractionCallbackType;
 use Ragnarok\Fenrir\Rest\Helpers\Channel\EmbedBuilder;
 use Ragnarok\Fenrir\Rest\Helpers\Channel\Message\AddComponent;
 use Ragnarok\Fenrir\Rest\Helpers\Channel\Message\AddEmbed;
@@ -30,18 +30,18 @@ class InteractionCallbackBuilder
     use AddFile;
     use MultipartMessage;
 
-    private InteractionCallbackTypes $type;
+    private InteractionCallbackType $type;
 
     private array $data = [];
 
-    public function setType(InteractionCallbackTypes $type): self
+    public function setType(InteractionCallbackType $type): self
     {
         $this->type = $type;
 
         return $this;
     }
 
-    public function getType(): InteractionCallbackTypes
+    public function getType(): InteractionCallbackType
     {
         return $this->type;
     }

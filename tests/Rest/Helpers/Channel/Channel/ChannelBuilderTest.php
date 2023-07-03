@@ -36,7 +36,7 @@ class ChannelBuilderTest extends TestCase
      */
     // public function testAddPermissionOverwrites(): void
     // {
-    //     $overwrite = new Overwrite(OverwriteTypes::MEMBER);
+    //     $overwrite = new Overwrite(OverwriteType::MEMBER);
     //     $builder = $this->getBuilder();
     //     $builder->addPermissionOverwrites($overwrite);
 

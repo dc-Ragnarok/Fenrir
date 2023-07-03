@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace Ragnarok\Fenrir\Parts;
 
-use Ragnarok\Fenrir\Enums\Parts\ApplicationCommandOptionTypes;
+use Ragnarok\Fenrir\Enums\ApplicationCommandOptionType;
 
 class ApplicationCommandInteractionDataOptionStructure
 {
     public string $name;
-    public ApplicationCommandOptionTypes $type;
+    public ApplicationCommandOptionType $type;
     public string|int|float|bool|null $value;
     /**
      * @var \Ragnarok\Fenrir\Parts\ApplicationCommandInteractionDataOptionStructure[]
@@ -24,6 +24,6 @@ class ApplicationCommandInteractionDataOptionStructure
 
     public function setType(int $value): void
     {
-        $this->type = ApplicationCommandOptionTypes::from($value);
+        $this->type = ApplicationCommandOptionType::from($value);
     }
 }

@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Ragnarok\Fenrir\Parts;
 
-use Ragnarok\Fenrir\Enums\Parts\IntegrationExpireBehaviors;
 use Carbon\Carbon;
-use Ragnarok\Fenrir\Enums\Parts\Scopes;
+use Ragnarok\Fenrir\Enums\IntegrationExpireBehavior;
+use Ragnarok\Fenrir\Enums\Scope;
 
 class Integration
 {
@@ -17,7 +17,7 @@ class Integration
     public ?bool $syncing;
     public ?string $role_id;
     public ?bool $enable_emoticons;
-    public ?IntegrationExpireBehaviors $expire_behavior;
+    public ?IntegrationExpireBehavior $expire_behavior;
     public ?int $expire_grace_period;
     public ?User $user;
     public Account $account;
@@ -26,13 +26,13 @@ class Integration
     public ?bool $revoked;
     public ?Application $application;
     /**
-     * @var \Ragnarok\Fenrir\Enums\Parts\Scopes[]
+     * @var \Ragnarok\Fenrir\Enums\Scope[]
      */
     public ?array $scopes;
 
     public function setExpireBehavior(int $value): void
     {
-        $this->expire_behavior = IntegrationExpireBehaviors::from($value);
+        $this->expire_behavior = IntegrationExpireBehavior::from($value);
     }
 
     public function setScopes(array $value): void
@@ -40,7 +40,7 @@ class Integration
         $this->scopes = [];
 
         foreach ($value as $entry) {
-            $this->scopes[] = Scopes::from($entry);
+            $this->scopes[] = Scope::from($entry);
         }
     }
 }

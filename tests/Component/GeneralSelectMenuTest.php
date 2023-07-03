@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Tests\Ragnarok\Fenrir\Component;
 
+use PHPUnit\Framework\TestCase;
 use Ragnarok\Fenrir\Component\SelectMenu\MentionableSelectMenu;
 use Ragnarok\Fenrir\Component\SelectMenu\RoleSelectMenu;
 use Ragnarok\Fenrir\Component\SelectMenu\UserSelectMenu;
-use Ragnarok\Fenrir\Enums\Component\SelectMenuType;
-use PHPUnit\Framework\TestCase;
+use Ragnarok\Fenrir\Enums\SelectMenuType;
 
 class GeneralSelectMenuTest extends TestCase
 {

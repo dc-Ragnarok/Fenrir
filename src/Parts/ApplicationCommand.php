@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Ragnarok\Fenrir\Parts;
 
-use Ragnarok\Fenrir\Enums\Parts\ApplicationCommandTypes;
+use Ragnarok\Fenrir\Enums\ApplicationCommandTypes;
 
 class ApplicationCommand
 {

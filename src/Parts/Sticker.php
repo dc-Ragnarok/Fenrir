@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Ragnarok\Fenrir\Parts;
 
-use Ragnarok\Fenrir\Enums\Parts\StickerTypes;
-use Ragnarok\Fenrir\Enums\Parts\StickerFormatTypes;
+use Ragnarok\Fenrir\Enums\StickerFormatType;
+use Ragnarok\Fenrir\Enums\StickerType;
 
 class Sticker
 {
@@ -18,8 +18,8 @@ class Sticker
      */
     public ?array $tags;
     public ?string $asset;
-    public StickerTypes $type;
-    public StickerFormatTypes $format_type;
+    public StickerType $type;
+    public StickerFormatType $format_type;
     public bool $available;
     public ?string $guild_id;
     public ?User $user;
@@ -27,11 +27,11 @@ class Sticker
 
     public function setType(int $value): void
     {
-        $this->type = StickerTypes::from($value);
+        $this->type = StickerType::from($value);
     }
 
     public function setFormatType(int $value): void
     {
-        $this->format_type = StickerFormatTypes::from($value);
+        $this->format_type = StickerFormatType::from($value);
     }
 }

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Ragnarok\Fenrir\Parts;
 
-use Ragnarok\Fenrir\Enums\Parts\AutoModerationKeywordPresetTypes;
+use Ragnarok\Fenrir\Enums\AutoModerationKeywordPresetType;
 
 class AutoModerationTriggerMetadata
 {
@@ -17,7 +17,7 @@ class AutoModerationTriggerMetadata
      */
     public array $regex_patterns;
     /**
-     * @var \Ragnarok\Fenrir\Enums\Parts\AutoModerationKeywordPresetTypes[]
+     * @var \Ragnarok\Fenrir\Enums\AutoModerationKeywordPresetType[]
      */
     public array $presets;
     /**
@@ -32,7 +32,7 @@ class AutoModerationTriggerMetadata
         $this->presets = [];
 
         foreach ($value as $entry) {
-            $this->presets[] = AutoModerationKeywordPresetTypes::from($entry);
+            $this->presets[] = AutoModerationKeywordPresetType::from($entry);
         }
     }
 }

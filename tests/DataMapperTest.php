@@ -4,15 +4,15 @@ declare(strict_types=1);
 
 namespace Tests\Ragnarok\Fenrir;
 
-use Ragnarok\Fenrir\DataMapper;
-use Ragnarok\Fenrir\Enums\Parts\ApplicationCommandOptionTypes;
-use Ragnarok\Fenrir\Parts\ApplicationCommandInteractionDataOptionStructure;
-use Ragnarok\Fenrir\Parts\InteractionData;
-use Ragnarok\Fenrir\Parts\Message;
-use Ragnarok\Fenrir\Gateway\Events\InteractionCreate;
 use Monolog\Test\TestCase;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
+use Ragnarok\Fenrir\DataMapper;
+use Ragnarok\Fenrir\Enums\ApplicationCommandOptionType;
+use Ragnarok\Fenrir\Gateway\Events\InteractionCreate;
+use Ragnarok\Fenrir\Parts\ApplicationCommandInteractionDataOptionStructure;
+use Ragnarok\Fenrir\Parts\InteractionData;
+use Ragnarok\Fenrir\Parts\Message;
 
 class DataMapperTest extends TestCase
 {
@@ -146,14 +146,14 @@ class DataMapperTest extends TestCase
     public function testItUsesSettersWhenAvailable(): void
     {
         $data = [
-            'type' => ApplicationCommandOptionTypes::INTEGER->value
+            'type' => ApplicationCommandOptionType::INTEGER->value
         ];
 
         /** @var ApplicationCommandInteractionDataOptionStructure */
         $output = $this->getDataMapper()->map($data, ApplicationCommandInteractionDataOptionStructure::class);
 
         $this->assertInstanceOf(ApplicationCommandInteractionDataOptionStructure::class, $output);
-        $this->assertInstanceOf(ApplicationCommandOptionTypes::class, $output->type);
-        $this->assertEquals(ApplicationCommandOptionTypes::INTEGER, $output->type);
+        $this->assertInstanceOf(ApplicationCommandOptionType::class, $output->type);
+        $this->assertEquals(ApplicationCommandOptionType::INTEGER, $output->type);
     }
 }

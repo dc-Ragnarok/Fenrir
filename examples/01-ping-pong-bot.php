@@ -3,9 +3,9 @@
 use Ragnarok\Fenrir\Bitwise\Bitwise;
 use Ragnarok\Fenrir\Constants\Events;
 use Ragnarok\Fenrir\Discord;
-use Ragnarok\Fenrir\Enums\Gateway\Intents;
-use Ragnarok\Fenrir\Rest\Helpers\Channel\MessageBuilder;
+use Ragnarok\Fenrir\Enums\Intent;
 use Ragnarok\Fenrir\Gateway\Events\MessageCreate;
+use Ragnarok\Fenrir\Rest\Helpers\Channel\MessageBuilder;
 
 require './vendor/autoload.php';
 
@@ -15,9 +15,9 @@ $discord = new Discord(
 
 $discord
     ->withGateway(Bitwise::from(
-        Intents::GUILD_MESSAGES,
-        Intents::DIRECT_MESSAGES,
-        Intents::MESSAGE_CONTENT,
+        Intent::GUILD_MESSAGES,
+        Intent::DIRECT_MESSAGES,
+        Intent::MESSAGE_CONTENT,
     ))
     ->withRest();
 

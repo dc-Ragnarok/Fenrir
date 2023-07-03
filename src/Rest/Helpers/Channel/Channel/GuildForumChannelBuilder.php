@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace Ragnarok\Fenrir\Rest\Helpers\Channel\Channel;
 
 use Ragnarok\Fenrir\Bitwise\Bitwise;
-use Ragnarok\Fenrir\Enums\Flags\ChannelFlags;
-use Ragnarok\Fenrir\Enums\Parts\ChannelTypes;
-use Ragnarok\Fenrir\Enums\Parts\ForumLayoutTypes;
-use Ragnarok\Fenrir\Enums\Parts\SortOrderTypes;
+use Ragnarok\Fenrir\Enums\ChannelFlag;
+use Ragnarok\Fenrir\Enums\ChannelTypes;
+use Ragnarok\Fenrir\Enums\ForumLayoutType;
+use Ragnarok\Fenrir\Enums\SortOrderType;
 use Ragnarok\Fenrir\Exceptions\Rest\Helpers\Channel\Channel\GuildForumChannelBuilder\TooManyAvailableTagsException;
 use Ragnarok\Fenrir\Rest\Helpers\Channel\Channel\Shared\SetDefaultAutoArchiveDuration;
 use Ragnarok\Fenrir\Rest\Helpers\Channel\Channel\Shared\SetDefaultThreadRateLimitPerUser;
@@ -37,7 +37,7 @@ class GuildForumChannelBuilder extends ChannelBuilder
         $this->setChannelType(ChannelTypes::GUILD_FORUM);
     }
 
-    public function addFlag(ChannelFlags $flag): self
+    public function addFlag(ChannelFlag $flag): self
     {
         if (!isset($this->channelFlags)) {
             $this->channelFlags = new Bitwise();
@@ -104,14 +104,14 @@ class GuildForumChannelBuilder extends ChannelBuilder
         return $this;
     }
 
-    public function setDefaultSortOrder(SortOrderTypes $sortOrderType): self
+    public function setDefaultSortOrder(SortOrderType $sortOrderType): self
     {
         $this->data['default_sort_order'] = $sortOrderType->value;
 
         return $this;
     }
 
-    public function setDefaultForumLayout(ForumLayoutTypes $formLayoutType): self
+    public function setDefaultForumLayout(ForumLayoutType $formLayoutType): self
     {
         $this->data['default_forum_layout'] = $formLayoutType->value;
 

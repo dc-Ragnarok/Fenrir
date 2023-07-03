@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Ragnarok\Fenrir\Rest\Helpers\Channel\Channel;
 
-use Ragnarok\Fenrir\Enums\Parts\ChannelTypes;
-use Ragnarok\Fenrir\Enums\Parts\VideoQualityModes;
+use Ragnarok\Fenrir\Enums\ChannelTypes;
+use Ragnarok\Fenrir\Enums\VideoQualityMode;
 use Ragnarok\Fenrir\Rest\Helpers\Channel\Channel\Shared\SetBitrate;
 use Ragnarok\Fenrir\Rest\Helpers\Channel\Channel\Shared\SetNsfw;
 use Ragnarok\Fenrir\Rest\Helpers\Channel\Channel\Shared\SetParentId;
@@ -33,7 +33,7 @@ class GuildVoiceChannelBuilder extends ChannelBuilder
         return $this;
     }
 
-    public function setVideoQualityMode(VideoQualityModes $quality): void
+    public function setVideoQualityMode(VideoQualityMode $quality): void
     {
         $this->data['video_quality_mode'] = $quality->value;
     }

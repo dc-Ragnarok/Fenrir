@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Ragnarok\Fenrir\Parts;
 
-use Ragnarok\Fenrir\Enums\Parts\GuildFeatures;
+use Ragnarok\Fenrir\Enums\GuildFeature;
 
 class GuildPreview
 {
@@ -15,7 +15,7 @@ class GuildPreview
     public ?string $discovery_splash;
     public array $emojis;
     /**
-     * @var \Ragnarok\Fenrir\Enums\Parts\GuildFeatures[]
+     * @var \Ragnarok\Fenrir\Enums\GuildFeature[]
      */
     public array $features;
     public ?int $approximate_member_count;
@@ -31,7 +31,7 @@ class GuildPreview
         $this->features = [];
 
         foreach ($value as $entry) {
-            $this->features[] = GuildFeatures::from($entry);
+            $this->features[] = GuildFeature::from($entry);
         }
     }
 }

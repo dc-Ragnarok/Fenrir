@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Tests\Ragnarok\Fenrir\Rest\Helpers\Channel\Channel\Shared;
 
-use Ragnarok\Fenrir\Enums\Parts\ChannelTypes;
-use Ragnarok\Fenrir\Rest\Helpers\Channel\Channel\Shared\SetType;
 use PHPUnit\Framework\TestCase;
+use Ragnarok\Fenrir\Enums\ChannelTypes;
 use Ragnarok\Fenrir\Exceptions\Rest\Helpers\Channel\Channel\Shared\SetType\UnsupportedConversionException;
+use Ragnarok\Fenrir\Rest\Helpers\Channel\Channel\Shared\SetType;
 
 class SetTypeTest extends TestCase
 {

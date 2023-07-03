@@ -4,15 +4,15 @@ declare(strict_types=1);
 
 namespace Tests\Ragnarok\Fenrir\Component;
 
+use PHPUnit\Framework\TestCase;
 use Ragnarok\Fenrir\Component\Button\DangerButton;
 use Ragnarok\Fenrir\Component\Button\LinkButton;
 use Ragnarok\Fenrir\Component\Button\PrimaryButton;
 use Ragnarok\Fenrir\Component\Button\SecondaryButton;
 use Ragnarok\Fenrir\Component\Button\SuccessButton;
-use Ragnarok\Fenrir\Enums\Component\ButtonStyle;
+use Ragnarok\Fenrir\Enums\ButtonStyle;
 use Ragnarok\Fenrir\Parts\Emoji;
 use Ragnarok\Fenrir\Rest\Helpers\Emoji\EmojiBuilder;
-use PHPUnit\Framework\TestCase;
 
 class ButtonTest extends TestCase
 {

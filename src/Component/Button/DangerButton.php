@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Ragnarok\Fenrir\Component\Button;
 
-use Ragnarok\Fenrir\Enums\Component\ButtonStyle;
+use Ragnarok\Fenrir\Enums\ButtonStyle;
 
 class DangerButton extends InteractionButton
 {

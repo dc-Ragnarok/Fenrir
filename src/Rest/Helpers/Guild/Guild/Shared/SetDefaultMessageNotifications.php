@@ -4,21 +4,21 @@ declare(strict_types=1);
 
 namespace Ragnarok\Fenrir\Rest\Helpers\Guild\Guild\Shared;
 
-use Ragnarok\Fenrir\Enums\DefaultMessageNotifications;
+use Ragnarok\Fenrir\Enums\DefaultMessageNotification;
 
 trait SetDefaultMessageNotifications
 {
-    public function setDefaultMessageNotifications(DefaultMessageNotifications $filter): static
+    public function setDefaultMessageNotifications(DefaultMessageNotification $filter): static
     {
         $this->data['default_message_notifications'] = $filter->value;
 
         return $this;
     }
 
-    public function getDefaultMessageNotifications(): ?DefaultMessageNotifications
+    public function getDefaultMessageNotifications(): ?DefaultMessageNotification
     {
         return isset($this->data['default_message_notifications'])
-            ? DefaultMessageNotifications::from($this->data['default_message_notifications'])
+            ? DefaultMessageNotification::from($this->data['default_message_notifications'])
             : null;
     }
 }

@@ -9,7 +9,7 @@ use Ragnarok\Fenrir\Bitwise\Bitwise;
 trait SetSystemChannelFlags
 {
     /**
-     * @param Bitwise<\Ragnarok\Fenrir\Enums\Flags\SystemChannelFlags> $flags
+     * @param Bitwise<\Ragnarok\Fenrir\Enums\SystemChannelFlag> $flags
      */
     public function setSystemChannelFlags(Bitwise $flags): static
     {

@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Ragnarok\Fenrir;
 
+use Ragnarok\Fenrir\Enums\InteractionCallbackType;
 use Ragnarok\Fenrir\Interaction\Helpers\InteractionCallbackBuilder;
-use Ragnarok\Fenrir\Enums\Command\InteractionCallbackTypes;
 use Ragnarok\Fenrir\Parts\Message;
 use Ragnarok\Fenrir\Rest\Helpers\Webhook\EditWebhookBuilder;
 use Ragnarok\Fenrir\Rest\Webhook;
@@ -24,7 +24,7 @@ class WebhookTest extends HttpHelperTestCase
                     '::interaction id::',
                     '::interaction token::',
                     InteractionCallbackBuilder::new()
-                        ->setType(InteractionCallbackTypes::APPLICATION_COMMAND_AUTOCOMPLETE_RESULT),
+                        ->setType(InteractionCallbackType::APPLICATION_COMMAND_AUTOCOMPLETE_RESULT),
                 ],
                 'mockOptions' => [
                     'method' => 'post',

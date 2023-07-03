@@ -6,9 +6,9 @@ namespace Tests\Ragnarok\Fenrir\Interaction\Helpers;
 
 use Discord\Http\Multipart\MultipartBody;
 use PHPUnit\Framework\TestCase;
-use Ragnarok\Fenrir\Interaction\Helpers\InteractionCallbackBuilder;
 use Ragnarok\Fenrir\Component\Button\DangerButton;
-use Ragnarok\Fenrir\Enums\Command\InteractionCallbackTypes;
+use Ragnarok\Fenrir\Enums\InteractionCallbackType;
+use Ragnarok\Fenrir\Interaction\Helpers\InteractionCallbackBuilder;
 use Ragnarok\Fenrir\Rest\Helpers\Channel\AllowedMentionsBuilder;
 use Ragnarok\Fenrir\Rest\Helpers\Channel\ComponentBuilder;
 use Ragnarok\Fenrir\Rest\Helpers\Channel\ComponentRowBuilder;
@@ -20,16 +20,16 @@ class InteractionCallbackBuilderTest extends TestCase
     {
         $interactionCallbackBuilder = new InteractionCallbackBuilder();
 
-        $interactionCallbackBuilder->setType(InteractionCallbackTypes::PONG);
+        $interactionCallbackBuilder->setType(InteractionCallbackType::PONG);
 
-        $this->assertEquals(InteractionCallbackTypes::PONG, $interactionCallbackBuilder->getType());
-        $this->assertEquals(InteractionCallbackTypes::PONG->value, $interactionCallbackBuilder->get()['type']);
+        $this->assertEquals(InteractionCallbackType::PONG, $interactionCallbackBuilder->getType());
+        $this->assertEquals(InteractionCallbackType::PONG->value, $interactionCallbackBuilder->get()['type']);
     }
 
     public function testGetMultipart(): void
     {
         $interactionCallbackBuilder = new InteractionCallbackBuilder();
-        $interactionCallbackBuilder->setType(InteractionCallbackTypes::PONG);
+        $interactionCallbackBuilder->setType(InteractionCallbackType::PONG);
 
         $interactionCallbackBuilder->addFile('file.png', '::spoopy binary::');
 
@@ -41,7 +41,7 @@ class InteractionCallbackBuilderTest extends TestCase
     public function testGetComponents(): void
     {
         $interactionCallbackBuilder = InteractionCallbackBuilder::new()
-            ->setType(InteractionCallbackTypes::CHANNEL_MESSAGE_WITH_SOURCE);
+            ->setType(InteractionCallbackType::CHANNEL_MESSAGE_WITH_SOURCE);
 
         $component = ComponentBuilder::new()
             ->addRow(
@@ -57,7 +57,7 @@ class InteractionCallbackBuilderTest extends TestCase
     public function testGetEmbeds(): void
     {
         $interactionCallbackBuilder = InteractionCallbackBuilder::new()
-            ->setType(InteractionCallbackTypes::CHANNEL_MESSAGE_WITH_SOURCE);
+            ->setType(InteractionCallbackType::CHANNEL_MESSAGE_WITH_SOURCE);
 
         $embed = EmbedBuilder::new()
             ->setTitle('::title::');
@@ -70,7 +70,7 @@ class InteractionCallbackBuilderTest extends TestCase
     public function testGetAllowedMentions(): void
     {
         $interactionCallbackBuilder = InteractionCallbackBuilder::new()
-            ->setType(InteractionCallbackTypes::CHANNEL_MESSAGE_WITH_SOURCE);
+            ->setType(InteractionCallbackType::CHANNEL_MESSAGE_WITH_SOURCE);
 
         $allowedMentions = AllowedMentionsBuilder::new()
             ->allowUsers('::user id::');

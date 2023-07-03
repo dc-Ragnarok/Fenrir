@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace Ragnarok\Fenrir\Parts;
 
-use Ragnarok\Fenrir\Enums\Parts\VerificationLevels;
-use Ragnarok\Fenrir\Enums\Parts\MessageNotificationLevels;
-use Ragnarok\Fenrir\Enums\Parts\ExplicitContentFilterLevels;
-use Ragnarok\Fenrir\Enums\Parts\GuildFeatures;
-use Ragnarok\Fenrir\Enums\Parts\MfaLevels;
 use Ragnarok\Fenrir\Bitwise\Bitwise;
-use Ragnarok\Fenrir\Enums\Parts\PremiumTiers;
-use Ragnarok\Fenrir\Enums\Parts\NsfwLevels;
+use Ragnarok\Fenrir\Enums\ExplicitContentFilterLevel;
+use Ragnarok\Fenrir\Enums\GuildFeature;
+use Ragnarok\Fenrir\Enums\MessageNotificationLevel;
+use Ragnarok\Fenrir\Enums\MfaLevel;
+use Ragnarok\Fenrir\Enums\NsfwLevel;
+use Ragnarok\Fenrir\Enums\PremiumTier;
+use Ragnarok\Fenrir\Enums\VerificationLevel;
 
 class Guild
 {
@@ -29,9 +29,9 @@ class Guild
     public int $afk_timeout;
     public bool $widget_enabled;
     public ?string $widget_channel_id;
-    public VerificationLevels $verification_level;
-    public MessageNotificationLevels $default_message_notifications;
-    public ExplicitContentFilterLevels $explicit_content_filter;
+    public VerificationLevel $verification_level;
+    public MessageNotificationLevel $default_message_notifications;
+    public ExplicitContentFilterLevel $explicit_content_filter;
     /**
      * @var \Ragnarok\Fenrir\Parts\Role[]
      */
@@ -41,10 +41,10 @@ class Guild
      */
     public array $emojis;
     /**
-     * @var \Ragnarok\Fenrir\Enums\Parts\GuildFeatures[]
+     * @var \Ragnarok\Fenrir\Enums\GuildFeature[]
      */
     public array $features;
-    public MfaLevels $mfa_level;
+    public MfaLevel $mfa_level;
     public ?string $application_id;
     public ?string $system_channel_id;
     public Bitwise $system_channel_flags;
@@ -54,7 +54,7 @@ class Guild
     public ?string $vanity_url_code;
     public ?string $description;
     public ?string $banner;
-    public PremiumTiers $premium_tier;
+    public PremiumTier $premium_tier;
     public ?int $premium_subscription_count;
     public string $preferred_locale;
     public ?string $public_updates_channel_id;
@@ -62,7 +62,7 @@ class Guild
     public ?int $approximate_member_count;
     public ?int $approximate_presence_count;
     public ?WelcomeScreen $welcome_screen;
-    public NsfwLevels $nsfw_level;
+    public NsfwLevel $nsfw_level;
     /**
      * @var \Ragnarok\Fenrir\Parts\Sticker[]
      */
@@ -72,17 +72,17 @@ class Guild
 
     public function setVerificationLevel(int $value): void
     {
-        $this->verification_level = VerificationLevels::from($value);
+        $this->verification_level = VerificationLevel::from($value);
     }
 
     public function setDefaultMessageNotifications(int $value): void
     {
-        $this->default_message_notifications = MessageNotificationLevels::from($value);
+        $this->default_message_notifications = MessageNotificationLevel::from($value);
     }
 
     public function setExplicitContentFilter(int $value): void
     {
-        $this->explicit_content_filter = ExplicitContentFilterLevels::from($value);
+        $this->explicit_content_filter = ExplicitContentFilterLevel::from($value);
     }
 
     public function setFeatures(array $value): void
@@ -90,22 +90,22 @@ class Guild
         $this->features = [];
 
         foreach ($value as $entry) {
-            $this->features[] = GuildFeatures::from($entry);
+            $this->features[] = GuildFeature::from($entry);
         }
     }
 
     public function setMfaLevel(int $value): void
     {
-        $this->mfa_level = MfaLevels::from($value);
+        $this->mfa_level = MfaLevel::from($value);
     }
 
     public function setPremiumTier(int $value): void
     {
-        $this->premium_tier = PremiumTiers::from($value);
+        $this->premium_tier = PremiumTier::from($value);
     }
 
     public function setNsfwLevel(int $value): void
     {
-        $this->nsfw_level = NsfwLevels::from($value);
+        $this->nsfw_level = NsfwLevel::from($value);
     }
 }

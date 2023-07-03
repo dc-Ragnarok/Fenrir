@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Tests\Ragnarok\Fenrir\Rest\Helpers\Channel;
 
-use Ragnarok\Fenrir\Constants\Validation\RateLimit;
-use Ragnarok\Fenrir\Enums\Parts\ThreadAutoArchiveDuration;
-use Ragnarok\Fenrir\Rest\Helpers\Channel\StartThreadFromMessageBuilder;
 use PHPUnit\Framework\TestCase;
+use Ragnarok\Fenrir\Constants\Validation\RateLimit;
+use Ragnarok\Fenrir\Enums\ThreadAutoArchiveDuration;
+use Ragnarok\Fenrir\Rest\Helpers\Channel\StartThreadFromMessageBuilder;
 
 class StartThreadFromMessageBuilderTest extends TestCase
 {

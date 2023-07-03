@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace Ragnarok\Fenrir\Parts;
 
-use Ragnarok\Fenrir\Enums\Parts\ApplicationCommandOptionTypes;
-use Ragnarok\Fenrir\Enums\Parts\ChannelTypes;
+use Ragnarok\Fenrir\Enums\ApplicationCommandOptionType;
+use Ragnarok\Fenrir\Enums\ChannelTypes;
 
 class ApplicationCommandOptionStructure
 {
-    public ApplicationCommandOptionTypes $type;
+    public ApplicationCommandOptionType $type;
     public string $name;
     /**
      * @var array<string, string>
@@ -30,7 +30,7 @@ class ApplicationCommandOptionStructure
      */
     public ?array $options;
     /**
-     * @var \Ragnarok\Fenrir\Enums\Parts\ChannelTypes[]
+     * @var \Ragnarok\Fenrir\Enums\ChannelTypes[]
      */
     public ?array $channel_types;
     public int|float|null $min_value;
@@ -51,7 +51,7 @@ class ApplicationCommandOptionStructure
 
     public function setType(int $value): void
     {
-        $this->type = ApplicationCommandOptionTypes::from($value);
+        $this->type = ApplicationCommandOptionType::from($value);
     }
 
     public function setChannelTypes(array $value): void
