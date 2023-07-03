@@ -4,12 +4,15 @@ declare(strict_types=1);
 
 namespace Ragnarok\Fenrir\Gateway\Events;
 
+use Ragnarok\Fenrir\Attributes\RequiresIntent;
+use Ragnarok\Fenrir\Enums\Intent;
 use Ragnarok\Fenrir\Enums\Parts\TriggerType;
 use Ragnarok\Fenrir\Parts\AutoModeractionAction;
 
 /**
  * @see https://discord.com/developers/docs/topics/gateway-events#auto-moderation-action-execution
  */
+#[RequiresIntent(Intent::AUTO_MODERATION_EXECUTION)]
 class AutoModerationActionExecution
 {
     public string $guild_id;
