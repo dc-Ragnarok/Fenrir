@@ -7,7 +7,7 @@ namespace Ragnarok\Fenrir\Gateway\Events;
 use Carbon\Carbon;
 use Ragnarok\Fenrir\Attributes\RequiresIntent;
 use Ragnarok\Fenrir\Enums\Intent;
-use Ragnarok\Fenrir\Enums\Parts\TargetType;
+use Ragnarok\Fenrir\Enums\TargetType;
 use Ragnarok\Fenrir\Parts\Application;
 use Ragnarok\Fenrir\Parts\User;
 
