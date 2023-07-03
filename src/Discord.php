@@ -97,10 +97,10 @@ class Discord
     }
 
     /**
-     * @template Extension
+     * @template E
      *
-     * @param class-string<Extension>
-     * @return Extension
+     * @param class-string<E>
+     * @return E
      *
      * @throws ExtensionNotFoundException
      */
