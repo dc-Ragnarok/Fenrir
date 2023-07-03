@@ -554,9 +554,9 @@ class Guild extends HttpResource
      * @return ExtendedPromiseInterface<void>
      */
     public function modifyMfaLevel(
-        string   $guildId,
+        string $guildId,
         MfaLevel $mfaLevel,
-        ?string  $reason = null
+        ?string $reason = null
     ): ExtendedPromiseInterface {
         return $this->http->post(
             Endpoint::bind(
