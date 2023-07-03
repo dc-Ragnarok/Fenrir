@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Ragnarok\Fenrir\Enums;
 
-enum TriggerType: int
+enum AutoModerationRuleTriggerType: int
 {
     case KEYWORD = 1;
     case SPAM = 3;
