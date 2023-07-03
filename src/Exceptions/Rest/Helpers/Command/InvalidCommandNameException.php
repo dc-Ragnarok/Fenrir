@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Ragnarok\Fenrir\Exceptions\Rest\Helpers\Command;
 
-use Ragnarok\Fenrir\Constants\Validation\Command;
 use Exception;
+use Ragnarok\Fenrir\Constants\Validation\Command;
 
 class InvalidCommandNameException extends Exception
 {

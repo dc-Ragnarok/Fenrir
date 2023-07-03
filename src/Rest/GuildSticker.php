@@ -5,12 +5,9 @@ declare(strict_types=1);
 namespace Ragnarok\Fenrir\Rest;
 
 use Discord\Http\Endpoint;
-use Discord\Http\Http;
 use Ragnarok\Fenrir\Parts\Sticker;
 use Ragnarok\Fenrir\Rest\Helpers\GuildSticker\ModifyStickerBuilder;
 use Ragnarok\Fenrir\Rest\Helpers\GuildSticker\StickerBuilder;
-use Ragnarok\Fenrir\Rest\Helpers\HttpHelper;
-use Ragnarok\Fenrir\DataMapper;
 use React\Promise\ExtendedPromiseInterface;
 
 /**

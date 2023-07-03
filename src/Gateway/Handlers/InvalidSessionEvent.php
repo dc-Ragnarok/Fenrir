@@ -6,7 +6,6 @@ namespace Ragnarok\Fenrir\Gateway\Handlers;
 
 use Ragnarok\Fenrir\Constants\OpCodes;
 use Ragnarok\Fenrir\Gateway\Objects\Payload;
-use React\Promise\ExtendedPromiseInterface;
 use Throwable;
 
 class InvalidSessionEvent extends GatewayEvent

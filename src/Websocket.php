@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace Ragnarok\Fenrir;
 
 use Evenement\EventEmitter;
-use Ragnarok\Fenrir\Constants\WebsocketEvents;
-use Ragnarok\Fenrir\Exceptions\Websocket\ConnectionNotInitializedException;
 use JsonSerializable;
 use Psr\Log\LoggerInterface;
+use Ragnarok\Fenrir\Constants\WebsocketEvents;
 use Ragnarok\Fenrir\Exceptions\Websocket\ConnectionFailedException;
+use Ragnarok\Fenrir\Exceptions\Websocket\ConnectionNotInitializedException;
 use Ratchet\Client\Connector;
 use Ratchet\Client\WebSocket as RatchetWebsocket;
 use Ratchet\RFC6455\Messaging\MessageInterface;

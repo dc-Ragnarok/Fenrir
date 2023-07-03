@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace Ragnarok\Fenrir\Gateway\Events;
 
 use Ragnarok\Fenrir\Attributes\Partial;
+use Ragnarok\Fenrir\Gateway\Objects\Payload;
 use Ragnarok\Fenrir\Parts\Application;
 use Ragnarok\Fenrir\Parts\User;
-use Ragnarok\Fenrir\Gateway\Objects\Payload;
 
 class Ready extends Payload
 {

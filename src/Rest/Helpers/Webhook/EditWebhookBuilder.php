@@ -6,7 +6,6 @@ namespace Ragnarok\Fenrir\Rest\Helpers\Webhook;
 
 use Discord\Http\Multipart\MultipartBody;
 use Ragnarok\Fenrir\Rest\Helpers\Channel\AttachmentBuilder;
-use Ragnarok\Fenrir\Rest\Helpers\Channel\ComponentBuilder;
 use Ragnarok\Fenrir\Rest\Helpers\Channel\EmbedBuilder;
 use Ragnarok\Fenrir\Rest\Helpers\Channel\Message\AddAttachment;
 use Ragnarok\Fenrir\Rest\Helpers\Channel\Message\AddComponent;

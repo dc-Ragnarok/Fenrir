@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Ragnarok\Fenrir\Rest;
 
 use Discord\Http\Http;
-use Ragnarok\Fenrir\DataMapper;
 use Psr\Log\LoggerInterface;
+use Ragnarok\Fenrir\DataMapper;
 use React\Promise\ExtendedPromiseInterface;
 use Throwable;
 

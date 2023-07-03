@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Ragnarok\Fenrir\Parts;
 
-use Ragnarok\Fenrir\Enums\Parts\EventTypes;
-use Ragnarok\Fenrir\Enums\Parts\AutoModerationTriggerTypes;
+use Ragnarok\Fenrir\Enums\AutoModerationTriggerType;
+use Ragnarok\Fenrir\Enums\EventType;
 
 class AutoModerationRuleObject
 {
@@ -13,8 +13,8 @@ class AutoModerationRuleObject
     public string $guild_id;
     public string $name;
     public string $creator_id;
-    public EventTypes $event_type;
-    public AutoModerationTriggerTypes $trigger_type;
+    public EventType $event_type;
+    public AutoModerationTriggerType $trigger_type;
     public AutoModerationTriggerMetadata $trigger_metadata;
     /**
      * @var \Ragnarok\Fenrir\Parts\AutoModerationActionStructure[]
@@ -32,11 +32,11 @@ class AutoModerationRuleObject
 
     public function setEventType(int $value): void
     {
-        $this->event_type = EventTypes::from($value);
+        $this->event_type = EventType::from($value);
     }
 
     public function setTriggerType(int $value): void
     {
-        $this->trigger_type = AutoModerationTriggerTypes::from($value);
+        $this->trigger_type = AutoModerationTriggerType::from($value);
     }
 }
