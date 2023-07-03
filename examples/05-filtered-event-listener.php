@@ -46,4 +46,4 @@ $discord->gateway->events->on(Events::MESSAGE_CREATE, static function (MessageCr
     }
 });
 
-$discord->gateway->connect();
+$discord->gateway->open();

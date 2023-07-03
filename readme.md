@@ -18,7 +18,12 @@ Fenrir heavily relies on ReactPHP for async operations. Knowing the basics of as
 ## Example bot
 
 ```php
-use Ragnarok\Fenrir\Bitwise\Bitwise;use Ragnarok\Fenrir\Constants\Events;use Ragnarok\Fenrir\Discord;use Ragnarok\Fenrir\Enums\Intent;use Ragnarok\Fenrir\Gateway\Events\MessageCreate;use Ragnarok\Fenrir\Rest\Helpers\Channel\MessageBuilder;
+use Ragnarok\Fenrir\Bitwise\Bitwise;
+use Ragnarok\Fenrir\Constants\Events;
+use Ragnarok\Fenrir\Discord;
+use Ragnarok\Fenrir\Enums\Intent;
+use Ragnarok\Fenrir\Gateway\Events\MessageCreate;
+use Ragnarok\Fenrir\Rest\Helpers\Channel\MessageBuilder;
 
 require './vendor/autoload.php';
 
@@ -42,7 +47,7 @@ $discord->gateway->events->on(Events::MESSAGE_CREATE, function (MessageCreate $m
     }
 });
 
-$discord->gateway->connect(); // Nothing after this line is executed
+$discord->gateway->open(); // Nothing after this line is executed
 ```
 
 For more examples, check out the examples directory (todo)

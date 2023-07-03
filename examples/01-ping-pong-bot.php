@@ -31,4 +31,4 @@ $discord->gateway->events->on(Events::MESSAGE_CREATE, static function (MessageCr
     }
 });
 
-$discord->gateway->connect(); // Nothing after this line is executed
+$discord->gateway->open(); // Nothing after this line is executed

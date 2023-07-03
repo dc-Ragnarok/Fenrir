@@ -17,4 +17,4 @@ $discord
     ->withGateway(new Bitwise())
     ->withRest();
 
-$discord->gateway->connect(); // Nothing after this line is executed
+$discord->gateway->open(); // Nothing after this line is executed
