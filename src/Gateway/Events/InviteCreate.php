@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Ragnarok\Fenrir\Gateway\Events;
 
 use Carbon\Carbon;
-use Ragnarok\Fenrir\Enums\Parts\TargetType;
+use Ragnarok\Fenrir\Enums\TargetType;
 use Ragnarok\Fenrir\Parts\Application;
 use Ragnarok\Fenrir\Parts\User;
 
