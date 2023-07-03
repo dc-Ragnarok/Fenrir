@@ -11,14 +11,11 @@ use Ragnarok\Fenrir\Enums\InviteTargetType;
 class Invite
 {
     public string $code;
-    #[Partial]
     public ?Guild $guild;
-    #[Partial]
     public ?Channel $channel;
     public ?User $inviter;
     public ?InviteTargetType $target_type;
     public ?User $target_user;
-    #[Partial]
     public ?Application $target_application;
     public ?int $approximate_presence_count;
     public ?int $approximate_member_count;

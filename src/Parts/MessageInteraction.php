@@ -13,7 +13,6 @@ class MessageInteraction
     public InteractionType $type;
     public string $name;
     public User $user;
-    #[Partial]
     public ?GuildMember $member;
 
     public function setType(int $value): void

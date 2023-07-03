@@ -27,7 +27,6 @@ class AuditLog
     /**
      * @var \Ragnarok\Fenrir\Parts\Integration[]
      */
-    #[Partial]
     public ?array $integrations;
     /**
      * @var \Ragnarok\Fenrir\Parts\Channel[]
