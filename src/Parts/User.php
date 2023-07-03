@@ -23,12 +23,12 @@ class User
     public bool $verified;
     public ?string $email;
     public ?Bitwise $flags;
-    public ?PremiumTypes $premium_type;
+    public ?PremiumTier $premium_type;
     public ?Bitwise $public_flags;
     public ?GuildMember $member;
 
     public function setPremiumType(int $value): void
     {
-        $this->premium_type = PremiumTypes::from($value);
+        $this->premium_type = PremiumTier::from($value);
     }
 }
