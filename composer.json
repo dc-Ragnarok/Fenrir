@@ -5,7 +5,11 @@
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "Ragnarok\\Fenrir\\": "src/",
+            "Ragnarok\\Fenrir\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
             "Tests\\Ragnarok\\Fenrir\\": "tests/",
             "Fakes\\Ragnarok\\Fenrir\\": "fakes/"
         }
