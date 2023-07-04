@@ -10,15 +10,10 @@ use Fakes\Ragnarok\Fenrir\DataMapperFake;
 use Ragnarok\Fenrir\EventHandler;
 use Ragnarok\Fenrir\Gateway\Objects\Payload;
 use PHPUnit\Framework\TestCase;
-use Psr\Log\NullLogger;
 use React\Promise\Promise;
-use seregazhuk\React\PromiseTesting\AssertsPromise;
-use stdClass;
 
 final class EventHandlerTest extends TestCase
 {
-    use AssertsPromise;
-
     private DataMapper $dataMapper;
 
     protected function setUp(): void
@@ -28,17 +23,6 @@ final class EventHandlerTest extends TestCase
         $this->dataMapper = DataMapperFake::get();
     }
 
-    private function awaitResponse(EventHandler $eventHandler, string $event, Payload $payload): Promise
-    {
-        return new Promise(static function ($resolve) use ($eventHandler, $event, $payload) {
-            $eventHandler->on($event, static function (mixed $eventResponse) use ($resolve) {
-                $resolve($eventResponse);
-            });
-
-            $eventHandler->handle($payload);
-        });
-    }
-
     public function testDoesNotEmitIfUnknownEvent(): void
     {
         $eventHandler = new EventHandler($this->dataMapper, false);
@@ -46,9 +30,14 @@ final class EventHandlerTest extends TestCase
         $payload = new Payload();
         $payload->t = '::unknown event::';
 
-        $response = $this->awaitResponse($eventHandler, '::unknown event::', $payload);
+        $hasRun = false;
+        $eventHandler->on('::unknown event::', function () use (&$hasRun) {
+            $hasRun = true;
+        });
 
-        $this->assertPromiseRejects($response, 1);
+        $eventHandler->handle($payload);
+
+        $this->assertFalse($hasRun, 'Unknown event should not be emitted.');
     }
 
     /**
@@ -60,15 +49,18 @@ final class EventHandlerTest extends TestCase
 
         $payload = new Payload();
         $payload->t = $event;
-        $payload->d = new stdClass();
+        $payload->d = (object) [];
 
-        $response = $this->awaitResponse(
-            $eventHandler,
-            $event,
-            $payload
-        );
+        $hasRun = false;
+        $eventHandler->on($event, function ($event) use (&$hasRun, $class) {
+            $this->assertInstanceOf($class, $event);
 
-        $this->assertPromiseFulfillsWithInstanceOf($response, $class);
+            $hasRun = true;
+        });
+
+        $eventHandler->handle($payload);
+
+        $this->assertTrue($hasRun, 'Known event should be emitted.');
     }
 
     public function eventProvider(): array

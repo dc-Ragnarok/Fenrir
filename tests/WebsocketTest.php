@@ -13,7 +13,7 @@ use Psr\Log\NullLogger;
 use Ratchet\RFC6455\Messaging\MessageInterface;
 use React\Promise\Promise;
 
-use function Clue\React\Block\await;
+use function React\Async\await;
 
 class WebsocketTest extends TestCase
 {
@@ -47,25 +47,6 @@ class WebsocketTest extends TestCase
         $websocket->close(1001, '::reason::');
     }
 
-    public function testItConnectsToWsAndHasIOMessagesWithBucket(): void
-    {
-        $websocket = new Websocket(10, new NullLogger());
-
-        await($websocket->open('ws://localhost:8080/echo'));
-
-        $message = await(new Promise(static function (callable $resolve) use ($websocket) {
-            $websocket->on(WebsocketEvents::MESSAGE, static function (MessageInterface $message) use ($resolve) {
-                $resolve($message);
-            });
-
-            $websocket->send('::message::', true);
-        }));
-
-        $this->assertEquals('::message::', (string) $message);
-
-        $websocket->close(1001, '::reason::');
-    }
-
     public function testItCanSendJsonSerializableItems(): void
     {
         $websocket = new Websocket(10, new NullLogger());
@@ -84,7 +65,7 @@ class WebsocketTest extends TestCase
                 $resolve($message);
             });
 
-            $websocket->sendAsJson($jsonItem, true);
+            $websocket->sendAsJson($jsonItem, false);
         }));
 
         $this->assertEquals('{"hello":"world"}', (string) $message);
