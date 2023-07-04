@@ -29,8 +29,6 @@ class Discord
 
     private array $extensions;
 
-    private array $extensions;
-
     public function __construct(
         private string $token,
         private LoggerInterface $logger = new NullLogger()
