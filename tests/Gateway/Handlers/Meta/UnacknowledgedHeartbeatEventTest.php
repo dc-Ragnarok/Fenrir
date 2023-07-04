@@ -168,23 +168,23 @@ class UnacknowledgedHeartbeatEventTest extends MockeryTestCase
             ->andReturns(PromiseFake::get())
             ->once();
 
-         /** @var Eventer&MockInterface */
-         $rawHandler = Mockery::mock(Eventer::class);
-         $rawHandler->expects()
-             ->registerOnce()
-             ->with(IdentifyHelloEvent::class)
-             ->once();
+        /** @var Eventer&MockInterface */
+        $rawHandler = Mockery::mock(Eventer::class);
+        $rawHandler->expects()
+            ->registerOnce()
+            ->with(IdentifyHelloEvent::class)
+            ->once();
 
-         $connection->expects()
-             ->getRawHandler()
-             ->andReturns($rawHandler)
-             ->once();
+        $connection->expects()
+            ->getRawHandler()
+            ->andReturns($rawHandler)
+            ->once();
 
         $event = new UnacknowledgedHeartbeatEvent(
             $connection,
             new NullLogger(),
         );
 
-         $event->execute();
+        $event->execute();
     }
 }

@@ -53,7 +53,7 @@ class WebsocketTest extends TestCase
 
         await($websocket->open('ws://localhost:8080/echo'));
 
-        $jsonItem = new class implements JsonSerializable {
+        $jsonItem = new class () implements JsonSerializable {
             public function jsonSerialize(): array
             {
                 return ['hello' => 'world'];

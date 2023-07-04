@@ -72,7 +72,7 @@ class DiscordTest extends MockeryTestCase
 
     public function testItTellsYouWhetherExtensionsAreInstalled(): void
     {
-        $extension = new class implements Extension {
+        $extension = new class () implements Extension {
             public function initialize(Discord $discord): void
             {
             }
@@ -89,7 +89,7 @@ class DiscordTest extends MockeryTestCase
 
     public function testItReturnsTheExtension(): void
     {
-        $extension = new class implements Extension {
+        $extension = new class () implements Extension {
             public function initialize(Discord $discord): void
             {
             }
@@ -104,7 +104,7 @@ class DiscordTest extends MockeryTestCase
 
     public function testItYellsWhenYouTryToReturnANonRegisteredExtension(): void
     {
-        $extension = new class implements Extension {
+        $extension = new class () implements Extension {
             public function initialize(Discord $discord): void
             {
             }

@@ -35,7 +35,7 @@ class RecoverableInvalidSessionEventTest extends MockeryTestCase
         $this->assertEquals(OpCodes::INVALID_SESSION, RecoverableInvalidSessionEvent::getEventName());
     }
 
-        /**
+    /**
      * @dataProvider listenerDataProvider
      */
     public function testItListensToTheCorrectRequirements(array $payload, bool $expect): void
@@ -210,24 +210,24 @@ class RecoverableInvalidSessionEventTest extends MockeryTestCase
             ->andReturns(PromiseFake::get())
             ->once();
 
-         /** @var Eventer&MockInterface */
-         $rawHandler = Mockery::mock(Eventer::class);
-         $rawHandler->expects()
-             ->registerOnce()
-             ->with(IdentifyHelloEvent::class)
-             ->once();
+        /** @var Eventer&MockInterface */
+        $rawHandler = Mockery::mock(Eventer::class);
+        $rawHandler->expects()
+            ->registerOnce()
+            ->with(IdentifyHelloEvent::class)
+            ->once();
 
-         $connection->expects()
-             ->getRawHandler()
-             ->andReturns($rawHandler)
-             ->once();
+        $connection->expects()
+            ->getRawHandler()
+            ->andReturns($rawHandler)
+            ->once();
 
-         $event = new RecoverableInvalidSessionEvent(
-             $connection,
-             $this->mapper->map([], Payload::class),
-             new NullLogger(),
-         );
+        $event = new RecoverableInvalidSessionEvent(
+            $connection,
+            $this->mapper->map([], Payload::class),
+            new NullLogger(),
+        );
 
-         $event->execute();
+        $event->execute();
     }
 }

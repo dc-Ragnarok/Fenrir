@@ -11,7 +11,7 @@ class SetParentIdTest extends TestCase
 {
     public function testSetParentId(): void
     {
-        $class = new class extends DummyTraitTester {
+        $class = new class () extends DummyTraitTester {
             use SetParentId;
         };
 

@@ -11,7 +11,7 @@ class SetTopicTest extends TestCase
 {
     public function testSetTopic(): void
     {
-        $class = new class extends DummyTraitTester {
+        $class = new class () extends DummyTraitTester {
             use SetTopic;
         };
 

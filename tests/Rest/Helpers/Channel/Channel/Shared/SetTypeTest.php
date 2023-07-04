@@ -13,7 +13,7 @@ class SetTypeTest extends TestCase
 {
     private function getClass(): DummyTraitTester
     {
-        return new class extends DummyTraitTester {
+        return new class () extends DummyTraitTester {
             use SetType;
         };
     }
