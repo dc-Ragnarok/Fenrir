@@ -42,8 +42,8 @@
     "scripts": {
         "md": "phpmd src text ruleset.xml",
 
-        "cs": "php-cs-fixer fix --using-cache=no --diff --dry-run",
-        "csf": "php-cs-fixer fix --using-cache=no",
+        "cs": "php-cs-fixer fix --using-cache=no --diff --dry-run --allow-risky=yes",
+        "csf": "php-cs-fixer fix --using-cache=no --allow-risky=yes",
 
         "phpunit": "phpunit",
         "phpunit-coverage": "@php -d xdebug.mode=coverage ./vendor/bin/phpunit --coverage-html .phpunit.cache/cov-html",

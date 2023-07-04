@@ -11,7 +11,27 @@ $finder = PhpCsFixer\Finder::create()
 $config = new PhpCsFixer\Config();
 
 $config->setRules([
-    '@PER-CS1.0' => true
+    '@PER-CS1.0' => true,
+
+    'combine_consecutive_issets' => true,
+    'combine_consecutive_unsets' => true,
+
+    'explicit_indirect_variable' => true,
+
+    'clean_namespace' => true,
+
+    'assign_null_coalescing_to_coalesce_equal' => true,
+
+    'concat_space' => [
+        'spacing' => 'one'
+    ],
+
+    'no_useless_nullsafe_operator' => true,
+
+    'declare_strict_types' => true,
+    'strict_comparison' => true,
+
+    'single_blank_line_at_eof' => true,
 ])->setFinder($finder);
 
 return $config;
