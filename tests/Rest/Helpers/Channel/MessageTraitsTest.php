@@ -23,7 +23,7 @@ class MessageTraitsTest extends TestCase
 {
     public function testSetContent(): void
     {
-        $traitTester = new class {
+        $traitTester = new class () {
             use SetContent;
 
             public $data = [];
@@ -37,7 +37,7 @@ class MessageTraitsTest extends TestCase
 
     public function testAddEmbed(): void
     {
-        $traitTester = new class {
+        $traitTester = new class () {
             use AddEmbed;
         };
 
@@ -53,7 +53,7 @@ class MessageTraitsTest extends TestCase
 
     public function testSetFlags(): void
     {
-        $traitTester = new class {
+        $traitTester = new class () {
             use SetFlags;
 
             public $data = [];
@@ -66,7 +66,7 @@ class MessageTraitsTest extends TestCase
 
     public function testAllowMentions(): void
     {
-        $traitTester = new class {
+        $traitTester = new class () {
             use AllowMentions;
         };
 
@@ -82,7 +82,7 @@ class MessageTraitsTest extends TestCase
 
     public function testNoMentions(): void
     {
-        $traitTester = new class {
+        $traitTester = new class () {
             use AllowMentions;
         };
 
@@ -95,7 +95,7 @@ class MessageTraitsTest extends TestCase
 
     public function testSetTts(): void
     {
-        $traitTester = new class {
+        $traitTester = new class () {
             use SetTts;
 
             public $data = [];
@@ -109,7 +109,7 @@ class MessageTraitsTest extends TestCase
 
     public function testAddComponent(): void
     {
-        $traitTester = new class {
+        $traitTester = new class () {
             use AddComponent;
         };
 
@@ -127,7 +127,7 @@ class MessageTraitsTest extends TestCase
 
     private function getClassWithAddFileTrait(): object
     {
-        return new class {
+        return new class () {
             use AddFile;
         };
     }
@@ -210,7 +210,7 @@ class MessageTraitsTest extends TestCase
 
     public function testAddAttachment(): void
     {
-        $traitTester = new class {
+        $traitTester = new class () {
             use AddAttachment;
         };
 

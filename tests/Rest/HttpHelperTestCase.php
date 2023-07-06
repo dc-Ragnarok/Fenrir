@@ -13,13 +13,11 @@ use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
 use React\Promise\Promise;
-use seregazhuk\React\PromiseTesting\AssertsPromise;
 
-use function Clue\React\Block\await;
+use function React\Async\await;
 
 abstract class HttpHelperTestCase extends TestCase
 {
-    use AssertsPromise;
     use MockeryPHPUnitIntegration;
 
     protected HttpResource $httpItem;

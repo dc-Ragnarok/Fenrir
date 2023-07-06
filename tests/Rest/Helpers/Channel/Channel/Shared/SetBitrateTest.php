@@ -11,7 +11,7 @@ class SetBitrateTest extends TestCase
 {
     public function testSetBitRate(): void
     {
-        $class = new class extends DummyTraitTester {
+        $class = new class () extends DummyTraitTester {
             use SetBitrate;
         };
 
@@ -22,7 +22,7 @@ class SetBitrateTest extends TestCase
 
     public function testSetBitRateLowerThanMinimum(): void
     {
-        $class = new class extends DummyTraitTester {
+        $class = new class () extends DummyTraitTester {
             use SetBitrate;
         };
 

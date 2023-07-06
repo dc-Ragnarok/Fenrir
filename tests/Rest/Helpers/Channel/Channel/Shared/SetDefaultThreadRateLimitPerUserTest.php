@@ -12,7 +12,7 @@ class SetDefaultThreadRateLimitPerUserTest extends TestCase
 {
     public function testSetThreadRateLimitPerUser(): void
     {
-        $class = new class extends DummyTraitTester {
+        $class = new class () extends DummyTraitTester {
             use SetDefaultThreadRateLimitPerUser;
         };
 
@@ -24,7 +24,7 @@ class SetDefaultThreadRateLimitPerUserTest extends TestCase
 
     public function testSetThreadRateLimitAboveMaxPerUser(): void
     {
-        $class = new class extends DummyTraitTester {
+        $class = new class () extends DummyTraitTester {
             use SetDefaultThreadRateLimitPerUser;
         };
 
@@ -36,7 +36,7 @@ class SetDefaultThreadRateLimitPerUserTest extends TestCase
 
     public function testSetThreadRateLimitBelowMinPerUser(): void
     {
-        $class = new class extends DummyTraitTester {
+        $class = new class () extends DummyTraitTester {
             use SetDefaultThreadRateLimitPerUser;
         };
 

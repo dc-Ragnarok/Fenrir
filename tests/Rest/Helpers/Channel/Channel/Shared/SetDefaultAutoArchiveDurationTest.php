@@ -11,7 +11,7 @@ class SetDefaultAutoArchiveDurationTest extends TestCase
 {
     public function testSetArchiveDuration(): void
     {
-        $class = new class extends DummyTraitTester {
+        $class = new class () extends DummyTraitTester {
             use SetDefaultAutoArchiveDuration;
         };
 

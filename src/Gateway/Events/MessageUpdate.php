@@ -6,6 +6,8 @@ namespace Ragnarok\Fenrir\Gateway\Events;
 
 use Ragnarok\Fenrir\Attributes\RequiresIntent;
 use Ragnarok\Fenrir\Enums\Intent;
+use Ragnarok\Fenrir\Attributes\Intent;
+use Ragnarok\Fenrir\Attributes\Partial;
 use Ragnarok\Fenrir\Parts\Message;
 
 /**

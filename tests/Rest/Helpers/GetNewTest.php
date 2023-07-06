@@ -11,7 +11,7 @@ class GetNewTest extends TestCase
 {
     public function testGetNew(): void
     {
-        $class = new class {
+        $class = new class () {
             use GetNew;
         };
 
