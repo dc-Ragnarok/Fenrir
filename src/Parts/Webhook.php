@@ -17,9 +17,7 @@ class Webhook
     public ?string $avatar;
     public ?string $token;
     public ?string $application_id;
-    #[Partial]
     public ?Guild $source_guild;
-    #[Partial]
     public ?Channel $source_channel;
     public ?string $url;
 }

@@ -26,7 +26,6 @@ class User
     public ?Bitwise $flags;
     public ?PremiumTier $premium_type;
     public ?Bitwise $public_flags;
-    #[Partial]
     public ?GuildMember $member;
 
     public function setPremiumType(int $value): void

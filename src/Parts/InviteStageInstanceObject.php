@@ -11,7 +11,6 @@ class InviteStageInstanceObject
     /**
      * @var \Ragnarok\Fenrir\Parts\GuildMember[]
      */
-    #[Partial]
     public array $members;
     public int $participant_count;
     public int $speaker_count;

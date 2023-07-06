@@ -4,12 +4,13 @@ declare(strict_types=1);
 
 namespace Ragnarok\Fenrir\Gateway\Events;
 
-use Ragnarok\Fenrir\Attributes\Intent;
+use Ragnarok\Fenrir\Attributes\RequiresIntent;
+use Ragnarok\Fenrir\Enums\Intent;
 
 /**
  * @see https://discord.com/developers/docs/topics/gateway-events#thread-members-update
  */
-#[Intent("GUILD_MEMBERS")]
+#[RequiresIntent(Intent::GUILDS)]
 class ThreadMemberUpdate
 {
     public string $id;

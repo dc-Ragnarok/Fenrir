@@ -15,7 +15,6 @@ class InteractionDataResolved
     /**
      * @var array<string, GuildMember>
      */
-    #[Partial]
     public ?array $members;
     /**
      * @var array<string, Role>
@@ -24,12 +23,10 @@ class InteractionDataResolved
     /**
      * @var array<string, Channel>
      */
-    #[Partial]
     public ?array $channels;
     /**
      * @var array<string, Message>
      */
-    #[Partial]
     public ?array $messages;
     /**
      * @var array<string, Attachment>
