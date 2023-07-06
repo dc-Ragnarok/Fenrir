@@ -67,7 +67,7 @@ While there is nothing stopping you from using it on such environments, you shou
 Contributions are welcome.
 You can look for `@todo` to find something that requires attention.
 Please make sure to write tests where possible & make sure your code matches the phpcs configuration.
-If possible, please make sure to write tests for your code.
+Thanks!
 
 ## Notice
 
