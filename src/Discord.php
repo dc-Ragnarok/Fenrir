@@ -8,13 +8,13 @@ use Composer\InstalledVersions;
 use Discord\Http\DriverInterface;
 use Discord\Http\Drivers\Guzzle;
 use Discord\Http\Http;
-use Ragnarok\Fenrir\Bitwise\Bitwise;
-use Ragnarok\Fenrir\Rest\Rest;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
+use Ragnarok\Fenrir\Bitwise\Bitwise;
 use Ragnarok\Fenrir\Exceptions\Extension\ExtensionNotFoundException;
 use Ragnarok\Fenrir\Extension\Extension;
 use Ragnarok\Fenrir\Gateway\Connection;
+use Ragnarok\Fenrir\Rest\Rest;
 use React\EventLoop\Loop;
 use React\EventLoop\LoopInterface;
 
@@ -41,7 +41,7 @@ class Discord
     }
 
     /**
-     * @param Bitwise<\Ragnarok\Fenrir\Enums\Gateway\Intents> $intents
+     * @param Bitwise<\Ragnarok\Fenrir\Enums\Intent> $intents
      */
     public function withGateway(
         Bitwise $intents,
@@ -97,10 +97,10 @@ class Discord
     }
 
     /**
-     * @template Extension
+     * @template E
      *
-     * @param class-string<Extension>
-     * @return Extension
+     * @param class-string<E>
+     * @return E
      *
      * @throws ExtensionNotFoundException
      */

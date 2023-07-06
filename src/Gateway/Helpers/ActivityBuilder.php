@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Ragnarok\Fenrir\Gateway\Helpers;
 
-use Ragnarok\Fenrir\Enums\Gateway\ActivityType;
+use Ragnarok\Fenrir\Enums\ActivityType;
 use Ragnarok\Fenrir\Rest\Helpers\Emoji\EmojiBuilder;
 use Ragnarok\Fenrir\Rest\Helpers\GetNew;
 

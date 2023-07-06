@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Ragnarok\Fenrir\Parts;
 
-use Ragnarok\Fenrir\Bitwise\Bitwise;
 use Ragnarok\Fenrir\Attributes\Partial;
+use Ragnarok\Fenrir\Bitwise\Bitwise;
 
 class Application
 {

@@ -6,14 +6,14 @@ namespace Ragnarok\Fenrir;
 
 use Ragnarok\Fenrir\Component\Button\InteractionButton;
 use Ragnarok\Fenrir\Constants\Events;
-use Ragnarok\Fenrir\Enums\Parts\InteractionTypes;
+use Ragnarok\Fenrir\Enums\InteractionType;
 use Ragnarok\Fenrir\Extension\Extension;
+use Ragnarok\Fenrir\Gateway\Events\InteractionCreate;
+use Ragnarok\Fenrir\Gateway\Events\Ready;
 use Ragnarok\Fenrir\Interaction\ButtonInteraction;
 use Ragnarok\Fenrir\Interaction\CommandInteraction;
 use Ragnarok\Fenrir\Parts\ApplicationCommand;
 use Ragnarok\Fenrir\Rest\Helpers\Command\CommandBuilder;
-use Ragnarok\Fenrir\Gateway\Events\InteractionCreate;
-use Ragnarok\Fenrir\Gateway\Events\Ready;
 
 class InteractionHandler implements Extension
 {
@@ -51,7 +51,7 @@ class InteractionHandler implements Extension
             $this->discord->gateway->events,
             Events::INTERACTION_CREATE,
             fn (InteractionCreate $interactionCreate) =>
-                $interactionCreate->type === InteractionTypes::APPLICATION_COMMAND
+                $interactionCreate->type === InteractionType::APPLICATION_COMMAND
                 && isset($this->handlersCommand[$interactionCreate->data->id])
         );
 
@@ -62,7 +62,7 @@ class InteractionHandler implements Extension
             $this->discord->gateway->events,
             Events::INTERACTION_CREATE,
             fn (InteractionCreate $interactionCreate) =>
-                $interactionCreate->type === InteractionTypes::MESSAGE_COMPONENT
+                $interactionCreate->type === InteractionType::MESSAGE_COMPONENT
                 && $interactionCreate->data->component_type === 2 // @todo enum
                 && isset($this->handlersButton[$interactionCreate->data->custom_id])
         );

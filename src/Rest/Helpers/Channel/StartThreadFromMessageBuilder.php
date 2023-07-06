@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Ragnarok\Fenrir\Rest\Helpers\Channel;
 
 use Ragnarok\Fenrir\Constants\Validation\RateLimit;
-use Ragnarok\Fenrir\Enums\Parts\ThreadAutoArchiveDuration;
+use Ragnarok\Fenrir\Enums\ThreadAutoArchiveDuration;
 use Ragnarok\Fenrir\Rest\Helpers\GetNew;
 
 class StartThreadFromMessageBuilder

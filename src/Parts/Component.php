@@ -4,14 +4,13 @@ declare(strict_types=1);
 
 namespace Ragnarok\Fenrir\Parts;
 
-use Ragnarok\Fenrir\Enums\Component\ButtonStyle;
-use Ragnarok\Fenrir\Enums\Parts\ChannelTypes;
-use Ragnarok\Fenrir\Enums\Parts\MessageComponentTypes;
-use Ragnarok\Fenrir\Parts\Emoji;
+use Ragnarok\Fenrir\Enums\ButtonStyle;
+use Ragnarok\Fenrir\Enums\ChannelTypes;
+use Ragnarok\Fenrir\Enums\MessageComponentType;
 
 class Component
 {
-    public MessageComponentTypes $type;
+    public MessageComponentType $type;
     /**
      * @var \Ragnarok\Fenrir\Parts\Component[]
      */
@@ -27,7 +26,7 @@ class Component
      */
     public ?array $options; // @todo
     /**
-     * @var \Ragnarok\Fenrir\Enums\Parts\ChannelTypes[]
+     * @var \Ragnarok\Fenrir\Enums\ChannelTypes[]
      */
     public ?array $channel_types;
     public ?string $placeholder;
@@ -47,7 +46,7 @@ class Component
 
     public function setType(int $value): void
     {
-        $this->type = MessageComponentTypes::from($value);
+        $this->type = MessageComponentType::from($value);
     }
 
     public function setStyle(int $value): void

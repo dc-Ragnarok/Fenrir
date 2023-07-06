@@ -4,15 +4,15 @@ declare(strict_types=1);
 
 namespace Ragnarok\Fenrir\Parts;
 
-use Ragnarok\Fenrir\Enums\Parts\MessageActivityTypes;
+use Ragnarok\Fenrir\Enums\MessageActivityType;
 
 class MessageActivity
 {
-    public MessageActivityTypes $type;
+    public MessageActivityType $type;
     public ?string $party_id;
 
     public function setType(int $value): void
     {
-        $this->type = MessageActivityTypes::from($value);
+        $this->type = MessageActivityType::from($value);
     }
 }

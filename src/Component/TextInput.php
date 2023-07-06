@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Ragnarok\Fenrir\Component;
 
-use Ragnarok\Fenrir\Enums\Component\TextInputStyle;
+use Ragnarok\Fenrir\Enums\TextInputStyle;
 
 class TextInput extends Component
 {

@@ -4,21 +4,21 @@ declare(strict_types=1);
 
 namespace Tests\Ragnarok\Fenrir;
 
-use Ragnarok\Fenrir\Component\Button\DangerButton;
-use Ragnarok\Fenrir\Interaction\CommandInteraction;
-use Ragnarok\Fenrir\Constants\Events;
 use Fakes\Ragnarok\Fenrir\DataMapperFake;
-use Ragnarok\Fenrir\Enums\Parts\InteractionTypes;
-use Ragnarok\Fenrir\EventHandler;
-use Ragnarok\Fenrir\Interaction\ButtonInteraction;
-use Ragnarok\Fenrir\InteractionHandler;
-use Ragnarok\Fenrir\Rest\Helpers\Command\CommandBuilder;
-use Ragnarok\Fenrir\Gateway\Objects\Payload;
-use Mockery\Adapter\Phpunit\MockeryTestCase;
-use Ragnarok\Fenrir\Parts\ApplicationCommand;
-use Ragnarok\Fenrir\Gateway\Events\InteractionCreate;
 use Fakes\Ragnarok\Fenrir\DiscordFake;
 use Fakes\Ragnarok\Fenrir\PromiseFake;
+use Mockery\Adapter\Phpunit\MockeryTestCase;
+use Ragnarok\Fenrir\Component\Button\DangerButton;
+use Ragnarok\Fenrir\Constants\Events;
+use Ragnarok\Fenrir\Enums\InteractionType;
+use Ragnarok\Fenrir\EventHandler;
+use Ragnarok\Fenrir\Gateway\Events\InteractionCreate;
+use Ragnarok\Fenrir\Gateway\Objects\Payload;
+use Ragnarok\Fenrir\Interaction\ButtonInteraction;
+use Ragnarok\Fenrir\Interaction\CommandInteraction;
+use Ragnarok\Fenrir\InteractionHandler;
+use Ragnarok\Fenrir\Parts\ApplicationCommand;
+use Ragnarok\Fenrir\Rest\Helpers\Command\CommandBuilder;
 use React\Promise\Promise;
 
 class InteractionHandlerTest extends MockeryTestCase
@@ -173,7 +173,7 @@ class InteractionHandlerTest extends MockeryTestCase
 
         /** @var InteractionCreate */
         $interactionCreate = DataMapperFake::get()->map([
-            'type' => InteractionTypes::APPLICATION_COMMAND->value,
+            'type' => InteractionType::APPLICATION_COMMAND->value,
             'data' => [
                 'id' => '::application command id::',
             ],
@@ -218,7 +218,7 @@ class InteractionHandlerTest extends MockeryTestCase
 
         /** @var InteractionCreate */
         $interactionCreate = DataMapperFake::get()->map([
-            'type' => InteractionTypes::APPLICATION_COMMAND->value,
+            'type' => InteractionType::APPLICATION_COMMAND->value,
             'data' => [
                 'id' => '::other application command id::',
             ],
@@ -248,7 +248,7 @@ class InteractionHandlerTest extends MockeryTestCase
         $interactionCreate = DataMapperFake::get()->map([
                 'id' => '::interaction id::',
                 'token' => '::token::',
-                'type' => InteractionTypes::MESSAGE_COMPONENT->value,
+                'type' => InteractionType::MESSAGE_COMPONENT->value,
                 'application_id' => '::application id::',
                 'data' => [
                     'component_type' => 2, // @todo enum
@@ -282,7 +282,7 @@ class InteractionHandlerTest extends MockeryTestCase
         $interactionCreate = DataMapperFake::get()->map([
                 'id' => '::interaction id::',
                 'token' => '::token::',
-                'type' => InteractionTypes::MESSAGE_COMPONENT->value,
+                'type' => InteractionType::MESSAGE_COMPONENT->value,
                 'application_id' => '::application id::',
                 'data' => [
                     'component_type' => 2, // @todo enum

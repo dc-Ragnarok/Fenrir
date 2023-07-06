@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Ragnarok\Fenrir\Rest;
 
 use Discord\Http\Endpoint;
-use Ragnarok\Fenrir\Bitwise\Bitwise;
 use Ragnarok\Fenrir\Parts\Channel as PartsChannel;
 use Ragnarok\Fenrir\Parts\Invite;
 use Ragnarok\Fenrir\Parts\Message;

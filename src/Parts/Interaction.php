@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace Ragnarok\Fenrir\Parts;
 
-use Ragnarok\Fenrir\Enums\Parts\InteractionTypes;
+use Ragnarok\Fenrir\Enums\InteractionType;
 
 class Interaction
 {
     public string $id;
     public string $application_id;
-    public InteractionTypes $type;
+    public InteractionType $type;
     public ?InteractionData $data;
     public ?string $guild_id;
     /** @deprecated */
@@ -31,6 +31,6 @@ class Interaction
 
     public function setType(int $value): void
     {
-        $this->type = InteractionTypes::from($value);
+        $this->type = InteractionType::from($value);
     }
 }

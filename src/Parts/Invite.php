@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Ragnarok\Fenrir\Parts;
 
-use Ragnarok\Fenrir\Enums\Parts\InviteTargetTypes;
 use Carbon\Carbon;
 use Ragnarok\Fenrir\Attributes\Partial;
+use Ragnarok\Fenrir\Enums\InviteTargetType;
 
 class Invite
 {
@@ -16,7 +16,7 @@ class Invite
     #[Partial]
     public ?Channel $channel;
     public ?User $inviter;
-    public ?InviteTargetTypes $target_type;
+    public ?InviteTargetType $target_type;
     public ?User $target_user;
     #[Partial]
     public ?Application $target_application;
@@ -28,6 +28,6 @@ class Invite
 
     public function setTargetType(int $value): void
     {
-        $this->target_type = InviteTargetTypes::from($value);
+        $this->target_type = InviteTargetType::from($value);
     }
 }

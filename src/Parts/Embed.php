@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace Ragnarok\Fenrir\Parts;
 
-use Ragnarok\Fenrir\Enums\Parts\EmbedTypes;
 use Carbon\Carbon;
+use Ragnarok\Fenrir\Enums\EmbedType;
 
 class Embed
 {
     public ?string $title;
-    public ?EmbedTypes $type;
+    public ?EmbedType $type;
     public ?string $description;
     public ?string $url;
     public ?Carbon $timestamp;
@@ -28,6 +28,6 @@ class Embed
 
     public function setType(string $value): void
     {
-        $this->type = EmbedTypes::from($value);
+        $this->type = EmbedType::from($value);
     }
 }

@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace Ragnarok\Fenrir\Parts;
 
-use Ragnarok\Fenrir\Enums\Parts\ActivityTypes;
 use Carbon\Carbon;
 use Ragnarok\Fenrir\Bitwise\Bitwise;
+use Ragnarok\Fenrir\Enums\ActivityType;
 
 class Activity
 {
     public string $name;
-    public ActivityTypes $type;
+    public ActivityType $type;
     public ?string $url;
     public Carbon $created_at;
     public ?ActivityTimestamps $timestamps;
@@ -31,6 +31,6 @@ class Activity
 
     public function setType(int $value): void
     {
-        $this->type = ActivityTypes::from($value);
+        $this->type = ActivityType::from($value);
     }
 }

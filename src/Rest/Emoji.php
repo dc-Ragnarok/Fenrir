@@ -5,11 +5,8 @@ declare(strict_types=1);
 namespace Ragnarok\Fenrir\Rest;
 
 use Discord\Http\Endpoint;
-use Discord\Http\Http;
 use Ragnarok\Fenrir\Parts\Emoji as PartsEmoji;
 use Ragnarok\Fenrir\Rest\Helpers\Emoji\CreateEmojiBuilder;
-use Ragnarok\Fenrir\Rest\Helpers\HttpHelper;
-use Ragnarok\Fenrir\DataMapper;
 use React\Promise\ExtendedPromiseInterface;
 
 /**

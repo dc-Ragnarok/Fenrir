@@ -4,12 +4,11 @@ declare(strict_types=1);
 
 namespace Ragnarok\Fenrir;
 
-use Ragnarok\Fenrir\Enums\Parts\ApplicationCommandOptionTypes;
-use Ragnarok\Fenrir\Enums\Parts\ChannelTypes;
-use Ragnarok\Fenrir\Rest\Helpers\Command\CommandBuilder;
-use Ragnarok\Fenrir\Rest\Helpers\Command\CommandOptionBuilder;
 use Mockery;
 use PHPUnit\Framework\TestCase;
+use Ragnarok\Fenrir\Enums\ApplicationCommandOptionType;
+use Ragnarok\Fenrir\Enums\ChannelTypes;
+use Ragnarok\Fenrir\Rest\Helpers\Command\CommandOptionBuilder;
 
 class CommandOptionBuilderTest extends TestCase
 {
@@ -17,10 +16,10 @@ class CommandOptionBuilderTest extends TestCase
     {
         $builder = new CommandOptionBuilder();
         $this->assertNull($builder->getType());
-        $builder->setType(ApplicationCommandOptionTypes::SUB_COMMAND);
+        $builder->setType(ApplicationCommandOptionType::SUB_COMMAND);
 
-        $this->assertEquals(ApplicationCommandOptionTypes::SUB_COMMAND, $builder->getType());
-        $this->assertEquals(ApplicationCommandOptionTypes::SUB_COMMAND->value, $builder->get()['type']);
+        $this->assertEquals(ApplicationCommandOptionType::SUB_COMMAND, $builder->getType());
+        $this->assertEquals(ApplicationCommandOptionType::SUB_COMMAND->value, $builder->get()['type']);
     }
 
     public function testSetName(): void

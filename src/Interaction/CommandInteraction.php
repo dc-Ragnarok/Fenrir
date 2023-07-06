@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace Ragnarok\Fenrir\Interaction;
 
-use Ragnarok\Fenrir\Interaction\Helpers\InteractionCallbackBuilder;
 use Ragnarok\Fenrir\Discord;
-use Ragnarok\Fenrir\Enums\Parts\ApplicationCommandOptionTypes as OptionTypes;
+use Ragnarok\Fenrir\Enums\ApplicationCommandOptionType as OptionTypes;
+use Ragnarok\Fenrir\Gateway\Events\InteractionCreate;
+use Ragnarok\Fenrir\Interaction\Helpers\InteractionCallbackBuilder;
 use Ragnarok\Fenrir\Parts\ApplicationCommandInteractionDataOptionStructure as OptionStructure;
 use Ragnarok\Fenrir\Rest\Helpers\Webhook\EditWebhookBuilder;
-use Ragnarok\Fenrir\Gateway\Events\InteractionCreate;
 use React\Promise\ExtendedPromiseInterface;
 
 class CommandInteraction

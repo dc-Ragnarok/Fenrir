@@ -3,22 +3,22 @@
 use Ragnarok\Fenrir\Bitwise\Bitwise;
 use Ragnarok\Fenrir\Constants\Events;
 use Ragnarok\Fenrir\Discord;
-use Ragnarok\Fenrir\Enums\Gateway\Intents;
+use Ragnarok\Fenrir\Enums\Intent;
 use Ragnarok\Fenrir\FilteredEventEmitter;
-use Ragnarok\Fenrir\Rest\Helpers\Channel\MessageBuilder;
 use Ragnarok\Fenrir\Gateway\Events\MessageCreate;
 use Ragnarok\Fenrir\Gateway\Events\MessageReactionAdd;
+use Ragnarok\Fenrir\Rest\Helpers\Channel\MessageBuilder;
 
 require './vendor/autoload.php';
 
 $discord = (new Discord(
     'TOKEN',
 ))->withGateway(Bitwise::from(
-    Intents::GUILD_MESSAGES,
-    Intents::DIRECT_MESSAGES,
-    Intents::MESSAGE_CONTENT,
-    Intents::GUILD_MESSAGE_REACTIONS,
-    Intents::DIRECT_MESSAGE_REACTIONS,
+    Intent::GUILD_MESSAGES,
+    Intent::DIRECT_MESSAGES,
+    Intent::MESSAGE_CONTENT,
+    Intent::GUILD_MESSAGE_REACTIONS,
+    Intent::DIRECT_MESSAGE_REACTIONS,
 ))->withRest();
 
 $discord->gateway->events->on(Events::MESSAGE_CREATE, static function (MessageCreate $message) use ($discord) {
@@ -46,4 +46,4 @@ $discord->gateway->events->on(Events::MESSAGE_CREATE, static function (MessageCr
     }
 });
 
-$discord->gateway->connect();
+$discord->gateway->open();

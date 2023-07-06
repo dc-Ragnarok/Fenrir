@@ -4,16 +4,15 @@ declare(strict_types=1);
 
 namespace Tests\Ragnarok\Fenrir\Rest\Helpers\Channel\Channel;
 
+use PHPUnit\Framework\TestCase;
 use Ragnarok\Fenrir\Bitwise\Bitwise;
-use Ragnarok\Fenrir\Enums\Flags\ChannelFlags;
-use Ragnarok\Fenrir\Enums\Parts\ChannelTypes;
-use Ragnarok\Fenrir\Enums\Parts\ForumLayoutTypes;
-use Ragnarok\Fenrir\Enums\Parts\SortOrderTypes;
+use Ragnarok\Fenrir\Enums\ChannelFlag;
+use Ragnarok\Fenrir\Enums\ChannelTypes;
+use Ragnarok\Fenrir\Enums\ForumLayoutType;
+use Ragnarok\Fenrir\Enums\SortOrderType;
 use Ragnarok\Fenrir\Exceptions\Rest\Helpers\Channel\Channel\GuildForumChannelBuilder\TooManyAvailableTagsException;
-use Ragnarok\Fenrir\Parts\Emoji;
 use Ragnarok\Fenrir\Rest\Helpers\Channel\Channel\GuildForumChannelBuilder;
 use Ragnarok\Fenrir\Rest\Helpers\Emoji\EmojiBuilder;
-use PHPUnit\Framework\TestCase;
 
 class GuildForumChannelBuilderTest extends TestCase
 {
@@ -29,8 +28,8 @@ class GuildForumChannelBuilderTest extends TestCase
     public function testSetFlags(): void
     {
         $builder = new GuildForumChannelBuilder();
-        $builder->addFlag(ChannelFlags::PINNED);
-        $bitwise = Bitwise::from(ChannelFlags::PINNED);
+        $builder->addFlag(ChannelFlag::PINNED);
+        $bitwise = Bitwise::from(ChannelFlag::PINNED);
 
         $this->assertEquals($bitwise->get(), $builder->get()['flags']);
     }
@@ -91,16 +90,16 @@ class GuildForumChannelBuilderTest extends TestCase
     public function testSetDefaultSortOrder(): void
     {
         $builder = new GuildForumChannelBuilder();
-        $builder->setDefaultSortOrder(SortOrderTypes::LATEST_ACTIVITY);
+        $builder->setDefaultSortOrder(SortOrderType::LATEST_ACTIVITY);
 
-        $this->assertEquals(SortOrderTypes::LATEST_ACTIVITY->value, $builder->get()['default_sort_order']);
+        $this->assertEquals(SortOrderType::LATEST_ACTIVITY->value, $builder->get()['default_sort_order']);
     }
 
     public function testSetDefaultForumLayout(): void
     {
         $builder = new GuildForumChannelBuilder();
-        $builder->setDefaultForumLayout(ForumLayoutTypes::NOT_SET);
+        $builder->setDefaultForumLayout(ForumLayoutType::NOT_SET);
 
-        $this->assertEquals(ForumLayoutTypes::NOT_SET->value, $builder->get()['default_forum_layout']);
+        $this->assertEquals(ForumLayoutType::NOT_SET->value, $builder->get()['default_forum_layout']);
     }
 }

@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Ragnarok\Fenrir\Parts;
 
-use Ragnarok\Fenrir\Bitwise\Bitwise;
-use Ragnarok\Fenrir\Enums\Parts\PremiumTypes;
 use Ragnarok\Fenrir\Attributes\Partial;
+use Ragnarok\Fenrir\Bitwise\Bitwise;
+use Ragnarok\Fenrir\Enums\PremiumTier;
 
 class User
 {
@@ -24,13 +24,13 @@ class User
     public bool $verified;
     public ?string $email;
     public ?Bitwise $flags;
-    public ?PremiumTypes $premium_type;
+    public ?PremiumTier $premium_type;
     public ?Bitwise $public_flags;
     #[Partial]
     public ?GuildMember $member;
 
     public function setPremiumType(int $value): void
     {
-        $this->premium_type = PremiumTypes::from($value);
+        $this->premium_type = PremiumTier::from($value);
     }
 }

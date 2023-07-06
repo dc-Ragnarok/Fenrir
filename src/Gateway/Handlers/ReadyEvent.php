@@ -6,7 +6,6 @@ namespace Ragnarok\Fenrir\Gateway\Handlers;
 
 use Ragnarok\Fenrir\Constants\Events;
 use Ragnarok\Fenrir\Constants\OpCodes;
-use Ragnarok\Fenrir\Gateway\Handlers\GatewayEvent;
 
 class ReadyEvent extends GatewayEvent
 {

@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace Ragnarok\Fenrir\Parts;
 
 use Carbon\Carbon;
-use Ragnarok\Fenrir\Enums\Parts\GuildScheduledEventPrivacyLevels;
-use Ragnarok\Fenrir\Enums\Parts\GuildScheduledEventStatus;
-use Ragnarok\Fenrir\Enums\Parts\GuildScheduledEventEntityTypes;
+use Ragnarok\Fenrir\Enums\GuildScheduledEventEntityType;
+use Ragnarok\Fenrir\Enums\GuildScheduledEventPrivacyLevel;
+use Ragnarok\Fenrir\Enums\GuildScheduledEventStatus;
 
 class GuildScheduledEvent
 {
@@ -19,9 +19,9 @@ class GuildScheduledEvent
     public ?string $description;
     public Carbon $scheduled_start_time;
     public ?Carbon $scheduled_end_time;
-    public GuildScheduledEventPrivacyLevels $privacy_level;
+    public GuildScheduledEventPrivacyLevel $privacy_level;
     public GuildScheduledEventStatus $status;
-    public GuildScheduledEventEntityTypes $entity_type;
+    public GuildScheduledEventEntityType $entity_type;
     public ?string $entity_id;
     public ?GuildScheduledEventEntityMetadata $entity_metadata;
     public User $creator;
@@ -30,7 +30,7 @@ class GuildScheduledEvent
 
     public function setPrivacyLevel(int $value): void
     {
-        $this->privacy_level = GuildScheduledEventPrivacyLevels::from($value);
+        $this->privacy_level = GuildScheduledEventPrivacyLevel::from($value);
     }
 
     public function setStatus(int $value): void
@@ -40,6 +40,6 @@ class GuildScheduledEvent
 
     public function setEntityType(int $value): void
     {
-        $this->entity_type = GuildScheduledEventEntityTypes::from($value);
+        $this->entity_type = GuildScheduledEventEntityType::from($value);
     }
 }

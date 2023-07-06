@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace Ragnarok\Fenrir\Gateway;
 
 use Exan\Eventer\Eventer;
-use Ragnarok\Fenrir\Bitwise\Bitwise;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
+use Ragnarok\Fenrir\Bitwise\Bitwise;
 use Ragnarok\Fenrir\Constants\MetaEvents;
 use Ragnarok\Fenrir\Constants\WebsocketEvents;
 use Ragnarok\Fenrir\DataMapper;

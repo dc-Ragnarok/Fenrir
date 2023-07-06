@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace Ragnarok\Fenrir;
 
+use PHPUnit\Framework\TestCase;
 use Ragnarok\Fenrir\Bitwise\Bitwise;
-use Ragnarok\Fenrir\Enums\Parts\ApplicationCommandOptionTypes;
-use Ragnarok\Fenrir\Enums\Parts\ApplicationCommandTypes;
+use Ragnarok\Fenrir\Enums\ApplicationCommandOptionType;
+use Ragnarok\Fenrir\Enums\ApplicationCommandTypes;
 use Ragnarok\Fenrir\Exceptions\Rest\Helpers\Command\InvalidCommandNameException;
 use Ragnarok\Fenrir\Rest\Helpers\Command\CommandBuilder;
 use Ragnarok\Fenrir\Rest\Helpers\Command\CommandOptionBuilder;
-use PHPUnit\Framework\TestCase;
 
 class CommandBuilderTest extends TestCase
 {
@@ -71,7 +71,7 @@ class CommandBuilderTest extends TestCase
         $commandBuilder = new CommandBuilder();
 
         $optionBuilder = new CommandOptionBuilder();
-        $optionBuilder->setType(ApplicationCommandOptionTypes::ATTACHMENT);
+        $optionBuilder->setType(ApplicationCommandOptionType::ATTACHMENT);
 
         $commandBuilder->addOption($optionBuilder);
 

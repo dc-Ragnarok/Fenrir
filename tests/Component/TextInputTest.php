@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Tests\Ragnarok\Fenrir\Component;
 
-use Ragnarok\Fenrir\Component\TextInput;
-use Ragnarok\Fenrir\Enums\Component\TextInputStyle;
 use PHPUnit\Framework\TestCase;
+use Ragnarok\Fenrir\Component\TextInput;
+use Ragnarok\Fenrir\Enums\TextInputStyle;
 
 class TextInputTest extends TestCase
 {

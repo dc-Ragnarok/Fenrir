@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace Tests\Ragnarok\Fenrir\Component;
 
+use PHPUnit\Framework\TestCase;
 use Ragnarok\Fenrir\Component\SelectMenu\StringSelectMenu;
-use Ragnarok\Fenrir\Enums\Component\SelectMenuType;
+use Ragnarok\Fenrir\Enums\SelectMenuType;
 use Ragnarok\Fenrir\Exceptions\Components\SelectMenu\StringSelectMenu\NoOptionsException;
 use Ragnarok\Fenrir\Exceptions\Components\SelectMenu\StringSelectMenu\TooManyOptionsException;
 use Ragnarok\Fenrir\Parts\Emoji;
 use Ragnarok\Fenrir\Rest\Helpers\Emoji\EmojiBuilder;
-use PHPUnit\Framework\TestCase;
 
 class StringSelectMenuTest extends TestCase
 {

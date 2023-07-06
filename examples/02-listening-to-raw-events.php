@@ -10,11 +10,11 @@ require './vendor/autoload.php';
 $discord = new Discord('TOKEN');
 
 $discord
-    ->withGateway(new Bitwise(), raw: true)// Enable your desired Gateway intents
+    ->withGateway(new Bitwise())// Enable your desired Gateway intents
     ->withRest();
 
 $discord->gateway->events->on(Events::RAW, static function (Payload $payload) {
     echo 'Received event ', $payload->t, PHP_EOL;
 });
 
-$discord->gateway->connect(); // Nothing after this line is executed
+$discord->gateway->open(); // Nothing after this line is executed

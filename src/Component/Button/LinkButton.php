@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Ragnarok\Fenrir\Component\Button;
 
 use Ragnarok\Fenrir\Component\Component;
-use Ragnarok\Fenrir\Enums\Component\ButtonStyle;
+use Ragnarok\Fenrir\Enums\ButtonStyle;
 use Ragnarok\Fenrir\Rest\Helpers\Emoji\EmojiBuilder;
 
 class LinkButton extends Component
