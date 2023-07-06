@@ -11,7 +11,7 @@ class SetNsfwTest extends TestCase
 {
     public function testSetNsfw(): void
     {
-        $class = new class extends DummyTraitTester {
+        $class = new class () extends DummyTraitTester {
             use SetNsfw;
         };
 

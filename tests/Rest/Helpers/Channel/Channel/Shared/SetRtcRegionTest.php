@@ -11,7 +11,7 @@ class SetRtcRegionTest extends TestCase
 {
     public function testSetRtcRegion(): void
     {
-        $class = new class extends DummyTraitTester {
+        $class = new class () extends DummyTraitTester {
             use SetRtcRegion;
         };
 

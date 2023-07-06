@@ -12,7 +12,7 @@ class SetRateLimitPerUserTest extends TestCase
 {
     private function getTestClass(): DummyTraitTester
     {
-        return new class extends DummyTraitTester {
+        return new class () extends DummyTraitTester {
             use SetRateLimitPerUser;
         };
     }

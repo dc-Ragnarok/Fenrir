@@ -10,12 +10,18 @@ use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use PHPUnit\Framework\TestCase;
 use React\EventLoop\Loop;
 
-use function Clue\React\Block\await;
-use function Clue\React\Block\awaitAll;
+use function React\Async\await;
 
 class BucketTest extends TestCase
 {
     use MockeryPHPUnitIntegration;
+
+    private function awaitAll(array $promises)
+    {
+        foreach ($promises as $promise) {
+            await($promise);
+        }
+    }
 
     public function testLimit(): void
     {
@@ -26,7 +32,7 @@ class BucketTest extends TestCase
 
         $start = microtime(true);
 
-        awaitAll([$bucket->run($spy), $bucket->run($spy)]);
+        $this->awaitAll([$bucket->run($spy), $bucket->run($spy)]);
 
         $mid = microtime(true);
         $spy->shouldHaveBeenCalled()->twice();

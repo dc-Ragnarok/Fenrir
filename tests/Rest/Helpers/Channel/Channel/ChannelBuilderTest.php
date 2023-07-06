@@ -11,7 +11,7 @@ class ChannelBuilderTest extends TestCase
 {
     private function getBuilder(): ChannelBuilder
     {
-        return new class extends ChannelBuilder {
+        return new class () extends ChannelBuilder {
         };
     }
 
