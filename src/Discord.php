@@ -81,7 +81,7 @@ class Discord
     public static function getDebugInfo(): array
     {
         try {
-            $version = InstalledVersions::getVersion('exan\\fenrir');
+            $version = InstalledVersions::getVersion('exan/fenrir');
         } catch (\OutOfBoundsException) {
             $version = 'Unknown';
         }
