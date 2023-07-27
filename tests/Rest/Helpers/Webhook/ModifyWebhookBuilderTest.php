@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\Ragnarok\Fenrir\Rest\Helpers\Webhook;
 
 use PHPUnit\Framework\TestCase;

@@ -17,6 +17,7 @@ use React\Promise\ExtendedPromiseInterface;
 
 /**
  * @see https://discord.com/developers/docs/resources/webhook
+ * @SuppressWarnings(PHPMD.TooManyPublicMethods)
  */
 class Webhook extends HttpResource
 {

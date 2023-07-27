@@ -18,6 +18,7 @@
     <rule ref="rulesets/cleancode.xml">
         <exclude name="StaticAccess" />
         <exclude name="BooleanArgumentFlag" />
+        <exclude name="UnusedPrivateField" />
     </rule>
     <rule ref="rulesets/controversial.xml" />
     <rule ref="rulesets/design.xml">
