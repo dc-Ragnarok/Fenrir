@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Tests\Ragnarok\Fenrir\Rest\Helpers\Emoji;
 
-use Ragnarok\Fenrir\Enums\ImageData;
 use Ragnarok\Fenrir\Parts\Emoji;
 use Ragnarok\Fenrir\Rest\Helpers\Emoji\EmojiBuilder;
 use PHPUnit\Framework\TestCase;

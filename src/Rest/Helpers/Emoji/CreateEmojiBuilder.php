@@ -5,11 +5,13 @@ declare(strict_types=1);
 namespace Ragnarok\Fenrir\Rest\Helpers\Emoji;
 
 use Ragnarok\Fenrir\Enums\ImageData;
+use Ragnarok\Fenrir\Rest\Helpers\GetBase64Image;
 use Ragnarok\Fenrir\Rest\Helpers\GetNew;
 
 class CreateEmojiBuilder
 {
     use GetNew;
+    use GetBase64Image;
 
     private array $data = [];
 
@@ -40,7 +42,7 @@ class CreateEmojiBuilder
 
     public function setImage(string $content, ImageData $imageData): self
     {
-        $this->data['image'] = 'data:' . $imageData->value . ';base64,' . base64_encode($content);
+        $this->data['image'] = $this->getBase64Image($content, $imageData);
 
         return $this;
     }
