@@ -4,20 +4,16 @@ declare(strict_types=1);
 
 namespace Ragnarok\Fenrir;
 
-use JsonMapper;
+use Tnapf\JsonMapper\Mapper;
 use Psr\Log\LoggerInterface;
 
 class DataMapper
 {
-    private JsonMapper $jsonMapper;
+    private Mapper $jsonMapper;
 
     public function __construct(private LoggerInterface $logger)
     {
-        $this->jsonMapper = new JsonMapper();
-
-        $this->jsonMapper->bStrictNullTypes = false;
-        $this->jsonMapper->bEnforceMapType = false;
-        $this->jsonMapper->bStrictObjectTypeChecking = false;
+        $this->jsonMapper = new Mapper();
     }
 
     /**
@@ -29,8 +25,12 @@ class DataMapper
      */
     public function map(object|array $data, string $definition): mixed
     {
+        if (is_object($data)) {
+            $data = get_object_vars($data);
+        }
+
         try {
-            return $this->jsonMapper->map($data, new $definition());
+            return $this->jsonMapper->map($definition, $data);
         } catch (\Throwable $e) {
             $this->logger->error($e->getMessage());
         }
