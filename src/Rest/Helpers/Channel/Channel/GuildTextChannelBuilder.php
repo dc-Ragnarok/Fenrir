@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Ragnarok\Fenrir\Rest\Helpers\Channel\Channel;
 
-use Ragnarok\Fenrir\Enums\ChannelTypes;
+use Ragnarok\Fenrir\Enums\ChannelType;
 use Ragnarok\Fenrir\Rest\Helpers\Channel\Channel\Shared\SetDefaultAutoArchiveDuration;
 use Ragnarok\Fenrir\Rest\Helpers\Channel\Channel\Shared\SetDefaultThreadRateLimitPerUser;
 use Ragnarok\Fenrir\Rest\Helpers\Channel\Channel\Shared\SetNsfw;
@@ -28,6 +28,6 @@ class GuildTextChannelBuilder extends ChannelBuilder
 
     public function __construct()
     {
-        $this->setChannelType(ChannelTypes::GUILD_TEXT);
+        $this->setChannelType(ChannelType::GUILD_TEXT);
     }
 }

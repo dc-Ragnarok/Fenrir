@@ -7,7 +7,7 @@ namespace Ragnarok\Fenrir;
 use Mockery;
 use PHPUnit\Framework\TestCase;
 use Ragnarok\Fenrir\Enums\ApplicationCommandOptionType;
-use Ragnarok\Fenrir\Enums\ChannelTypes;
+use Ragnarok\Fenrir\Enums\ChannelType;
 use Ragnarok\Fenrir\Rest\Helpers\Command\CommandOptionBuilder;
 
 class CommandOptionBuilderTest extends TestCase
@@ -120,14 +120,14 @@ class CommandOptionBuilderTest extends TestCase
         $commandOptionBuilder = CommandOptionBuilder::new();
         $this->assertNull($commandOptionBuilder->getChannelTypes());
 
-        $commandOptionBuilder->setChannelTypes(ChannelTypes::GROUP_DM, ChannelTypes::GUILD_DIRECTORY);
+        $commandOptionBuilder->setChannelTypes(ChannelType::GROUP_DM, ChannelType::GUILD_DIRECTORY);
 
         $this->assertEquals([
-            ChannelTypes::GROUP_DM, ChannelTypes::GUILD_DIRECTORY
+            ChannelType::GROUP_DM, ChannelType::GUILD_DIRECTORY
         ], $commandOptionBuilder->getChannelTypes());
 
         $this->assertEquals([
-            ChannelTypes::GROUP_DM->value, ChannelTypes::GUILD_DIRECTORY->value
+            ChannelType::GROUP_DM->value, ChannelType::GUILD_DIRECTORY->value
         ], $commandOptionBuilder->get()['channel_types']);
     }
 

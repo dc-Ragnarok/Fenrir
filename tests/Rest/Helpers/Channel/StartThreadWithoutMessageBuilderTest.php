@@ -6,7 +6,7 @@ namespace Tests\Ragnarok\Fenrir\Rest\Helpers\Channel;
 
 use PHPUnit\Framework\TestCase;
 use Ragnarok\Fenrir\Constants\Validation\RateLimit;
-use Ragnarok\Fenrir\Enums\ChannelTypes;
+use Ragnarok\Fenrir\Enums\ChannelType;
 use Ragnarok\Fenrir\Enums\ThreadAutoArchiveDuration;
 use Ragnarok\Fenrir\Rest\Helpers\Channel\StartThreadWithoutMessageBuilder;
 
@@ -48,10 +48,10 @@ class StartThreadWithoutMessageBuilderTest extends TestCase
     {
         $builder = new StartThreadWithoutMessageBuilder();
 
-        $builder->setType(ChannelTypes::DM);
+        $builder->setType(ChannelType::DM);
 
-        $this->assertEquals(['type' => ChannelTypes::DM->value], $builder->get());
-        $this->assertEquals(ChannelTypes::DM, $builder->getType());
+        $this->assertEquals(['type' => ChannelType::DM->value], $builder->get());
+        $this->assertEquals(ChannelType::DM, $builder->getType());
     }
 
     public function testSetInvitable(): void

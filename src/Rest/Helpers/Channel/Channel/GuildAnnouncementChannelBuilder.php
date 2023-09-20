@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Ragnarok\Fenrir\Rest\Helpers\Channel\Channel;
 
-use Ragnarok\Fenrir\Enums\ChannelTypes;
+use Ragnarok\Fenrir\Enums\ChannelType;
 use Ragnarok\Fenrir\Rest\Helpers\Channel\Channel\Shared\SetDefaultAutoArchiveDuration;
 use Ragnarok\Fenrir\Rest\Helpers\Channel\Channel\Shared\SetNsfw;
 use Ragnarok\Fenrir\Rest\Helpers\Channel\Channel\Shared\SetParentId;
@@ -24,6 +24,6 @@ class GuildAnnouncementChannelBuilder extends ChannelBuilder
 
     public function __construct()
     {
-        $this->setChannelType(ChannelTypes::GUILD_ANNOUNCEMENT);
+        $this->setChannelType(ChannelType::GUILD_ANNOUNCEMENT);
     }
 }

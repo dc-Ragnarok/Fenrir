@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Ragnarok\Fenrir\Rest\Helpers\Channel;
 
 use Ragnarok\Fenrir\Constants\Validation\RateLimit;
-use Ragnarok\Fenrir\Enums\ChannelTypes;
+use Ragnarok\Fenrir\Enums\ChannelType;
 use Ragnarok\Fenrir\Enums\ThreadAutoArchiveDuration;
 use Ragnarok\Fenrir\Rest\Helpers\GetNew;
 
@@ -65,17 +65,17 @@ class StartThreadWithoutMessageBuilder
         return $this->data['invitable'] ?? null;
     }
 
-    public function setType(ChannelTypes $type): self
+    public function setType(ChannelType $type): self
     {
         $this->data['type'] = $type->value;
 
         return $this;
     }
 
-    public function getType(): ?ChannelTypes
+    public function getType(): ?ChannelType
     {
         return isset($this->data['type'])
-            ? ChannelTypes::from($this->data['type'])
+            ? ChannelType::from($this->data['type'])
             : null;
     }
 

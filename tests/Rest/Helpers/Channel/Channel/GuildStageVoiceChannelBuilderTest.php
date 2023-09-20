@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Tests\Ragnarok\Fenrir\Rest\Helpers\Channel\Channel;
 
 use PHPUnit\Framework\TestCase;
-use Ragnarok\Fenrir\Enums\ChannelTypes;
+use Ragnarok\Fenrir\Enums\ChannelType;
 use Ragnarok\Fenrir\Rest\Helpers\Channel\Channel\GuildStageVoiceChannelBuilder;
 
 class GuildStageVoiceChannelBuilderTest extends TestCase
@@ -15,7 +15,7 @@ class GuildStageVoiceChannelBuilderTest extends TestCase
         $channelBuilder = new GuildStageVoiceChannelBuilder();
 
         $this->assertEquals([
-            'type' => ChannelTypes::GUILD_STAGE_VOICE->value
+            'type' => ChannelType::GUILD_STAGE_VOICE->value
         ], $channelBuilder->get());
     }
 }

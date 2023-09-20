@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Ragnarok\Fenrir\Parts;
 
 use Ragnarok\Fenrir\Enums\ButtonStyle;
-use Ragnarok\Fenrir\Enums\ChannelTypes;
+use Ragnarok\Fenrir\Enums\ChannelType;
 use Ragnarok\Fenrir\Enums\MessageComponentType;
 
 class Component
@@ -26,7 +26,7 @@ class Component
      */
     public ?array $options; // @todo
     /**
-     * @var \Ragnarok\Fenrir\Enums\ChannelTypes[]
+     * @var \Ragnarok\Fenrir\Enums\ChannelType[]
      */
     public ?array $channel_types;
     public ?string $placeholder;
@@ -40,7 +40,7 @@ class Component
         $this->channel_types = [];
 
         foreach ($values as $entry) {
-            $this->channel_types[] = ChannelTypes::from($entry);
+            $this->channel_types[] = ChannelType::from($entry);
         }
     }
 
