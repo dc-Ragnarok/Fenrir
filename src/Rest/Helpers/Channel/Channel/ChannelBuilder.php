@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Ragnarok\Fenrir\Rest\Helpers\Channel\Channel;
 
-use Ragnarok\Fenrir\Enums\ChannelTypes;
+use Ragnarok\Fenrir\Enums\ChannelType;
 use Ragnarok\Fenrir\Rest\Helpers\GetNew;
 
 /**
@@ -49,7 +49,7 @@ abstract class ChannelBuilder
     //     return $this;
     // }
 
-    protected function setChannelType(ChannelTypes $type): self
+    protected function setChannelType(ChannelType $type): self
     {
         $this->data['type'] = $type->value;
 

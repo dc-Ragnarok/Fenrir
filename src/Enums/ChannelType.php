@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Ragnarok\Fenrir\Enums;
 
-enum ChannelTypes: int
+enum ChannelType: int
 {
     case GUILD_TEXT = 0;
     case DM = 1;

@@ -8,7 +8,7 @@
 |property|type|
 |--------|----|
 |`id`|`string`|
-|`type`|`Ragnarok\Fenrir\Enums\ChannelTypes`|
+|`type`|`Ragnarok\Fenrir\Enums\ChannelType`|
 |`guild_id`|`null`&#124;`string`|
 |`position`|`int`&#124;`null`|
 |`permission_overwrites`|`array`&#124;`null`|

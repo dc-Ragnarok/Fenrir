@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Tests\Ragnarok\Fenrir\Rest\Helpers\Channel\Channel\Shared;
 
 use PHPUnit\Framework\TestCase;
-use Ragnarok\Fenrir\Enums\ChannelTypes;
+use Ragnarok\Fenrir\Enums\ChannelType;
 use Ragnarok\Fenrir\Exceptions\Rest\Helpers\Channel\Channel\Shared\SetType\UnsupportedConversionException;
 use Ragnarok\Fenrir\Rest\Helpers\Channel\Channel\Shared\SetType;
 
@@ -21,9 +21,9 @@ class SetTypeTest extends TestCase
     public function testSetType(): void
     {
         $class = $this->getClass();
-        $class->setType(ChannelTypes::GUILD_TEXT);
-        $this->assertEquals(['type' => ChannelTypes::GUILD_TEXT->value], $class->get());
-        $this->assertEquals(ChannelTypes::GUILD_TEXT, $class->getType());
+        $class->setType(ChannelType::GUILD_TEXT);
+        $this->assertEquals(['type' => ChannelType::GUILD_TEXT->value], $class->get());
+        $this->assertEquals(ChannelType::GUILD_TEXT, $class->getType());
     }
 
     public function testSetTypeUnsupportedConversionException(): void
@@ -32,6 +32,6 @@ class SetTypeTest extends TestCase
         $this->expectException(
             UnsupportedConversionException::class
         );
-        $class->setType(ChannelTypes::GUILD_VOICE);
+        $class->setType(ChannelType::GUILD_VOICE);
     }
 }
