@@ -18,4 +18,5 @@ enum ChannelTypes: int
     case GUILD_STAGE_VOICE = 13;
     case GUILD_DIRECTORY = 14;
     case GUILD_FORUM = 15;
+    case GUILD_MEDIA = 16;
 }
