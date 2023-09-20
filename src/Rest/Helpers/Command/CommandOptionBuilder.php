@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Ragnarok\Fenrir\Rest\Helpers\Command;
 
 use Ragnarok\Fenrir\Enums\ApplicationCommandOptionType;
-use Ragnarok\Fenrir\Enums\ChannelTypes;
+use Ragnarok\Fenrir\Enums\ChannelType;
 use Ragnarok\Fenrir\Rest\Helpers\GetNew;
 
 class CommandOptionBuilder
@@ -17,8 +17,8 @@ class CommandOptionBuilder
     /** @var CommandOptionBuilder[] */
     private array $options;
 
-    /** @var ChannelTypes[] */
-    private array $channelTypes;
+    /** @var ChannelType[] */
+    private array $ChannelType;
 
     public function setType(ApplicationCommandOptionType $type): self
     {
@@ -156,17 +156,17 @@ class CommandOptionBuilder
         return $this->options ?? null;
     }
 
-    public function setChannelTypes(ChannelTypes ...$channelTypes): self
+    public function setChannelType(ChannelType ...$ChannelType): self
     {
-        $this->channelTypes = $channelTypes;
+        $this->ChannelType = $ChannelType;
 
         return $this;
     }
 
-    /** @return ?ChannelTypes[] */
-    public function getChannelTypes(): ?array
+    /** @return ?ChannelType[] */
+    public function getChannelType(): ?array
     {
-        return $this->channelTypes ?? null;
+        return $this->ChannelType ?? null;
     }
 
     public function setMinValue(float|int $minValue): self
@@ -240,10 +240,10 @@ class CommandOptionBuilder
             );
         }
 
-        if (isset($this->channelTypes)) {
+        if (isset($this->ChannelType)) {
             $data['channel_types'] = array_map(
-                static fn (ChannelTypes $type) => $type->value,
-                $this->channelTypes
+                static fn (ChannelType $type) => $type->value,
+                $this->ChannelType
             );
         }
 

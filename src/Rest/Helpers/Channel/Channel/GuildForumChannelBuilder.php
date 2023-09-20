@@ -6,7 +6,7 @@ namespace Ragnarok\Fenrir\Rest\Helpers\Channel\Channel;
 
 use Ragnarok\Fenrir\Bitwise\Bitwise;
 use Ragnarok\Fenrir\Enums\ChannelFlag;
-use Ragnarok\Fenrir\Enums\ChannelTypes;
+use Ragnarok\Fenrir\Enums\ChannelType;
 use Ragnarok\Fenrir\Enums\ForumLayoutType;
 use Ragnarok\Fenrir\Enums\SortOrderType;
 use Ragnarok\Fenrir\Exceptions\Rest\Helpers\Channel\Channel\GuildForumChannelBuilder\TooManyAvailableTagsException;
@@ -34,7 +34,7 @@ class GuildForumChannelBuilder extends ChannelBuilder
 
     public function __construct()
     {
-        $this->setChannelType(ChannelTypes::GUILD_FORUM);
+        $this->setChannelType(ChannelType::GUILD_FORUM);
     }
 
     public function addFlag(ChannelFlag $flag): self

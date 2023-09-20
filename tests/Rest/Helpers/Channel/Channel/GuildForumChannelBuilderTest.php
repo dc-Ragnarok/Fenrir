@@ -7,7 +7,7 @@ namespace Tests\Ragnarok\Fenrir\Rest\Helpers\Channel\Channel;
 use PHPUnit\Framework\TestCase;
 use Ragnarok\Fenrir\Bitwise\Bitwise;
 use Ragnarok\Fenrir\Enums\ChannelFlag;
-use Ragnarok\Fenrir\Enums\ChannelTypes;
+use Ragnarok\Fenrir\Enums\ChannelType;
 use Ragnarok\Fenrir\Enums\ForumLayoutType;
 use Ragnarok\Fenrir\Enums\SortOrderType;
 use Ragnarok\Fenrir\Exceptions\Rest\Helpers\Channel\Channel\GuildForumChannelBuilder\TooManyAvailableTagsException;
@@ -21,7 +21,7 @@ class GuildForumChannelBuilderTest extends TestCase
         $channelBuilder = new GuildForumChannelBuilder();
 
         $this->assertEquals([
-            'type' => ChannelTypes::GUILD_FORUM->value
+            'type' => ChannelType::GUILD_FORUM->value
         ], $channelBuilder->get());
     }
 

@@ -6,7 +6,7 @@ namespace Ragnarok\Fenrir\Parts;
 
 use Carbon\Carbon;
 use Ragnarok\Fenrir\Bitwise\Bitwise;
-use Ragnarok\Fenrir\Enums\ChannelTypes;
+use Ragnarok\Fenrir\Enums\ChannelType;
 use Ragnarok\Fenrir\Enums\ForumLayoutType;
 use Ragnarok\Fenrir\Enums\SortOrderType;
 use Ragnarok\Fenrir\Enums\VideoQualityMode;
@@ -14,7 +14,7 @@ use Ragnarok\Fenrir\Enums\VideoQualityMode;
 class Channel
 {
     public string $id;
-    public ChannelTypes $type;
+    public ChannelType $type;
     public ?string $guild_id;
     public ?int $position;
     /**
@@ -62,7 +62,7 @@ class Channel
 
     public function setType(int $value): void
     {
-        $this->type = ChannelTypes::from($value);
+        $this->type = ChannelType::from($value);
     }
 
     public function setVideoQualityMode(int $value): void

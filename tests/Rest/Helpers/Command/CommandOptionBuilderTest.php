@@ -7,7 +7,7 @@ namespace Ragnarok\Fenrir;
 use Mockery;
 use PHPUnit\Framework\TestCase;
 use Ragnarok\Fenrir\Enums\ApplicationCommandOptionType;
-use Ragnarok\Fenrir\Enums\ChannelTypes;
+use Ragnarok\Fenrir\Enums\ChannelType;
 use Ragnarok\Fenrir\Rest\Helpers\Command\CommandOptionBuilder;
 
 class CommandOptionBuilderTest extends TestCase
@@ -115,19 +115,19 @@ class CommandOptionBuilderTest extends TestCase
         $this->assertEquals([['::option::']], $commandOptionBuilder->get()['options']);
     }
 
-    public function testSetChannelTypes(): void
+    public function testSetChannelType(): void
     {
         $commandOptionBuilder = CommandOptionBuilder::new();
-        $this->assertNull($commandOptionBuilder->getChannelTypes());
+        $this->assertNull($commandOptionBuilder->getChannelType());
 
-        $commandOptionBuilder->setChannelTypes(ChannelTypes::GROUP_DM, ChannelTypes::GUILD_DIRECTORY);
-
-        $this->assertEquals([
-            ChannelTypes::GROUP_DM, ChannelTypes::GUILD_DIRECTORY
-        ], $commandOptionBuilder->getChannelTypes());
+        $commandOptionBuilder->setChannelType(ChannelType::GROUP_DM, ChannelType::GUILD_DIRECTORY);
 
         $this->assertEquals([
-            ChannelTypes::GROUP_DM->value, ChannelTypes::GUILD_DIRECTORY->value
+            ChannelType::GROUP_DM, ChannelType::GUILD_DIRECTORY
+        ], $commandOptionBuilder->getChannelType());
+
+        $this->assertEquals([
+            ChannelType::GROUP_DM->value, ChannelType::GUILD_DIRECTORY->value
         ], $commandOptionBuilder->get()['channel_types']);
     }
 

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Ragnarok\Fenrir\Rest\Helpers\Channel\Channel;
 
-use Ragnarok\Fenrir\Enums\ChannelTypes;
+use Ragnarok\Fenrir\Enums\ChannelType;
 use Ragnarok\Fenrir\Enums\VideoQualityMode;
 use Ragnarok\Fenrir\Rest\Helpers\Channel\Channel\Shared\SetBitrate;
 use Ragnarok\Fenrir\Rest\Helpers\Channel\Channel\Shared\SetNsfw;
@@ -23,7 +23,7 @@ class GuildVoiceChannelBuilder extends ChannelBuilder
 
     public function __construct()
     {
-        $this->setChannelType(ChannelTypes::GUILD_VOICE);
+        $this->setChannelType(ChannelType::GUILD_VOICE);
     }
 
     public function setUserLimit(int $limit): self
