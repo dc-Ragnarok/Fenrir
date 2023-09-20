@@ -16,7 +16,7 @@ class ChannelSelectMenu extends SelectMenu
     public function __construct(
         protected string $customId,
         protected ?string $placeholder = null,
-        protected ?array $ChannelType = null,
+        protected ?array $channelType = null,
         protected ?int $minValues = null,
         protected ?int $maxValues = null,
         protected bool $disabled = false
@@ -34,7 +34,7 @@ class ChannelSelectMenu extends SelectMenu
     {
         return [
             ...parent::get(),
-            ...(is_null($this->ChannelType) ? [] : ['channel_types' => $this->ChannelType])
+            ...(is_null($this->channelType) ? [] : ['channel_types' => $this->channelType])
         ];
     }
 }

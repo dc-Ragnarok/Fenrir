@@ -18,7 +18,7 @@ class CommandOptionBuilder
     private array $options;
 
     /** @var ChannelType[] */
-    private array $ChannelType;
+    private array $channelType;
 
     public function setType(ApplicationCommandOptionType $type): self
     {
@@ -156,9 +156,9 @@ class CommandOptionBuilder
         return $this->options ?? null;
     }
 
-    public function setChannelType(ChannelType ...$ChannelType): self
+    public function setChannelType(ChannelType ...$channelType): self
     {
-        $this->ChannelType = $ChannelType;
+        $this->channelType = $channelType;
 
         return $this;
     }
@@ -166,7 +166,7 @@ class CommandOptionBuilder
     /** @return ?ChannelType[] */
     public function getChannelType(): ?array
     {
-        return $this->ChannelType ?? null;
+        return $this->channelType ?? null;
     }
 
     public function setMinValue(float|int $minValue): self
@@ -240,10 +240,10 @@ class CommandOptionBuilder
             );
         }
 
-        if (isset($this->ChannelType)) {
+        if (isset($this->channelType)) {
             $data['channel_types'] = array_map(
                 static fn (ChannelType $type) => $type->value,
-                $this->ChannelType
+                $this->channelType
             );
         }
 
