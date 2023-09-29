@@ -17,6 +17,7 @@ use Ragnarok\Fenrir\Constants\MetaEvents;
 use Ragnarok\Fenrir\Constants\WebsocketEvents;
 use Ragnarok\Fenrir\Gateway\Connection;
 use Ragnarok\Fenrir\Gateway\Objects\Payload;
+use Ragnarok\Fenrir\Gateway\Shard;
 use Ratchet\RFC6455\Messaging\MessageInterface;
 use React\EventLoop\LoopInterface;
 use React\EventLoop\TimerInterface;
@@ -332,6 +333,36 @@ class ConnectionTest extends MockeryTestCase
                 $this->assertEquals(2, $payload['op']);
                 $this->assertEquals('::token::', $payload['d']['token']);
                 $this->assertEquals(123, $payload['d']['intents']);
+
+                return true;
+            }), true)
+            ->once();
+
+        $connection->identify();
+    }
+
+    public function testItIdentifiesWithShards(): void
+    {
+        $connection = new Connection(
+            Mockery::mock(LoopInterface::class),
+            '::token::',
+            new Bitwise(123),
+            new DataMapper(new NullLogger())
+        );
+
+        $connection->shard(new Shard(1, 16));
+
+        /** @var MockInterface&Websocket */
+        $websocket = Mockery::mock(Websocket::class);
+        (new ReflectionProperty($connection, 'websocket'))->setValue($connection, $websocket);
+
+        $websocket->expects()
+            ->sendAsJson()
+            ->with(Mockery::on(function ($payload) {
+                $this->assertEquals(2, $payload['op']);
+                $this->assertEquals('::token::', $payload['d']['token']);
+                $this->assertEquals(123, $payload['d']['intents']);
+                $this->assertEquals([1, 16], $payload['d']['shard']);
 
                 return true;
             }), true)

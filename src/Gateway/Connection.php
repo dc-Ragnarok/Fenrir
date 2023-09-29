@@ -51,6 +51,8 @@ class Connection implements ConnectionInterface
     private TimerInterface $heartbeatTimer;
     private TimerInterface $unacknowledgedHeartbeatTimer;
 
+    private ShardInterface $shard;
+
     public function __construct(
         private LoopInterface $loop,
         private string $token,
@@ -192,7 +194,7 @@ class Connection implements ConnectionInterface
 
     public function identify(): void
     {
-        $this->websocket->sendAsJson([
+        $payload = [
             'op' => 2,
             'd' => [
                 'token' => $this->token,
@@ -203,7 +205,13 @@ class Connection implements ConnectionInterface
                     'device' => 'Ragnarok\Fenrir',
                 ]
             ]
-        ], true);
+        ];
+
+        if (isset($this->shard)) {
+            $payload['d']['shard'] = $this->shard->getShardSettings();
+        }
+
+        $this->websocket->sendAsJson($payload, true);
     }
 
     public function resume(): void
@@ -221,5 +229,10 @@ class Connection implements ConnectionInterface
     public function open(): ExtendedPromiseInterface
     {
         return $this->connect(self::DEFAULT_WEBSOCKET_URL);
+    }
+
+    public function shard(ShardInterface $shard)
+    {
+        $this->shard = $shard;
     }
 }
