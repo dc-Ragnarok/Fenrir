@@ -231,6 +231,16 @@ class ChannelTest extends HttpHelperTestCase
                     'returnType' => Message::class,
                 ]
             ],
+            'Delete message' => [
+                'method' => 'deleteMessage',
+                'args' => ['::channel id::', '::message id::'],
+                'mockOptions' => [
+                    'method' => 'delete',
+                    'return' => null,
+                ],
+                'validationOptions' => [
+                ]
+            ],
             'Edit message with file' => [
                 'method' => 'editMessage',
                 'args' => [

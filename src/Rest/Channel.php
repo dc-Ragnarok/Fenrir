@@ -317,6 +317,26 @@ class Channel extends HttpResource
     }
 
     /**
+     * @see https://discord.com/developers/docs/resources/channel#delete-message
+     *
+     * @return ExtendedPromiseInterface<void>
+     */
+    public function deleteMessage(
+        string $channelId,
+        string $messageId,
+        ?string $reason = null,
+    ): ExtendedPromiseInterface {
+        return $this->http->delete(
+            Endpoint::bind(
+                Endpoint::CHANNEL_MESSAGE,
+                $channelId,
+                $messageId
+            ),
+            headers: $this->getAuditLogReasonHeader($reason),
+        )->otherwise($this->logThrowable(...));
+    }
+
+    /**
      * @see https://discord.com/developers/docs/resources/channel#bulk-delete-messages
      *
      * @var string[] $messageIds
