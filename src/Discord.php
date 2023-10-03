@@ -31,11 +31,12 @@ class Discord
 
     public function __construct(
         private string $token,
-        private LoggerInterface $logger = new NullLogger()
+        private LoggerInterface $logger = new NullLogger(),
+        ?LoopInterface $loop = null
     ) {
         $this->logger->info('Fenrir initialized. Discriminators > usernames');
 
-        $this->loop = Loop::get();
+        $this->loop = $loop ?? Loop::get();
 
         $this->mapper = new DataMapper($this->logger);
     }
