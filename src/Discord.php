@@ -7,6 +7,7 @@ namespace Ragnarok\Fenrir;
 use Composer\InstalledVersions;
 use Discord\Http\DriverInterface;
 use Discord\Http\Drivers\Guzzle;
+use Discord\Http\Drivers\React;
 use Discord\Http\Http;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
@@ -63,7 +64,7 @@ class Discord
     public function withRest(
         ?DriverInterface $driver = null,
     ): static {
-        $driver ??= new Guzzle(
+        $driver ??= new React(
             $this->loop
         );
 
