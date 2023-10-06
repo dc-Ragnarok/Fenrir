@@ -30,16 +30,16 @@ class GuildScheduledEvent
 
     public function setPrivacyLevel(int $value): void
     {
-        $this->privacy_level = GuildScheduledEventPrivacyLevel::from($value);
+        $this->privacy_level = GuildScheduledEventPrivacyLevel::tryFrom($value);
     }
 
     public function setStatus(int $value): void
     {
-        $this->status = GuildScheduledEventStatus::from($value);
+        $this->status = GuildScheduledEventStatus::tryFrom($value);
     }
 
     public function setEntityType(int $value): void
     {
-        $this->entity_type = GuildScheduledEventEntityType::from($value);
+        $this->entity_type = GuildScheduledEventEntityType::tryFrom($value);
     }
 }

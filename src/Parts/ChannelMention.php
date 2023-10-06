@@ -15,6 +15,6 @@ class ChannelMention
 
     public function setType(int $value): void
     {
-        $this->type = ChannelType::from($value);
+        $this->type = ChannelType::tryFrom($value);
     }
 }

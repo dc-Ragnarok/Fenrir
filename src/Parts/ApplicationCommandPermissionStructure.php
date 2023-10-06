@@ -14,6 +14,6 @@ class ApplicationCommandPermissionStructure
 
     public function setType(int $value): void
     {
-        $this->type = ApplicationCommandPermissionType::from($value);
+        $this->type = ApplicationCommandPermissionType::tryFrom($value);
     }
 }

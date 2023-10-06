@@ -72,6 +72,6 @@ class Message
 
     public function setType(int $value): void
     {
-        $this->type = MessageType::from($value);
+        $this->type = MessageType::tryFrom($value);
     }
 }

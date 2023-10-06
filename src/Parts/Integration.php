@@ -32,7 +32,7 @@ class Integration
 
     public function setExpireBehavior(int $value): void
     {
-        $this->expire_behavior = IntegrationExpireBehavior::from($value);
+        $this->expire_behavior = IntegrationExpireBehavior::tryFrom($value);
     }
 
     public function setScopes(array $value): void

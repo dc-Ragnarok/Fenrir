@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace Ragnarok\Fenrir\Gateway\Objects;
 
-class Payload
+use JsonSerializable;
+
+class Payload implements JsonSerializable
 {
     public ?string $t;
     public ?int $s;
@@ -14,4 +16,14 @@ class Payload
      * @var mixed|null $d
      */
     public $d;
+
+    public function jsonSerialize(): mixed
+    {
+        return [
+            't' => $this->t,
+            's' => $this->s,
+            'op' => $this->op,
+            'd' => $this->d,
+        ];
+    }
 }

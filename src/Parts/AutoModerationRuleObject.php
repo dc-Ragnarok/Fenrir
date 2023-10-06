@@ -32,11 +32,11 @@ class AutoModerationRuleObject
 
     public function setEventType(int $value): void
     {
-        $this->event_type = AutoModerationRuleEventType::from($value);
+        $this->event_type = AutoModerationRuleEventType::tryFrom($value);
     }
 
     public function setTriggerType(int $value): void
     {
-        $this->trigger_type = AutoModerationRuleTriggerType::from($value);
+        $this->trigger_type = AutoModerationRuleTriggerType::tryFrom($value);
     }
 }
