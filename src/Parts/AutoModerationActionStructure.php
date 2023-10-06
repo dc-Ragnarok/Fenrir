@@ -4,15 +4,15 @@ declare(strict_types=1);
 
 namespace Ragnarok\Fenrir\Parts;
 
-use Ragnarok\Fenrir\Enums\Parts\AutoModerationActionTypes;
+use Ragnarok\Fenrir\Enums\ActionType;
 
 class AutoModerationActionStructure
 {
-    public AutoModerationActionTypes $type;
+    public ActionType $type;
     public ?AutoModerationActionMetadata $metadata;
 
     public function setType(int $value): void
     {
-        $this->type = AutoModerationActionTypes::tryFrom($value);
+        $this->type = ActionType::tryFrom($value);
     }
 }
