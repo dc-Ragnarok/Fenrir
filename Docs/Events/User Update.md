@@ -29,7 +29,7 @@
 use Ragnarok\Fenrir\Gateway\Events\UserUpdate;
 use Ragnarok\Fenrir\Constants\Events;
 
-$discord->gateway->on(Events::USER_UPDATE, function (UserUpdate $event) {
+$discord->gateway->events->on(Events::USER_UPDATE, function (UserUpdate $event) {
     // Handle event
 });
 ```

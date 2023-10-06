@@ -16,7 +16,7 @@
 use Ragnarok\Fenrir\Gateway\Events\AutoModerationRuleDelete;
 use Ragnarok\Fenrir\Constants\Events;
 
-$discord->gateway->on(Events::AUTO_MODERATION_RULE_DELETE, function (AutoModerationRuleDelete $event) {
+$discord->gateway->events->on(Events::AUTO_MODERATION_RULE_DELETE, function (AutoModerationRuleDelete $event) {
     // Handle event
 });
 ```

@@ -19,7 +19,7 @@
 use Ragnarok\Fenrir\Gateway\Events\GuildMembersChunk;
 use Ragnarok\Fenrir\Constants\Events;
 
-$discord->gateway->on(Events::GUILD_MEMBERS_CHUNK, function (GuildMembersChunk $event) {
+$discord->gateway->events->on(Events::GUILD_MEMBERS_CHUNK, function (GuildMembersChunk $event) {
     // Handle event
 });
 ```

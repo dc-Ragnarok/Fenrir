@@ -15,7 +15,7 @@
 use Ragnarok\Fenrir\Gateway\Events\GuildBanRemove;
 use Ragnarok\Fenrir\Constants\Events;
 
-$discord->gateway->on(Events::GUILD_BAN_REMOVE, function (GuildBanRemove $event) {
+$discord->gateway->events->on(Events::GUILD_BAN_REMOVE, function (GuildBanRemove $event) {
     // Handle event
 });
 ```

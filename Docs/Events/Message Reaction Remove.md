@@ -19,7 +19,7 @@
 use Ragnarok\Fenrir\Gateway\Events\MessageReactionRemove;
 use Ragnarok\Fenrir\Constants\Events;
 
-$discord->gateway->on(Events::MESSAGE_REACTION_REMOVE, function (MessageReactionRemove $event) {
+$discord->gateway->events->on(Events::MESSAGE_REACTION_REMOVE, function (MessageReactionRemove $event) {
     // Handle event
 });
 ```

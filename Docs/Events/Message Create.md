@@ -45,7 +45,7 @@
 use Ragnarok\Fenrir\Gateway\Events\MessageCreate;
 use Ragnarok\Fenrir\Constants\Events;
 
-$discord->gateway->on(Events::MESSAGE_CREATE, function (MessageCreate $event) {
+$discord->gateway->events->on(Events::MESSAGE_CREATE, function (MessageCreate $event) {
     // Handle event
 });
 ```

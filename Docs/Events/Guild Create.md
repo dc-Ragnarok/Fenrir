@@ -55,7 +55,7 @@
 use Ragnarok\Fenrir\Gateway\Events\GuildCreate;
 use Ragnarok\Fenrir\Constants\Events;
 
-$discord->gateway->on(Events::GUILD_CREATE, function (GuildCreate $event) {
+$discord->gateway->events->on(Events::GUILD_CREATE, function (GuildCreate $event) {
     // Handle event
 });
 ```

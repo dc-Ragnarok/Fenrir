@@ -15,7 +15,7 @@
 use Ragnarok\Fenrir\Gateway\Events\GuildRoleCreate;
 use Ragnarok\Fenrir\Constants\Events;
 
-$discord->gateway->on(Events::GUILD_ROLE_CREATE, function (GuildRoleCreate $event) {
+$discord->gateway->events->on(Events::GUILD_ROLE_CREATE, function (GuildRoleCreate $event) {
     // Handle event
 });
 ```

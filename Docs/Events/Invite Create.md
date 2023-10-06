@@ -25,7 +25,7 @@
 use Ragnarok\Fenrir\Gateway\Events\InviteCreate;
 use Ragnarok\Fenrir\Constants\Events;
 
-$discord->gateway->on(Events::INVITE_CREATE, function (InviteCreate $event) {
+$discord->gateway->events->on(Events::INVITE_CREATE, function (InviteCreate $event) {
     // Handle event
 });
 ```

@@ -16,7 +16,7 @@
 use Ragnarok\Fenrir\Gateway\Events\IntegrationDelete;
 use Ragnarok\Fenrir\Constants\Events;
 
-$discord->gateway->on(Events::INTEGRATION_DELETE, function (IntegrationDelete $event) {
+$discord->gateway->events->on(Events::INTEGRATION_DELETE, function (IntegrationDelete $event) {
     // Handle event
 });
 ```

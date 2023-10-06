@@ -19,7 +19,7 @@
 use Ragnarok\Fenrir\Gateway\Events\TypingStart;
 use Ragnarok\Fenrir\Constants\Events;
 
-$discord->gateway->on(Events::TYPING_START, function (TypingStart $event) {
+$discord->gateway->events->on(Events::TYPING_START, function (TypingStart $event) {
     // Handle event
 });
 ```

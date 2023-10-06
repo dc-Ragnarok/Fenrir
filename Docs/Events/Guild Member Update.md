@@ -24,7 +24,7 @@
 use Ragnarok\Fenrir\Gateway\Events\GuildMemberUpdate;
 use Ragnarok\Fenrir\Constants\Events;
 
-$discord->gateway->on(Events::GUILD_MEMBER_UPDATE, function (GuildMemberUpdate $event) {
+$discord->gateway->events->on(Events::GUILD_MEMBER_UPDATE, function (GuildMemberUpdate $event) {
     // Handle event
 });
 ```

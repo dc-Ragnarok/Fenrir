@@ -45,7 +45,7 @@
 use Ragnarok\Fenrir\Gateway\Events\MessageUpdate;
 use Ragnarok\Fenrir\Constants\Events;
 
-$discord->gateway->on(Events::MESSAGE_UPDATE, function (MessageUpdate $event) {
+$discord->gateway->events->on(Events::MESSAGE_UPDATE, function (MessageUpdate $event) {
     // Handle event
 });
 ```

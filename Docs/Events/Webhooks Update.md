@@ -15,7 +15,7 @@
 use Ragnarok\Fenrir\Gateway\Events\WebhooksUpdate;
 use Ragnarok\Fenrir\Constants\Events;
 
-$discord->gateway->on(Events::WEBHOOKS_UPDATE, function (WebhooksUpdate $event) {
+$discord->gateway->events->on(Events::WEBHOOKS_UPDATE, function (WebhooksUpdate $event) {
     // Handle event
 });
 ```

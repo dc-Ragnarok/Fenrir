@@ -29,7 +29,7 @@
 use Ragnarok\Fenrir\Gateway\Events\GuildScheduledEventDelete;
 use Ragnarok\Fenrir\Constants\Events;
 
-$discord->gateway->on(Events::GUILD_SCHEDULED_EVENT_DELETE, function (GuildScheduledEventDelete $event) {
+$discord->gateway->events->on(Events::GUILD_SCHEDULED_EVENT_DELETE, function (GuildScheduledEventDelete $event) {
     // Handle event
 });
 ```

@@ -28,7 +28,7 @@
 use Ragnarok\Fenrir\Gateway\Events\InteractionCreate;
 use Ragnarok\Fenrir\Constants\Events;
 
-$discord->gateway->on(Events::INTERACTION_CREATE, function (InteractionCreate $event) {
+$discord->gateway->events->on(Events::INTERACTION_CREATE, function (InteractionCreate $event) {
     // Handle event
 });
 ```

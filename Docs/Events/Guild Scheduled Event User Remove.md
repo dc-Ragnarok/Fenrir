@@ -16,7 +16,7 @@
 use Ragnarok\Fenrir\Gateway\Events\GuildScheduledEventUserRemove;
 use Ragnarok\Fenrir\Constants\Events;
 
-$discord->gateway->on(Events::GUILD_SCHEDULED_EVENT_USER_REMOVE, function (GuildScheduledEventUserRemove $event) {
+$discord->gateway->events->on(Events::GUILD_SCHEDULED_EVENT_USER_REMOVE, function (GuildScheduledEventUserRemove $event) {
     // Handle event
 });
 ```

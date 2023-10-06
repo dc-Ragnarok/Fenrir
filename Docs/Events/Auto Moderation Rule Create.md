@@ -16,7 +16,7 @@
 use Ragnarok\Fenrir\Gateway\Events\AutoModerationRuleCreate;
 use Ragnarok\Fenrir\Constants\Events;
 
-$discord->gateway->on(Events::AUTO_MODERATION_RULE_CREATE, function (AutoModerationRuleCreate $event) {
+$discord->gateway->events->on(Events::AUTO_MODERATION_RULE_CREATE, function (AutoModerationRuleCreate $event) {
     // Handle event
 });
 ```

@@ -15,7 +15,7 @@
 use Ragnarok\Fenrir\Gateway\Events\GuildBanAdd;
 use Ragnarok\Fenrir\Constants\Events;
 
-$discord->gateway->on(Events::GUILD_BAN_ADD, function (GuildBanAdd $event) {
+$discord->gateway->events->on(Events::GUILD_BAN_ADD, function (GuildBanAdd $event) {
     // Handle event
 });
 ```

@@ -17,7 +17,7 @@
 use Ragnarok\Fenrir\Gateway\Events\ThreadDelete;
 use Ragnarok\Fenrir\Constants\Events;
 
-$discord->gateway->on(Events::THREAD_DELETE, function (ThreadDelete $event) {
+$discord->gateway->events->on(Events::THREAD_DELETE, function (ThreadDelete $event) {
     // Handle event
 });
 ```

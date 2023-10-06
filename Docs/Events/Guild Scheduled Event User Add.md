@@ -16,7 +16,7 @@
 use Ragnarok\Fenrir\Gateway\Events\GuildScheduledEventUserAdd;
 use Ragnarok\Fenrir\Constants\Events;
 
-$discord->gateway->on(Events::GUILD_SCHEDULED_EVENT_USER_ADD, function (GuildScheduledEventUserAdd $event) {
+$discord->gateway->events->on(Events::GUILD_SCHEDULED_EVENT_USER_ADD, function (GuildScheduledEventUserAdd $event) {
     // Handle event
 });
 ```

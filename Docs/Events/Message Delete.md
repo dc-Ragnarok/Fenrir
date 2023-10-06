@@ -17,7 +17,7 @@
 use Ragnarok\Fenrir\Gateway\Events\MessageDelete;
 use Ragnarok\Fenrir\Constants\Events;
 
-$discord->gateway->on(Events::MESSAGE_DELETE, function (MessageDelete $event) {
+$discord->gateway->events->on(Events::MESSAGE_DELETE, function (MessageDelete $event) {
     // Handle event
 });
 ```

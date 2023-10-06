@@ -16,7 +16,7 @@
 use Ragnarok\Fenrir\Gateway\Events\ChannelPinsUpdate;
 use Ragnarok\Fenrir\Constants\Events;
 
-$discord->gateway->on(Events::CHANNEL_PINS_UPDATE, function (ChannelPinsUpdate $event) {
+$discord->gateway->events->on(Events::CHANNEL_PINS_UPDATE, function (ChannelPinsUpdate $event) {
     // Handle event
 });
 ```

@@ -55,7 +55,7 @@
 use Ragnarok\Fenrir\Gateway\Events\GuildDelete;
 use Ragnarok\Fenrir\Constants\Events;
 
-$discord->gateway->on(Events::GUILD_DELETE, function (GuildDelete $event) {
+$discord->gateway->events->on(Events::GUILD_DELETE, function (GuildDelete $event) {
     // Handle event
 });
 ```

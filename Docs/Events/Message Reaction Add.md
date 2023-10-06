@@ -20,7 +20,7 @@
 use Ragnarok\Fenrir\Gateway\Events\MessageReactionAdd;
 use Ragnarok\Fenrir\Constants\Events;
 
-$discord->gateway->on(Events::MESSAGE_REACTION_ADD, function (MessageReactionAdd $event) {
+$discord->gateway->events->on(Events::MESSAGE_REACTION_ADD, function (MessageReactionAdd $event) {
     // Handle event
 });
 ```

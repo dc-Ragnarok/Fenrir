@@ -17,7 +17,7 @@
 use Ragnarok\Fenrir\Gateway\Events\ThreadUpdate;
 use Ragnarok\Fenrir\Constants\Events;
 
-$discord->gateway->on(Events::THREAD_UPDATE, function (ThreadUpdate $event) {
+$discord->gateway->events->on(Events::THREAD_UPDATE, function (ThreadUpdate $event) {
     // Handle event
 });
 ```

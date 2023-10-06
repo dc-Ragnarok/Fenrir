@@ -26,7 +26,7 @@
 use Ragnarok\Fenrir\Gateway\Events\VoiceStateUpdate;
 use Ragnarok\Fenrir\Constants\Events;
 
-$discord->gateway->on(Events::VOICE_STATE_UPDATE, function (VoiceStateUpdate $event) {
+$discord->gateway->events->on(Events::VOICE_STATE_UPDATE, function (VoiceStateUpdate $event) {
     // Handle event
 });
 ```

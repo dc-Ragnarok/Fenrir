@@ -47,7 +47,7 @@
 use Ragnarok\Fenrir\Gateway\Events\ChannelUpdate;
 use Ragnarok\Fenrir\Constants\Events;
 
-$discord->gateway->on(Events::CHANNEL_UPDATE, function (ChannelUpdate $event) {
+$discord->gateway->events->on(Events::CHANNEL_UPDATE, function (ChannelUpdate $event) {
     // Handle event
 });
 ```

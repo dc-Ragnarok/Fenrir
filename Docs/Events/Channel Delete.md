@@ -47,7 +47,7 @@
 use Ragnarok\Fenrir\Gateway\Events\ChannelDelete;
 use Ragnarok\Fenrir\Constants\Events;
 
-$discord->gateway->on(Events::CHANNEL_DELETE, function (ChannelDelete $event) {
+$discord->gateway->events->on(Events::CHANNEL_DELETE, function (ChannelDelete $event) {
     // Handle event
 });
 ```

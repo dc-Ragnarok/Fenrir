@@ -47,7 +47,7 @@
 use Ragnarok\Fenrir\Gateway\Events\ChannelCreate;
 use Ragnarok\Fenrir\Constants\Events;
 
-$discord->gateway->on(Events::CHANNEL_CREATE, function (ChannelCreate $event) {
+$discord->gateway->events->on(Events::CHANNEL_CREATE, function (ChannelCreate $event) {
     // Handle event
 });
 ```

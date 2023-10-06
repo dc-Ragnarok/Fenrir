@@ -15,7 +15,7 @@
 use Ragnarok\Fenrir\Gateway\Events\GuildEmojisUpdate;
 use Ragnarok\Fenrir\Constants\Events;
 
-$discord->gateway->on(Events::GUILD_EMOJIS_UPDATE, function (GuildEmojisUpdate $event) {
+$discord->gateway->events->on(Events::GUILD_EMOJIS_UPDATE, function (GuildEmojisUpdate $event) {
     // Handle event
 });
 ```

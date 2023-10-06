@@ -15,7 +15,7 @@
 use Ragnarok\Fenrir\Gateway\Events\GuildRoleDelete;
 use Ragnarok\Fenrir\Constants\Events;
 
-$discord->gateway->on(Events::GUILD_ROLE_DELETE, function (GuildRoleDelete $event) {
+$discord->gateway->events->on(Events::GUILD_ROLE_DELETE, function (GuildRoleDelete $event) {
     // Handle event
 });
 ```

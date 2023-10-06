@@ -26,7 +26,7 @@
 use Ragnarok\Fenrir\Gateway\Events\GuildMemberAdd;
 use Ragnarok\Fenrir\Constants\Events;
 
-$discord->gateway->on(Events::GUILD_MEMBER_ADD, function (GuildMemberAdd $event) {
+$discord->gateway->events->on(Events::GUILD_MEMBER_ADD, function (GuildMemberAdd $event) {
     // Handle event
 });
 ```

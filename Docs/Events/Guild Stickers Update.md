@@ -15,7 +15,7 @@
 use Ragnarok\Fenrir\Gateway\Events\GuildStickersUpdate;
 use Ragnarok\Fenrir\Constants\Events;
 
-$discord->gateway->on(Events::GUILD_STICKERS_UPDATE, function (GuildStickersUpdate $event) {
+$discord->gateway->events->on(Events::GUILD_STICKERS_UPDATE, function (GuildStickersUpdate $event) {
     // Handle event
 });
 ```

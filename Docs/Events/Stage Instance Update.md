@@ -16,7 +16,7 @@
 use Ragnarok\Fenrir\Gateway\Events\StageInstanceUpdate;
 use Ragnarok\Fenrir\Constants\Events;
 
-$discord->gateway->on(Events::STAGE_INSTANCE_UPDATE, function (StageInstanceUpdate $event) {
+$discord->gateway->events->on(Events::STAGE_INSTANCE_UPDATE, function (StageInstanceUpdate $event) {
     // Handle event
 });
 ```

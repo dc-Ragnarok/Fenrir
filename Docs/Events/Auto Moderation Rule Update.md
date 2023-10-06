@@ -16,7 +16,7 @@
 use Ragnarok\Fenrir\Gateway\Events\AutoModerationRuleUpdate;
 use Ragnarok\Fenrir\Constants\Events;
 
-$discord->gateway->on(Events::AUTO_MODERATION_RULE_UPDATE, function (AutoModerationRuleUpdate $event) {
+$discord->gateway->events->on(Events::AUTO_MODERATION_RULE_UPDATE, function (AutoModerationRuleUpdate $event) {
     // Handle event
 });
 ```

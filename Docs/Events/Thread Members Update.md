@@ -19,7 +19,7 @@
 use Ragnarok\Fenrir\Gateway\Events\ThreadMembersUpdate;
 use Ragnarok\Fenrir\Constants\Events;
 
-$discord->gateway->on(Events::THREAD_MEMBERS_UPDATE, function (ThreadMembersUpdate $event) {
+$discord->gateway->events->on(Events::THREAD_MEMBERS_UPDATE, function (ThreadMembersUpdate $event) {
     // Handle event
 });
 ```

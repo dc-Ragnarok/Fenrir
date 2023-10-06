@@ -18,7 +18,7 @@
 use Ragnarok\Fenrir\Gateway\Events\PresenceUpdate;
 use Ragnarok\Fenrir\Constants\Events;
 
-$discord->gateway->on(Events::PRESENCE_UPDATE, function (PresenceUpdate $event) {
+$discord->gateway->events->on(Events::PRESENCE_UPDATE, function (PresenceUpdate $event) {
     // Handle event
 });
 ```

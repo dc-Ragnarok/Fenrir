@@ -16,7 +16,7 @@
 use Ragnarok\Fenrir\Gateway\Events\InviteDelete;
 use Ragnarok\Fenrir\Constants\Events;
 
-$discord->gateway->on(Events::INVITE_DELETE, function (InviteDelete $event) {
+$discord->gateway->events->on(Events::INVITE_DELETE, function (InviteDelete $event) {
     // Handle event
 });
 ```

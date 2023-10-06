@@ -16,7 +16,7 @@
 use Ragnarok\Fenrir\Gateway\Events\StageInstanceDelete;
 use Ragnarok\Fenrir\Constants\Events;
 
-$discord->gateway->on(Events::STAGE_INSTANCE_DELETE, function (StageInstanceDelete $event) {
+$discord->gateway->events->on(Events::STAGE_INSTANCE_DELETE, function (StageInstanceDelete $event) {
     // Handle event
 });
 ```

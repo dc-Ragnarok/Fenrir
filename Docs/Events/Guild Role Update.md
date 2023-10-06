@@ -15,7 +15,7 @@
 use Ragnarok\Fenrir\Gateway\Events\GuildRoleUpdate;
 use Ragnarok\Fenrir\Constants\Events;
 
-$discord->gateway->on(Events::GUILD_ROLE_UPDATE, function (GuildRoleUpdate $event) {
+$discord->gateway->events->on(Events::GUILD_ROLE_UPDATE, function (GuildRoleUpdate $event) {
     // Handle event
 });
 ```

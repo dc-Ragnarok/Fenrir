@@ -48,7 +48,7 @@
 use Ragnarok\Fenrir\Gateway\Events\ThreadCreate;
 use Ragnarok\Fenrir\Constants\Events;
 
-$discord->gateway->on(Events::THREAD_CREATE, function (ThreadCreate $event) {
+$discord->gateway->events->on(Events::THREAD_CREATE, function (ThreadCreate $event) {
     // Handle event
 });
 ```

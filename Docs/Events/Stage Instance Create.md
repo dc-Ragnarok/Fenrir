@@ -16,7 +16,7 @@
 use Ragnarok\Fenrir\Gateway\Events\StageInstanceCreate;
 use Ragnarok\Fenrir\Constants\Events;
 
-$discord->gateway->on(Events::STAGE_INSTANCE_CREATE, function (StageInstanceCreate $event) {
+$discord->gateway->events->on(Events::STAGE_INSTANCE_CREATE, function (StageInstanceCreate $event) {
     // Handle event
 });
 ```

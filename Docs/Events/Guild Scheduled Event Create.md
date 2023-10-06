@@ -29,7 +29,7 @@
 use Ragnarok\Fenrir\Gateway\Events\GuildScheduledEventCreate;
 use Ragnarok\Fenrir\Constants\Events;
 
-$discord->gateway->on(Events::GUILD_SCHEDULED_EVENT_CREATE, function (GuildScheduledEventCreate $event) {
+$discord->gateway->events->on(Events::GUILD_SCHEDULED_EVENT_CREATE, function (GuildScheduledEventCreate $event) {
     // Handle event
 });
 ```

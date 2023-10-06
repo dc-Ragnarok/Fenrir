@@ -16,7 +16,7 @@
 use Ragnarok\Fenrir\Gateway\Events\ApplicationCommandPermissionsUpdate;
 use Ragnarok\Fenrir\Constants\Events;
 
-$discord->gateway->on(Events::APPLICATION_COMMAND_PERMISSIONS_UPDATE, function (ApplicationCommandPermissionsUpdate $event) {
+$discord->gateway->events->on(Events::APPLICATION_COMMAND_PERMISSIONS_UPDATE, function (ApplicationCommandPermissionsUpdate $event) {
     // Handle event
 });
 ```

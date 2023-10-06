@@ -16,7 +16,7 @@
 use Ragnarok\Fenrir\Gateway\Events\MessageDeleteBulk;
 use Ragnarok\Fenrir\Constants\Events;
 
-$discord->gateway->on(Events::MESSAGE_DELETE_BULK, function (MessageDeleteBulk $event) {
+$discord->gateway->events->on(Events::MESSAGE_DELETE_BULK, function (MessageDeleteBulk $event) {
     // Handle event
 });
 ```

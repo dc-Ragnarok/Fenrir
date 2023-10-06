@@ -14,7 +14,7 @@
 use Ragnarok\Fenrir\Gateway\Events\GuildIntegrationsUpdate;
 use Ragnarok\Fenrir\Constants\Events;
 
-$discord->gateway->on(Events::GUILD_INTEGRATIONS_UPDATE, function (GuildIntegrationsUpdate $event) {
+$discord->gateway->events->on(Events::GUILD_INTEGRATIONS_UPDATE, function (GuildIntegrationsUpdate $event) {
     // Handle event
 });
 ```

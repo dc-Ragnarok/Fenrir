@@ -22,7 +22,7 @@
 use Ragnarok\Fenrir\Gateway\Events\Ready;
 use Ragnarok\Fenrir\Constants\Events;
 
-$discord->gateway->on(Events::READY, function (Ready $event) {
+$discord->gateway->events->on(Events::READY, function (Ready $event) {
     // Handle event
 });
 ```

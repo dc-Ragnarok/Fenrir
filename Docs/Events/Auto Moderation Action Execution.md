@@ -24,7 +24,7 @@
 use Ragnarok\Fenrir\Gateway\Events\AutoModerationActionExecution;
 use Ragnarok\Fenrir\Constants\Events;
 
-$discord->gateway->on(Events::AUTO_MODERATION_ACTION_EXECUTION, function (AutoModerationActionExecution $event) {
+$discord->gateway->events->on(Events::AUTO_MODERATION_ACTION_EXECUTION, function (AutoModerationActionExecution $event) {
     // Handle event
 });
 ```

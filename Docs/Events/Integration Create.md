@@ -30,7 +30,7 @@
 use Ragnarok\Fenrir\Gateway\Events\IntegrationCreate;
 use Ragnarok\Fenrir\Constants\Events;
 
-$discord->gateway->on(Events::INTEGRATION_CREATE, function (IntegrationCreate $event) {
+$discord->gateway->events->on(Events::INTEGRATION_CREATE, function (IntegrationCreate $event) {
     // Handle event
 });
 ```

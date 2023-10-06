@@ -15,7 +15,7 @@
 use Ragnarok\Fenrir\Gateway\Events\GuildMemberRemove;
 use Ragnarok\Fenrir\Constants\Events;
 
-$discord->gateway->on(Events::GUILD_MEMBER_REMOVE, function (GuildMemberRemove $event) {
+$discord->gateway->events->on(Events::GUILD_MEMBER_REMOVE, function (GuildMemberRemove $event) {
     // Handle event
 });
 ```
