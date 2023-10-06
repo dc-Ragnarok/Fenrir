@@ -182,7 +182,7 @@ class Channel extends HttpResource
     ): ExtendedPromiseInterface {
         return $this->http->put(
             Endpoint::bind(
-                Endpoint::MESSAGE_REACTION_EMOJI,
+                Endpoint::OWN_MESSAGE_REACTION,
                 $channelId,
                 $messageId,
                 (string) $emoji
