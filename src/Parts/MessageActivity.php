@@ -13,6 +13,6 @@ class MessageActivity
 
     public function setType(int $value): void
     {
-        $this->type = MessageActivityType::from($value);
+        $this->type = MessageActivityType::tryFrom($value);
     }
 }

@@ -31,6 +31,6 @@ class Interaction
 
     public function setType(int $value): void
     {
-        $this->type = InteractionType::from($value);
+        $this->type = InteractionType::tryFrom($value);
     }
 }

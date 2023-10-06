@@ -30,6 +30,6 @@ class User
 
     public function setPremiumType(int $value): void
     {
-        $this->premium_type = PremiumTier::from($value);
+        $this->premium_type = PremiumTier::tryFrom($value);
     }
 }

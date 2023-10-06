@@ -27,11 +27,11 @@ class Sticker
 
     public function setType(int $value): void
     {
-        $this->type = StickerType::from($value);
+        $this->type = StickerType::tryFrom($value);
     }
 
     public function setFormatType(int $value): void
     {
-        $this->format_type = StickerFormatType::from($value);
+        $this->format_type = StickerFormatType::tryFrom($value);
     }
 }

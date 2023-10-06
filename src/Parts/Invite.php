@@ -25,6 +25,6 @@ class Invite
 
     public function setTargetType(int $value): void
     {
-        $this->target_type = InviteTargetType::from($value);
+        $this->target_type = InviteTargetType::tryFrom($value);
     }
 }

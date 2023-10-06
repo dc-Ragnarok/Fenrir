@@ -21,6 +21,6 @@ class AuditLogEntry
 
     public function setActionType(int $value): void
     {
-        $this->action_type = AuditLogEvents::from($value);
+        $this->action_type = AuditLogEvents::tryFrom($value);
     }
 }

@@ -13,6 +13,6 @@ class AutoModerationActionStructure
 
     public function setType(int $value): void
     {
-        $this->type = AutoModerationActionTypes::from($value);
+        $this->type = AutoModerationActionTypes::tryFrom($value);
     }
 }

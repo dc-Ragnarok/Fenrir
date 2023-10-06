@@ -46,11 +46,11 @@ class Component
 
     public function setType(int $value): void
     {
-        $this->type = MessageComponentType::from($value);
+        $this->type = MessageComponentType::tryFrom($value);
     }
 
     public function setStyle(int $value): void
     {
-        $this->style = ButtonStyle::from($value);
+        $this->style = ButtonStyle::tryFrom($value);
     }
 }

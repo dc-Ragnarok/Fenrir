@@ -15,6 +15,6 @@ class Overwrite
 
     public function setType(int $value): void
     {
-        $this->type = OverwriteType::from($value);
+        $this->type = OverwriteType::tryFrom($value);
     }
 }
