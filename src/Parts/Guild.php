@@ -72,17 +72,17 @@ class Guild
 
     public function setVerificationLevel(int $value): void
     {
-        $this->verification_level = VerificationLevel::from($value);
+        $this->verification_level = VerificationLevel::tryFrom($value);
     }
 
     public function setDefaultMessageNotifications(int $value): void
     {
-        $this->default_message_notifications = MessageNotificationLevel::from($value);
+        $this->default_message_notifications = MessageNotificationLevel::tryFrom($value);
     }
 
     public function setExplicitContentFilter(int $value): void
     {
-        $this->explicit_content_filter = ExplicitContentFilterLevel::from($value);
+        $this->explicit_content_filter = ExplicitContentFilterLevel::tryFrom($value);
     }
 
     public function setFeatures(array $value): void
@@ -90,22 +90,22 @@ class Guild
         $this->features = [];
 
         foreach ($value as $entry) {
-            $this->features[] = GuildFeature::from($entry);
+            $this->features[] = GuildFeature::tryFrom($entry);
         }
     }
 
     public function setMfaLevel(int $value): void
     {
-        $this->mfa_level = MfaLevel::from($value);
+        $this->mfa_level = MfaLevel::tryFrom($value);
     }
 
     public function setPremiumTier(int $value): void
     {
-        $this->premium_tier = PremiumTier::from($value);
+        $this->premium_tier = PremiumTier::tryFrom($value);
     }
 
     public function setNsfwLevel(int $value): void
     {
-        $this->nsfw_level = NsfwLevel::from($value);
+        $this->nsfw_level = NsfwLevel::tryFrom($value);
     }
 }

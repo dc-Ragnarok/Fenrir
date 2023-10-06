@@ -62,21 +62,21 @@ class Channel
 
     public function setType(int $value): void
     {
-        $this->type = ChannelType::from($value);
+        $this->type = ChannelType::tryFrom($value);
     }
 
     public function setVideoQualityMode(int $value): void
     {
-        $this->video_quality_mode = VideoQualityMode::from($value);
+        $this->video_quality_mode = VideoQualityMode::tryFrom($value);
     }
 
     public function setDefaultSortOrder(int $value): void
     {
-        $this->default_sort_order = SortOrderType::from($value);
+        $this->default_sort_order = SortOrderType::tryFrom($value);
     }
 
     public function setDefaultForumLayout(int $value): void
     {
-        $this->default_forum_layout = ForumLayoutType::from($value);
+        $this->default_forum_layout = ForumLayoutType::tryFrom($value);
     }
 }

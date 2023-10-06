@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Ragnarok\Fenrir\Parts;
 
-use Ragnarok\Fenrir\Attributes\Partial;
 use Ragnarok\Fenrir\Enums\MembershipState;
 
 class TeamMember
@@ -19,6 +18,6 @@ class TeamMember
 
     public function setMembershipState(int $value): void
     {
-        $this->membership_state = MembershipState::from($value);
+        $this->membership_state = MembershipState::tryFrom($value);
     }
 }

@@ -13,10 +13,7 @@ class Sticker
     public ?string $pack_id;
     public string $name;
     public ?string $description;
-    /**
-     * @var string[]
-     */
-    public ?array $tags;
+    public ?string $tags;
     public ?string $asset;
     public StickerType $type;
     public StickerFormatType $format_type;
@@ -27,11 +24,11 @@ class Sticker
 
     public function setType(int $value): void
     {
-        $this->type = StickerType::from($value);
+        $this->type = StickerType::tryFrom($value);
     }
 
     public function setFormatType(int $value): void
     {
-        $this->format_type = StickerFormatType::from($value);
+        $this->format_type = StickerFormatType::tryFrom($value);
     }
 }

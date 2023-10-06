@@ -14,6 +14,6 @@ class MessageStickerItem
 
     public function setFormatType(int $value): void
     {
-        $this->format_type = StickerFormatType::from($value);
+        $this->format_type = StickerFormatType::tryFrom($value);
     }
 }

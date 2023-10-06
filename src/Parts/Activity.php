@@ -31,6 +31,6 @@ class Activity
 
     public function setType(int $value): void
     {
-        $this->type = ActivityType::from($value);
+        $this->type = ActivityType::tryFrom($value);
     }
 }

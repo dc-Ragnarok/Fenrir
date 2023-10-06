@@ -28,6 +28,6 @@ class Embed
 
     public function setType(string $value): void
     {
-        $this->type = EmbedType::from($value);
+        $this->type = EmbedType::tryFrom($value);
     }
 }

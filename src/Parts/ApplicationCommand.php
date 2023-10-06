@@ -34,6 +34,6 @@ class ApplicationCommand
 
     public function setType(int $value): void
     {
-        $this->type = ApplicationCommandTypes::from($value);
+        $this->type = ApplicationCommandTypes::tryFrom($value);
     }
 }

@@ -24,6 +24,6 @@ class ApplicationCommandInteractionDataOptionStructure
 
     public function setType(int $value): void
     {
-        $this->type = ApplicationCommandOptionType::from($value);
+        $this->type = ApplicationCommandOptionType::tryFrom($value);
     }
 }
