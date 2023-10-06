@@ -17,7 +17,8 @@ class Payload implements JsonSerializable
      */
     public $d;
 
-    public function jsonSerialize(): mixed {
+    public function jsonSerialize(): mixed
+    {
         return [
             't' => $this->t,
             's' => $this->s,
