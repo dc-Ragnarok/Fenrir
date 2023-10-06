@@ -13,10 +13,7 @@ class Sticker
     public ?string $pack_id;
     public string $name;
     public ?string $description;
-    /**
-     * @var string[]
-     */
-    public ?array $tags;
+    public ?string $tags;
     public ?string $asset;
     public StickerType $type;
     public StickerFormatType $format_type;
