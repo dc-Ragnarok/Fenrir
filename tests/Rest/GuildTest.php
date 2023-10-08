@@ -31,6 +31,17 @@ class GuildTest extends HttpHelperTestCase
                     'returnType' => PartsGuild::class,
                 ]
             ],
+            'Get guild with counts' => [
+                'method' => 'get',
+                'args' => ['::guild id::', true],
+                'mockOptions' => [
+                    'method' => 'get',
+                    'return' => (object) [],
+                ],
+                'validationOptions' => [
+                    'returnType' => PartsGuild::class,
+                ]
+            ],
             'Get preview' => [
                 'method' => 'getPreview',
                 'args' => ['::guild id::'],

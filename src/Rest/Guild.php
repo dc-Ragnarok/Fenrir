@@ -54,14 +54,20 @@ class Guild extends HttpResource
      *
      * @return ExtendedPromiseInterface<\Ragnarok\Fenrir\Parts\Guild>
      */
-    public function get(string $guildId): ExtendedPromiseInterface
+    public function get(string $guildId, bool $withCounts = false): ExtendedPromiseInterface
     {
+        $endpoint = Endpoint::bind(
+            Endpoint::GUILD,
+            $guildId
+        );
+
+        if ($withCounts) {
+            $endpoint->addQuery('with_counts', true);
+        }
+
         return $this->mapPromise(
             $this->http->get(
-                Endpoint::bind(
-                    Endpoint::GUILD,
-                    $guildId
-                )
+                $endpoint,
             ),
             PartsGuild::class
         )->otherwise($this->logThrowable(...));
