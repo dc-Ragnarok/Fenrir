@@ -12,12 +12,14 @@ class ApplicationCommandOptionStructure
     public ApplicationCommandOptionType $type;
     public string $name;
     /**
-     * @var array<string, string>
+     * Array of string => string
+     * @var string[]
      */
     public ?array $name_localizations;
     public string $description;
     /**
-     * @var array<string, string>
+     * Array of string => string
+     * @var string[]
      */
     public ?array $description_localizations;
     public ?bool $required;

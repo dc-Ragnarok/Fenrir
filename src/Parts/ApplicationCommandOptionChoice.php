@@ -8,7 +8,8 @@ class ApplicationCommandOptionChoice
 {
     public string $name;
     /**
-     * @var array<string, string>
+     * Array of string => string
+     * @var string[]
      */
     public ?array $name_localizations;
     public string|int|float $value;

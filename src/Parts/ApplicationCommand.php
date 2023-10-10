@@ -14,12 +14,14 @@ class ApplicationCommand
     public ?string $guild_id;
     public string $name;
     /**
-     * @var array<string, string>
+     * Array of string => string
+     * @var string[]
      */
     public ?array $name_localizations;
     public string $description;
     /**
-     * @var array<string, string>
+     * Array of string => string
+     * @var string[]
      */
     public ?array $description_localizations;
     /**
