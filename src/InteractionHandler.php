@@ -51,7 +51,8 @@ class InteractionHandler implements Extension
             $this->discord->gateway->events,
             Events::INTERACTION_CREATE,
             fn (InteractionCreate $interactionCreate) =>
-                $interactionCreate->type === InteractionType::APPLICATION_COMMAND
+                isset($interactionCreate)
+                && $interactionCreate->type === InteractionType::APPLICATION_COMMAND
                 && isset($this->handlersCommand[$interactionCreate->data->id])
         );
 
@@ -62,7 +63,8 @@ class InteractionHandler implements Extension
             $this->discord->gateway->events,
             Events::INTERACTION_CREATE,
             fn (InteractionCreate $interactionCreate) =>
-                $interactionCreate->type === InteractionType::MESSAGE_COMPONENT
+                isset($interactionCreate)
+                && $interactionCreate->type === InteractionType::MESSAGE_COMPONENT
                 && $interactionCreate->data->component_type === 2 // @todo enum
                 && isset($this->handlersButton[$interactionCreate->data->custom_id])
         );
