@@ -127,7 +127,7 @@ class CommandOptionBuilder
 
         $this->data['choices'][] = [
             'name' => $name,
-            'localized_names' => $localizedNames,
+            'name_localizations' => $localizedNames,
             'value' => $value,
         ];
 
