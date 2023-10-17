@@ -52,7 +52,7 @@ class InteractionHandler implements Extension
             Events::INTERACTION_CREATE,
             fn (InteractionCreate $interactionCreate) =>
                 isset($interactionCreate)
-                && $interactionCreate?->type ?? null === InteractionType::APPLICATION_COMMAND
+                && $interactionCreate?->type === InteractionType::APPLICATION_COMMAND
                 && isset($this->handlersCommand[$interactionCreate->data->id])
         );
 
@@ -64,7 +64,7 @@ class InteractionHandler implements Extension
             Events::INTERACTION_CREATE,
             fn (InteractionCreate $interactionCreate) =>
                 isset($interactionCreate)
-                && $interactionCreate->type === InteractionType::MESSAGE_COMPONENT
+                && $interactionCreate?->type === InteractionType::MESSAGE_COMPONENT
                 && $interactionCreate->data->component_type === 2 // @todo enum
                 && isset($this->handlersButton[$interactionCreate->data->custom_id])
         );
