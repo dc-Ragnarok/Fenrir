@@ -6,6 +6,13 @@
 
 <p align="center">PHP Discord Interface.</p>
 
+<div align="center">
+
+[![Fenrir Code Quality](https://github.com/dc-Ragnarok/Fenrir/actions/workflows/code-quality.yml/badge.svg)](https://github.com/dc-Ragnarok/Fenrir/actions/workflows/code-quality.yml)
+[![Fenrir Unit Tests](https://github.com/dc-Ragnarok/Fenrir/actions/workflows/unit-tests.yml/badge.svg)](https://github.com/dc-Ragnarok/Fenrir/actions/workflows/unit-tests.yml)
+
+</div>
+
 ## About
 
 Fenrir is a mostly plain wrapper over Discords APIs/gateway.
