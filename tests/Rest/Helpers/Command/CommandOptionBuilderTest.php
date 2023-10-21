@@ -90,13 +90,13 @@ class CommandOptionBuilderTest extends TestCase
         $builder->addChoice('choice-2', 'choice-value-2');
 
         $this->assertEquals([
-            ['name' => 'choice-1', 'value' => 'choice-value-1', 'localized_names' => []],
-            ['name' => 'choice-2', 'value' => 'choice-value-2', 'localized_names' => []]
+            ['name' => 'choice-1', 'value' => 'choice-value-1', 'name_localizations' => []],
+            ['name' => 'choice-2', 'value' => 'choice-value-2', 'name_localizations' => []]
         ], $builder->getChoices());
 
         $this->assertEquals([
-            ['name' => 'choice-1', 'value' => 'choice-value-1', 'localized_names' => []],
-            ['name' => 'choice-2', 'value' => 'choice-value-2', 'localized_names' => []]
+            ['name' => 'choice-1', 'value' => 'choice-value-1', 'name_localizations' => []],
+            ['name' => 'choice-2', 'value' => 'choice-value-2', 'name_localizations' => []]
         ], $builder->get()['choices']);
     }
 
