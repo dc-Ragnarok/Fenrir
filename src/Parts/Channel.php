@@ -70,8 +70,12 @@ class Channel
         $this->video_quality_mode = VideoQualityMode::tryFrom($value);
     }
 
-    public function setDefaultSortOrder(int $value): void
+    public function setDefaultSortOrder(?int $value): void
     {
+        if (is_null($value)) {
+            return;
+        }
+
         $this->default_sort_order = SortOrderType::tryFrom($value);
     }
 
