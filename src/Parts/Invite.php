@@ -21,9 +21,4 @@ class Invite
     public ?Carbon $expires_at;
     public ?InviteStageInstanceObject $stage_instance;
     public ?GuildScheduledEvent $guild_scheduled_event;
-
-    public function setTargetType(int $value): void
-    {
-        $this->target_type = InviteTargetType::tryFrom($value);
-    }
 }

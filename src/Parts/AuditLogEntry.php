@@ -20,9 +20,4 @@ class AuditLogEntry
     public AuditLogEvents $action_type;
     public ?OptionalAuditEntryInfo $options;
     public ?string $reason;
-
-    public function setActionType(int $value): void
-    {
-        $this->action_type = AuditLogEvents::tryFrom($value);
-    }
 }

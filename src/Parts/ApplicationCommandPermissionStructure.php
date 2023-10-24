@@ -11,9 +11,4 @@ class ApplicationCommandPermissionStructure
     public string $id;
     public ApplicationCommandPermissionType $type;
     public bool $permission;
-
-    public function setType(int $value): void
-    {
-        $this->type = ApplicationCommandPermissionType::tryFrom($value);
-    }
 }

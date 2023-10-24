@@ -19,8 +19,8 @@ class AutoModerationTriggerMetadata
     public array $regex_patterns;
     /**
      * @var \Ragnarok\Fenrir\Enums\AutoModerationKeywordPresetType[]
+     * @todo Enum array
      */
-    #[ArrayMapping(AutoModerationKeywordPresetType::class)]
     public array $presets;
     /**
      * @var string[]
@@ -28,13 +28,4 @@ class AutoModerationTriggerMetadata
     public array $allow_list;
     public int $mention_total_limit;
     public bool $mention_raid_protection_enabled;
-
-    public function setPresets(array $value): void
-    {
-        $this->presets = [];
-
-        foreach ($value as $entry) {
-            $this->presets[] = AutoModerationKeywordPresetType::from($entry);
-        }
-    }
 }

@@ -14,9 +14,4 @@ class MessageInteraction
     public string $name;
     public User $user;
     public ?GuildMember $member;
-
-    public function setType(int $value): void
-    {
-        $this->type = InteractionType::tryFrom($value);
-    }
 }

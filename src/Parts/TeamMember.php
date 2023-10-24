@@ -15,9 +15,4 @@ class TeamMember
     public array $permissions;
     public string $team_id;
     public User $user;
-
-    public function setMembershipState(int $value): void
-    {
-        $this->membership_state = MembershipState::tryFrom($value);
-    }
 }

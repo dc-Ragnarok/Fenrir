@@ -31,14 +31,4 @@ class AutoModerationRuleObject
      * @var string[]
      */
     public array $exempt_channels;
-
-    public function setEventType(int $value): void
-    {
-        $this->event_type = AutoModerationRuleEventType::tryFrom($value);
-    }
-
-    public function setTriggerType(int $value): void
-    {
-        $this->trigger_type = AutoModerationRuleTriggerType::tryFrom($value);
-    }
 }

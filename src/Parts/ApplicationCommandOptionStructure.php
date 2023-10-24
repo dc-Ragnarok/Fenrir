@@ -36,6 +36,7 @@ class ApplicationCommandOptionStructure
     public ?array $options;
     /**
      * @var \Ragnarok\Fenrir\Enums\ChannelType[]
+     * @todo Enum array
      */
     public ?array $channel_types;
     public int|float|null $min_value;
@@ -43,28 +44,4 @@ class ApplicationCommandOptionStructure
     public ?int $min_length;
     public ?int $max_length;
     public ?bool $autocomplete;
-
-    public function setMinValue(mixed $value): void
-    {
-        $this->min_value = $value;
-    }
-
-    public function setMaxValue(mixed $value): void
-    {
-        $this->max_value = $value;
-    }
-
-    public function setType(int $value): void
-    {
-        $this->type = ApplicationCommandOptionType::tryFrom($value);
-    }
-
-    public function setChannelTypes(array $value): void
-    {
-        $this->channel_types = [];
-
-        foreach ($value as $entry) {
-            $this->channel_types[] = ChannelType::from($entry);
-        }
-    }
 }

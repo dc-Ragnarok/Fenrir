@@ -10,16 +10,8 @@ class InstallParams
 {
     /**
      * @var \Ragnarok\Fenrir\Enums\Scope[]
+     * @todo Enum array
      */
     public array $scopes;
     public string $permissions;
-
-    public function setScopes(array $value): void
-    {
-        $this->scopes = [];
-
-        foreach ($value as $entry) {
-            $this->scopes[] = Scope::from($entry);
-        }
-    }
 }

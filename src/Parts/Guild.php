@@ -45,8 +45,8 @@ class Guild
     public array $emojis;
     /**
      * @var \Ragnarok\Fenrir\Enums\GuildFeature[]
+     * @todo Enum array
      */
-    #[ArrayMapping(GuildFeature::class)]
     public array $features;
     public MfaLevel $mfa_level;
     public ?string $application_id;
@@ -74,43 +74,4 @@ class Guild
     public ?array $stickers;
     public bool $premium_progress_bar_enabled;
     public ?string $safety_alerts_channel_id;
-
-    public function setVerificationLevel(int $value): void
-    {
-        $this->verification_level = VerificationLevel::tryFrom($value);
-    }
-
-    public function setDefaultMessageNotifications(int $value): void
-    {
-        $this->default_message_notifications = MessageNotificationLevel::tryFrom($value);
-    }
-
-    public function setExplicitContentFilter(int $value): void
-    {
-        $this->explicit_content_filter = ExplicitContentFilterLevel::tryFrom($value);
-    }
-
-    public function setFeatures(array $value): void
-    {
-        $this->features = [];
-
-        foreach ($value as $entry) {
-            $this->features[] = GuildFeature::tryFrom($entry);
-        }
-    }
-
-    public function setMfaLevel(int $value): void
-    {
-        $this->mfa_level = MfaLevel::tryFrom($value);
-    }
-
-    public function setPremiumTier(int $value): void
-    {
-        $this->premium_tier = PremiumTier::tryFrom($value);
-    }
-
-    public function setNsfwLevel(int $value): void
-    {
-        $this->nsfw_level = NsfwLevel::tryFrom($value);
-    }
 }

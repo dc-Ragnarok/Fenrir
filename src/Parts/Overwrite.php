@@ -12,9 +12,4 @@ class Overwrite
     public OverwriteType $type;
     public string $allow;
     public string $deny;
-
-    public function setType(int $value): void
-    {
-        $this->type = OverwriteType::tryFrom($value);
-    }
 }

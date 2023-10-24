@@ -18,14 +18,4 @@ class ApplicationCommandInteractionDataOptionStructure
     #[ArrayMapping(ApplicationCommandInteractionDataOptionStructure::class)]
     public ?array $options;
     public bool $focused;
-
-    public function setValue(mixed $value): void
-    {
-        $this->value = $value;
-    }
-
-    public function setType(int $value): void
-    {
-        $this->type = ApplicationCommandOptionType::tryFrom($value);
-    }
 }

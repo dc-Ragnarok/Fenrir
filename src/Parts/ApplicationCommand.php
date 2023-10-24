@@ -33,9 +33,4 @@ class ApplicationCommand
     public ?bool $default_permission;
     public ?bool $nsfw;
     public string $version;
-
-    public function setType(int $value): void
-    {
-        $this->type = ApplicationCommandTypes::tryFrom($value);
-    }
 }

@@ -17,8 +17,8 @@ class GuildPreview
     public array $emojis;
     /**
      * @var \Ragnarok\Fenrir\Enums\GuildFeature[]
+     * @todo Enum array
      */
-    #[ArrayMapping(GuildFeature::class)]
     public array $features;
     public ?int $approximate_member_count;
     public ?int $approximate_presence_count;
@@ -28,13 +28,4 @@ class GuildPreview
      */
     #[ArrayMapping(Sticker::class)]
     public ?array $stickers;
-
-    public function setFeatures(array $value): void
-    {
-        $this->features = [];
-
-        foreach ($value as $entry) {
-            $this->features[] = GuildFeature::from($entry);
-        }
-    }
 }

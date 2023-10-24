@@ -27,20 +27,7 @@ class Integration
     public ?Application $application;
     /**
      * @var \Ragnarok\Fenrir\Enums\Scope[]
+     * @todo Enum array
      */
     public ?array $scopes;
-
-    public function setExpireBehavior(int $value): void
-    {
-        $this->expire_behavior = IntegrationExpireBehavior::tryFrom($value);
-    }
-
-    public function setScopes(array $value): void
-    {
-        $this->scopes = [];
-
-        foreach ($value as $entry) {
-            $this->scopes[] = Scope::from($entry);
-        }
-    }
 }

@@ -30,9 +30,4 @@ class Activity
      */
     #[ArrayMapping(ActivityButton::class)]
     public ?array $buttons;
-
-    public function setType(int $value): void
-    {
-        $this->type = ActivityType::tryFrom($value);
-    }
 }

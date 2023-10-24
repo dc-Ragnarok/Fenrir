@@ -77,9 +77,4 @@ class Message
     public ?array $stickers;
     public ?int $position;
     public ?RoleSubscriptionData $role_subscription_data;
-
-    public function setType(int $value): void
-    {
-        $this->type = MessageType::tryFrom($value);
-    }
 }

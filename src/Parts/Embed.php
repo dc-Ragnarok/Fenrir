@@ -27,9 +27,4 @@ class Embed
      */
     #[ArrayMapping(EmbedField::class)]
     public ?array $fields;
-
-    public function setType(string $value): void
-    {
-        $this->type = EmbedType::tryFrom($value);
-    }
 }

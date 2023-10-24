@@ -30,6 +30,7 @@ class Component
     public ?array $options; // @todo
     /**
      * @var \Ragnarok\Fenrir\Enums\ChannelType[]
+     * @todo Enum array
      */
     #[ArrayMapping(ChannelType::class)]
     public ?array $channel_types;
@@ -38,23 +39,4 @@ class Component
     public ?int $max_values;
     public ?bool $required;
     public ?string $value;
-
-    public function setChannelTypes(array $values): void
-    {
-        $this->channel_types = [];
-
-        foreach ($values as $entry) {
-            $this->channel_types[] = ChannelType::from($entry);
-        }
-    }
-
-    public function setType(int $value): void
-    {
-        $this->type = MessageComponentType::tryFrom($value);
-    }
-
-    public function setStyle(int $value): void
-    {
-        $this->style = ButtonStyle::tryFrom($value);
-    }
 }
