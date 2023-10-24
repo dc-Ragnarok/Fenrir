@@ -36,7 +36,7 @@ class IdentifyHelloEventTest extends MockeryTestCase
         $connection = Mockery::mock(ConnectionInterface::class);
         $event = new IdentifyHelloEvent(
             $connection,
-            $this->mapper->map([
+            $this->mapper->map((object) [
                 'd' => (object) [
                     'heartbeat_interval' => 123
                 ]

@@ -6,6 +6,7 @@ namespace Ragnarok\Fenrir\Parts;
 
 use Ragnarok\Fenrir\Enums\AutoModerationRuleTriggerType;
 use Ragnarok\Fenrir\Enums\AutoModerationRuleEventType;
+use Ragnarok\Fenrir\Mapping\ArrayMapping;
 
 class AutoModerationRuleObject
 {
@@ -19,6 +20,7 @@ class AutoModerationRuleObject
     /**
      * @var \Ragnarok\Fenrir\Parts\AutoModerationActionStructure[]
      */
+    #[ArrayMapping(AutoModerationActionStructure::class)]
     public array $actions;
     public bool $enabled;
     /**

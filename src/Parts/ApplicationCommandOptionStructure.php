@@ -6,6 +6,7 @@ namespace Ragnarok\Fenrir\Parts;
 
 use Ragnarok\Fenrir\Enums\ApplicationCommandOptionType;
 use Ragnarok\Fenrir\Enums\ChannelType;
+use Ragnarok\Fenrir\Mapping\ArrayMapping;
 
 class ApplicationCommandOptionStructure
 {
@@ -26,10 +27,12 @@ class ApplicationCommandOptionStructure
     /**
      * @var \Ragnarok\Fenrir\Parts\ApplicationCommandOptionChoice[]
      */
+    #[ArrayMapping(ApplicationCommandOptionChoice::class)]
     public ?array $choices;
     /**
      * @var \Ragnarok\Fenrir\Parts\ApplicationCommandOptionStructure[]
      */
+    #[ArrayMapping(ApplicationCommandOptionStructure::class)]
     public ?array $options;
     /**
      * @var \Ragnarok\Fenrir\Enums\ChannelType[]

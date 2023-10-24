@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Ragnarok\Fenrir\Parts;
 
+use Ragnarok\Fenrir\Mapping\ArrayMapping;
+
 class InteractionData
 {
     public string $id;
@@ -13,6 +15,7 @@ class InteractionData
     /**
      * @var \Ragnarok\Fenrir\Parts\ApplicationCommandInteractionDataOptionStructure[]
      */
+    #[ArrayMapping(ApplicationCommandInteractionDataOptionStructure::class)]
     public ?array $options;
     public ?string $guild_id;
     public ?string $target_id;
@@ -21,5 +24,6 @@ class InteractionData
     /**
      * @var \Ragnarok\Fenrir\Parts\ComponentSelectOptions[]
      */
+    #[ArrayMapping(ComponentSelectOptions::class)]
     public ?array $values;
 }

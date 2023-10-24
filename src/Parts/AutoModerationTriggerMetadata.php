@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Ragnarok\Fenrir\Parts;
 
 use Ragnarok\Fenrir\Enums\AutoModerationKeywordPresetType;
+use Ragnarok\Fenrir\Mapping\ArrayMapping;
 
 class AutoModerationTriggerMetadata
 {
@@ -19,6 +20,7 @@ class AutoModerationTriggerMetadata
     /**
      * @var \Ragnarok\Fenrir\Enums\AutoModerationKeywordPresetType[]
      */
+    #[ArrayMapping(AutoModerationKeywordPresetType::class)]
     public array $presets;
     /**
      * @var string[]

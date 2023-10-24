@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Ragnarok\Fenrir\Parts;
 
 use Ragnarok\Fenrir\Enums\ApplicationCommandTypes;
+use Ragnarok\Fenrir\Mapping\ArrayMapping;
 
 class ApplicationCommand
 {
@@ -14,19 +15,18 @@ class ApplicationCommand
     public ?string $guild_id;
     public string $name;
     /**
-     * Array of string => string
-     * @var string[]
+     * @var array<string, string>
      */
     public ?array $name_localizations;
     public string $description;
     /**
-     * Array of string => string
-     * @var string[]
+     * @var array<string, string>
      */
     public ?array $description_localizations;
     /**
      * @var \Ragnarok\Fenrir\Parts\ApplicationCommandOptionStructure[]
      */
+    #[ArrayMapping(ApplicationCommandOptionStructure::class)]
     public ?array $options;
     public ?string $default_member_permissions;
     public ?bool $dm_permission;

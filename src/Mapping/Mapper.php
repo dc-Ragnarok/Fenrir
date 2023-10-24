@@ -87,6 +87,11 @@ class Mapper
 
         if (($type instanceof ReflectionNamedType && $type->isBuiltin())) {
             if ($type->getName() === 'array') {
+                if (!is_array($value)) {
+                    $errors[] = new MappingException('Unable to map non-array to array', $reflectionProperty->getName(), get_class($instance));
+                    return;
+                }
+
                 $attributes = $reflectionProperty->getAttributes(ArrayMapping::class);
 
                 /**

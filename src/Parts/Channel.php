@@ -10,6 +10,7 @@ use Ragnarok\Fenrir\Enums\ChannelType;
 use Ragnarok\Fenrir\Enums\ForumLayoutType;
 use Ragnarok\Fenrir\Enums\SortOrderType;
 use Ragnarok\Fenrir\Enums\VideoQualityMode;
+use Ragnarok\Fenrir\Mapping\ArrayMapping;
 
 class Channel
 {
@@ -20,6 +21,7 @@ class Channel
     /**
      * @var \Ragnarok\Fenrir\Parts\Overwrite[]
      */
+    #[ArrayMapping(Overwrite::class)]
     public ?array $permission_overwrites;
     public ?string $name;
     public ?string $topic;
@@ -31,6 +33,7 @@ class Channel
     /**
      * @var \Ragnarok\Fenrir\Parts\User[]
      */
+    #[ArrayMapping(User::class)]
     public ?array $recipients;
     public ?string $icon;
     public ?string $owner_id;
@@ -50,6 +53,7 @@ class Channel
     /**
      * @var \Ragnarok\Fenrir\Parts\Tag[]
      */
+    #[ArrayMapping(Tag::class)]
     public ?array $available_tags;
     /**
      * @var string[]

@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Ragnarok\Fenrir\Parts;
 
+use Ragnarok\Fenrir\Mapping\ArrayMapping;
+
 class ApplicationCommandPermissionObject
 {
     public string $id;
@@ -12,5 +14,6 @@ class ApplicationCommandPermissionObject
     /**
      * @var \Ragnarok\Fenrir\Parts\ApplicationCommandPermissionStructure[]
      */
+    #[ArrayMapping(ApplicationCommandPermissionStructure::class)]
     public array $permissions;
 }

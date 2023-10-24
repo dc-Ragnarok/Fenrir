@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Ragnarok\Fenrir\Parts;
 
 use Ragnarok\Fenrir\Attributes\Partial;
+use Ragnarok\Fenrir\Mapping\ArrayMapping;
 
 class InteractionDataResolved
 {
@@ -12,30 +13,36 @@ class InteractionDataResolved
      * Array of string => User
      * @var \Ragnarok\Fenrir\Parts\User[]
      */
+    #[ArrayMapping(User::class)]
     public ?array $users;
     /**
      * Array of string => GuildMember
      * @var \Ragnarok\Fenrir\Parts\GuildMember[]
      */
+    #[ArrayMapping(GuildMember::class)]
     public ?array $members;
     /**
      * Array of string => Role
      * @var \Ragnarok\Fenrir\Parts\Role[]
      */
+    #[ArrayMapping(Role::class)]
     public ?array $roles;
     /**
      * Array of string => Channel
      * @var \Ragnarok\Fenrir\Parts\Channel[]
      */
+    #[ArrayMapping(Channel::class)]
     public ?array $channels;
     /**
      * Array of string => Message
      * @var \Ragnarok\Fenrir\Parts\Message[]
      */
+    #[ArrayMapping(Message::class)]
     public ?array $messages;
     /**
      * Array of string => Attachment
      * @var \Ragnarok\Fenrir\Parts\Attachment[]
      */
+    #[ArrayMapping(Attachment::class)]
     public ?array $attachments;
 }

@@ -12,6 +12,7 @@ use Ragnarok\Fenrir\Enums\MfaLevel;
 use Ragnarok\Fenrir\Enums\NsfwLevel;
 use Ragnarok\Fenrir\Enums\PremiumTier;
 use Ragnarok\Fenrir\Enums\VerificationLevel;
+use Ragnarok\Fenrir\Mapping\ArrayMapping;
 
 class Guild
 {
@@ -35,14 +36,17 @@ class Guild
     /**
      * @var \Ragnarok\Fenrir\Parts\Role[]
      */
+    #[ArrayMapping(Role::class)]
     public array $roles;
     /**
      * @var \Ragnarok\Fenrir\Parts\Emoji[]
      */
+    #[ArrayMapping(Emoji::class)]
     public array $emojis;
     /**
      * @var \Ragnarok\Fenrir\Enums\GuildFeature[]
      */
+    #[ArrayMapping(GuildFeature::class)]
     public array $features;
     public MfaLevel $mfa_level;
     public ?string $application_id;
@@ -66,6 +70,7 @@ class Guild
     /**
      * @var \Ragnarok\Fenrir\Parts\Sticker[]
      */
+    #[ArrayMapping(Sticker::class)]
     public ?array $stickers;
     public bool $premium_progress_bar_enabled;
     public ?string $safety_alerts_channel_id;

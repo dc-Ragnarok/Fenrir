@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Ragnarok\Fenrir\Parts;
 
 use Carbon\Carbon;
-use Ragnarok\Fenrir\Attributes\Partial;
 use Ragnarok\Fenrir\Enums\InviteTargetType;
 
 class Invite

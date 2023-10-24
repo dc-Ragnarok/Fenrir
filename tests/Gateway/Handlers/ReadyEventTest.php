@@ -28,7 +28,7 @@ class ReadyEventTest extends MockeryTestCase
     /**
      * @dataProvider listenerDataProvider
      */
-    public function testItListensToTheCorrectEvent(array $payload, bool $expectation): void
+    public function testItListensToTheCorrectEvent(object $payload, bool $expectation): void
     {
         $event = new ReadyEvent(
             Mockery::mock(ConnectionInterface::class),
@@ -43,19 +43,19 @@ class ReadyEventTest extends MockeryTestCase
     {
         return [
             'Ready event' => [
-                'payload' => [
+                'payload' => (object) [
                     't' => Events::READY
                 ],
                 'expectation' => true,
             ],
             'Other event' => [
-                'payload' => [
+                'payload' => (object) [
                     't' => Events::AUTO_MODERATION_ACTION_EXECUTION
                 ],
                 'expectation' => false,
             ],
             'No type' => [
-                'payload' => [],
+                'payload' => (object) [],
                 'expectation' => false,
             ],
         ];
@@ -64,7 +64,7 @@ class ReadyEventTest extends MockeryTestCase
     /**
      * @dataProvider payloadProvider
      */
-    public function testItSetsResumeUrlAndSessionId(array $payload, bool $shouldSet): void
+    public function testItSetsResumeUrlAndSessionId(object $payload, bool $shouldSet): void
     {
         /** @var MockInterface&ConnectionInterface */
         $connection = Mockery::mock(ConnectionInterface::class);
@@ -97,7 +97,7 @@ class ReadyEventTest extends MockeryTestCase
     {
         return [
             'All filled in' => [
-                'payload' => [
+                'payload' => (object) [
                     't' => Events::READY,
                     'd' => (object) [
                         'resume_gateway_url' => '::resume gateway url::',
@@ -108,7 +108,7 @@ class ReadyEventTest extends MockeryTestCase
             ],
 
             'No resume url' => [
-                'payload' => [
+                'payload' => (object) [
                     't' => Events::READY,
                     'd' => (object) [
                         'session_id' => '::session id::',
@@ -118,7 +118,7 @@ class ReadyEventTest extends MockeryTestCase
             ],
 
             'No session id' => [
-                'payload' => [
+                'payload' => (object) [
                     't' => Events::READY,
                     'd' => (object) [
                         'resume_gateway_url' => '::resume gateway url::',
@@ -128,7 +128,7 @@ class ReadyEventTest extends MockeryTestCase
             ],
 
             'No d' => [
-                'payload' => [
+                'payload' => (object) [
                     't' => Events::READY,
                 ],
                 'expectation' => false,

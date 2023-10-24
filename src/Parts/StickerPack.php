@@ -4,12 +4,15 @@ declare(strict_types=1);
 
 namespace Ragnarok\Fenrir\Parts;
 
+use Ragnarok\Fenrir\Mapping\ArrayMapping;
+
 class StickerPack
 {
     public string $id;
     /**
      * @var \Ragnarok\Fenrir\Parts\Sticker[]
      */
+    #[ArrayMapping(Sticker::class)]
     public array $stickers;
     public string $name;
     public string $sku_id;

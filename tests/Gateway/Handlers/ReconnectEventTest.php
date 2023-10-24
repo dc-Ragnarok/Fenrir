@@ -79,7 +79,7 @@ class ReconnectEventTest extends MockeryTestCase
 
         $event = new ReconnectEvent(
             $connection,
-            $this->mapper->map([], Payload::class),
+            $this->mapper->map((object) [], Payload::class),
             new NullLogger(),
         );
 
@@ -130,7 +130,7 @@ class ReconnectEventTest extends MockeryTestCase
 
         $event = new ReconnectEvent(
             $connection,
-            $this->mapper->map([], Payload::class),
+            $this->mapper->map((object) [], Payload::class),
             new NullLogger(),
         );
 
@@ -192,7 +192,7 @@ class ReconnectEventTest extends MockeryTestCase
 
         $event = new ReconnectEvent(
             $connection,
-            $this->mapper->map([], Payload::class),
+            $this->mapper->map((object) [], Payload::class),
             new NullLogger(),
         );
 
