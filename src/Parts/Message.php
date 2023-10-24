@@ -8,6 +8,7 @@ use Carbon\Carbon;
 use Ragnarok\Fenrir\Attributes\Partial;
 use Ragnarok\Fenrir\Bitwise\Bitwise;
 use Ragnarok\Fenrir\Enums\MessageType;
+use Ragnarok\Fenrir\Mapping\ArrayMapping;
 
 class Message
 {
@@ -30,18 +31,22 @@ class Message
     /**
      * @var \Ragnarok\Fenrir\Parts\ChannelMention[]
      */
+    #[ArrayMapping(ChannelMention::class)]
     public ?array $mention_channels;
     /**
      * @var \Ragnarok\Fenrir\Parts\Attachment[]
      */
+    #[ArrayMapping(Attachment::class)]
     public array $attachments;
     /**
      * @var \Ragnarok\Fenrir\Parts\Embed[]
      */
+    #[ArrayMapping(Embed::class)]
     public array $embeds;
     /**
      * @var \Ragnarok\Fenrir\Parts\Reaction[]
      */
+    #[ArrayMapping(Reaction::class)]
     public ?array $reactions;
     public ?string $nonce;
     public bool $pinned;
@@ -58,14 +63,17 @@ class Message
     /**
      * @var \Ragnarok\Fenrir\Parts\Component[]
      */
+    #[ArrayMapping(Component::class)]
     public array $components;
     /**
      * @var \Ragnarok\Fenrir\Parts\MessageStickerItem[]
      */
+    #[ArrayMapping(MessageStickerItem::class)]
     public ?array $sticker_items;
     /**
      * @var \Ragnarok\Fenrir\Parts\Sticker[]
      */
+    #[ArrayMapping(Sticker::class)]
     public ?array $stickers;
     public ?int $position;
     public ?RoleSubscriptionData $role_subscription_data;

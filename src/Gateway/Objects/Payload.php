@@ -12,9 +12,6 @@ class Payload implements JsonSerializable
     public ?int $s;
     public int $op;
 
-    /**
-     * @var mixed|null $d
-     */
     public $d;
 
     public function jsonSerialize(): mixed

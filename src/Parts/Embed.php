@@ -6,6 +6,7 @@ namespace Ragnarok\Fenrir\Parts;
 
 use Carbon\Carbon;
 use Ragnarok\Fenrir\Enums\EmbedType;
+use Ragnarok\Fenrir\Mapping\ArrayMapping;
 
 class Embed
 {
@@ -24,6 +25,7 @@ class Embed
     /**
      * @var \Ragnarok\Fenrir\Parts\EmbedField[]
      */
+    #[ArrayMapping(EmbedField::class)]
     public ?array $fields;
 
     public function setType(string $value): void
