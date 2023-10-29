@@ -206,6 +206,13 @@ class Mapper
 
     private function mapArray(array $values, ArrayMapping $arrayMapping, array &$errors)
     {
+        return enum_exists($arrayMapping->definition)
+            ? $this->mapEnumArray($values, $arrayMapping, $errors)
+            : $this->mapClassArray($values, $arrayMapping, $errors);
+    }
+
+    private function mapClassArray(array $values, ArrayMapping $arrayMapping, array &$errors)
+    {
         $new = [];
 
         foreach ($values as $key => $value) {
@@ -213,6 +220,22 @@ class Mapper
 
             $errors = [...$errors, ...$completedMapping->errors];
             $new[$key] = $completedMapping->result;
+        }
+
+        return $new;
+    }
+
+    private function mapEnumArray(array $values, ArrayMapping $arrayMapping, array &$errors)
+    {
+        $new = [];
+
+        foreach ($values as $key => $value) {
+            try {
+                $new[$key] = $arrayMapping->definition::tryFrom($value);
+            } catch (Throwable $e) {
+                $errors[] = new MappingException($e->getMessage(), '', $arrayMapping->definition, $e);
+                $new[$key] = null;
+            }
         }
 
         return $new;

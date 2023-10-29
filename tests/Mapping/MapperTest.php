@@ -255,4 +255,31 @@ class MapperTest extends TestCase
             })(),
         ];
     }
+
+    public function testItMapsEnumArrays()
+    {
+        $definition = new class () {
+            #[ArrayMapping(MessageType::class)]
+            public array $test;
+        };
+
+        $source = (object) [
+            'test' => [
+                0,
+                1,
+                2,
+            ],
+        ];
+
+        $result = $this->mapper->map($source, $definition::class);
+
+        $this->assertInstanceOf($definition::class, $result->result);
+        $this->assertEmpty($result->errors);
+
+        $this->assertEquals([
+            MessageType::DEFAULT,
+            MessageType::RECIPIENT_ADD,
+            MessageType::RECIPIENT_REMOVE,
+        ], $result->result->test);
+    }
 }
