@@ -35,7 +35,7 @@ abstract class HttpResource
 
     protected function logThrowable(Throwable $e): void
     {
-        $this->logger->error($e);
+        $this->logger->error($e->getMessage());
     }
 
     protected function getAuditLogReasonHeader(?string $reason = null): array
