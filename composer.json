@@ -18,7 +18,6 @@
     "require": {
         "react/event-loop": "^1.3.0",
         "ratchet/pawl": "^0.4.1",
-        "netresearch/jsonmapper": "^4.1",
         "evenement/evenement": "^3.0.0",
         "nesbot/carbon": "^2.64",
         "discord-php/http": "v10.2.0",
