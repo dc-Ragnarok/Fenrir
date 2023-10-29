@@ -21,16 +21,14 @@
         "evenement/evenement": "^3.0.0",
         "nesbot/carbon": "^2.64",
         "discord-php/http": "v10.2.0",
-        "monolog/monolog": "^3.2",
-        "ramsey/uuid": "^4.7",
         "ralouphie/mimey": "^1.0",
         "spatie/regex": "^3.1",
-        "guzzlehttp/guzzle": "^7.0",
         "react/async": "^4.0.0",
         "exan/eventer": "^1.0.3",
         "exan/reactphp-retrier": "^1.0"
     },
     "require-dev": {
+        "monolog/monolog": "^3.2",
         "phpunit/phpunit": "^9.5",
         "cboden/ratchet": "^0.4.4",
         "phpmd/phpmd": "^2.13",
