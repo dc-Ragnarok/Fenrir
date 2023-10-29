@@ -61,19 +61,14 @@ class Mapper
         ReflectionProperty $reflectionProperty,
         mixed &$instance,
         array &$errors,
-    ) {
+    ): void {
         $type = $reflectionProperty->getType();
 
         /**
-         * Union types will only be used for primitive union types, thus typing of source data should match allowed
+         * Typing should match for Union Types & non-set types
          */
         if ($type instanceof ReflectionUnionType || is_null($type)) {
-            try {
-                $reflectionProperty->setValue($instance, $value);
-            } catch (Throwable $e) {
-                $errors[] = new MappingException($e->getMessage(), $reflectionProperty->getName(), get_class($instance), $e);
-            }
-
+            $this->setFlat($reflectionProperty, $instance, $value, $errors);
             return;
         }
 
@@ -83,69 +78,130 @@ class Mapper
          */
         if ($type instanceof ReflectionIntersectionType) {
             $errors[] = new MappingException('Unsupported typing', $reflectionProperty->getName(), get_class($instance));
+            return;
         }
 
+        /**
+         * Scalar types
+         */
         if (($type instanceof ReflectionNamedType && $type->isBuiltin())) {
-            if ($type->getName() === 'array') {
-                if (!is_array($value)) {
-                    $errors[] = new MappingException('Unable to map non-array to array', $reflectionProperty->getName(), get_class($instance));
-                    return;
-                }
-
-                $attributes = $reflectionProperty->getAttributes(ArrayMapping::class);
-
-                /**
-                 * Only arrays with a custom type should use the attribute
-                 */
-                $arrayValue = count($attributes) > 0
-                    ? $this->mapArray($value, array_pop($attributes)->newInstance(), $errors)
-                    : $value;
-
-                try {
-                    $reflectionProperty->setValue($instance, $arrayValue);
-                } catch (Throwable $e) {
-                    $errors[] = new MappingException($e->getMessage(), $reflectionProperty->getName(), get_class($instance), $e);
-                }
-
-                return;
-            }
-
-            try {
-                $reflectionProperty->setValue($instance, $value);
-            } catch (Throwable $e) {
-                $errors[] = new MappingException($e->getMessage(), $reflectionProperty->getName(), get_class($instance), $e);
-            }
-
+            $this->setNamedType($reflectionProperty, $type, $instance, $value, $errors);
             return;
         }
 
         $typeName = $type->getName();
 
         if (enum_exists($typeName)) {
-            try {
-                $reflectionProperty->setValue($instance, $typeName::tryFrom($value));
-            } catch (Throwable $e) {
-                $errors[] = new MappingException($e->getMessage(), $reflectionProperty->getName(), get_class($instance), $e);
-            }
-
+            $this->setEnum($reflectionProperty, $instance, $value, $typeName, $errors);
             return;
         }
 
         if (class_exists($typeName)) {
-            $mappedValue = $this->map($value, $typeName);
-
-            $errors = [...$errors, ...$mappedValue->errors];
-
-            try {
-                $reflectionProperty->setValue($instance, $mappedValue->result);
-            } catch (Throwable $e) {
-                $errors[] = new MappingException($e->getMessage(), $reflectionProperty->getName(), get_class($instance), $e);
-            }
-
+            $this->setClass($reflectionProperty, $instance, $value, $typeName, $errors);
             return;
         }
 
         $errors[] = new MappingException('Unsupported typing', $reflectionProperty->getName(), get_class($instance));
+    }
+
+    private function setFlat(
+        ReflectionProperty $reflectionProperty,
+        mixed &$instance,
+        mixed $value,
+        array &$errors,
+    ): void {
+        try {
+            $reflectionProperty->setValue($instance, $value);
+        } catch (Throwable $e) {
+            $errors[] = new MappingException($e->getMessage(), $reflectionProperty->getName(), get_class($instance), $e);
+        }
+
+        return;
+    }
+
+    private function setNamedType(
+        ReflectionProperty $reflectionProperty,
+        ReflectionNamedType $type,
+        mixed &$instance,
+        mixed $value,
+        array &$errors,
+    ): void {
+        if ($type->getName() === 'array') {
+            $this->setArray($reflectionProperty, $instance, $value, $errors);
+
+            return;
+        }
+
+        try {
+            $reflectionProperty->setValue($instance, $value);
+        } catch (Throwable $e) {
+            $errors[] = new MappingException($e->getMessage(), $reflectionProperty->getName(), get_class($instance), $e);
+        }
+
+        return;
+    }
+
+    private function setArray(
+        ReflectionProperty $reflectionProperty,
+        mixed &$instance,
+        mixed $value,
+        array &$errors,
+    ): void {
+        if (!is_array($value)) {
+            $errors[] = new MappingException('Unable to map non-array to array', $reflectionProperty->getName(), get_class($instance));
+            return;
+        }
+
+        $attributes = $reflectionProperty->getAttributes(ArrayMapping::class);
+
+        /**
+         * Only arrays with a custom type should use the attribute
+         */
+        $arrayValue = count($attributes) > 0
+            ? $this->mapArray($value, array_pop($attributes)->newInstance(), $errors)
+            : $value;
+
+        try {
+            $reflectionProperty->setValue($instance, $arrayValue);
+        } catch (Throwable $e) {
+            $errors[] = new MappingException($e->getMessage(), $reflectionProperty->getName(), get_class($instance), $e);
+        }
+    }
+
+    private function setEnum(
+        ReflectionProperty $reflectionProperty,
+        mixed &$instance,
+        mixed $value,
+        string $enum,
+        array &$errors,
+    ): void {
+        try {
+            $reflectionProperty->setValue($instance, $enum::tryFrom($value));
+        } catch (Throwable $e) {
+            $errors[] = new MappingException($e->getMessage(), $reflectionProperty->getName(), get_class($instance), $e);
+        }
+
+        return;
+    }
+
+    private function setClass(
+        ReflectionProperty $reflectionProperty,
+        mixed &$instance,
+        mixed $value,
+        string $class,
+        array &$errors,
+    ): void {
+        $mappedValue = $this->map($value, $class);
+
+        $errors = [...$errors, ...$mappedValue->errors];
+
+        try {
+            $reflectionProperty->setValue($instance, $mappedValue->result);
+        } catch (Throwable $e) {
+            $errors[] = new MappingException($e->getMessage(), $reflectionProperty->getName(), get_class($instance), $e);
+        }
+
+        return;
     }
 
     private function mapArray(array $values, ArrayMapping $arrayMapping, array &$errors)
