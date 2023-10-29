@@ -6,6 +6,7 @@ namespace Ragnarok\Fenrir\Gateway\Events;
 
 use Ragnarok\Fenrir\Attributes\RequiresIntent;
 use Ragnarok\Fenrir\Enums\Intent;
+use Ragnarok\Fenrir\Mapping\ArrayMapping;
 use Ragnarok\Fenrir\Parts\Channel;
 use Ragnarok\Fenrir\Parts\ThreadMember;
 
@@ -25,10 +26,12 @@ class ThreadUpdate
     /**
      * @var Channel[]
      */
+    #[ArrayMapping(Channel::class)]
     public array $threads;
 
     /**
      * @var ThreadMember[]
      */
+    #[ArrayMapping(ThreadMember::class)]
     public array $members;
 }

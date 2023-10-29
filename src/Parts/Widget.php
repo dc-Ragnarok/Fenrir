@@ -13,13 +13,13 @@ class Widget
     public ?string $instant_invite;
 
     /**
-     * @var \Ragnarok\Fenrir\Parts\Channel[]
+     * @var Channel[]
      */
     #[ArrayMapping(Channel::class)]
     public array $channels;
 
     /**
-     * @var \Ragnarok\Fenrir\Parts\User[]
+     * @var User[]
      */
     #[ArrayMapping(User::class)]
     public array $users;

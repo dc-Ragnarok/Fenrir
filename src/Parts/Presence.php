@@ -12,7 +12,7 @@ class Presence
     public string $guild_id;
     public string $status;
     /**
-     * @var \Ragnarok\Fenrir\Parts\Activity[]
+     * @var Activity[]
      */
     #[ArrayMapping(Activity::class)]
     public ?array $activities;

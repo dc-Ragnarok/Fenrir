@@ -11,7 +11,7 @@ class Emoji
     public ?string $id;
     public ?string $name;
     /**
-     * @var \Ragnarok\Fenrir\Parts\Role[]
+     * @var Role[]
      */
     #[ArrayMapping(Role::class)]
     public ?array $roles;

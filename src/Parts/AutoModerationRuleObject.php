@@ -18,7 +18,7 @@ class AutoModerationRuleObject
     public AutoModerationRuleTriggerType $trigger_type;
     public AutoModerationTriggerMetadata $trigger_metadata;
     /**
-     * @var \Ragnarok\Fenrir\Parts\AutoModerationActionStructure[]
+     * @var AutoModerationActionStructure[]
      */
     #[ArrayMapping(AutoModerationActionStructure::class)]
     public array $actions;

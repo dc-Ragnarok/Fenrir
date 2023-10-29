@@ -13,7 +13,7 @@ class ApplicationCommandInteractionDataOptionStructure
     public ApplicationCommandOptionType $type;
     public string|int|float|bool|null $value;
     /**
-     * @var \Ragnarok\Fenrir\Parts\ApplicationCommandInteractionDataOptionStructure[]
+     * @var ApplicationCommandInteractionDataOptionStructure[]
      */
     #[ArrayMapping(ApplicationCommandInteractionDataOptionStructure::class)]
     public ?array $options;

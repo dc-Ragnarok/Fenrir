@@ -10,7 +10,7 @@ class WelcomeScreen
 {
     public ?string $description;
     /**
-     * @var \Ragnarok\Fenrir\Parts\WelcomeScreenChannel[]
+     * @var WelcomeScreenChannel[]
      */
     #[ArrayMapping(WelcomeScreenChannel::class)]
     public array $welcome_channels;

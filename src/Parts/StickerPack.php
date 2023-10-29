@@ -10,7 +10,7 @@ class StickerPack
 {
     public string $id;
     /**
-     * @var \Ragnarok\Fenrir\Parts\Sticker[]
+     * @var Sticker[]
      */
     #[ArrayMapping(Sticker::class)]
     public array $stickers;

@@ -16,7 +16,7 @@ class GuildPreview
     public ?string $discovery_splash;
     public array $emojis;
     /**
-     * @var \Ragnarok\Fenrir\Enums\GuildFeature[]
+     * @var GuildFeature[]
      */
     #[ArrayMapping(GuildFeature::class)]
     public array $features;
@@ -24,7 +24,7 @@ class GuildPreview
     public ?int $approximate_presence_count;
     public ?string $description;
     /**
-     * @var \Ragnarok\Fenrir\Parts\Sticker[]
+     * @var Sticker[]
      */
     #[ArrayMapping(Sticker::class)]
     public ?array $stickers;

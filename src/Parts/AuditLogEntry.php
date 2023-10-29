@@ -11,7 +11,7 @@ class AuditLogEntry
 {
     public ?string $target_id;
     /**
-     * @var \Ragnarok\Fenrir\Parts\AuditLogChange[]
+     * @var AuditLogChange[]
      */
     #[ArrayMapping(AuditLogChange::class)]
     public ?array $changes;

@@ -25,17 +25,17 @@ class ApplicationCommandOptionStructure
     public ?array $description_localizations;
     public ?bool $required;
     /**
-     * @var \Ragnarok\Fenrir\Parts\ApplicationCommandOptionChoice[]
+     * @var ApplicationCommandOptionChoice[]
      */
     #[ArrayMapping(ApplicationCommandOptionChoice::class)]
     public ?array $choices;
     /**
-     * @var \Ragnarok\Fenrir\Parts\ApplicationCommandOptionStructure[]
+     * @var ApplicationCommandOptionStructure[]
      */
     #[ArrayMapping(ApplicationCommandOptionStructure::class)]
     public ?array $options;
     /**
-     * @var \Ragnarok\Fenrir\Enums\ChannelType[]
+     * @var ChannelType[]
      */
     #[ArrayMapping(ChannelType::class)]
     public ?array $channel_types;

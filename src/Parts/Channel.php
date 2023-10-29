@@ -19,7 +19,7 @@ class Channel
     public ?string $guild_id;
     public ?int $position;
     /**
-     * @var \Ragnarok\Fenrir\Parts\Overwrite[]
+     * @var Overwrite[]
      */
     #[ArrayMapping(Overwrite::class)]
     public ?array $permission_overwrites;
@@ -31,7 +31,7 @@ class Channel
     public ?int $user_limit;
     public ?int $rate_limit_per_user;
     /**
-     * @var \Ragnarok\Fenrir\Parts\User[]
+     * @var User[]
      */
     #[ArrayMapping(User::class)]
     public ?array $recipients;
@@ -51,7 +51,7 @@ class Channel
     public ?Bitwise $flags;
     public ?int $total_message_sent;
     /**
-     * @var \Ragnarok\Fenrir\Parts\Tag[]
+     * @var Tag[]
      */
     #[ArrayMapping(Tag::class)]
     public ?array $available_tags;

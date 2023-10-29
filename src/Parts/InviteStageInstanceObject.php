@@ -10,7 +10,7 @@ use Ragnarok\Fenrir\Mapping\ArrayMapping;
 class InviteStageInstanceObject
 {
     /**
-     * @var \Ragnarok\Fenrir\Parts\GuildMember[]
+     * @var GuildMember[]
      */
     #[ArrayMapping(GuildMember::class)]
     public array $members;

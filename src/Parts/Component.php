@@ -13,7 +13,7 @@ class Component
 {
     public MessageComponentType $type;
     /**
-     * @var \Ragnarok\Fenrir\Parts\Component[]
+     * @var Component[]
      */
     #[ArrayMapping(Component::class)]
     public ?array $components;
@@ -24,12 +24,12 @@ class Component
     public ?string $url;
     public ?bool $disabled;
     /**
-     * @var \Ragnarok\Fenrir\Parts\ComponentSelectOptions[]
+     * @var ComponentSelectOptions[]
      */
     #[ArrayMapping(ComponentSelectOptions::class)]
     public ?array $options; // @todo
     /**
-     * @var \Ragnarok\Fenrir\Enums\ChannelType[]
+     * @var ChannelType[]
      */
     #[ArrayMapping(ChannelType::class)]
     public ?array $channel_types;

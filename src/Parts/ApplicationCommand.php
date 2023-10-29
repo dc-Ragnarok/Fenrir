@@ -24,7 +24,7 @@ class ApplicationCommand
      */
     public ?array $description_localizations;
     /**
-     * @var \Ragnarok\Fenrir\Parts\ApplicationCommandOptionStructure[]
+     * @var ApplicationCommandOptionStructure[]
      */
     #[ArrayMapping(ApplicationCommandOptionStructure::class)]
     public ?array $options;

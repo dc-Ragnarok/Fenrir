@@ -10,7 +10,7 @@ use Ragnarok\Fenrir\Mapping\ArrayMapping;
 class InstallParams
 {
     /**
-     * @var \Ragnarok\Fenrir\Enums\Scope[]
+     * @var Scope[]
      */
     #[ArrayMapping(Scope::class)]
     public array $scopes;

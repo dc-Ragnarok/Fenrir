@@ -11,7 +11,7 @@ class Team
     public ?string $icon;
     public string $id;
     /**
-     * @var \Ragnarok\Fenrir\Parts\TeamMember[]
+     * @var TeamMember[]
      */
     #[ArrayMapping(TeamMember::class)]
     public array $members;

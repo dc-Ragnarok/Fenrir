@@ -11,37 +11,37 @@ class InteractionDataResolved
 {
     /**
      * Array of string => User
-     * @var \Ragnarok\Fenrir\Parts\User[]
+     * @var User[]
      */
     #[ArrayMapping(User::class)]
     public ?array $users;
     /**
      * Array of string => GuildMember
-     * @var \Ragnarok\Fenrir\Parts\GuildMember[]
+     * @var GuildMember[]
      */
     #[ArrayMapping(GuildMember::class)]
     public ?array $members;
     /**
      * Array of string => Role
-     * @var \Ragnarok\Fenrir\Parts\Role[]
+     * @var Role[]
      */
     #[ArrayMapping(Role::class)]
     public ?array $roles;
     /**
      * Array of string => Channel
-     * @var \Ragnarok\Fenrir\Parts\Channel[]
+     * @var Channel[]
      */
     #[ArrayMapping(Channel::class)]
     public ?array $channels;
     /**
      * Array of string => Message
-     * @var \Ragnarok\Fenrir\Parts\Message[]
+     * @var Message[]
      */
     #[ArrayMapping(Message::class)]
     public ?array $messages;
     /**
      * Array of string => Attachment
-     * @var \Ragnarok\Fenrir\Parts\Attachment[]
+     * @var Attachment[]
      */
     #[ArrayMapping(Attachment::class)]
     public ?array $attachments;

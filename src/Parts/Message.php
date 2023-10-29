@@ -21,7 +21,7 @@ class Message
     public bool $tts;
     public bool $mention_everyone;
     /**
-     * @var \Ragnarok\Fenrir\Parts\User[]
+     * @var User[]
      */
     public array $mentions;
     /**
@@ -29,22 +29,22 @@ class Message
      */
     public array $mention_roles;
     /**
-     * @var \Ragnarok\Fenrir\Parts\ChannelMention[]
+     * @var ChannelMention[]
      */
     #[ArrayMapping(ChannelMention::class)]
     public ?array $mention_channels;
     /**
-     * @var \Ragnarok\Fenrir\Parts\Attachment[]
+     * @var Attachment[]
      */
     #[ArrayMapping(Attachment::class)]
     public array $attachments;
     /**
-     * @var \Ragnarok\Fenrir\Parts\Embed[]
+     * @var Embed[]
      */
     #[ArrayMapping(Embed::class)]
     public array $embeds;
     /**
-     * @var \Ragnarok\Fenrir\Parts\Reaction[]
+     * @var Reaction[]
      */
     #[ArrayMapping(Reaction::class)]
     public ?array $reactions;
@@ -61,17 +61,17 @@ class Message
     public ?MessageInteraction $interaction;
     public ?Channel $thread;
     /**
-     * @var \Ragnarok\Fenrir\Parts\Component[]
+     * @var Component[]
      */
     #[ArrayMapping(Component::class)]
     public array $components;
     /**
-     * @var \Ragnarok\Fenrir\Parts\MessageStickerItem[]
+     * @var MessageStickerItem[]
      */
     #[ArrayMapping(MessageStickerItem::class)]
     public ?array $sticker_items;
     /**
-     * @var \Ragnarok\Fenrir\Parts\Sticker[]
+     * @var Sticker[]
      */
     #[ArrayMapping(Sticker::class)]
     public ?array $stickers;
