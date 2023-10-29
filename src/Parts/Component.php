@@ -30,7 +30,6 @@ class Component
     public ?array $options; // @todo
     /**
      * @var \Ragnarok\Fenrir\Enums\ChannelType[]
-     * @todo Enum array
      */
     #[ArrayMapping(ChannelType::class)]
     public ?array $channel_types;

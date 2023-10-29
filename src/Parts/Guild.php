@@ -45,8 +45,8 @@ class Guild
     public array $emojis;
     /**
      * @var \Ragnarok\Fenrir\Enums\GuildFeature[]
-     * @todo Enum array
      */
+    #[ArrayMapping(GuildFeature::class)]
     public array $features;
     public MfaLevel $mfa_level;
     public ?string $application_id;

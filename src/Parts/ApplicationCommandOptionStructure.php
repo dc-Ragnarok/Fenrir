@@ -36,8 +36,8 @@ class ApplicationCommandOptionStructure
     public ?array $options;
     /**
      * @var \Ragnarok\Fenrir\Enums\ChannelType[]
-     * @todo Enum array
      */
+    #[ArrayMapping(ChannelType::class)]
     public ?array $channel_types;
     public int|float|null $min_value;
     public int|float|null $max_value;

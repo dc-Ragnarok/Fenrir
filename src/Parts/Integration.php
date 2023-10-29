@@ -7,6 +7,7 @@ namespace Ragnarok\Fenrir\Parts;
 use Carbon\Carbon;
 use Ragnarok\Fenrir\Enums\IntegrationExpireBehavior;
 use Ragnarok\Fenrir\Enums\Scope;
+use Ragnarok\Fenrir\Mapping\ArrayMapping;
 
 class Integration
 {
@@ -27,7 +28,7 @@ class Integration
     public ?Application $application;
     /**
      * @var \Ragnarok\Fenrir\Enums\Scope[]
-     * @todo Enum array
      */
+    #[ArrayMapping(Scope::class)]
     public ?array $scopes;
 }
