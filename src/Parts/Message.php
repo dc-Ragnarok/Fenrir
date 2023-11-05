@@ -51,7 +51,7 @@ class Message
     public ?string $nonce;
     public bool $pinned;
     public ?string $webhook_id;
-    public MessageType $type;
+    public ?MessageType $type;
     public ?MessageActivity $activity;
     public ?Application $application;
     public ?string $application_id;
