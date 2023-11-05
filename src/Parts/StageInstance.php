@@ -15,9 +15,4 @@ class StageInstance
     public PrivacyLevel $privacy_level;
     public bool $discoverable_disabled;
     public ?string $guild_scheduled_event_id;
-
-    public function setPrivacyLevel(int $value): void
-    {
-        $this->privacy_level = PrivacyLevel::tryFrom($value);
-    }
 }

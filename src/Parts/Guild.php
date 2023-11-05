@@ -12,6 +12,7 @@ use Ragnarok\Fenrir\Enums\MfaLevel;
 use Ragnarok\Fenrir\Enums\NsfwLevel;
 use Ragnarok\Fenrir\Enums\PremiumTier;
 use Ragnarok\Fenrir\Enums\VerificationLevel;
+use Ragnarok\Fenrir\Mapping\ArrayMapping;
 
 class Guild
 {
@@ -33,16 +34,19 @@ class Guild
     public MessageNotificationLevel $default_message_notifications;
     public ExplicitContentFilterLevel $explicit_content_filter;
     /**
-     * @var \Ragnarok\Fenrir\Parts\Role[]
+     * @var Role[]
      */
+    #[ArrayMapping(Role::class)]
     public array $roles;
     /**
-     * @var \Ragnarok\Fenrir\Parts\Emoji[]
+     * @var Emoji[]
      */
+    #[ArrayMapping(Emoji::class)]
     public array $emojis;
     /**
-     * @var \Ragnarok\Fenrir\Enums\GuildFeature[]
+     * @var GuildFeature[]
      */
+    #[ArrayMapping(GuildFeature::class)]
     public array $features;
     public MfaLevel $mfa_level;
     public ?string $application_id;
@@ -64,48 +68,10 @@ class Guild
     public ?WelcomeScreen $welcome_screen;
     public NsfwLevel $nsfw_level;
     /**
-     * @var \Ragnarok\Fenrir\Parts\Sticker[]
+     * @var Sticker[]
      */
+    #[ArrayMapping(Sticker::class)]
     public ?array $stickers;
     public bool $premium_progress_bar_enabled;
     public ?string $safety_alerts_channel_id;
-
-    public function setVerificationLevel(int $value): void
-    {
-        $this->verification_level = VerificationLevel::tryFrom($value);
-    }
-
-    public function setDefaultMessageNotifications(int $value): void
-    {
-        $this->default_message_notifications = MessageNotificationLevel::tryFrom($value);
-    }
-
-    public function setExplicitContentFilter(int $value): void
-    {
-        $this->explicit_content_filter = ExplicitContentFilterLevel::tryFrom($value);
-    }
-
-    public function setFeatures(array $value): void
-    {
-        $this->features = [];
-
-        foreach ($value as $entry) {
-            $this->features[] = GuildFeature::tryFrom($entry);
-        }
-    }
-
-    public function setMfaLevel(int $value): void
-    {
-        $this->mfa_level = MfaLevel::tryFrom($value);
-    }
-
-    public function setPremiumTier(int $value): void
-    {
-        $this->premium_tier = PremiumTier::tryFrom($value);
-    }
-
-    public function setNsfwLevel(int $value): void
-    {
-        $this->nsfw_level = NsfwLevel::tryFrom($value);
-    }
 }

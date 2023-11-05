@@ -38,7 +38,7 @@ class RecoverableInvalidSessionEventTest extends MockeryTestCase
     /**
      * @dataProvider listenerDataProvider
      */
-    public function testItListensToTheCorrectRequirements(array $payload, bool $expect): void
+    public function testItListensToTheCorrectRequirements(object $payload, bool $expect): void
     {
         $event = new RecoverableInvalidSessionEvent(
             Mockery::mock(ConnectionInterface::class),
@@ -53,13 +53,13 @@ class RecoverableInvalidSessionEventTest extends MockeryTestCase
     {
         return [
             'Payload D => true' => [
-                'payload' => [
+                'payload' => (object) [
                     'd' => true
                 ],
                 'expect' => true,
             ],
             'Payload D => false' => [
-                'payload' => [
+                'payload' => (object) [
                     'd' => false
                 ],
                 'expect' => false,
@@ -111,7 +111,7 @@ class RecoverableInvalidSessionEventTest extends MockeryTestCase
 
         $event = new RecoverableInvalidSessionEvent(
             $connection,
-            $this->mapper->map([], Payload::class),
+            $this->mapper->map((object) [], Payload::class),
             new NullLogger(),
         );
 
@@ -162,7 +162,7 @@ class RecoverableInvalidSessionEventTest extends MockeryTestCase
 
         $event = new RecoverableInvalidSessionEvent(
             $connection,
-            $this->mapper->map([], Payload::class),
+            $this->mapper->map((object) [], Payload::class),
             new NullLogger(),
         );
 
@@ -224,7 +224,7 @@ class RecoverableInvalidSessionEventTest extends MockeryTestCase
 
         $event = new RecoverableInvalidSessionEvent(
             $connection,
-            $this->mapper->map([], Payload::class),
+            $this->mapper->map((object) [], Payload::class),
             new NullLogger(),
         );
 

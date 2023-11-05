@@ -6,6 +6,8 @@ namespace Ragnarok\Fenrir\Gateway\Events;
 
 use Ragnarok\Fenrir\Attributes\RequiresIntent;
 use Ragnarok\Fenrir\Enums\Intent;
+use Ragnarok\Fenrir\Mapping\ArrayMapping;
+use Ragnarok\Fenrir\Parts\ThreadMember;
 
 /**
  * @see https://discord.com/developers/docs/topics/gateway-events#thread-members-update
@@ -18,8 +20,9 @@ class ThreadMemberUpdate
     public int $member_count;
 
     /**
-     * @var \Ragnarok\Fenrir\Parts\ThreadMember[]
+     * @var ThreadMember[]
      */
+    #[ArrayMapping(ThreadMember::class)]
     public ?array $added_members;
 
     /**

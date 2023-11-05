@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Ragnarok\Fenrir\Parts;
 
-use Ragnarok\Fenrir\Attributes\Partial;
-
 class Webhook
 {
     public string $id;

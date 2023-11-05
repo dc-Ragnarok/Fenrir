@@ -10,6 +10,7 @@ use Ragnarok\Fenrir\Enums\ChannelType;
 use Ragnarok\Fenrir\Enums\ForumLayoutType;
 use Ragnarok\Fenrir\Enums\SortOrderType;
 use Ragnarok\Fenrir\Enums\VideoQualityMode;
+use Ragnarok\Fenrir\Mapping\ArrayMapping;
 
 class Channel
 {
@@ -18,8 +19,9 @@ class Channel
     public ?string $guild_id;
     public ?int $position;
     /**
-     * @var \Ragnarok\Fenrir\Parts\Overwrite[]
+     * @var Overwrite[]
      */
+    #[ArrayMapping(Overwrite::class)]
     public ?array $permission_overwrites;
     public ?string $name;
     public ?string $topic;
@@ -29,8 +31,9 @@ class Channel
     public ?int $user_limit;
     public ?int $rate_limit_per_user;
     /**
-     * @var \Ragnarok\Fenrir\Parts\User[]
+     * @var User[]
      */
+    #[ArrayMapping(User::class)]
     public ?array $recipients;
     public ?string $icon;
     public ?string $owner_id;
@@ -48,8 +51,9 @@ class Channel
     public ?Bitwise $flags;
     public ?int $total_message_sent;
     /**
-     * @var \Ragnarok\Fenrir\Parts\Tag[]
+     * @var Tag[]
      */
+    #[ArrayMapping(Tag::class)]
     public ?array $available_tags;
     /**
      * @var string[]
@@ -59,28 +63,4 @@ class Channel
     public ?int $default_thread_rate_limit_per_user;
     public ?SortOrderType $default_sort_order;
     public ?ForumLayoutType $default_forum_layout;
-
-    public function setType(int $value): void
-    {
-        $this->type = ChannelType::tryFrom($value);
-    }
-
-    public function setVideoQualityMode(int $value): void
-    {
-        $this->video_quality_mode = VideoQualityMode::tryFrom($value);
-    }
-
-    public function setDefaultSortOrder(?int $value): void
-    {
-        if (is_null($value)) {
-            return;
-        }
-
-        $this->default_sort_order = SortOrderType::tryFrom($value);
-    }
-
-    public function setDefaultForumLayout(int $value): void
-    {
-        $this->default_forum_layout = ForumLayoutType::tryFrom($value);
-    }
 }

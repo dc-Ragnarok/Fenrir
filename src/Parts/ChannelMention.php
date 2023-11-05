@@ -12,9 +12,4 @@ class ChannelMention
     public string $guild_id;
     public ChannelType $type;
     public string $name;
-
-    public function setType(int $value): void
-    {
-        $this->type = ChannelType::tryFrom($value);
-    }
 }

@@ -10,9 +10,4 @@ class MessageActivity
 {
     public MessageActivityType $type;
     public ?string $party_id;
-
-    public function setType(int $value): void
-    {
-        $this->type = MessageActivityType::tryFrom($value);
-    }
 }

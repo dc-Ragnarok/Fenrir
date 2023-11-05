@@ -6,6 +6,7 @@ namespace Ragnarok\Fenrir\Parts;
 
 use Ragnarok\Fenrir\Enums\AutoModerationRuleTriggerType;
 use Ragnarok\Fenrir\Enums\AutoModerationRuleEventType;
+use Ragnarok\Fenrir\Mapping\ArrayMapping;
 
 class AutoModerationRuleObject
 {
@@ -17,8 +18,9 @@ class AutoModerationRuleObject
     public AutoModerationRuleTriggerType $trigger_type;
     public AutoModerationTriggerMetadata $trigger_metadata;
     /**
-     * @var \Ragnarok\Fenrir\Parts\AutoModerationActionStructure[]
+     * @var AutoModerationActionStructure[]
      */
+    #[ArrayMapping(AutoModerationActionStructure::class)]
     public array $actions;
     public bool $enabled;
     /**
@@ -29,14 +31,4 @@ class AutoModerationRuleObject
      * @var string[]
      */
     public array $exempt_channels;
-
-    public function setEventType(int $value): void
-    {
-        $this->event_type = AutoModerationRuleEventType::tryFrom($value);
-    }
-
-    public function setTriggerType(int $value): void
-    {
-        $this->trigger_type = AutoModerationRuleTriggerType::tryFrom($value);
-    }
 }

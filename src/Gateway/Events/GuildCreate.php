@@ -7,7 +7,14 @@ namespace Ragnarok\Fenrir\Gateway\Events;
 use Carbon\Carbon;
 use Ragnarok\Fenrir\Attributes\RequiresIntent;
 use Ragnarok\Fenrir\Enums\Intent;
+use Ragnarok\Fenrir\Mapping\ArrayMapping;
+use Ragnarok\Fenrir\Parts\Channel;
 use Ragnarok\Fenrir\Parts\Guild;
+use Ragnarok\Fenrir\Parts\GuildMember;
+use Ragnarok\Fenrir\Parts\GuildScheduledEvent;
+use Ragnarok\Fenrir\Parts\Presence;
+use Ragnarok\Fenrir\Parts\StageInstance;
+use Ragnarok\Fenrir\Parts\VoiceState;
 
 /**
  * @see https://discord.com/developers/docs/topics/gateway-events#guild-create
@@ -20,25 +27,32 @@ class GuildCreate extends Guild
     public ?bool $unavailable;
     public int $member_count;
 
-    /** @var \Ragnarok\Fenrir\Parts\VoiceState[] */
+    /** @var VoiceState[] */
+    #[ArrayMapping(VoiceState::class)]
     public array $voice_states;
 
-    /** @var \Ragnarok\Fenrir\Parts\GuildMember[] */
+    /** @var GuildMember[] */
+    #[ArrayMapping(GuildMember::class)]
     public array $members;
 
-    /** @var \Ragnarok\Fenrir\Parts\Channel[] */
+    /** @var Channel[] */
+    #[ArrayMapping(Channel::class)]
     public array $channels;
 
-    /** @var \Ragnarok\Fenrir\Parts\Channel[] */
+    /** @var Channel[] */
+    #[ArrayMapping(Channel::class)]
     public array $threads;
 
-    /** @var \Ragnarok\Fenrir\Parts\Presence[] */
+    /** @var Presence[] */
     #[RequiresIntent(Intent::GUILD_PRESENCES)]
+    #[ArrayMapping(Presence::class)]
     public array $presences;
 
-    /** @var \Ragnarok\Fenrir\Parts\StageInstance[] */
+    /** @var StageInstance[] */
+    #[ArrayMapping(StageInstance::class)]
     public array $stage_instances;
 
-    /** @var \Ragnarok\Fenrir\Parts\GuildScheduledEvent[] */
+    /** @var GuildScheduledEvent[] */
+    #[ArrayMapping(GuildScheduledEvent::class)]
     public array $guild_scheduled_events;
 }

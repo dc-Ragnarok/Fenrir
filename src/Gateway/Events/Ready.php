@@ -5,7 +5,9 @@ declare(strict_types=1);
 namespace Ragnarok\Fenrir\Gateway\Events;
 
 use Ragnarok\Fenrir\Gateway\Objects\Payload;
+use Ragnarok\Fenrir\Mapping\ArrayMapping;
 use Ragnarok\Fenrir\Parts\Application;
+use Ragnarok\Fenrir\Parts\UnavailableGuild;
 use Ragnarok\Fenrir\Parts\User;
 
 class Ready extends Payload
@@ -13,7 +15,8 @@ class Ready extends Payload
     public int $v;
     public User $user;
 
-    /** @var \Ragnarok\Fenrir\Parts\UnavailableGuild[] */
+    /** @var UnavailableGuild[] */
+    #[ArrayMapping(UnavailableGuild::class)]
     public array $guilds;
 
     public string $session_id;

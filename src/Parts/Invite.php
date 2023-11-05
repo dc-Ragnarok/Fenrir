@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Ragnarok\Fenrir\Parts;
 
 use Carbon\Carbon;
-use Ragnarok\Fenrir\Attributes\Partial;
 use Ragnarok\Fenrir\Enums\InviteTargetType;
 
 class Invite
@@ -22,9 +21,4 @@ class Invite
     public ?Carbon $expires_at;
     public ?InviteStageInstanceObject $stage_instance;
     public ?GuildScheduledEvent $guild_scheduled_event;
-
-    public function setTargetType(int $value): void
-    {
-        $this->target_type = InviteTargetType::tryFrom($value);
-    }
 }

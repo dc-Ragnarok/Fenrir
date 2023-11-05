@@ -34,7 +34,7 @@ class PassthroughEventTest extends MockeryTestCase
     {
         /** @var MockInterface&ConnectionInterface */
         $connection = Mockery::mock(ConnectionInterface::class);
-        $payload = $this->mapper->map([], Payload::class);
+        $payload = $this->mapper->map((object) [], Payload::class);
 
         $event = new PassthroughEvent(
             $connection,
@@ -65,7 +65,7 @@ class PassthroughEventTest extends MockeryTestCase
     {
         /** @var MockInterface&ConnectionInterface */
         $connection = Mockery::mock(ConnectionInterface::class);
-        $payload = $this->mapper->map(['s' => 123], Payload::class);
+        $payload = $this->mapper->map((object) ['s' => 123], Payload::class);
 
         $event = new PassthroughEvent(
             $connection,
@@ -101,7 +101,7 @@ class PassthroughEventTest extends MockeryTestCase
     {
         /** @var MockInterface&ConnectionInterface */
         $connection = Mockery::mock(ConnectionInterface::class);
-        $payload = $this->mapper->map(['s' => 123], Payload::class);
+        $payload = $this->mapper->map((object) ['s' => 123], Payload::class);
 
         $event = new PassthroughEvent(
             $connection,
@@ -138,7 +138,7 @@ class PassthroughEventTest extends MockeryTestCase
     {
         /** @var MockInterface&ConnectionInterface */
         $connection = Mockery::mock(ConnectionInterface::class);
-        $payload = $this->mapper->map(['s' => 123], Payload::class);
+        $payload = $this->mapper->map((object) ['s' => 123], Payload::class);
 
         $event = new PassthroughEvent(
             $connection,

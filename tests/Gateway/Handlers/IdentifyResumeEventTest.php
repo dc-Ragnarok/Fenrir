@@ -36,7 +36,7 @@ class IdentifyResumeEventTest extends MockeryTestCase
         $connection = Mockery::mock(ConnectionInterface::class);
         $event = new IdentifyResumeEvent(
             $connection,
-            $this->mapper->map([
+            $this->mapper->map((object) [
                 'd' => (object) [
                     'heartbeat_interval' => 123
                 ]
