@@ -27,9 +27,4 @@ class User
     public ?PremiumTier $premium_type;
     public ?Bitwise $public_flags;
     public ?GuildMember $member;
-
-    public function setPremiumType(int $value): void
-    {
-        $this->premium_type = PremiumTier::tryFrom($value);
-    }
 }

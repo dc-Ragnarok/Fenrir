@@ -6,6 +6,8 @@ namespace Ragnarok\Fenrir\Gateway\Events;
 
 use Ragnarok\Fenrir\Attributes\RequiresIntent;
 use Ragnarok\Fenrir\Enums\Intent;
+use Ragnarok\Fenrir\Mapping\ArrayMapping;
+use Ragnarok\Fenrir\Parts\Sticker;
 
 /**
  * @see https://discord.com/developers/docs/topics/gateway-events#guild-stickers-update
@@ -16,7 +18,8 @@ class GuildStickersUpdate
     public string $guild_id;
 
     /**
-     * @var \Ragnarok\Fenrir\Parts\Sticker[]
+     * @var Sticker[]
      */
+    #[ArrayMapping(Sticker::class)]
     public array $stickers;
 }

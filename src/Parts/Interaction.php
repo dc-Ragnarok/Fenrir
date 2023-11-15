@@ -23,14 +23,5 @@ class Interaction
     public ?string $app_permissions;
     public ?string $locale;
     public string $guild_locale;
-
-    /**
-     * @partial
-     */
     public Channel $channel;
-
-    public function setType(int $value): void
-    {
-        $this->type = InteractionType::tryFrom($value);
-    }
 }

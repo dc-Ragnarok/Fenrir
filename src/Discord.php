@@ -6,7 +6,6 @@ namespace Ragnarok\Fenrir;
 
 use Composer\InstalledVersions;
 use Discord\Http\DriverInterface;
-use Discord\Http\Drivers\Guzzle;
 use Discord\Http\Drivers\React;
 use Discord\Http\Http;
 use Psr\Log\LoggerInterface;

@@ -4,20 +4,17 @@ declare(strict_types=1);
 
 namespace Ragnarok\Fenrir;
 
-use JsonMapper;
 use Psr\Log\LoggerInterface;
+use Ragnarok\Fenrir\Mapping\Mapper;
+use Ragnarok\Fenrir\Mapping\MappingException;
 
 class DataMapper
 {
-    private JsonMapper $jsonMapper;
+    private Mapper $mapper;
 
     public function __construct(private LoggerInterface $logger)
     {
-        $this->jsonMapper = new JsonMapper();
-
-        $this->jsonMapper->bStrictNullTypes = false;
-        $this->jsonMapper->bEnforceMapType = false;
-        $this->jsonMapper->bStrictObjectTypeChecking = false;
+        $this->mapper = new Mapper();
     }
 
     /**
@@ -27,15 +24,23 @@ class DataMapper
      * @return T Instance of given definition with provided properties.
      *  If no properties are present, the mapping failed
      */
-    public function map(object|array $data, string $definition): mixed
+    public function map(object $data, string $definition): mixed
     {
-        try {
-            return $this->jsonMapper->map($data, new $definition());
-        } catch (\Throwable $e) {
-            $this->logger->error($e->getMessage());
+        $completedMapping = $this->mapper->map(
+            $data,
+            $definition
+        );
+
+        $errors = array_map(fn (MappingException $exception) => [
+            'Mapping exception: ' . $exception->getMessage(),
+            ['class' => $exception->className, 'property' => $exception->propertyName]
+        ], $completedMapping->errors);
+
+        foreach (array_unique($errors, SORT_REGULAR) as $uniqueError) {
+            $this->logger->debug(...$uniqueError);
         }
 
-        return new $definition();
+        return $completedMapping->result;
     }
 
     /**

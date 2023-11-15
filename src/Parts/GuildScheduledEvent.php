@@ -27,19 +27,4 @@ class GuildScheduledEvent
     public User $creator;
     public ?int $user_count;
     public ?string $image;
-
-    public function setPrivacyLevel(int $value): void
-    {
-        $this->privacy_level = GuildScheduledEventPrivacyLevel::tryFrom($value);
-    }
-
-    public function setStatus(int $value): void
-    {
-        $this->status = GuildScheduledEventStatus::tryFrom($value);
-    }
-
-    public function setEntityType(int $value): void
-    {
-        $this->entity_type = GuildScheduledEventEntityType::tryFrom($value);
-    }
 }

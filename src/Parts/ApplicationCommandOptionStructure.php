@@ -6,6 +6,7 @@ namespace Ragnarok\Fenrir\Parts;
 
 use Ragnarok\Fenrir\Enums\ApplicationCommandOptionType;
 use Ragnarok\Fenrir\Enums\ChannelType;
+use Ragnarok\Fenrir\Mapping\ArrayMapping;
 
 class ApplicationCommandOptionStructure
 {
@@ -24,44 +25,23 @@ class ApplicationCommandOptionStructure
     public ?array $description_localizations;
     public ?bool $required;
     /**
-     * @var \Ragnarok\Fenrir\Parts\ApplicationCommandOptionChoice[]
+     * @var ApplicationCommandOptionChoice[]
      */
+    #[ArrayMapping(ApplicationCommandOptionChoice::class)]
     public ?array $choices;
     /**
-     * @var \Ragnarok\Fenrir\Parts\ApplicationCommandOptionStructure[]
+     * @var ApplicationCommandOptionStructure[]
      */
+    #[ArrayMapping(ApplicationCommandOptionStructure::class)]
     public ?array $options;
     /**
-     * @var \Ragnarok\Fenrir\Enums\ChannelType[]
+     * @var ChannelType[]
      */
+    #[ArrayMapping(ChannelType::class)]
     public ?array $channel_types;
     public int|float|null $min_value;
     public int|float|null $max_value;
     public ?int $min_length;
     public ?int $max_length;
     public ?bool $autocomplete;
-
-    public function setMinValue(mixed $value): void
-    {
-        $this->min_value = $value;
-    }
-
-    public function setMaxValue(mixed $value): void
-    {
-        $this->max_value = $value;
-    }
-
-    public function setType(int $value): void
-    {
-        $this->type = ApplicationCommandOptionType::tryFrom($value);
-    }
-
-    public function setChannelTypes(array $value): void
-    {
-        $this->channel_types = [];
-
-        foreach ($value as $entry) {
-            $this->channel_types[] = ChannelType::from($entry);
-        }
-    }
 }

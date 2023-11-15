@@ -40,43 +40,9 @@ class DataMapperTest extends TestCase
         $this->assertEquals('::channel id::', $output->channel_id);
     }
 
-    public function testItMapsDataFromArray(): void
+    public function testItDoesNotFailHardOnImpossibleJuggles(): void
     {
-        $data = [
-            'id' => '::id::',
-            'channel_id' => '::channel id::',
-            'tts' => true,
-            'position' => 20,
-        ];
-
-        /** @var Message */
-        $output = $this->getDataMapper()->map($data, Message::class);
-
-        $this->assertInstanceOf(Message::class, $output);
-        $this->assertEquals('::id::', $output->id);
-        $this->assertEquals('::channel id::', $output->channel_id);
-    }
-
-    public function testItJugglesDataTypes(): void
-    {
-        $data = [
-            'id' => 123,
-            'tts' => 0,
-            'pinned' => 1,
-        ];
-
-        /** @var Message */
-        $output = $this->getDataMapper()->map($data, Message::class);
-
-        $this->assertInstanceOf(Message::class, $output);
-        $this->assertEquals('123', $output->id);
-        $this->assertTrue($output->pinned);
-        $this->assertFalse($output->tts);
-    }
-
-    public function testItDoesNotFailOnImpossibleJuggles(): void
-    {
-        $data = [
+        $data = (object) [
             'reactions' => 'this is supposed to be an array',
             'position' => 'ten'
         ];
@@ -91,9 +57,9 @@ class DataMapperTest extends TestCase
 
     public function testItMapsRecursively(): void
     {
-        $data = [
+        $data = (object) [
             'id' => '::interaction id::',
-            'data' => [
+            'data' => (object) [
                 'id' => '::interaction data id::',
             ],
         ];
@@ -110,19 +76,19 @@ class DataMapperTest extends TestCase
 
     public function testItMapsArrays(): void
     {
-        $data = [
+        $data = (object) [
             'id' => '::interaction id::',
             'token' => '::token::',
             'application_id' => '::application id::',
-            'data' => [
+            'data' => (object) [
                 'options' => [
-                    [
+                    (object) [
                         'name' => '::option name:: 0',
                     ],
-                    [
+                    (object) [
                         'name' => '::option name:: 1',
                     ],
-                    [
+                    (object) [
                         'name' => '::option name:: 2',
                     ]
                 ],
@@ -141,19 +107,5 @@ class DataMapperTest extends TestCase
             $this->assertInstanceOf(ApplicationCommandInteractionDataOptionStructure::class, $value);
             $this->assertEquals('::option name:: ' . $key, $value->name);
         }
-    }
-
-    public function testItUsesSettersWhenAvailable(): void
-    {
-        $data = [
-            'type' => ApplicationCommandOptionType::INTEGER->value
-        ];
-
-        /** @var ApplicationCommandInteractionDataOptionStructure */
-        $output = $this->getDataMapper()->map($data, ApplicationCommandInteractionDataOptionStructure::class);
-
-        $this->assertInstanceOf(ApplicationCommandInteractionDataOptionStructure::class, $output);
-        $this->assertInstanceOf(ApplicationCommandOptionType::class, $output->type);
-        $this->assertEquals(ApplicationCommandOptionType::INTEGER, $output->type);
     }
 }

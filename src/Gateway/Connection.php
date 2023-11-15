@@ -21,6 +21,7 @@ use Ragnarok\Fenrir\Gateway\Handlers\ReadyEvent;
 use Ragnarok\Fenrir\Gateway\Handlers\ReconnectEvent;
 use Ragnarok\Fenrir\Gateway\Handlers\RecoverableInvalidSessionEvent;
 use Ragnarok\Fenrir\Gateway\Handlers\RequestHeartbeatEvent;
+use Ragnarok\Fenrir\Gateway\Helpers\PresenceUpdateBuilder;
 use Ragnarok\Fenrir\Gateway\Objects\Payload;
 use Ragnarok\Fenrir\Websocket;
 use Ratchet\RFC6455\Messaging\MessageInterface;
@@ -234,5 +235,13 @@ class Connection implements ConnectionInterface
     public function shard(ShardInterface $shard)
     {
         $this->shard = $shard;
+    }
+
+    public function updatePresence(PresenceUpdateBuilder $presenceUpdate): void
+    {
+        $this->websocket->sendAsJson([
+            'op' => 3,
+            'd' => $presenceUpdate->get(),
+        ], true);
     }
 }

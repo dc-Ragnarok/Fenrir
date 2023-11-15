@@ -31,7 +31,7 @@ class InvalidSessionEventTest extends MockeryTestCase
     /**
      * @dataProvider listenerDataProvider
      */
-    public function testItListensToTheCorrectRequirements(array $payload, bool $expect): void
+    public function testItListensToTheCorrectRequirements(object $payload, bool $expect): void
     {
         $event = new InvalidSessionEvent(
             Mockery::mock(ConnectionInterface::class),
@@ -46,13 +46,13 @@ class InvalidSessionEventTest extends MockeryTestCase
     {
         return [
             'Payload D => true' => [
-                'payload' => [
+                'payload' => (object) [
                     'd' => true
                 ],
                 'expect' => false,
             ],
             'Payload D => false' => [
-                'payload' => [
+                'payload' => (object) [
                     'd' => false
                 ],
                 'expect' => true,
@@ -67,7 +67,7 @@ class InvalidSessionEventTest extends MockeryTestCase
 
         $event = new InvalidSessionEvent(
             $connection,
-            $this->mapper->map(['d' => false], Payload::class),
+            $this->mapper->map((object) ['d' => false], Payload::class),
             new NullLogger(),
         );
 
@@ -117,7 +117,7 @@ class InvalidSessionEventTest extends MockeryTestCase
 
         $event = new InvalidSessionEvent(
             $connection,
-            $this->mapper->map(['d' => false], Payload::class),
+            $this->mapper->map((object) ['d' => false], Payload::class),
             new NullLogger(),
         );
 

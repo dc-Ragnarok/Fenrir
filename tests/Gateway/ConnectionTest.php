@@ -16,6 +16,7 @@ use Ragnarok\Fenrir\Bitwise\Bitwise;
 use Ragnarok\Fenrir\Constants\MetaEvents;
 use Ragnarok\Fenrir\Constants\WebsocketEvents;
 use Ragnarok\Fenrir\Gateway\Connection;
+use Ragnarok\Fenrir\Gateway\Helpers\PresenceUpdateBuilder;
 use Ragnarok\Fenrir\Gateway\Objects\Payload;
 use Ragnarok\Fenrir\Gateway\Shard;
 use Ratchet\RFC6455\Messaging\MessageInterface;
@@ -474,5 +475,37 @@ class ConnectionTest extends MockeryTestCase
             ->once();
 
         $websocket->emit(WebsocketEvents::MESSAGE, [$message]);
+    }
+
+    public function testItSendsPresenceUpdates()
+    {
+        $connection = new Connection(
+            Mockery::mock(LoopInterface::class),
+            '::token::',
+            new Bitwise(123),
+            new DataMapper(new NullLogger())
+        );
+
+        /** @var MockInterface&Websocket */
+        $websocket = Mockery::mock(Websocket::class);
+        (new ReflectionProperty($connection, 'websocket'))->setValue($connection, $websocket);
+
+        $websocket->expects()
+            ->sendAsJson()
+            ->with(Mockery::on(function ($payload) {
+                $this->assertEquals(3, $payload['op']);
+                $this->assertEquals(['::presence update::'], $payload['d']);
+
+                return true;
+            }), true)
+            ->once();
+
+        /** @var MockInterface&PresenceUpdateBuilder */
+        $presenceUpdate = Mockery::mock(PresenceUpdateBuilder::class);
+        $presenceUpdate->shouldReceive()
+            ->get()
+            ->andReturn(['::presence update::']);
+
+        $connection->updatePresence($presenceUpdate);
     }
 }

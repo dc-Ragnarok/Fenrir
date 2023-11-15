@@ -7,6 +7,7 @@ namespace Ragnarok\Fenrir\Parts;
 use Carbon\Carbon;
 use Ragnarok\Fenrir\Bitwise\Bitwise;
 use Ragnarok\Fenrir\Enums\ActivityType;
+use Ragnarok\Fenrir\Mapping\ArrayMapping;
 
 class Activity
 {
@@ -25,12 +26,8 @@ class Activity
     public bool $instance;
     public ?Bitwise $flags;
     /**
-     * @var \Ragnarok\Fenrir\Parts\ActivityButton[]
+     * @var ActivityButton[]
      */
+    #[ArrayMapping(ActivityButton::class)]
     public ?array $buttons;
-
-    public function setType(int $value): void
-    {
-        $this->type = ActivityType::tryFrom($value);
-    }
 }

@@ -26,9 +26,4 @@ class AutoModerationActionExecution
     public ?string $content;
     public ?string $matched_keyword;
     public ?string $matched_content;
-
-    public function setRuleTriggerTypes(int $value): void
-    {
-        $this->rule_trigger_types = AutoModerationRuleTriggerType::from($value);
-    }
 }

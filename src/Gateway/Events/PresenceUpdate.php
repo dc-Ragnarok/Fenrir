@@ -6,6 +6,8 @@ namespace Ragnarok\Fenrir\Gateway\Events;
 
 use Ragnarok\Fenrir\Attributes\RequiresIntent;
 use Ragnarok\Fenrir\Enums\Intent;
+use Ragnarok\Fenrir\Mapping\ArrayMapping;
+use Ragnarok\Fenrir\Parts\Activity;
 use Ragnarok\Fenrir\Parts\ClientStatus;
 use Ragnarok\Fenrir\Parts\User;
 
@@ -20,8 +22,9 @@ class PresenceUpdate
     public string $status;
 
     /**
-     * @var \Ragnarok\Fenrir\Parts\Activity[]
+     * @var Activity[]
      */
+    #[ArrayMapping(Activity::class)]
     public array $activities;
 
     public ClientStatus $clientStatus;

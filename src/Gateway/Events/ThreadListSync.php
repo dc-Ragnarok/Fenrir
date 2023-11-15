@@ -6,6 +6,8 @@ namespace Ragnarok\Fenrir\Gateway\Events;
 
 use Ragnarok\Fenrir\Attributes\RequiresIntent;
 use Ragnarok\Fenrir\Enums\Intent;
+use Ragnarok\Fenrir\Mapping\ArrayMapping;
+use Ragnarok\Fenrir\Parts\Channel;
 
 /**
  * @see https://discord.com/developers/docs/topics/gateway-events#thread-list-sync
@@ -21,8 +23,9 @@ class ThreadListSync
     public ?array $channel_ids;
 
     /**
-     * @var \Ragnarok\Fenrir\Parts\Channel[]
+     * @var Channel[]
      */
+    #[ArrayMapping(Channel::class)]
     public array $threads;
 
     public array $members;

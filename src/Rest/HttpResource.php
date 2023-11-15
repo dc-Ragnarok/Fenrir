@@ -40,6 +40,6 @@ abstract class HttpResource
 
     protected function getAuditLogReasonHeader(?string $reason = null): array
     {
-        return is_null($reason) ? [] : ['X-Audit-Log-Reason' => $reason];
+        return is_null($reason) ? [] : ['X-Audit-Log-Reason' => rawurlencode($reason)];
     }
 }

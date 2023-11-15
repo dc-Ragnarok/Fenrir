@@ -5,21 +5,14 @@ declare(strict_types=1);
 namespace Ragnarok\Fenrir\Parts;
 
 use Ragnarok\Fenrir\Enums\Scope;
+use Ragnarok\Fenrir\Mapping\ArrayMapping;
 
 class InstallParams
 {
     /**
-     * @var \Ragnarok\Fenrir\Enums\Scope[]
+     * @var Scope[]
      */
+    #[ArrayMapping(Scope::class)]
     public array $scopes;
     public string $permissions;
-
-    public function setScopes(array $value): void
-    {
-        $this->scopes = [];
-
-        foreach ($value as $entry) {
-            $this->scopes[] = Scope::from($entry);
-        }
-    }
 }

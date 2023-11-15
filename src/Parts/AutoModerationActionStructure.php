@@ -10,9 +10,4 @@ class AutoModerationActionStructure
 {
     public ActionType $type;
     public ?AutoModerationActionMetadata $metadata;
-
-    public function setType(int $value): void
-    {
-        $this->type = ActionType::tryFrom($value);
-    }
 }

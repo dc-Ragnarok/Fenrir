@@ -8,6 +8,7 @@ use Carbon\Carbon;
 use Ragnarok\Fenrir\Attributes\Partial;
 use Ragnarok\Fenrir\Bitwise\Bitwise;
 use Ragnarok\Fenrir\Enums\MessageType;
+use Ragnarok\Fenrir\Mapping\ArrayMapping;
 
 class Message
 {
@@ -20,7 +21,7 @@ class Message
     public bool $tts;
     public bool $mention_everyone;
     /**
-     * @var \Ragnarok\Fenrir\Parts\User[]
+     * @var User[]
      */
     public array $mentions;
     /**
@@ -28,25 +29,29 @@ class Message
      */
     public array $mention_roles;
     /**
-     * @var \Ragnarok\Fenrir\Parts\ChannelMention[]
+     * @var ChannelMention[]
      */
+    #[ArrayMapping(ChannelMention::class)]
     public ?array $mention_channels;
     /**
-     * @var \Ragnarok\Fenrir\Parts\Attachment[]
+     * @var Attachment[]
      */
+    #[ArrayMapping(Attachment::class)]
     public array $attachments;
     /**
-     * @var \Ragnarok\Fenrir\Parts\Embed[]
+     * @var Embed[]
      */
+    #[ArrayMapping(Embed::class)]
     public array $embeds;
     /**
-     * @var \Ragnarok\Fenrir\Parts\Reaction[]
+     * @var Reaction[]
      */
+    #[ArrayMapping(Reaction::class)]
     public ?array $reactions;
     public ?string $nonce;
     public bool $pinned;
     public ?string $webhook_id;
-    public MessageType $type;
+    public ?MessageType $type;
     public ?MessageActivity $activity;
     public ?Application $application;
     public ?string $application_id;
@@ -56,22 +61,20 @@ class Message
     public ?MessageInteraction $interaction;
     public ?Channel $thread;
     /**
-     * @var \Ragnarok\Fenrir\Parts\Component[]
+     * @var Component[]
      */
+    #[ArrayMapping(Component::class)]
     public array $components;
     /**
-     * @var \Ragnarok\Fenrir\Parts\MessageStickerItem[]
+     * @var MessageStickerItem[]
      */
+    #[ArrayMapping(MessageStickerItem::class)]
     public ?array $sticker_items;
     /**
-     * @var \Ragnarok\Fenrir\Parts\Sticker[]
+     * @var Sticker[]
      */
+    #[ArrayMapping(Sticker::class)]
     public ?array $stickers;
     public ?int $position;
     public ?RoleSubscriptionData $role_subscription_data;
-
-    public function setType(int $value): void
-    {
-        $this->type = MessageType::tryFrom($value);
-    }
 }

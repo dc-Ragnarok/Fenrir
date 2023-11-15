@@ -116,13 +116,13 @@ class CommandInteractionTest extends MockeryTestCase
 
         /** @var InteractionCreate */
         $interactionCreate = $dataMapper->map(
-            [
+            (object) [
                 'id' => '::interaction id::',
                 'token' => '::token::',
                 'application_id' => '::application id::',
-                'data' => [
+                'data' => (object) [
                     'options' => [
-                        [
+                        (object) [
                             'name' => '::option name::',
                             'type' => 1,
                         ]
@@ -143,17 +143,17 @@ class CommandInteractionTest extends MockeryTestCase
 
         /** @var InteractionCreate */
         $interactionCreate = $dataMapper->map(
-            [
+            (object) [
                 'id' => '::interaction id::',
                 'token' => '::token::',
                 'application_id' => '::application id::',
-                'data' => [
+                'data' => (object) [
                     'options' => [
-                        [
+                        (object) [
                             'name' => 'group_name',
                             'type' => 2,
                             'options' => [
-                                [
+                                (object) [
                                     'name' => 'option_name',
                                     'type' => 1,
                                 ]
@@ -176,13 +176,13 @@ class CommandInteractionTest extends MockeryTestCase
 
         /** @var InteractionCreate */
         $interactionCreate = $dataMapper->map(
-            [
+            (object) [
                 'id' => '::interaction id::',
                 'token' => '::token::',
                 'application_id' => '::application id::',
-                'data' => [
+                'data' => (object) [
                     'options' => [
-                        [
+                        (object) [
                             'name' => '::option name::',
                             'type' => 3,
                         ]

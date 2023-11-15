@@ -7,6 +7,7 @@ namespace Ragnarok\Fenrir\Parts;
 use Carbon\Carbon;
 use Ragnarok\Fenrir\Enums\IntegrationExpireBehavior;
 use Ragnarok\Fenrir\Enums\Scope;
+use Ragnarok\Fenrir\Mapping\ArrayMapping;
 
 class Integration
 {
@@ -26,21 +27,8 @@ class Integration
     public ?bool $revoked;
     public ?Application $application;
     /**
-     * @var \Ragnarok\Fenrir\Enums\Scope[]
+     * @var Scope[]
      */
+    #[ArrayMapping(Scope::class)]
     public ?array $scopes;
-
-    public function setExpireBehavior(int $value): void
-    {
-        $this->expire_behavior = IntegrationExpireBehavior::tryFrom($value);
-    }
-
-    public function setScopes(array $value): void
-    {
-        $this->scopes = [];
-
-        foreach ($value as $entry) {
-            $this->scopes[] = Scope::from($entry);
-        }
-    }
 }

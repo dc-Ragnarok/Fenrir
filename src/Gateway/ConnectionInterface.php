@@ -6,6 +6,7 @@ namespace Ragnarok\Fenrir\Gateway;
 
 use Exan\Eventer\Eventer;
 use Ragnarok\Fenrir\EventHandler;
+use Ragnarok\Fenrir\Gateway\Helpers\PresenceUpdateBuilder;
 use React\Promise\ExtendedPromiseInterface;
 
 interface ConnectionInterface
@@ -36,4 +37,6 @@ interface ConnectionInterface
 
     public function identify(): void;
     public function resume(): void;
+
+    public function updatePresence(PresenceUpdateBuilder $presenceUpdate): void;
 }

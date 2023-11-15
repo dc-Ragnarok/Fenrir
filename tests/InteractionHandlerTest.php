@@ -26,11 +26,11 @@ class InteractionHandlerTest extends MockeryTestCase
     private function emitReady(EventHandler $eventHandler): void
     {
         /** @var Payload */
-        $payload = DataMapperFake::get()->map([
+        $payload = DataMapperFake::get()->map((object) [
             'op' => 0,
             't' => Events::READY,
-            'd' => [
-                'user' => [
+            'd' => (object) [
+                'user' => (object) [
                     'id' => '::bot user id::',
                 ],
             ],
@@ -132,7 +132,7 @@ class InteractionHandlerTest extends MockeryTestCase
             ->shouldReceive('createApplicationCommand')
             ->with('::bot user id::', $commandBuilder)
             ->andReturn(PromiseFake::get(
-                DataMapperFake::get()->map([
+                DataMapperFake::get()->map((object) [
                     'id' => '::application command id::',
                 ], ApplicationCommand::class)
             ))
@@ -142,7 +142,7 @@ class InteractionHandlerTest extends MockeryTestCase
             ->shouldReceive('createApplicationCommand')
             ->with('::bot user id::', '::guild id::', $commandBuilder)
             ->andReturn(PromiseFake::get(
-                DataMapperFake::get()->map([
+                DataMapperFake::get()->map((object) [
                     'id' => '::guild application command id::',
                 ], ApplicationCommand::class)
             ))
@@ -172,9 +172,9 @@ class InteractionHandlerTest extends MockeryTestCase
         $this->emitReady($discord->gateway->events);
 
         /** @var InteractionCreate */
-        $interactionCreate = DataMapperFake::get()->map([
+        $interactionCreate = DataMapperFake::get()->map((object) [
             'type' => InteractionType::APPLICATION_COMMAND->value,
-            'data' => [
+            'data' => (object) [
                 'id' => '::application command id::',
             ],
         ], InteractionCreate::class);
@@ -199,7 +199,7 @@ class InteractionHandlerTest extends MockeryTestCase
             ->shouldReceive('createApplicationCommand')
             ->with('::bot user id::', $commandBuilder)
             ->andReturn(PromiseFake::get(
-                DataMapperFake::get()->map([
+                DataMapperFake::get()->map((object) [
                     'id' => '::application command id::',
                 ], ApplicationCommand::class)
             ))
@@ -217,9 +217,9 @@ class InteractionHandlerTest extends MockeryTestCase
         $this->emitReady($discord->gateway->events);
 
         /** @var InteractionCreate */
-        $interactionCreate = DataMapperFake::get()->map([
+        $interactionCreate = DataMapperFake::get()->map((object) [
             'type' => InteractionType::APPLICATION_COMMAND->value,
-            'data' => [
+            'data' => (object) [
                 'id' => '::other application command id::',
             ],
         ], InteractionCreate::class);
@@ -245,12 +245,12 @@ class InteractionHandlerTest extends MockeryTestCase
             }
         );
 
-        $interactionCreate = DataMapperFake::get()->map([
+        $interactionCreate = DataMapperFake::get()->map((object) [
                 'id' => '::interaction id::',
                 'token' => '::token::',
                 'type' => InteractionType::MESSAGE_COMPONENT->value,
                 'application_id' => '::application id::',
-                'data' => [
+                'data' => (object) [
                     'component_type' => 2, // @todo enum
                     'custom_id' => '::custom id::',
                 ],
@@ -279,12 +279,12 @@ class InteractionHandlerTest extends MockeryTestCase
             }
         );
 
-        $interactionCreate = DataMapperFake::get()->map([
+        $interactionCreate = DataMapperFake::get()->map((object) [
                 'id' => '::interaction id::',
                 'token' => '::token::',
                 'type' => InteractionType::MESSAGE_COMPONENT->value,
                 'application_id' => '::application id::',
-                'data' => [
+                'data' => (object) [
                     'component_type' => 2, // @todo enum
                     'custom_id' => '::custom id::',
                 ],
