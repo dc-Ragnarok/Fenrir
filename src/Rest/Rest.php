@@ -10,6 +10,7 @@ use Ragnarok\Fenrir\DataMapper;
 
 class Rest
 {
+    public readonly Application $application;
     public readonly AuditLog $auditLog;
     public readonly Channel $channel;
     public readonly Emoji $emoji;
@@ -26,7 +27,6 @@ class Rest
 
     /**
      * @todo add
-     * - Application
      * - Application Role Connection Metadata
      * - Guild
      * - Stage Instance
@@ -36,6 +36,7 @@ class Rest
     {
         $args = [$this->http, $this->dataMapper, $this->logger];
 
+        $this->application = new Application(...$args);
         $this->auditLog = new AuditLog(...$args);
         $this->channel = new Channel(...$args);
         $this->emoji = new Emoji(...$args);
