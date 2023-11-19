@@ -20,6 +20,7 @@ class Rest
     public readonly GuildSticker $guildSticker;
     public readonly GuildTemplate $guildTemplate;
     public readonly Invite $invite;
+    public readonly StageInstance $stageInstance;
     public readonly Sticker $sticker;
     public readonly GuildCommand $guildCommand;
     public readonly GlobalCommand $globalCommand;
@@ -28,7 +29,6 @@ class Rest
 
     /**
      * @todo add
-     * - Stage Instance
      * - User
      */
     public function __construct(private Http $http, private DataMapper $dataMapper, private LoggerInterface $logger)
@@ -45,6 +45,7 @@ class Rest
         $this->guildSticker = new GuildSticker(...$args);
         $this->guildTemplate = new GuildTemplate(...$args);
         $this->invite = new Invite(...$args);
+        $this->stageInstance = new StageInstance(...$args);
         $this->sticker = new Sticker(...$args);
         $this->guildCommand = new GuildCommand(...$args);
         $this->globalCommand = new GlobalCommand(...$args);
