@@ -27,7 +27,7 @@ class StageInstance extends HttpResource
                 $this->getAuditLogReasonHeader($reason),
             ),
             PartsStageInstance::class,
-        );
+        )->otherwise($this->logThrowable(...));
     }
 
     /**
@@ -45,7 +45,7 @@ class StageInstance extends HttpResource
                 ),
             ),
             PartsStageInstance::class,
-        );
+        )->otherwise($this->logThrowable(...));
     }
 
     /**
@@ -65,7 +65,7 @@ class StageInstance extends HttpResource
                 $this->getAuditLogReasonHeader($reason),
             ),
             PartsStageInstance::class,
-        );
+        )->otherwise($this->logThrowable(...));
     }
 
     /**
@@ -84,6 +84,6 @@ class StageInstance extends HttpResource
                 headers: $this->getAuditLogReasonHeader($reason),
             ),
             PartsStageInstance::class,
-        );
+        )->otherwise($this->logThrowable(...));
     }
 }

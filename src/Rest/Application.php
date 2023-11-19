@@ -25,7 +25,7 @@ class Application extends HttpResource
                 'applications/@me' // @todo update endpoint to Endpoint:: when available
             ),
             PartsApplication::class,
-        );
+        )->otherwise($this->logThrowable(...));
     }
 
     /**
@@ -41,6 +41,6 @@ class Application extends HttpResource
                 $params,
             ),
             PartsApplication::class,
-        );
+        )->otherwise($this->logThrowable(...));
     }
 }

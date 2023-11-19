@@ -28,10 +28,6 @@ class Rest
     public readonly Webhook $webhook;
     public readonly Guild $guild;
 
-    /**
-     * @todo add
-     * - User
-     */
     public function __construct(private Http $http, private DataMapper $dataMapper, private LoggerInterface $logger)
     {
         $args = [$this->http, $this->dataMapper, $this->logger];
