@@ -8,6 +8,9 @@ use Discord\Http\Http;
 use Psr\Log\LoggerInterface;
 use Ragnarok\Fenrir\DataMapper;
 
+/**
+ * @SuppressWarnings(PHPMD.TooManyFields)
+ */
 class Rest
 {
     public readonly Application $application;
