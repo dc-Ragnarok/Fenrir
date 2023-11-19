@@ -22,6 +22,7 @@ class Rest
     public readonly Invite $invite;
     public readonly StageInstance $stageInstance;
     public readonly Sticker $sticker;
+    public readonly User $user;
     public readonly GuildCommand $guildCommand;
     public readonly GlobalCommand $globalCommand;
     public readonly Webhook $webhook;
@@ -47,6 +48,7 @@ class Rest
         $this->invite = new Invite(...$args);
         $this->stageInstance = new StageInstance(...$args);
         $this->sticker = new Sticker(...$args);
+        $this->user = new User(...$args);
         $this->guildCommand = new GuildCommand(...$args);
         $this->globalCommand = new GlobalCommand(...$args);
         $this->webhook = new Webhook(...$args);
