@@ -10,6 +10,9 @@ use Ragnarok\Fenrir\DataMapper;
 use React\Promise\ExtendedPromiseInterface;
 use Throwable;
 
+/**
+ * @SuppressWarnings(PHPMD.NumberOfChildren)
+ */
 abstract class HttpResource
 {
     public function __construct(
