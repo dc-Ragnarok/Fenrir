@@ -11,6 +11,7 @@ use Ragnarok\Fenrir\DataMapper;
 class Rest
 {
     public readonly Application $application;
+    public readonly ApplicationRoleConnectionMetadata $applicationRoleConnectionMetadata;
     public readonly AuditLog $auditLog;
     public readonly Channel $channel;
     public readonly Emoji $emoji;
@@ -27,8 +28,6 @@ class Rest
 
     /**
      * @todo add
-     * - Application Role Connection Metadata
-     * - Guild
      * - Stage Instance
      * - User
      */
@@ -37,6 +36,7 @@ class Rest
         $args = [$this->http, $this->dataMapper, $this->logger];
 
         $this->application = new Application(...$args);
+        $this->applicationRoleConnectionMetadata = new ApplicationRoleConnectionMetadata(...$args);
         $this->auditLog = new AuditLog(...$args);
         $this->channel = new Channel(...$args);
         $this->emoji = new Emoji(...$args);
