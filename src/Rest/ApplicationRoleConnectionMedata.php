@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Ragnarok\Fenrir\Rest;
 
 use Discord\Http\Endpoint;
-use Ragnarok\Fenrir\Parts\Application as PartsApplication;
 use Ragnarok\Fenrir\Parts\ApplicationRoleConnectionMetadata as PartsApplicationRoleConnectionMetadata;
 use React\Promise\ExtendedPromiseInterface;
 
