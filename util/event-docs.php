@@ -68,15 +68,13 @@ foreach ($events as $className => $friendlyName) {
         ];
     }, $reflected->getProperties(ReflectionProperty::IS_PUBLIC));
 
-    $fileContent  = '#### Event' . PHP_EOL;
-    $fileContent .= '`' . $eventInfo['event'] . '`' . PHP_EOL;
-    $fileContent .= PHP_EOL;
-    $fileContent .= '#### Required Intents' . PHP_EOL;
+    $fileContent  = '## ' . $friendlyName . PHP_EOL;
+    $fileContent .= '### Required Intents' . PHP_EOL;
     foreach ($eventInfo['intents'] as $intent) {
         $fileContent .= '- `' . $intent . '`' . PHP_EOL;
     }
     $fileContent .= PHP_EOL;
-    $fileContent .= '#### Properties' . PHP_EOL;
+    $fileContent .= '### Properties' . PHP_EOL;
     $fileContent .= '|property|type|' . PHP_EOL;
     $fileContent .= '|--------|----|' . PHP_EOL;
     foreach ($eventInfo['properties'] as $property) {
@@ -84,13 +82,13 @@ foreach ($events as $className => $friendlyName) {
     }
 
     $fileContent .= PHP_EOL;
-    $fileContent .= '#### Listener' . PHP_EOL;
+    $fileContent .= '### How to use' . PHP_EOL;
     $fileContent .= '```php' . PHP_EOL;
     $fileContent .= 'use ' . $class . ';' . PHP_EOL;
     $fileContent .= 'use ' . Events::class . ';' . PHP_EOL;
     $fileContent .= PHP_EOL;
     $fileContent .= '$discord->gateway->events->on(Events::' . $eventInfo['event'] . ', function (' . $className . ' $event) {' . PHP_EOL;
-    $fileContent .= '    // Handle event' . PHP_EOL;
+    $fileContent .= '    // ...' . PHP_EOL;
     $fileContent .= '});' . PHP_EOL;
     $fileContent .= '```' . PHP_EOL;
 
