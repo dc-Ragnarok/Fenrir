@@ -47,4 +47,6 @@ enum Permission: int
     case SEND_MESSAGES_IN_THREADS = 1 << 38;
     case USE_EMBEDDED_ACTIVITIES = 1 << 39;
     case MODERATE_MEMBERS = 1 << 40;
+    case CREATE_GUILD_EXPRESSIONS = 1 << 43;
+    case CREATE_EVENTS = 1 << 44;
 }
