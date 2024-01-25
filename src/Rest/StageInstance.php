@@ -18,7 +18,7 @@ class StageInstance extends HttpResource
      *
      * @return ExtendedPromiseInterface<\Ragnarok\Fenrir\Parts\StageInstance>
      */
-    public function createInstance(array $params, ?string $reason): ExtendedPromiseInterface
+    public function createInstance(array $params, ?string $reason = null): ExtendedPromiseInterface
     {
         return $this->mapPromise(
             $this->http->post(
@@ -53,7 +53,7 @@ class StageInstance extends HttpResource
      *
      * @return ExtendedPromiseInterface<\Ragnarok\Fenrir\Parts\StageInstance>
      */
-    public function modifyInstances(string $channelId, array $params, ?string $reason): ExtendedPromiseInterface
+    public function modifyInstances(string $channelId, array $params, ?string $reason = null): ExtendedPromiseInterface
     {
         return $this->mapPromise(
             $this->http->patch(
@@ -73,7 +73,7 @@ class StageInstance extends HttpResource
      *
      * @return ExtendedPromiseInterface<void>
      */
-    public function deleteInstances(string $channelId, ?string $reason): ExtendedPromiseInterface
+    public function deleteInstances(string $channelId, ?string $reason = null): ExtendedPromiseInterface
     {
         return $this->mapPromise(
             $this->http->delete(
