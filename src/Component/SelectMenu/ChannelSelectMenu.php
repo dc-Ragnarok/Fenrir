@@ -8,6 +8,8 @@ use Ragnarok\Fenrir\Enums\SelectMenuType;
 
 class ChannelSelectMenu extends SelectMenu
 {
+    use HasDefaultValues;
+
     protected SelectMenuType $type = SelectMenuType::Channel;
 
     /**
@@ -34,7 +36,8 @@ class ChannelSelectMenu extends SelectMenu
     {
         return [
             ...parent::get(),
-            ...(is_null($this->channelTypes) ? [] : ['channel_types' => $this->channelTypes])
+            ...(is_null($this->channelTypes) ? [] : ['channel_types' => $this->channelTypes]),
+            'default_values' => $this->defaultValues,
         ];
     }
 }

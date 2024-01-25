@@ -24,6 +24,13 @@ class ActivityBuilder
         return $this;
     }
 
+    public function setState(string $state): self
+    {
+        $this->data['state'] = $state;
+
+        return $this;
+    }
+
     /**
      * @see https://discord.com/developers/docs/topics/gateway-events#activity-object-activity-types
      */
