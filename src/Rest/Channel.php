@@ -588,7 +588,7 @@ class Channel extends HttpResource
                 $this->getAuditLogReasonHeader($reason),
             ),
             $forumChannelWithMessage::class,
-        );
+        )->otherwise($this->logThrowable(...));
     }
 
     /**
