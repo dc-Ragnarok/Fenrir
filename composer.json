@@ -20,7 +20,7 @@
         "ratchet/pawl": "^0.4.1",
         "evenement/evenement": "^3.0.0",
         "nesbot/carbon": "^2.64",
-        "discord-php/http": "v10.2.0",
+        "discord-php/http": "v10.3.0",
         "ralouphie/mimey": "^1.0",
         "spatie/regex": "^3.1",
         "react/async": "^4.0.0",
