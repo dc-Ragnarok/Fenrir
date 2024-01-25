@@ -577,7 +577,7 @@ class Channel extends HttpResource
         MultipartBody|array $params,
         ?string $reason = null
     ): ExtendedPromiseInterface {
-        $forumChannelWithMessage = new class() extends Channel {
+        $forumChannelWithMessage = new class () extends Channel {
             public Message $message;
         };
 
