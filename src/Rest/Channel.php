@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Ragnarok\Fenrir\Rest;
 
 use Discord\Http\Endpoint;
+use Discord\Http\Multipart\MultipartBody;
 use Ragnarok\Fenrir\Parts\Channel as PartsChannel;
 use Ragnarok\Fenrir\Parts\Invite;
 use Ragnarok\Fenrir\Parts\Message;
@@ -567,10 +568,27 @@ class Channel extends HttpResource
     }
 
     /**
-     * @todo implement call
+     * @see https://discord.com/developers/docs/resources/channel#start-thread-in-forum-or-media-channel
+     *
+     * @return ExtendedPromiseInterface<\Ragnarok\Fenrir\Parts\Channel> includes $message property
      */
-    public function startThreadInForumChannel(): void
-    {
+    public function startThreadInForumChannel(
+        string $channelId,
+        MultipartBody|array $params,
+        ?string $reason = null
+    ): ExtendedPromiseInterface {
+        $forumChannelWithMessage = new class() extends Channel {
+            public Message $message;
+        };
+
+        return $this->mapPromise(
+            $this->http->post(
+                Endpoint::bind(Endpoint::CHANNEL_THREADS, $channelId),
+                $params,
+                $this->getAuditLogReasonHeader($reason),
+            ),
+            $forumChannelWithMessage::class,
+        );
     }
 
     /**
