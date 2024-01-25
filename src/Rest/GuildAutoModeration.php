@@ -47,7 +47,7 @@ class GuildAutoModeration extends HttpResource
      * @see https://discord.com/developers/docs/resources/auto-moderation#create-auto-moderation-rule
      * @return ExtendedPromiseInterface<\Ragnarok\Fenrir\Parts\AutoModerationRuleObject>
      */
-    public function create(string $guildId, array $params, ?string $reason): ExtendedPromiseInterface
+    public function create(string $guildId, array $params, ?string $reason = null): ExtendedPromiseInterface
     {
         return $this->mapPromise(
             $this->http->post(
@@ -66,7 +66,7 @@ class GuildAutoModeration extends HttpResource
      * @see https://discord.com/developers/docs/resources/auto-moderation#modify-auto-moderation-rule
      * @return ExtendedPromiseInterface<\Ragnarok\Fenrir\Parts\AutoModerationRuleObject>
      */
-    public function modify(string $guildId, string $autoModerationRuleId, array $params, ?string $reason): ExtendedPromiseInterface
+    public function modify(string $guildId, string $autoModerationRuleId, array $params, ?string $reason = null): ExtendedPromiseInterface
     {
         return $this->mapPromise(
             $this->http->patch(
@@ -86,7 +86,7 @@ class GuildAutoModeration extends HttpResource
      * @see https://discord.com/developers/docs/resources/auto-moderation#delete-auto-moderation-rule
      * @return ExtendedPromiseInterface<void>
      */
-    public function delete(string $guildId, string $autoModerationRuleId, ?string $reason): ExtendedPromiseInterface
+    public function delete(string $guildId, string $autoModerationRuleId, ?string $reason = null): ExtendedPromiseInterface
     {
         return $this->mapPromise(
             $this->http->delete(
