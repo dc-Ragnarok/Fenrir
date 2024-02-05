@@ -19,7 +19,7 @@
         "react/event-loop": "^1.3.0",
         "ratchet/pawl": "^0.4.1",
         "evenement/evenement": "^3.0.0",
-        "nesbot/carbon": "^2.64",
+        "nesbot/carbon": "^2.64 || ^3.0",
         "discord-php/http": "^v10.3.0",
         "ralouphie/mimey": "^1.0",
         "spatie/regex": "^3.1",
