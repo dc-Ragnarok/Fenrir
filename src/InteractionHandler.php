@@ -15,6 +15,9 @@ use Ragnarok\Fenrir\Interaction\CommandInteraction;
 use Ragnarok\Fenrir\Parts\ApplicationCommand;
 use Ragnarok\Fenrir\Rest\Helpers\Command\CommandBuilder;
 
+/**
+ * @deprecated
+ */
 class InteractionHandler implements Extension
 {
     private readonly Discord $discord;
