@@ -67,8 +67,11 @@ class InteractionCallbackBuilder
 
         $data = [
             'type' => $this->type->value,
-            'data' => $callbackData,
         ];
+
+        if ($callbackData !== []) {
+            $data['data'] = $callbackData;
+        }
 
         if ($this->requiresMultipart()) {
             return $this->getMultipart($data);
