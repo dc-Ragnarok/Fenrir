@@ -42,7 +42,7 @@ class InvalidSessionEventTest extends MockeryTestCase
         $this->assertEquals($expect, $event->filter());
     }
 
-    public function listenerDataProvider(): array
+    public static function listenerDataProvider(): array
     {
         return [
             'Payload D => true' => [

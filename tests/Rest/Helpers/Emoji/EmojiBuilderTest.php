@@ -60,7 +60,7 @@ class EmojiBuilderTest extends TestCase
         $this->assertEquals(EmojiBuilder::fromPart($emoji)->get(), $result);
     }
 
-    public function getFromPartProvider(): array
+    public static function getFromPartProvider(): array
     {
         return [
             'All properties' => [

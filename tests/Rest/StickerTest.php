@@ -13,7 +13,7 @@ class StickerTest extends HttpHelperTestCase
 {
     protected string $httpItemClass = Sticker::class;
 
-    public function httpBindingsProvider(): array
+    public static function httpBindingsProvider(): array
     {
         return [
             'Get sticker' => [

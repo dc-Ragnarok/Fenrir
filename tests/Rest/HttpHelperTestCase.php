@@ -41,7 +41,7 @@ abstract class HttpHelperTestCase extends TestCase
         $this->httpItem = new $this->httpItemClass($this->http, $this->dataMapper, $this->mockLog);
     }
 
-    abstract public function httpBindingsProvider(): array;
+    abstract public static function httpBindingsProvider(): array;
 
     /**
      * @dataProvider httpBindingsProvider

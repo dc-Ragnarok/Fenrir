@@ -27,7 +27,7 @@ class ChannelTest extends HttpHelperTestCase
 {
     protected string $httpItemClass = Channel::class;
 
-    public function httpBindingsProvider(): array
+    public static function httpBindingsProvider(): array
     {
         return [
             'Get channel' => [

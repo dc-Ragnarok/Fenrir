@@ -13,7 +13,7 @@ class GlobalCommandTest extends HttpHelperTestCase
 {
     protected string $httpItemClass = GlobalCommand::class;
 
-    public function httpBindingsProvider(): array
+    public static function httpBindingsProvider(): array
     {
         return [
             'Create application command' => [
