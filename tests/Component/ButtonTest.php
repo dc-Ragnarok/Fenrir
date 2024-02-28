@@ -16,7 +16,7 @@ use Ragnarok\Fenrir\Rest\Helpers\Emoji\EmojiBuilder;
 
 class ButtonTest extends TestCase
 {
-    private function getEmoji(): EmojiBuilder
+    private static function getEmoji(): EmojiBuilder
     {
         $emoji = new Emoji();
         $emoji->id = '::emoji id::';
@@ -47,21 +47,21 @@ class ButtonTest extends TestCase
         }
     }
 
-    public function convertionExpectationProvider(): array
+    public static function convertionExpectationProvider(): array
     {
         return [
             'Completely filled out' => [
                 'args' => [
                     '::custom id::',
                     '::label::',
-                    $this->getEmoji(),
+                    self::getEmoji(),
                     true,
                 ],
                 'expected' => [
                     'type' => 2,
                     'custom_id' => '::custom id::',
                     'label' => '::label::',
-                    'emoji' => $this->getEmoji()->get(),
+                    'emoji' => self::getEmoji()->get(),
                     'disabled' => true
                 ],
             ],
@@ -69,13 +69,13 @@ class ButtonTest extends TestCase
                 'args' => [
                     '::custom id::',
                     null,
-                    $this->getEmoji(),
+                    self::getEmoji(),
                     true,
                 ],
                 'expected' => [
                     'type' => 2,
                     'custom_id' => '::custom id::',
-                    'emoji' => $this->getEmoji()->get(),
+                    'emoji' => self::getEmoji()->get(),
                     'disabled' => true
                 ],
             ],
@@ -97,13 +97,13 @@ class ButtonTest extends TestCase
                 'args' => [
                     '::custom id::',
                     '::label::',
-                    $this->getEmoji(),
+                    self::getEmoji(),
                 ],
                 'expected' => [
                     'type' => 2,
                     'custom_id' => '::custom id::',
                     'label' => '::label::',
-                    'emoji' => $this->getEmoji()->get(),
+                    'emoji' => self::getEmoji()->get(),
                     'disabled' => false
                 ],
             ],
@@ -120,14 +120,14 @@ class ButtonTest extends TestCase
         $this->assertEquals($expected, $button->get());
     }
 
-    public function convertionExpectationProviderLinkButton(): array
+    public static function convertionExpectationProviderLinkButton(): array
     {
         return [
             'Completely filled out' => [
                 'args' => [
                     '::url::',
                     '::label::',
-                    $this->getEmoji(),
+                    self::getEmoji(),
                     true,
                 ],
                 'expected' => [
@@ -135,7 +135,7 @@ class ButtonTest extends TestCase
                     'style' => ButtonStyle::Link,
                     'url' => '::url::',
                     'label' => '::label::',
-                    'emoji' => $this->getEmoji()->get(),
+                    'emoji' => self::getEmoji()->get(),
                     'disabled' => true
                 ],
             ],
@@ -143,14 +143,14 @@ class ButtonTest extends TestCase
                 'args' => [
                     '::url::',
                     null,
-                    $this->getEmoji(),
+                    self::getEmoji(),
                     true,
                 ],
                 'expected' => [
                     'type' => 2,
                     'style' => ButtonStyle::Link,
                     'url' => '::url::',
-                    'emoji' => $this->getEmoji()->get(),
+                    'emoji' => self::getEmoji()->get(),
                     'disabled' => true
                 ],
             ],
@@ -173,14 +173,14 @@ class ButtonTest extends TestCase
                 'args' => [
                     '::url::',
                     '::label::',
-                    $this->getEmoji(),
+                    self::getEmoji(),
                 ],
                 'expected' => [
                     'type' => 2,
                     'style' => ButtonStyle::Link,
                     'url' => '::url::',
                     'label' => '::label::',
-                    'emoji' => $this->getEmoji()->get(),
+                    'emoji' => self::getEmoji()->get(),
                     'disabled' => false
                 ],
             ],

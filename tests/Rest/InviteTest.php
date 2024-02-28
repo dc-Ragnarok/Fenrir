@@ -11,7 +11,7 @@ class InviteTest extends HttpHelperTestCase
 {
     protected string $httpItemClass = RestInvite::class;
 
-    public function httpBindingsProvider(): array
+    public static function httpBindingsProvider(): array
     {
         return [
             'Get invite' => [

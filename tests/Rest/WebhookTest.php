@@ -15,7 +15,7 @@ class WebhookTest extends HttpHelperTestCase
 {
     protected string $httpItemClass = Webhook::class;
 
-    public function httpBindingsProvider(): array
+    public static function httpBindingsProvider(): array
     {
         return [
             'Create interaction response' => [

@@ -39,7 +39,7 @@ class ReadyEventTest extends MockeryTestCase
         $this->assertEquals($expectation, $event->filter());
     }
 
-    public function listenerDataProvider(): array
+    public static function listenerDataProvider(): array
     {
         return [
             'Ready event' => [
@@ -93,7 +93,7 @@ class ReadyEventTest extends MockeryTestCase
         $event->execute();
     }
 
-    public function payloadProvider(): array
+    public static function payloadProvider(): array
     {
         return [
             'All filled in' => [

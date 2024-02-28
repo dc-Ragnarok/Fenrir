@@ -17,7 +17,7 @@ class GuildTest extends HttpHelperTestCase
 {
     protected string $httpItemClass = Guild::class;
 
-    public function httpBindingsProvider(): array
+    public static function httpBindingsProvider(): array
     {
         return [
             'Get guild' => [

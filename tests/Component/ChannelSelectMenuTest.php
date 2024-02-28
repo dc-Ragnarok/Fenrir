@@ -21,7 +21,7 @@ class ChannelSelectMenuTest extends TestCase
         $this->assertEquals($expected, $select->get());
     }
 
-    public function convertionExpectationProvider(): array
+    public static function convertionExpectationProvider(): array
     {
         return [
             'Completely filled out' => [
@@ -31,7 +31,7 @@ class ChannelSelectMenuTest extends TestCase
                     [ChannelType::ANNOUNCEMENT_THREAD, ChannelType::PUBLIC_THREAD],
                     5,
                     10,
-                    true
+                    true,
                 ],
                 'expected' => [
                     'type' => SelectMenuType::Channel,
@@ -41,6 +41,7 @@ class ChannelSelectMenuTest extends TestCase
                     'min_values' => 5,
                     'max_values' => 10,
                     'disabled' => true,
+                    'default_values' => [],
                 ],
             ],
             'Missing placeholder' => [
@@ -59,6 +60,7 @@ class ChannelSelectMenuTest extends TestCase
                     'min_values' => 5,
                     'max_values' => 10,
                     'disabled' => true,
+                    'default_values' => [],
                 ],
             ],
             'Missing channel types' => [
@@ -77,6 +79,7 @@ class ChannelSelectMenuTest extends TestCase
                     'min_values' => 5,
                     'max_values' => 10,
                     'disabled' => true,
+                    'default_values' => [],
                 ],
             ],
             'Missing min values' => [
@@ -96,6 +99,7 @@ class ChannelSelectMenuTest extends TestCase
                     'min_values' => 1,
                     'max_values' => 10,
                     'disabled' => true,
+                    'default_values' => [],
                 ],
             ],
             'Missing max values' => [
@@ -115,6 +119,7 @@ class ChannelSelectMenuTest extends TestCase
                     'min_values' => 5,
                     'max_values' => 25,
                     'disabled' => true,
+                    'default_values' => [],
                 ],
             ],
             'Missing disabled' => [
@@ -133,6 +138,7 @@ class ChannelSelectMenuTest extends TestCase
                     'min_values' => 5,
                     'max_values' => 10,
                     'disabled' => false,
+                    'default_values' => [],
                 ],
             ],
         ];

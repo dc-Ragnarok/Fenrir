@@ -14,7 +14,7 @@ use Ragnarok\Fenrir\Rest\Helpers\Emoji\EmojiBuilder;
 
 class StringSelectMenuTest extends TestCase
 {
-    private function getEmoji(): EmojiBuilder
+    private static function getEmoji(): EmojiBuilder
     {
         $emoji = new Emoji();
         $emoji->id = '::emoji id::';
@@ -36,7 +36,7 @@ class StringSelectMenuTest extends TestCase
         $this->assertEquals($expected, $select->get());
     }
 
-    public function convertionExpectationProvider(): array
+    public static function convertionExpectationProvider(): array
     {
         return [
             'Completely filled out' => [
@@ -186,7 +186,7 @@ class StringSelectMenuTest extends TestCase
         );
     }
 
-    public function optionConversionProvider(): array
+    public static function optionConversionProvider(): array
     {
         return [
             'Completely filled' => [
@@ -194,14 +194,14 @@ class StringSelectMenuTest extends TestCase
                     '::label::',
                     '::value::',
                     '::description::',
-                    $this->getEmoji(),
+                    self::getEmoji(),
                     true,
                 ],
                 'expected' => [
                     'label' => '::label::',
                     'value' => '::value::',
                     'description' => '::description::',
-                    'emoji' => $this->getEmoji()->get(),
+                    'emoji' => self::getEmoji()->get(),
                     'default' => true,
                 ],
             ],
@@ -210,13 +210,13 @@ class StringSelectMenuTest extends TestCase
                     '::label::',
                     '::value::',
                     null,
-                    $this->getEmoji(),
+                    self::getEmoji(),
                     true,
                 ],
                 'expected' => [
                     'label' => '::label::',
                     'value' => '::value::',
-                    'emoji' => $this->getEmoji()->get(),
+                    'emoji' => self::getEmoji()->get(),
                     'default' => true,
                 ],
             ],
@@ -240,13 +240,13 @@ class StringSelectMenuTest extends TestCase
                     '::label::',
                     '::value::',
                     '::description::',
-                    $this->getEmoji(),
+                    self::getEmoji(),
                 ],
                 'expected' => [
                     'label' => '::label::',
                     'value' => '::value::',
                     'description' => '::description::',
-                    'emoji' => $this->getEmoji()->get(),
+                    'emoji' => self::getEmoji()->get(),
                 ],
             ],
         ];

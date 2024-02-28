@@ -13,7 +13,7 @@ class EmojiTest extends HttpHelperTestCase
 {
     protected string $httpItemClass = Emoji::class;
 
-    public function httpBindingsProvider(): array
+    public static function httpBindingsProvider(): array
     {
         return [
             'List guild emojis' => [
