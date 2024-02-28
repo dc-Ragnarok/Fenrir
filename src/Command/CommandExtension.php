@@ -39,7 +39,8 @@ abstract class CommandExtension extends EventEmitter implements Extension
             $discord->gateway->events,
             Events::INTERACTION_CREATE,
             fn (InteractionCreate $interactionCreate) =>
-                $interactionCreate?->type === InteractionType::APPLICATION_COMMAND
+                isset($interactionCreate->type)
+                && $interactionCreate->type === InteractionType::APPLICATION_COMMAND
                 && isset($this->commandMappings[$interactionCreate->data->id])
         );
 

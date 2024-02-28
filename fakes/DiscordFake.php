@@ -16,7 +16,6 @@ class DiscordFake
 
         $discord->rest = RestFake::get();
         $discord->gateway = GatewayFake::get();
-        $discord->interaction = InteractionHandlerFake::get();
 
         return $discord;
     }
