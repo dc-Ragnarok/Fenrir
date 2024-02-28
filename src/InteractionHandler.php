@@ -91,6 +91,14 @@ class InteractionHandler implements Extension
         }
     }
 
+    /**
+     * @deprecated
+     *
+     * use \Ragnarok\Fenrir\Command\GlobalCommandExtension or \Ragnarok\Fenrir\Command\GuildCommandExtension instead
+     *
+     * This implementation is flawed in terms of rate limiting and should not be used.
+     *  It will be removed in a later version
+     */
     public function registerCommand(CommandBuilder $commandBuilder, callable $handler): void
     {
         if ($this->devMode) {
@@ -102,6 +110,14 @@ class InteractionHandler implements Extension
         $this->registerGlobalCommand($commandBuilder, $handler);
     }
 
+    /**
+     * @deprecated
+     *
+     * use \Ragnarok\Fenrir\Command\GlobalCommandExtension or \Ragnarok\Fenrir\Command\GuildCommandExtension instead
+     *
+     * This implementation is flawed in terms of rate limiting and should not be used.
+     *  It will be removed in a later version
+     */
     public function registerGuildCommand(CommandBuilder $commandBuilder, string $guildId, callable $handler): void
     {
         /** Ready event includes Application ID */
@@ -119,6 +135,14 @@ class InteractionHandler implements Extension
         );
     }
 
+    /**
+     * @deprecated
+     *
+     * use \Ragnarok\Fenrir\Command\GlobalCommandExtension or \Ragnarok\Fenrir\Command\GuildCommandExtension instead
+     *
+     * This implementation is flawed in terms of rate limiting and should not be used.
+     *  It will be removed in a later version
+     */
     public function registerGlobalCommand(CommandBuilder $commandBuilder, callable $handler): void
     {
         /** Ready event includes Application ID */

@@ -14,6 +14,19 @@ use React\Promise\ExtendedPromiseInterface;
  */
 class GuildCommand extends HttpResource
 {
+    public function getCommands(string $guildId, string $applicationId, bool $withLocalizations = false): ExtendedPromiseInterface
+    {
+        $endpoint = Endpoint::bind(Endpoint::GUILD_APPLICATION_COMMANDS, $applicationId, $guildId);
+        $endpoint->addQuery('with_localizations', $withLocalizations);
+
+        return $this->mapArrayPromise(
+            $this->http->get(
+                $endpoint
+            ),
+            ApplicationCommand::class
+        );
+    }
+
     /**
      * @see https://discord.com/developers/docs/interactions/application-commands#create-guild-application-command
      *

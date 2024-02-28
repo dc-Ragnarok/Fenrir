@@ -14,6 +14,19 @@ use React\Promise\ExtendedPromiseInterface;
  */
 class GlobalCommand extends HttpResource
 {
+    public function getCommands(string $applicationId, bool $withLocalizations = false): ExtendedPromiseInterface
+    {
+        $endpoint = Endpoint::bind(Endpoint::GLOBAL_APPLICATION_COMMANDS, $applicationId);
+        $endpoint->addQuery('with_localizations', $withLocalizations);
+
+        return $this->mapArrayPromise(
+            $this->http->get(
+                $endpoint
+            ),
+            ApplicationCommand::class
+        );
+    }
+
     /**
      * @see https://discord.com/developers/docs/interactions/application-commands#making-a-global-command
      *
