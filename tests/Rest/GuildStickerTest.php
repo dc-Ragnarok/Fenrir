@@ -15,7 +15,7 @@ class GuildStickerTest extends HttpHelperTestCase
 {
     protected string $httpItemClass = GuildSticker::class;
 
-    public function httpBindingsProvider(): array
+    public static function httpBindingsProvider(): array
     {
         return [
             'List stickers' => [

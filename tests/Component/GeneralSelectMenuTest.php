@@ -28,11 +28,11 @@ class GeneralSelectMenuTest extends TestCase
 
             $select = new $selectClass(...$args);
 
-            $this->assertEquals($expected, $select->get());
+            $this->assertEquals($expected, $select->get(), 'Failed on ' . $selectClass);
         }
     }
 
-    public function convertionExpectationProvider(): array
+    public static function convertionExpectationProvider(): array
     {
         return [
             'Completely filled out' => [
@@ -49,6 +49,7 @@ class GeneralSelectMenuTest extends TestCase
                     'min_values' => 5,
                     'max_values' => 10,
                     'disabled' => true,
+                    'default_values' => [],
                 ],
             ],
             'Missing placeholder' => [
@@ -64,6 +65,7 @@ class GeneralSelectMenuTest extends TestCase
                     'min_values' => 5,
                     'max_values' => 10,
                     'disabled' => true,
+                    'default_values' => [],
                 ],
             ],
             'Missing min values' => [
@@ -80,6 +82,7 @@ class GeneralSelectMenuTest extends TestCase
                     'min_values' => 1,
                     'max_values' => 10,
                     'disabled' => true,
+                    'default_values' => [],
                 ],
             ],
             'Missing max values' => [
@@ -96,6 +99,7 @@ class GeneralSelectMenuTest extends TestCase
                     'min_values' => 5,
                     'max_values' => 25,
                     'disabled' => true,
+                    'default_values' => [],
                 ],
             ],
             'Missing disabled' => [
@@ -111,6 +115,7 @@ class GeneralSelectMenuTest extends TestCase
                     'min_values' => 5,
                     'max_values' => 10,
                     'disabled' => false,
+                    'default_values' => [],
                 ],
             ],
         ];

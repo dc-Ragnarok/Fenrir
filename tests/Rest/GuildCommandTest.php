@@ -13,7 +13,7 @@ class GuildCommandTest extends HttpHelperTestCase
 {
     protected string $httpItemClass = GuildCommand::class;
 
-    public function httpBindingsProvider(): array
+    public static function httpBindingsProvider(): array
     {
         return [
             'Create application command' => [

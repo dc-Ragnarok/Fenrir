@@ -13,7 +13,7 @@ class AuditLogTest extends HttpHelperTestCase
 {
     protected string $httpItemClass = AuditLog::class;
 
-    public function httpBindingsProvider(): array
+    public static function httpBindingsProvider(): array
     {
         return [
             'Get guild audit log' => [

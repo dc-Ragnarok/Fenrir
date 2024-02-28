@@ -15,7 +15,7 @@ class MentionableSelectMenu extends SelectMenu
     public function get(): array
     {
         return [
-            parent::get(),
+            ...parent::get(),
             'default_values' => $this->defaultValues,
         ];
     }

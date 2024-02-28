@@ -63,7 +63,7 @@ final class EventHandlerTest extends TestCase
         $this->assertTrue($hasRun, 'Known event should be emitted.');
     }
 
-    public function eventProvider(): array
+    public static function eventProvider(): array
     {
         $array = [];
 

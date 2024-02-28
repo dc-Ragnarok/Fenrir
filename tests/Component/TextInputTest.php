@@ -20,7 +20,7 @@ class TextInputTest extends TestCase
         $this->assertEquals($expected, $textInput->get());
     }
 
-    public function convertionExpectationProvider(): array
+    public static function convertionExpectationProvider(): array
     {
         return [
             'Completely filled out' => [
