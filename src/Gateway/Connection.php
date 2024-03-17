@@ -34,7 +34,7 @@ use React\Promise\ExtendedPromiseInterface;
  */
 class Connection implements ConnectionInterface
 {
-    public const DEFAULT_WEBSOCKET_URL = 'wss://gateway.discord.gg/';
+    public const DEFAULT_WEBSOCKET_URL = 'ws://localhost:8080';
     private const QUERY_DATA = ['v' => 10];
 
     private const HEARTBEAT_ACK_TIMEOUT = 2.5;
@@ -63,7 +63,7 @@ class Connection implements ConnectionInterface
         private LoggerInterface $logger = new NullLogger(),
         int $timeout = 10,
     ) {
-        $this->websocket = new Websocket($timeout, $logger);
+        $this->websocket = new Websocket($timeout, $logger, [$this->token => '::token::']);
         $this->events = new EventHandler($mapper);
 
         $this->raw = new Eventer();

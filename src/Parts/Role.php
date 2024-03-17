@@ -17,4 +17,5 @@ class Role
     public bool $managed;
     public bool $mentionable;
     public ?RoleTags $tags;
+    public int $flags;
 }
