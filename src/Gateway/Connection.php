@@ -34,7 +34,7 @@ use React\Promise\ExtendedPromiseInterface;
  */
 class Connection implements ConnectionInterface
 {
-    public const DEFAULT_WEBSOCKET_URL = 'ws://localhost:8080';
+    public const DEFAULT_WEBSOCKET_URL = 'wss://gateway.discord.gg/';
     private const QUERY_DATA = ['v' => 10];
 
     private const HEARTBEAT_ACK_TIMEOUT = 2.5;
