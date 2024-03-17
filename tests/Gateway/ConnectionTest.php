@@ -37,7 +37,7 @@ class ConnectionTest extends MockeryTestCase
             new DataMapper(new NullLogger())
         );
 
-        $this->assertMatchesRegularExpression('/wss:\/\/gateway.discord.gg\/\?v=(\d+)/', $connection->getDefaultUrl());
+        $this->assertEquals('wss://gateway.discord.gg/', $connection->getDefaultUrl());
     }
 
     public function testSequence(): void
@@ -73,7 +73,7 @@ class ConnectionTest extends MockeryTestCase
 
         $websocket->expects()
             ->open()
-            ->with('::ws url::')
+            ->with('::ws url::?v=10')
             ->andReturns(PromiseFake::get('::return::'))
             ->once();
 
