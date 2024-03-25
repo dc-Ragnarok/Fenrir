@@ -63,7 +63,7 @@ class Connection implements ConnectionInterface
         private LoggerInterface $logger = new NullLogger(),
         int $timeout = 10,
     ) {
-        $this->websocket = new Websocket($timeout, $logger);
+        $this->websocket = new Websocket($timeout, $logger, [$this->token => '::token::']);
         $this->events = new EventHandler($mapper);
 
         $this->raw = new Eventer();
