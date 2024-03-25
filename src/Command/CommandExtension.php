@@ -14,13 +14,14 @@ use Ragnarok\Fenrir\FilteredEventEmitter;
 use Ragnarok\Fenrir\Gateway\Events\InteractionCreate;
 use Ragnarok\Fenrir\Interaction\CommandInteraction;
 use Ragnarok\Fenrir\Parts\ApplicationCommandInteractionDataOptionStructure;
-use Ragnarok\Fenrir\Parts\ApplicationCommandOptionStructure;
 
 use function Freezemage\ArrayUtils\find;
 
 abstract class CommandExtension extends EventEmitter implements Extension
 {
     protected FilteredEventEmitter $commandListener;
+
+    abstract protected function emitInteraction(InteractionCreate $interaction): bool;
 
     public function initialize(Discord $discord): void
     {
@@ -30,6 +31,7 @@ abstract class CommandExtension extends EventEmitter implements Extension
             fn (InteractionCreate $interactionCreate) =>
                 isset($interactionCreate->type)
                 && $interactionCreate->type === InteractionType::APPLICATION_COMMAND
+                && $this->emitInteraction($interactionCreate)
         );
 
         $this->commandListener->on(Events::INTERACTION_CREATE, function (InteractionCreate $interaction) use ($discord) {
@@ -58,7 +60,7 @@ abstract class CommandExtension extends EventEmitter implements Extension
 
     private function drillName(array $options, array &$names)
     {
-        /** @var ?ApplicationCommandOptionStructure */
+        /** @var ?ApplicationCommandInteractionDataOptionStructure */
         $subCommand = find($options ?? [], function (ApplicationCommandInteractionDataOptionStructure $option) {
             return in_array(
                 $option->type,
