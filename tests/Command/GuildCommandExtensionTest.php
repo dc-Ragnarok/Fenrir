@@ -210,4 +210,69 @@ class GuildCommandExtensionTest extends TestCase
             ],
         ];
     }
+
+    public function testItAllowsSeveralCommandsInSameNamespace(): void
+    {
+        $firstSub = (function () {
+            $command = new ApplicationCommand();
+            $command->id = '::first::';
+            $command->name = 'main';
+
+            $command->options = [new ApplicationCommandOptionStructure()];
+            $command->options[0]->name = 'first';
+            $command->options[0]->type = ApplicationCommandOptionType::SUB_COMMAND;
+
+            return $command;
+        })();
+
+        $secondSub = (function () {
+            $command = new ApplicationCommand();
+            $command->id = '::second::';
+            $command->name = 'main';
+
+            $command->options = [new ApplicationCommandOptionStructure()];
+            $command->options[0]->name = 'second';
+            $command->options[0]->type = ApplicationCommandOptionType::SUB_COMMAND;
+
+            return $command;
+        })();
+
+        $this->discord->rest->guildCommand->shouldReceive()
+            ->getCommands('::guild id::', '::application id::')
+            ->andReturns(PromiseFake::get([$firstSub, $secondSub]));
+
+        $extension = new GuildCommandExtension('::application id::', '::guild id::');
+        $extension->initialize($this->discord);
+
+        $hasRunFirst = false;
+        $hasRunSecond = false;
+
+        $extension->on('main.first', function (CommandInteraction $firedCommand) use (&$hasRunFirst) {
+            $hasRunFirst = true;
+        });
+
+        $extension->on('main.second', function (CommandInteraction $firedCommand) use (&$hasRunSecond) {
+            $hasRunSecond = true;
+        });
+
+        $interaction = new InteractionCreate();
+        $interaction->type = InteractionType::APPLICATION_COMMAND;
+        $interaction->data = new InteractionData();
+        $interaction->data->id = '::first::';
+
+        $this->discord->gateway->events->emit(
+            Events::INTERACTION_CREATE,
+            [$interaction]
+        );
+
+        $interaction->data->id = '::second::';
+
+        $this->discord->gateway->events->emit(
+            Events::INTERACTION_CREATE,
+            [$interaction]
+        );
+
+        $this->assertTrue($hasRunFirst, 'Command 1 was not emitted');
+        $this->assertTrue($hasRunSecond, 'Command 2 was not emitted');
+    }
 }
