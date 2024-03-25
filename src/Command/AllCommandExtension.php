@@ -9,7 +9,7 @@ use Ragnarok\Fenrir\Gateway\Events\InteractionCreate;
 /**
  * Emits an event for Guild Commands and Global Commands
  */
-class GlobalCommandExtension extends CommandExtension
+class AllCommandExtension extends CommandExtension
 {
     protected function emitInteraction(InteractionCreate $interaction): bool
     {
