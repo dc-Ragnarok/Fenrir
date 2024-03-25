@@ -42,7 +42,7 @@ class Mapper
 
         foreach ($data as $key => $value) {
             try {
-                @$this->setProperty(
+                $this->setProperty(
                     $value,
                     $reflection->getProperty($key),
                     $instance,
