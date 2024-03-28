@@ -30,7 +30,7 @@ class Websocket extends EventEmitter
 
     private Bucket $bucket;
 
-    public function __construct(private int $timeout, private LoggerInterface $logger)
+    public function __construct(private int $timeout, private LoggerInterface $logger, private array $sendLoggerBlacklist = [])
     {
         $this->loop = Loop::get();
         $this->socketConnector = new SocketConnector(['timeout' => $timeout]);
@@ -106,11 +106,11 @@ class Websocket extends EventEmitter
 
         $action = function () use ($message) {
             $this->connection->send($message);
-            $this->logger->debug('Client: New message', [$message]);
+            $this->logger->debug('Client: New message', [$this->filterSentMessage($message)]);
         };
 
         if ($useBucket) {
-            $this->logger->debug('Client: Queued message', [$message]);
+            $this->logger->debug('Client: Queued message', [$this->filterSentMessage($message)]);
 
             $this->bucket->run($action);
 
@@ -118,6 +118,11 @@ class Websocket extends EventEmitter
         }
 
         $action();
+    }
+
+    private function filterSentMessage(string $message)
+    {
+        return str_replace(array_keys($this->sendLoggerBlacklist), array_values($this->sendLoggerBlacklist), $message);
     }
 
     /**
