@@ -13,27 +13,17 @@ use Ragnarok\Fenrir\Extension\Extension;
 use Ragnarok\Fenrir\FilteredEventEmitter;
 use Ragnarok\Fenrir\Gateway\Events\InteractionCreate;
 use Ragnarok\Fenrir\Interaction\CommandInteraction;
-use Ragnarok\Fenrir\Parts\ApplicationCommand;
-use Ragnarok\Fenrir\Parts\ApplicationCommandOptionStructure;
+use Ragnarok\Fenrir\Parts\ApplicationCommandInteractionDataOptionStructure;
 
 use function Freezemage\ArrayUtils\find;
 
 abstract class CommandExtension extends EventEmitter implements Extension
 {
-    protected array $commandMappings = [];
-
     protected FilteredEventEmitter $commandListener;
 
-    abstract protected function loadExistingCommands(Discord $discord): void;
+    abstract protected function emitInteraction(InteractionCreate $interaction): bool;
 
     public function initialize(Discord $discord): void
-    {
-        $this->loadExistingCommands($discord);
-
-        $this->registerListener($discord);
-    }
-
-    private function registerListener(Discord $discord): void
     {
         $this->commandListener = new FilteredEventEmitter(
             $discord->gateway->events,
@@ -41,7 +31,7 @@ abstract class CommandExtension extends EventEmitter implements Extension
             fn (InteractionCreate $interactionCreate) =>
                 isset($interactionCreate->type)
                 && $interactionCreate->type === InteractionType::APPLICATION_COMMAND
-                && isset($this->commandMappings[$interactionCreate->data->id])
+                && $this->emitInteraction($interactionCreate)
         );
 
         $this->commandListener->on(Events::INTERACTION_CREATE, function (InteractionCreate $interaction) use ($discord) {
@@ -53,24 +43,25 @@ abstract class CommandExtension extends EventEmitter implements Extension
 
     private function handleInteraction(InteractionCreate $interaction, Discord $discord)
     {
+        $commandName = $this->getFullNameByInteraction($interaction);
         $firedCommand = new CommandInteraction($interaction, $discord);
 
-        $this->emit($this->commandMappings[$interaction->data->id], [$firedCommand]);
+        $this->emit($commandName, [$firedCommand]);
     }
 
-    protected function getFullNameByCommand(ApplicationCommand $command): string
+    protected function getFullNameByInteraction(InteractionCreate $command): string
     {
-        $names = [$command->name];
+        $names = [$command->data->name];
 
-        $this->drillName($command->options ?? [], $names);
+        $this->drillName($command->data->options ?? [], $names);
 
         return implode('.', $names);
     }
 
     private function drillName(array $options, array &$names)
     {
-        /** @var ?ApplicationCommandOptionStructure */
-        $subCommand = find($options ?? [], function (ApplicationCommandOptionStructure $option) {
+        /** @var ?ApplicationCommandInteractionDataOptionStructure */
+        $subCommand = find($options ?? [], function (ApplicationCommandInteractionDataOptionStructure $option) {
             return in_array(
                 $option->type,
                 [

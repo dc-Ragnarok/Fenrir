@@ -4,23 +4,22 @@ declare(strict_types=1);
 
 namespace Ragnarok\Fenrir\Command;
 
-use Ragnarok\Fenrir\Discord;
-use Ragnarok\Fenrir\Parts\ApplicationCommand;
+use Ragnarok\Fenrir\Gateway\Events\InteractionCreate;
 
+/**
+ * Emits an event for each Guild Command used on a specific Guild
+ */
 class GuildCommandExtension extends CommandExtension
 {
-    public function __construct(protected readonly string $applicationId, protected readonly string $guildId)
+    public function __construct(?string $applicationId, private readonly string $guildId)
     {
+        if (!is_null($applicationId)) {
+            trigger_error('Providing an application ID is no longer required and will be removed in a later version');
+        }
     }
 
-    protected function loadExistingCommands(Discord $discord): void
+    protected function emitInteraction(InteractionCreate $interaction): bool
     {
-        $discord->rest->guildCommand->getCommands($this->guildId, $this->applicationId)
-            ->then(function (array $commands) {
-                /** @var ApplicationCommand $command */
-                foreach ($commands as $command) {
-                    $this->commandMappings[$command->id] = $this->getFullNameByCommand($command);
-                }
-            });
+        return isset($interaction->data->guild_id) && $interaction->data->guild_id === $this->guildId;
     }
 }
