@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Tests\Ragnarok\Fenrir\Command;
 
 use Fakes\Ragnarok\Fenrir\DiscordFake;
-use Fakes\Ragnarok\Fenrir\PromiseFake;
 use PHPUnit\Framework\TestCase;
 use Ragnarok\Fenrir\Command\GlobalCommandExtension;
 use Ragnarok\Fenrir\Constants\Events;
@@ -14,8 +13,7 @@ use Ragnarok\Fenrir\Enums\ApplicationCommandOptionType;
 use Ragnarok\Fenrir\Enums\InteractionType;
 use Ragnarok\Fenrir\Gateway\Events\InteractionCreate;
 use Ragnarok\Fenrir\Interaction\CommandInteraction;
-use Ragnarok\Fenrir\Parts\ApplicationCommand;
-use Ragnarok\Fenrir\Parts\ApplicationCommandOptionStructure;
+use Ragnarok\Fenrir\Parts\ApplicationCommandInteractionDataOptionStructure;
 use Ragnarok\Fenrir\Parts\InteractionData;
 
 class GlobalCommandExtensionTest extends TestCase
@@ -29,22 +27,10 @@ class GlobalCommandExtensionTest extends TestCase
 
     public function testItEmitsEventsForApplicationCommands()
     {
-        $commands = [new ApplicationCommand(), new ApplicationCommand()];
-
-        $commands[0]->id = '::application command 1::';
-        $commands[0]->name = 'command-1';
-
-        $commands[1]->id = '::application command 2::';
-        $commands[1]->name = 'command-2';
-
-        $this->discord->rest->globalCommand->shouldReceive()
-            ->getCommands('::application id::')
-            ->andReturns(PromiseFake::get($commands));
-
-        $extension = new GlobalCommandExtension('::application id::');
+        $extension = new GlobalCommandExtension();
         $extension->initialize($this->discord);
 
-        $hasRun = [false, false];
+        $hasRun = [false, false, false];
 
         $extension->on('command-1', function (CommandInteraction $firedCommand) use (&$hasRun) {
             $hasRun[0] = true;
@@ -54,17 +40,21 @@ class GlobalCommandExtensionTest extends TestCase
             $hasRun[1] = true;
         });
 
+        $extension->on('command-3', function (CommandInteraction $firedCommand) use (&$hasRun) {
+            $hasRun[2] = true;
+        });
+
         $interaction = new InteractionCreate();
         $interaction->type = InteractionType::APPLICATION_COMMAND;
         $interaction->data = new InteractionData();
-        $interaction->data->id = '::application command 1::';
+        $interaction->data->name = 'command-1';
 
         $this->discord->gateway->events->emit(
             Events::INTERACTION_CREATE,
             [$interaction]
         );
 
-        $interaction->data->id = '::application command 2::';
+        $interaction->data->name = 'command-2';
 
         $this->discord->gateway->events->emit(
             Events::INTERACTION_CREATE,
@@ -73,20 +63,12 @@ class GlobalCommandExtensionTest extends TestCase
 
         $this->assertTrue($hasRun[0], 'Command 1 did not run');
         $this->assertTrue($hasRun[1], 'Command 2 did not run');
+        $this->assertFalse($hasRun[2], 'Command 3 should not have been run');
     }
 
-    public function testItDoesNotEmitCommandIfDifferentInteractionOccured()
+    public function testItDoesNotEmitEventsForGuilds()
     {
-        $command = new ApplicationCommand();
-
-        $command->id = '::application command::';
-        $command->name = 'command';
-
-        $this->discord->rest->globalCommand->shouldReceive()
-            ->getCommands('::application id::')
-            ->andReturns(PromiseFake::get([$command]));
-
-        $extension = new GlobalCommandExtension('::application id::');
+        $extension = new GlobalCommandExtension();
         $extension->initialize($this->discord);
 
         $hasRun = false;
@@ -96,31 +78,26 @@ class GlobalCommandExtensionTest extends TestCase
         });
 
         $interaction = new InteractionCreate();
-        $interaction->type = InteractionType::PING;
+        $interaction->type = InteractionType::APPLICATION_COMMAND;
         $interaction->data = new InteractionData();
-        $interaction->data->id = '::application command::';
+        $interaction->data->name = 'command';
+        $interaction->data->guild_id = '::guild id::';
 
         $this->discord->gateway->events->emit(
             Events::INTERACTION_CREATE,
             [$interaction]
         );
 
-        $this->assertFalse($hasRun, 'Command was emitted wrongfully');
+        $this->assertFalse($hasRun, 'Command 1 did not run');
     }
 
     /**
      * @dataProvider nameMappingProvider
      * @depends testItEmitsEventsForApplicationCommands
      */
-    public function testItMapsNamesCorrectly(ApplicationCommand $command, string $expectedName)
+    public function testItMapsNamesCorrectly(InteractionCreate $interaction, string $expectedName)
     {
-        $command->id = '::application command::';
-
-        $this->discord->rest->globalCommand->shouldReceive()
-            ->getCommands('::application id::')
-            ->andReturns(PromiseFake::get([$command]));
-
-        $extension = new GlobalCommandExtension('::application id::');
+        $extension = new GlobalCommandExtension();
         $extension->initialize($this->discord);
 
         $hasRun = false;
@@ -129,10 +106,6 @@ class GlobalCommandExtensionTest extends TestCase
             $hasRun = true;
         });
 
-        $interaction = new InteractionCreate();
-        $interaction->type = InteractionType::APPLICATION_COMMAND;
-        $interaction->data = new InteractionData();
-        $interaction->data->id = '::application command::';
 
         $this->discord->gateway->events->emit(
             Events::INTERACTION_CREATE,
@@ -146,9 +119,11 @@ class GlobalCommandExtensionTest extends TestCase
     {
         return [
             'Plain name' => [
-                'command' => (function () {
-                    $command = new ApplicationCommand();
-                    $command->name = 'command-name';
+                'interaction' => (function () {
+                    $command = new InteractionCreate();
+                    $command->type = InteractionType::APPLICATION_COMMAND;
+                    $command->data = new InteractionData();
+                    $command->data->name = 'command-name';
 
                     return $command;
                 })(),
@@ -156,13 +131,15 @@ class GlobalCommandExtensionTest extends TestCase
             ],
 
             'Nested 1 layer' => [
-                'command' => (function () {
-                    $command = new ApplicationCommand();
-                    $command->name = 'command-name';
+                'interaction' => (function () {
+                    $command = new InteractionCreate();
+                    $command->type = InteractionType::APPLICATION_COMMAND;
+                    $command->data = new InteractionData();
+                    $command->data->name = 'command-name';
 
-                    $command->options = [new ApplicationCommandOptionStructure()];
-                    $command->options[0]->name = 'sub';
-                    $command->options[0]->type = ApplicationCommandOptionType::SUB_COMMAND;
+                    $command->data->options = [new ApplicationCommandInteractionDataOptionStructure()];
+                    $command->data->options[0]->name = 'sub';
+                    $command->data->options[0]->type = ApplicationCommandOptionType::SUB_COMMAND;
 
                     return $command;
                 })(),
@@ -170,17 +147,19 @@ class GlobalCommandExtensionTest extends TestCase
             ],
 
             'Nested 2 layer' => [
-                'command' => (function () {
-                    $command = new ApplicationCommand();
-                    $command->name = 'command-name';
+                'interaction' => (function () {
+                    $command = new InteractionCreate();
+                    $command->type = InteractionType::APPLICATION_COMMAND;
+                    $command->data = new InteractionData();
+                    $command->data->name = 'command-name';
 
-                    $command->options = [new ApplicationCommandOptionStructure()];
-                    $command->options[0]->name = 'double';
-                    $command->options[0]->type = ApplicationCommandOptionType::SUB_COMMAND_GROUP;
+                    $command->data->options = [new ApplicationCommandInteractionDataOptionStructure()];
+                    $command->data->options[0]->name = 'double';
+                    $command->data->options[0]->type = ApplicationCommandOptionType::SUB_COMMAND_GROUP;
 
-                    $command->options[0]->options = [new ApplicationCommandOptionStructure()];
-                    $command->options[0]->options[0]->name = 'sub';
-                    $command->options[0]->options[0]->type = ApplicationCommandOptionType::SUB_COMMAND_GROUP;
+                    $command->data->options[0]->options = [new ApplicationCommandInteractionDataOptionStructure()];
+                    $command->data->options[0]->options[0]->name = 'sub';
+                    $command->data->options[0]->options[0]->type = ApplicationCommandOptionType::SUB_COMMAND_GROUP;
 
                     return $command;
                 })(),
@@ -188,21 +167,23 @@ class GlobalCommandExtensionTest extends TestCase
             ],
 
             'Nested 3 layer' => [ // NOTE: Not supported by Discord
-                'command' => (function () {
-                    $command = new ApplicationCommand();
-                    $command->name = 'command-name';
+                'interaction' => (function () {
+                    $command = new InteractionCreate();
+                    $command->type = InteractionType::APPLICATION_COMMAND;
+                    $command->data = new InteractionData();
+                    $command->data->name = 'command-name';
 
-                    $command->options = [new ApplicationCommandOptionStructure()];
-                    $command->options[0]->name = 'double';
-                    $command->options[0]->type = ApplicationCommandOptionType::SUB_COMMAND_GROUP;
+                    $command->data->options = [new ApplicationCommandInteractionDataOptionStructure()];
+                    $command->data->options[0]->name = 'double';
+                    $command->data->options[0]->type = ApplicationCommandOptionType::SUB_COMMAND_GROUP;
 
-                    $command->options[0]->options = [new ApplicationCommandOptionStructure()];
-                    $command->options[0]->options[0]->name = 'sub';
-                    $command->options[0]->options[0]->type = ApplicationCommandOptionType::SUB_COMMAND_GROUP;
+                    $command->data->options[0]->options = [new ApplicationCommandInteractionDataOptionStructure()];
+                    $command->data->options[0]->options[0]->name = 'sub';
+                    $command->data->options[0]->options[0]->type = ApplicationCommandOptionType::SUB_COMMAND_GROUP;
 
-                    $command->options[0]->options[0]->options = [new ApplicationCommandOptionStructure()];
-                    $command->options[0]->options[0]->options[0]->name = 'dub';
-                    $command->options[0]->options[0]->options[0]->type = ApplicationCommandOptionType::SUB_COMMAND_GROUP;
+                    $command->data->options[0]->options[0]->options = [new ApplicationCommandInteractionDataOptionStructure()];
+                    $command->data->options[0]->options[0]->options[0]->name = 'dub';
+                    $command->data->options[0]->options[0]->options[0]->type = ApplicationCommandOptionType::SUB_COMMAND_GROUP;
 
                     return $command;
                 })(),

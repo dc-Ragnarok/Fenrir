@@ -11,7 +11,7 @@ use Ragnarok\Fenrir\Gateway\Events\InteractionCreate;
  */
 class GuildCommandExtension extends CommandExtension
 {
-    public function __construct(?string $applicationId = null, private readonly string $guildId)
+    public function __construct(?string $applicationId, private readonly string $guildId)
     {
         if (!is_null($applicationId)) {
             trigger_error('Providing an application ID is no longer required and will be removed in a later version');

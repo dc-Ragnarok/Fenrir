@@ -10,7 +10,6 @@ use Fakes\Ragnarok\Fenrir\DataMapperFake;
 use Ragnarok\Fenrir\EventHandler;
 use Ragnarok\Fenrir\Gateway\Objects\Payload;
 use PHPUnit\Framework\TestCase;
-use React\Promise\Promise;
 
 final class EventHandlerTest extends TestCase
 {
