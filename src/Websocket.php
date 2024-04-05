@@ -68,6 +68,10 @@ class Websocket extends EventEmitter
                     $this->emit(WebsocketEvents::MESSAGE, [$message]);
                 });
 
+                $connection->on('close', function (int $code, string $reason = '') {
+                    $this->logger->info('Connection closed', ['code' => $code, 'reason' => $reason]);
+                });
+
                 $resolver();
             }, function (\Exception $e) use ($url, $reject) {
                 $this->logger->error(
