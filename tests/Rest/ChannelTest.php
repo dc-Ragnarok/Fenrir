@@ -258,7 +258,7 @@ class ChannelTest extends HttpHelperTestCase
             ],
             'Bulk delete messages' => [
                 'method' => 'bulkDeleteMessages',
-                'args' => ['::channel id::', ['::message id::'], (new EmojiBuilder())->setId('::id::')],
+                'args' => ['::channel id::', ['::message id::']],
                 'mockOptions' => [
                     'method' => 'post',
                     'return' => null,

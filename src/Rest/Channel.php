@@ -354,7 +354,7 @@ class Channel extends HttpResource
                 Endpoint::CHANNEL_MESSAGES_BULK_DELETE,
                 $channelId
             ),
-            $messageIds,
+            ['messages' => $messageIds],
             $this->getAuditLogReasonHeader($reason)
         )->otherwise($this->logThrowable(...));
     }
