@@ -53,9 +53,6 @@ class ConnectionTest extends MockeryTestCase
 
         $connection->setSequence(123);
         $this->assertEquals(123, $connection->getSequence());
-
-        $connection->resetSequence();
-        $this->assertNull($connection->getSequence());
     }
 
     public function testConnect(): void
@@ -311,8 +308,6 @@ class ConnectionTest extends MockeryTestCase
         );
 
         $this->assertInstanceOf(EventHandler::class, $connection->getEventHandler());
-        $this->assertInstanceOf(Eventer::class, $connection->getRawHandler());
-        $this->assertInstanceOf(Eventer::class, $connection->getMetaHandler());
     }
 
     public function testItIdentifies(): void

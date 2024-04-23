@@ -5,15 +5,18 @@ declare(strict_types=1);
 namespace Ragnarok\Fenrir\Gateway;
 
 use Exan\Eventer\Eventer;
+use Exan\Retrier\Retrier;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use Ragnarok\Fenrir\Bitwise\Bitwise;
+use Ragnarok\Fenrir\Constants\GatewayCloseCodes;
 use Ragnarok\Fenrir\Constants\MetaEvents;
 use Ragnarok\Fenrir\Constants\WebsocketEvents;
 use Ragnarok\Fenrir\DataMapper;
 use Ragnarok\Fenrir\EventHandler;
 use Ragnarok\Fenrir\Gateway\Handlers\HeartbeatAcknowledgedEvent;
 use Ragnarok\Fenrir\Gateway\Handlers\IdentifyHelloEvent;
+use Ragnarok\Fenrir\Gateway\Handlers\IdentifyResumeEvent;
 use Ragnarok\Fenrir\Gateway\Handlers\InvalidSessionEvent;
 use Ragnarok\Fenrir\Gateway\Handlers\Meta\UnacknowledgedHeartbeatEvent;
 use Ragnarok\Fenrir\Gateway\Handlers\PassthroughEvent;
@@ -55,6 +58,8 @@ class Connection implements ConnectionInterface
 
     private ShardInterface $shard;
 
+    private Retrier $retrier;
+
     public function __construct(
         private LoopInterface $loop,
         private string $token,
@@ -69,11 +74,15 @@ class Connection implements ConnectionInterface
         $this->raw = new Eventer();
         $this->meta = new Eventer();
 
+        $this->retrier = new Retrier();
+
         $this->websocket->on(WebsocketEvents::MESSAGE, function (MessageInterface $message) {
             $payload = $this->mapper->map(json_decode((string) $message), Payload::class);
 
             $this->raw->emit((string) $payload->op, [$this, $payload, $this->logger]);
         });
+
+        $this->websocket->on(WebsocketEvents::CLOSE, $this->handleClose(...));
 
         $this->registerEvents();
     }
@@ -95,6 +104,68 @@ class Connection implements ConnectionInterface
         $this->meta->register(UnacknowledgedHeartbeatEvent::class);
     }
 
+    private function handleClose(int $code, string $reason): void
+    {
+        $this->stopAutomaticHeartbeats();
+
+        $description = GatewayCloseCodes::DESCRIPTIONS[$code] ?? sprintf('Unknown error code %d - %s', $code, $reason);
+        $isUserError = GatewayCloseCodes::USER_ERROR[$code] ?? false;
+        $isRecoverable = GatewayCloseCodes::RECOVERABLE[$code] ?? false;
+        $isResumable = GatewayCloseCodes::RECOVERABLE[$code] ?? false;
+
+        $message = $description . ' '
+            . ($isUserError
+                ? 'This is likely not a library issue.'
+                : 'This is likely a library issue, please report the issue if it persists.'
+            );
+
+        $context = ['code' => $code, 'reason' => $reason];
+
+        if (!$isRecoverable) {
+            $this->logger->emergency($message, $context);
+
+            $this->loop->stop();
+            return;
+        }
+
+        $this->logger->error($message, $context);
+
+        if ($isResumable && $this->meetsResumeRequirements()) {
+            $this->resumeConnection();
+            return;
+        }
+
+        $this->sequence = null;
+        $this->startNewConnection();
+    }
+
+    private function resumeConnection(): void
+    {
+        $this->retrier->retry(3, function ($i) {
+            $this->logger->info(sprintf('Reconnecting and resuming session, attempt %d.', $i));
+
+            return $this->connect($this->resumeUrl)->then(function () {
+                $this->raw->registerOnce(IdentifyResumeEvent::class);
+            });
+        });
+    }
+
+    private function startNewConnection(): void
+    {
+        $this->retrier->retry(3, function ($i) {
+            $this->logger->info(sprintf('Forceful reconnection attempt %d.', $i));
+
+            return $this->connect($this->resumeUrl)->then(function () {
+                $this->raw->registerOnce(IdentifyHelloEvent::class);
+            });
+        });
+    }
+
+    public function meetsResumeRequirements(): bool
+    {
+        return !(is_null($this->resumeUrl) || is_null($this->sessionId));
+    }
+
     public function getDefaultUrl(): string
     {
         return self::DEFAULT_WEBSOCKET_URL;
@@ -108,11 +179,6 @@ class Connection implements ConnectionInterface
     public function setSequence(int $sequence): void
     {
         $this->sequence = $sequence;
-    }
-
-    public function resetSequence(): void
-    {
-        $this->sequence = null;
     }
 
     public function connect(string $url): ExtendedPromiseInterface
@@ -184,16 +250,6 @@ class Connection implements ConnectionInterface
     public function getEventHandler(): EventHandler
     {
         return $this->events;
-    }
-
-    public function getRawHandler(): Eventer
-    {
-        return $this->raw;
-    }
-
-    public function getMetaHandler(): Eventer
-    {
-        return $this->meta;
     }
 
     public function identify(): void
