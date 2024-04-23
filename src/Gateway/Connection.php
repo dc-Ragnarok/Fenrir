@@ -241,7 +241,7 @@ class Connection implements ConnectionInterface
         $this->logger->debug('Started heartbeat timer', ['ms' => $ms]);
     }
 
-    public function stopAutomaticHeartbeats(): void
+    private function stopAutomaticHeartbeats(): void
     {
         $this->loop->cancelTimer($this->heartbeatTimer);
         $this->logger->debug('Cancelled heartbeat timer');

@@ -27,7 +27,6 @@ interface ConnectionInterface
     public function sendHeartbeat(): void;
     public function acknowledgeHeartbeat(): void;
     public function startAutomaticHeartbeats(int $ms): void;
-    public function stopAutomaticHeartbeats(): void;
 
     public function getEventHandler(): EventHandler;
 
