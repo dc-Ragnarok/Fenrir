@@ -48,6 +48,18 @@ class MessageBuilder
         return $this->data['nonce'] ?? null;
     }
 
+    public function setEnforceNonce(bool $enforceNonce)
+    {
+        $this->data['enforce_nonce'] = $enforceNonce;
+
+        return $this;
+    }
+
+    public function getEnforceNonce(): ?bool
+    {
+        return $this->data['enforce_nonce'] ?? null;
+    }
+
     public function setTts(bool $tts): self
     {
         $this->data['tts'] = $tts;
