@@ -26,7 +26,7 @@ use Ragnarok\Fenrir\Gateway\Handlers\RecoverableInvalidSessionEvent;
 use Ragnarok\Fenrir\Gateway\Handlers\RequestHeartbeatEvent;
 use Ragnarok\Fenrir\Gateway\Helpers\PresenceUpdateBuilder;
 use Ragnarok\Fenrir\Gateway\Objects\Payload;
-use Ragnarok\Fenrir\Websocket;
+use Ragnarok\Fenrir\WebsocketInterface;
 use Ratchet\RFC6455\Messaging\MessageInterface;
 use React\EventLoop\LoopInterface;
 use React\EventLoop\TimerInterface;
@@ -37,44 +37,37 @@ use React\Promise\ExtendedPromiseInterface;
  */
 class Connection implements ConnectionInterface
 {
+    public const DISCORD_VERSION = 10;
     public const DEFAULT_WEBSOCKET_URL = 'wss://gateway.discord.gg/';
-    private const QUERY_DATA = ['v' => 10];
+
+    private const QUERY_DATA = ['v' => self::DISCORD_VERSION];
 
     private const HEARTBEAT_ACK_TIMEOUT = 2.5;
 
     private ?int $sequence = null;
 
-    private Websocket $websocket;
-
     private ?string $sessionId = null;
     private ?string $resumeUrl = null;
 
     public EventHandler $events;
-    public Eventer $raw;
-    public Eventer $meta;
 
     private TimerInterface $heartbeatTimer;
     private TimerInterface $unacknowledgedHeartbeatTimer;
 
     private ShardInterface $shard;
 
-    private Retrier $retrier;
-
     public function __construct(
         private LoopInterface $loop,
         private string $token,
         private Bitwise $intents,
         private DataMapper $mapper,
+        private WebsocketInterface $websocket,
         private LoggerInterface $logger = new NullLogger(),
-        int $timeout = 10,
+        private Eventer $raw = new Eventer(),
+        private Eventer $meta = new Eventer(),
+        private Retrier $retrier = new Retrier(),
     ) {
-        $this->websocket = new Websocket($timeout, $logger, [$this->token => '::token::']);
         $this->events = new EventHandler($mapper);
-
-        $this->raw = new Eventer();
-        $this->meta = new Eventer();
-
-        $this->retrier = new Retrier();
 
         $this->websocket->on(WebsocketEvents::MESSAGE, function (MessageInterface $message) {
             $payload = $this->mapper->map(json_decode((string) $message), Payload::class);
@@ -155,7 +148,7 @@ class Connection implements ConnectionInterface
         $this->retrier->retry(3, function ($i) {
             $this->logger->info(sprintf('Forceful reconnection attempt %d.', $i));
 
-            return $this->connect($this->resumeUrl)->then(function () {
+            return $this->open()->then(function () {
                 $this->raw->registerOnce(IdentifyHelloEvent::class);
             });
         });
@@ -243,8 +236,10 @@ class Connection implements ConnectionInterface
 
     private function stopAutomaticHeartbeats(): void
     {
-        $this->loop->cancelTimer($this->heartbeatTimer);
-        $this->logger->debug('Cancelled heartbeat timer');
+        if (isset($this->heartbeatTimer)) {
+            $this->loop->cancelTimer($this->heartbeatTimer);
+            $this->logger->debug('Cancelled heartbeat timer');
+        }
     }
 
     public function getEventHandler(): EventHandler

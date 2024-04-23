@@ -19,7 +19,7 @@ use React\Promise\ExtendedPromiseInterface;
 use React\Promise\Promise;
 use React\Socket\Connector as SocketConnector;
 
-class Websocket extends EventEmitter
+class Websocket extends EventEmitter implements WebsocketInterface
 {
     private Connector $connector;
 

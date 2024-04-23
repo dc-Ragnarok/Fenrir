@@ -15,14 +15,14 @@ class InvalidSessionEvent extends GatewayEvent
         return OpCodes::INVALID_SESSION;
     }
 
-    public static function isRecoverable(Payload $payload): bool
+    public function isRecoverable(): bool
     {
-        return isset($payload->d) && $payload->d === true;
+        return isset($this->payload->d) && $this->payload->d === true;
     }
 
     public function filter(): bool
     {
-        return !self::isRecoverable($this->payload);
+        return !$this->isRecoverable();
     }
 
     public function execute(): void
