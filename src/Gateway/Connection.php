@@ -107,7 +107,8 @@ class Connection implements ConnectionInterface
         $isResumable = GatewayCloseCodes::RECOVERABLE[$code] ?? false;
 
         $message = $description . ' '
-            . ($isUserError
+            . (
+                $isUserError
                 ? 'This is likely not a library issue.'
                 : 'This is likely a library issue, please report the issue if it persists.'
             );

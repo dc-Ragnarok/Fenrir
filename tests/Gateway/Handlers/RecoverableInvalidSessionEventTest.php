@@ -11,7 +11,7 @@ use Psr\Log\NullLogger;
 use Ragnarok\Fenrir\Constants\GatewayCloseCodes;
 use Ragnarok\Fenrir\DataMapper;
 use Ragnarok\Fenrir\Gateway\ConnectionInterface;
-    use Ragnarok\Fenrir\Gateway\Handlers\RecoverableInvalidSessionEvent;
+use Ragnarok\Fenrir\Gateway\Handlers\RecoverableInvalidSessionEvent;
 use Ragnarok\Fenrir\Gateway\Objects\Payload;
 
 class RecoverableInvalidSessionEventTest extends MockeryTestCase

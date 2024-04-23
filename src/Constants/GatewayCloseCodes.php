@@ -6,10 +6,10 @@ namespace Ragnarok\Fenrir\Constants;
 
 class GatewayCloseCodes
 {
-    public final const LIB_INSTANTIATED_RECONNECT = 1001;
-    public final const LIB_INSTANTIATED_RESUME = 1003;
+    final public const LIB_INSTANTIATED_RECONNECT = 1001;
+    final public const LIB_INSTANTIATED_RESUME = 1003;
 
-    public final const DESCRIPTIONS = [
+    final public const DESCRIPTIONS = [
         1001 => 'Library instantiated: Reconnect required',
         1003 => 'Library instantiated: Resume required',
 
@@ -29,7 +29,7 @@ class GatewayCloseCodes
         4015 => 'Disallowed intents',
     ];
 
-    public final const USER_ERROR = [
+    final public const USER_ERROR = [
         1001 => false,
         1003 => false,
 
@@ -49,7 +49,7 @@ class GatewayCloseCodes
         4014 => true,
     ];
 
-    public final const RECOVERABLE = [
+    final public const RECOVERABLE = [
         1001 => true,
         1003 => true,
 
@@ -69,7 +69,7 @@ class GatewayCloseCodes
         4014 => false,
     ];
 
-    public final const RESUMABLE = [
+    final public const RESUMABLE = [
         1001 => false,
         1003 => true,
 
