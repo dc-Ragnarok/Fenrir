@@ -27,7 +27,7 @@ class GuildCommandExtensionTest extends TestCase
 
     public function testItEmitsEventsForApplicationCommands()
     {
-        $extension = new GuildCommandExtension(null, '::guild id::');
+        $extension = new GuildCommandExtension('::guild id::');
         $extension->initialize($this->discord);
 
         $hasRun = [false, false, false];
@@ -69,7 +69,7 @@ class GuildCommandExtensionTest extends TestCase
 
     public function testItDoesNotEmitEventsForDifferentGuilds()
     {
-        $extension = new GuildCommandExtension(null, '::guild id::');
+        $extension = new GuildCommandExtension('::guild id::');
         $extension->initialize($this->discord);
 
         $hasRun = false;
@@ -98,7 +98,7 @@ class GuildCommandExtensionTest extends TestCase
      */
     public function testItMapsNamesCorrectly(InteractionCreate $interaction, string $expectedName)
     {
-        $extension = new GuildCommandExtension(null, '::guild id::');
+        $extension = new GuildCommandExtension('::guild id::');
         $extension->initialize($this->discord);
 
         $hasRun = false;

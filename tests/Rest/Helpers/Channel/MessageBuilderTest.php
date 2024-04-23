@@ -25,6 +25,18 @@ class MessageBuilderTest extends TestCase
         $this->assertEquals('::nonce::', $builder->getNonce());
     }
 
+    public function testSetEnforceNonce(): void
+    {
+        $builder = new MessageBuilder();
+
+        $this->assertNull($builder->getEnforceNonce());
+
+        $builder->setEnforceNonce(true);
+
+        $this->assertTrue($builder->get()['enforce_nonce']);
+        $this->assertTrue($builder->getEnforceNonce());
+    }
+
     public function testSetTts(): void
     {
         $builder = new MessageBuilder();
