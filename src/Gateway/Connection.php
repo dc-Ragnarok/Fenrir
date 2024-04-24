@@ -248,6 +248,16 @@ class Connection implements ConnectionInterface
         return $this->events;
     }
 
+    public function getRawHandler(): Eventer
+    {
+        return $this->raw;
+    }
+
+    public function getMetaHandler(): Eventer
+    {
+        return $this->meta;
+    }
+
     public function identify(): void
     {
         $payload = [
