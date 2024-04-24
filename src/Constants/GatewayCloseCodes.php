@@ -13,6 +13,7 @@ class GatewayCloseCodes
         1001 => 'Library instantiated: Reconnect required',
         1003 => 'Library instantiated: Resume required',
 
+        1006 => 'Underlying connection closed',
         4000 => 'Unknown error',
         4001 => 'Unknown opcode',
         4002 => 'Decode error',
@@ -33,6 +34,7 @@ class GatewayCloseCodes
         1001 => false,
         1003 => false,
 
+        1006 => false,
         4000 => true,
         4001 => false,
         4002 => false,
@@ -53,6 +55,7 @@ class GatewayCloseCodes
         1001 => true,
         1003 => true,
 
+        1006 => true,
         4000 => true,
         4001 => true,
         4002 => true,
@@ -73,6 +76,7 @@ class GatewayCloseCodes
         1001 => false,
         1003 => true,
 
+        1006 => false,
         4000 => true,
         4001 => true,
         4002 => true,
