@@ -184,6 +184,8 @@ class Connection implements ConnectionInterface
 
     public function disconnect(int $code, string $reason): void
     {
+        $this->cancelHeartbeatAcknowledgement();
+
         $this->websocket->close($code, $reason);
     }
 
@@ -226,7 +228,14 @@ class Connection implements ConnectionInterface
 
     public function acknowledgeHeartbeat(): void
     {
-        $this->loop->cancelTimer($this->unacknowledgedHeartbeatTimer);
+        $this->cancelHeartbeatAcknowledgement();
+    }
+
+    private function cancelHeartbeatAcknowledgement(): void
+    {
+        if (isset($this->unacknowledgedHeartbeatTimer)) {
+            $this->loop->cancelTimer($this->unacknowledgedHeartbeatTimer);
+        }
     }
 
     public function startAutomaticHeartbeats(int $ms): void
