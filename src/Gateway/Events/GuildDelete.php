@@ -6,12 +6,12 @@ namespace Ragnarok\Fenrir\Gateway\Events;
 
 use Ragnarok\Fenrir\Attributes\RequiresIntent;
 use Ragnarok\Fenrir\Enums\Intent;
-use Ragnarok\Fenrir\Parts\Guild;
+use Ragnarok\Fenrir\Parts\UnavailableGuild;
 
 /**
  * @see https://discord.com/developers/docs/topics/gateway-events#guild-delete
  */
 #[RequiresIntent(Intent::GUILDS)]
-class GuildDelete extends Guild
+class GuildDelete extends UnavailableGuild
 {
 }
