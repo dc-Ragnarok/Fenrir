@@ -19,7 +19,7 @@ use React\Promise\ExtendedPromiseInterface;
 use React\Promise\Promise;
 use React\Socket\Connector as SocketConnector;
 
-class Websocket extends EventEmitter
+class Websocket extends EventEmitter implements WebsocketInterface
 {
     private Connector $connector;
 
@@ -69,7 +69,8 @@ class Websocket extends EventEmitter
                 });
 
                 $connection->on('close', function (int $code, string $reason = '') {
-                    $this->logger->info('Connection closed', ['code' => $code, 'reason' => $reason]);
+                    $this->logger->debug('Connection closed', ['code' => $code, 'reason' => $reason]);
+                    $this->emit(WebsocketEvents::CLOSE, [$code, $reason]);
                 });
 
                 $resolver();

@@ -7,4 +7,5 @@ namespace Ragnarok\Fenrir\Constants;
 class WebsocketEvents
 {
     final public const MESSAGE = 'MESSAGE';
+    final public const CLOSE = 'CLOSE';
 }

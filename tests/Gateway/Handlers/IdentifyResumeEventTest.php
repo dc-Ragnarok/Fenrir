@@ -8,7 +8,6 @@ use Mockery;
 use Mockery\Adapter\Phpunit\MockeryTestCase;
 use Mockery\MockInterface;
 use Psr\Log\NullLogger;
-use Ragnarok\Fenrir\Constants\OpCodes;
 use Ragnarok\Fenrir\DataMapper;
 use Ragnarok\Fenrir\Gateway\ConnectionInterface;
 use Ragnarok\Fenrir\Gateway\Handlers\IdentifyResumeEvent;
@@ -23,11 +22,6 @@ class IdentifyResumeEventTest extends MockeryTestCase
         parent::setUp();
 
         $this->mapper = new DataMapper(new NullLogger());
-    }
-
-    public function testItListensTo10(): void
-    {
-        $this->assertEquals(OpCodes::HELLO, IdentifyResumeEvent::getEventName());
     }
 
     public function testItAcknowledgesAHeartbeat(): void

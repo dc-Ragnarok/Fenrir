@@ -5,7 +5,10 @@ declare(strict_types=1);
 namespace Tests\Ragnarok\Fenrir\Gateway;
 
 use Exan\Eventer\Eventer;
+use Fakes\Ragnarok\Fenrir\DataMapperFake;
 use Fakes\Ragnarok\Fenrir\PromiseFake;
+use Fakes\Ragnarok\Fenrir\RetrierFake;
+use Fakes\Ragnarok\Fenrir\WebsocketFake;
 use Mockery;
 use Mockery\Adapter\Phpunit\MockeryTestCase;
 use Mockery\MockInterface;
@@ -17,6 +20,8 @@ use Ragnarok\Fenrir\Constants\WebsocketEvents;
 use Ragnarok\Fenrir\DataMapper;
 use Ragnarok\Fenrir\EventHandler;
 use Ragnarok\Fenrir\Gateway\Connection;
+use Ragnarok\Fenrir\Gateway\Handlers\IdentifyHelloEvent;
+use Ragnarok\Fenrir\Gateway\Handlers\IdentifyResumeEvent;
 use Ragnarok\Fenrir\Gateway\Helpers\PresenceUpdateBuilder;
 use Ragnarok\Fenrir\Gateway\Objects\Payload;
 use Ragnarok\Fenrir\Gateway\Shard;
@@ -36,7 +41,8 @@ class ConnectionTest extends MockeryTestCase
             Mockery::mock(LoopInterface::class),
             '::token::',
             new Bitwise(),
-            new DataMapper(new NullLogger())
+            new DataMapper(new NullLogger()),
+            new WebsocketFake(),
         );
 
         $this->assertEquals('wss://gateway.discord.gg/', $connection->getDefaultUrl());
@@ -48,16 +54,14 @@ class ConnectionTest extends MockeryTestCase
             Mockery::mock(LoopInterface::class),
             '::token::',
             new Bitwise(),
-            new DataMapper(new NullLogger())
+            new DataMapper(new NullLogger()),
+            new WebsocketFake(),
         );
 
         $this->assertNull($connection->getSequence());
 
         $connection->setSequence(123);
         $this->assertEquals(123, $connection->getSequence());
-
-        $connection->resetSequence();
-        $this->assertNull($connection->getSequence());
     }
 
     public function testConnect(): void
@@ -66,7 +70,8 @@ class ConnectionTest extends MockeryTestCase
             Mockery::mock(LoopInterface::class),
             '::token::',
             new Bitwise(),
-            new DataMapper(new NullLogger())
+            new DataMapper(new NullLogger()),
+            new WebsocketFake(),
         );
 
         /** @var MockInterface&Websocket */
@@ -88,7 +93,8 @@ class ConnectionTest extends MockeryTestCase
             Mockery::mock(LoopInterface::class),
             '::token::',
             new Bitwise(),
-            new DataMapper(new NullLogger())
+            new DataMapper(new NullLogger()),
+            new WebsocketFake(),
         );
 
         /** @var MockInterface&Websocket */
@@ -109,7 +115,8 @@ class ConnectionTest extends MockeryTestCase
             Mockery::mock(LoopInterface::class),
             '::token::',
             new Bitwise(),
-            new DataMapper(new NullLogger())
+            new DataMapper(new NullLogger()),
+            new WebsocketFake(),
         );
 
         $this->assertNull($connection->getSessionId());
@@ -124,7 +131,8 @@ class ConnectionTest extends MockeryTestCase
             Mockery::mock(LoopInterface::class),
             '::token::',
             new Bitwise(),
-            new DataMapper(new NullLogger())
+            new DataMapper(new NullLogger()),
+            new WebsocketFake(),
         );
 
         $this->assertNull($connection->getResumeUrl());
@@ -148,7 +156,8 @@ class ConnectionTest extends MockeryTestCase
             $loop,
             '::token::',
             new Bitwise(),
-            new DataMapper(new NullLogger())
+            new DataMapper(new NullLogger()),
+            new WebsocketFake(),
         );
 
         /** @var MockInterface&Websocket */
@@ -187,28 +196,25 @@ class ConnectionTest extends MockeryTestCase
             })
             ->once();
 
+        /** @var Eventer&MockInterface */
+        $meta = Mockery::mock(Eventer::class);
+
+        $meta->shouldReceive()
+            ->register()
+            ->withAnyArgs();
+
         $logger = new NullLogger();
         $connection = new Connection(
             $loop,
             '::token::',
             new Bitwise(),
             new DataMapper(new NullLogger()),
-            $logger
+            new WebsocketFake(),
+            meta: $meta,
+            logger: $logger
         );
 
-        /** @var MockInterface&Websocket */
-        $websocket = Mockery::mock(Websocket::class);
-        (new ReflectionProperty($connection, 'websocket'))->setValue($connection, $websocket);
-
-        $websocket->expects()
-            ->sendAsJson()
-            ->withAnyArgs()
-            ->once();
-
-        /** @var Eventer&MockInterface */
-        $connection->meta = Mockery::mock(Eventer::class);
-
-        $connection->meta->expects()
+        $meta->expects()
             ->emit()
             ->with(MetaEvents::UNACKNOWLEDGED_HEARTBEAT, [$connection, $logger])
             ->once();
@@ -232,7 +238,8 @@ class ConnectionTest extends MockeryTestCase
             $loop,
             '::token::',
             new Bitwise(),
-            new DataMapper(new NullLogger())
+            new DataMapper(new NullLogger()),
+            new WebsocketFake(),
         );
 
         /** @var MockInterface&Websocket */
@@ -282,6 +289,7 @@ class ConnectionTest extends MockeryTestCase
             '::token::',
             new Bitwise(),
             new DataMapper(new NullLogger()),
+            new WebsocketFake(),
         );
 
         /** @var MockInterface&Websocket */
@@ -294,13 +302,6 @@ class ConnectionTest extends MockeryTestCase
             ->once();
 
         $connection->startAutomaticHeartbeats(10000);
-
-        $loop->expects()
-            ->cancelTimer()
-            ->with($timer)
-            ->once();
-
-        $connection->stopAutomaticHeartbeats();
     }
 
     public function testItReturnsEventHandlers(): void
@@ -310,11 +311,10 @@ class ConnectionTest extends MockeryTestCase
             '::token::',
             new Bitwise(),
             new DataMapper(new NullLogger()),
+            new WebsocketFake(),
         );
 
         $this->assertInstanceOf(EventHandler::class, $connection->getEventHandler());
-        $this->assertInstanceOf(Eventer::class, $connection->getRawHandler());
-        $this->assertInstanceOf(Eventer::class, $connection->getMetaHandler());
     }
 
     public function testItIdentifies(): void
@@ -323,7 +323,8 @@ class ConnectionTest extends MockeryTestCase
             Mockery::mock(LoopInterface::class),
             '::token::',
             new Bitwise(123),
-            new DataMapper(new NullLogger())
+            new DataMapper(new NullLogger()),
+            new WebsocketFake(),
         );
 
         /** @var MockInterface&Websocket */
@@ -350,7 +351,8 @@ class ConnectionTest extends MockeryTestCase
             Mockery::mock(LoopInterface::class),
             '::token::',
             new Bitwise(123),
-            new DataMapper(new NullLogger())
+            new DataMapper(new NullLogger()),
+            new WebsocketFake(),
         );
 
         $connection->shard(new Shard(1, 16));
@@ -380,7 +382,8 @@ class ConnectionTest extends MockeryTestCase
             Mockery::mock(LoopInterface::class),
             '::token::',
             new Bitwise(123),
-            new DataMapper(new NullLogger())
+            new DataMapper(new NullLogger()),
+            new WebsocketFake(),
         );
 
         /** @var MockInterface&Websocket */
@@ -426,7 +429,8 @@ class ConnectionTest extends MockeryTestCase
             Mockery::mock(LoopInterface::class),
             '::token::',
             new Bitwise(),
-            new DataMapper(new NullLogger())
+            new DataMapper(new NullLogger()),
+            new WebsocketFake(),
         );
 
         /** @var MockInterface&Websocket */
@@ -447,19 +451,29 @@ class ConnectionTest extends MockeryTestCase
 
     public function testItEmitsGatewayMessagesAsEvents(): void
     {
+        /** @var Eventer&MockInterface */
+        $raw = Mockery::mock(Eventer::class);
+
+        $raw->shouldReceive()
+            ->register()
+            ->withAnyArgs();
+
+        $raw->shouldReceive()
+            ->registerOnce()
+            ->withAnyArgs();
+
         $connection = new Connection(
             Mockery::mock(LoopInterface::class),
             '::token::',
             new Bitwise(),
-            new DataMapper(new NullLogger())
+            new DataMapper(new NullLogger()),
+            new WebsocketFake(),
+            raw: $raw,
         );
 
         $websocket = (new ReflectionProperty($connection, 'websocket'))->getValue($connection);
 
-        /** @var Eventer&MockInterface */
-        $connection->raw = Mockery::mock(Eventer::class);
-
-        $connection->raw->expects()
+        $raw->expects()
             ->emit()
             ->with('1', Mockery::on(function ($args) use ($connection) {
                 $this->assertEquals($connection, $args[0]);
@@ -485,7 +499,8 @@ class ConnectionTest extends MockeryTestCase
             Mockery::mock(LoopInterface::class),
             '::token::',
             new Bitwise(123),
-            new DataMapper(new NullLogger())
+            new DataMapper(new NullLogger()),
+            new WebsocketFake(),
         );
 
         /** @var MockInterface&Websocket */
@@ -509,5 +524,170 @@ class ConnectionTest extends MockeryTestCase
             ->andReturn(['::presence update::']);
 
         $connection->updatePresence($presenceUpdate);
+    }
+
+    /**
+     * @dataProvider reconnectCloseCodesProvider
+     */
+    public function testItReconnectsWhenWebsocketConnectionClosedWithCertainCodes(int $code)
+    {
+        $websocket = new WebsocketFake();
+
+        $raw = Mockery::mock(Eventer::class);
+
+        $raw->shouldReceive()
+            ->register()
+            ->withAnyArgs();
+
+        $raw->shouldReceive()
+            ->registerOnce()
+            ->with(IdentifyHelloEvent::class)
+            ->twice();
+
+        new Connection(
+            Mockery::mock(LoopInterface::class),
+            '::token::',
+            new Bitwise(1),
+            DataMapperFake::get(),
+            $websocket,
+            raw: $raw,
+            retrier: new RetrierFake(),
+        );
+
+        $websocket->emit(WebsocketEvents::CLOSE, [$code, 'reason']);
+
+        $this->assertEquals([Connection::DEFAULT_WEBSOCKET_URL . '?v=' . Connection::DISCORD_VERSION], $websocket->openings);
+    }
+
+    public static function reconnectCloseCodesProvider(): array
+    {
+        return [
+            [1001],
+            [4003],
+            [4007],
+            [4009],
+        ];
+    }
+
+    /**
+     * @dataProvider resumeCloseCodesProvider
+     */
+    public function testItResumesWhenWebsocketConnectionClosedWithCertainCodes(int $code)
+    {
+        $websocket = new WebsocketFake();
+        $raw = Mockery::mock(Eventer::class);
+
+        $raw->shouldReceive()
+            ->register()
+            ->withAnyArgs();
+
+        $raw->shouldReceive()
+            ->registerOnce()
+            ->with(IdentifyHelloEvent::class)
+            ->once();
+
+        $raw->shouldReceive()
+            ->registerOnce()
+            ->with(IdentifyResumeEvent::class)
+            ->once();
+
+        $connection = new Connection(
+            Mockery::mock(LoopInterface::class),
+            '::token::',
+            new Bitwise(1),
+            DataMapperFake::get(),
+            $websocket,
+            raw: $raw,
+            retrier: new RetrierFake(),
+        );
+
+        $connection->setResumeUrl('::resume url::');
+        $connection->setSessionId('::session id::');
+
+        $websocket->emit(WebsocketEvents::CLOSE, [$code, 'reason']);
+
+        $this->assertEquals(['::resume url::?v=' . Connection::DISCORD_VERSION], $websocket->openings);
+    }
+
+    /**
+     * @dataProvider resumeCloseCodesProvider
+     */
+    public function testItReconnectsIfMissingResumeUrl(int $code)
+    {
+        $websocket = new WebsocketFake();
+
+        $raw = Mockery::mock(Eventer::class);
+
+        $raw->shouldReceive()
+            ->register()
+            ->withAnyArgs();
+
+        $raw->shouldReceive()
+            ->registerOnce()
+            ->with(IdentifyHelloEvent::class)
+            ->twice();
+
+        $connection = new Connection(
+            Mockery::mock(LoopInterface::class),
+            '::token::',
+            new Bitwise(1),
+            DataMapperFake::get(),
+            $websocket,
+            raw: $raw,
+            retrier: new RetrierFake(),
+        );
+
+        $connection->setSessionId('::session id::');
+
+        $websocket->emit(WebsocketEvents::CLOSE, [$code, 'reason']);
+
+        $this->assertEquals([Connection::DEFAULT_WEBSOCKET_URL . '?v=' . Connection::DISCORD_VERSION], $websocket->openings);
+    }
+
+    /**
+     * @dataProvider resumeCloseCodesProvider
+     */
+    public function testItReconnectsIfMissingSessionId(int $code)
+    {
+        $websocket = new WebsocketFake();
+
+        $raw = Mockery::mock(Eventer::class);
+
+        $raw->shouldReceive()
+            ->register()
+            ->withAnyArgs();
+
+        $raw->shouldReceive()
+            ->registerOnce()
+            ->with(IdentifyHelloEvent::class)
+            ->twice();
+
+        $connection = new Connection(
+            Mockery::mock(LoopInterface::class),
+            '::token::',
+            new Bitwise(1),
+            DataMapperFake::get(),
+            $websocket,
+            raw: $raw,
+            retrier: new RetrierFake(),
+        );
+
+        $connection->setResumeUrl('::resume url::');
+
+        $websocket->emit(WebsocketEvents::CLOSE, [$code, 'reason']);
+
+        $this->assertEquals([Connection::DEFAULT_WEBSOCKET_URL . '?v=' . Connection::DISCORD_VERSION], $websocket->openings);
+    }
+
+    public static function resumeCloseCodesProvider(): array
+    {
+        return [
+            [1003],
+            [4000],
+            [4001],
+            [4002],
+            [4005],
+            [4008],
+        ];
     }
 }

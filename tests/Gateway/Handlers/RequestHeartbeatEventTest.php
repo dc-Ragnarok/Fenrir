@@ -15,11 +15,6 @@ use Ragnarok\Fenrir\Gateway\Objects\Payload;
 
 class RequestHeartbeatEventTest extends MockeryTestCase
 {
-    public function testItListensTo1(): void
-    {
-        $this->assertEquals(OpCodes::HEARTBEAT, RequestHeartbeatEvent::getEventName());
-    }
-
     public function testItAcknowledgesAHeartbeat(): void
     {
         /** @var MockInterface&ConnectionInterface */
