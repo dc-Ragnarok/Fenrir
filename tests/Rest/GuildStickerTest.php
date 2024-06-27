@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Tests\Ragnarok\Fenrir\Rest;
 
-use Ragnarok\Fenrir\Parts\StickerPack;
 use Ragnarok\Fenrir\Parts\Sticker;
 use Ragnarok\Fenrir\Rest\GuildSticker;
 use Ragnarok\Fenrir\Rest\Helpers\GuildSticker\ModifyStickerBuilder;
