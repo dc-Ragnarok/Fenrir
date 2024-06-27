@@ -2,23 +2,25 @@
 
 declare(strict_types=1);
 
-namespace Ragnarok\Fenrir;
+namespace Tests\Ragnarok\Fenrir\Gateway;
 
 use Exan\Eventer\Eventer;
 use Fakes\Ragnarok\Fenrir\PromiseFake;
 use Mockery;
 use Mockery\Adapter\Phpunit\MockeryTestCase;
-use Mockery\Mock;
 use Mockery\MockInterface;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use Ragnarok\Fenrir\Bitwise\Bitwise;
 use Ragnarok\Fenrir\Constants\MetaEvents;
 use Ragnarok\Fenrir\Constants\WebsocketEvents;
+use Ragnarok\Fenrir\DataMapper;
+use Ragnarok\Fenrir\EventHandler;
 use Ragnarok\Fenrir\Gateway\Connection;
 use Ragnarok\Fenrir\Gateway\Helpers\PresenceUpdateBuilder;
 use Ragnarok\Fenrir\Gateway\Objects\Payload;
 use Ragnarok\Fenrir\Gateway\Shard;
+use Ragnarok\Fenrir\Websocket;
 use Ratchet\RFC6455\Messaging\MessageInterface;
 use React\EventLoop\LoopInterface;
 use React\EventLoop\TimerInterface;
