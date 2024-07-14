@@ -5,15 +5,18 @@ declare(strict_types=1);
 namespace Ragnarok\Fenrir\Gateway;
 
 use Exan\Eventer\Eventer;
+use Exan\Retrier\Retrier;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use Ragnarok\Fenrir\Bitwise\Bitwise;
+use Ragnarok\Fenrir\Constants\GatewayCloseCodes;
 use Ragnarok\Fenrir\Constants\MetaEvents;
 use Ragnarok\Fenrir\Constants\WebsocketEvents;
 use Ragnarok\Fenrir\DataMapper;
 use Ragnarok\Fenrir\EventHandler;
 use Ragnarok\Fenrir\Gateway\Handlers\HeartbeatAcknowledgedEvent;
 use Ragnarok\Fenrir\Gateway\Handlers\IdentifyHelloEvent;
+use Ragnarok\Fenrir\Gateway\Handlers\IdentifyResumeEvent;
 use Ragnarok\Fenrir\Gateway\Handlers\InvalidSessionEvent;
 use Ragnarok\Fenrir\Gateway\Handlers\Meta\UnacknowledgedHeartbeatEvent;
 use Ragnarok\Fenrir\Gateway\Handlers\PassthroughEvent;
@@ -23,7 +26,7 @@ use Ragnarok\Fenrir\Gateway\Handlers\RecoverableInvalidSessionEvent;
 use Ragnarok\Fenrir\Gateway\Handlers\RequestHeartbeatEvent;
 use Ragnarok\Fenrir\Gateway\Helpers\PresenceUpdateBuilder;
 use Ragnarok\Fenrir\Gateway\Objects\Payload;
-use Ragnarok\Fenrir\Websocket;
+use Ragnarok\Fenrir\WebsocketInterface;
 use Ratchet\RFC6455\Messaging\MessageInterface;
 use React\EventLoop\LoopInterface;
 use React\EventLoop\TimerInterface;
@@ -34,21 +37,19 @@ use React\Promise\ExtendedPromiseInterface;
  */
 class Connection implements ConnectionInterface
 {
+    public const DISCORD_VERSION = 10;
     public const DEFAULT_WEBSOCKET_URL = 'wss://gateway.discord.gg/';
-    private const QUERY_DATA = ['v' => 10];
+
+    private const QUERY_DATA = ['v' => self::DISCORD_VERSION];
 
     private const HEARTBEAT_ACK_TIMEOUT = 2.5;
 
     private ?int $sequence = null;
 
-    private Websocket $websocket;
-
     private ?string $sessionId = null;
     private ?string $resumeUrl = null;
 
     public EventHandler $events;
-    public Eventer $raw;
-    public Eventer $meta;
 
     private TimerInterface $heartbeatTimer;
     private TimerInterface $unacknowledgedHeartbeatTimer;
@@ -60,14 +61,13 @@ class Connection implements ConnectionInterface
         private string $token,
         private Bitwise $intents,
         private DataMapper $mapper,
+        private WebsocketInterface $websocket,
         private LoggerInterface $logger = new NullLogger(),
-        int $timeout = 10,
+        private Eventer $raw = new Eventer(),
+        private Eventer $meta = new Eventer(),
+        private Retrier $retrier = new Retrier(),
     ) {
-        $this->websocket = new Websocket($timeout, $logger, [$this->token => '::token::']);
         $this->events = new EventHandler($mapper);
-
-        $this->raw = new Eventer();
-        $this->meta = new Eventer();
 
         $this->websocket->on(WebsocketEvents::MESSAGE, function (MessageInterface $message) {
             $parsedMessage = json_decode((string) $message, depth: 1024);
@@ -79,6 +79,8 @@ class Connection implements ConnectionInterface
 
             $this->raw->emit((string) $payload->op, [$this, $payload, $this->logger]);
         });
+
+        $this->websocket->on(WebsocketEvents::CLOSE, $this->handleClose(...));
 
         $this->registerEvents();
     }
@@ -100,6 +102,69 @@ class Connection implements ConnectionInterface
         $this->meta->register(UnacknowledgedHeartbeatEvent::class);
     }
 
+    private function handleClose(int $code, string $reason): void
+    {
+        $this->stopAutomaticHeartbeats();
+
+        $description = GatewayCloseCodes::DESCRIPTIONS[$code] ?? sprintf('Unknown error code %d - %s', $code, $reason);
+        $isUserError = GatewayCloseCodes::USER_ERROR[$code] ?? false;
+        $isRecoverable = GatewayCloseCodes::RECOVERABLE[$code] ?? false;
+        $isResumable = GatewayCloseCodes::RECOVERABLE[$code] ?? false;
+
+        $message = $description . ' '
+            . (
+                $isUserError
+                ? 'This is likely a userspace error.'
+                : 'This is likely caused by Discord or the library. If you suspect the latter, please report it on Github.'
+            );
+
+        $context = ['code' => $code, 'reason' => $reason];
+
+        if (!$isRecoverable) {
+            $this->logger->emergency($message, $context);
+
+            $this->loop->stop();
+            return;
+        }
+
+        $this->logger->error($message, $context);
+
+        if ($isResumable && $this->meetsResumeRequirements()) {
+            $this->resumeConnection();
+            return;
+        }
+
+        $this->sequence = null;
+        $this->startNewConnection();
+    }
+
+    private function resumeConnection(): void
+    {
+        $this->retrier->retry(3, function ($i) {
+            $this->logger->info(sprintf('Reconnecting and resuming session, attempt %d.', $i));
+
+            return $this->connect($this->resumeUrl)->then(function () {
+                $this->raw->registerOnce(IdentifyResumeEvent::class);
+            });
+        });
+    }
+
+    private function startNewConnection(): void
+    {
+        $this->retrier->retry(3, function ($i) {
+            $this->logger->info(sprintf('Forceful reconnection attempt %d.', $i));
+
+            return $this->open()->then(function () {
+                $this->raw->registerOnce(IdentifyHelloEvent::class);
+            });
+        });
+    }
+
+    public function meetsResumeRequirements(): bool
+    {
+        return !(is_null($this->resumeUrl) || is_null($this->sessionId));
+    }
+
     public function getDefaultUrl(): string
     {
         return self::DEFAULT_WEBSOCKET_URL;
@@ -115,11 +180,6 @@ class Connection implements ConnectionInterface
         $this->sequence = $sequence;
     }
 
-    public function resetSequence(): void
-    {
-        $this->sequence = null;
-    }
-
     public function connect(string $url): ExtendedPromiseInterface
     {
         $url .= '?' . http_build_query(self::QUERY_DATA);
@@ -129,6 +189,8 @@ class Connection implements ConnectionInterface
 
     public function disconnect(int $code, string $reason): void
     {
+        $this->cancelHeartbeatAcknowledgement();
+
         $this->websocket->close($code, $reason);
     }
 
@@ -171,7 +233,14 @@ class Connection implements ConnectionInterface
 
     public function acknowledgeHeartbeat(): void
     {
-        $this->loop->cancelTimer($this->unacknowledgedHeartbeatTimer);
+        $this->cancelHeartbeatAcknowledgement();
+    }
+
+    private function cancelHeartbeatAcknowledgement(): void
+    {
+        if (isset($this->unacknowledgedHeartbeatTimer)) {
+            $this->loop->cancelTimer($this->unacknowledgedHeartbeatTimer);
+        }
     }
 
     public function startAutomaticHeartbeats(int $ms): void
@@ -180,10 +249,12 @@ class Connection implements ConnectionInterface
         $this->logger->debug('Started heartbeat timer', ['ms' => $ms]);
     }
 
-    public function stopAutomaticHeartbeats(): void
+    private function stopAutomaticHeartbeats(): void
     {
-        $this->loop->cancelTimer($this->heartbeatTimer);
-        $this->logger->debug('Cancelled heartbeat timer');
+        if (isset($this->heartbeatTimer)) {
+            $this->loop->cancelTimer($this->heartbeatTimer);
+            $this->logger->debug('Cancelled heartbeat timer');
+        }
     }
 
     public function getEventHandler(): EventHandler

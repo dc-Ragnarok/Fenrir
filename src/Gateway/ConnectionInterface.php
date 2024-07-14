@@ -15,7 +15,6 @@ interface ConnectionInterface
 
     public function getSequence(): ?int;
     public function setSequence(int $sequence);
-    public function resetSequence(): void;
 
     public function connect(string $url): ExtendedPromiseInterface;
     public function disconnect(int $code, string $reason): void;
@@ -29,14 +28,16 @@ interface ConnectionInterface
     public function sendHeartbeat(): void;
     public function acknowledgeHeartbeat(): void;
     public function startAutomaticHeartbeats(int $ms): void;
-    public function stopAutomaticHeartbeats(): void;
 
     public function getEventHandler(): EventHandler;
     public function getRawHandler(): Eventer;
     public function getMetaHandler(): Eventer;
 
+
     public function identify(): void;
     public function resume(): void;
+
+    public function meetsResumeRequirements(): bool;
 
     public function updatePresence(PresenceUpdateBuilder $presenceUpdate): void;
 }
