@@ -109,8 +109,8 @@ class Connection implements ConnectionInterface
         $message = $description . ' '
             . (
                 $isUserError
-                ? 'This is likely not a library issue.'
-                : 'This is likely a library issue, please report the issue if it persists.'
+                ? 'This is likely a userspace error.'
+                : 'This is likely caused by Discord or the library. If you suspect the latter, please report it on Github.'
             );
 
         $context = ['code' => $code, 'reason' => $reason];
