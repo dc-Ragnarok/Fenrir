@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Ragnarok\Fenrir;
+namespace Tests\Ragnarok\Fenrir\Rest;
 
 use Ragnarok\Fenrir\Enums\InteractionCallbackType;
 use Ragnarok\Fenrir\Interaction\Helpers\InteractionCallbackBuilder;

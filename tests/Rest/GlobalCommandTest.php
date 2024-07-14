@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Ragnarok\Fenrir;
+namespace Tests\Ragnarok\Fenrir\Rest;
 
 use Ragnarok\Fenrir\Parts\ApplicationCommand;
 use Ragnarok\Fenrir\Rest\GlobalCommand;

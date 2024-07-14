@@ -104,7 +104,7 @@ class ReadyEventTest extends MockeryTestCase
                         'session_id' => '::session id::',
                     ]
                 ],
-                'expectation' => true,
+                'shouldSet' => true,
             ],
 
             'No resume url' => [
@@ -114,7 +114,7 @@ class ReadyEventTest extends MockeryTestCase
                         'session_id' => '::session id::',
                     ]
                 ],
-                'expectation' => false,
+                'shouldSet' => false,
             ],
 
             'No session id' => [
@@ -124,14 +124,14 @@ class ReadyEventTest extends MockeryTestCase
                         'resume_gateway_url' => '::resume gateway url::',
                     ]
                 ],
-                'expectation' => false,
+                'shouldSet' => false,
             ],
 
             'No d' => [
                 'payload' => (object) [
                     't' => Events::READY,
                 ],
-                'expectation' => false,
+                'shouldSet' => false,
             ],
         ];
     }

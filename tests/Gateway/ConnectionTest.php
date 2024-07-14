@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Ragnarok\Fenrir;
+namespace Tests\Ragnarok\Fenrir\Gateway;
 
 use Exan\Eventer\Eventer;
 use Fakes\Ragnarok\Fenrir\DataMapperFake;
@@ -17,12 +17,15 @@ use Psr\Log\NullLogger;
 use Ragnarok\Fenrir\Bitwise\Bitwise;
 use Ragnarok\Fenrir\Constants\MetaEvents;
 use Ragnarok\Fenrir\Constants\WebsocketEvents;
+use Ragnarok\Fenrir\DataMapper;
+use Ragnarok\Fenrir\EventHandler;
 use Ragnarok\Fenrir\Gateway\Connection;
 use Ragnarok\Fenrir\Gateway\Handlers\IdentifyHelloEvent;
 use Ragnarok\Fenrir\Gateway\Handlers\IdentifyResumeEvent;
 use Ragnarok\Fenrir\Gateway\Helpers\PresenceUpdateBuilder;
 use Ragnarok\Fenrir\Gateway\Objects\Payload;
 use Ragnarok\Fenrir\Gateway\Shard;
+use Ragnarok\Fenrir\Websocket;
 use Ratchet\RFC6455\Messaging\MessageInterface;
 use React\EventLoop\LoopInterface;
 use React\EventLoop\TimerInterface;

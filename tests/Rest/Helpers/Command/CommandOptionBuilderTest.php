@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Ragnarok\Fenrir;
+namespace Tests\Ragnarok\Fenrir\Rest\Helpers\Command;
 
 use Mockery;
 use PHPUnit\Framework\TestCase;
