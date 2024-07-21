@@ -100,14 +100,18 @@ class Channel extends HttpResource
         string $channelId,
         GetMessagesBuilder $getMessagesBuilder = new GetMessagesBuilder()
     ): ExtendedPromiseInterface {
+        $endpoint = Endpoint::bind(
+            Endpoint::CHANNEL_MESSAGES,
+            $channelId
+        );
+
+        $queryParams = $getMessagesBuilder->get();
+        foreach ($queryParams as $key => $value) {
+            $endpoint->addQuery($key, $value);
+        }
+
         return $this->mapArrayPromise(
-            $this->http->get(
-                Endpoint::bind(
-                    Endpoint::CHANNEL_MESSAGES,
-                    $channelId
-                ),
-                $getMessagesBuilder->get()
-            ),
+            $this->http->get($endpoint),
             Message::class
         )->otherwise($this->logThrowable(...));
     }
