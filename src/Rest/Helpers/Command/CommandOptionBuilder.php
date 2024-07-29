@@ -119,17 +119,22 @@ class CommandOptionBuilder
      *
      * @param array<string, string> $localizedNames `key => locale`, `value => description`
      */
-    public function addChoice(string $name, string|int|float $value, array $localizedNames = []): self
+    public function addChoice(string $name, string|int|float $value, ?array $localizedNames = null): self
     {
         if (!isset($this->data['choices'])) {
             $this->data['choices'] = [];
         }
 
-        $this->data['choices'][] = [
+        $choice = [
             'name' => $name,
-            'name_localizations' => $localizedNames,
             'value' => $value,
         ];
+
+        if ($localizedNames) {
+            $choice['name_localizations'] = $localizedNames;
+        }
+
+        $this->data['choices'][] = $choice;
 
         return $this;
     }
