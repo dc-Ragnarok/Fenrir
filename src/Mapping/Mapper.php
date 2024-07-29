@@ -14,6 +14,21 @@ use Throwable;
 
 class Mapper
 {
+    /**
+     * @var ReflectionClass[]
+     */
+    private array $reflectionClasses = [];
+
+    /**
+     * @var ReflectionProperty[]
+     */
+    private array $reflectionProperties = [];
+
+    /**
+     * @var (ReflectionNamedType|ReflectionUnionType|ReflectionIntersectionType|null)[]
+     */
+    private array $reflectionTypes = [];
+
     public function map(mixed $source, string $definition): CompletedMapping
     {
         if (is_object($source)) {
@@ -34,7 +49,6 @@ class Mapper
 
     private function mapFromObject(mixed $source, string $definition): CompletedMapping
     {
-        $reflection = new ReflectionClass($definition);
         $instance = new $definition();
 
         $errors = [];
@@ -44,7 +58,8 @@ class Mapper
             try {
                 $this->setProperty(
                     $value,
-                    $reflection->getProperty($key),
+                    $this->getReflectionProperty($definition, $key),
+                    $this->getReflectionType($definition, $key),
                     $instance,
                     $errors
                 );
@@ -59,15 +74,14 @@ class Mapper
     private function setProperty(
         mixed $value,
         ReflectionProperty $reflectionProperty,
+        ReflectionNamedType|ReflectionUnionType|ReflectionIntersectionType|null $reflectionType,
         mixed &$instance,
         array &$errors,
     ): void {
-        $type = $reflectionProperty->getType();
-
         /**
          * Typing should match for Union Types & non-set types
          */
-        if ($type instanceof ReflectionUnionType || is_null($type)) {
+        if ($reflectionType instanceof ReflectionUnionType || is_null($reflectionType)) {
             $this->setFlat($reflectionProperty, $instance, $value, $errors);
             return;
         }
@@ -76,7 +90,7 @@ class Mapper
          * IntersecionType is not used
          * e.g. TypeA&TypeB
          */
-        if ($type instanceof ReflectionIntersectionType) {
+        if ($reflectionType instanceof ReflectionIntersectionType) {
             $errors[] = new MappingException('Unsupported typing', $reflectionProperty->getName(), get_class($instance));
             return;
         }
@@ -84,12 +98,12 @@ class Mapper
         /**
          * Scalar types
          */
-        if (($type instanceof ReflectionNamedType && $type->isBuiltin())) {
-            $this->setNamedType($reflectionProperty, $type, $instance, $value, $errors);
+        if (($reflectionType instanceof ReflectionNamedType && $reflectionType->isBuiltin())) {
+            $this->setNamedType($reflectionProperty, $reflectionType, $instance, $value, $errors);
             return;
         }
 
-        $typeName = $type->getName();
+        $typeName = $reflectionType->getName();
 
         if (enum_exists($typeName)) {
             $this->setEnum($reflectionProperty, $instance, $value, $typeName, $errors);
@@ -239,5 +253,23 @@ class Mapper
         }
 
         return $new;
+    }
+
+    private function getReflectionProperty(string $definition, string $key): ReflectionProperty
+    {
+        if (isset($this->reflectionProperties[$definition][$key])) {
+            return $this->reflectionProperties[$definition][$key];
+        }
+
+        $reflectionClass = $this->reflectionClasses[$definition]
+            ?? $this->reflectionClasses[$definition] = new ReflectionClass($definition);
+
+        return $this->reflectionProperties[$definition][$key] = $reflectionClass->getProperty($key);
+    }
+
+    private function getReflectionType(string $definition, string $key): ReflectionNamedType|ReflectionUnionType|ReflectionIntersectionType|null
+    {
+        return $this->reflectionTypes[$definition][$key]
+            ?? $this->reflectionTypes[$definition][$key] = $this->getReflectionProperty($definition, $key)->getType();
     }
 }

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Ragnarok\Fenrir;
+namespace Tests\Ragnarok\Fenrir\Rest\Helpers;
 
 use Ragnarok\Fenrir\Rest\Helpers\GetNew;
 use PHPUnit\Framework\TestCase;

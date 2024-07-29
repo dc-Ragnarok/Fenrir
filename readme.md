@@ -99,6 +99,3 @@ Thanks!
 
 The current underlying HTTP component is subject to change in the future.
 While the accesible API for it will remain similar, you should try to refrain from using it manually in your application.
-
-##### Jetbrains oss license
-Thanks to Jetbrains for providing an [OSS license](https://www.jetbrains.com/community/opensource/#support) for this project!

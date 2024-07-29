@@ -53,8 +53,8 @@ class Discord
             $this->token,
             $intents,
             $this->mapper,
+            new Websocket($timeout, $this->logger, [$this->token => '::token::']),
             $this->logger,
-            $timeout
         );
 
         return $this;

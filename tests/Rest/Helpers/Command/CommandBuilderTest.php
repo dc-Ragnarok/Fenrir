@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Ragnarok\Fenrir;
+namespace Tests\Ragnarok\Fenrir\Rest\Helpers\Command;
 
 use PHPUnit\Framework\TestCase;
 use Ragnarok\Fenrir\Bitwise\Bitwise;
