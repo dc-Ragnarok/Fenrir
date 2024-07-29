@@ -14,6 +14,11 @@ use React\Promise\ExtendedPromiseInterface;
  */
 class GuildCommand extends HttpResource
 {
+    /**
+     * @see https://discord.com/developers/docs/interactions/application-commands#get-guild-application-command
+     *
+     * @return ExtendedPromiseInterface<\Ragnarok\Fenrir\Parts\ApplicationCommand[]>
+     */
     public function getCommands(string $guildId, string $applicationId, bool $withLocalizations = false): ExtendedPromiseInterface
     {
         $endpoint = Endpoint::bind(Endpoint::GUILD_APPLICATION_COMMANDS, $applicationId, $guildId);
