@@ -61,9 +61,29 @@ class CommandInteraction
         );
     }
 
-    public function getOption($option): ?OptionStructure
+    public function getOption(string $path): ?OptionStructure
     {
-        return $this->options[$option] ?? null;
+        $segments = explode('.', $path);
+        return $this->findOption($this->options, $segments);
+    }
+
+    private function findOption(array $options, array $segments): ?OptionStructure
+    {
+        $currentSegment = array_shift($segments);
+
+        foreach ($options as $opt) {
+            if ($opt->name === $currentSegment) {
+                if (empty($segments)) {
+                    return $opt;
+                }
+
+                if (!empty($opt->options)) {
+                    return $this->findOption($opt->options, $segments);
+                }
+            }
+        }
+
+        return null;
     }
 
     public function hasOption($option): bool
