@@ -86,9 +86,10 @@ class CommandInteraction
         return null;
     }
 
-    public function hasOption($option): bool
+    public function hasOption(string $path): bool
     {
-        return isset($this->options[$option]);
+        $segments = explode('.', $path);
+        return $this->findOption($this->options, $segments) !== null;
     }
 
     public function getSubCommandName(): ?string
