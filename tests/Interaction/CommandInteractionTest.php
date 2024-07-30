@@ -108,6 +108,29 @@ class CommandInteractionTest extends MockeryTestCase
 
         $this->assertNull($commandInteraction->getOption('other_name'));
         $this->assertEquals($interactionCreate->data->options[0], $commandInteraction->getOption('funny_name'));
+
+        $interactionCreate = $this->getInteractionCreate();
+
+        $interactionCreate->data = new InteractionData();
+        $interactionCreate->data->options = [
+            new ApplicationCommandInteractionDataOptionStructure()
+        ];
+
+        $interactionCreate->data->options[0]->name = 'foo';
+        $interactionCreate->data->options[0]->type = \Ragnarok\Fenrir\Enums\ApplicationCommandOptionType::SUB_COMMAND;
+        $interactionCreate->data->options[0]->options = [
+            new ApplicationCommandInteractionDataOptionStructure()
+        ];
+        $interactionCreate->data->options[0]->options[0]->name = 'bar';
+        $interactionCreate->data->options[0]->options[0]->value = '::value::';
+
+        $commandInteraction = new CommandInteraction($interactionCreate, DiscordFake::get());
+
+        $this->assertTrue($commandInteraction->hasOption('foo.bar'));
+        $this->assertFalse($commandInteraction->hasOption('foo.baz'));
+
+        $this->assertNull($commandInteraction->getOption('foo.baz'));
+        $this->assertEquals($interactionCreate->data->options[0]->options[0], $commandInteraction->getOption('foo.bar'));
     }
 
     public function testGetSubCommandName(): void
