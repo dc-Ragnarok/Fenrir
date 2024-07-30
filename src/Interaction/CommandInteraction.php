@@ -12,6 +12,8 @@ use Ragnarok\Fenrir\Parts\ApplicationCommandInteractionDataOptionStructure as Op
 use Ragnarok\Fenrir\Rest\Helpers\Webhook\EditWebhookBuilder;
 use React\Promise\ExtendedPromiseInterface;
 
+use function Freezemage\ArrayUtils\find as array_find;
+
 class CommandInteraction
 {
     /** @var OptionStructure[] */
@@ -61,14 +63,29 @@ class CommandInteraction
         );
     }
 
-    public function getOption($option): ?OptionStructure
+    public function getOption(string $path): ?OptionStructure
     {
-        return $this->options[$option] ?? null;
+        $segments = explode('.', $path);
+        return $this->findOption($this->options, $segments);
     }
 
-    public function hasOption($option): bool
+    private function findOption(array $options, array $segments): ?OptionStructure
     {
-        return isset($this->options[$option]);
+        $currentSegment = array_shift($segments);
+
+        $option = array_find($options, fn (OptionStructure $option) => $option->name === $currentSegment);
+
+        if (empty($segments)) {
+            return $option;
+        }
+
+        return empty($option->options) ? null : $this->findOption($option->options, $segments);
+    }
+
+    public function hasOption(string $path): bool
+    {
+        $segments = explode('.', $path);
+        return $this->findOption($this->options, $segments) !== null;
     }
 
     public function getSubCommandName(): ?string
