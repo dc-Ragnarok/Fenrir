@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Ragnarok\Fenrir\Parts;
 
+use Ragnarok\Fenrir\Enums\InteractionContextType;
 use Ragnarok\Fenrir\Enums\InteractionType;
 
 class Interaction
@@ -24,4 +25,5 @@ class Interaction
     public ?string $locale;
     public string $guild_locale;
     public Channel $channel;
+    public InteractionContextType $context;
 }
