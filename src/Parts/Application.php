@@ -35,6 +35,7 @@ class Application
      * @var string[]
      */
     public ?array $redirect_uris;
+    public ?string $interactions_endpoint_url;
     /**
      * @var string[]
      */
