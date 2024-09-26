@@ -7,6 +7,7 @@ namespace Tests\Ragnarok\Fenrir\Component;
 use PHPUnit\Framework\TestCase;
 use Ragnarok\Fenrir\Component\Button\DangerButton;
 use Ragnarok\Fenrir\Component\Button\LinkButton;
+use Ragnarok\Fenrir\Component\Button\PremiumButton;
 use Ragnarok\Fenrir\Component\Button\PrimaryButton;
 use Ragnarok\Fenrir\Component\Button\SecondaryButton;
 use Ragnarok\Fenrir\Component\Button\SuccessButton;
@@ -181,6 +182,45 @@ class ButtonTest extends TestCase
                     'url' => '::url::',
                     'label' => '::label::',
                     'emoji' => self::getEmoji()->get(),
+                    'disabled' => false
+                ],
+            ],
+        ];
+    }
+
+    /**
+     * @dataProvider convertionExpectationProviderPremiumButton
+     */
+    public function testCorrectlyConvertedPremiumButton(array $args, array $expected): void
+    {
+        $button = new PremiumButton(...$args);
+
+        $this->assertEquals($expected, $button->get());
+    }
+
+    public static function convertionExpectationProviderPremiumButton(): array
+    {
+        return [
+            'Completely filled out' => [
+                'args' => [
+                    '::sku::',
+                    true,
+                ],
+                'expected' => [
+                    'type' => 2,
+                    'style' => ButtonStyle::Premium,
+                    'sku_id' => '::sku::',
+                    'disabled' => true
+                ],
+            ],
+            'Missing disabled' => [
+                'args' => [
+                    '::sku::',
+                ],
+                'expected' => [
+                    'type' => 2,
+                    'style' => ButtonStyle::Premium,
+                    'sku_id' => '::sku::',
                     'disabled' => false
                 ],
             ],
