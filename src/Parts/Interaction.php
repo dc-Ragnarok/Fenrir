@@ -26,4 +26,9 @@ class Interaction
     public string $guild_locale;
     public Channel $channel;
     public InteractionContextType $context;
+    /**
+     * @var string[]
+     * @see https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-object-authorizing-integration-owners-object
+     */
+    public array $authorizing_integration_owners;
 }
