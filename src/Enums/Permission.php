@@ -49,4 +49,5 @@ enum Permission: int
     case MODERATE_MEMBERS = 1 << 40;
     case CREATE_GUILD_EXPRESSIONS = 1 << 43;
     case CREATE_EVENTS = 1 << 44;
+    case USE_EXTERNAL_SOUNDS = 1 << 45;
 }
