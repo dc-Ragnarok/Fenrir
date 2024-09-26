@@ -207,13 +207,13 @@ class Emoji extends HttpResource
      * @return ExtendedPromiseInterface<void>
      */
     public function deleteApplicationEmoji(
-        string $guildId,
+        string $applicationId,
         string $emojiId,
     ): ExtendedPromiseInterface {
         return $this->http->delete(
             Endpoint::bind(
                 'applications/:application/emojis/:emoji',
-                $guildId,
+                $applicationId,
                 $emojiId
             ),
         )->otherwise($this->logThrowable(...));
