@@ -34,6 +34,10 @@ class Application
     /**
      * @var string[]
      */
+    public ?array $redirect_uris;
+    /**
+     * @var string[]
+     */
     public ?array $tags;
     public ?InstallParams $install_params;
     public ?string $custom_install_url;
