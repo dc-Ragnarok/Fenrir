@@ -50,4 +50,5 @@ enum Permission: int
     case CREATE_GUILD_EXPRESSIONS = 1 << 43;
     case CREATE_EVENTS = 1 << 44;
     case USE_EXTERNAL_SOUNDS = 1 << 45;
+    case SEND_VOICE_MESSAGES = 1 << 46;
 }
