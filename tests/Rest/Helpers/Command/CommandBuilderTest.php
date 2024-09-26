@@ -8,6 +8,8 @@ use PHPUnit\Framework\TestCase;
 use Ragnarok\Fenrir\Bitwise\Bitwise;
 use Ragnarok\Fenrir\Enums\ApplicationCommandOptionType;
 use Ragnarok\Fenrir\Enums\ApplicationCommandTypes;
+use Ragnarok\Fenrir\Enums\ApplicationIntegrationType;
+use Ragnarok\Fenrir\Enums\InteractionContextType;
 use Ragnarok\Fenrir\Exceptions\Rest\Helpers\Command\InvalidCommandNameException;
 use Ragnarok\Fenrir\Rest\Helpers\Command\CommandBuilder;
 use Ragnarok\Fenrir\Rest\Helpers\Command\CommandOptionBuilder;
@@ -117,5 +119,23 @@ class CommandBuilderTest extends TestCase
         $commandBuilder->setNsfw(true);
         $this->assertTrue($commandBuilder->getNsfw());
         $this->assertTrue($commandBuilder->get()['nsfw']);
+    }
+
+    public function testSetIntegrationTypes()
+    {
+        $types = [ApplicationIntegrationType::GUILD_INSTALL, ApplicationIntegrationType::USER_INSTALL];
+        $commandBuilder = new CommandBuilder();
+        $commandBuilder->setIntegrationTypes(...$types);
+        $this->assertEquals($types, $commandBuilder->getIntegrationTypes());
+        $this->assertEquals([0, 1], $commandBuilder->get()['integration_types']);
+    }
+
+    public function testSetContexts()
+    {
+        $types = [InteractionContextType::GUILD, InteractionContextType::PRIVATE_CHANNEL];
+        $commandBuilder = new CommandBuilder();
+        $commandBuilder->setContexts(...$types);
+        $this->assertEquals($types, $commandBuilder->getContexts());
+        $this->assertEquals([0, 2], $commandBuilder->get()['contexts']);
     }
 }

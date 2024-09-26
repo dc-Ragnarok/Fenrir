@@ -7,6 +7,8 @@ namespace Ragnarok\Fenrir\Rest\Helpers\Command;
 use Ragnarok\Fenrir\Bitwise\Bitwise;
 use Ragnarok\Fenrir\Constants\Validation\Command;
 use Ragnarok\Fenrir\Enums\ApplicationCommandTypes;
+use Ragnarok\Fenrir\Enums\ApplicationIntegrationType;
+use Ragnarok\Fenrir\Enums\InteractionContextType;
 use Ragnarok\Fenrir\Exceptions\Rest\Helpers\Command\InvalidCommandNameException;
 use Ragnarok\Fenrir\Rest\Helpers\GetNew;
 use Spatie\Regex\Regex;
@@ -16,6 +18,16 @@ class CommandBuilder
     use GetNew;
 
     private array $data = [];
+
+    /**
+     * @var ApplicationIntegrationType[]
+     */
+    private array $integrationTypes;
+
+    /**
+     * @var InteractionContextType[]
+     */
+    private array $contextTypes;
 
     /** @var ?CommandOptionBuilder[] */
     private array $commandOptionBuilders;
@@ -176,6 +188,30 @@ class CommandBuilder
         return $this->data['nsfw'] ?? null;
     }
 
+    public function setIntegrationTypes(ApplicationIntegrationType ...$integrationTypes): self
+    {
+        $this->integrationTypes = $integrationTypes;
+
+        return $this;
+    }
+
+    public function getIntegrationTypes(): ?array
+    {
+        return $this->integrationTypes ?? null;
+    }
+
+    public function setContexts(InteractionContextType ...$contextTypes): self
+    {
+        $this->contextTypes = $contextTypes;
+
+        return $this;
+    }
+
+    public function getContexts(): ?array
+    {
+        return $this->contextTypes ?? null;
+    }
+
     private function isAllowedName($name): bool
     {
         return Regex::match(Command::NAME_REGEX, $name)->hasMatch();
@@ -189,6 +225,20 @@ class CommandBuilder
             $data['options'] = array_map(
                 static fn (CommandOptionBuilder $option) => $option->get(),
                 $this->commandOptionBuilders
+            );
+        }
+
+        if (isset($this->integrationTypes)) {
+            $data['integration_types'] = array_map(
+                fn (ApplicationIntegrationType $integrationType) => $integrationType->value,
+                $this->integrationTypes
+            );
+        }
+
+        if (isset($this->contextTypes)) {
+            $data['contexts'] = array_map(
+                fn (InteractionContextType $contextType) => $contextType->value,
+                $this->contextTypes
             );
         }
 
