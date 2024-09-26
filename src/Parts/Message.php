@@ -58,6 +58,9 @@ class Message
     public ?Bitwise $flags;
     public ?Message $referenced_message;
     public ?MessageInteractionMetadata $interaction_metadata;
+    /**
+     * @deprecated use $this->interaction_metadata instead
+     */
     public ?MessageInteraction $interaction;
     public ?Channel $thread;
     /**

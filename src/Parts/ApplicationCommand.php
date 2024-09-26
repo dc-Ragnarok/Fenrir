@@ -31,6 +31,9 @@ class ApplicationCommand
     #[ArrayMapping(ApplicationCommandOptionStructure::class)]
     public ?array $options;
     public ?string $default_member_permissions;
+    /**
+     * @deprecated use $this->contexts instead
+     */
     public ?bool $dm_permission;
     public ?bool $default_permission;
     public ?bool $nsfw;
