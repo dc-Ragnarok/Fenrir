@@ -17,6 +17,7 @@ use Ragnarok\Fenrir\Parts\Invite;
 use Ragnarok\Fenrir\Parts\PruneCount;
 use Ragnarok\Fenrir\Parts\Role;
 use Ragnarok\Fenrir\Parts\VoiceRegion;
+use Ragnarok\Fenrir\Parts\VoiceState;
 use Ragnarok\Fenrir\Parts\WelcomeScreen;
 use Ragnarok\Fenrir\Parts\Widget;
 use Ragnarok\Fenrir\Parts\WidgetSettings;
@@ -650,6 +651,43 @@ class Guild extends HttpResource
                 ),
             ),
             VoiceRegion::class
+        )->otherwise($this->logThrowable(...));
+    }
+
+    /**
+     * @see https://discord.com/developers/docs/resources/guild#get-guild-voice-regions
+     *
+     * @return ExtendedPromiseInterface<\Ragnarok\Fenrir\Parts\VoiceState>
+     */
+    public function getCurrentUserVoiceState(string $guildId): ExtendedPromiseInterface
+    {
+        return $this->mapArrayPromise(
+            $this->http->get(
+                Endpoint::bind(
+                    '/guilds/:guild/voice-states/@me',
+                    $guildId,
+                ),
+            ),
+            VoiceState::class
+        )->otherwise($this->logThrowable(...));
+    }
+
+    /**
+     * @see https://discord.com/developers/docs/resources/guild#get-guild-voice-regions
+     *
+     * @return ExtendedPromiseInterface<\Ragnarok\Fenrir\Parts\VoiceState>
+     */
+    public function getUserVoiceState(string $guildId, string $userId): ExtendedPromiseInterface
+    {
+        return $this->mapArrayPromise(
+            $this->http->get(
+                Endpoint::bind(
+                    '/guilds/:guild/voice-states/:user',
+                    $guildId,
+                    $userId,
+                ),
+            ),
+            VoiceState::class
         )->otherwise($this->logThrowable(...));
     }
 
