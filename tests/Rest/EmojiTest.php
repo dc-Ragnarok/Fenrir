@@ -70,6 +70,61 @@ class EmojiTest extends HttpHelperTestCase
                 ],
                 'validationOptions' => []
             ],
+
+            'List application emojis' => [
+                'method' => 'listApplicationEmojis',
+                'args' => ['::application id::'],
+                'mockOptions' => [
+                    'method' => 'get',
+                    'return' => [(object) [], (object) [], (object) []],
+                ],
+                'validationOptions' => [
+                    'returnType' => PartsEmoji::class,
+                    'array' => true,
+                ]
+            ],
+            'Get application emoji' => [
+                'method' => 'getApplicationEmoji',
+                'args' => ['::application id::', '::emoji id::'],
+                'mockOptions' => [
+                    'method' => 'get',
+                    'return' => (object) [],
+                ],
+                'validationOptions' => [
+                    'returnType' => PartsEmoji::class,
+                ]
+            ],
+            'Create application emoji' => [
+                'method' => 'createApplicationEmoji',
+                'args' => ['::application id::', new CreateEmojiBuilder()],
+                'mockOptions' => [
+                    'method' => 'post',
+                    'return' => (object) [],
+                ],
+                'validationOptions' => [
+                    'returnType' => PartsEmoji::class,
+                ]
+            ],
+            'Modify application emoji' => [
+                'method' => 'modifyApplicationEmoji',
+                'args' => ['::application id::', '::emoji id::', new CreateEmojiBuilder()],
+                'mockOptions' => [
+                    'method' => 'patch',
+                    'return' => (object) [],
+                ],
+                'validationOptions' => [
+                    'returnType' => PartsEmoji::class,
+                ]
+            ],
+            'Delete application emoji' => [
+                'method' => 'deleteApplicationEmoji',
+                'args' => ['::application id::', '::emoji id::'],
+                'mockOptions' => [
+                    'method' => 'delete',
+                    'return' => null,
+                ],
+                'validationOptions' => []
+            ],
         ];
     }
 }
