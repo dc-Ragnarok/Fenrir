@@ -10,4 +10,5 @@ enum AutoModerationRuleTriggerType: int
     case SPAM = 3;
     case KEYWORD_PRESET = 4;
     case MENTION_SPAM = 5;
+    case MEMBER_PROFILE = 6;
 }
