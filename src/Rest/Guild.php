@@ -488,6 +488,25 @@ class Guild extends HttpResource
     }
 
     /**
+     * @see https://discord.com/developers/docs/resources/guild#get-guild-role
+     *
+     * @return ExtendedPromiseInterface<\Ragnarok\Fenrir\Parts\Role>
+     */
+    public function getRole(string $guildId, string $roleId): ExtendedPromiseInterface
+    {
+        return $this->mapPromise(
+            $this->http->get(
+                Endpoint::bind(
+                    Endpoint::GUILD_ROLE,
+                    $guildId,
+                    $roleId
+                ),
+            ),
+            Role::class,
+        )->otherwise($this->logThrowable(...));
+    }
+
+    /**
      * @see https://discord.com/developers/docs/resources/guild#create-guild-role
      *
      * @return ExtendedPromiseInterface<\Ragnarok\Fenrir\Parts\Role>
@@ -655,13 +674,13 @@ class Guild extends HttpResource
     }
 
     /**
-     * @see https://discord.com/developers/docs/resources/guild#get-guild-voice-regions
+     * @see https://discord.com/developers/docs/resources/voice#get-current-user-voice-state
      *
      * @return ExtendedPromiseInterface<\Ragnarok\Fenrir\Parts\VoiceState>
      */
     public function getCurrentUserVoiceState(string $guildId): ExtendedPromiseInterface
     {
-        return $this->mapArrayPromise(
+        return $this->mapPromise(
             $this->http->get(
                 Endpoint::bind(
                     '/guilds/:guild/voice-states/@me',
@@ -673,13 +692,13 @@ class Guild extends HttpResource
     }
 
     /**
-     * @see https://discord.com/developers/docs/resources/guild#get-guild-voice-regions
+     * @see https://discord.com/developers/docs/resources/voice#get-user-voice-state
      *
      * @return ExtendedPromiseInterface<\Ragnarok\Fenrir\Parts\VoiceState>
      */
     public function getUserVoiceState(string $guildId, string $userId): ExtendedPromiseInterface
     {
-        return $this->mapArrayPromise(
+        return $this->mapPromise(
             $this->http->get(
                 Endpoint::bind(
                     '/guilds/:guild/voice-states/:user',
