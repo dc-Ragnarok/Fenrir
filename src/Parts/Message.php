@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Ragnarok\Fenrir\Parts;
 
 use Carbon\Carbon;
-use Ragnarok\Fenrir\Attributes\Partial;
 use Ragnarok\Fenrir\Bitwise\Bitwise;
 use Ragnarok\Fenrir\Enums\MessageType;
 use Ragnarok\Fenrir\Mapping\ArrayMapping;
@@ -58,6 +57,7 @@ class Message
     public ?MessageReference $message_reference;
     public ?Bitwise $flags;
     public ?Message $referenced_message;
+    public ?MessageInteractionMetadata $interaction_metadata;
     public ?MessageInteraction $interaction;
     public ?Channel $thread;
     /**
