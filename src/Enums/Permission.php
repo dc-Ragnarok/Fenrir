@@ -52,4 +52,5 @@ enum Permission: int
     case USE_EXTERNAL_SOUNDS = 1 << 45;
     case SEND_VOICE_MESSAGES = 1 << 46;
     case SEND_POLLS = 1 << 49;
+    case USE_EXTERNAL_APPS = 1 << 50;
 }
