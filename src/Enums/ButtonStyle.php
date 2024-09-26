@@ -11,4 +11,5 @@ enum ButtonStyle: int
     case Success = 3;
     case Danger = 4;
     case Link = 5;
+    case Premium = 6;
 }

@@ -13,4 +13,5 @@ enum InteractionCallbackType: int
     case UPDATE_MESSAGE = 7;
     case APPLICATION_COMMAND_AUTOCOMPLETE_RESULT = 8;
     case MODAL = 9;
+    case LAUNCH_ACTIVITY = 12;
 }

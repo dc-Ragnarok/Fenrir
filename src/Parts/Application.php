@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Ragnarok\Fenrir\Parts;
 
-use Ragnarok\Fenrir\Attributes\Partial;
 use Ragnarok\Fenrir\Bitwise\Bitwise;
+use Ragnarok\Fenrir\Mapping\ArrayMapping;
 
 class Application
 {
@@ -29,6 +29,13 @@ class Application
     public ?string $slug;
     public ?string $cover_image;
     public ?Bitwise $flags;
+    public ?int $approximate_guild_count;
+    public ?int $approximate_user_install_count;
+    /**
+     * @var string[]
+     */
+    public ?array $redirect_uris;
+    public ?string $interactions_endpoint_url;
     /**
      * @var string[]
      */
@@ -36,4 +43,9 @@ class Application
     public ?InstallParams $install_params;
     public ?string $custom_install_url;
     public ?string $role_connections_verification_url;
+    /**
+     * @var ApplicationIntegrationType[]
+     */
+    #[ArrayMapping(ApplicationIntegrationType::class)]
+    public ?array $integration_types_config;
 }

@@ -17,6 +17,7 @@ use Ragnarok\Fenrir\Parts\Invite;
 use Ragnarok\Fenrir\Parts\PruneCount;
 use Ragnarok\Fenrir\Parts\Role;
 use Ragnarok\Fenrir\Parts\VoiceRegion;
+use Ragnarok\Fenrir\Parts\VoiceState;
 use Ragnarok\Fenrir\Parts\WelcomeScreen;
 use Ragnarok\Fenrir\Parts\Widget;
 use Ragnarok\Fenrir\Parts\WidgetSettings;
@@ -28,6 +29,8 @@ use React\Promise\ExtendedPromiseInterface;
  *
  * @SuppressWarnings(PHPMD.TooManyMethods)
  * @SuppressWarnings(PHPMD.TooManyPublicMethods)
+ * @SuppressWarnings(PHPMD.ExcessivePublicCount)
+ * @SuppressWarnings(PHPMD.ExcessiveClassComplexity)
  */
 class Guild extends HttpResource
 {
@@ -487,6 +490,25 @@ class Guild extends HttpResource
     }
 
     /**
+     * @see https://discord.com/developers/docs/resources/guild#get-guild-role
+     *
+     * @return ExtendedPromiseInterface<\Ragnarok\Fenrir\Parts\Role>
+     */
+    public function getRole(string $guildId, string $roleId): ExtendedPromiseInterface
+    {
+        return $this->mapPromise(
+            $this->http->get(
+                Endpoint::bind(
+                    Endpoint::GUILD_ROLE,
+                    $guildId,
+                    $roleId
+                ),
+            ),
+            Role::class,
+        )->otherwise($this->logThrowable(...));
+    }
+
+    /**
      * @see https://discord.com/developers/docs/resources/guild#create-guild-role
      *
      * @return ExtendedPromiseInterface<\Ragnarok\Fenrir\Parts\Role>
@@ -650,6 +672,43 @@ class Guild extends HttpResource
                 ),
             ),
             VoiceRegion::class
+        )->otherwise($this->logThrowable(...));
+    }
+
+    /**
+     * @see https://discord.com/developers/docs/resources/voice#get-current-user-voice-state
+     *
+     * @return ExtendedPromiseInterface<\Ragnarok\Fenrir\Parts\VoiceState>
+     */
+    public function getCurrentUserVoiceState(string $guildId): ExtendedPromiseInterface
+    {
+        return $this->mapPromise(
+            $this->http->get(
+                Endpoint::bind(
+                    '/guilds/:guild/voice-states/@me',
+                    $guildId,
+                ),
+            ),
+            VoiceState::class
+        )->otherwise($this->logThrowable(...));
+    }
+
+    /**
+     * @see https://discord.com/developers/docs/resources/voice#get-user-voice-state
+     *
+     * @return ExtendedPromiseInterface<\Ragnarok\Fenrir\Parts\VoiceState>
+     */
+    public function getUserVoiceState(string $guildId, string $userId): ExtendedPromiseInterface
+    {
+        return $this->mapPromise(
+            $this->http->get(
+                Endpoint::bind(
+                    '/guilds/:guild/voice-states/:user',
+                    $guildId,
+                    $userId,
+                ),
+            ),
+            VoiceState::class
         )->otherwise($this->logThrowable(...));
     }
 

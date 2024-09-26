@@ -119,4 +119,103 @@ class Emoji extends HttpResource
             $this->getAuditLogReasonHeader($reason)
         )->otherwise($this->logThrowable(...));
     }
+
+    /**
+     * @see https://discord.com/developers/docs/resources/emoji#list-application-emojis
+     *
+     * @return ExtendedPromiseInterface<\Ragnarok\Fenrir\Parts\Emoji[]>
+     */
+    public function listApplicationEmojis(string $applicationId): ExtendedPromiseInterface
+    {
+        return $this->mapArrayPromise(
+            $this->http->get(
+                Endpoint::bind(
+                    'applications/:application/emojis',
+                    $applicationId
+                ),
+            ),
+            PartsEmoji::class
+        )->otherwise($this->logThrowable(...));
+    }
+
+    /**
+     * @see https://discord.com/developers/docs/resources/emoji#get-application-emoji
+     *
+     * @return ExtendedPromiseInterface<\Ragnarok\Fenrir\Parts\Emoji>
+     */
+    public function getApplicationEmoji(string $guildId, string $emojiId): ExtendedPromiseInterface
+    {
+        return $this->mapPromise(
+            $this->http->get(
+                Endpoint::bind(
+                    'applications/:application/emojis/:emoji',
+                    $guildId,
+                    $emojiId
+                )
+            ),
+            PartsEmoji::class
+        )->otherwise($this->logThrowable(...));
+    }
+
+    /**
+     * @see https://discord.com/developers/docs/resources/emoji#create-application-emoji
+     *
+     * @return ExtendedPromiseInterface<\Ragnarok\Fenrir\Parts\Emoji>
+     */
+    public function createApplicationEmoji(
+        string $applicationId,
+        CreateEmojiBuilder $emojiBuilder,
+    ): ExtendedPromiseInterface {
+        return $this->mapPromise(
+            $this->http->post(
+                Endpoint::bind(
+                    'applications/:application/emojis',
+                    $applicationId
+                ),
+                $emojiBuilder->get(),
+            ),
+            PartsEmoji::class
+        )->otherwise($this->logThrowable(...));
+    }
+
+    /**
+     * @see https://discord.com/developers/docs/resources/emoji#modify-application-emoji
+     *
+     * @return ExtendedPromiseInterface<\Ragnarok\Fenrir\Parts\Emoji>
+     */
+    public function modifyApplicationEmoji(
+        string $applicationId,
+        string $emojiId,
+        CreateEmojiBuilder $emojiBuilder,
+    ): ExtendedPromiseInterface {
+        return $this->mapPromise(
+            $this->http->patch(
+                Endpoint::bind(
+                    'applications/:application/emojis/:emoji',
+                    $applicationId,
+                    $emojiId
+                ),
+                $emojiBuilder->get(),
+            ),
+            PartsEmoji::class
+        )->otherwise($this->logThrowable(...));
+    }
+
+    /**
+     * @see https://discord.com/developers/docs/resources/emoji#delete-application-emoji
+     *
+     * @return ExtendedPromiseInterface<void>
+     */
+    public function deleteApplicationEmoji(
+        string $applicationId,
+        string $emojiId,
+    ): ExtendedPromiseInterface {
+        return $this->http->delete(
+            Endpoint::bind(
+                'applications/:application/emojis/:emoji',
+                $applicationId,
+                $emojiId
+            ),
+        )->otherwise($this->logThrowable(...));
+    }
 }
