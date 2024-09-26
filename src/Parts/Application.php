@@ -30,6 +30,7 @@ class Application
     public ?string $cover_image;
     public ?Bitwise $flags;
     public ?int $approximate_guild_count;
+    public ?int $approximate_user_install_count;
     /**
      * @var string[]
      */
