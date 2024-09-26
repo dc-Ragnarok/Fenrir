@@ -29,6 +29,7 @@ class Application
     public ?string $slug;
     public ?string $cover_image;
     public ?Bitwise $flags;
+    public ?int $approximate_guild_count;
     /**
      * @var string[]
      */
