@@ -14,6 +14,7 @@ use Ragnarok\Fenrir\Constants\MetaEvents;
 use Ragnarok\Fenrir\Constants\WebsocketEvents;
 use Ragnarok\Fenrir\DataMapper;
 use Ragnarok\Fenrir\EventHandler;
+use Ragnarok\Fenrir\Gateway\Events\Meta\MetaEvent;
 use Ragnarok\Fenrir\Gateway\Handlers\HeartbeatAcknowledgedEvent;
 use Ragnarok\Fenrir\Gateway\Handlers\IdentifyHelloEvent;
 use Ragnarok\Fenrir\Gateway\Handlers\IdentifyResumeEvent;
@@ -104,6 +105,8 @@ class Connection implements ConnectionInterface
 
     private function handleClose(int $code, string $reason): void
     {
+        $this->meta->emit(MetaEvents::DISCONNECT, [$this, $this->logger]);
+
         $this->stopAutomaticHeartbeats();
 
         $description = GatewayCloseCodes::DESCRIPTIONS[$code] ?? sprintf('Unknown error code %d - %s', $code, $reason);
