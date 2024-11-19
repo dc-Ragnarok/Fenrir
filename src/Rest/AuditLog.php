@@ -32,6 +32,6 @@ class AuditLog extends HttpResource
                 $getGuildAuditLogsBuilder->get()
             ),
             PartsAuditLog::class
-        )->otherwise($this->logThrowable(...));
+        )->catch($this->logThrowable(...));
     }
 }

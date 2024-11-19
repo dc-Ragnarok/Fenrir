@@ -52,7 +52,7 @@ class GuildCommand extends HttpResource
                 $commandBuilder->get(),
             ),
             ApplicationCommand::class
-        )->otherwise($this->logThrowable(...));
+        )->catch($this->logThrowable(...));
     }
 
     /**
@@ -72,6 +72,6 @@ class GuildCommand extends HttpResource
                 $guildId,
                 $commandId,
             ),
-        )->otherwise($this->logThrowable(...));
+        )->catch($this->logThrowable(...));
     }
 }

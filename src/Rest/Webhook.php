@@ -36,7 +36,7 @@ class Webhook extends HttpResource
                 $interactionToken
             ),
             $interactionCallbackBuilder->get()
-        )->otherwise($this->logThrowable(...));
+        )->catch($this->logThrowable(...));
     }
 
     /**
@@ -55,7 +55,7 @@ class Webhook extends HttpResource
                 )
             ),
             Message::class
-        )->otherwise($this->logThrowable(...));
+        )->catch($this->logThrowable(...));
     }
 
     /**
@@ -76,7 +76,7 @@ class Webhook extends HttpResource
                 $webhookBuilder->get()
             ),
             Message::class
-        )->otherwise($this->logThrowable(...));
+        )->catch($this->logThrowable(...));
     }
 
     /**
@@ -92,7 +92,7 @@ class Webhook extends HttpResource
                 $applicationId,
                 $interactionToken
             )
-        )->otherwise($this->logThrowable(...));
+        )->catch($this->logThrowable(...));
     }
 
     /**
@@ -112,7 +112,7 @@ class Webhook extends HttpResource
                 $this->getAuditLogReasonHeader($reason),
             ),
             PartsWebhook::class,
-        )->otherwise($this->logThrowable(...));
+        )->catch($this->logThrowable(...));
     }
 
     /**
@@ -130,7 +130,7 @@ class Webhook extends HttpResource
                 ),
             ),
             PartsWebhook::class,
-        )->otherwise($this->logThrowable(...));
+        )->catch($this->logThrowable(...));
     }
 
     /**
@@ -148,7 +148,7 @@ class Webhook extends HttpResource
                 ),
             ),
             PartsWebhook::class,
-        )->otherwise($this->logThrowable(...));
+        )->catch($this->logThrowable(...));
     }
 
     /**
@@ -166,7 +166,7 @@ class Webhook extends HttpResource
                 ),
             ),
             PartsWebhook::class,
-        )->otherwise($this->logThrowable(...));
+        )->catch($this->logThrowable(...));
     }
 
     /**
@@ -185,7 +185,7 @@ class Webhook extends HttpResource
                 ),
             ),
             PartsWebhook::class,
-        )->otherwise($this->logThrowable(...));
+        )->catch($this->logThrowable(...));
     }
 
     /**
@@ -205,7 +205,7 @@ class Webhook extends HttpResource
                 $this->getAuditLogReasonHeader($reason),
             ),
             PartsWebhook::class,
-        )->otherwise($this->logThrowable(...));
+        )->catch($this->logThrowable(...));
     }
 
     /**
@@ -226,7 +226,7 @@ class Webhook extends HttpResource
                 $this->getAuditLogReasonHeader($reason),
             ),
             PartsWebhook::class,
-        )->otherwise($this->logThrowable(...));
+        )->catch($this->logThrowable(...));
     }
 
     /**
@@ -242,7 +242,7 @@ class Webhook extends HttpResource
                 $webhookId,
             ),
             headers: $this->getAuditLogReasonHeader($reason),
-        )->otherwise($this->logThrowable(...));
+        )->catch($this->logThrowable(...));
     }
 
     /**
@@ -259,7 +259,7 @@ class Webhook extends HttpResource
                 $token,
             ),
             headers: $this->getAuditLogReasonHeader($reason),
-        )->otherwise($this->logThrowable(...));
+        )->catch($this->logThrowable(...));
     }
 
     /**
@@ -286,7 +286,7 @@ class Webhook extends HttpResource
         return $this->http->post(
             $endpoint,
             $builder->get(),
-        )->otherwise($this->logThrowable(...));
+        )->catch($this->logThrowable(...));
     }
 
     /**
@@ -313,7 +313,7 @@ class Webhook extends HttpResource
         return $this->http->post(
             $endpoint,
             $params,
-        )->otherwise($this->logThrowable(...));
+        )->catch($this->logThrowable(...));
     }
 
     /**
@@ -340,7 +340,7 @@ class Webhook extends HttpResource
         return $this->http->post(
             $endpoint,
             $params,
-        )->otherwise($this->logThrowable(...));
+        )->catch($this->logThrowable(...));
     }
 
     /**
@@ -366,7 +366,7 @@ class Webhook extends HttpResource
                 $endpoint,
             ),
             Message::class,
-        )->otherwise($this->logThrowable(...));
+        )->catch($this->logThrowable(...));
     }
 
     /**
@@ -393,7 +393,7 @@ class Webhook extends HttpResource
                 $builder->get(),
             ),
             Message::class,
-        )->otherwise($this->logThrowable(...));
+        )->catch($this->logThrowable(...));
     }
 
     /**
@@ -416,6 +416,6 @@ class Webhook extends HttpResource
 
         $this->http->delete(
             $endpoint,
-        )->otherwise($this->logThrowable(...));
+        )->catch($this->logThrowable(...));
     }
 }

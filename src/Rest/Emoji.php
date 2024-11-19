@@ -29,7 +29,7 @@ class Emoji extends HttpResource
                 )
             ),
             PartsEmoji::class
-        )->otherwise($this->logThrowable(...));
+        )->catch($this->logThrowable(...));
     }
 
     /**
@@ -48,7 +48,7 @@ class Emoji extends HttpResource
                 )
             ),
             PartsEmoji::class
-        )->otherwise($this->logThrowable(...));
+        )->catch($this->logThrowable(...));
     }
 
     /**
@@ -71,7 +71,7 @@ class Emoji extends HttpResource
                 $this->getAuditLogReasonHeader($reason)
             ),
             PartsEmoji::class
-        )->otherwise($this->logThrowable(...));
+        )->catch($this->logThrowable(...));
     }
 
     /**
@@ -96,7 +96,7 @@ class Emoji extends HttpResource
                 $this->getAuditLogReasonHeader($reason)
             ),
             PartsEmoji::class
-        )->otherwise($this->logThrowable(...));
+        )->catch($this->logThrowable(...));
     }
 
     /**
@@ -117,7 +117,7 @@ class Emoji extends HttpResource
             ),
             null,
             $this->getAuditLogReasonHeader($reason)
-        )->otherwise($this->logThrowable(...));
+        )->catch($this->logThrowable(...));
     }
 
     /**
@@ -135,7 +135,7 @@ class Emoji extends HttpResource
                 ),
             ),
             PartsEmoji::class
-        )->otherwise($this->logThrowable(...));
+        )->catch($this->logThrowable(...));
     }
 
     /**
@@ -154,7 +154,7 @@ class Emoji extends HttpResource
                 )
             ),
             PartsEmoji::class
-        )->otherwise($this->logThrowable(...));
+        )->catch($this->logThrowable(...));
     }
 
     /**
@@ -175,7 +175,7 @@ class Emoji extends HttpResource
                 $emojiBuilder->get(),
             ),
             PartsEmoji::class
-        )->otherwise($this->logThrowable(...));
+        )->catch($this->logThrowable(...));
     }
 
     /**
@@ -198,7 +198,7 @@ class Emoji extends HttpResource
                 $emojiBuilder->get(),
             ),
             PartsEmoji::class
-        )->otherwise($this->logThrowable(...));
+        )->catch($this->logThrowable(...));
     }
 
     /**
@@ -216,6 +216,6 @@ class Emoji extends HttpResource
                 $applicationId,
                 $emojiId
             ),
-        )->otherwise($this->logThrowable(...));
+        )->catch($this->logThrowable(...));
     }
 }

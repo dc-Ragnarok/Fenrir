@@ -25,7 +25,7 @@ class ApplicationRoleConnectionMetadata extends HttpResource
                 Endpoint::APPLICATION_ROLE_CONNECTION_METADATA,
             ),
             PartsApplicationRoleConnectionMetadata::class,
-        )->otherwise($this->logThrowable(...));
+        )->catch($this->logThrowable(...));
     }
 
     /**
@@ -41,6 +41,6 @@ class ApplicationRoleConnectionMetadata extends HttpResource
                 $params,
             ),
             PartsApplicationRoleConnectionMetadata::class,
-        )->otherwise($this->logThrowable(...));
+        )->catch($this->logThrowable(...));
     }
 }

@@ -22,7 +22,7 @@ class GuildAutoModeration extends HttpResource
         return $this->mapArrayPromise(
             $this->http->get(Endpoint::bind(Endpoint::GUILD_AUTO_MODERATION_RULES, $guildId)),
             AutoModerationRuleObject::class,
-        )->otherwise($this->logThrowable(...));
+        )->catch($this->logThrowable(...));
     }
 
     /**
@@ -40,7 +40,7 @@ class GuildAutoModeration extends HttpResource
                 )
             ),
             AutoModerationRuleObject::class,
-        )->otherwise($this->logThrowable(...));
+        )->catch($this->logThrowable(...));
     }
 
     /**
@@ -59,7 +59,7 @@ class GuildAutoModeration extends HttpResource
                 $this->getAuditLogReasonHeader($reason)
             ),
             AutoModerationRuleObject::class,
-        )->otherwise($this->logThrowable(...));
+        )->catch($this->logThrowable(...));
     }
 
     /**
@@ -79,7 +79,7 @@ class GuildAutoModeration extends HttpResource
                 $this->getAuditLogReasonHeader($reason)
             ),
             AutoModerationRuleObject::class,
-        )->otherwise($this->logThrowable(...));
+        )->catch($this->logThrowable(...));
     }
 
     /**
@@ -98,6 +98,6 @@ class GuildAutoModeration extends HttpResource
                 headers: $this->getAuditLogReasonHeader($reason)
             ),
             AutoModerationRuleObject::class,
-        )->otherwise($this->logThrowable(...));
+        )->catch($this->logThrowable(...));
     }
 }

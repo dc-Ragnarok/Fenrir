@@ -31,7 +31,7 @@ class User extends HttpResource
                 ),
             ),
             PartsUser::class,
-        )->otherwise($this->logThrowable(...));
+        )->catch($this->logThrowable(...));
     }
 
     /**
@@ -46,7 +46,7 @@ class User extends HttpResource
                 Endpoint::USER_CURRENT,
             ),
             PartsUser::class,
-        )->otherwise($this->logThrowable(...));
+        )->catch($this->logThrowable(...));
     }
 
     /**
@@ -62,7 +62,7 @@ class User extends HttpResource
                 $params
             ),
             PartsUser::class,
-        )->otherwise($this->logThrowable(...));
+        )->catch($this->logThrowable(...));
     }
 
     /**
@@ -99,7 +99,7 @@ class User extends HttpResource
                 $endpoint,
             ),
             Guild::class,
-        )->otherwise($this->logThrowable(...));
+        )->catch($this->logThrowable(...));
     }
 
     /**
@@ -117,7 +117,7 @@ class User extends HttpResource
                 ),
             ),
             GuildMember::class,
-        )->otherwise($this->logThrowable(...));
+        )->catch($this->logThrowable(...));
     }
 
     /**
@@ -132,7 +132,7 @@ class User extends HttpResource
                 Endpoint::USER_CURRENT_GUILD,
                 $guildId,
             ),
-        )->otherwise($this->logThrowable(...));
+        )->catch($this->logThrowable(...));
     }
 
     /**
@@ -148,7 +148,7 @@ class User extends HttpResource
                 ['recipient_id' => $recipientId],
             ),
             Channel::class,
-        )->otherwise($this->logThrowable(...));
+        )->catch($this->logThrowable(...));
     }
 
     /**
@@ -164,6 +164,6 @@ class User extends HttpResource
                 $params,
             ),
             Channel::class,
-        )->otherwise($this->logThrowable(...));
+        )->catch($this->logThrowable(...));
     }
 }
