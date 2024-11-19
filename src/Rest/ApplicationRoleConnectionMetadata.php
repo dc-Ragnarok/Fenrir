@@ -6,7 +6,7 @@ namespace Ragnarok\Fenrir\Rest;
 
 use Discord\Http\Endpoint;
 use Ragnarok\Fenrir\Parts\ApplicationRoleConnectionMetadata as PartsApplicationRoleConnectionMetadata;
-use React\Promise\ExtendedPromiseInterface;
+use React\Promise\PromiseInterface;
 
 /**
  * @see https://discord.com/developers/docs/resources/application-role-connection-metadata
@@ -16,9 +16,9 @@ class ApplicationRoleConnectionMetadata extends HttpResource
     /**
      * @see https://discord.com/developers/docs/resources/application-role-connection-metadata#get-application-role-connection-metadata-records
      *
-     * @return ExtendedPromiseInterface<\Ragnarok\Fenrir\Parts\ApplicationRoleConnectionMetadata>
+     * @return PromiseInterface<\Ragnarok\Fenrir\Parts\ApplicationRoleConnectionMetadata>
      */
-    public function getRecords(): ExtendedPromiseInterface
+    public function getRecords(): PromiseInterface
     {
         return $this->mapPromise(
             $this->http->get(
@@ -31,9 +31,9 @@ class ApplicationRoleConnectionMetadata extends HttpResource
     /**
      * @see https://discord.com/developers/docs/resources/application-role-connection-metadata#update-application-role-connection-metadata-records
      *
-     * @return ExtendedPromiseInterface<\Ragnarok\Fenrir\Parts\ApplicationRoleConnectionMetadata>
+     * @return PromiseInterface<\Ragnarok\Fenrir\Parts\ApplicationRoleConnectionMetadata>
      */
-    public function updateRecords(array $params): ExtendedPromiseInterface
+    public function updateRecords(array $params): PromiseInterface
     {
         return $this->mapPromise(
             $this->http->put(

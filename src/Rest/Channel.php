@@ -21,7 +21,7 @@ use Ragnarok\Fenrir\Rest\Helpers\Channel\MessageBuilder;
 use Ragnarok\Fenrir\Rest\Helpers\Channel\StartThreadFromMessageBuilder;
 use Ragnarok\Fenrir\Rest\Helpers\Channel\StartThreadWithoutMessageBuilder;
 use Ragnarok\Fenrir\Rest\Helpers\Emoji\EmojiBuilder;
-use React\Promise\ExtendedPromiseInterface;
+use React\Promise\PromiseInterface;
 
 /**
  * @see https://discord.com/developers/docs/resources/channel
@@ -36,9 +36,9 @@ class Channel extends HttpResource
     /**
      * @see https://discord.com/developers/docs/resources/channel#get-channel
      *
-     * @return ExtendedPromiseInterface<\Ragnarok\Fenrir\Parts\Channel>
+     * @return PromiseInterface<\Ragnarok\Fenrir\Parts\Channel>
      */
-    public function get(string $channelId): ExtendedPromiseInterface
+    public function get(string $channelId): PromiseInterface
     {
         return $this->mapPromise(
             $this->http->get(
@@ -54,9 +54,9 @@ class Channel extends HttpResource
     /**
      * @see https://discord.com/developers/docs/resources/channel#modify-channel
      *
-     * @return ExtendedPromiseInterface<\Ragnarok\Fenrir\Parts\Channel>
+     * @return PromiseInterface<\Ragnarok\Fenrir\Parts\Channel>
      */
-    public function modify(string $channelId, ChannelBuilder $channel, ?string $reason = null): ExtendedPromiseInterface
+    public function modify(string $channelId, ChannelBuilder $channel, ?string $reason = null): PromiseInterface
     {
         return $this->mapPromise(
             $this->http->post(
@@ -74,9 +74,9 @@ class Channel extends HttpResource
     /**
      * @see https://discord.com/developers/docs/resources/channel#deleteclose-channel
      *
-     * @return ExtendedPromiseInterface<\Ragnarok\Fenrir\Parts\Channel>
+     * @return PromiseInterface<\Ragnarok\Fenrir\Parts\Channel>
      */
-    public function delete(string $channelId, ?string $reason = null): ExtendedPromiseInterface
+    public function delete(string $channelId, ?string $reason = null): PromiseInterface
     {
         return $this->mapPromise(
             $this->http->delete(
@@ -94,12 +94,12 @@ class Channel extends HttpResource
     /**
      * @see https://discord.com/developers/docs/resources/channel#get-channel-messages
      *
-     * @return ExtendedPromiseInterface<\Ragnarok\Fenrir\Parts\Message[]>
+     * @return PromiseInterface<\Ragnarok\Fenrir\Parts\Message[]>
      */
     public function getMessages(
         string $channelId,
         GetMessagesBuilder $getMessagesBuilder = new GetMessagesBuilder()
-    ): ExtendedPromiseInterface {
+    ): PromiseInterface {
         $endpoint = Endpoint::bind(
             Endpoint::CHANNEL_MESSAGES,
             $channelId
@@ -119,9 +119,9 @@ class Channel extends HttpResource
     /**
      * @see https://discord.com/developers/docs/resources/channel#get-channel-message
      *
-     * @return ExtendedPromiseInterface<\Ragnarok\Fenrir\Parts\Message>
+     * @return PromiseInterface<\Ragnarok\Fenrir\Parts\Message>
      */
-    public function getMessage(string $channelId, string $messageId): ExtendedPromiseInterface
+    public function getMessage(string $channelId, string $messageId): PromiseInterface
     {
         return $this->mapPromise(
             $this->http->get(
@@ -138,12 +138,12 @@ class Channel extends HttpResource
     /**
      * @see https://discord.com/developers/docs/resources/channel#create-message
      *
-     * @return ExtendedPromiseInterface<\Ragnarok\Fenrir\Parts\Message>
+     * @return PromiseInterface<\Ragnarok\Fenrir\Parts\Message>
      */
     public function createMessage(
         string $channelId,
         MessageBuilder $message
-    ): ExtendedPromiseInterface {
+    ): PromiseInterface {
         return $this->mapPromise(
             $this->http->post(
                 Endpoint::bind(
@@ -159,9 +159,9 @@ class Channel extends HttpResource
     /**
      * @see https://discord.com/developers/docs/resources/channel#crosspost-message
      *
-     * @return ExtendedPromiseInterface<\Ragnarok\Fenrir\Parts\Message>
+     * @return PromiseInterface<\Ragnarok\Fenrir\Parts\Message>
      */
-    public function crosspostMessage(string $channelId, string $messageId): ExtendedPromiseInterface
+    public function crosspostMessage(string $channelId, string $messageId): PromiseInterface
     {
         return $this->mapPromise(
             $this->http->post(
@@ -178,13 +178,13 @@ class Channel extends HttpResource
     /**
      * @see https://discord.com/developers/docs/resources/channel#create-reaction
      *
-     * @return ExtendedPromiseInterface<void>
+     * @return PromiseInterface<void>
      */
     public function createReaction(
         string $channelId,
         string $messageId,
         EmojiBuilder $emoji
-    ): ExtendedPromiseInterface {
+    ): PromiseInterface {
         return $this->http->put(
             Endpoint::bind(
                 Endpoint::OWN_MESSAGE_REACTION,
@@ -198,13 +198,13 @@ class Channel extends HttpResource
     /**
      * @see https://discord.com/developers/docs/resources/channel#delete-own-reaction
      *
-     * @return ExtendedPromiseInterface<void>
+     * @return PromiseInterface<void>
      */
     public function deleteOwnReaction(
         string $channelId,
         string $messageId,
         EmojiBuilder $emoji
-    ): ExtendedPromiseInterface {
+    ): PromiseInterface {
         return $this->http->delete(
             Endpoint::bind(
                 Endpoint::OWN_MESSAGE_REACTION,
@@ -218,14 +218,14 @@ class Channel extends HttpResource
     /**
      * @see https://discord.com/developers/docs/resources/channel#delete-user-reaction
      *
-     * @return ExtendedPromiseInterface<void>
+     * @return PromiseInterface<void>
      */
     public function deleteUserReaction(
         string $channelId,
         string $messageId,
         EmojiBuilder $emoji,
         string $userId
-    ): ExtendedPromiseInterface {
+    ): PromiseInterface {
         return $this->http->delete(
             Endpoint::bind(
                 Endpoint::USER_MESSAGE_REACTION,
@@ -240,14 +240,14 @@ class Channel extends HttpResource
     /**
      * @see https://discord.com/developers/docs/resources/channel#get-reactions
      *
-     * @return ExtendedPromiseInterface<\Ragnarok\Fenrir\Parts\Message>
+     * @return PromiseInterface<\Ragnarok\Fenrir\Parts\Message>
      */
     public function getReactions(
         string $channelId,
         string $messageId,
         EmojiBuilder $emoji,
         GetReactionsBuilder $getReactionsBuilder = new GetReactionsBuilder()
-    ): ExtendedPromiseInterface {
+    ): PromiseInterface {
         return $this->mapArrayPromise(
             $this->http->get(
                 Endpoint::bind(
@@ -265,9 +265,9 @@ class Channel extends HttpResource
     /**
      * @see https://discord.com/developers/docs/resources/channel#delete-all-reactions
      *
-     * @return ExtendedPromiseInterface<void>
+     * @return PromiseInterface<void>
      */
-    public function deleteAllReactions(string $channelId, string $messageId): ExtendedPromiseInterface
+    public function deleteAllReactions(string $channelId, string $messageId): PromiseInterface
     {
         return $this->http->delete(
             Endpoint::bind(
@@ -281,13 +281,13 @@ class Channel extends HttpResource
     /**
      * @see https://discord.com/developers/docs/resources/channel#delete-all-reactions-for-emoji
      *
-     * @return ExtendedPromiseInterface<void>
+     * @return PromiseInterface<void>
      */
     public function deleteAllReactionsForEmoji(
         string $channelId,
         string $messageId,
         EmojiBuilder $emoji
-    ): ExtendedPromiseInterface {
+    ): PromiseInterface {
         return $this->http->delete(
             Endpoint::bind(
                 Endpoint::MESSAGE_REACTION_EMOJI,
@@ -301,13 +301,13 @@ class Channel extends HttpResource
     /**
      * @see https://discord.com/developers/docs/resources/channel#edit-message
      *
-     * @return ExtendedPromiseInterface<\Ragnarok\Fenrir\Parts\Message>
+     * @return PromiseInterface<\Ragnarok\Fenrir\Parts\Message>
      */
     public function editMessage(
         string $channelId,
         string $messageId,
         EditMessageBuilder $message
-    ): ExtendedPromiseInterface {
+    ): PromiseInterface {
         return $this->mapPromise(
             $this->http->patch(
                 Endpoint::bind(
@@ -324,13 +324,13 @@ class Channel extends HttpResource
     /**
      * @see https://discord.com/developers/docs/resources/channel#delete-message
      *
-     * @return ExtendedPromiseInterface<void>
+     * @return PromiseInterface<void>
      */
     public function deleteMessage(
         string $channelId,
         string $messageId,
         ?string $reason = null,
-    ): ExtendedPromiseInterface {
+    ): PromiseInterface {
         return $this->http->delete(
             Endpoint::bind(
                 Endpoint::CHANNEL_MESSAGE,
@@ -346,13 +346,13 @@ class Channel extends HttpResource
      *
      * @var string[] $messageIds
      *
-     * @return ExtendedPromiseInterface<void>
+     * @return PromiseInterface<void>
      */
     public function bulkDeleteMessages(
         string $channelId,
         array $messageIds,
         ?string $reason = null
-    ): ExtendedPromiseInterface {
+    ): PromiseInterface {
         return $this->http->post(
             Endpoint::bind(
                 Endpoint::CHANNEL_MESSAGES_BULK_DELETE,
@@ -366,13 +366,13 @@ class Channel extends HttpResource
     /**
      * @see https://discord.com/developers/docs/resources/channel#edit-channel-permissions
      *
-     * @return ExtendedPromiseInterface<void>
+     * @return PromiseInterface<void>
      */
     public function editChannelPermissions(
         string $channelId,
         EditPermissionsBuilder $editPermissionsBuilder,
         ?string $reason = null
-    ): ExtendedPromiseInterface {
+    ): PromiseInterface {
         return $this->http->put(
             Endpoint::bind(
                 Endpoint::CHANNEL_PERMISSIONS,
@@ -387,9 +387,9 @@ class Channel extends HttpResource
     /**
      * @see https://discord.com/developers/docs/resources/invite#invite-object
      *
-     * @return ExtendedPromiseInterface<\Ragnarok\Fenrir\Parts\Invite>
+     * @return PromiseInterface<\Ragnarok\Fenrir\Parts\Invite>
      */
-    public function getChannelInvites(string $channelId): ExtendedPromiseInterface
+    public function getChannelInvites(string $channelId): PromiseInterface
     {
         return $this->mapArrayPromise(
             $this->http->get(
@@ -405,13 +405,13 @@ class Channel extends HttpResource
     /**
      * @see https://discord.com/developers/docs/resources/channel#get-channel-invites
      *
-     * @return ExtendedPromiseInterface<\Ragnarok\Fenrir\Parts\Invite>
+     * @return PromiseInterface<\Ragnarok\Fenrir\Parts\Invite>
      */
     public function createChannelInvite(
         string $channelId,
         InviteBuilder $inviteBuilder = new InviteBuilder(),
         ?string $reason = null
-    ): ExtendedPromiseInterface {
+    ): PromiseInterface {
         return $this->mapPromise(
             $this->http->post(
                 Endpoint::bind(
@@ -428,13 +428,13 @@ class Channel extends HttpResource
     /**
      * @see https://discord.com/developers/docs/resources/channel#delete-channel-permission
      *
-     * @return ExtendedPromiseInterface<void>
+     * @return PromiseInterface<void>
      */
     public function deleteChannelPermissions(
         string $channelId,
         string $overwriteId,
         ?string $reason = null
-    ): ExtendedPromiseInterface {
+    ): PromiseInterface {
         return $this->http->delete(
             Endpoint::bind(
                 Endpoint::CHANNEL_PERMISSIONS,
@@ -449,9 +449,9 @@ class Channel extends HttpResource
     /**
      * @see https://discord.com/developers/docs/resources/channel#follow-announcement-channel
      *
-     * @return ExtendedPromiseInterface<void>
+     * @return PromiseInterface<void>
      */
-    public function followAnnouncementChannel(string $channelId, string $webhookChannelId): ExtendedPromiseInterface
+    public function followAnnouncementChannel(string $channelId, string $webhookChannelId): PromiseInterface
     {
         return $this->http->post(
             Endpoint::bind(
@@ -465,9 +465,9 @@ class Channel extends HttpResource
     /**
      * @see https://discord.com/developers/docs/resources/channel#trigger-typing-indicator
      *
-     * @return ExtendedPromiseInterface<void>
+     * @return PromiseInterface<void>
      */
-    public function triggerTypingIndicator(string $channelId): ExtendedPromiseInterface
+    public function triggerTypingIndicator(string $channelId): PromiseInterface
     {
         return $this->http->post(
             Endpoint::bind(
@@ -480,9 +480,9 @@ class Channel extends HttpResource
     /**
      * @see https://discord.com/developers/docs/resources/channel#get-pinned-messages
      *
-     * @return ExtendedPromiseInterface<\Ragnarok\Fenrir\Parts\Message[]>
+     * @return PromiseInterface<\Ragnarok\Fenrir\Parts\Message[]>
      */
-    public function getPinnedMessages(string $channelId): ExtendedPromiseInterface
+    public function getPinnedMessages(string $channelId): PromiseInterface
     {
         return $this->mapArrayPromise(
             $this->http->get(
@@ -498,9 +498,9 @@ class Channel extends HttpResource
     /**
      * @see https://discord.com/developers/docs/resources/channel#pin-message
      *
-     * @return ExtendedPromiseInterface<void>
+     * @return PromiseInterface<void>
      */
-    public function pinMessage(string $channelId, string $messageId): ExtendedPromiseInterface
+    public function pinMessage(string $channelId, string $messageId): PromiseInterface
     {
         return $this->http->put(
             Endpoint::bind(
@@ -514,9 +514,9 @@ class Channel extends HttpResource
     /**
      * @see https://discord.com/developers/docs/resources/channel#unpin-message
      *
-     * @return ExtendedPromiseInterface<void>
+     * @return PromiseInterface<void>
      */
-    public function unpinMessage(string $channelId, string $messageId): ExtendedPromiseInterface
+    public function unpinMessage(string $channelId, string $messageId): PromiseInterface
     {
         return $this->http->delete(
             Endpoint::bind(
@@ -530,13 +530,13 @@ class Channel extends HttpResource
     /**
      * @see https://discord.com/developers/docs/resources/channel#start-thread-from-message
      *
-     * @return ExtendedPromiseInterface<\Ragnarok\Fenrir\Parts\Channel>
+     * @return PromiseInterface<\Ragnarok\Fenrir\Parts\Channel>
      */
     public function startThreadFromMessage(
         string $channelId,
         string $messageId,
         StartThreadFromMessageBuilder $startThreadFromMessageBuilder
-    ): ExtendedPromiseInterface {
+    ): PromiseInterface {
         return $this->mapPromise(
             $this->http->post(
                 Endpoint::bind(
@@ -553,12 +553,12 @@ class Channel extends HttpResource
     /**
      * @see https://discord.com/developers/docs/resources/channel#start-thread-without-message
      *
-     * @return ExtendedPromiseInterface<\Ragnarok\Fenrir\Parts\Channel>
+     * @return PromiseInterface<\Ragnarok\Fenrir\Parts\Channel>
      */
     public function startThreadWithoutMessage(
         string $channelId,
         StartThreadWithoutMessageBuilder $startThreadWithoutMessageBuilder
-    ): ExtendedPromiseInterface {
+    ): PromiseInterface {
         return $this->mapPromise(
             $this->http->post(
                 Endpoint::bind(
@@ -574,14 +574,14 @@ class Channel extends HttpResource
     /**
      * @see https://discord.com/developers/docs/resources/channel#start-thread-in-forum-or-media-channel
      *
-     * @return ExtendedPromiseInterface<\Ragnarok\Fenrir\Parts\Channel> includes $message property
+     * @return PromiseInterface<\Ragnarok\Fenrir\Parts\Channel> includes $message property
      */
     public function startThreadInForumChannel(
         string $channelId,
         MultipartBody|array $params,
         ?string $reason = null
-    ): ExtendedPromiseInterface {
-        $forumChannelWithMessage = new class () extends Channel {
+    ): PromiseInterface {
+        $forumChannelWithMessage = new class() extends Channel {
             public Message $message;
         };
 
@@ -598,9 +598,9 @@ class Channel extends HttpResource
     /**
      * @see https://discord.com/developers/docs/resources/channel#join-thread
      *
-     * @return ExtendedPromiseInterface<void>
+     * @return PromiseInterface<void>
      */
-    public function joinThread(string $channelId): ExtendedPromiseInterface
+    public function joinThread(string $channelId): PromiseInterface
     {
         return $this->http->put(
             Endpoint::bind(
@@ -613,9 +613,9 @@ class Channel extends HttpResource
     /**
      * @see https://discord.com/developers/docs/resources/channel#add-thread-member
      *
-     * @return ExtendedPromiseInterface<void>
+     * @return PromiseInterface<void>
      */
-    public function addThreadMember(string $channelId, string $userId): ExtendedPromiseInterface
+    public function addThreadMember(string $channelId, string $userId): PromiseInterface
     {
         return $this->http->put(
             Endpoint::bind(
@@ -629,9 +629,9 @@ class Channel extends HttpResource
     /**
      * @see https://discord.com/developers/docs/resources/channel#leave-thread
      *
-     * @return ExtendedPromiseInterface<void>
+     * @return PromiseInterface<void>
      */
-    public function leaveThread(string $channelId): ExtendedPromiseInterface
+    public function leaveThread(string $channelId): PromiseInterface
     {
         return $this->http->delete(
             Endpoint::bind(
@@ -644,9 +644,9 @@ class Channel extends HttpResource
     /**
      * @see https://discord.com/developers/docs/resources/channel#remove-thread-member
      *
-     * @return ExtendedPromiseInterface<void>
+     * @return PromiseInterface<void>
      */
-    public function removeThreadMember(string $channelId, string $userId): ExtendedPromiseInterface
+    public function removeThreadMember(string $channelId, string $userId): PromiseInterface
     {
         return $this->http->delete(
             Endpoint::bind(
@@ -660,9 +660,9 @@ class Channel extends HttpResource
     /**
      * @see https://discord.com/developers/docs/resources/channel#get-thread-member
      *
-     * @return ExtendedPromiseInterface<\Ragnarok\Fenrir\Parts\ThreadMember>
+     * @return PromiseInterface<\Ragnarok\Fenrir\Parts\ThreadMember>
      */
-    public function getThreadMember(string $channelId, string $userId): ExtendedPromiseInterface
+    public function getThreadMember(string $channelId, string $userId): PromiseInterface
     {
         return $this->mapPromise(
             $this->http->get(
@@ -679,19 +679,19 @@ class Channel extends HttpResource
     /**
      * @see https://discord.com/developers/docs/resources/channel#list-thread-members
      *
-     * @return ExtendedPromiseInterface<\Ragnarok\Fenrir\Parts\ThreadMember[]>
+     * @return PromiseInterface<\Ragnarok\Fenrir\Parts\ThreadMember[]>
      */
     public function listThreadMembers(
         string $channelId,
         ?bool $withMember = null,
         ?string $after = null,
         ?int $limit = null,
-    ): ExtendedPromiseInterface {
+    ): PromiseInterface {
         $options = array_filter([
             'with_member' => $withMember,
             'after' => $after,
             'limit' => $limit,
-        ], static fn ($value) => !is_null($value));
+        ], static fn($value) => !is_null($value));
 
         return $this->mapArrayPromise(
             $this->http->get(
@@ -708,9 +708,9 @@ class Channel extends HttpResource
     /**
      * @see https://discord.com/developers/docs/resources/channel#list-public-archived-threads
      *
-     * @return ExtendedPromiseInterface<\Ragnarok\Fenrir\Parts\Channel[]>
+     * @return PromiseInterface<\Ragnarok\Fenrir\Parts\Channel[]>
      */
-    public function listPublicArchivedThreads(string $channelId): ExtendedPromiseInterface
+    public function listPublicArchivedThreads(string $channelId): PromiseInterface
     {
         return $this->mapArrayPromise(
             $this->http->get(
@@ -726,9 +726,9 @@ class Channel extends HttpResource
     /**
      * @see https://discord.com/developers/docs/resources/channel#list-private-archived-threads
      *
-     * @return ExtendedPromiseInterface<\Ragnarok\Fenrir\Parts\Channel[]>
+     * @return PromiseInterface<\Ragnarok\Fenrir\Parts\Channel[]>
      */
-    public function listPrivateArchivedThreads(string $channelId): ExtendedPromiseInterface
+    public function listPrivateArchivedThreads(string $channelId): PromiseInterface
     {
         return $this->mapArrayPromise(
             $this->http->get(
@@ -744,9 +744,9 @@ class Channel extends HttpResource
     /**
      * @see https://discord.com/developers/docs/resources/channel#list-joined-private-archived-threads
      *
-     * @return ExtendedPromiseInterface<\Ragnarok\Fenrir\Parts\Channel[]>
+     * @return PromiseInterface<\Ragnarok\Fenrir\Parts\Channel[]>
      */
-    public function listJoinedPrivateArchivedThreads(string $channelId): ExtendedPromiseInterface
+    public function listJoinedPrivateArchivedThreads(string $channelId): PromiseInterface
     {
         return $this->mapArrayPromise(
             $this->http->get(

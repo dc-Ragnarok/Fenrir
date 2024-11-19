@@ -10,7 +10,7 @@ use Ragnarok\Fenrir\Gateway\Events\InteractionCreate;
 use Ragnarok\Fenrir\Interaction\Helpers\InteractionCallbackBuilder;
 use Ragnarok\Fenrir\Parts\ApplicationCommandInteractionDataOptionStructure as OptionStructure;
 use Ragnarok\Fenrir\Rest\Helpers\Webhook\EditWebhookBuilder;
-use React\Promise\ExtendedPromiseInterface;
+use React\Promise\PromiseInterface;
 
 use function Freezemage\ArrayUtils\find as array_find;
 
@@ -30,7 +30,7 @@ class CommandInteraction
 
     public function createInteractionResponse(
         InteractionCallbackBuilder $interactionCallbackBuilder
-    ): ExtendedPromiseInterface {
+    ): PromiseInterface {
         return $this->discord->rest->webhook->createInteractionResponse(
             $this->interaction->id,
             $this->interaction->token,
@@ -38,7 +38,7 @@ class CommandInteraction
         );
     }
 
-    public function getInteractionResponse(): ExtendedPromiseInterface
+    public function getInteractionResponse(): PromiseInterface
     {
         return $this->discord->rest->webhook->getOriginalInteractionResponse(
             $this->interaction->application_id,
@@ -46,7 +46,7 @@ class CommandInteraction
         );
     }
 
-    public function editInteractionResponse(EditWebhookBuilder $webhookBuilder): ExtendedPromiseInterface
+    public function editInteractionResponse(EditWebhookBuilder $webhookBuilder): PromiseInterface
     {
         return $this->discord->rest->webhook->editOriginalInteractionResponse(
             $this->interaction->application_id,
@@ -55,7 +55,7 @@ class CommandInteraction
         );
     }
 
-    public function deleteInteractionResponse(): ExtendedPromiseInterface
+    public function deleteInteractionResponse(): PromiseInterface
     {
         return $this->discord->rest->webhook->deleteOriginalInteractionResponse(
             $this->interaction->application_id,
@@ -73,7 +73,7 @@ class CommandInteraction
     {
         $currentSegment = array_shift($segments);
 
-        $option = array_find($options, fn (OptionStructure $option) => $option->name === $currentSegment);
+        $option = array_find($options, fn(OptionStructure $option) => $option->name === $currentSegment);
 
         if (empty($segments)) {
             return $option;
@@ -102,7 +102,7 @@ class CommandInteraction
     {
         $subItem = array_values(array_filter(
             $options,
-            static fn (OptionStructure $option) => in_array(
+            static fn(OptionStructure $option) => in_array(
                 $option->type,
                 [OptionTypes::SUB_COMMAND, OptionTypes::SUB_COMMAND_GROUP]
             )

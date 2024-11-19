@@ -7,7 +7,7 @@ namespace Ragnarok\Fenrir\Rest;
 use Discord\Http\Endpoint;
 use Ragnarok\Fenrir\Parts\ApplicationCommand;
 use Ragnarok\Fenrir\Rest\Helpers\Command\CommandBuilder;
-use React\Promise\ExtendedPromiseInterface;
+use React\Promise\PromiseInterface;
 
 /**
  * @see https://discord.com/developers/docs/interactions/application-commands
@@ -17,9 +17,9 @@ class GuildCommand extends HttpResource
     /**
      * @see https://discord.com/developers/docs/interactions/application-commands#get-guild-application-command
      *
-     * @return ExtendedPromiseInterface<\Ragnarok\Fenrir\Parts\ApplicationCommand[]>
+     * @return PromiseInterface<\Ragnarok\Fenrir\Parts\ApplicationCommand[]>
      */
-    public function getCommands(string $guildId, string $applicationId, bool $withLocalizations = false): ExtendedPromiseInterface
+    public function getCommands(string $guildId, string $applicationId, bool $withLocalizations = false): PromiseInterface
     {
         $endpoint = Endpoint::bind(Endpoint::GUILD_APPLICATION_COMMANDS, $applicationId, $guildId);
         $endpoint->addQuery('with_localizations', $withLocalizations);
@@ -35,13 +35,13 @@ class GuildCommand extends HttpResource
     /**
      * @see https://discord.com/developers/docs/interactions/application-commands#create-guild-application-command
      *
-     * @return ExtendedPromiseInterface<\Ragnarok\Fenrir\Parts\ApplicationCommand>
+     * @return PromiseInterface<\Ragnarok\Fenrir\Parts\ApplicationCommand>
      */
     public function createApplicationCommand(
         string $applicationId,
         string $guildId,
         CommandBuilder $commandBuilder
-    ): ExtendedPromiseInterface {
+    ): PromiseInterface {
         return $this->mapPromise(
             $this->http->post(
                 Endpoint::bind(
@@ -58,13 +58,13 @@ class GuildCommand extends HttpResource
     /**
      * @see https://discord.com/developers/docs/interactions/application-commands#delete-guild-application-command
      *
-     * @return ExtendedPromiseInterface<void>
+     * @return PromiseInterface<void>
      */
     public function deleteApplicationCommand(
         string $applicationId,
         string $guildId,
         string $commandId
-    ): ExtendedPromiseInterface {
+    ): PromiseInterface {
         return $this->http->delete(
             Endpoint::bind(
                 Endpoint::GUILD_APPLICATION_COMMAND,

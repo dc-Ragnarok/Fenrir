@@ -8,7 +8,7 @@ use Discord\Http\Endpoint;
 use Ragnarok\Fenrir\Parts\Sticker;
 use Ragnarok\Fenrir\Rest\Helpers\GuildSticker\ModifyStickerBuilder;
 use Ragnarok\Fenrir\Rest\Helpers\GuildSticker\StickerBuilder;
-use React\Promise\ExtendedPromiseInterface;
+use React\Promise\PromiseInterface;
 
 /**
  * @see https://discord.com/developers/docs/resources/sticker
@@ -18,9 +18,9 @@ class GuildSticker extends HttpResource
     /**
      * @see https://discord.com/developers/docs/resources/sticker#list-guild-stickers
      *
-     * @return ExtendedPromiseInterface<\Ragnarok\Fenrir\Parts\Sticker[]>
+     * @return PromiseInterface<\Ragnarok\Fenrir\Parts\Sticker[]>
      */
-    public function list(string $guildId): ExtendedPromiseInterface
+    public function list(string $guildId): PromiseInterface
     {
         return $this->mapArrayPromise(
             $this->http->get(
@@ -36,9 +36,9 @@ class GuildSticker extends HttpResource
     /**
      * @see https://discord.com/developers/docs/resources/sticker#get-guild-sticker
      *
-     * @return ExtendedPromiseInterface<\Ragnarok\Fenrir\Parts\Sticker>
+     * @return PromiseInterface<\Ragnarok\Fenrir\Parts\Sticker>
      */
-    public function get(string $guildId, string $stickerId): ExtendedPromiseInterface
+    public function get(string $guildId, string $stickerId): PromiseInterface
     {
         return $this->mapPromise(
             $this->http->get(
@@ -55,9 +55,9 @@ class GuildSticker extends HttpResource
     /**
      * @see https://discord.com/developers/docs/resources/sticker#get-guild-sticker
      *
-     * @return ExtendedPromiseInterface<\Ragnarok\Fenrir\Parts\Sticker>
+     * @return PromiseInterface<\Ragnarok\Fenrir\Parts\Sticker>
      */
-    public function create(string $guildId, StickerBuilder $stickerBuilder): ExtendedPromiseInterface
+    public function create(string $guildId, StickerBuilder $stickerBuilder): PromiseInterface
     {
         return $this->mapPromise(
             $this->http->post(
@@ -73,13 +73,13 @@ class GuildSticker extends HttpResource
 
     /**
      * @see https://discord.com/developers/docs/resources/sticker#modify-guild-sticker
-     * @return ExtendedPromiseInterface<\Ragnarok\Fenrir\Parts\Sticker>
+     * @return PromiseInterface<\Ragnarok\Fenrir\Parts\Sticker>
      */
     public function modify(
         string $guildId,
         string $stickerId,
         ModifyStickerBuilder $modifyStickerBuilder
-    ): ExtendedPromiseInterface {
+    ): PromiseInterface {
         return $this->mapPromise(
             $this->http->patch(
                 Endpoint::bind(
@@ -96,9 +96,9 @@ class GuildSticker extends HttpResource
     /**
      * @see https://discord.com/developers/docs/resources/sticker#delete-guild-sticker
      *
-     * @return ExtendedPromiseInterface<void>
+     * @return PromiseInterface<void>
      */
-    public function delete(string $guildId, string $stickerId): ExtendedPromiseInterface
+    public function delete(string $guildId, string $stickerId): PromiseInterface
     {
         return $this->http->delete(
             Endpoint::bind(

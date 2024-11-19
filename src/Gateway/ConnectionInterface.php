@@ -7,7 +7,7 @@ namespace Ragnarok\Fenrir\Gateway;
 use Exan\Eventer\Eventer;
 use Ragnarok\Fenrir\EventHandler;
 use Ragnarok\Fenrir\Gateway\Helpers\PresenceUpdateBuilder;
-use React\Promise\ExtendedPromiseInterface;
+use React\Promise\PromiseInterface;
 
 interface ConnectionInterface
 {
@@ -16,7 +16,7 @@ interface ConnectionInterface
     public function getSequence(): ?int;
     public function setSequence(int $sequence);
 
-    public function connect(string $url): ExtendedPromiseInterface;
+    public function connect(string $url): PromiseInterface;
     public function disconnect(int $code, string $reason): void;
 
     public function setSessionId(string $sessionId): void;
