@@ -6,7 +6,7 @@ namespace Ragnarok\Fenrir\Rest;
 
 use Discord\Http\Endpoint;
 use Ragnarok\Fenrir\Parts\StageInstance as PartsStageInstance;
-use React\Promise\ExtendedPromiseInterface;
+use React\Promise\PromiseInterface;
 
 /**
  * @see https://discord.com/developers/docs/resources/application
@@ -16,9 +16,9 @@ class StageInstance extends HttpResource
     /**
      * @see https://discord.com/developers/docs/resources/stage-instance#modify-stage-instance
      *
-     * @return ExtendedPromiseInterface<\Ragnarok\Fenrir\Parts\StageInstance>
+     * @return PromiseInterface<\Ragnarok\Fenrir\Parts\StageInstance>
      */
-    public function createInstance(array $params, ?string $reason = null): ExtendedPromiseInterface
+    public function createInstance(array $params, ?string $reason = null): PromiseInterface
     {
         return $this->mapPromise(
             $this->http->post(
@@ -27,15 +27,15 @@ class StageInstance extends HttpResource
                 $this->getAuditLogReasonHeader($reason),
             ),
             PartsStageInstance::class,
-        )->otherwise($this->logThrowable(...));
+        )->catch($this->logThrowable(...));
     }
 
     /**
      * @see https://discord.com/developers/docs/resources/stage-instance#get-stage-instance
      *
-     * @return ExtendedPromiseInterface<\Ragnarok\Fenrir\Parts\StageInstance>
+     * @return PromiseInterface<\Ragnarok\Fenrir\Parts\StageInstance>
      */
-    public function getInstances(string $channelId): ExtendedPromiseInterface
+    public function getInstances(string $channelId): PromiseInterface
     {
         return $this->mapPromise(
             $this->http->get(
@@ -45,15 +45,15 @@ class StageInstance extends HttpResource
                 ),
             ),
             PartsStageInstance::class,
-        )->otherwise($this->logThrowable(...));
+        )->catch($this->logThrowable(...));
     }
 
     /**
      * @see https://discord.com/developers/docs/resources/stage-instance#modify-stage-instance
      *
-     * @return ExtendedPromiseInterface<\Ragnarok\Fenrir\Parts\StageInstance>
+     * @return PromiseInterface<\Ragnarok\Fenrir\Parts\StageInstance>
      */
-    public function modifyInstances(string $channelId, array $params, ?string $reason = null): ExtendedPromiseInterface
+    public function modifyInstances(string $channelId, array $params, ?string $reason = null): PromiseInterface
     {
         return $this->mapPromise(
             $this->http->patch(
@@ -65,15 +65,15 @@ class StageInstance extends HttpResource
                 $this->getAuditLogReasonHeader($reason),
             ),
             PartsStageInstance::class,
-        )->otherwise($this->logThrowable(...));
+        )->catch($this->logThrowable(...));
     }
 
     /**
      * @see https://discord.com/developers/docs/resources/stage-instance#delete-stage-instance
      *
-     * @return ExtendedPromiseInterface<void>
+     * @return PromiseInterface<void>
      */
-    public function deleteInstances(string $channelId, ?string $reason = null): ExtendedPromiseInterface
+    public function deleteInstances(string $channelId, ?string $reason = null): PromiseInterface
     {
         return $this->mapPromise(
             $this->http->delete(
@@ -84,6 +84,6 @@ class StageInstance extends HttpResource
                 headers: $this->getAuditLogReasonHeader($reason),
             ),
             PartsStageInstance::class,
-        )->otherwise($this->logThrowable(...));
+        )->catch($this->logThrowable(...));
     }
 }

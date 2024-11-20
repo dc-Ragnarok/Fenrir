@@ -7,7 +7,7 @@ namespace Ragnarok\Fenrir\Rest;
 use Discord\Http\Endpoint;
 use Ragnarok\Fenrir\Parts\GuildScheduledEvent as PartsGuildScheduledEvent;
 use Ragnarok\Fenrir\Parts\GuildScheduledEventUser;
-use React\Promise\ExtendedPromiseInterface;
+use React\Promise\PromiseInterface;
 
 /**
  * @see https://discord.com/developers/docs/resources/guild-scheduled-event
@@ -16,9 +16,9 @@ class GuildScheduledEvent extends HttpResource
 {
     /**
      * @see https://discord.com/developers/docs/resources/guild-scheduled-event#list-scheduled-events-for-guild
-     * @return ExtendedPromiseInterface<\Ragnarok\Fenrir\Parts\GuildScheduledEvent[]>
+     * @return PromiseInterface<\Ragnarok\Fenrir\Parts\GuildScheduledEvent[]>
      */
-    public function list(string $guildId, bool $withUserCount = false): ExtendedPromiseInterface
+    public function list(string $guildId, bool $withUserCount = false): PromiseInterface
     {
         $endpoint = Endpoint::bind(Endpoint::GUILD_SCHEDULED_EVENTS, $guildId);
         $endpoint->addQuery('with_user_count', $withUserCount);
@@ -28,14 +28,14 @@ class GuildScheduledEvent extends HttpResource
                 $endpoint
             ),
             PartsGuildScheduledEvent::class,
-        )->otherwise($this->logThrowable(...));
+        )->catch($this->logThrowable(...));
     }
 
     /**
      * @see https://discord.com/developers/docs/resources/guild-scheduled-event#get-guild-scheduled-event
-     * @return ExtendedPromiseInterface<\Ragnarok\Fenrir\Parts\GuildScheduledEvent>
+     * @return PromiseInterface<\Ragnarok\Fenrir\Parts\GuildScheduledEvent>
      */
-    public function get(string $guildId, string $scheduledEventId, bool $withUserCount = false): ExtendedPromiseInterface
+    public function get(string $guildId, string $scheduledEventId, bool $withUserCount = false): PromiseInterface
     {
         $endpoint = Endpoint::bind(Endpoint::GUILD_SCHEDULED_EVENT, $guildId, $scheduledEventId);
         $endpoint->addQuery('with_user_count', $withUserCount);
@@ -45,14 +45,14 @@ class GuildScheduledEvent extends HttpResource
                 $endpoint
             ),
             PartsGuildScheduledEvent::class,
-        )->otherwise($this->logThrowable(...));
+        )->catch($this->logThrowable(...));
     }
 
     /**
      * @see https://discord.com/developers/docs/resources/guild-scheduled-event#create-guild-scheduled-event
-     * @return ExtendedPromiseInterface<\Ragnarok\Fenrir\Parts\GuildScheduledEvent>
+     * @return PromiseInterface<\Ragnarok\Fenrir\Parts\GuildScheduledEvent>
      */
-    public function create(string $guildId, array $params, ?string $reason = null): ExtendedPromiseInterface
+    public function create(string $guildId, array $params, ?string $reason = null): PromiseInterface
     {
         return $this->mapArrayPromise(
             $this->http->post(
@@ -61,14 +61,14 @@ class GuildScheduledEvent extends HttpResource
                 $this->getAuditLogReasonHeader($reason),
             ),
             PartsGuildScheduledEvent::class,
-        )->otherwise($this->logThrowable(...));
+        )->catch($this->logThrowable(...));
     }
 
     /**
      * @see https://discord.com/developers/docs/resources/guild-scheduled-event#modify-guild-scheduled-event
-     * @return ExtendedPromiseInterface<\Ragnarok\Fenrir\Parts\GuildScheduledEvent>
+     * @return PromiseInterface<\Ragnarok\Fenrir\Parts\GuildScheduledEvent>
      */
-    public function modify(string $guildId, string $scheduledEventId, array $params, ?string $reason = null): ExtendedPromiseInterface
+    public function modify(string $guildId, string $scheduledEventId, array $params, ?string $reason = null): PromiseInterface
     {
         return $this->mapArrayPromise(
             $this->http->patch(
@@ -77,18 +77,18 @@ class GuildScheduledEvent extends HttpResource
                 $this->getAuditLogReasonHeader($reason),
             ),
             PartsGuildScheduledEvent::class,
-        )->otherwise($this->logThrowable(...));
+        )->catch($this->logThrowable(...));
     }
 
     /**
      * @see https://discord.com/developers/docs/resources/guild-scheduled-event#delete-guild-scheduled-event
-     * @return ExtendedPromiseInterface<void>
+     * @return PromiseInterface<void>
      */
-    public function delete(string $guildId, string $scheduledEventId): ExtendedPromiseInterface
+    public function delete(string $guildId, string $scheduledEventId): PromiseInterface
     {
         return $this->http->delete(
             Endpoint::bind(Endpoint::GUILD_SCHEDULED_EVENT, $guildId, $scheduledEventId),
-        )->otherwise($this->logThrowable(...));
+        )->catch($this->logThrowable(...));
     }
 
     /**
@@ -101,7 +101,7 @@ class GuildScheduledEvent extends HttpResource
         bool $withMembers = false,
         ?string $before = null,
         ?string $after = null,
-    ): ExtendedPromiseInterface {
+    ): PromiseInterface {
         $endpoint = Endpoint::bind(Endpoint::GUILD_SCHEDULED_EVENT_USERS, $guildId, $scheduledEventId);
 
         $endpoint->addQuery('limit', $limit);
@@ -120,6 +120,6 @@ class GuildScheduledEvent extends HttpResource
                 $endpoint
             ),
             GuildScheduledEventUser::class,
-        )->otherwise($this->logThrowable(...));
+        )->catch($this->logThrowable(...));
     }
 }

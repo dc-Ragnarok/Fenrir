@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Ragnarok\Fenrir\Rest;
 
 use Ragnarok\Fenrir\Parts\Application as PartsApplication;
-use React\Promise\ExtendedPromiseInterface;
+use React\Promise\PromiseInterface;
 
 /**
  * @see https://discord.com/developers/docs/resources/application
@@ -15,24 +15,24 @@ class Application extends HttpResource
     /**
      * @see https://discord.com/developers/docs/resources/application#get-current-application
      *
-     * @return ExtendedPromiseInterface<\Ragnarok\Fenrir\Parts\Application>
+     * @return PromiseInterface<\Ragnarok\Fenrir\Parts\Application>
      */
-    public function getCurrent(): ExtendedPromiseInterface
+    public function getCurrent(): PromiseInterface
     {
         return $this->mapPromise(
             $this->http->get(
                 'applications/@me' // @todo update endpoint to Endpoint:: when available
             ),
             PartsApplication::class,
-        )->otherwise($this->logThrowable(...));
+        )->catch($this->logThrowable(...));
     }
 
     /**
      * @see https://discord.com/developers/docs/resources/application#edit-current-application
      *
-     * @return ExtendedPromiseInterface<\Ragnarok\Fenrir\Parts\Application>
+     * @return PromiseInterface<\Ragnarok\Fenrir\Parts\Application>
      */
-    public function editCurrent(array $params): ExtendedPromiseInterface
+    public function editCurrent(array $params): PromiseInterface
     {
         return $this->mapPromise(
             $this->http->patch(
@@ -40,6 +40,6 @@ class Application extends HttpResource
                 $params,
             ),
             PartsApplication::class,
-        )->otherwise($this->logThrowable(...));
+        )->catch($this->logThrowable(...));
     }
 }

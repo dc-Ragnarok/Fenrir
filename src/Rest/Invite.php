@@ -6,7 +6,7 @@ namespace Ragnarok\Fenrir\Rest;
 
 use Discord\Http\Endpoint;
 use Ragnarok\Fenrir\Parts\Invite as PartsInvite;
-use React\Promise\ExtendedPromiseInterface;
+use React\Promise\PromiseInterface;
 
 /**
  * @see https://discord.com/developers/docs/resources/invite
@@ -16,9 +16,9 @@ class Invite extends HttpResource
     /**
      * @see https://discord.com/developers/docs/resources/invite#get-invite
      *
-     * @return ExtendedPromiseInterface<\Ragnarok\Fenrir\Parts\Invite>
+     * @return PromiseInterface<\Ragnarok\Fenrir\Parts\Invite>
      */
-    public function get(string $code): ExtendedPromiseInterface
+    public function get(string $code): PromiseInterface
     {
         return $this->mapPromise(
             $this->http->get(
@@ -28,21 +28,21 @@ class Invite extends HttpResource
                 )
             ),
             PartsInvite::class
-        )->otherwise($this->logThrowable(...));
+        )->catch($this->logThrowable(...));
     }
 
     /**
      * @see https://discord.com/developers/docs/resources/invite#delete-invite
      *
-     * @return ExtendedPromiseInterface<void>
+     * @return PromiseInterface<void>
      */
-    public function delete(string $code): ExtendedPromiseInterface
+    public function delete(string $code): PromiseInterface
     {
         return $this->http->delete(
             Endpoint::bind(
                 Endpoint::INVITE,
                 $code
             )
-        )->otherwise($this->logThrowable(...));
+        )->catch($this->logThrowable(...));
     }
 }
