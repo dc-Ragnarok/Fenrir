@@ -19,7 +19,8 @@ abstract class HttpResource
         protected Http $http,
         protected DataMapper $dataMapper,
         protected LoggerInterface $logger
-    ) {}
+    ) {
+    }
 
     protected function mapPromise(PromiseInterface $promise, string $class): PromiseInterface
     {

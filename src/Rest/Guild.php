@@ -185,7 +185,7 @@ class Guild extends HttpResource
                 Endpoint::GUILD_CHANNELS,
                 $guildId,
             ),
-            array_map(fn(ModifyChannelPositionsBuilder $builder) => $builder->get(), $modifyChannelPositionsBuilders)
+            array_map(fn (ModifyChannelPositionsBuilder $builder) => $builder->get(), $modifyChannelPositionsBuilders)
         )->catch($this->logThrowable(...));
     }
 

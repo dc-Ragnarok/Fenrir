@@ -20,9 +20,15 @@ class WebsocketFake extends EventEmitter implements WebsocketInterface
         return PromiseFake::get();
     }
 
-    public function close(int $code, string $reason): void {}
+    public function close(int $code, string $reason): void
+    {
+    }
 
-    public function send(string $message, bool $useBucket = true): void {}
+    public function send(string $message, bool $useBucket = true): void
+    {
+    }
 
-    public function sendAsJson(array|JsonSerializable $item, bool $useBucket): void {}
+    public function sendAsJson(array|JsonSerializable $item, bool $useBucket): void
+    {
+    }
 }

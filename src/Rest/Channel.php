@@ -581,7 +581,7 @@ class Channel extends HttpResource
         MultipartBody|array $params,
         ?string $reason = null
     ): PromiseInterface {
-        $forumChannelWithMessage = new class() extends Channel {
+        $forumChannelWithMessage = new class () extends Channel {
             public Message $message;
         };
 
@@ -691,7 +691,7 @@ class Channel extends HttpResource
             'with_member' => $withMember,
             'after' => $after,
             'limit' => $limit,
-        ], static fn($value) => !is_null($value));
+        ], static fn ($value) => !is_null($value));
 
         return $this->mapArrayPromise(
             $this->http->get(

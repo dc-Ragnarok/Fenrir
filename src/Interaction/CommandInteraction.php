@@ -73,7 +73,7 @@ class CommandInteraction
     {
         $currentSegment = array_shift($segments);
 
-        $option = array_find($options, fn(OptionStructure $option) => $option->name === $currentSegment);
+        $option = array_find($options, fn (OptionStructure $option) => $option->name === $currentSegment);
 
         if (empty($segments)) {
             return $option;
@@ -102,7 +102,7 @@ class CommandInteraction
     {
         $subItem = array_values(array_filter(
             $options,
-            static fn(OptionStructure $option) => in_array(
+            static fn (OptionStructure $option) => in_array(
                 $option->type,
                 [OptionTypes::SUB_COMMAND, OptionTypes::SUB_COMMAND_GROUP]
             )
