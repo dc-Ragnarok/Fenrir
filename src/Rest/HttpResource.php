@@ -7,7 +7,7 @@ namespace Ragnarok\Fenrir\Rest;
 use Discord\Http\Http;
 use Psr\Log\LoggerInterface;
 use Ragnarok\Fenrir\DataMapper;
-use React\Promise\ExtendedPromiseInterface;
+use React\Promise\PromiseInterface;
 use Throwable;
 
 /**
@@ -22,23 +22,18 @@ abstract class HttpResource
     ) {
     }
 
-    protected function mapPromise(ExtendedPromiseInterface $promise, string $class): ExtendedPromiseInterface
+    protected function mapPromise(PromiseInterface $promise, string $class): PromiseInterface
     {
         return $promise->then(function ($data) use ($class) {
             return $this->dataMapper->map($data, $class);
         });
     }
 
-    protected function mapArrayPromise(ExtendedPromiseInterface $promise, string $class): ExtendedPromiseInterface
+    protected function mapArrayPromise(PromiseInterface $promise, string $class): PromiseInterface
     {
         return $promise->then(function ($data) use ($class) {
             return $this->dataMapper->mapArray($data, $class);
         });
-    }
-
-    protected function logThrowable(Throwable $e): void
-    {
-        $this->logger->error($e->getMessage());
     }
 
     protected function getAuditLogReasonHeader(?string $reason = null): array

@@ -15,7 +15,7 @@ use Ratchet\Client\WebSocket as RatchetWebsocket;
 use Ratchet\RFC6455\Messaging\MessageInterface;
 use React\EventLoop\Loop;
 use React\EventLoop\LoopInterface;
-use React\Promise\ExtendedPromiseInterface;
+use React\Promise\PromiseInterface;
 use React\Promise\Promise;
 use React\Socket\Connector as SocketConnector;
 
@@ -53,7 +53,7 @@ class Websocket extends EventEmitter implements WebsocketInterface
         }
     }
 
-    public function open(string $url): ExtendedPromiseInterface
+    public function open(string $url): PromiseInterface
     {
         $this->logger->debug('Client: Attempting connection', ['url' => $url]);
 
@@ -73,7 +73,7 @@ class Websocket extends EventEmitter implements WebsocketInterface
                     $this->emit(WebsocketEvents::CLOSE, [$code, $reason]);
                 });
 
-                $resolver();
+                $resolver(null);
             }, function (\Exception $e) use ($url, $reject) {
                 $this->logger->error(
                     'Client: Error connecting to server',

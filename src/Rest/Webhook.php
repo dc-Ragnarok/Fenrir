@@ -13,7 +13,7 @@ use Ragnarok\Fenrir\Rest\Helpers\Webhook\EditWebhookBuilder;
 use Ragnarok\Fenrir\Rest\Helpers\Webhook\EditWebhookMessageBuilder;
 use Ragnarok\Fenrir\Rest\Helpers\Webhook\ModifyWebhookBuilder;
 use Ragnarok\Fenrir\Rest\Helpers\Webhook\WebhookBuilder;
-use React\Promise\ExtendedPromiseInterface;
+use React\Promise\PromiseInterface;
 
 /**
  * @see https://discord.com/developers/docs/resources/webhook
@@ -28,7 +28,7 @@ class Webhook extends HttpResource
         string $interactionId,
         string $interactionToken,
         InteractionCallbackBuilder $interactionCallbackBuilder
-    ): ExtendedPromiseInterface {
+    ): PromiseInterface {
         return $this->http->post(
             Endpoint::bind(
                 Endpoint::INTERACTION_RESPONSE,
@@ -36,7 +36,7 @@ class Webhook extends HttpResource
                 $interactionToken
             ),
             $interactionCallbackBuilder->get()
-        )->otherwise($this->logThrowable(...));
+        );
     }
 
     /**
@@ -45,7 +45,7 @@ class Webhook extends HttpResource
     public function getOriginalInteractionResponse(
         string $applicationId,
         string $interactionToken
-    ): ExtendedPromiseInterface {
+    ): PromiseInterface {
         return $this->mapPromise(
             $this->http->get(
                 Endpoint::bind(
@@ -55,7 +55,7 @@ class Webhook extends HttpResource
                 )
             ),
             Message::class
-        )->otherwise($this->logThrowable(...));
+        );
     }
 
     /**
@@ -65,7 +65,7 @@ class Webhook extends HttpResource
         string $applicationId,
         string $interactionToken,
         EditWebhookBuilder $webhookBuilder
-    ): ExtendedPromiseInterface {
+    ): PromiseInterface {
         return $this->mapPromise(
             $this->http->patch(
                 Endpoint::bind(
@@ -76,7 +76,7 @@ class Webhook extends HttpResource
                 $webhookBuilder->get()
             ),
             Message::class
-        )->otherwise($this->logThrowable(...));
+        );
     }
 
     /**
@@ -85,22 +85,22 @@ class Webhook extends HttpResource
     public function deleteOriginalInteractionResponse(
         string $applicationId,
         string $interactionToken
-    ): ExtendedPromiseInterface {
+    ): PromiseInterface {
         return $this->http->delete(
             Endpoint::bind(
                 Endpoint::ORIGINAL_INTERACTION_RESPONSE,
                 $applicationId,
                 $interactionToken
             )
-        )->otherwise($this->logThrowable(...));
+        );
     }
 
     /**
      * @see https://discord.com/developers/docs/resources/webhook#create-webhook
      *
-     * @return ExtendedPromiseInterface<\Ragnarok\Fenrir\Parts\Webhook>
+     * @return PromiseInterface<\Ragnarok\Fenrir\Parts\Webhook>
      */
-    public function create(string $channelId, CreateWebhookBuilder $builder, ?string $reason = null): ExtendedPromiseInterface
+    public function create(string $channelId, CreateWebhookBuilder $builder, ?string $reason = null): PromiseInterface
     {
         return $this->mapPromise(
             $this->http->post(
@@ -112,15 +112,15 @@ class Webhook extends HttpResource
                 $this->getAuditLogReasonHeader($reason),
             ),
             PartsWebhook::class,
-        )->otherwise($this->logThrowable(...));
+        );
     }
 
     /**
      * @see https://discord.com/developers/docs/resources/webhook#get-channel-webhooks
      *
-     * @return ExtendedPromiseInterface<\Ragnarok\Fenrir\Parts\Webhook[]>
+     * @return PromiseInterface<\Ragnarok\Fenrir\Parts\Webhook[]>
      */
-    public function getChannelWebhooks(string $channelId): ExtendedPromiseInterface
+    public function getChannelWebhooks(string $channelId): PromiseInterface
     {
         return $this->mapArrayPromise(
             $this->http->get(
@@ -130,13 +130,13 @@ class Webhook extends HttpResource
                 ),
             ),
             PartsWebhook::class,
-        )->otherwise($this->logThrowable(...));
+        );
     }
 
     /**
      * @see https://discord.com/developers/docs/resources/webhook#get-guild-webhooks
      *
-     * @return ExtendedPromiseInterface<\Ragnarok\Fenrir\Parts\Webhook[]>
+     * @return PromiseInterface<\Ragnarok\Fenrir\Parts\Webhook[]>
      */
     public function getGuildWebhooks(string $guildId)
     {
@@ -148,13 +148,13 @@ class Webhook extends HttpResource
                 ),
             ),
             PartsWebhook::class,
-        )->otherwise($this->logThrowable(...));
+        );
     }
 
     /**
      * @see https://discord.com/developers/docs/resources/webhook#get-webhook
      *
-     * @return ExtendedPromiseInterface<\Ragnarok\Fenrir\Parts\Webhook[]>
+     * @return PromiseInterface<\Ragnarok\Fenrir\Parts\Webhook[]>
      */
     public function get(string $webhookId)
     {
@@ -166,13 +166,13 @@ class Webhook extends HttpResource
                 ),
             ),
             PartsWebhook::class,
-        )->otherwise($this->logThrowable(...));
+        );
     }
 
     /**
      * @see https://discord.com/developers/docs/resources/webhook#get-webhook-with-token
      *
-     * @return ExtendedPromiseInterface<\Ragnarok\Fenrir\Parts\Webhook[]>
+     * @return PromiseInterface<\Ragnarok\Fenrir\Parts\Webhook[]>
      */
     public function getWithToken(string $webhookId, string $token)
     {
@@ -185,15 +185,15 @@ class Webhook extends HttpResource
                 ),
             ),
             PartsWebhook::class,
-        )->otherwise($this->logThrowable(...));
+        );
     }
 
     /**
      * @see https://discord.com/developers/docs/resources/webhook#modify-webhook
      *
-     * @return ExtendedPromiseInterface<\Ragnarok\Fenrir\Parts\Webhook[]>
+     * @return PromiseInterface<\Ragnarok\Fenrir\Parts\Webhook[]>
      */
-    public function modify(string $webhookId, ModifyWebhookBuilder $builder, ?string $reason = null): ExtendedPromiseInterface
+    public function modify(string $webhookId, ModifyWebhookBuilder $builder, ?string $reason = null): PromiseInterface
     {
         return $this->mapPromise(
             $this->http->patch(
@@ -205,15 +205,15 @@ class Webhook extends HttpResource
                 $this->getAuditLogReasonHeader($reason),
             ),
             PartsWebhook::class,
-        )->otherwise($this->logThrowable(...));
+        );
     }
 
     /**
      * @see https://discord.com/developers/docs/resources/webhook#modify-webhook-with-token
      *
-     * @return ExtendedPromiseInterface<\Ragnarok\Fenrir\Parts\Webhook[]>
+     * @return PromiseInterface<\Ragnarok\Fenrir\Parts\Webhook[]>
      */
-    public function modifyWithToken(string $webhookId, string $token, ModifyWebhookBuilder $builder, ?string $reason = null): ExtendedPromiseInterface
+    public function modifyWithToken(string $webhookId, string $token, ModifyWebhookBuilder $builder, ?string $reason = null): PromiseInterface
     {
         return $this->mapPromise(
             $this->http->patch(
@@ -226,15 +226,15 @@ class Webhook extends HttpResource
                 $this->getAuditLogReasonHeader($reason),
             ),
             PartsWebhook::class,
-        )->otherwise($this->logThrowable(...));
+        );
     }
 
     /**
      * @see https://discord.com/developers/docs/resources/webhook#delete-webhook
      *
-     * @return ExtendedPromiseInterface<void>
+     * @return PromiseInterface<void>
      */
-    public function delete(string $webhookId, ?string $reason = null): ExtendedPromiseInterface
+    public function delete(string $webhookId, ?string $reason = null): PromiseInterface
     {
         return $this->http->delete(
             Endpoint::bind(
@@ -242,15 +242,15 @@ class Webhook extends HttpResource
                 $webhookId,
             ),
             headers: $this->getAuditLogReasonHeader($reason),
-        )->otherwise($this->logThrowable(...));
+        );
     }
 
     /**
      * @see https://discord.com/developers/docs/resources/webhook#delete-webhook-with-token
      *
-     * @return ExtendedPromiseInterface<void>
+     * @return PromiseInterface<void>
      */
-    public function deleteWithToken(string $webhookId, string $token, ?string $reason = null): ExtendedPromiseInterface
+    public function deleteWithToken(string $webhookId, string $token, ?string $reason = null): PromiseInterface
     {
         return $this->http->delete(
             Endpoint::bind(
@@ -259,15 +259,15 @@ class Webhook extends HttpResource
                 $token,
             ),
             headers: $this->getAuditLogReasonHeader($reason),
-        )->otherwise($this->logThrowable(...));
+        );
     }
 
     /**
      * @see https://discord.com/developers/docs/resources/webhook#execute-webhook
      *
-     * @return ExtendedPromiseInterface<void>
+     * @return PromiseInterface<void>
      */
-    public function execute(string $webhookId, string $token, WebhookBuilder $builder, ?bool $wait = null, ?string $threadId = null): ExtendedPromiseInterface
+    public function execute(string $webhookId, string $token, WebhookBuilder $builder, ?bool $wait = null, ?string $threadId = null): PromiseInterface
     {
         $endpoint = Endpoint::bind(
             Endpoint::WEBHOOK_EXECUTE,
@@ -286,15 +286,15 @@ class Webhook extends HttpResource
         return $this->http->post(
             $endpoint,
             $builder->get(),
-        )->otherwise($this->logThrowable(...));
+        );
     }
 
     /**
      * @see https://discord.com/developers/docs/resources/webhook#execute-slackcompatible-webhook
      *
-     * @return ExtendedPromiseInterface<void>
+     * @return PromiseInterface<void>
      */
-    public function executeSlackWebhook(string $webhookId, string $token, array $params, ?bool $wait = null, ?string $threadId = null): ExtendedPromiseInterface
+    public function executeSlackWebhook(string $webhookId, string $token, array $params, ?bool $wait = null, ?string $threadId = null): PromiseInterface
     {
         $endpoint = Endpoint::bind(
             Endpoint::WEBHOOK_EXECUTE_SLACK,
@@ -313,15 +313,15 @@ class Webhook extends HttpResource
         return $this->http->post(
             $endpoint,
             $params,
-        )->otherwise($this->logThrowable(...));
+        );
     }
 
     /**
      * @see https://discord.com/developers/docs/resources/webhook#execute-githubcompatible-webhook
      *
-     * @return ExtendedPromiseInterface<void>
+     * @return PromiseInterface<void>
      */
-    public function executeGithubWebhook(string $webhookId, string $token, array $params, ?bool $wait = null, ?string $threadId = null): ExtendedPromiseInterface
+    public function executeGithubWebhook(string $webhookId, string $token, array $params, ?bool $wait = null, ?string $threadId = null): PromiseInterface
     {
         $endpoint = Endpoint::bind(
             Endpoint::WEBHOOK_EXECUTE_GITHUB,
@@ -340,15 +340,15 @@ class Webhook extends HttpResource
         return $this->http->post(
             $endpoint,
             $params,
-        )->otherwise($this->logThrowable(...));
+        );
     }
 
     /**
      * @see https://discord.com/developers/docs/resources/webhook#get-webhook-message
      *
-     * @return ExtendedPromiseInterface<\Ragnarok\Fenrir\Parts\Message>
+     * @return PromiseInterface<\Ragnarok\Fenrir\Parts\Message>
      */
-    public function getWebhookMessage(string $webhookId, string $token, string $messageId, ?string $threadId = null): ExtendedPromiseInterface
+    public function getWebhookMessage(string $webhookId, string $token, string $messageId, ?string $threadId = null): PromiseInterface
     {
         $endpoint = Endpoint::bind(
             Endpoint::WEBHOOK_MESSAGE,
@@ -366,15 +366,15 @@ class Webhook extends HttpResource
                 $endpoint,
             ),
             Message::class,
-        )->otherwise($this->logThrowable(...));
+        );
     }
 
     /**
      * @see https://discord.com/developers/docs/resources/webhook#edit-webhook-message
      *
-     * @return ExtendedPromiseInterface<\Ragnarok\Fenrir\Parts\Message>
+     * @return PromiseInterface<\Ragnarok\Fenrir\Parts\Message>
      */
-    public function editWebhookMessage(string $webhookId, string $token, string $messageId, EditWebhookMessageBuilder $builder, ?string $threadId = null): ExtendedPromiseInterface
+    public function editWebhookMessage(string $webhookId, string $token, string $messageId, EditWebhookMessageBuilder $builder, ?string $threadId = null): PromiseInterface
     {
         $endpoint = Endpoint::bind(
             Endpoint::WEBHOOK_MESSAGE,
@@ -393,13 +393,13 @@ class Webhook extends HttpResource
                 $builder->get(),
             ),
             Message::class,
-        )->otherwise($this->logThrowable(...));
+        );
     }
 
     /**
      * @see https://discord.com/developers/docs/resources/webhook#delete-webhook-message
      *
-     * @return ExtendedPromiseInterface<void>
+     * @return PromiseInterface<void>
      */
     public function deleteWebhookMessage(string $webhookId, string $token, string $messageId, ?string $threadId = null)
     {
@@ -416,6 +416,6 @@ class Webhook extends HttpResource
 
         $this->http->delete(
             $endpoint,
-        )->otherwise($this->logThrowable(...));
+        );
     }
 }

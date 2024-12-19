@@ -7,7 +7,7 @@ namespace Ragnarok\Fenrir\Interaction;
 use Ragnarok\Fenrir\Discord;
 use Ragnarok\Fenrir\Gateway\Events\InteractionCreate;
 use Ragnarok\Fenrir\Interaction\Helpers\InteractionCallbackBuilder;
-use React\Promise\ExtendedPromiseInterface;
+use React\Promise\PromiseInterface;
 
 class ButtonInteraction
 {
@@ -17,7 +17,7 @@ class ButtonInteraction
 
     public function createInteractionResponse(
         InteractionCallbackBuilder $interactionCallbackBuilder
-    ): ExtendedPromiseInterface {
+    ): PromiseInterface {
         return $this->discord->rest->webhook->createInteractionResponse(
             $this->interaction->id,
             $this->interaction->token,

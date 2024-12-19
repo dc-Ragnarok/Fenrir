@@ -7,13 +7,13 @@ namespace Fakes\Ragnarok\Fenrir;
 use Evenement\EventEmitter;
 use JsonSerializable;
 use Ragnarok\Fenrir\WebsocketInterface;
-use React\Promise\ExtendedPromiseInterface;
+use React\Promise\PromiseInterface;
 
 class WebsocketFake extends EventEmitter implements WebsocketInterface
 {
     public array $openings = [];
 
-    public function open(string $url): ExtendedPromiseInterface
+    public function open(string $url): PromiseInterface
     {
         $this->openings[] = $url;
 

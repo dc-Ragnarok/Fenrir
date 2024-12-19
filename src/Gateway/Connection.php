@@ -31,7 +31,7 @@ use Ragnarok\Fenrir\WebsocketInterface;
 use Ratchet\RFC6455\Messaging\MessageInterface;
 use React\EventLoop\LoopInterface;
 use React\EventLoop\TimerInterface;
-use React\Promise\ExtendedPromiseInterface;
+use React\Promise\PromiseInterface;
 
 /**
  * @SuppressWarnings(PHPMD.TooManyPublicMethods)
@@ -183,7 +183,7 @@ class Connection implements ConnectionInterface
         $this->sequence = $sequence;
     }
 
-    public function connect(string $url): ExtendedPromiseInterface
+    public function connect(string $url): PromiseInterface
     {
         $url .= '?' . http_build_query(self::QUERY_DATA);
 
@@ -309,7 +309,7 @@ class Connection implements ConnectionInterface
         ], true);
     }
 
-    public function open(): ExtendedPromiseInterface
+    public function open(): PromiseInterface
     {
         return $this->connect(self::DEFAULT_WEBSOCKET_URL);
     }

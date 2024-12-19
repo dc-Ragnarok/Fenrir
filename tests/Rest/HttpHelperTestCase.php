@@ -70,22 +70,4 @@ abstract class HttpHelperTestCase extends TestCase
             $this->assertInstanceOf($validationOptions['returnType'], $response);
         }
     }
-
-    /**
-     * @dataProvider httpBindingsProvider
-     */
-    public function testItLogsErrors(string $method, array $args, array $mockOptions, array $validationOptions): void
-    {
-        $this->mockLog->shouldReceive('error')->once();
-
-        $this->http->shouldReceive($mockOptions['method'])->andReturns(
-            new Promise(static function ($resolve, $reject) {
-                $reject(new \Exception());
-            })
-        )->once();
-
-        $promise = call_user_func_array([$this->httpItem, $method], $args);
-
-        $this->mockLog->shouldHaveReceived('error');
-    }
 }

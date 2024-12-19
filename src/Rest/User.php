@@ -9,7 +9,7 @@ use Ragnarok\Fenrir\Parts\Channel;
 use Ragnarok\Fenrir\Parts\Guild;
 use Ragnarok\Fenrir\Parts\GuildMember;
 use Ragnarok\Fenrir\Parts\User as PartsUser;
-use React\Promise\ExtendedPromiseInterface;
+use React\Promise\PromiseInterface;
 
 /**
  * @see https://discord.com/developers/docs/resources/application
@@ -19,9 +19,9 @@ class User extends HttpResource
     /**
      * @see https://discord.com/developers/docs/resources/user#get-user
      *
-     * @return ExtendedPromiseInterface<\Ragnarok\Fenrir\Parts\User>
+     * @return PromiseInterface<\Ragnarok\Fenrir\Parts\User>
      */
-    public function get(string $userId): ExtendedPromiseInterface
+    public function get(string $userId): PromiseInterface
     {
         return $this->mapPromise(
             $this->http->get(
@@ -31,30 +31,30 @@ class User extends HttpResource
                 ),
             ),
             PartsUser::class,
-        )->otherwise($this->logThrowable(...));
+        );
     }
 
     /**
      * @see https://discord.com/developers/docs/resources/user#get-current-user
      *
-     * @return ExtendedPromiseInterface<\Ragnarok\Fenrir\Parts\User>
+     * @return PromiseInterface<\Ragnarok\Fenrir\Parts\User>
      */
-    public function getCurrent(): ExtendedPromiseInterface
+    public function getCurrent(): PromiseInterface
     {
         return $this->mapPromise(
             $this->http->get(
                 Endpoint::USER_CURRENT,
             ),
             PartsUser::class,
-        )->otherwise($this->logThrowable(...));
+        );
     }
 
     /**
      * @see https://discord.com/developers/docs/resources/user#modify-current-user
      *
-     * @return ExtendedPromiseInterface<\Ragnarok\Fenrir\Parts\User>
+     * @return PromiseInterface<\Ragnarok\Fenrir\Parts\User>
      */
-    public function modifyCurrent(array $params): ExtendedPromiseInterface
+    public function modifyCurrent(array $params): PromiseInterface
     {
         return $this->mapPromise(
             $this->http->patch(
@@ -62,20 +62,20 @@ class User extends HttpResource
                 $params
             ),
             PartsUser::class,
-        )->otherwise($this->logThrowable(...));
+        );
     }
 
     /**
      * @see https://discord.com/developers/docs/resources/user#get-current-user-guilds
      *
-     * @return ExtendedPromiseInterface<\Ragnarok\Fenrir\Parts\Guild>
+     * @return PromiseInterface<\Ragnarok\Fenrir\Parts\Guild>
      */
     public function getCurrentUserGuilds(
         ?string $before = null,
         ?string $after = null,
         ?int $limit = null,
         ?bool $withCounts = null
-    ): ExtendedPromiseInterface {
+    ): PromiseInterface {
         $endpoint = Endpoint::bind(Endpoint::USER_CURRENT_GUILD);
 
         if ($before) {
@@ -99,15 +99,15 @@ class User extends HttpResource
                 $endpoint,
             ),
             Guild::class,
-        )->otherwise($this->logThrowable(...));
+        );
     }
 
     /**
      * @see https://discord.com/developers/docs/resources/user#get-current-user-guild-member
      *
-     * @return ExtendedPromiseInterface<\Ragnarok\Fenrir\Parts\GuildMember>
+     * @return PromiseInterface<\Ragnarok\Fenrir\Parts\GuildMember>
      */
-    public function getCurrentUserGuildMember(string $guildId): ExtendedPromiseInterface
+    public function getCurrentUserGuildMember(string $guildId): PromiseInterface
     {
         return $this->mapPromise(
             $this->http->get(
@@ -117,30 +117,30 @@ class User extends HttpResource
                 ),
             ),
             GuildMember::class,
-        )->otherwise($this->logThrowable(...));
+        );
     }
 
     /**
      * @see https://discord.com/developers/docs/resources/user#leave-guild
      *
-     * @return ExtendedPromiseInterface<void>
+     * @return PromiseInterface<void>
      */
-    public function leaveGuild(string $guildId): ExtendedPromiseInterface
+    public function leaveGuild(string $guildId): PromiseInterface
     {
         return $this->http->delete(
             Endpoint::bind(
                 Endpoint::USER_CURRENT_GUILD,
                 $guildId,
             ),
-        )->otherwise($this->logThrowable(...));
+        );
     }
 
     /**
      * @see https://discord.com/developers/docs/resources/user#create-dm
      *
-     * @return ExtendedPromiseInterface<\Ragnarok\Fenrir\Parts\Channel>
+     * @return PromiseInterface<\Ragnarok\Fenrir\Parts\Channel>
      */
-    public function createDm(string $recipientId): ExtendedPromiseInterface
+    public function createDm(string $recipientId): PromiseInterface
     {
         return $this->mapPromise(
             $this->http->post(
@@ -148,15 +148,15 @@ class User extends HttpResource
                 ['recipient_id' => $recipientId],
             ),
             Channel::class,
-        )->otherwise($this->logThrowable(...));
+        );
     }
 
     /**
      * @see https://discord.com/developers/docs/resources/user#create-dm
      *
-     * @return ExtendedPromiseInterface<\Ragnarok\Fenrir\Parts\Channel>
+     * @return PromiseInterface<\Ragnarok\Fenrir\Parts\Channel>
      */
-    public function createGroupDm(array $params): ExtendedPromiseInterface
+    public function createGroupDm(array $params): PromiseInterface
     {
         return $this->mapPromise(
             $this->http->post(
@@ -164,6 +164,6 @@ class User extends HttpResource
                 $params,
             ),
             Channel::class,
-        )->otherwise($this->logThrowable(...));
+        );
     }
 }
