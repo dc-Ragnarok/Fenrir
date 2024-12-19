@@ -36,11 +36,6 @@ abstract class HttpResource
         });
     }
 
-    protected function logThrowable(Throwable $e): void
-    {
-        $this->logger->error($e->getMessage());
-    }
-
     protected function getAuditLogReasonHeader(?string $reason = null): array
     {
         return is_null($reason) ? [] : ['X-Audit-Log-Reason' => rawurlencode($reason)];

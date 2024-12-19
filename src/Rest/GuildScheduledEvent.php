@@ -28,7 +28,7 @@ class GuildScheduledEvent extends HttpResource
                 $endpoint
             ),
             PartsGuildScheduledEvent::class,
-        )->catch($this->logThrowable(...));
+        );
     }
 
     /**
@@ -45,7 +45,7 @@ class GuildScheduledEvent extends HttpResource
                 $endpoint
             ),
             PartsGuildScheduledEvent::class,
-        )->catch($this->logThrowable(...));
+        );
     }
 
     /**
@@ -61,7 +61,7 @@ class GuildScheduledEvent extends HttpResource
                 $this->getAuditLogReasonHeader($reason),
             ),
             PartsGuildScheduledEvent::class,
-        )->catch($this->logThrowable(...));
+        );
     }
 
     /**
@@ -77,7 +77,7 @@ class GuildScheduledEvent extends HttpResource
                 $this->getAuditLogReasonHeader($reason),
             ),
             PartsGuildScheduledEvent::class,
-        )->catch($this->logThrowable(...));
+        );
     }
 
     /**
@@ -88,7 +88,7 @@ class GuildScheduledEvent extends HttpResource
     {
         return $this->http->delete(
             Endpoint::bind(Endpoint::GUILD_SCHEDULED_EVENT, $guildId, $scheduledEventId),
-        )->catch($this->logThrowable(...));
+        );
     }
 
     /**
@@ -120,6 +120,6 @@ class GuildScheduledEvent extends HttpResource
                 $endpoint
             ),
             GuildScheduledEventUser::class,
-        )->catch($this->logThrowable(...));
+        );
     }
 }

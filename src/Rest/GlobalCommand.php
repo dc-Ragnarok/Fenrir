@@ -45,7 +45,7 @@ class GlobalCommand extends HttpResource
                 $commandBuilder->get(),
             ),
             ApplicationCommand::class
-        )->catch($this->logThrowable(...));
+        );
     }
 
 
@@ -64,6 +64,6 @@ class GlobalCommand extends HttpResource
                 $applicationId,
                 $commandId,
             ),
-        )->catch($this->logThrowable(...));
+        );
     }
 }

@@ -48,7 +48,7 @@ class Channel extends HttpResource
                 )
             ),
             PartsChannel::class
-        )->catch($this->logThrowable(...));
+        );
     }
 
     /**
@@ -68,7 +68,7 @@ class Channel extends HttpResource
                 $this->getAuditLogReasonHeader($reason)
             ),
             PartsChannel::class
-        )->catch($this->logThrowable(...));
+        );
     }
 
     /**
@@ -88,7 +88,7 @@ class Channel extends HttpResource
                 $this->getAuditLogReasonHeader($reason)
             ),
             PartsChannel::class
-        )->catch($this->logThrowable(...));
+        );
     }
 
     /**
@@ -113,7 +113,7 @@ class Channel extends HttpResource
         return $this->mapArrayPromise(
             $this->http->get($endpoint),
             Message::class
-        )->catch($this->logThrowable(...));
+        );
     }
 
     /**
@@ -132,7 +132,7 @@ class Channel extends HttpResource
                 )
             ),
             Message::class
-        )->catch($this->logThrowable(...));
+        );
     }
 
     /**
@@ -153,7 +153,7 @@ class Channel extends HttpResource
                 $message->get()
             ),
             Message::class
-        )->catch($this->logThrowable(...));
+        );
     }
 
     /**
@@ -172,7 +172,7 @@ class Channel extends HttpResource
                 )
             ),
             Message::class,
-        )->catch($this->logThrowable(...));
+        );
     }
 
     /**
@@ -192,7 +192,7 @@ class Channel extends HttpResource
                 $messageId,
                 (string) $emoji
             )
-        )->catch($this->logThrowable(...));
+        );
     }
 
     /**
@@ -212,7 +212,7 @@ class Channel extends HttpResource
                 $messageId,
                 (string) $emoji
             )
-        )->catch($this->logThrowable(...));
+        );
     }
 
     /**
@@ -234,7 +234,7 @@ class Channel extends HttpResource
                 (string) $emoji,
                 $userId
             )
-        )->catch($this->logThrowable(...));
+        );
     }
 
     /**
@@ -259,7 +259,7 @@ class Channel extends HttpResource
                 $getReactionsBuilder->get()
             ),
             User::class
-        )->catch($this->logThrowable(...));
+        );
     }
 
     /**
@@ -275,7 +275,7 @@ class Channel extends HttpResource
                 $channelId,
                 $messageId
             )
-        )->catch($this->logThrowable(...));
+        );
     }
 
     /**
@@ -295,7 +295,7 @@ class Channel extends HttpResource
                 $messageId,
                 (string) $emoji
             )
-        )->catch($this->logThrowable(...));
+        );
     }
 
     /**
@@ -318,7 +318,7 @@ class Channel extends HttpResource
                 $message->get()
             ),
             Message::class
-        )->catch($this->logThrowable(...));
+        );
     }
 
     /**
@@ -338,7 +338,7 @@ class Channel extends HttpResource
                 $messageId
             ),
             headers: $this->getAuditLogReasonHeader($reason),
-        )->catch($this->logThrowable(...));
+        );
     }
 
     /**
@@ -360,7 +360,7 @@ class Channel extends HttpResource
             ),
             ['messages' => $messageIds],
             $this->getAuditLogReasonHeader($reason)
-        )->catch($this->logThrowable(...));
+        );
     }
 
     /**
@@ -381,7 +381,7 @@ class Channel extends HttpResource
             ),
             $editPermissionsBuilder->get(),
             $this->getAuditLogReasonHeader($reason)
-        )->catch($this->logThrowable(...));
+        );
     }
 
     /**
@@ -399,7 +399,7 @@ class Channel extends HttpResource
                 )
             ),
             Invite::class
-        )->catch($this->logThrowable(...));
+        );
     }
 
     /**
@@ -422,7 +422,7 @@ class Channel extends HttpResource
                 $this->getAuditLogReasonHeader($reason)
             ),
             Invite::class
-        )->catch($this->logThrowable(...));
+        );
     }
 
     /**
@@ -443,7 +443,7 @@ class Channel extends HttpResource
             ),
             null,
             $this->getAuditLogReasonHeader($reason)
-        )->catch($this->logThrowable(...));
+        );
     }
 
     /**
@@ -459,7 +459,7 @@ class Channel extends HttpResource
                 $channelId
             ),
             ['webhook_channel_id' => $webhookChannelId]
-        )->catch($this->logThrowable(...));
+        );
     }
 
     /**
@@ -474,7 +474,7 @@ class Channel extends HttpResource
                 Endpoint::CHANNEL_TYPING,
                 $channelId
             )
-        )->catch($this->logThrowable(...));
+        );
     }
 
     /**
@@ -492,7 +492,7 @@ class Channel extends HttpResource
                 )
             ),
             Message::class
-        )->catch($this->logThrowable(...));
+        );
     }
 
     /**
@@ -508,7 +508,7 @@ class Channel extends HttpResource
                 $channelId,
                 $messageId
             )
-        )->catch($this->logThrowable(...));
+        );
     }
 
     /**
@@ -524,7 +524,7 @@ class Channel extends HttpResource
                 $channelId,
                 $messageId
             )
-        )->catch($this->logThrowable(...));
+        );
     }
 
     /**
@@ -547,7 +547,7 @@ class Channel extends HttpResource
                 $startThreadFromMessageBuilder->get()
             ),
             PartsChannel::class
-        )->catch($this->logThrowable(...));
+        );
     }
 
     /**
@@ -568,7 +568,7 @@ class Channel extends HttpResource
                 $startThreadWithoutMessageBuilder->get()
             ),
             PartsChannel::class
-        )->catch($this->logThrowable(...));
+        );
     }
 
     /**
@@ -592,7 +592,7 @@ class Channel extends HttpResource
                 $this->getAuditLogReasonHeader($reason),
             ),
             $forumChannelWithMessage::class,
-        )->catch($this->logThrowable(...));
+        );
     }
 
     /**
@@ -607,7 +607,7 @@ class Channel extends HttpResource
                 Endpoint::THREAD_MEMBER_ME,
                 $channelId
             )
-        )->catch($this->logThrowable(...));
+        );
     }
 
     /**
@@ -623,7 +623,7 @@ class Channel extends HttpResource
                 $channelId,
                 $userId
             )
-        )->catch($this->logThrowable(...));
+        );
     }
 
     /**
@@ -638,7 +638,7 @@ class Channel extends HttpResource
                 Endpoint::THREAD_MEMBER_ME,
                 $channelId
             )
-        )->catch($this->logThrowable(...));
+        );
     }
 
     /**
@@ -654,7 +654,7 @@ class Channel extends HttpResource
                 $channelId,
                 $userId
             )
-        )->catch($this->logThrowable(...));
+        );
     }
 
     /**
@@ -673,7 +673,7 @@ class Channel extends HttpResource
                 )
             ),
             ThreadMember::class
-        )->catch($this->logThrowable(...));
+        );
     }
 
     /**
@@ -702,7 +702,7 @@ class Channel extends HttpResource
                 $options
             ),
             ThreadMember::class
-        )->catch($this->logThrowable(...));
+        );
     }
 
     /**
@@ -720,7 +720,7 @@ class Channel extends HttpResource
                 )
             ),
             PartsChannel::class
-        )->catch($this->logThrowable(...));
+        );
     }
 
     /**
@@ -738,7 +738,7 @@ class Channel extends HttpResource
                 )
             ),
             PartsChannel::class
-        )->catch($this->logThrowable(...));
+        );
     }
 
     /**
@@ -756,6 +756,6 @@ class Channel extends HttpResource
                 )
             ),
             PartsChannel::class
-        )->catch($this->logThrowable(...));
+        );
     }
 }

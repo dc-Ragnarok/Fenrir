@@ -30,7 +30,7 @@ class GuildSticker extends HttpResource
                 )
             ),
             Sticker::class
-        )->catch($this->logThrowable(...));
+        );
     }
 
     /**
@@ -49,7 +49,7 @@ class GuildSticker extends HttpResource
                 )
             ),
             Sticker::class
-        )->catch($this->logThrowable(...));
+        );
     }
 
     /**
@@ -68,7 +68,7 @@ class GuildSticker extends HttpResource
                 $stickerBuilder->get()
             ),
             Sticker::class
-        )->catch($this->logThrowable(...));
+        );
     }
 
     /**
@@ -90,7 +90,7 @@ class GuildSticker extends HttpResource
                 $modifyStickerBuilder->get()
             ),
             Sticker::class
-        )->catch($this->logThrowable(...));
+        );
     }
 
     /**
@@ -106,6 +106,6 @@ class GuildSticker extends HttpResource
                 $guildId,
                 $stickerId
             )
-        )->catch($this->logThrowable(...));
+        );
     }
 }

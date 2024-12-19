@@ -29,7 +29,7 @@ class Sticker extends HttpResource
                 )
             ),
             PartsSticker::class
-        )->catch($this->logThrowable(...));
+        );
     }
 
     /**
@@ -46,6 +46,6 @@ class Sticker extends HttpResource
                 )
             ),
             StickerPack::class
-        )->catch($this->logThrowable(...));
+        );
     }
 }

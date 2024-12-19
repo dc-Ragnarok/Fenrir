@@ -28,7 +28,7 @@ class Invite extends HttpResource
                 )
             ),
             PartsInvite::class
-        )->catch($this->logThrowable(...));
+        );
     }
 
     /**
@@ -43,6 +43,6 @@ class Invite extends HttpResource
                 Endpoint::INVITE,
                 $code
             )
-        )->catch($this->logThrowable(...));
+        );
     }
 }

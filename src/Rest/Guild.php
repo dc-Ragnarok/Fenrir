@@ -49,7 +49,7 @@ class Guild extends HttpResource
                 $params
             ),
             PartsGuild::class,
-        )->catch($this->logThrowable(...));
+        );
     }
 
     /**
@@ -73,7 +73,7 @@ class Guild extends HttpResource
                 $endpoint,
             ),
             PartsGuild::class
-        )->catch($this->logThrowable(...));
+        );
     }
 
     /**
@@ -91,7 +91,7 @@ class Guild extends HttpResource
                 )
             ),
             GuildPreview::class
-        )->catch($this->logThrowable(...));
+        );
     }
 
     /**
@@ -113,7 +113,7 @@ class Guild extends HttpResource
                 $this->getAuditLogReasonHeader($reason)
             ),
             PartsGuild::class
-        )->catch($this->logThrowable(...));
+        );
     }
 
     /**
@@ -128,7 +128,7 @@ class Guild extends HttpResource
                 Endpoint::GUILD,
                 $guildId
             )
-        )->catch($this->logThrowable(...));
+        );
     }
 
     /**
@@ -146,7 +146,7 @@ class Guild extends HttpResource
                 )
             ),
             Channel::class
-        )->catch($this->logThrowable(...));
+        );
     }
 
     /**
@@ -168,7 +168,7 @@ class Guild extends HttpResource
                 $this->getAuditLogReasonHeader($reason)
             ),
             Channel::class
-        )->catch($this->logThrowable(...));
+        );
     }
 
     /**
@@ -186,7 +186,7 @@ class Guild extends HttpResource
                 $guildId,
             ),
             array_map(fn (ModifyChannelPositionsBuilder $builder) => $builder->get(), $modifyChannelPositionsBuilders)
-        )->catch($this->logThrowable(...));
+        );
     }
 
     /**
@@ -223,7 +223,7 @@ class Guild extends HttpResource
                 ),
             ),
             GuildMember::class
-        )->catch($this->logThrowable(...));
+        );
     }
 
     /**
@@ -247,7 +247,7 @@ class Guild extends HttpResource
         return $this->mapArrayPromise(
             $this->http->get($endpoint),
             GuildMember::class
-        )->catch($this->logThrowable(...));
+        );
     }
 
     /**
@@ -269,7 +269,7 @@ class Guild extends HttpResource
         return $this->mapArrayPromise(
             $this->http->get($endpoint),
             GuildMember::class
-        )->catch($this->logThrowable(...));
+        );
     }
 
     /**
@@ -289,7 +289,7 @@ class Guild extends HttpResource
                 $params,
             ),
             GuildMember::class,
-        )->catch($this->logThrowable(...));
+        );
     }
 
     /**
@@ -311,7 +311,7 @@ class Guild extends HttpResource
             ),
             $params,
             $this->getAuditLogReasonHeader($reason),
-        )->catch($this->logThrowable(...));
+        );
     }
 
     /**
@@ -331,7 +331,7 @@ class Guild extends HttpResource
             ),
             $params,
             $this->getAuditLogReasonHeader($reason),
-        )->catch($this->logThrowable(...));
+        );
     }
 
     /**
@@ -353,7 +353,7 @@ class Guild extends HttpResource
                 $roleId,
             ),
             headers: $this->getAuditLogReasonHeader($reason),
-        )->catch($this->logThrowable(...));
+        );
     }
 
     /**
@@ -375,7 +375,7 @@ class Guild extends HttpResource
                 $roleId,
             ),
             headers: $this->getAuditLogReasonHeader($reason),
-        )->catch($this->logThrowable(...));
+        );
     }
 
     /**
@@ -392,7 +392,7 @@ class Guild extends HttpResource
                 $userId,
             ),
             headers: $this->getAuditLogReasonHeader($reason),
-        )->catch($this->logThrowable(...));
+        );
     }
 
     /**
@@ -410,7 +410,7 @@ class Guild extends HttpResource
                 )
             ),
             GuildBan::class
-        )->catch($this->logThrowable(...));
+        );
     }
 
     /**
@@ -429,7 +429,7 @@ class Guild extends HttpResource
                 )
             ),
             GuildBan::class
-        )->catch($this->logThrowable(...));
+        );
     }
 
     /**
@@ -451,7 +451,7 @@ class Guild extends HttpResource
             ),
             $params,
             $this->getAuditLogReasonHeader($reason)
-        )->catch($this->logThrowable(...));
+        );
     }
 
     /**
@@ -468,7 +468,7 @@ class Guild extends HttpResource
                 $userId,
             ),
             headers: $this->getAuditLogReasonHeader($reason)
-        )->catch($this->logThrowable(...));
+        );
     }
 
     /**
@@ -486,7 +486,7 @@ class Guild extends HttpResource
                 )
             ),
             Role::class,
-        )->catch($this->logThrowable(...));
+        );
     }
 
     /**
@@ -505,7 +505,7 @@ class Guild extends HttpResource
                 ),
             ),
             Role::class,
-        )->catch($this->logThrowable(...));
+        );
     }
 
     /**
@@ -525,7 +525,7 @@ class Guild extends HttpResource
                 $this->getAuditLogReasonHeader($reason),
             ),
             Role::class,
-        )->catch($this->logThrowable(...));
+        );
     }
 
     /**
@@ -548,7 +548,7 @@ class Guild extends HttpResource
                 $this->getAuditLogReasonHeader($reason),
             ),
             Role::class,
-        )->catch($this->logThrowable(...));
+        );
     }
 
     /**
@@ -573,7 +573,7 @@ class Guild extends HttpResource
                 $this->getAuditLogReasonHeader($reason),
             ),
             Role::class,
-        )->catch($this->logThrowable(...));
+        );
     }
 
     /**
@@ -593,7 +593,7 @@ class Guild extends HttpResource
             ),
             ['level' => $mfaLevel->value],
             $this->getAuditLogReasonHeader($reason),
-        )->catch($this->logThrowable(...));
+        );
     }
 
     /**
@@ -610,7 +610,7 @@ class Guild extends HttpResource
                 $roleId,
             ),
             headers: $this->getAuditLogReasonHeader($reason),
-        )->catch($this->logThrowable(...));
+        );
     }
 
     /**
@@ -634,7 +634,7 @@ class Guild extends HttpResource
                 $endpoint,
             ),
             PruneCount::class,
-        )->catch($this->logThrowable(...));
+        );
     }
 
     /**
@@ -654,7 +654,7 @@ class Guild extends HttpResource
                 headers: $this->getAuditLogReasonHeader($reason)
             ),
             PruneCount::class,
-        )->catch($this->logThrowable(...));
+        );
     }
 
     /**
@@ -672,7 +672,7 @@ class Guild extends HttpResource
                 ),
             ),
             VoiceRegion::class
-        )->catch($this->logThrowable(...));
+        );
     }
 
     /**
@@ -690,7 +690,7 @@ class Guild extends HttpResource
                 ),
             ),
             VoiceState::class
-        )->catch($this->logThrowable(...));
+        );
     }
 
     /**
@@ -709,7 +709,7 @@ class Guild extends HttpResource
                 ),
             ),
             VoiceState::class
-        )->catch($this->logThrowable(...));
+        );
     }
 
     /**
@@ -727,7 +727,7 @@ class Guild extends HttpResource
                 ),
             ),
             Invite::class
-        )->catch($this->logThrowable(...));
+        );
     }
 
     /**
@@ -745,7 +745,7 @@ class Guild extends HttpResource
                 ),
             ),
             Integration::class
-        )->catch($this->logThrowable(...));
+        );
     }
 
     /**
@@ -765,7 +765,7 @@ class Guild extends HttpResource
                 $integrationId,
             ),
             headers: $this->getAuditLogReasonHeader($reason),
-        )->catch($this->logThrowable(...));
+        );
     }
 
     /**
@@ -783,7 +783,7 @@ class Guild extends HttpResource
                 ),
             ),
             WidgetSettings::class,
-        )->catch($this->logThrowable(...));
+        );
     }
 
     /**
@@ -803,7 +803,7 @@ class Guild extends HttpResource
                 $this->getAuditLogReasonHeader($reason),
             ),
             WidgetSettings::class,
-        )->catch($this->logThrowable(...));
+        );
     }
 
     /**
@@ -821,7 +821,7 @@ class Guild extends HttpResource
                 )
             ),
             Widget::class,
-        )->catch($this->logThrowable(...));
+        );
     }
 
     /**
@@ -839,7 +839,7 @@ class Guild extends HttpResource
                 )
             ),
             Invite::class,
-        )->catch($this->logThrowable(...));
+        );
     }
 
     /**
@@ -876,7 +876,7 @@ class Guild extends HttpResource
                 ),
             ),
             WelcomeScreen::class,
-        )->catch($this->logThrowable(...));
+        );
     }
 
     /**
@@ -892,7 +892,7 @@ class Guild extends HttpResource
                 $guildId,
             ),
             $params,
-        )->catch($this->logThrowable(...));
+        );
     }
 
     /**
@@ -909,6 +909,6 @@ class Guild extends HttpResource
                 $userId
             ),
             $params,
-        )->catch($this->logThrowable(...));
+        );
     }
 }
