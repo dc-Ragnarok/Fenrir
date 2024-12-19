@@ -90,7 +90,14 @@ class Websocket extends EventEmitter implements WebsocketInterface
      */
     public function close(int $code, string $reason): void
     {
-        $this->mustHaveActiveConnection();
+        if (!isset($this->connection)) {
+            $this->logger->info(
+                'Client: Attempting to close connection while no connection active',
+                ['code' => $code, 'reason' => $reason]
+            );
+
+            return;
+        }
 
         $this->logger->info(
             'Client: Closing connection',
