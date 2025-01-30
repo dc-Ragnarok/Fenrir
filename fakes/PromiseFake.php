@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Fakes\Ragnarok\Fenrir;
 
-use React\Promise\ExtendedPromiseInterface;
+use React\Promise\PromiseInterface;
 use React\Promise\Promise;
 use Throwable;
 
@@ -15,7 +15,7 @@ class PromiseFake
      *
      * @param mixed $return What the promise should resolve to
      */
-    public static function get(mixed $return = null): ExtendedPromiseInterface
+    public static function get(mixed $return = null): PromiseInterface
     {
         return new Promise(static function ($resolve) use ($return) {
             $resolve($return);
@@ -27,7 +27,7 @@ class PromiseFake
      *
      * @param Throwable $e The exception
      */
-    public static function reject(Throwable $e): ExtendedPromiseInterface
+    public static function reject(Throwable $e): PromiseInterface
     {
         return new Promise(static function ($resolve, $reject) use ($e) {
             $reject($e);
