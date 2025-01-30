@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace Tests\Ragnarok\Fenrir\Gateway;
 
+use DateInterval;
 use Exan\Eventer\Eventer;
 use Fakes\Ragnarok\Fenrir\DataMapperFake;
+use Fakes\Ragnarok\Fenrir\LoopFake;
 use Fakes\Ragnarok\Fenrir\PromiseFake;
 use Fakes\Ragnarok\Fenrir\RetrierFake;
 use Fakes\Ragnarok\Fenrir\WebsocketFake;
@@ -25,6 +27,7 @@ use Ragnarok\Fenrir\Gateway\Handlers\IdentifyResumeEvent;
 use Ragnarok\Fenrir\Gateway\Helpers\PresenceUpdateBuilder;
 use Ragnarok\Fenrir\Gateway\Objects\Payload;
 use Ragnarok\Fenrir\Gateway\Shard;
+use Ragnarok\Fenrir\Gateway\ShardInterface;
 use Ragnarok\Fenrir\Websocket;
 use Ratchet\RFC6455\Messaging\MessageInterface;
 use React\EventLoop\LoopInterface;
@@ -376,6 +379,45 @@ class ConnectionTest extends MockeryTestCase
         $connection->identify();
     }
 
+    public function testItWaitsBeforeConnecting(): void
+    {
+        $loop = new LoopFake();
+        $websocket = new WebsocketFake();
+
+        $connection = new Connection(
+            $loop,
+            '::token::',
+            new Bitwise(123),
+            new DataMapper(new NullLogger()),
+            $websocket,
+        );
+
+        $connection->shard(new class implements ShardInterface {
+            public function getShardSettings(): array
+            {
+                return [];
+            }
+
+            public function startDelay(): DateInterval
+            {
+                return new DateInterval('PT10S');
+            }
+        });
+
+        $connection->open();
+
+        $this->assertEmpty($websocket->connections);
+
+        $loop->runTimers(9);
+
+        $this->assertEmpty($websocket->connections);
+
+        $loop->runTimers(1);
+
+        $this->assertCount(1, $websocket->connections);
+        $this->assertEquals(Connection::DEFAULT_WEBSOCKET_URL . '?v=' . Connection::DISCORD_VERSION, $websocket->connections[0]);
+    }
+
     public function testItResumes(): void
     {
         $connection = new Connection(
@@ -556,7 +598,7 @@ class ConnectionTest extends MockeryTestCase
 
         $websocket->emit(WebsocketEvents::CLOSE, [$code, 'reason']);
 
-        $this->assertEquals([Connection::DEFAULT_WEBSOCKET_URL . '?v=' . Connection::DISCORD_VERSION], $websocket->openings);
+        $this->assertEquals([Connection::DEFAULT_WEBSOCKET_URL . '?v=' . Connection::DISCORD_VERSION], $websocket->connections);
     }
 
     public static function reconnectCloseCodesProvider(): array
@@ -606,7 +648,7 @@ class ConnectionTest extends MockeryTestCase
 
         $websocket->emit(WebsocketEvents::CLOSE, [$code, 'reason']);
 
-        $this->assertEquals(['::resume url::?v=' . Connection::DISCORD_VERSION], $websocket->openings);
+        $this->assertEquals(['::resume url::?v=' . Connection::DISCORD_VERSION], $websocket->connections);
     }
 
     /**
@@ -641,7 +683,7 @@ class ConnectionTest extends MockeryTestCase
 
         $websocket->emit(WebsocketEvents::CLOSE, [$code, 'reason']);
 
-        $this->assertEquals([Connection::DEFAULT_WEBSOCKET_URL . '?v=' . Connection::DISCORD_VERSION], $websocket->openings);
+        $this->assertEquals([Connection::DEFAULT_WEBSOCKET_URL . '?v=' . Connection::DISCORD_VERSION], $websocket->connections);
     }
 
     /**
@@ -676,7 +718,7 @@ class ConnectionTest extends MockeryTestCase
 
         $websocket->emit(WebsocketEvents::CLOSE, [$code, 'reason']);
 
-        $this->assertEquals([Connection::DEFAULT_WEBSOCKET_URL . '?v=' . Connection::DISCORD_VERSION], $websocket->openings);
+        $this->assertEquals([Connection::DEFAULT_WEBSOCKET_URL . '?v=' . Connection::DISCORD_VERSION], $websocket->connections);
     }
 
     public static function resumeCloseCodesProvider(): array

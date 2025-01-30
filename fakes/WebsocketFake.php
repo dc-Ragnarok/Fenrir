@@ -11,11 +11,11 @@ use React\Promise\PromiseInterface;
 
 class WebsocketFake extends EventEmitter implements WebsocketInterface
 {
-    public array $openings = [];
+    public array $connections = [];
 
     public function open(string $url): PromiseInterface
     {
-        $this->openings[] = $url;
+        $this->connections[] = $url;
 
         return PromiseFake::get();
     }

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Ragnarok\Fenrir\Gateway;
 
+use DateTime;
 use Exan\Eventer\Eventer;
 use Exan\Retrier\Retrier;
 use Psr\Log\LoggerInterface;
@@ -14,7 +15,6 @@ use Ragnarok\Fenrir\Constants\MetaEvents;
 use Ragnarok\Fenrir\Constants\WebsocketEvents;
 use Ragnarok\Fenrir\DataMapper;
 use Ragnarok\Fenrir\EventHandler;
-use Ragnarok\Fenrir\Gateway\Events\Meta\MetaEvent;
 use Ragnarok\Fenrir\Gateway\Handlers\HeartbeatAcknowledgedEvent;
 use Ragnarok\Fenrir\Gateway\Handlers\IdentifyHelloEvent;
 use Ragnarok\Fenrir\Gateway\Handlers\IdentifyResumeEvent;
@@ -31,6 +31,7 @@ use Ragnarok\Fenrir\WebsocketInterface;
 use Ratchet\RFC6455\Messaging\MessageInterface;
 use React\EventLoop\LoopInterface;
 use React\EventLoop\TimerInterface;
+use React\Promise\Promise;
 use React\Promise\PromiseInterface;
 
 /**
@@ -157,7 +158,7 @@ class Connection implements ConnectionInterface
         $this->retrier->retry(3, function ($i) {
             $this->logger->info(sprintf('Forceful reconnection attempt %d.', $i));
 
-            return $this->open()->then(function () {
+            return $this->connect(self::DEFAULT_WEBSOCKET_URL)->then(function () {
                 $this->raw->registerOnce(IdentifyHelloEvent::class);
             });
         });
@@ -188,6 +189,19 @@ class Connection implements ConnectionInterface
         $url .= '?' . http_build_query(self::QUERY_DATA);
 
         return $this->websocket->open($url);
+    }
+
+    private function connectShard(string $url): PromiseInterface
+    {
+        $wait = (new DateTime())->add($this->shard->startDelay())->getTimestamp() - (new DateTime())->getTimestamp();
+        $this->logger->info(sprintf('Waiting %d seconds before connecting due to sharding', $wait));
+
+        return new Promise(
+            fn ($resolve) => $this->loop->addTimer(
+                $wait,
+                fn () => $resolve($this->connect($url))
+            )
+        );
     }
 
     public function disconnect(int $code, string $reason): void
@@ -311,7 +325,9 @@ class Connection implements ConnectionInterface
 
     public function open(): PromiseInterface
     {
-        return $this->connect(self::DEFAULT_WEBSOCKET_URL);
+        return isset($this->shard)
+            ? $this->connectShard(self::DEFAULT_WEBSOCKET_URL)
+            : $this->connect(self::DEFAULT_WEBSOCKET_URL);
     }
 
     public function shard(ShardInterface $shard)
