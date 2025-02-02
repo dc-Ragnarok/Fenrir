@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Ragnarok\Fenrir\Orchestration;
 
-use DateTime;
+use Carbon\Carbon;
+use DateTimeInterface;
 use Evenement\EventEmitter;
 use Ragnarok\Fenrir\Parts\GatewayBot;
 use Ragnarok\Fenrir\Parts\SessionStartLimit;
@@ -58,10 +59,10 @@ class Orchestrator extends EventEmitter
         return $this->startSpawning(
             $sessionStartLimits->remaining,
             $sessionStartLimits->max_concurrency,
-            (new DateTime())->setTimestamp($sessionStartLimits->reset_after),
+            Carbon::createFromTimestamp($sessionStartLimits->reset_after),
         )->then(function () use ($sessionStartLimits) {
             $wait = max(
-                $sessionStartLimits->reset_after - (new DateTime())->getTimestamp(),
+                $sessionStartLimits->reset_after - (Carbon::now())->getTimestamp(),
                 1
             );
 
@@ -92,10 +93,10 @@ class Orchestrator extends EventEmitter
     /**
      * @return PromiseInterface<null>
      */
-    private function startSpawning(int $remaining, int $concurrency, DateTime $resetAfter): PromiseInterface
+    private function startSpawning(int $remaining, int $concurrency, DateTimeInterface $resetAfter): PromiseInterface
     {
         return new Promise(function (callable $resolve) use ($remaining, $concurrency, $resetAfter) {
-            $currentDate = new DateTime();
+            $currentDate = Carbon::now();
 
             if ($currentDate > $resetAfter) {
                 $resolve(null);
