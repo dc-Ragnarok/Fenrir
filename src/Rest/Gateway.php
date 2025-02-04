@@ -6,6 +6,7 @@ namespace Ragnarok\Fenrir\Rest;
 
 use Discord\Http\Endpoint;
 use Ragnarok\Fenrir\Parts\Gateway as PartsGateway;
+use Ragnarok\Fenrir\Parts\GatewayBot;
 use React\Promise\PromiseInterface;
 
 /**
@@ -29,7 +30,7 @@ class Gateway extends HttpResource
             $this->http->get(
                 Endpoint::GATEWAY_BOT
             ),
-            PartsGateway::class,
+            GatewayBot::class,
         );
     }
 }
