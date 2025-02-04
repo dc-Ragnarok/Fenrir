@@ -19,11 +19,13 @@ use Ragnarok\Fenrir\Rest\Gateway as HttpGateway;
 class OrchestratorTest extends TestCase
 {
     private const EXPECT_SPAWN = 'expect_spawn';
-    private const EXPECT_WAIT = 'expect_wait';
+    private const EXPECT_RUN_TIMERS = 'expect_run_timers';
 
     /** @dataProvider orchestrationDataProvider */
     public function testItSpawnsBasedOnGatewayBotInfo(array $gatewayBots, array $expectations): void
     {
+        Carbon::setTestNow(Carbon::createFromTimestamp(1));
+
         $loop = new LoopFake();
         /** @var HttpGateway&MockInterface */
         $gateway = Mockery::mock(HttpGateway::class);
@@ -46,16 +48,17 @@ class OrchestratorTest extends TestCase
 
         $orchestrator->init();
 
-        $firstExpectation = array_shift($expectations);
-        $this->assertEquals($firstExpectation['data'], $spawned);
-        $spawned = [];
-
         foreach ($expectations as $expectation) {
             switch ($expectation['type']) {
                 case self::EXPECT_SPAWN: {
-                    $loop->runTimers();
                     $this->assertEquals($expectation['data'], $spawned);
                     $spawned = [];
+                    break;
+                }
+
+                case self::EXPECT_RUN_TIMERS: {
+                    $loop->runTimers($expectation['data'] ?? null);
+                    break;
                 }
             }
         }
@@ -107,7 +110,8 @@ class OrchestratorTest extends TestCase
                             [3, 15],
                             [4, 15],
                         ]
-                    ],
+                        ],
+                    ['type' => self::EXPECT_RUN_TIMERS],
                     [
                         'type' => self::EXPECT_SPAWN,
                         'data' => [
@@ -118,6 +122,7 @@ class OrchestratorTest extends TestCase
                             [9, 15],
                         ]
                     ],
+                    ['type' => self::EXPECT_RUN_TIMERS],
                     [
                         'type' => self::EXPECT_SPAWN,
                         'data' => [
@@ -152,6 +157,7 @@ class OrchestratorTest extends TestCase
                             [4, 18],
                         ]
                     ],
+                    ['type' => self::EXPECT_RUN_TIMERS],
                     [
                         'type' => self::EXPECT_SPAWN,
                         'data' => [
@@ -162,6 +168,7 @@ class OrchestratorTest extends TestCase
                             [9, 18],
                         ]
                     ],
+                    ['type' => self::EXPECT_RUN_TIMERS],
                     [
                         'type' => self::EXPECT_SPAWN,
                         'data' => [
@@ -172,6 +179,7 @@ class OrchestratorTest extends TestCase
                             [14, 18],
                         ]
                     ],
+                    ['type' => self::EXPECT_RUN_TIMERS],
                     [
                         'type' => self::EXPECT_SPAWN,
                         'data' => [
@@ -186,10 +194,18 @@ class OrchestratorTest extends TestCase
             'It spawns only to the limit of remaining before waiting for reset, and fetching new allowance' => [
                 'gatewayBots' => [
                     self::getGatewayBot(
-                        18,
-                        18,
+                        28,
+                        28,
                         15,
-                        Carbon::now()->addMinutes(5),
+                        Carbon::createFromTimestamp(20),
+                        5,
+                    ),
+
+                    self::getGatewayBot(
+                        28,
+                        28,
+                        15,
+                        Carbon::createFromTimestamp(50),
                         5,
                     ),
                 ],
@@ -197,31 +213,70 @@ class OrchestratorTest extends TestCase
                     [
                         'type' => self::EXPECT_SPAWN,
                         'data' => [
-                            [0, 18],
-                            [1, 18],
-                            [2, 18],
-                            [3, 18],
-                            [4, 18],
+                            [0, 28],
+                            [1, 28],
+                            [2, 28],
+                            [3, 28],
+                            [4, 28],
                         ]
                     ],
+                    ['type' => self::EXPECT_RUN_TIMERS],
                     [
                         'type' => self::EXPECT_SPAWN,
                         'data' => [
-                            [5, 18],
-                            [6, 18],
-                            [7, 18],
-                            [8, 18],
-                            [9, 18],
+                            [5, 28],
+                            [6, 28],
+                            [7, 28],
+                            [8, 28],
+                            [9, 28],
                         ]
                     ],
+                    ['type' => self::EXPECT_RUN_TIMERS],
                     [
                         'type' => self::EXPECT_SPAWN,
                         'data' => [
-                            [10, 18],
-                            [11, 18],
-                            [12, 18],
-                            [13, 18],
-                            [14, 18],
+                            [10, 28],
+                            [11, 28],
+                            [12, 28],
+                            [13, 28],
+                            [14, 28],
+                        ]
+                    ],
+                    ['type' => self::EXPECT_RUN_TIMERS],
+                    ['type' => self::EXPECT_RUN_TIMERS, 'data' => 15],
+                    [
+                        'type' => self::EXPECT_SPAWN,
+                        'data' => []
+                    ],
+                    ['type' => self::EXPECT_RUN_TIMERS, 'data' => 10],
+                    [
+                        'type' => self::EXPECT_SPAWN,
+                        'data' => [
+                            [15, 28],
+                            [16, 28],
+                            [17, 28],
+                            [18, 28],
+                            [19, 28],
+                        ]
+                    ],
+                    ['type' => self::EXPECT_RUN_TIMERS],
+                    [
+                        'type' => self::EXPECT_SPAWN,
+                        'data' => [
+                            [20, 28],
+                            [21, 28],
+                            [22, 28],
+                            [23, 28],
+                            [24, 28],
+                        ]
+                    ],
+                    ['type' => self::EXPECT_RUN_TIMERS],
+                    [
+                        'type' => self::EXPECT_SPAWN,
+                        'data' => [
+                            [25, 28],
+                            [26, 28],
+                            [27, 28],
                         ]
                     ],
                 ],

@@ -120,7 +120,7 @@ class Orchestrator extends EventEmitter
             $this->allowSpawning($shards);
 
             $this->loop->addTimer(self::CONCURRENCY_TIMESPAN_SECONDS, function () use ($remaining, $concurrency, $resetAfter, $resolve) {
-                $this->startSpawning($remaining, $concurrency, $resetAfter)->then(fn () => $resolve());
+                $this->startSpawning($remaining, $concurrency, $resetAfter)->then(fn () => $resolve(null));
             });
         });
     }
