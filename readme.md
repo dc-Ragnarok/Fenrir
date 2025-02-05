@@ -18,7 +18,7 @@
 Fenrir is a mostly plain wrapper over Discords APIs/gateway.
 There is no caching built in, this is for the user to implement themselves.
 
-If you're looking for something thats easier to use, has caching OOTB, you could consider [DiscordPHP](https://github.com/discord-php/DiscordPHP).
+If you're looking for something thats easier to use, has caching OOTB, you could consider [Laracord](https://github.com/laracord/framework) or [DiscordPHP](https://github.com/discord-php/DiscordPHP).
 
 Fenrir heavily relies on ReactPHP for async operations. Knowing the basics of async PHP is recommended before diving in.
 
