@@ -60,8 +60,10 @@ class Bucket extends EventEmitter
 
     private function setTimer(): void
     {
-        $this->loop->addTimer($this->seconds, function () {
-            $this->emit('DECREASE_USES');
+        $this->loop->addTimer($this->seconds + 0.1, function () {
+            $this->loop->futureTick(function () {
+                $this->emit('DECREASE_USES');
+            });
         });
     }
 }
