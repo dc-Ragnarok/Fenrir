@@ -22,6 +22,12 @@ If you're looking for something thats easier to use, has caching OOTB, you could
 
 Fenrir heavily relies on ReactPHP for async operations. Knowing the basics of async PHP is recommended before diving in.
 
+## Install
+
+```
+composer require ragnarok/fenrir
+```
+
 ## Example bot
 
 ```php

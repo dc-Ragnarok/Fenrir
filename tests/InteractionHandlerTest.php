@@ -52,10 +52,12 @@ class InteractionHandlerTest extends MockeryTestCase
             ->setName('command')
             ->setDescription('::description::');
 
+        $applicationCommand = new ApplicationCommand();
+        $applicationCommand->id = '::application command id::';
         $discord->rest->globalCommand
             ->shouldReceive('createApplicationCommand')
             ->with('::bot user id::', $commandBuilder)
-            ->andReturn(PromiseFake::get())
+            ->andReturn(PromiseFake::get($applicationCommand))
             ->once();
 
         $interactionHandler->registerGlobalCommand(
@@ -77,10 +79,12 @@ class InteractionHandlerTest extends MockeryTestCase
             ->setName('command')
             ->setDescription('::description::');
 
+        $applicationCommand = new ApplicationCommand();
+        $applicationCommand->id = '::application command id::';
         $discord->rest->guildCommand
             ->shouldReceive('createApplicationCommand')
             ->with('::bot user id::', '::guild id::', $commandBuilder)
-            ->andReturn(PromiseFake::get())
+            ->andReturn(PromiseFake::get($applicationCommand))
             ->once();
 
         $interactionHandler->registerGuildCommand(
