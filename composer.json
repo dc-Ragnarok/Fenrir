@@ -44,11 +44,19 @@
         "cs": "php-cs-fixer fix --using-cache=no --diff --dry-run --allow-risky=yes",
         "csf": "php-cs-fixer fix --using-cache=no --allow-risky=yes",
 
-        "phpunit": "phpunit",
-        "phpunit-coverage": "@php -d xdebug.mode=coverage ./vendor/bin/phpunit --coverage-html .phpunit.cache/cov-html",
+        "test": "phpunit",
+        "test-coverage": "@php -d xdebug.mode=coverage ./vendor/bin/phpunit --coverage-html .phpunit.cache/cov-html",
 
-        "test": "php tests/WebsocketTestServer.php & PID=$!; composer phpunit; kill $PID;",
-        "test-coverage": "php tests/WebsocketTestServer.php & PID=$!; composer phpunit-coverage; kill $PID;"
+        "test-8.1": "docker-compose run php8.1 composer phpunit",
+        "test-8.2": "docker-compose run php8.2 composer phpunit",
+        "test-8.3": "docker-compose run php8.3 composer phpunit",
+        "test-8.4": "docker-compose run php8.4 composer phpunit",
+        "test-all": [
+            "composer test-8.1",
+            "composer test-8.2",
+            "composer test-8.3",
+            "composer test-8.4"
+        ]
     },
     "config": {
         "allow-plugins": {
