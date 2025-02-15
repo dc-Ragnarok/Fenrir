@@ -12,6 +12,7 @@ use React\Promise\PromiseInterface;
 
 class HttpScheduler
 {
+    /** @var HttpProcessor[] */
     private array $processors = [];
 
     public function __construct(
@@ -29,19 +30,19 @@ class HttpScheduler
             $this->log->debug('Creating new HTTP processor', [$key]);
 
             $this->processors[$key] = new HttpProcessor($this->loop, $key, $this->log);
+
+            $this->processors[$key]->on(
+                HttpProcessor::DESTRUCT,
+                function () use ($key) {
+                    $this->log->debug('Destructing HTTP processor', [$key]);
+
+                    unset($this->processors[$key]);
+                }
+            );
         }
 
         /** @var HttpProcessor */
         $processor = &$this->processors[$key];
-
-        $processor->on(
-            HttpProcessor::DESTRUCT,
-            function () use ($key) {
-                $this->log->debug('Destructing HTTP processor', [$key]);
-
-                unset($this->processors[$key]);
-            }
-        );
 
         $this->log->debug('Queueing request', [$key]);
 
