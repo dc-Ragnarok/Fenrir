@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Ragnarok\Fenrir\Rest;
 
-use Discord\Http\Http;
 use Psr\Log\LoggerInterface;
 use Ragnarok\Fenrir\DataMapper;
+use Ragnarok\Fenrir\Http\Scheduler;
 
 /**
  * @SuppressWarnings(PHPMD.TooManyFields)
@@ -31,7 +31,7 @@ class Rest
     public readonly Webhook $webhook;
     public readonly Guild $guild;
 
-    public function __construct(private Http $http, private DataMapper $dataMapper, private LoggerInterface $logger)
+    public function __construct(private Scheduler $http, private DataMapper $dataMapper, private LoggerInterface $logger)
     {
         $args = [$this->http, $this->dataMapper, $this->logger];
 

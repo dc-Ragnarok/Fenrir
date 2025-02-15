@@ -45,7 +45,7 @@ class Guild extends HttpResource
     {
         return $this->mapPromise(
             $this->http->post(
-                Endpoint::GUILDS,
+                Endpoint::bind(Endpoint::GUILDS),
                 $params
             ),
             PartsGuild::class,

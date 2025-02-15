@@ -22,7 +22,7 @@ class ApplicationRoleConnectionMetadata extends HttpResource
     {
         return $this->mapPromise(
             $this->http->get(
-                Endpoint::APPLICATION_ROLE_CONNECTION_METADATA,
+                Endpoint::bind(Endpoint::APPLICATION_ROLE_CONNECTION_METADATA),
             ),
             PartsApplicationRoleConnectionMetadata::class,
         );
@@ -37,7 +37,7 @@ class ApplicationRoleConnectionMetadata extends HttpResource
     {
         return $this->mapPromise(
             $this->http->put(
-                Endpoint::APPLICATION_ROLE_CONNECTION_METADATA,
+                Endpoint::bind(Endpoint::APPLICATION_ROLE_CONNECTION_METADATA),
                 $params,
             ),
             PartsApplicationRoleConnectionMetadata::class,

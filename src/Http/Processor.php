@@ -7,6 +7,7 @@ namespace Ragnarok\Fenrir\Http;
 use Carbon\Carbon;
 use Evenement\EventEmitter;
 use Psr\Http\Message\ResponseInterface;
+use Psr\Log\LoggerInterface;
 use React\EventLoop\LoopInterface;
 
 class Processor extends EventEmitter
@@ -34,6 +35,8 @@ class Processor extends EventEmitter
 
     public function __construct(
         private readonly LoopInterface $loop,
+        private readonly string $key,
+        private readonly LoggerInterface $log,
     ) {
     }
 
@@ -48,12 +51,15 @@ class Processor extends EventEmitter
     {
         if ($this->started) {
             if ($this->initialized) {
+                $this->log->debug('Continueing processor', [$this->key]);
+
                 $this->process();
             }
 
             return;
         }
 
+        $this->log->debug('Starting processor', [$this->key]);
         $this->started = true;
 
         $this->continue();
@@ -66,6 +72,8 @@ class Processor extends EventEmitter
          * @var Job $job
          */
         [$resolver, $job] = array_shift($this->queue);
+
+        $this->log->debug('Performing ratelimit info request', [$this->key]);
 
         $job->execute()
             ->then(function (ResponseInterface $response) use ($resolver) {
@@ -80,6 +88,8 @@ class Processor extends EventEmitter
                 $this->initialized = true;
 
                 $this->loop->addTimer($this->resetAfter, function () {
+                    $this->log->debug('Ratelimits reset', [$this->key]);
+
                     if (empty($this->queue)) {
                         $this->emit(self::DESTRUCT);
                         return;
@@ -110,6 +120,8 @@ class Processor extends EventEmitter
              * @var Job $job
              */
             [$resolver, $job] = array_shift($this->queue);
+
+            $this->log->debug('Performing request', [$this->key]);
 
             $job->execute()
                 ->then(function (ResponseInterface $response) use ($resolver) {

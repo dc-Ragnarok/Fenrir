@@ -22,7 +22,7 @@ class StageInstance extends HttpResource
     {
         return $this->mapPromise(
             $this->http->post(
-                Endpoint::STAGE_INSTANCES,
+                Endpoint::bind(Endpoint::STAGE_INSTANCES),
                 $params,
                 $this->getAuditLogReasonHeader($reason),
             ),

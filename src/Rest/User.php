@@ -43,7 +43,7 @@ class User extends HttpResource
     {
         return $this->mapPromise(
             $this->http->get(
-                Endpoint::USER_CURRENT,
+                Endpoint::bind(Endpoint::USER_CURRENT),
             ),
             PartsUser::class,
         );
@@ -58,7 +58,7 @@ class User extends HttpResource
     {
         return $this->mapPromise(
             $this->http->patch(
-                Endpoint::USER_CURRENT,
+                Endpoint::bind(Endpoint::USER_CURRENT),
                 $params
             ),
             PartsUser::class,
@@ -144,7 +144,7 @@ class User extends HttpResource
     {
         return $this->mapPromise(
             $this->http->post(
-                Endpoint::USER_CURRENT_CHANNELS,
+                Endpoint::bind(Endpoint::USER_CURRENT_CHANNELS),
                 ['recipient_id' => $recipientId],
             ),
             Channel::class,
@@ -160,7 +160,7 @@ class User extends HttpResource
     {
         return $this->mapPromise(
             $this->http->post(
-                Endpoint::USER_CURRENT_CHANNELS,
+                Endpoint::bind(Endpoint::USER_CURRENT_CHANNELS),
                 $params,
             ),
             Channel::class,

@@ -5,24 +5,24 @@ declare(strict_types=1);
 namespace Ragnarok\Fenrir;
 
 use Composer\InstalledVersions;
-use Discord\Http\DriverInterface;
-use Discord\Http\Drivers\React;
-use Discord\Http\Http;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use Ragnarok\Fenrir\Bitwise\Bitwise;
 use Ragnarok\Fenrir\Exceptions\Extension\ExtensionNotFoundException;
 use Ragnarok\Fenrir\Extension\Extension;
 use Ragnarok\Fenrir\Gateway\Connection;
+use Ragnarok\Fenrir\Http\Client;
+use Ragnarok\Fenrir\Http\Scheduler;
 use Ragnarok\Fenrir\Rest\Rest;
 use React\EventLoop\Loop;
 use React\EventLoop\LoopInterface;
+use React\Http\Browser;
 
 class Discord
 {
     private LoopInterface $loop;
     private DataMapper $mapper;
-    private Http $http;
+    private Scheduler $http;
 
     public Rest $rest;
     public Connection $gateway;
@@ -61,18 +61,14 @@ class Discord
         return $this;
     }
 
-    public function withRest(
-        ?DriverInterface $driver = null,
-    ): static {
-        $driver ??= new React(
-            $this->loop
-        );
+    public function withRest(?Browser $browser = null): static
+    {
+        $browser ??= new Browser(loop: $this->loop);
 
-        $this->http = new Http(
-            'Bot ' . $this->token,
+        $this->http = new Scheduler(
             $this->loop,
+            new Client($browser, 'Bot ' . $this->token),
             $this->logger,
-            $driver
         );
 
         $this->rest = new Rest($this->http, $this->mapper, $this->logger);

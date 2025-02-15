@@ -4,11 +4,10 @@ declare(strict_types=1);
 
 namespace Ragnarok\Fenrir\Rest;
 
-use Discord\Http\Http;
 use Psr\Log\LoggerInterface;
 use Ragnarok\Fenrir\DataMapper;
+use Ragnarok\Fenrir\Http\Scheduler;
 use React\Promise\PromiseInterface;
-use Throwable;
 
 /**
  * @SuppressWarnings(PHPMD.NumberOfChildren)
@@ -16,7 +15,7 @@ use Throwable;
 abstract class HttpResource
 {
     public function __construct(
-        protected Http $http,
+        protected Scheduler $http,
         protected DataMapper $dataMapper,
         protected LoggerInterface $logger
     ) {
