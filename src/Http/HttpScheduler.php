@@ -10,13 +10,13 @@ use React\EventLoop\LoopInterface;
 use React\Promise\Promise;
 use React\Promise\PromiseInterface;
 
-class Scheduler
+class HttpScheduler
 {
     private array $processors = [];
 
     public function __construct(
         private readonly LoopInterface $loop,
-        private readonly Client $client,
+        private readonly HttpClient $client,
         private readonly LoggerInterface $log,
     ) {
     }
@@ -28,14 +28,14 @@ class Scheduler
         if (!isset($this->processors[$key])) {
             $this->log->debug('Creating new HTTP processor', [$key]);
 
-            $this->processors[$key] = new Processor($this->loop, $key, $this->log);
+            $this->processors[$key] = new HttpProcessor($this->loop, $key, $this->log);
         }
 
-        /** @var Processor */
+        /** @var HttpProcessor */
         $processor = &$this->processors[$key];
 
         $processor->on(
-            Processor::DESTRUCT,
+            HttpProcessor::DESTRUCT,
             function () use ($key) {
                 $this->log->debug('Destructing HTTP processor', [$key]);
 
@@ -48,7 +48,7 @@ class Scheduler
         return new Promise(function (callable $resolver) use ($processor, $verb, $endpoint, $content, $headers) {
             $processor->queue(
                 $resolver,
-                new Job(
+                new HttpJob(
                     $this->client,
                     $verb,
                     $endpoint,

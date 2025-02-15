@@ -8,7 +8,7 @@ use Discord\Http\Endpoint;
 use React\Http\Browser;
 use React\Promise\PromiseInterface;
 
-class Client
+class HttpClient
 {
     private const BASE_URL = 'https://discord.com/api/';
 

@@ -6,7 +6,7 @@ namespace Ragnarok\Fenrir\Rest;
 
 use Psr\Log\LoggerInterface;
 use Ragnarok\Fenrir\DataMapper;
-use Ragnarok\Fenrir\Http\Scheduler;
+use Ragnarok\Fenrir\Http\HttpScheduler;
 use React\Promise\PromiseInterface;
 
 /**
@@ -15,7 +15,7 @@ use React\Promise\PromiseInterface;
 abstract class HttpResource
 {
     public function __construct(
-        protected Scheduler $http,
+        protected HttpScheduler $http,
         protected DataMapper $dataMapper,
         protected LoggerInterface $logger
     ) {

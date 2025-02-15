@@ -10,7 +10,7 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Log\LoggerInterface;
 use React\EventLoop\LoopInterface;
 
-class Processor extends EventEmitter
+class HttpProcessor extends EventEmitter
 {
     public const DESTRUCT = 'destruct';
 
@@ -42,7 +42,7 @@ class Processor extends EventEmitter
 
     public function queue(
         callable $resolver,
-        Job $job,
+        HttpJob $job,
     ): void {
         $this->queue[] = [$resolver, $job];
     }
@@ -69,7 +69,7 @@ class Processor extends EventEmitter
     {
         /**
          * @var callable $resolver
-         * @var Job $job
+         * @var HttpJob $job
          */
         [$resolver, $job] = array_shift($this->queue);
 
@@ -117,7 +117,7 @@ class Processor extends EventEmitter
 
             /**
              * @var callable $resolver
-             * @var Job $job
+             * @var HttpJob $job
              */
             [$resolver, $job] = array_shift($this->queue);
 

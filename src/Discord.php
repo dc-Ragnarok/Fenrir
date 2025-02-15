@@ -11,8 +11,8 @@ use Ragnarok\Fenrir\Bitwise\Bitwise;
 use Ragnarok\Fenrir\Exceptions\Extension\ExtensionNotFoundException;
 use Ragnarok\Fenrir\Extension\Extension;
 use Ragnarok\Fenrir\Gateway\Connection;
-use Ragnarok\Fenrir\Http\Client;
-use Ragnarok\Fenrir\Http\Scheduler;
+use Ragnarok\Fenrir\Http\HttpClient;
+use Ragnarok\Fenrir\Http\HttpScheduler;
 use Ragnarok\Fenrir\Rest\Rest;
 use React\EventLoop\Loop;
 use React\EventLoop\LoopInterface;
@@ -22,7 +22,7 @@ class Discord
 {
     private LoopInterface $loop;
     private DataMapper $mapper;
-    private Scheduler $http;
+    private HttpScheduler $http;
 
     public Rest $rest;
     public Connection $gateway;
@@ -65,9 +65,9 @@ class Discord
     {
         $browser ??= new Browser(loop: $this->loop);
 
-        $this->http = new Scheduler(
+        $this->http = new HttpScheduler(
             $this->loop,
-            new Client($browser, 'Bot ' . $this->token),
+            new HttpClient($browser, 'Bot ' . $this->token),
             $this->logger,
         );
 
