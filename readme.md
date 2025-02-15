@@ -86,8 +86,8 @@ For more examples, check out the examples directory
 
 ## Support
 
-Fenrir currently supports PHP 8.1 to 8.3.
-Tests should pass nightly 8.4 builds, but this is not a supported usecase.
+Fenrir currently supports PHP 8.1+
+Tests should pass nightly builds of newer versions, but this is not a supported usecase.
 
 If you're using this in a Apache2/Nginx/etc webserver environment, you should probably limit yourself to only using Fenrir's REST capabilities.
 These environments typically don't allow long-running processes.
