@@ -46,9 +46,10 @@ class HttpScheduler
 
         $this->log->debug('Queueing request', [$key]);
 
-        return new Promise(function (callable $resolver) use ($processor, $verb, $endpoint, $content, $headers) {
+        return new Promise(function (callable $resolver, callable $reject) use ($processor, $verb, $endpoint, $content, $headers) {
             $processor->queue(
                 $resolver,
+                $reject,
                 new HttpJob(
                     $this->client,
                     $verb,

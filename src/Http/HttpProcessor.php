@@ -42,9 +42,10 @@ class HttpProcessor extends EventEmitter
 
     public function queue(
         callable $resolver,
+        callable $reject,
         HttpJob $job,
     ): void {
-        $this->queue[] = [$resolver, $job];
+        $this->queue[] = [$resolver, $reject, $job];
     }
 
     public function start()
@@ -69,9 +70,10 @@ class HttpProcessor extends EventEmitter
     {
         /**
          * @var callable $resolver
+         * @var callable $reject
          * @var HttpJob $job
          */
-        [$resolver, $job] = array_shift($this->queue);
+        [$resolver, $reject, $job] = array_shift($this->queue);
 
         $this->log->debug('Performing ratelimit info request', [$this->key]);
 
@@ -99,7 +101,8 @@ class HttpProcessor extends EventEmitter
                 });
 
                 $this->process();
-            });
+            })
+            ->catch($reject);
     }
 
 
@@ -119,14 +122,15 @@ class HttpProcessor extends EventEmitter
              * @var callable $resolver
              * @var HttpJob $job
              */
-            [$resolver, $job] = array_shift($this->queue);
+            [$resolver, $reject, $job] = array_shift($this->queue);
 
             $this->log->debug('Performing request', [$this->key]);
 
             $job->execute()
                 ->then(function (ResponseInterface $response) use ($resolver) {
                     $this->resolve($resolver, $response);
-                });
+                })
+                ->catch($reject);
         }
 
         $this->isProcessing = false;
