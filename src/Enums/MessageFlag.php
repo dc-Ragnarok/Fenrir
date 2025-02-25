@@ -16,4 +16,5 @@ enum MessageFlag: int
     case LOADING = 1 << 7;
     case FAILED_TO_MENTION_SOME_ROLES_IN_THREAD = 1 << 8;
     case SUPPRESS_NOTIFICATIONS = 1 << 12;
+    case COMPONENTS_V2 = 1 << 15;
 }
