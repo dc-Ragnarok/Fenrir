@@ -7,6 +7,7 @@ namespace Ragnarok\Fenrir\Parts;
 use Ragnarok\Fenrir\Enums\ButtonStyle;
 use Ragnarok\Fenrir\Enums\ChannelType;
 use Ragnarok\Fenrir\Enums\MessageComponentType;
+use Ragnarok\Fenrir\Enums\SeparatorSpacingSize;
 use Ragnarok\Fenrir\Mapping\ArrayMapping;
 
 class Component
@@ -38,4 +39,18 @@ class Component
     public ?int $max_values;
     public ?bool $required;
     public ?string $value;
+    public ?string $content;
+    public ?string $description;
+    public ?Component $accessory;
+    public ?UnfurledMediaItem $media;
+    public ?UnfurledMediaItem $file;
+    public ?bool $spoiler;
+    /**
+     * @var UnfurledMediaItem[]
+     */
+    #[ArrayMapping(UnfurledMediaItem::class)]
+    public ?array $items;
+    public ?bool $divider;
+    public ?SeparatorSpacingSize $spacing;
+    public ?int $accent_color;
 }

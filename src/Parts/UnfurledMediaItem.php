@@ -11,11 +11,11 @@ class UnfurledMediaItem
 {
     public string $url;
     public string $proxy_url;
-    public int $width;
-    public int $height;
-    public string $placeholder;
-    public int $placeholder_version;
-    public string $content_type;
+    public ?int $width;
+    public ?int $height;
+    public ?string $placeholder;
+    public ?int $placeholder_version;
+    public ?string $content_type;
     public UnfurledMediaItemLoadingState $loading_state;
     public Bitwise $flags;
 }
