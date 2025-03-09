@@ -20,6 +20,7 @@ class HttpScheduler
         private readonly HttpClient $client,
         private readonly LoggerInterface $log,
     ) {
+        echo 'Constructing HttpScheduler object', PHP_EOL;
     }
 
     public function request(Verb $verb, Endpoint $endpoint, mixed $content = null, array $headers = []): PromiseInterface
@@ -41,13 +42,10 @@ class HttpScheduler
             );
         }
 
-        /** @var HttpProcessor */
-        $processor = &$this->processors[$key];
-
         $this->log->debug('Queueing request', [$key]);
 
-        return new Promise(function (callable $resolver, callable $reject) use ($processor, $verb, $endpoint, $content, $headers) {
-            $processor->queue(
+        return new Promise(function (callable $resolver, callable $reject) use ($key, $verb, $endpoint, $content, $headers) {
+            $this->processors[$key]->queue(
                 $resolver,
                 $reject,
                 new HttpJob(
@@ -59,7 +57,7 @@ class HttpScheduler
                 ),
             );
 
-            $processor->start();
+            $this->processors[$key]->start();
         });
     }
 
@@ -106,5 +104,10 @@ class HttpScheduler
     public function patch(Endpoint $endpoint, mixed $content = null, array $headers = []): PromiseInterface
     {
         return $this->request(Verb::PATCH, $endpoint, $content, $headers);
+    }
+
+    public function __destruct()
+    {
+        echo 'Destructing HttpScheduler object', PHP_EOL;
     }
 }

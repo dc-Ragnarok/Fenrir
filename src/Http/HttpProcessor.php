@@ -38,6 +38,7 @@ class HttpProcessor extends EventEmitter
         private readonly string $key,
         private readonly LoggerInterface $log,
     ) {
+        echo 'Constructing HttpProcessor object', PHP_EOL;
     }
 
     public function queue(
@@ -102,7 +103,10 @@ class HttpProcessor extends EventEmitter
 
                 $this->process();
             })
-            ->catch($reject);
+            ->catch($reject)
+            ->finally(function () use (&$job) {
+                unset($job);
+            });
     }
 
 
@@ -145,5 +149,10 @@ class HttpProcessor extends EventEmitter
             : json_decode($body);
 
         $resolver($result);
+    }
+
+    public function __destruct()
+    {
+        echo 'Destructing HTTP processor object', PHP_EOL;
     }
 }
