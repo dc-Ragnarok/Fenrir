@@ -76,7 +76,7 @@ class User extends HttpResource
         ?int $limit = null,
         ?bool $withCounts = null
     ): PromiseInterface {
-        $endpoint = Endpoint::bind(Endpoint::USER_CURRENT_GUILD);
+        $endpoint = Endpoint::bind(Endpoint::USER_CURRENT_GUILDS);
 
         if ($before) {
             $endpoint->addQuery('before', $before);
