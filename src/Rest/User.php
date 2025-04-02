@@ -68,7 +68,7 @@ class User extends HttpResource
     /**
      * @see https://discord.com/developers/docs/resources/user#get-current-user-guilds
      *
-     * @return PromiseInterface<\Ragnarok\Fenrir\Parts\Guild>
+     * @return PromiseInterface<\Ragnarok\Fenrir\Parts\Guild[]>
      */
     public function getCurrentUserGuilds(
         ?string $before = null,
