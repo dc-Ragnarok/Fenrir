@@ -63,13 +63,14 @@ class Discord
 
     public function withRest(
         ?DriverInterface $driver = null,
+        bool $bot = true,
     ): static {
         $driver ??= new React(
             $this->loop
         );
 
         $this->http = new Http(
-            'Bot ' . $this->token,
+            $bot ? 'Bot ' : 'Bearer ' . $this->token,
             $this->loop,
             $this->logger,
             $driver
