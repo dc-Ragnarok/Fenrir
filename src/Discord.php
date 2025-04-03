@@ -11,6 +11,7 @@ use Discord\Http\Http;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use Ragnarok\Fenrir\Bitwise\Bitwise;
+use Ragnarok\Fenrir\Enums\TokenType;
 use Ragnarok\Fenrir\Exceptions\Extension\ExtensionNotFoundException;
 use Ragnarok\Fenrir\Extension\Extension;
 use Ragnarok\Fenrir\Gateway\Connection;
@@ -63,14 +64,14 @@ class Discord
 
     public function withRest(
         ?DriverInterface $driver = null,
-        bool $bot = true,
+        TokenType $tokenType = TokenType::BOT,
     ): static {
         $driver ??= new React(
             $this->loop
         );
 
         $this->http = new Http(
-            $bot ? 'Bot ' : 'Bearer ' . $this->token,
+            $tokenType->value . ' ' . $this->token,
             $this->loop,
             $this->logger,
             $driver
