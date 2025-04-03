@@ -68,7 +68,7 @@ class User extends HttpResource
     /**
      * @see https://discord.com/developers/docs/resources/user#get-current-user-guilds
      *
-     * @return PromiseInterface<\Ragnarok\Fenrir\Parts\Guild>
+     * @return PromiseInterface<\Ragnarok\Fenrir\Parts\Guild[]>
      */
     public function getCurrentUserGuilds(
         ?string $before = null,
@@ -76,7 +76,7 @@ class User extends HttpResource
         ?int $limit = null,
         ?bool $withCounts = null
     ): PromiseInterface {
-        $endpoint = Endpoint::bind(Endpoint::USER_CURRENT_GUILD);
+        $endpoint = Endpoint::bind(Endpoint::USER_CURRENT_GUILDS);
 
         if ($before) {
             $endpoint->addQuery('before', $before);
