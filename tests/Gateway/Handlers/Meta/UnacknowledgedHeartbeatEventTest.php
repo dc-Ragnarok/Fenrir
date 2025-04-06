@@ -31,7 +31,7 @@ class UnacknowledgedHeartbeatEventTest extends MockeryTestCase
         $connection
             ->shouldReceive()
             ->disconnect()
-            ->with(GatewayCloseCodes::LIB_INSTANTIATED_RESUME, Mockery::type('string'))
+            ->with(GatewayCloseCodes::LIB_INSTANTIATED_RECONNECT, Mockery::type('string'))
             ->once();
 
         $event->execute();
