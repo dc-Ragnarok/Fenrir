@@ -112,7 +112,7 @@ class Connection implements ConnectionInterface
         $description = GatewayCloseCodes::DESCRIPTIONS[$code] ?? sprintf('Unknown error code %d - %s', $code, $reason);
         $isUserError = GatewayCloseCodes::USER_ERROR[$code] ?? false;
         $isRecoverable = GatewayCloseCodes::RECOVERABLE[$code] ?? false;
-        $isResumable = GatewayCloseCodes::RECOVERABLE[$code] ?? false;
+        $isResumable = GatewayCloseCodes::RESUMABLE[$code] ?? false;
 
         $message = $description . ' '
             . (
