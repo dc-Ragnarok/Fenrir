@@ -53,7 +53,7 @@ class Connection implements ConnectionInterface
     public EventHandler $events;
 
     private TimerInterface $heartbeatTimer;
-    private TimerInterface $unacknowledgedHeartbeatTimer;
+    private ?TimerInterface $unacknowledgedHeartbeatTimer;
 
     private ShardInterface $shard;
 
@@ -71,6 +71,8 @@ class Connection implements ConnectionInterface
         $this->events = new EventHandler($mapper);
 
         $this->websocket->on(WebsocketEvents::MESSAGE, function (MessageInterface $message) {
+            $this->acknowledgeHeartbeat();
+
             $parsedMessage = json_decode((string) $message, depth: 1024);
             if ($parsedMessage === null) {
                 return;
@@ -243,6 +245,7 @@ class Connection implements ConnectionInterface
     {
         if (isset($this->unacknowledgedHeartbeatTimer)) {
             $this->loop->cancelTimer($this->unacknowledgedHeartbeatTimer);
+            $this->unacknowledgedHeartbeatTimer = null;
         }
     }
 
