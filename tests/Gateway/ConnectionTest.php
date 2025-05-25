@@ -80,7 +80,7 @@ class ConnectionTest extends MockeryTestCase
 
         $websocket->expects()
             ->open()
-            ->with('::ws url::?v=10')
+            ->with('::ws url::?' . http_build_query(Connection::QUERY_DATA))
             ->andReturns(PromiseFake::get('::return::'))
             ->once();
 
@@ -556,7 +556,7 @@ class ConnectionTest extends MockeryTestCase
 
         $websocket->emit(WebsocketEvents::CLOSE, [$code, 'reason']);
 
-        $this->assertEquals([Connection::DEFAULT_WEBSOCKET_URL . '?v=' . Connection::DISCORD_VERSION], $websocket->openings);
+        $this->assertEquals([Connection::DEFAULT_WEBSOCKET_URL . '?' . http_build_query(Connection::QUERY_DATA)], $websocket->openings);
     }
 
     public static function reconnectCloseCodesProvider(): array
@@ -606,7 +606,7 @@ class ConnectionTest extends MockeryTestCase
 
         $websocket->emit(WebsocketEvents::CLOSE, [$code, 'reason']);
 
-        $this->assertEquals(['::resume url::?v=' . Connection::DISCORD_VERSION], $websocket->openings);
+        $this->assertEquals(['::resume url::?' . http_build_query(Connection::QUERY_DATA)], $websocket->openings);
     }
 
     /**
@@ -641,7 +641,7 @@ class ConnectionTest extends MockeryTestCase
 
         $websocket->emit(WebsocketEvents::CLOSE, [$code, 'reason']);
 
-        $this->assertEquals([Connection::DEFAULT_WEBSOCKET_URL . '?v=' . Connection::DISCORD_VERSION], $websocket->openings);
+        $this->assertEquals([Connection::DEFAULT_WEBSOCKET_URL . '?' . http_build_query(Connection::QUERY_DATA)], $websocket->openings);
     }
 
     /**
@@ -676,7 +676,7 @@ class ConnectionTest extends MockeryTestCase
 
         $websocket->emit(WebsocketEvents::CLOSE, [$code, 'reason']);
 
-        $this->assertEquals([Connection::DEFAULT_WEBSOCKET_URL . '?v=' . Connection::DISCORD_VERSION], $websocket->openings);
+        $this->assertEquals([Connection::DEFAULT_WEBSOCKET_URL . '?' . http_build_query(Connection::QUERY_DATA)], $websocket->openings);
     }
 
     public static function resumeCloseCodesProvider(): array
