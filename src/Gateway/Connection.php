@@ -31,6 +31,7 @@ use Ratchet\RFC6455\Messaging\MessageInterface;
 use React\EventLoop\LoopInterface;
 use React\EventLoop\TimerInterface;
 use React\Promise\PromiseInterface;
+use InflateContext;
 
 /**
  * @SuppressWarnings(PHPMD.TooManyPublicMethods)
@@ -58,7 +59,7 @@ class Connection implements ConnectionInterface
     private ShardInterface $shard;
 
     private string $buffer = '';
-    private $inflate;
+    private InflateContext|false $inflate;
 
     public function __construct(
         private LoopInterface $loop,
