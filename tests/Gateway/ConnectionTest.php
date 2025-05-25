@@ -468,8 +468,16 @@ class ConnectionTest extends MockeryTestCase
             ->registerOnce()
             ->withAnyArgs();
 
+        $loop = Mockery::mock(LoopInterface::class);
+        $loop->shouldReceive('futureTick')
+            ->once()
+            ->with(Mockery::on(function ($callback) {
+                $callback(); // вызываем вручную
+                return true;
+            }));
+
         $connection = new Connection(
-            Mockery::mock(LoopInterface::class),
+            $loop,
             '::token::',
             new Bitwise(),
             new DataMapper(new NullLogger()),
@@ -493,7 +501,7 @@ class ConnectionTest extends MockeryTestCase
         $message = Mockery::mock(MessageInterface::class);
         $message->expects()
             ->getPayload()
-            ->andReturns('{"op": 1}')
+            ->andReturns(zlib_encode('{"op":1}', ZLIB_ENCODING_DEFLATE) . "\x00\x00\xff\xff")
             ->once();
 
         $websocket->emit(WebsocketEvents::MESSAGE, [$message]);
