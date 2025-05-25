@@ -492,7 +492,7 @@ class ConnectionTest extends MockeryTestCase
         /** @var MessageInterface&MockInterface */
         $message = Mockery::mock(MessageInterface::class);
         $message->expects()
-            ->__toString()
+            ->getPayload()
             ->andReturns('{"op": 1}')
             ->once();
 
