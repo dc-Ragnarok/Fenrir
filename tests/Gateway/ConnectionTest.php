@@ -472,7 +472,7 @@ class ConnectionTest extends MockeryTestCase
         $loop->shouldReceive('futureTick')
             ->once()
             ->with(Mockery::on(function ($callback) {
-                $callback(); // вызываем вручную
+                $callback();
                 return true;
             }));
 
