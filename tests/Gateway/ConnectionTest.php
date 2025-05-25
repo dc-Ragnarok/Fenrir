@@ -35,6 +35,12 @@ use function React\Async\await;
 
 class ConnectionTest extends MockeryTestCase
 {
+    private const EXPECTED_QUERY_PARAMS = [
+        'v' => 10,
+        'encoding' => 'json',
+        'compress' => 'zlib-stream'
+    ];
+
     public function testGetDefaultUrl(): void
     {
         $connection = new Connection(
@@ -80,7 +86,7 @@ class ConnectionTest extends MockeryTestCase
 
         $websocket->expects()
             ->open()
-            ->with('::ws url::?v=10')
+            ->with('::ws url::?' . http_build_query(self::EXPECTED_QUERY_PARAMS))
             ->andReturns(PromiseFake::get('::return::'))
             ->once();
 
@@ -462,8 +468,16 @@ class ConnectionTest extends MockeryTestCase
             ->registerOnce()
             ->withAnyArgs();
 
+        $loop = Mockery::mock(LoopInterface::class);
+        $loop->shouldReceive('futureTick')
+            ->once()
+            ->with(Mockery::on(function ($callback) {
+                $callback();
+                return true;
+            }));
+
         $connection = new Connection(
-            Mockery::mock(LoopInterface::class),
+            $loop,
             '::token::',
             new Bitwise(),
             new DataMapper(new NullLogger()),
@@ -486,8 +500,8 @@ class ConnectionTest extends MockeryTestCase
         /** @var MessageInterface&MockInterface */
         $message = Mockery::mock(MessageInterface::class);
         $message->expects()
-            ->__toString()
-            ->andReturns('{"op": 1}')
+            ->getPayload()
+            ->andReturns(zlib_encode('{"op":1}', ZLIB_ENCODING_DEFLATE) . "\x00\x00\xff\xff")
             ->once();
 
         $websocket->emit(WebsocketEvents::MESSAGE, [$message]);
@@ -556,7 +570,7 @@ class ConnectionTest extends MockeryTestCase
 
         $websocket->emit(WebsocketEvents::CLOSE, [$code, 'reason']);
 
-        $this->assertEquals([Connection::DEFAULT_WEBSOCKET_URL . '?v=' . Connection::DISCORD_VERSION], $websocket->openings);
+        $this->assertEquals([Connection::DEFAULT_WEBSOCKET_URL . '?' . http_build_query(self::EXPECTED_QUERY_PARAMS)], $websocket->openings);
     }
 
     public static function reconnectCloseCodesProvider(): array
@@ -606,7 +620,7 @@ class ConnectionTest extends MockeryTestCase
 
         $websocket->emit(WebsocketEvents::CLOSE, [$code, 'reason']);
 
-        $this->assertEquals(['::resume url::?v=' . Connection::DISCORD_VERSION], $websocket->openings);
+        $this->assertEquals(['::resume url::?' . http_build_query(self::EXPECTED_QUERY_PARAMS)], $websocket->openings);
     }
 
     /**
@@ -641,7 +655,7 @@ class ConnectionTest extends MockeryTestCase
 
         $websocket->emit(WebsocketEvents::CLOSE, [$code, 'reason']);
 
-        $this->assertEquals([Connection::DEFAULT_WEBSOCKET_URL . '?v=' . Connection::DISCORD_VERSION], $websocket->openings);
+        $this->assertEquals([Connection::DEFAULT_WEBSOCKET_URL . '?' . http_build_query(self::EXPECTED_QUERY_PARAMS)], $websocket->openings);
     }
 
     /**
@@ -676,7 +690,7 @@ class ConnectionTest extends MockeryTestCase
 
         $websocket->emit(WebsocketEvents::CLOSE, [$code, 'reason']);
 
-        $this->assertEquals([Connection::DEFAULT_WEBSOCKET_URL . '?v=' . Connection::DISCORD_VERSION], $websocket->openings);
+        $this->assertEquals([Connection::DEFAULT_WEBSOCKET_URL . '?' . http_build_query(self::EXPECTED_QUERY_PARAMS)], $websocket->openings);
     }
 
     public static function resumeCloseCodesProvider(): array
