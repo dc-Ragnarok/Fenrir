@@ -14,7 +14,6 @@ use Ragnarok\Fenrir\Constants\MetaEvents;
 use Ragnarok\Fenrir\Constants\WebsocketEvents;
 use Ragnarok\Fenrir\DataMapper;
 use Ragnarok\Fenrir\EventHandler;
-use Ragnarok\Fenrir\Gateway\Events\Meta\MetaEvent;
 use Ragnarok\Fenrir\Gateway\Handlers\HeartbeatAcknowledgedEvent;
 use Ragnarok\Fenrir\Gateway\Handlers\IdentifyHelloEvent;
 use Ragnarok\Fenrir\Gateway\Handlers\IdentifyResumeEvent;
@@ -41,21 +40,25 @@ class Connection implements ConnectionInterface
     public const DISCORD_VERSION = 10;
     public const DEFAULT_WEBSOCKET_URL = 'wss://gateway.discord.gg/';
 
-    private const QUERY_DATA = ['v' => self::DISCORD_VERSION];
+    private const QUERY_DATA = [
+        'v' => self::DISCORD_VERSION,
+        'encoding' => 'json',
+        'compress' => 'zlib-stream'
+    ];
 
     private const HEARTBEAT_ACK_TIMEOUT = 2.5;
 
     private ?int $sequence = null;
-
     private ?string $sessionId = null;
     private ?string $resumeUrl = null;
 
     public EventHandler $events;
-
     private TimerInterface $heartbeatTimer;
     private TimerInterface $unacknowledgedHeartbeatTimer;
-
     private ShardInterface $shard;
+
+    private string $buffer = '';
+    private $inflate;
 
     public function __construct(
         private LoopInterface $loop,
@@ -69,21 +72,48 @@ class Connection implements ConnectionInterface
         private Retrier $retrier = new Retrier(),
     ) {
         $this->events = new EventHandler($mapper);
+        $this->resetInflater();
 
         $this->websocket->on(WebsocketEvents::MESSAGE, function (MessageInterface $message) {
-            $parsedMessage = json_decode((string) $message, depth: 1024);
-            if ($parsedMessage === null) {
+            $this->buffer .= $message->getPayload();
+
+            if (!str_ends_with($this->buffer, "\x00\x00\xff\xff")) {
                 return;
             }
 
-            $payload = $this->mapper->map($parsedMessage, Payload::class);
+            $json = @inflate_add($this->inflate, $this->buffer);
+            $this->buffer = '';
 
-            $this->raw->emit((string) $payload->op, [$this, $payload, $this->logger]);
+            if ($json === false) {
+                $this->logger->warning('ZLIB decompression error');
+                return;
+            }
+
+            $parsed = json_decode($json);
+            if ($parsed === null) {
+                $this->logger->warning('Failed to decode JSON payload');
+                return;
+            }
+
+            $payload = $this->mapper->map($parsed, Payload::class);
+
+            $this->loop->futureTick(function () use ($payload) {
+                $this->raw->emit((string) $payload->op, [$this, $payload, $this->logger]);
+            });
         });
 
-        $this->websocket->on(WebsocketEvents::CLOSE, $this->handleClose(...));
+        $this->websocket->on(WebsocketEvents::CLOSE, function (int $code, string $reason) {
+            $this->resetInflater();
+            $this->handleClose($code, $reason);
+        });
 
         $this->registerEvents();
+    }
+
+    private function resetInflater(): void
+    {
+        $this->inflate = inflate_init(ZLIB_ENCODING_DEFLATE);
+        $this->buffer = '';
     }
 
     private function registerEvents(): void
