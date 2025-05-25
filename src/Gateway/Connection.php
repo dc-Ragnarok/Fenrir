@@ -81,7 +81,7 @@ class Connection implements ConnectionInterface
                 return;
             }
 
-            $json = @inflate_add($this->inflate, $this->buffer);
+            $json = inflate_add($this->inflate, $this->buffer);
             $this->buffer = '';
 
             if ($json === false) {
