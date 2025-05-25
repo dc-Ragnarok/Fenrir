@@ -35,6 +35,12 @@ use function React\Async\await;
 
 class ConnectionTest extends MockeryTestCase
 {
+    private const EXPECTED_QUERY_PARAMS = [
+        'v' => 10,
+        'encoding' => 'json',
+        'compress' => 'zlib-stream'
+    ];
+
     public function testGetDefaultUrl(): void
     {
         $connection = new Connection(
@@ -80,7 +86,7 @@ class ConnectionTest extends MockeryTestCase
 
         $websocket->expects()
             ->open()
-            ->with('::ws url::?' . http_build_query(Connection::QUERY_DATA))
+            ->with('::ws url::?' . http_build_query(self::EXPECTED_QUERY_PARAMS))
             ->andReturns(PromiseFake::get('::return::'))
             ->once();
 
@@ -556,7 +562,7 @@ class ConnectionTest extends MockeryTestCase
 
         $websocket->emit(WebsocketEvents::CLOSE, [$code, 'reason']);
 
-        $this->assertEquals([Connection::DEFAULT_WEBSOCKET_URL . '?' . http_build_query(Connection::QUERY_DATA)], $websocket->openings);
+        $this->assertEquals([Connection::DEFAULT_WEBSOCKET_URL . '?' . http_build_query(self::EXPECTED_QUERY_PARAMS)], $websocket->openings);
     }
 
     public static function reconnectCloseCodesProvider(): array
@@ -606,7 +612,7 @@ class ConnectionTest extends MockeryTestCase
 
         $websocket->emit(WebsocketEvents::CLOSE, [$code, 'reason']);
 
-        $this->assertEquals(['::resume url::?' . http_build_query(Connection::QUERY_DATA)], $websocket->openings);
+        $this->assertEquals(['::resume url::?' . http_build_query(self::EXPECTED_QUERY_PARAMS)], $websocket->openings);
     }
 
     /**
@@ -641,7 +647,7 @@ class ConnectionTest extends MockeryTestCase
 
         $websocket->emit(WebsocketEvents::CLOSE, [$code, 'reason']);
 
-        $this->assertEquals([Connection::DEFAULT_WEBSOCKET_URL . '?' . http_build_query(Connection::QUERY_DATA)], $websocket->openings);
+        $this->assertEquals([Connection::DEFAULT_WEBSOCKET_URL . '?' . http_build_query(self::EXPECTED_QUERY_PARAMS)], $websocket->openings);
     }
 
     /**
@@ -676,7 +682,7 @@ class ConnectionTest extends MockeryTestCase
 
         $websocket->emit(WebsocketEvents::CLOSE, [$code, 'reason']);
 
-        $this->assertEquals([Connection::DEFAULT_WEBSOCKET_URL . '?' . http_build_query(Connection::QUERY_DATA)], $websocket->openings);
+        $this->assertEquals([Connection::DEFAULT_WEBSOCKET_URL . '?' . http_build_query(self::EXPECTED_QUERY_PARAMS)], $websocket->openings);
     }
 
     public static function resumeCloseCodesProvider(): array
