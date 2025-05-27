@@ -28,7 +28,7 @@
         "exan/reactphp-retrier": "^2.0",
         "freezemage0/array_find": "^1.0",
         "react/promise": "^3",
-        "exan/pawl": "^0.4.4"
+        "ratchet/pawl": "^0.4.3"
     },
     "require-dev": {
         "monolog/monolog": "^3.2",
