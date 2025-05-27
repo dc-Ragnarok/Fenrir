@@ -78,7 +78,10 @@ class Connection implements ConnectionInterface
 
             $payload = $this->mapper->map($parsedMessage, Payload::class);
 
-            $this->raw->emit((string) $payload->op, [$this, $payload, $this->logger]);
+            $this->loop->futureTick(function () use ($payload) {
+                // Moving this to future tick improves stability
+                $this->raw->emit((string) $payload->op, [$this, $payload, $this->logger]);
+            });
         });
 
         $this->websocket->on(WebsocketEvents::CLOSE, $this->handleClose(...));
