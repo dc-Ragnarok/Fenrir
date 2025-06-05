@@ -7,6 +7,8 @@ namespace Ragnarok\Fenrir;
 use Evenement\EventEmitter;
 use JsonSerializable;
 use Psr\Log\LoggerInterface;
+use Ragnarok\Fenrir\Buffer\BufferInterface;
+use Ragnarok\Fenrir\Buffer\Passthrough;
 use Ragnarok\Fenrir\Constants\WebsocketEvents;
 use Ragnarok\Fenrir\Exceptions\Websocket\ConnectionFailedException;
 use Ragnarok\Fenrir\Exceptions\Websocket\ConnectionNotInitializedException;
@@ -30,8 +32,12 @@ class Websocket extends EventEmitter implements WebsocketInterface
 
     private Bucket $bucket;
 
-    public function __construct(private int $timeout, private LoggerInterface $logger, private array $sendLoggerBlacklist = [])
-    {
+    public function __construct(
+        private int $timeout,
+        private LoggerInterface $logger,
+        private array $sendLoggerBlacklist = [],
+        private readonly BufferInterface $buffer = new Passthrough(),
+    ) {
         $this->loop = Loop::get();
         $this->socketConnector = new SocketConnector(['timeout' => $timeout]);
 
@@ -63,9 +69,13 @@ class Websocket extends EventEmitter implements WebsocketInterface
 
                 $this->logger->info('Client: Connection esablished', ['url' => $url]);
 
-                $connection->on('message', function (MessageInterface $message) {
+                $this->buffer->onCompleteMessage(function (string $message) {
                     $this->logger->debug('Server: New message', ['message' => $message]);
                     $this->emit(WebsocketEvents::MESSAGE, [$message]);
+                });
+
+                $connection->on('message', function (MessageInterface $message) {
+                    $this->buffer->partialMessage((string) $message);
                 });
 
                 $connection->on('close', function (int $code, string $reason = '') {
@@ -136,5 +146,10 @@ class Websocket extends EventEmitter implements WebsocketInterface
     public function sendAsJson(array|JsonSerializable $item, bool $useBucket): void
     {
         $this->send(json_encode($item), $useBucket);
+    }
+
+    public function getCompressor(): BufferInterface
+    {
+        return $this->buffer;
     }
 }

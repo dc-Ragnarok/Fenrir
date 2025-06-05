@@ -6,6 +6,7 @@ namespace Ragnarok\Fenrir;
 
 use Evenement\EventEmitterInterface;
 use JsonSerializable;
+use Ragnarok\Fenrir\Buffer\BufferInterface;
 use React\Promise\PromiseInterface;
 
 interface WebsocketInterface extends EventEmitterInterface
@@ -14,4 +15,5 @@ interface WebsocketInterface extends EventEmitterInterface
     public function close(int $code, string $reason): void;
     public function send(string $message, bool $useBucket = true): void;
     public function sendAsJson(array|JsonSerializable $item, bool $useBucket): void;
+    public function getCompressor(): BufferInterface;
 }
