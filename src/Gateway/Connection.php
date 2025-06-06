@@ -69,8 +69,8 @@ class Connection implements ConnectionInterface
     ) {
         $this->events = new EventHandler($mapper);
 
-        $this->websocket->on(WebsocketEvents::MESSAGE, function (MessageInterface $message) {
-            $parsedMessage = json_decode((string) $message, depth: 1024);
+        $this->websocket->on(WebsocketEvents::MESSAGE, function (string $message) {
+            $parsedMessage = json_decode($message, depth: 1024);
             if ($parsedMessage === null) {
                 return;
             }

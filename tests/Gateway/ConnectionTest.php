@@ -465,14 +465,7 @@ class ConnectionTest extends MockeryTestCase
                 return true;
             }));
 
-        /** @var MessageInterface&MockInterface */
-        $message = Mockery::mock(MessageInterface::class);
-        $message->expects()
-            ->__toString()
-            ->andReturns('{"op": 1}')
-            ->once();
-
-        $websocket->emit(WebsocketEvents::MESSAGE, [$message]);
+        $websocket->emit(WebsocketEvents::MESSAGE, ['{"op": 1}']);
     }
 
     public function testItSendsPresenceUpdates()
