@@ -66,47 +66,38 @@ class ConnectionTest extends MockeryTestCase
 
     public function testConnect(): void
     {
+        $websocket = new WebsocketFake();
+
         $connection = new Connection(
             $this->getLoop(),
             '::token::',
             new Bitwise(),
             new DataMapper(new NullLogger()),
-            new WebsocketFake(),
+            $websocket,
         );
 
-        /** @var MockInterface&Websocket */
-        $websocket = Mockery::mock(Websocket::class);
-        (new ReflectionProperty($connection, 'websocket'))->setValue($connection, $websocket);
 
-        $websocket->expects()
-            ->open()
-            ->with('::ws url::?v=10')
-            ->andReturns(PromiseFake::get('::return::'))
-            ->once();
+        await($connection->connect('::ws url::'));
 
-        $this->assertEquals('::return::', await($connection->connect('::ws url::')));
+        $this->assertEquals(['::ws url::?v=10'], $websocket->openings);
     }
 
     public function testDisconnect(): void
     {
+        $websocket = new WebsocketFake();
+
         $connection = new Connection(
             $this->getLoop(),
             '::token::',
             new Bitwise(),
             new DataMapper(new NullLogger()),
-            new WebsocketFake(),
+            $websocket,
         );
 
-        /** @var MockInterface&Websocket */
-        $websocket = Mockery::mock(Websocket::class);
-        (new ReflectionProperty($connection, 'websocket'))->setValue($connection, $websocket);
-
-        $websocket->expects()
-            ->close()
-            ->with(1234, '::reason::')
-            ->once();
-
         $connection->disconnect(1234, '::reason::');
+
+        $this->assertCount(1, $websocket->closings);
+        $this->assertEquals([1234, '::reason::'], $websocket->closings[0]);
     }
 
     public function testSessionId(): void
@@ -425,28 +416,19 @@ class ConnectionTest extends MockeryTestCase
 
     public function testOpen(): void
     {
+        $websocket = new WebsocketFake();
         $connection = new Connection(
             $this->getLoop(),
             '::token::',
             new Bitwise(),
             new DataMapper(new NullLogger()),
-            new WebsocketFake(),
+            $websocket,
         );
 
-        /** @var MockInterface&Websocket */
-        $websocket = Mockery::mock(Websocket::class);
-        (new ReflectionProperty($connection, 'websocket'))->setValue($connection, $websocket);
-
-        $websocket->expects()
-            ->open()
-            ->with(Mockery::on(function (string $url) {
-                $this->assertMatchesRegularExpression('/wss:\/\/gateway.discord.gg\/\?v=(\d+)/', $url);
-
-                return true;
-            }))
-            ->once();
-
         $connection->open();
+
+        $this->assertCount(1, $websocket->openings);
+        $this->assertMatchesRegularExpression('/wss:\/\/gateway.discord.gg\/\?v=(\d+)/', $websocket->openings[0]);
     }
 
     public function testItEmitsGatewayMessagesAsEvents(): void

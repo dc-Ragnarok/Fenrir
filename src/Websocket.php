@@ -148,7 +148,7 @@ class Websocket extends EventEmitter implements WebsocketInterface
         $this->send(json_encode($item), $useBucket);
     }
 
-    public function getCompressor(): BufferInterface
+    public function getBuffer(): BufferInterface
     {
         return $this->buffer;
     }

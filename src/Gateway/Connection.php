@@ -189,7 +189,7 @@ class Connection implements ConnectionInterface
     {
         $queryData = [
             ...self::QUERY_DATA,
-            $this->websocket->getCompressor()->additionalQueryData(),
+            $this->websocket->getBuffer()->additionalQueryData(),
         ];
 
         $url .= '?' . http_build_query($queryData);

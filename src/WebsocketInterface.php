@@ -15,5 +15,5 @@ interface WebsocketInterface extends EventEmitterInterface
     public function close(int $code, string $reason): void;
     public function send(string $message, bool $useBucket = true): void;
     public function sendAsJson(array|JsonSerializable $item, bool $useBucket): void;
-    public function getCompressor(): BufferInterface;
+    public function getBuffer(): BufferInterface;
 }
