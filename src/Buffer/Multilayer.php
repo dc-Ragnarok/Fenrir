@@ -18,10 +18,10 @@ class Multilayer implements BufferInterface
         $keys = array_keys($buffers);
 
         foreach ($keys as $key => $bufferKey) {
-            $buffer = &$this->buffers[$bufferKey];
+            $buffer = $this->buffers[$bufferKey];
 
             if (isset($keys[$key + 1])) {
-                $next = &$this->buffers[$keys[$key + 1]];
+                $next = $this->buffers[$keys[$key + 1]];
                 $buffer->onCompleteMessage(fn (string $message) => $next->partialMessage($message));
 
                 continue;
