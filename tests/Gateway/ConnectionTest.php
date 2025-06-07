@@ -15,6 +15,8 @@ use Mockery\MockInterface;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use Ragnarok\Fenrir\Bitwise\Bitwise;
+use Ragnarok\Fenrir\Buffer\BufferInterface;
+use Ragnarok\Fenrir\Buffer\Passthrough;
 use Ragnarok\Fenrir\Constants\MetaEvents;
 use Ragnarok\Fenrir\Constants\WebsocketEvents;
 use Ragnarok\Fenrir\DataMapper;
@@ -84,7 +86,16 @@ class ConnectionTest extends MockeryTestCase
 
     public function testDisconnect(): void
     {
-        $websocket = new WebsocketFake();
+        $buffer = new class extends Passthrough {
+            public bool $hasReset = false;
+
+            public function reset(): void
+            {
+                $this->hasReset = true;
+            }
+        };
+
+        $websocket = new WebsocketFake($buffer);
 
         $connection = new Connection(
             $this->getLoop(),
@@ -98,6 +109,7 @@ class ConnectionTest extends MockeryTestCase
 
         $this->assertCount(1, $websocket->closings);
         $this->assertEquals([1234, '::reason::'], $websocket->closings[0]);
+        $this->assertTrue($buffer->hasReset);
     }
 
     public function testSessionId(): void

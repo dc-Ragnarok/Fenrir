@@ -15,9 +15,14 @@ class MultilayerTest extends TestCase
     public function testItRoutesEventsThroughAllBuffersInOrder()
     {
         $result = null;
+        $resets = [];
 
-        $one = new class implements BufferInterface {
+        $one = new class($resets) implements BufferInterface {
             private Closure $handler;
+
+            public function __construct(private array &$resets)
+            {
+            }
 
             public function partialMessage(string $partial): void
             {
@@ -35,10 +40,20 @@ class MultilayerTest extends TestCase
             {
                 return [];
             }
+
+            public function reset(): void
+            {
+                $this->resets[] = 1;
+            }
         };
 
-        $two = new class implements BufferInterface {
+        $two = new class($resets) implements BufferInterface {
             private Closure $handler;
+
+            public function __construct(private array &$resets)
+            {
+
+            }
 
             public function partialMessage(string $partial): void
             {
@@ -56,10 +71,20 @@ class MultilayerTest extends TestCase
             {
                 return [];
             }
+
+            public function reset(): void
+            {
+                $this->resets[] = 2;
+            }
         };
 
-        $three = new class implements BufferInterface {
+        $three = new class($resets) implements BufferInterface {
             private Closure $handler;
+
+            public function __construct(private array &$resets)
+            {
+
+            }
 
             public function partialMessage(string $partial): void
             {
@@ -77,10 +102,20 @@ class MultilayerTest extends TestCase
             {
                 return [];
             }
+
+            public function reset(): void
+            {
+                $this->resets[] = 3;
+            }
         };
 
-        $four = new class implements BufferInterface {
+        $four = new class($resets) implements BufferInterface {
             private Closure $handler;
+
+            public function __construct(private array &$resets)
+            {
+
+            }
 
             public function partialMessage(string $partial): void
             {
@@ -98,6 +133,11 @@ class MultilayerTest extends TestCase
             {
                 return [];
             }
+
+            public function reset(): void
+            {
+                $this->resets[] = 4;
+            }
         };
 
         $multilayer = new Multilayer([
@@ -112,5 +152,11 @@ class MultilayerTest extends TestCase
         });
 
         $multilayer->partialMessage('one');
+
+        $this->assertEquals('five', $result);
+
+        $multilayer->reset();
+
+        $this->assertEquals([1,2,3,4], $resets);
     }
 }

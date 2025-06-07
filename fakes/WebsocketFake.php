@@ -35,6 +35,7 @@ class WebsocketFake extends EventEmitter implements WebsocketInterface
     public function close(int $code, string $reason): void
     {
         $this->closings[] = [$code, $reason];
+        $this->buffer->reset();
     }
 
     public function send(string $message, bool $useBucket = true): void

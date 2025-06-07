@@ -108,6 +108,7 @@ class Websocket extends EventEmitter implements WebsocketInterface
         );
 
         $this->connection->close($code, $reason);
+        $this->buffer->reset();
 
         unset($this->connection);
     }

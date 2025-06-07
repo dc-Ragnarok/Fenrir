@@ -27,4 +27,6 @@ class Passthrough implements BufferInterface
     {
         return [];
     }
+
+    public function reset(): void { }
 }

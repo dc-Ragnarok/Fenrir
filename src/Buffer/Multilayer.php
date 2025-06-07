@@ -49,4 +49,11 @@ class Multilayer implements BufferInterface
             array_map(fn (BufferInterface $buffer) => $buffer->additionalQueryData(), $this->buffers)
         );
     }
+
+    public function reset(): void
+    {
+        foreach ($this->buffers as $buffer) {
+            $buffer->reset();
+        }
+    }
 }
