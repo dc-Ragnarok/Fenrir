@@ -6,6 +6,7 @@ namespace Ragnarok\Fenrir\Rest\Helpers\Channel;
 
 use Carbon\Carbon;
 use Ragnarok\Fenrir\Rest\Helpers\GetNew;
+use Ragnarok\Fenrir\Parts\Embed;
 
 /**
  * @see https://discord.com/developers/docs/resources/channel#embed-object
@@ -294,5 +295,81 @@ class EmbedBuilder
     public function get(): array
     {
         return $this->data;
+    }
+
+    public static function from(Embed $embed): self
+    {
+        $builder = new self();
+
+        if (isset($embed->title)) {
+            $builder->setTitle($embed->title);
+        }
+
+        if (isset($embed->url)) {
+            $builder->setUrl($embed->url);
+        }
+
+        if (isset($embed->description)) {
+            $builder->setDescription($embed->description);
+        }
+
+        if (isset($embed->color)) {
+            $builder->setColor($embed->color);
+        }
+
+        if (isset($embed->fields) && is_array($embed->fields)) {
+            foreach ($embed->fields as $field) {
+                $builder->addField(
+                    $field->name ?? '',
+                    $field->value ?? '',
+                    $field->inline ?? null
+                );
+            }
+        }
+
+        if (isset($embed->footer)) {
+            $builder->setFooter(
+                $embed->footer->text ?? '',
+                $embed->footer->icon_url ?? null
+            );
+        }
+
+        if (isset($embed->author)) {
+            $builder->setAuthor(
+                $embed->author->name ?? '',
+                $embed->author->url ?? null,
+                $embed->author->icon_url ?? null
+            );
+        }
+
+        if (isset($embed->timestamp)) {
+            $builder->setTimestamp(new Carbon($embed->timestamp));
+        }
+
+        if (isset($embed->thumbnail) && isset($embed->thumbnail->url)) {
+            $builder->setThumbnail($embed->thumbnail->url);
+        }
+
+        if (isset($embed->image) && isset($embed->image->url)) {
+            $builder->setImage($embed->image->url);
+        }
+
+        if (isset($embed->provider)) {
+            $builder->setProvider(
+                $embed->provider->name ?? null,
+                $embed->provider->url ?? null
+            );
+        }
+
+        if (isset($embed->video) && isset($embed->video->url)) {
+            $builder->setVideo(
+                $embed->video->url,
+                $embed->video->proxy_url ?? null,
+                $embed->video->height ?? null,
+                $embed->video->width ?? null
+            );
+        }
+
+        return $builder;
     }
 }
