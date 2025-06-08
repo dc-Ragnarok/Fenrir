@@ -46,7 +46,7 @@ class Multilayer implements BufferInterface
     public function additionalQueryData(): array
     {
         return array_merge(
-            array_map(fn (BufferInterface $buffer) => $buffer->additionalQueryData(), $this->buffers)
+            ...array_map(fn (BufferInterface $buffer) => $buffer->additionalQueryData(), $this->buffers)
         );
     }
 
