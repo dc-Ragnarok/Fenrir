@@ -22,6 +22,7 @@ class Message
     /**
      * @var User[]
      */
+    #[ArrayMapping(User::class)]
     public array $mentions;
     /**
      * @var string[]
@@ -54,8 +55,8 @@ class Message
     public ?MessageActivity $activity;
     public ?Application $application;
     public ?string $application_id;
-    public ?MessageReference $message_reference;
     public ?Bitwise $flags;
+    public ?MessageReference $message_reference;
     public ?Message $referenced_message;
     public ?MessageInteractionMetadata $interaction_metadata;
     /**
@@ -80,4 +81,7 @@ class Message
     public ?array $stickers;
     public ?int $position;
     public ?RoleSubscriptionData $role_subscription_data;
+    public ?MessageResolved $resolved;
+    public ?Poll $poll;
+    public MessageCall $call;
 }
