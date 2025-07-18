@@ -57,6 +57,11 @@ class Message
     public ?string $application_id;
     public ?Bitwise $flags;
     public ?MessageReference $message_reference;
+    /**
+     * @var MessageSnapshot[]
+     */
+    #[ArrayMapping(MessageSnapshot::class)]
+    public array $message_snapshots;
     public ?Message $referenced_message;
     public ?MessageInteractionMetadata $interaction_metadata;
     /**
