@@ -8,5 +8,5 @@ class ApplicationRoleConnection
 {
     public ?string $platform_name;
     public ?string $platform_username;
-    public ApplicationRoleConnectionMetadata $metadata;
+    public ?object $metadata;
 }

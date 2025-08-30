@@ -189,11 +189,14 @@ class User extends HttpResource
      *
      * @return PromiseInterface<\Ragnarok\Fenrir\Parts\ApplicationRoleConnection>
      */
-    public function getCurrentUserApplicationRoleConnection(): PromiseInterface
+    public function getCurrentUserApplicationRoleConnection(string $applicationId): PromiseInterface
     {
         return $this->mapPromise(
             $this->http->get(
-                Endpoint::USER_CURRENT_APPLICATION_ROLE_CONNECTION,
+                Endpoint::bind(
+                    Endpoint::USER_CURRENT_APPLICATION_ROLE_CONNECTION,
+                    $applicationId
+                ),
             ),
             ApplicationRoleConnection::class,
         );
@@ -204,11 +207,14 @@ class User extends HttpResource
      *
      * @return PromiseInterface<\Ragnarok\Fenrir\Parts\ApplicationRoleConnection>
      */
-    public function updateCurrentUserApplicationRoleConnection(array $params): PromiseInterface
+    public function updateCurrentUserApplicationRoleConnection(string $applicationId, array $params): PromiseInterface
     {
         return $this->mapPromise(
             $this->http->put(
-                Endpoint::USER_CURRENT_APPLICATION_ROLE_CONNECTION,
+                Endpoint::bind(
+                    Endpoint::USER_CURRENT_APPLICATION_ROLE_CONNECTION,
+                    $applicationId
+                ),
                 $params
             ),
             ApplicationRoleConnection::class,
