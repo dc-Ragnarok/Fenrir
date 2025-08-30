@@ -204,7 +204,7 @@ class User extends HttpResource
      *
      * @return PromiseInterface<\Ragnarok\Fenrir\Parts\ApplicationRoleConnection>
      */
-    public function UpdateCurrentUserApplicationRoleConnection(array $params): PromiseInterface
+    public function updateCurrentUserApplicationRoleConnection(array $params): PromiseInterface
     {
         return $this->mapPromise(
             $this->http->put(
