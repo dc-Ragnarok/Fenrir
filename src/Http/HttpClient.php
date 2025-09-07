@@ -16,7 +16,6 @@ class HttpClient
         private readonly Browser $browser,
         private string $authorization,
     ) {
-        echo 'Constructing HttpClient object', PHP_EOL;
     }
 
     public function request(
@@ -40,10 +39,5 @@ class HttpClient
             [...$defaultHeaders, ...$headers],
             $encodedContent,
         );
-    }
-
-    public function __destruct()
-    {
-        echo 'Destructing HttpClient object', PHP_EOL;
     }
 }

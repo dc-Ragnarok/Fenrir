@@ -20,7 +20,6 @@ class HttpScheduler
         private readonly HttpClient $client,
         private readonly LoggerInterface $log,
     ) {
-        echo 'Constructing HttpScheduler object', PHP_EOL;
     }
 
     public function request(Verb $verb, Endpoint $endpoint, mixed $content = null, array $headers = []): PromiseInterface
@@ -104,10 +103,5 @@ class HttpScheduler
     public function patch(Endpoint $endpoint, mixed $content = null, array $headers = []): PromiseInterface
     {
         return $this->request(Verb::PATCH, $endpoint, $content, $headers);
-    }
-
-    public function __destruct()
-    {
-        echo 'Destructing HttpScheduler object', PHP_EOL;
     }
 }

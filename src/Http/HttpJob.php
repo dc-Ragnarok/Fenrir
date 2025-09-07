@@ -16,7 +16,6 @@ class HttpJob
         private readonly ?array $content,
         private readonly mixed $headers,
     ) {
-        echo 'Constructing HttpJob object', PHP_EOL;
     }
 
     public function execute(): PromiseInterface
@@ -27,10 +26,5 @@ class HttpJob
             $this->headers,
             $this->content,
         );
-    }
-
-    public function __destruct()
-    {
-        echo 'Destructing HttpJob object', PHP_EOL;
     }
 }
