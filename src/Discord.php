@@ -8,6 +8,7 @@ use Composer\InstalledVersions;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use Ragnarok\Fenrir\Bitwise\Bitwise;
+use Ragnarok\Fenrir\Enums\TokenType;
 use Ragnarok\Fenrir\Exceptions\Extension\ExtensionNotFoundException;
 use Ragnarok\Fenrir\Extension\Extension;
 use Ragnarok\Fenrir\Gateway\Connection;
@@ -61,13 +62,15 @@ class Discord
         return $this;
     }
 
-    public function withRest(?Browser $browser = null): static
-    {
+    public function withRest(
+        ?Browser $browser = null,
+        TokenType $tokenType = TokenType::BOT,
+    ): static {
         $browser ??= new Browser(loop: $this->loop);
 
         $this->http = new HttpScheduler(
             $this->loop,
-            new HttpClient($browser, 'Bot ' . $this->token),
+            new HttpClient($browser, $tokenType->value . ' ' . $this->token),
             $this->logger,
         );
 
