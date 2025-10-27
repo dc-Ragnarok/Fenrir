@@ -18,11 +18,14 @@ class ApplicationRoleConnectionMetadata extends HttpResource
      *
      * @return PromiseInterface<\Ragnarok\Fenrir\Parts\ApplicationRoleConnectionMetadata>
      */
-    public function getRecords(): PromiseInterface
+    public function getRecords(string $applicationId): PromiseInterface
     {
-        return $this->mapPromise(
+        return $this->mapArrayPromise(
             $this->http->get(
-                Endpoint::APPLICATION_ROLE_CONNECTION_METADATA,
+                Endpoint::bind(
+                    Endpoint::APPLICATION_ROLE_CONNECTION_METADATA,
+                    $applicationId
+                )
             ),
             PartsApplicationRoleConnectionMetadata::class,
         );
@@ -33,11 +36,14 @@ class ApplicationRoleConnectionMetadata extends HttpResource
      *
      * @return PromiseInterface<\Ragnarok\Fenrir\Parts\ApplicationRoleConnectionMetadata>
      */
-    public function updateRecords(array $params): PromiseInterface
+    public function updateRecords(string $applicationId, array $params): PromiseInterface
     {
-        return $this->mapPromise(
+        return $this->mapArrayPromise(
             $this->http->put(
-                Endpoint::APPLICATION_ROLE_CONNECTION_METADATA,
+                Endpoint::bind(
+                    Endpoint::APPLICATION_ROLE_CONNECTION_METADATA,
+                    $applicationId
+                ),
                 $params,
             ),
             PartsApplicationRoleConnectionMetadata::class,

@@ -22,6 +22,8 @@ If you're looking for something thats easier to use, has caching OOTB, you could
 
 Fenrir heavily relies on ReactPHP for async operations. Knowing the basics of async PHP is recommended before diving in.
 
+Join the [Discord](https://discord.gg/KMYPcDAYwb) for discussion & support!
+
 ## Install
 
 ```
@@ -86,8 +88,8 @@ For more examples, check out the examples directory
 
 ## Support
 
-Fenrir currently supports PHP 8.1 to 8.3.
-Tests should pass nightly 8.4 builds, but this is not a supported usecase.
+Fenrir currently supports PHP 8.2+
+Tests should pass nightly builds of newer versions, but this is not a supported usecase.
 
 If you're using this in a Apache2/Nginx/etc webserver environment, you should probably limit yourself to only using Fenrir's REST capabilities.
 These environments typically don't allow long-running processes.

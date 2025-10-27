@@ -12,8 +12,8 @@ class UnacknowledgedHeartbeatEvent extends BaseUnacknowledgedHeartbeatEvent
     public function execute(): void
     {
         $this->connection->disconnect(
-            GatewayCloseCodes::LIB_INSTANTIATED_RESUME,
-            'Unacknowledged heartbeat, attempting resume'
+            GatewayCloseCodes::LIB_INSTANTIATED_RECONNECT,
+            'Unacknowledged heartbeat, attempting reconnect'
         );
     }
 }

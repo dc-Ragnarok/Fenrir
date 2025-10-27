@@ -28,6 +28,8 @@
     <exclude>
       <directory>src/Parts</directory>
       <directory>src/Exceptions</directory>
+      <directory>src/Attributes</directory>
+      <directory>src/Enums</directory>
     </exclude>
   </source>
 </phpunit>

@@ -38,7 +38,7 @@ class ConnectionTest extends MockeryTestCase
     public function testGetDefaultUrl(): void
     {
         $connection = new Connection(
-            Mockery::mock(LoopInterface::class),
+            $this->getLoop(),
             '::token::',
             new Bitwise(),
             new DataMapper(new NullLogger()),
@@ -51,7 +51,7 @@ class ConnectionTest extends MockeryTestCase
     public function testSequence(): void
     {
         $connection = new Connection(
-            Mockery::mock(LoopInterface::class),
+            $this->getLoop(),
             '::token::',
             new Bitwise(),
             new DataMapper(new NullLogger()),
@@ -67,7 +67,7 @@ class ConnectionTest extends MockeryTestCase
     public function testConnect(): void
     {
         $connection = new Connection(
-            Mockery::mock(LoopInterface::class),
+            $this->getLoop(),
             '::token::',
             new Bitwise(),
             new DataMapper(new NullLogger()),
@@ -90,7 +90,7 @@ class ConnectionTest extends MockeryTestCase
     public function testDisconnect(): void
     {
         $connection = new Connection(
-            Mockery::mock(LoopInterface::class),
+            $this->getLoop(),
             '::token::',
             new Bitwise(),
             new DataMapper(new NullLogger()),
@@ -112,7 +112,7 @@ class ConnectionTest extends MockeryTestCase
     public function testSessionId(): void
     {
         $connection = new Connection(
-            Mockery::mock(LoopInterface::class),
+            $this->getLoop(),
             '::token::',
             new Bitwise(),
             new DataMapper(new NullLogger()),
@@ -128,7 +128,7 @@ class ConnectionTest extends MockeryTestCase
     public function testResumeUrl(): void
     {
         $connection = new Connection(
-            Mockery::mock(LoopInterface::class),
+            $this->getLoop(),
             '::token::',
             new Bitwise(),
             new DataMapper(new NullLogger()),
@@ -307,7 +307,7 @@ class ConnectionTest extends MockeryTestCase
     public function testItReturnsEventHandlers(): void
     {
         $connection = new Connection(
-            Mockery::mock(LoopInterface::class),
+            $this->getLoop(),
             '::token::',
             new Bitwise(),
             new DataMapper(new NullLogger()),
@@ -320,7 +320,7 @@ class ConnectionTest extends MockeryTestCase
     public function testItIdentifies(): void
     {
         $connection = new Connection(
-            Mockery::mock(LoopInterface::class),
+            $this->getLoop(),
             '::token::',
             new Bitwise(123),
             new DataMapper(new NullLogger()),
@@ -348,7 +348,7 @@ class ConnectionTest extends MockeryTestCase
     public function testItIdentifiesWithShards(): void
     {
         $connection = new Connection(
-            Mockery::mock(LoopInterface::class),
+            $this->getLoop(),
             '::token::',
             new Bitwise(123),
             new DataMapper(new NullLogger()),
@@ -379,7 +379,7 @@ class ConnectionTest extends MockeryTestCase
     public function testItResumes(): void
     {
         $connection = new Connection(
-            Mockery::mock(LoopInterface::class),
+            $this->getLoop(),
             '::token::',
             new Bitwise(123),
             new DataMapper(new NullLogger()),
@@ -426,7 +426,7 @@ class ConnectionTest extends MockeryTestCase
     public function testOpen(): void
     {
         $connection = new Connection(
-            Mockery::mock(LoopInterface::class),
+            $this->getLoop(),
             '::token::',
             new Bitwise(),
             new DataMapper(new NullLogger()),
@@ -463,7 +463,7 @@ class ConnectionTest extends MockeryTestCase
             ->withAnyArgs();
 
         $connection = new Connection(
-            Mockery::mock(LoopInterface::class),
+            $this->getLoop(),
             '::token::',
             new Bitwise(),
             new DataMapper(new NullLogger()),
@@ -496,7 +496,7 @@ class ConnectionTest extends MockeryTestCase
     public function testItSendsPresenceUpdates()
     {
         $connection = new Connection(
-            Mockery::mock(LoopInterface::class),
+            $this->getLoop(),
             '::token::',
             new Bitwise(123),
             new DataMapper(new NullLogger()),
@@ -545,7 +545,7 @@ class ConnectionTest extends MockeryTestCase
             ->twice();
 
         new Connection(
-            Mockery::mock(LoopInterface::class),
+            $this->getLoop(),
             '::token::',
             new Bitwise(1),
             DataMapperFake::get(),
@@ -592,7 +592,7 @@ class ConnectionTest extends MockeryTestCase
             ->once();
 
         $connection = new Connection(
-            Mockery::mock(LoopInterface::class),
+            $this->getLoop(),
             '::token::',
             new Bitwise(1),
             DataMapperFake::get(),
@@ -628,7 +628,7 @@ class ConnectionTest extends MockeryTestCase
             ->twice();
 
         $connection = new Connection(
-            Mockery::mock(LoopInterface::class),
+            $this->getLoop(),
             '::token::',
             new Bitwise(1),
             DataMapperFake::get(),
@@ -663,7 +663,7 @@ class ConnectionTest extends MockeryTestCase
             ->twice();
 
         $connection = new Connection(
-            Mockery::mock(LoopInterface::class),
+            $this->getLoop(),
             '::token::',
             new Bitwise(1),
             DataMapperFake::get(),
@@ -677,6 +677,18 @@ class ConnectionTest extends MockeryTestCase
         $websocket->emit(WebsocketEvents::CLOSE, [$code, 'reason']);
 
         $this->assertEquals([Connection::DEFAULT_WEBSOCKET_URL . '?v=' . Connection::DISCORD_VERSION], $websocket->openings);
+    }
+
+    private function getLoop(): LoopInterface
+    {
+        $loop = Mockery::mock(LoopInterface::class);
+
+        $loop->shouldReceive('futureTick')
+            ->andReturnUsing(function (callable $callback) {
+                $callback();
+            });
+
+        return $loop;
     }
 
     public static function resumeCloseCodesProvider(): array

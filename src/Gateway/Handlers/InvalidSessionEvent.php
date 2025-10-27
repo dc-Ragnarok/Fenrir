@@ -6,7 +6,6 @@ namespace Ragnarok\Fenrir\Gateway\Handlers;
 
 use Ragnarok\Fenrir\Constants\GatewayCloseCodes;
 use Ragnarok\Fenrir\Constants\OpCodes;
-use Ragnarok\Fenrir\Gateway\Objects\Payload;
 
 class InvalidSessionEvent extends GatewayEvent
 {
