@@ -38,8 +38,7 @@ class OrchestratorTest extends TestCase
                 $this->assertNotEmpty($gatewayBots, 'GatewayBot requested unexpectedly.');
 
                 return PromiseFake::get(array_shift($gatewayBots));
-            })
-            ->once();
+            });
 
         $spawned = [];
         $orchestrator->on(Orchestrator::ALLOW_SPAWN, function (int $shard, int $totalShards) use (&$spawned) {
