@@ -43,7 +43,7 @@ class Connection implements ConnectionInterface
 
     private const QUERY_DATA = ['v' => self::DISCORD_VERSION];
 
-    private const HEARTBEAT_ACK_TIMEOUT = 2.5;
+    private static float $heartbeatAckTimeout = 5;
 
     private ?int $sequence = null;
 
@@ -56,6 +56,26 @@ class Connection implements ConnectionInterface
     private TimerInterface $unacknowledgedHeartbeatTimer;
 
     private ShardInterface $shard;
+
+    /**
+     * Change how long to wait for a heartbeat acknowledgement from Discords gateway. This essentially changes how much
+     * wiggle room your websocket connection allows for.
+     *
+     * If you're not sure you need to change this value, you should probably leave it at the default. Lowering the value
+     * is not recommended, as this will decrease stability.
+     *
+     * This function should be called at the start of your application. Before a connection is established. Otherwise
+     * this change may only take effect after the first connection resume/restart.
+     */
+    public static function setHeartbeatAckTimeout(float $timeout): void
+    {
+        self::$heartbeatAckTimeout = $timeout;
+    }
+
+    public static function getHeartbeatAckTimeout(): float
+    {
+        return self::$heartbeatAckTimeout;
+    }
 
     public function __construct(
         private LoopInterface $loop,
@@ -232,7 +252,7 @@ class Connection implements ConnectionInterface
 
     private function expectHeartbeatAcknowledgement(): void
     {
-        $this->unacknowledgedHeartbeatTimer = $this->loop->addTimer(self::HEARTBEAT_ACK_TIMEOUT, function () {
+        $this->unacknowledgedHeartbeatTimer = $this->loop->addTimer(self::$heartbeatAckTimeout, function () {
             $this->meta->emit(MetaEvents::UNACKNOWLEDGED_HEARTBEAT, [$this, $this->logger]);
         });
     }
