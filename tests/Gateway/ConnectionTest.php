@@ -15,6 +15,8 @@ use Mockery\MockInterface;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use Ragnarok\Fenrir\Bitwise\Bitwise;
+use Ragnarok\Fenrir\Buffer\BufferInterface;
+use Ragnarok\Fenrir\Buffer\Passthrough;
 use Ragnarok\Fenrir\Constants\MetaEvents;
 use Ragnarok\Fenrir\Constants\WebsocketEvents;
 use Ragnarok\Fenrir\DataMapper;
@@ -66,47 +68,48 @@ class ConnectionTest extends MockeryTestCase
 
     public function testConnect(): void
     {
+        $websocket = new WebsocketFake();
+
         $connection = new Connection(
             $this->getLoop(),
             '::token::',
             new Bitwise(),
             new DataMapper(new NullLogger()),
-            new WebsocketFake(),
+            $websocket,
         );
 
-        /** @var MockInterface&Websocket */
-        $websocket = Mockery::mock(Websocket::class);
-        (new ReflectionProperty($connection, 'websocket'))->setValue($connection, $websocket);
 
-        $websocket->expects()
-            ->open()
-            ->with('::ws url::?v=10')
-            ->andReturns(PromiseFake::get('::return::'))
-            ->once();
+        await($connection->connect('::ws url::'));
 
-        $this->assertEquals('::return::', await($connection->connect('::ws url::')));
+        $this->assertEquals(['::ws url::?v=10'], $websocket->openings);
     }
 
     public function testDisconnect(): void
     {
+        $buffer = new class () extends Passthrough {
+            public bool $hasReset = false;
+
+            public function reset(): void
+            {
+                $this->hasReset = true;
+            }
+        };
+
+        $websocket = new WebsocketFake($buffer);
+
         $connection = new Connection(
             $this->getLoop(),
             '::token::',
             new Bitwise(),
             new DataMapper(new NullLogger()),
-            new WebsocketFake(),
+            $websocket,
         );
 
-        /** @var MockInterface&Websocket */
-        $websocket = Mockery::mock(Websocket::class);
-        (new ReflectionProperty($connection, 'websocket'))->setValue($connection, $websocket);
-
-        $websocket->expects()
-            ->close()
-            ->with(1234, '::reason::')
-            ->once();
-
         $connection->disconnect(1234, '::reason::');
+
+        $this->assertCount(1, $websocket->closings);
+        $this->assertEquals([1234, '::reason::'], $websocket->closings[0]);
+        $this->assertTrue($buffer->hasReset);
     }
 
     public function testSessionId(): void
@@ -425,28 +428,19 @@ class ConnectionTest extends MockeryTestCase
 
     public function testOpen(): void
     {
+        $websocket = new WebsocketFake();
         $connection = new Connection(
             $this->getLoop(),
             '::token::',
             new Bitwise(),
             new DataMapper(new NullLogger()),
-            new WebsocketFake(),
+            $websocket,
         );
 
-        /** @var MockInterface&Websocket */
-        $websocket = Mockery::mock(Websocket::class);
-        (new ReflectionProperty($connection, 'websocket'))->setValue($connection, $websocket);
-
-        $websocket->expects()
-            ->open()
-            ->with(Mockery::on(function (string $url) {
-                $this->assertMatchesRegularExpression('/wss:\/\/gateway.discord.gg\/\?v=(\d+)/', $url);
-
-                return true;
-            }))
-            ->once();
-
         $connection->open();
+
+        $this->assertCount(1, $websocket->openings);
+        $this->assertMatchesRegularExpression('/wss:\/\/gateway.discord.gg\/\?v=(\d+)/', $websocket->openings[0]);
     }
 
     public function testItEmitsGatewayMessagesAsEvents(): void
@@ -483,14 +477,7 @@ class ConnectionTest extends MockeryTestCase
                 return true;
             }));
 
-        /** @var MessageInterface&MockInterface */
-        $message = Mockery::mock(MessageInterface::class);
-        $message->expects()
-            ->__toString()
-            ->andReturns('{"op": 1}')
-            ->once();
-
-        $websocket->emit(WebsocketEvents::MESSAGE, [$message]);
+        $websocket->emit(WebsocketEvents::MESSAGE, ['{"op": 1}']);
     }
 
     public function testItSendsPresenceUpdates()

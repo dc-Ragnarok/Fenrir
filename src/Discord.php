@@ -11,6 +11,8 @@ use Discord\Http\Http;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use Ragnarok\Fenrir\Bitwise\Bitwise;
+use Ragnarok\Fenrir\Buffer\BufferInterface;
+use Ragnarok\Fenrir\Buffer\Passthrough;
 use Ragnarok\Fenrir\Enums\TokenType;
 use Ragnarok\Fenrir\Exceptions\Extension\ExtensionNotFoundException;
 use Ragnarok\Fenrir\Extension\Extension;
@@ -48,14 +50,15 @@ class Discord
      */
     public function withGateway(
         Bitwise $intents,
-        int $timeout = 10
+        int $timeout = 10,
+        BufferInterface $buffer = new Passthrough(),
     ): static {
         $this->gateway = new Connection(
             $this->loop,
             $this->token,
             $intents,
             $this->mapper,
-            new Websocket($timeout, $this->logger, [$this->token => '::token::']),
+            new Websocket($timeout, $this->logger, [$this->token => '::token::'], $buffer),
             $this->logger,
         );
 

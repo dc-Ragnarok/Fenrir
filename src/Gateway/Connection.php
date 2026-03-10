@@ -14,7 +14,6 @@ use Ragnarok\Fenrir\Constants\MetaEvents;
 use Ragnarok\Fenrir\Constants\WebsocketEvents;
 use Ragnarok\Fenrir\DataMapper;
 use Ragnarok\Fenrir\EventHandler;
-use Ragnarok\Fenrir\Gateway\Events\Meta\MetaEvent;
 use Ragnarok\Fenrir\Gateway\Handlers\HeartbeatAcknowledgedEvent;
 use Ragnarok\Fenrir\Gateway\Handlers\IdentifyHelloEvent;
 use Ragnarok\Fenrir\Gateway\Handlers\IdentifyResumeEvent;
@@ -28,7 +27,6 @@ use Ragnarok\Fenrir\Gateway\Handlers\RequestHeartbeatEvent;
 use Ragnarok\Fenrir\Gateway\Helpers\PresenceUpdateBuilder;
 use Ragnarok\Fenrir\Gateway\Objects\Payload;
 use Ragnarok\Fenrir\WebsocketInterface;
-use Ratchet\RFC6455\Messaging\MessageInterface;
 use React\EventLoop\LoopInterface;
 use React\EventLoop\TimerInterface;
 use React\Promise\PromiseInterface;
@@ -90,8 +88,8 @@ class Connection implements ConnectionInterface
     ) {
         $this->events = new EventHandler($mapper);
 
-        $this->websocket->on(WebsocketEvents::MESSAGE, function (MessageInterface $message) {
-            $parsedMessage = json_decode((string) $message, depth: 1024);
+        $this->websocket->on(WebsocketEvents::MESSAGE, function (string $message) {
+            $parsedMessage = json_decode($message, depth: 1024);
             if ($parsedMessage === null) {
                 return;
             }
@@ -208,7 +206,12 @@ class Connection implements ConnectionInterface
 
     public function connect(string $url): PromiseInterface
     {
-        $url .= '?' . http_build_query(self::QUERY_DATA);
+        $queryData = [
+            ...self::QUERY_DATA,
+            ...$this->websocket->getBuffer()->additionalQueryData(),
+        ];
+
+        $url .= '?' . http_build_query($queryData);
 
         return $this->websocket->open($url);
     }
