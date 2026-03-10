@@ -16,7 +16,7 @@ class WebsocketFake extends EventEmitter implements WebsocketInterface
     public array $openings = [];
     public array $closings = [];
 
-    public function __construct(public BufferInterface $buffer = new Passthrough)
+    public function __construct(public BufferInterface $buffer = new Passthrough())
     {
     }
 

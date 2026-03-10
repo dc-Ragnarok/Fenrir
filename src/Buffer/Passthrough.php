@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Ragnarok\Fenrir\Buffer;
 
 use Closure;
@@ -28,5 +30,7 @@ class Passthrough implements BufferInterface
         return [];
     }
 
-    public function reset(): void { }
+    public function reset(): void
+    {
+    }
 }

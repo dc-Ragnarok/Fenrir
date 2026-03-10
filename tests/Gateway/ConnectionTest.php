@@ -86,7 +86,7 @@ class ConnectionTest extends MockeryTestCase
 
     public function testDisconnect(): void
     {
-        $buffer = new class extends Passthrough {
+        $buffer = new class () extends Passthrough {
             public bool $hasReset = false;
 
             public function reset(): void

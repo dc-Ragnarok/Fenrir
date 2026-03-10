@@ -27,7 +27,6 @@ use Ragnarok\Fenrir\Gateway\Handlers\RequestHeartbeatEvent;
 use Ragnarok\Fenrir\Gateway\Helpers\PresenceUpdateBuilder;
 use Ragnarok\Fenrir\Gateway\Objects\Payload;
 use Ragnarok\Fenrir\WebsocketInterface;
-use Ratchet\RFC6455\Messaging\MessageInterface;
 use React\EventLoop\LoopInterface;
 use React\EventLoop\TimerInterface;
 use React\Promise\PromiseInterface;

@@ -17,7 +17,7 @@ class MultilayerTest extends TestCase
         $result = null;
         $resets = [];
 
-        $one = new class($resets) implements BufferInterface {
+        $one = new class ($resets) implements BufferInterface {
             private Closure $handler;
 
             public function __construct(private array &$resets)
@@ -47,7 +47,7 @@ class MultilayerTest extends TestCase
             }
         };
 
-        $two = new class($resets) implements BufferInterface {
+        $two = new class ($resets) implements BufferInterface {
             private Closure $handler;
 
             public function __construct(private array &$resets)
@@ -78,7 +78,7 @@ class MultilayerTest extends TestCase
             }
         };
 
-        $three = new class($resets) implements BufferInterface {
+        $three = new class ($resets) implements BufferInterface {
             private Closure $handler;
 
             public function __construct(private array &$resets)
@@ -109,7 +109,7 @@ class MultilayerTest extends TestCase
             }
         };
 
-        $four = new class($resets) implements BufferInterface {
+        $four = new class ($resets) implements BufferInterface {
             private Closure $handler;
 
             public function __construct(private array &$resets)
