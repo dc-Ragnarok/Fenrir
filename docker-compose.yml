@@ -1,4 +1,10 @@
 services:
+    php8.1:
+        build: ./.dev/docker/php/8.1
+        volumes:
+            - .:/fenrir:z
+        working_dir: /fenrir
+        command: sh
     php8.2:
         build: ./.dev/docker/php/8.2
         volumes:
@@ -13,6 +19,12 @@ services:
         command: sh
     php8.4:
         build: ./.dev/docker/php/8.4
+        volumes:
+            - .:/fenrir:z
+        working_dir: /fenrir
+        command: sh
+    php8.5:
+        build: ./.dev/docker/php/8.5
         volumes:
             - .:/fenrir:z
         working_dir: /fenrir
