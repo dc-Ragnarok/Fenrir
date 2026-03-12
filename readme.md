@@ -91,6 +91,14 @@ For more examples, check out the examples directory
 Fenrir currently supports PHP 8.4+
 Tests should pass nightly builds of newer versions, but this is not a supported usecase.
 
+| PHP Version | Library version |
+| ----------- | --------------- |
+| 8.4+        | Current         |
+| 8.2, 8.3    | < 1.2           |
+| 8.1         | < 1.0.1         |
+
+Note: Bugfixes/features will not be backported to older versions. Older versions are as-is.
+
 If you're using this in a Apache2/Nginx/etc webserver environment, you should probably limit yourself to only using Fenrir's REST capabilities.
 These environments typically don't allow long-running processes.
 
