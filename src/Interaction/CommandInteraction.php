@@ -12,8 +12,6 @@ use Ragnarok\Fenrir\Parts\ApplicationCommandInteractionDataOptionStructure as Op
 use Ragnarok\Fenrir\Rest\Helpers\Webhook\EditWebhookBuilder;
 use React\Promise\PromiseInterface;
 
-use function Freezemage\ArrayUtils\find as array_find;
-
 class CommandInteraction
 {
     /** @var OptionStructure[] */
