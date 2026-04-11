@@ -11,7 +11,6 @@ use Ragnarok\Fenrir\Enums\ApplicationIntegrationType;
 use Ragnarok\Fenrir\Enums\InteractionContextType;
 use Ragnarok\Fenrir\Exceptions\Rest\Helpers\Command\InvalidCommandNameException;
 use Ragnarok\Fenrir\Rest\Helpers\GetNew;
-use Spatie\Regex\Regex;
 
 class CommandBuilder
 {
@@ -214,7 +213,7 @@ class CommandBuilder
 
     private function isAllowedName($name): bool
     {
-        return Regex::match(Command::NAME_REGEX, $name)->hasMatch();
+        return preg_match(Command::NAME_REGEX, $name) === 1;
     }
 
     public function get(): array
