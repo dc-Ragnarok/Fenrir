@@ -47,7 +47,7 @@ class Mapper
         }
     }
 
-    private function mapFromObject(mixed $source, string $definition): CompletedMapping
+    private function mapFromObject(object $source, string $definition): CompletedMapping
     {
         $instance = new $definition();
 
@@ -57,6 +57,7 @@ class Mapper
         foreach ($data as $key => $value) {
             try {
                 $this->setProperty(
+                    $source,
                     $value,
                     $this->getReflectionProperty($definition, $key),
                     $this->getReflectionType($definition, $key),
@@ -72,6 +73,7 @@ class Mapper
     }
 
     private function setProperty(
+        object $source,
         mixed $value,
         ReflectionProperty $reflectionProperty,
         ReflectionNamedType|ReflectionUnionType|ReflectionIntersectionType|null $reflectionType,
@@ -99,7 +101,7 @@ class Mapper
          * Scalar types
          */
         if (($reflectionType instanceof ReflectionNamedType && $reflectionType->isBuiltin())) {
-            $this->setNamedType($reflectionProperty, $reflectionType, $instance, $value, $errors);
+            $this->setNamedType($source, $reflectionProperty, $reflectionType, $instance, $value, $errors);
             return;
         }
 
@@ -134,6 +136,7 @@ class Mapper
     }
 
     private function setNamedType(
+        object $source,
         ReflectionProperty $reflectionProperty,
         ReflectionNamedType $type,
         mixed &$instance,
@@ -141,7 +144,7 @@ class Mapper
         array &$errors,
     ): void {
         if ($type->getName() === 'array') {
-            $this->setArray($reflectionProperty, $instance, $value, $errors);
+            $this->setArray($source, $reflectionProperty, $instance, $value, $errors);
 
             return;
         }
@@ -156,6 +159,7 @@ class Mapper
     }
 
     private function setArray(
+        object $source,
         ReflectionProperty $reflectionProperty,
         mixed &$instance,
         mixed $value,
@@ -172,7 +176,7 @@ class Mapper
          * Only arrays with a custom type should use the attribute
          */
         $arrayValue = count($attributes) > 0
-            ? $this->mapArray($value, array_pop($attributes)->newInstance(), $errors)
+            ? $this->mapArray($source, $value, array_pop($attributes)->newInstance(), $errors)
             : $value;
 
         try {
@@ -218,19 +222,28 @@ class Mapper
         return;
     }
 
-    private function mapArray(array $values, ArrayMapping $arrayMapping, array &$errors)
+    private function mapArray(object $source, array $values, ArrayMapping $arrayMapping, array &$errors)
     {
-        return enum_exists($arrayMapping->definition)
-            ? $this->mapEnumArray($values, $arrayMapping, $errors)
-            : $this->mapClassArray($values, $arrayMapping, $errors);
+        $definition = is_callable($arrayMapping->definition)
+            ? ($arrayMapping->definition)($source)
+            : $arrayMapping->definition;
+
+        return enum_exists($definition)
+            ? $this->mapEnumArray($values, $definition, $errors)
+            : $this->mapClassArray($values, $definition, $errors);
     }
 
-    private function mapClassArray(array $values, ArrayMapping $arrayMapping, array &$errors)
+    /**
+     * @param array $values
+     * @param class-string $definition
+     * @param array &$errors
+     */
+    private function mapClassArray(array $values, string $definition, array &$errors)
     {
         $new = [];
 
         foreach ($values as $key => $value) {
-            $completedMapping = $this->map($value, $arrayMapping->definition);
+            $completedMapping = $this->map($value, $definition);
 
             $errors = [...$errors, ...$completedMapping->errors];
             $new[$key] = $completedMapping->result;
@@ -239,15 +252,20 @@ class Mapper
         return $new;
     }
 
-    private function mapEnumArray(array $values, ArrayMapping $arrayMapping, array &$errors)
+    /**
+     * @param array $values
+     * @param class-string $definition
+     * @param array &$errors
+     */
+    private function mapEnumArray(array $values, string $definition, array &$errors)
     {
         $new = [];
 
         foreach ($values as $key => $value) {
             try {
-                $new[$key] = $arrayMapping->definition::tryFrom($value);
+                $new[$key] = $definition::tryFrom($value);
             } catch (Throwable $e) {
-                $errors[] = new MappingException($e->getMessage(), '', $arrayMapping->definition, $e);
+                $errors[] = new MappingException($e->getMessage(), '', $definition, $e);
                 $new[$key] = null;
             }
         }

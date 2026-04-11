@@ -29,9 +29,14 @@ class Bitwise
         return $this->flags;
     }
 
-    public function has(int $flag): bool
+    /**
+     * @param BackedEnum<int>|int $flag
+     */
+    public function has(BackedEnum|int $flag): bool
     {
-        return ($this->flags & $flag) === $flag;
+        $value = $flag instanceof BackedEnum ? $flag->value : $flag;
+
+        return ($this->flags & $value) === $value;
     }
 
     public function getBitSet(): string

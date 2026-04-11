@@ -6,6 +6,8 @@ namespace Tests\Ragnarok\Fenrir\Mapping;
 
 use Carbon\Carbon;
 use Mockery\MockInterface;
+use PHPUnit\Framework\Assert;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Ragnarok\Fenrir\Discord;
 use Ragnarok\Fenrir\Enums\MessageType;
@@ -281,5 +283,40 @@ class MapperTest extends TestCase
             MessageType::RECIPIENT_ADD,
             MessageType::RECIPIENT_REMOVE,
         ], $result->result->test);
+    }
+
+    #[Test]
+    public function it_allows_dynamic_typing_of_arrays(): void
+    {
+        $source = (object) [
+            'test_prop' => 1,
+            'test' => [
+                (object) [
+                    'name' => '::name::',
+                    'value' => '::value::',
+                    'inline' => false,
+                ],
+            ],
+        ];
+
+        $definition = new class () {
+            #[ArrayMapping(static function (object $passedSource) {
+                Assert::assertEquals(1, $passedSource->test_prop);
+
+                return EmbedField::class;
+            })]
+            public array $test;
+            public int $test_prop;
+        };
+
+        $result = $this->mapper->map($source, $definition::class);
+
+        $this->assertInstanceOf($definition::class, $result->result);
+        $this->assertEmpty($result->errors);
+
+        $this->assertInstanceOf(EmbedField::class, $result->result->test[0]);
+        $this->assertEquals('::name::', $result->result->test[0]->name);
+        $this->assertEquals('::value::', $result->result->test[0]->value);
+        $this->assertFalse($result->result->test[0]->inline);
     }
 }

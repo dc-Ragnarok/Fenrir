@@ -6,6 +6,9 @@ namespace Ragnarok\Fenrir\Parts;
 
 use Carbon\Carbon;
 use Ragnarok\Fenrir\Bitwise\Bitwise;
+use Ragnarok\Fenrir\Component\Component;
+use Ragnarok\Fenrir\ComponentsV2\Component as ComponentV2;
+use Ragnarok\Fenrir\Enums\MessageFlag;
 use Ragnarok\Fenrir\Enums\MessageType;
 use Ragnarok\Fenrir\Mapping\ArrayMapping;
 
@@ -70,9 +73,15 @@ class Message
     public ?MessageInteraction $interaction;
     public ?Channel $thread;
     /**
-     * @var Component[]
+     * @var Component[]|ComponentV2[]
      */
-    #[ArrayMapping(Component::class)]
+    #[ArrayMapping(static function (object $source) {
+        $flags = new Bitwise($source->flags ?? 0);
+
+        $flags->has(MessageFlag::IS_COMPONENTS_V2)
+            ? ComponentV2::class
+            : Component::class;
+    })]
     public array $components;
     /**
      * @var MessageStickerItem[]
