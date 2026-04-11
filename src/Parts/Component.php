@@ -9,6 +9,7 @@ use Ragnarok\Fenrir\Enums\ChannelType;
 use Ragnarok\Fenrir\Enums\MessageComponentType;
 use Ragnarok\Fenrir\Mapping\ArrayMapping;
 
+/** @deprecated */
 class Component
 {
     public MessageComponentType $type;

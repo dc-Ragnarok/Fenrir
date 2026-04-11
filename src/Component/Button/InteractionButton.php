@@ -8,6 +8,7 @@ use Ragnarok\Fenrir\Component\Component;
 use Ragnarok\Fenrir\Enums\ButtonStyle;
 use Ragnarok\Fenrir\Rest\Helpers\Emoji\EmojiBuilder;
 
+/** @deprecated */
 abstract class InteractionButton extends Component
 {
     protected ButtonStyle $style;

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Ragnarok\Fenrir\Component\SelectMenu;
 
+/** @deprecated */
 trait HasDefaultValues
 {
     protected array $defaultValues = [];

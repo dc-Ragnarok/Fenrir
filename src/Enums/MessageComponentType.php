@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Ragnarok\Fenrir\Enums;
 
+/** @deprecated */
 enum MessageComponentType: int
 {
     case ACTION_ROW = 1;

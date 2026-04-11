@@ -6,6 +6,7 @@ namespace Ragnarok\Fenrir\Component\Button;
 
 use Ragnarok\Fenrir\Enums\ButtonStyle;
 
+/** @deprecated */
 class PrimaryButton extends InteractionButton
 {
     protected ButtonStyle $style = ButtonStyle::Primary;

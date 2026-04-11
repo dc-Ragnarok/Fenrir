@@ -6,6 +6,7 @@ namespace Ragnarok\Fenrir\Component\SelectMenu;
 
 use Ragnarok\Fenrir\Enums\SelectMenuType;
 
+/** @deprecated */
 class MentionableSelectMenu extends SelectMenu
 {
     use HasDefaultValues;

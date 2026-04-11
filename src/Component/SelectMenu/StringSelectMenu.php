@@ -9,6 +9,7 @@ use Ragnarok\Fenrir\Exceptions\Components\SelectMenu\StringSelectMenu\NoOptionsE
 use Ragnarok\Fenrir\Exceptions\Components\SelectMenu\StringSelectMenu\TooManyOptionsException;
 use Ragnarok\Fenrir\Rest\Helpers\Emoji\EmojiBuilder;
 
+/** @deprecated */
 class StringSelectMenu extends SelectMenu
 {
     protected SelectMenuType $type = SelectMenuType::String;

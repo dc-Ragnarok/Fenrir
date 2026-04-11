@@ -12,6 +12,7 @@ use Ragnarok\Fenrir\Rest\Helpers\GetNew;
  * Can not exceed 9 components
  *
  * @see https://discord.com/developers/docs/interactions/message-components#component-object
+ * @deprecated
  */
 class ComponentRowBuilder
 {

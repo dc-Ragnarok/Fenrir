@@ -9,6 +9,7 @@ use Ragnarok\Fenrir\Rest\Helpers\GetNew;
 
 /**
  * @see https://discord.com/developers/docs/interactions/message-components#component-object
+ * @deprecated
  */
 class ComponentBuilder
 {

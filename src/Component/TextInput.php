@@ -6,6 +6,7 @@ namespace Ragnarok\Fenrir\Component;
 
 use Ragnarok\Fenrir\Enums\TextInputStyle;
 
+/** @deprecated */
 class TextInput extends Component
 {
     public function get(): array

@@ -7,6 +7,7 @@ namespace Ragnarok\Fenrir\Component\SelectMenu;
 use Ragnarok\Fenrir\Component\Component;
 use Ragnarok\Fenrir\Enums\SelectMenuType;
 
+/** @deprecated */
 abstract class SelectMenu extends Component
 {
     protected SelectMenuType $type;
