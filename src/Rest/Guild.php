@@ -26,11 +26,6 @@ use React\Promise\PromiseInterface;
 
 /**
  * @see https://discord.com/developers/docs/resources/guild
- *
- * @SuppressWarnings(PHPMD.TooManyMethods)
- * @SuppressWarnings(PHPMD.TooManyPublicMethods)
- * @SuppressWarnings(PHPMD.ExcessivePublicCount)
- * @SuppressWarnings(PHPMD.ExcessiveClassComplexity)
  */
 class Guild extends HttpResource
 {

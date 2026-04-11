@@ -31,9 +31,6 @@ use React\EventLoop\LoopInterface;
 use React\EventLoop\TimerInterface;
 use React\Promise\PromiseInterface;
 
-/**
- * @SuppressWarnings(PHPMD.TooManyPublicMethods)
- */
 class Connection implements ConnectionInterface
 {
     public const DISCORD_VERSION = 10;
