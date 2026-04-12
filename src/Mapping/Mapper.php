@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Ragnarok\Fenrir\Mapping;
 
+use Ragnarok\Fenrir\Parts\ComponentV2\ActionRow;
+use ReflectionAttribute;
 use ReflectionClass;
 use ReflectionException;
 use ReflectionIntersectionType;
@@ -47,9 +49,15 @@ class Mapper
         }
     }
 
-    private function mapFromObject(object $source, string $definition): CompletedMapping
+    /**
+     * @param object $source
+     * @param class-string $definition
+     */
+    private function mapFromObject(object $source, string $target): CompletedMapping
     {
+        $definition = $this->getClassToInstantiate($target, $source);
         $instance = new $definition();
+        // dd($instance);
 
         $errors = [];
         $data = get_object_vars($source);
@@ -70,6 +78,24 @@ class Mapper
         }
 
         return new CompletedMapping($instance, $errors);
+    }
+
+    private function getClassToInstantiate(string $target, object $source): string
+    {
+        $ref = new ReflectionClass($target);
+        $attributes = $ref->getAttributes(MapTo::class);
+
+        if (empty($attributes)) {
+            return $target;
+        }
+
+        /**
+         * @var ReflectionAttribute<MapTo>
+         */
+        $reflectionAttribute = array_shift($attributes);
+        $attribute = $reflectionAttribute->newInstance();
+
+        return ($attribute->definition)($source) ?? $target;
     }
 
     private function setProperty(

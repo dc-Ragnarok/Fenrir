@@ -10,9 +10,13 @@ use PHPUnit\Framework\Assert;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Ragnarok\Fenrir\Discord;
+use Ragnarok\Fenrir\Enums\ComponentV2Type;
 use Ragnarok\Fenrir\Enums\MessageType;
 use Ragnarok\Fenrir\Mapping\ArrayMapping;
 use Ragnarok\Fenrir\Mapping\Mapper;
+use Ragnarok\Fenrir\Parts\ComponentV2\ActionRow;
+use Ragnarok\Fenrir\Parts\ComponentV2\Checkbox;
+use Ragnarok\Fenrir\Parts\ComponentV2\Component;
 use Ragnarok\Fenrir\Parts\EmbedField;
 
 class MapperTest extends TestCase
@@ -318,5 +322,50 @@ class MapperTest extends TestCase
         $this->assertEquals('::name::', $result->result->test[0]->name);
         $this->assertEquals('::value::', $result->result->test[0]->value);
         $this->assertFalse($result->result->test[0]->inline);
+    }
+
+    #[Test]
+    public function it_allows_dynamic_typing_of_items()
+    {
+        $source = (object) [
+            'type' => ComponentV2Type::ActionRow->value,
+            'components' => [],
+        ];
+
+        $result = $this->mapper->map($source, Component::class)->result;
+
+        $this->assertInstanceOf(ActionRow::class, $result);
+    }
+
+    #[Test]
+    public function it_allows_dynamic_typing_of_items_in_array()
+    {
+        $source = (object) [
+            'components' => [
+                (object) [
+                    'type' => ComponentV2Type::ActionRow->value,
+                    'components' => [],
+                ],
+                (object) [
+                    'type' => ComponentV2Type::Checkbox->value,
+                ],
+                (object) [
+                    'type' => -1,
+                ],
+            ],
+        ];
+
+        $definition = new class() {
+            #[ArrayMapping(Component::class)]
+            public array $components;
+        };
+
+        $result = $this->mapper->map($source, $definition::class)->result;
+
+        [$actionRow, $checkbox, $plainComponent] = $result->components;
+
+        $this->assertInstanceOf(ActionRow::class, $actionRow);
+        $this->assertInstanceOf(Checkbox::class, $checkbox);
+        $this->assertInstanceOf(Component::class, $plainComponent);
     }
 }
