@@ -6,11 +6,10 @@ namespace Ragnarok\Fenrir\Parts;
 
 use Carbon\Carbon;
 use Ragnarok\Fenrir\Bitwise\Bitwise;
-use Ragnarok\Fenrir\Component\Component;
-use Ragnarok\Fenrir\ComponentsV2\Component as ComponentV2;
 use Ragnarok\Fenrir\Enums\MessageFlag;
 use Ragnarok\Fenrir\Enums\MessageType;
 use Ragnarok\Fenrir\Mapping\ArrayMapping;
+use Ragnarok\Fenrir\Parts\ComponentV2\Component as ComponentV2;
 
 class Message
 {
