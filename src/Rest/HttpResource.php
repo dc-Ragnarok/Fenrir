@@ -8,11 +8,7 @@ use Discord\Http\Http;
 use Psr\Log\LoggerInterface;
 use Ragnarok\Fenrir\DataMapper;
 use React\Promise\PromiseInterface;
-use Throwable;
 
-/**
- * @SuppressWarnings(PHPMD.NumberOfChildren)
- */
 abstract class HttpResource
 {
     public function __construct(

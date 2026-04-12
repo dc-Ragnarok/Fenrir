@@ -15,8 +15,6 @@ use Ragnarok\Fenrir\Gateway\Events\InteractionCreate;
 use Ragnarok\Fenrir\Interaction\CommandInteraction;
 use Ragnarok\Fenrir\Parts\ApplicationCommandInteractionDataOptionStructure;
 
-use function Freezemage\ArrayUtils\find;
-
 abstract class CommandExtension extends EventEmitter implements Extension
 {
     protected FilteredEventEmitter $commandListener;
@@ -61,7 +59,7 @@ abstract class CommandExtension extends EventEmitter implements Extension
     private function drillName(array $options, array &$names)
     {
         /** @var ?ApplicationCommandInteractionDataOptionStructure */
-        $subCommand = find($options ?? [], function (ApplicationCommandInteractionDataOptionStructure $option) {
+        $subCommand = array_find($options ?? [], function (ApplicationCommandInteractionDataOptionStructure $option) {
             return in_array(
                 $option->type,
                 [

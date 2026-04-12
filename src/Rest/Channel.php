@@ -26,9 +26,6 @@ use React\Promise\PromiseInterface;
 /**
  * @see https://discord.com/developers/docs/resources/channel
  *
- * @SuppressWarnings(PHPMD.TooManyMethods)
- * @SuppressWarnings(PHPMD.TooManyPublicMethods)
- *
  * @todo seperate calls, `$this->reaction->create(...)` instead of `$this->createReaction(...)` etc
  */
 class Channel extends HttpResource
