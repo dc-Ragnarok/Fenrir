@@ -352,6 +352,8 @@ class MapperTest extends TestCase
                 (object) [
                     'type' => -1,
                 ],
+                (object) [
+                ],
             ],
         ];
 
@@ -362,10 +364,11 @@ class MapperTest extends TestCase
 
         $result = $this->mapper->map($source, $definition::class)->result;
 
-        [$actionRow, $checkbox, $plainComponent] = $result->components;
+        [$actionRow, $checkbox, $invalidType, $noType] = $result->components;
 
         $this->assertInstanceOf(ActionRow::class, $actionRow);
         $this->assertInstanceOf(Checkbox::class, $checkbox);
-        $this->assertInstanceOf(Component::class, $plainComponent);
+        $this->assertInstanceOf(Component::class, $invalidType);
+        $this->assertInstanceOf(Component::class, $noType);
     }
 }
