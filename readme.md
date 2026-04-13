@@ -88,7 +88,7 @@ For more examples, check out the examples directory
 
 ## Support
 
-Fenrir currently supports PHP 8.4+
+Fenrir currently supports PHP 8.5+
 Tests should pass nightly builds of newer versions, but this is not a supported usecase.
 
 | PHP Version   | Library version |
