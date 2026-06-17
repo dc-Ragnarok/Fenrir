@@ -48,6 +48,12 @@ class InteractionCallbackBuilder
 
     public function get(): array|MultipartBody
     {
+        $flags = $this->componentFlags();
+        if ($flags->get() !== 0) {
+            $flags->add($this->getFlags() ?? 0);
+            $this->setFlags($flags->get());
+        }
+
         $callbackData = $this->data;
 
         if ($this->hasComponents()) {

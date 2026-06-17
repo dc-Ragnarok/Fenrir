@@ -13,6 +13,8 @@ use Ragnarok\Fenrir\Rest\Helpers\Channel\AllowedMentionsBuilder;
 use Ragnarok\Fenrir\Rest\Helpers\Channel\ComponentBuilder;
 use Ragnarok\Fenrir\Rest\Helpers\Channel\ComponentRowBuilder;
 use Ragnarok\Fenrir\Rest\Helpers\Channel\EmbedBuilder;
+use Ragnarok\Fenrir\Rest\Helpers\Channel\ComponentV2Builder;
+use Ragnarok\Fenrir\Enums\MessageFlag;
 
 class InteractionCallbackBuilderTest extends TestCase
 {
@@ -78,5 +80,20 @@ class InteractionCallbackBuilderTest extends TestCase
         $interactionCallbackBuilder->allowMentions($allowedMentions);
 
         $this->assertEquals($allowedMentions->get(), $interactionCallbackBuilder->get()['data']['allowed_mentions']);
+    }
+
+    public function testConfiguresFlagsCorrectly(): void
+    {
+        $interactionCallbackBuilder = InteractionCallbackBuilder::new()
+            ->setType(InteractionCallbackType::CHANNEL_MESSAGE_WITH_SOURCE);
+
+        $interactionCallbackBuilder->setFlags(MessageFlag::SUPPRESS_EMBEDS->value);
+
+        $interactionCallbackBuilder->setComponents(ComponentV2Builder::new());
+
+        $this->assertEquals(
+            MessageFlag::IS_COMPONENTS_V2->value | MessageFlag::SUPPRESS_EMBEDS->value,
+            $interactionCallbackBuilder->get()['data']['flags']
+        );
     }
 }

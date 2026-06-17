@@ -32,6 +32,12 @@ class EditMessageBuilder
 
     public function get(): MultipartBody|array
     {
+        $flags = $this->componentFlags();
+        if ($flags->get() !== 0) {
+            $flags->add($this->getFlags() ?? 0);
+            $this->setFlags($flags->get());
+        }
+
         $data = $this->data;
 
         if ($this->hasAttachments()) {

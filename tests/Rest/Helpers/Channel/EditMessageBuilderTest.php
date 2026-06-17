@@ -11,6 +11,8 @@ use Ragnarok\Fenrir\Rest\Helpers\Channel\ComponentBuilder;
 use Ragnarok\Fenrir\Rest\Helpers\Channel\ComponentRowBuilder;
 use Ragnarok\Fenrir\Rest\Helpers\Channel\EditMessageBuilder;
 use Ragnarok\Fenrir\Rest\Helpers\Channel\EmbedBuilder;
+use Ragnarok\Fenrir\Rest\Helpers\Channel\ComponentV2Builder;
+use Ragnarok\Fenrir\Enums\MessageFlag;
 use PHPUnit\Framework\TestCase;
 
 class EditMessageBuilderTest extends TestCase
@@ -64,5 +66,19 @@ class EditMessageBuilderTest extends TestCase
         $messageBuilder->allowMentions($allowedMentions);
 
         $this->assertEquals($allowedMentions->get(), $messageBuilder->get()['allowed_mentions']);
+    }
+
+    public function testConfiguresFlagsCorrectly(): void
+    {
+        $messageBuilder = EditMessageBuilder::new();
+
+        $messageBuilder->setFlags(MessageFlag::SUPPRESS_EMBEDS->value);
+
+        $messageBuilder->setComponents(ComponentV2Builder::new());
+
+        $this->assertEquals(
+            MessageFlag::IS_COMPONENTS_V2->value | MessageFlag::SUPPRESS_EMBEDS->value,
+            $messageBuilder->get()['flags']
+        );
     }
 }

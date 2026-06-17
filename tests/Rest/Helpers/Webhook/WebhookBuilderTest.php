@@ -11,6 +11,8 @@ use Ragnarok\Fenrir\Rest\Helpers\Channel\ComponentBuilder;
 use Ragnarok\Fenrir\Rest\Helpers\Channel\ComponentRowBuilder;
 use Ragnarok\Fenrir\Rest\Helpers\Channel\EmbedBuilder;
 use Ragnarok\Fenrir\Rest\Helpers\Webhook\WebhookBuilder;
+use Ragnarok\Fenrir\Rest\Helpers\Channel\ComponentV2Builder;
+use Ragnarok\Fenrir\Enums\MessageFlag;
 use PHPUnit\Framework\TestCase;
 
 class WebhookBuilderTest extends TestCase
@@ -131,5 +133,19 @@ class WebhookBuilderTest extends TestCase
         $this->assertStringContainsString('filename="file.jpg"', $body);
         $this->assertStringContainsString('::spooky binary data::', $body);
         $this->assertStringContainsString('Content-Type: image/jpeg', $body);
+    }
+
+    public function testConfiguresFlagsCorrectly(): void
+    {
+        $webhookBuilder = WebhookBuilder::new();
+
+        $webhookBuilder->setFlags(MessageFlag::SUPPRESS_EMBEDS->value);
+
+        $webhookBuilder->setComponents(ComponentV2Builder::new());
+
+        $this->assertEquals(
+            MessageFlag::IS_COMPONENTS_V2->value | MessageFlag::SUPPRESS_EMBEDS->value,
+            $webhookBuilder->get()['flags']
+        );
     }
 }
