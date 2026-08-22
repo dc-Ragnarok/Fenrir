@@ -15,6 +15,7 @@ class Rest
     public readonly AuditLog $auditLog;
     public readonly Channel $channel;
     public readonly Emoji $emoji;
+    public readonly Entitlement $entitlement;
     public readonly GuildAutoModeration $guildAutoModeration;
     public readonly GuildScheduledEvent $guildScheduledEvent;
     public readonly GuildSticker $guildSticker;
@@ -40,6 +41,7 @@ class Rest
         $this->auditLog = new AuditLog(...$args);
         $this->channel = new Channel(...$args);
         $this->emoji = new Emoji(...$args);
+        $this->entitlement = new Entitlement(...$args);
         $this->guildAutoModeration = new GuildAutoModeration(...$args);
         $this->guildScheduledEvent = new GuildScheduledEvent(...$args);
         $this->guildSticker = new GuildSticker(...$args);

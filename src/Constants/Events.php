@@ -27,6 +27,10 @@ class Events
     final public const THREAD_MEMBER_UPDATE = 'THREAD_MEMBER_UPDATE';
     final public const THREAD_MEMBERS_UPDATE = 'THREAD_MEMBERS_UPDATE';
 
+    final public const ENTITLEMENT_CREATE = 'ENTITLEMENT_CREATE';
+    final public const ENTITLEMENT_UPDATE = 'ENTITLEMENT_UPDATE';
+    final public const ENTITLEMENT_DELETE = 'ENTITLEMENT_DELETE';
+
     final public const GUILD_CREATE = 'GUILD_CREATE';
     final public const GUILD_UPDATE = 'GUILD_UPDATE';
     final public const GUILD_DELETE = 'GUILD_DELETE';
@@ -114,6 +118,10 @@ class Events
         self::THREAD_LIST_SYNC => \Ragnarok\Fenrir\Gateway\Events\ThreadListSync::class,
         self::THREAD_MEMBER_UPDATE => \Ragnarok\Fenrir\Gateway\Events\ThreadMemberUpdate::class,
         self::THREAD_MEMBERS_UPDATE => \Ragnarok\Fenrir\Gateway\Events\ThreadMembersUpdate::class,
+
+        self::ENTITLEMENT_CREATE => \Ragnarok\Fenrir\Gateway\Events\EntitlementCreate::class,
+        self::ENTITLEMENT_UPDATE => \Ragnarok\Fenrir\Gateway\Events\EntitlementUpdate::class,
+        self::ENTITLEMENT_DELETE => \Ragnarok\Fenrir\Gateway\Events\EntitlementDelete::class,
 
         self::GUILD_CREATE => \Ragnarok\Fenrir\Gateway\Events\GuildCreate::class,
         self::GUILD_UPDATE => \Ragnarok\Fenrir\Gateway\Events\GuildUpdate::class,
