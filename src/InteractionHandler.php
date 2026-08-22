@@ -7,6 +7,7 @@ namespace Ragnarok\Fenrir;
 use Ragnarok\Fenrir\Component\Button\InteractionButton;
 use Ragnarok\Fenrir\Constants\Events;
 use Ragnarok\Fenrir\Enums\InteractionType;
+use Ragnarok\Fenrir\Enums\MessageComponentType;
 use Ragnarok\Fenrir\Extension\Extension;
 use Ragnarok\Fenrir\Gateway\Events\InteractionCreate;
 use Ragnarok\Fenrir\Gateway\Events\Ready;
@@ -65,7 +66,7 @@ class InteractionHandler implements Extension
             fn (InteractionCreate $interactionCreate) =>
                 isset($interactionCreate)
                 && $interactionCreate?->type === InteractionType::MESSAGE_COMPONENT
-                && $interactionCreate->data->component_type === 2 // @todo enum
+                && $interactionCreate->data->component_type === MessageComponentType::BUTTON
                 && isset($this->handlersButton[$interactionCreate->data->custom_id])
         );
 

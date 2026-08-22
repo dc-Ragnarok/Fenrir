@@ -11,6 +11,7 @@ use Mockery\Adapter\Phpunit\MockeryTestCase;
 use Ragnarok\Fenrir\Component\Button\DangerButton;
 use Ragnarok\Fenrir\Constants\Events;
 use Ragnarok\Fenrir\Enums\InteractionType;
+use Ragnarok\Fenrir\Enums\MessageComponentType;
 use Ragnarok\Fenrir\EventHandler;
 use Ragnarok\Fenrir\Gateway\Events\InteractionCreate;
 use Ragnarok\Fenrir\Gateway\Objects\Payload;
@@ -255,7 +256,7 @@ class InteractionHandlerTest extends MockeryTestCase
                 'type' => InteractionType::MESSAGE_COMPONENT->value,
                 'application_id' => '::application id::',
                 'data' => (object) [
-                    'component_type' => 2, // @todo enum
+                    'component_type' => MessageComponentType::BUTTON->value,
                     'custom_id' => '::custom id::',
                 ],
             ], InteractionCreate::class);
@@ -289,7 +290,7 @@ class InteractionHandlerTest extends MockeryTestCase
                 'type' => InteractionType::MESSAGE_COMPONENT->value,
                 'application_id' => '::application id::',
                 'data' => (object) [
-                    'component_type' => 2, // @todo enum
+                    'component_type' => MessageComponentType::BUTTON->value,
                     'custom_id' => '::custom id::',
                 ],
             ], InteractionCreate::class);
