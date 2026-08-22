@@ -35,6 +35,8 @@ class Events
     final public const GUILD_UPDATE = 'GUILD_UPDATE';
     final public const GUILD_DELETE = 'GUILD_DELETE';
 
+    final public const GUILD_AUDIT_LOG_ENTRY_CREATE = 'GUILD_AUDIT_LOG_ENTRY_CREATE';
+
     final public const GUILD_BAN_ADD = 'GUILD_BAN_ADD';
     final public const GUILD_BAN_REMOVE = 'GUILD_BAN_REMOVE';
 
@@ -126,6 +128,9 @@ class Events
         self::GUILD_CREATE => \Ragnarok\Fenrir\Gateway\Events\GuildCreate::class,
         self::GUILD_UPDATE => \Ragnarok\Fenrir\Gateway\Events\GuildUpdate::class,
         self::GUILD_DELETE => \Ragnarok\Fenrir\Gateway\Events\GuildDelete::class,
+
+        self::GUILD_AUDIT_LOG_ENTRY_CREATE =>
+            \Ragnarok\Fenrir\Gateway\Events\GuildAuditLogEntryCreate::class,
 
         self::GUILD_BAN_ADD => \Ragnarok\Fenrir\Gateway\Events\GuildBanAdd::class,
         self::GUILD_BAN_REMOVE => \Ragnarok\Fenrir\Gateway\Events\GuildBanRemove::class,
