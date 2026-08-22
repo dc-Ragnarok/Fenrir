@@ -50,6 +50,50 @@ class GlobalCommand extends HttpResource
 
 
     /**
+     * @see https://discord.com/developers/docs/interactions/application-commands#get-global-application-command
+     *
+     * @return PromiseInterface<\Ragnarok\Fenrir\Parts\ApplicationCommand>
+     */
+    public function getApplicationCommand(
+        string $applicationId,
+        string $commandId
+    ): PromiseInterface {
+        return $this->mapPromise(
+            $this->http->get(
+                Endpoint::bind(
+                    Endpoint::GLOBAL_APPLICATION_COMMAND,
+                    $applicationId,
+                    $commandId,
+                ),
+            ),
+            ApplicationCommand::class
+        );
+    }
+
+    /**
+     * @see https://discord.com/developers/docs/interactions/application-commands#edit-global-application-command
+     *
+     * @return PromiseInterface<\Ragnarok\Fenrir\Parts\ApplicationCommand>
+     */
+    public function editApplicationCommand(
+        string $applicationId,
+        string $commandId,
+        CommandBuilder $commandBuilder
+    ): PromiseInterface {
+        return $this->mapPromise(
+            $this->http->patch(
+                Endpoint::bind(
+                    Endpoint::GLOBAL_APPLICATION_COMMAND,
+                    $applicationId,
+                    $commandId,
+                ),
+                $commandBuilder->get(),
+            ),
+            ApplicationCommand::class
+        );
+    }
+
+    /**
      * @see https://discord.com/developers/docs/interactions/application-commands#delete-global-application-command
      *
      * @return PromiseInterface<void>
@@ -64,6 +108,38 @@ class GlobalCommand extends HttpResource
                 $applicationId,
                 $commandId,
             ),
+        );
+    }
+
+    /**
+     * Replaces the application's entire set of global commands in one request.
+     *
+     * Commands that are not part of the given set are deleted, which makes this
+     * the endpoint to reach for when registering the commands an application
+     * declares rather than creating them one by one.
+     *
+     * @see https://discord.com/developers/docs/interactions/application-commands#bulk-overwrite-global-application-commands
+     *
+     * @param CommandBuilder[] $commandBuilders
+     *
+     * @return PromiseInterface<\Ragnarok\Fenrir\Parts\ApplicationCommand[]>
+     */
+    public function bulkOverwriteApplicationCommands(
+        string $applicationId,
+        array $commandBuilders
+    ): PromiseInterface {
+        return $this->mapArrayPromise(
+            $this->http->put(
+                Endpoint::bind(
+                    Endpoint::GLOBAL_APPLICATION_COMMANDS,
+                    $applicationId
+                ),
+                array_map(
+                    static fn (CommandBuilder $commandBuilder) => $commandBuilder->get(),
+                    array_values($commandBuilders)
+                ),
+            ),
+            ApplicationCommand::class
         );
     }
 }
