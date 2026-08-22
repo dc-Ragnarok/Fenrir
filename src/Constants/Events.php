@@ -54,6 +54,12 @@ class Events
     final public const GUILD_SCHEDULED_EVENT_USER_ADD = 'GUILD_SCHEDULED_EVENT_USER_ADD';
     final public const GUILD_SCHEDULED_EVENT_USER_REMOVE = 'GUILD_SCHEDULED_EVENT_USER_REMOVE';
 
+    final public const GUILD_SOUNDBOARD_SOUND_CREATE = 'GUILD_SOUNDBOARD_SOUND_CREATE';
+    final public const GUILD_SOUNDBOARD_SOUND_UPDATE = 'GUILD_SOUNDBOARD_SOUND_UPDATE';
+    final public const GUILD_SOUNDBOARD_SOUND_DELETE = 'GUILD_SOUNDBOARD_SOUND_DELETE';
+    final public const GUILD_SOUNDBOARD_SOUNDS_UPDATE = 'GUILD_SOUNDBOARD_SOUNDS_UPDATE';
+    final public const SOUNDBOARD_SOUNDS = 'SOUNDBOARD_SOUNDS';
+
     final public const INTEGRATION_CREATE = 'INTEGRATION_CREATE';
     final public const INTEGRATION_UPDATE = 'INTEGRATION_UPDATE';
     final public const INTEGRATION_DELETE = 'INTEGRATION_DELETE';
@@ -136,6 +142,13 @@ class Events
         self::GUILD_SCHEDULED_EVENT_USER_ADD => \Ragnarok\Fenrir\Gateway\Events\GuildScheduledEventUserAdd::class,
         self::GUILD_SCHEDULED_EVENT_USER_REMOVE =>
             \Ragnarok\Fenrir\Gateway\Events\GuildScheduledEventUserRemove::class,
+
+        self::GUILD_SOUNDBOARD_SOUND_CREATE => \Ragnarok\Fenrir\Gateway\Events\GuildSoundboardSoundCreate::class,
+        self::GUILD_SOUNDBOARD_SOUND_UPDATE => \Ragnarok\Fenrir\Gateway\Events\GuildSoundboardSoundUpdate::class,
+        self::GUILD_SOUNDBOARD_SOUND_DELETE => \Ragnarok\Fenrir\Gateway\Events\GuildSoundboardSoundDelete::class,
+        self::GUILD_SOUNDBOARD_SOUNDS_UPDATE =>
+            \Ragnarok\Fenrir\Gateway\Events\GuildSoundboardSoundsUpdate::class,
+        self::SOUNDBOARD_SOUNDS => \Ragnarok\Fenrir\Gateway\Events\SoundboardSounds::class,
 
         self::INTEGRATION_CREATE => \Ragnarok\Fenrir\Gateway\Events\IntegrationCreate::class,
         self::INTEGRATION_UPDATE => \Ragnarok\Fenrir\Gateway\Events\IntegrationUpdate::class,

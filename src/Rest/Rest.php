@@ -21,6 +21,7 @@ class Rest
     public readonly GuildTemplate $guildTemplate;
     public readonly Invite $invite;
     public readonly StageInstance $stageInstance;
+    public readonly Soundboard $soundboard;
     public readonly Sticker $sticker;
     public readonly User $user;
     public readonly GuildCommand $guildCommand;
@@ -44,6 +45,7 @@ class Rest
         $this->guildTemplate = new GuildTemplate(...$args);
         $this->invite = new Invite(...$args);
         $this->stageInstance = new StageInstance(...$args);
+        $this->soundboard = new Soundboard(...$args);
         $this->sticker = new Sticker(...$args);
         $this->user = new User(...$args);
         $this->guildCommand = new GuildCommand(...$args);
