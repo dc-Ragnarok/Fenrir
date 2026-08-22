@@ -90,6 +90,10 @@ class Events
     final public const STAGE_INSTANCE_UPDATE = 'STAGE_INSTANCE_UPDATE';
     final public const STAGE_INSTANCE_DELETE = 'STAGE_INSTANCE_DELETE';
 
+    final public const SUBSCRIPTION_CREATE = 'SUBSCRIPTION_CREATE';
+    final public const SUBSCRIPTION_UPDATE = 'SUBSCRIPTION_UPDATE';
+    final public const SUBSCRIPTION_DELETE = 'SUBSCRIPTION_DELETE';
+
     final public const TYPING_START = 'TYPING_START';
     final public const USER_UPDATE = 'USER_UPDATE';
 
@@ -185,6 +189,10 @@ class Events
         self::STAGE_INSTANCE_CREATE => \Ragnarok\Fenrir\Gateway\Events\StageInstanceCreate::class,
         self::STAGE_INSTANCE_UPDATE => \Ragnarok\Fenrir\Gateway\Events\StageInstanceUpdate::class,
         self::STAGE_INSTANCE_DELETE => \Ragnarok\Fenrir\Gateway\Events\StageInstanceDelete::class,
+
+        self::SUBSCRIPTION_CREATE => \Ragnarok\Fenrir\Gateway\Events\SubscriptionCreate::class,
+        self::SUBSCRIPTION_UPDATE => \Ragnarok\Fenrir\Gateway\Events\SubscriptionUpdate::class,
+        self::SUBSCRIPTION_DELETE => \Ragnarok\Fenrir\Gateway\Events\SubscriptionDelete::class,
 
         self::TYPING_START => \Ragnarok\Fenrir\Gateway\Events\TypingStart::class,
         self::USER_UPDATE => \Ragnarok\Fenrir\Gateway\Events\UserUpdate::class,

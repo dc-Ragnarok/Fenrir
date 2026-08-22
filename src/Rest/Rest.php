@@ -23,7 +23,9 @@ class Rest
     public readonly Invite $invite;
     public readonly StageInstance $stageInstance;
     public readonly Poll $poll;
+    public readonly Sku $sku;
     public readonly Soundboard $soundboard;
+    public readonly Subscription $subscription;
     public readonly Sticker $sticker;
     public readonly User $user;
     public readonly GuildCommand $guildCommand;
@@ -49,7 +51,9 @@ class Rest
         $this->invite = new Invite(...$args);
         $this->stageInstance = new StageInstance(...$args);
         $this->poll = new Poll(...$args);
+        $this->sku = new Sku(...$args);
         $this->soundboard = new Soundboard(...$args);
+        $this->subscription = new Subscription(...$args);
         $this->sticker = new Sticker(...$args);
         $this->user = new User(...$args);
         $this->guildCommand = new GuildCommand(...$args);
