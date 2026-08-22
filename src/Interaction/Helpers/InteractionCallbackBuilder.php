@@ -32,7 +32,25 @@ class InteractionCallbackBuilder
 
     private InteractionCallbackType $type;
 
+    private ModalBuilder $modal;
+
     private array $data = [];
+
+    /**
+     * Responds to the interaction by opening a modal, which sets the callback
+     * type as well since a modal cannot be sent as any other kind of response.
+     */
+    public function setModal(ModalBuilder $modal): self
+    {
+        $this->modal = $modal;
+
+        return $this->setType(InteractionCallbackType::MODAL);
+    }
+
+    public function getModal(): ?ModalBuilder
+    {
+        return $this->modal ?? null;
+    }
 
     public function setType(InteractionCallbackType $type): self
     {
@@ -49,6 +67,13 @@ class InteractionCallbackBuilder
     public function get(): array|MultipartBody
     {
         $callbackData = $this->data;
+
+        if (isset($this->modal)) {
+            return [
+                'type' => $this->type->value,
+                'data' => $this->modal->get(),
+            ];
+        }
 
         if ($this->hasComponents()) {
             $callbackData['components'] = $this->getComponents()->get();
