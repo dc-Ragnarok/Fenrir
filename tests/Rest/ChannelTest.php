@@ -9,6 +9,12 @@ use Ragnarok\Fenrir\Parts\Invite;
 use Ragnarok\Fenrir\Parts\Message;
 use Ragnarok\Fenrir\Parts\ThreadMember;
 use Ragnarok\Fenrir\Parts\User;
+use Ragnarok\Fenrir\Enums\SortingOrder;
+use Ragnarok\Fenrir\Enums\ThreadSearchTagSetting;
+use Ragnarok\Fenrir\Enums\ThreadSortingMode;
+use Ragnarok\Fenrir\Parts\PinnedMessages;
+use Ragnarok\Fenrir\Parts\ThreadSearchResult;
+use Ragnarok\Fenrir\Rest\Helpers\Channel\SearchThreadsBuilder;
 use Ragnarok\Fenrir\Rest\Channel;
 use Ragnarok\Fenrir\Rest\Helpers\Channel\Channel\GuildAnnouncementChannelBuilder;
 use Ragnarok\Fenrir\Rest\Helpers\Channel\Channel\GuildForumChannelBuilder;
@@ -30,6 +36,95 @@ class ChannelTest extends HttpHelperTestCase
     public static function httpBindingsProvider(): array
     {
         return [
+            'Get channel pins' => [
+                'method' => 'getChannelPins',
+                'args' => ['::channel id::'],
+                'mockOptions' => [
+                    'method' => 'get',
+                    'return' => (object) ['items' => [], 'has_more' => false],
+                ],
+                'validationOptions' => [
+                    'returnType' => PinnedMessages::class,
+                ],
+            ],
+            'Get channel pins paginated' => [
+                'method' => 'getChannelPins',
+                'args' => ['::channel id::', '2026-01-01T00:00:00.000Z', 50],
+                'mockOptions' => [
+                    'method' => 'get',
+                    'return' => (object) ['items' => [], 'has_more' => true],
+                ],
+                'validationOptions' => [
+                    'returnType' => PinnedMessages::class,
+                ],
+            ],
+            'Pin channel message' => [
+                'method' => 'pinChannelMessage',
+                'args' => ['::channel id::', '::message id::'],
+                'mockOptions' => [
+                    'method' => 'put',
+                    'return' => null,
+                ],
+                'validationOptions' => [],
+            ],
+            'Unpin channel message' => [
+                'method' => 'unpinChannelMessage',
+                'args' => ['::channel id::', '::message id::'],
+                'mockOptions' => [
+                    'method' => 'delete',
+                    'return' => null,
+                ],
+                'validationOptions' => [],
+            ],
+            'Set voice status' => [
+                'method' => 'setVoiceStatus',
+                'args' => ['::channel id::', 'Playing chess'],
+                'mockOptions' => [
+                    'method' => 'put',
+                    'return' => null,
+                ],
+                'validationOptions' => [],
+            ],
+            'Clear voice status' => [
+                'method' => 'setVoiceStatus',
+                'args' => ['::channel id::', null],
+                'mockOptions' => [
+                    'method' => 'put',
+                    'return' => null,
+                ],
+                'validationOptions' => [],
+            ],
+            'Search threads' => [
+                'method' => 'searchThreads',
+                'args' => ['::channel id::'],
+                'mockOptions' => [
+                    'method' => 'get',
+                    'return' => (object) ['threads' => [], 'members' => [], 'first_messages' => [], 'has_more' => false, 'total_results' => 0],
+                ],
+                'validationOptions' => [
+                    'returnType' => ThreadSearchResult::class,
+                ],
+            ],
+            'Search threads filtered' => [
+                'method' => 'searchThreads',
+                'args' => [
+                    '::channel id::',
+                    SearchThreadsBuilder::new()
+                        ->setName('bug')
+                        ->setTags(['::tag a::'])
+                        ->setTagSetting(ThreadSearchTagSetting::MATCH_ALL)
+                        ->setSortBy(ThreadSortingMode::RELEVANCE)
+                        ->setSortOrder(SortingOrder::DESC)
+                        ->setLimit(25),
+                ],
+                'mockOptions' => [
+                    'method' => 'get',
+                    'return' => (object) ['threads' => [], 'members' => [], 'first_messages' => [], 'has_more' => false, 'total_results' => 0],
+                ],
+                'validationOptions' => [
+                    'returnType' => ThreadSearchResult::class,
+                ],
+            ],
             'Get channel' => [
                 'method' => 'get',
                 'args' => ['::channel id::'],
