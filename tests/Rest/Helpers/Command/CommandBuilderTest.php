@@ -92,7 +92,13 @@ class CommandBuilderTest extends TestCase
         $commandBuilder->setDefaultMemberPermissions($permissions);
 
         $this->assertEquals($permissions->get(), $commandBuilder->getDefaultMemberPermissions()->get());
-        $this->assertEquals($permissions->getBitSet(), $commandBuilder->get()['default_member_permissions']);
+
+        /*
+         * Discord reads this as a decimal bit field. Sending the binary
+         * representation would be read back as an entirely different, and
+         * much larger, set of permissions.
+         */
+        $this->assertSame('6', $commandBuilder->get()['default_member_permissions']);
     }
 
     public function testSetDmPermission(): void
