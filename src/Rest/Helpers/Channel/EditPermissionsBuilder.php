@@ -37,7 +37,7 @@ class EditPermissionsBuilder
 
     public function setAllow(Bitwise $allow): self
     {
-        $this->data['allow'] = $allow->getBitSet();
+        $this->data['allow'] = (string) $allow->get();
 
         return $this;
     }
@@ -45,13 +45,13 @@ class EditPermissionsBuilder
     public function getAllow(): ?Bitwise
     {
         return isset($this->data['allow'])
-            ? Bitwise::fromBitSet($this->data['allow'])
+            ? new Bitwise((int) $this->data['allow'])
             : null;
     }
 
     public function setDeny(Bitwise $deny): self
     {
-        $this->data['deny'] = $deny->getBitSet();
+        $this->data['deny'] = (string) $deny->get();
 
         return $this;
     }
@@ -59,7 +59,7 @@ class EditPermissionsBuilder
     public function getDeny(): ?Bitwise
     {
         return isset($this->data['deny'])
-            ? Bitwise::fromBitSet($this->data['deny'])
+            ? new Bitwise((int) $this->data['deny'])
             : null;
     }
 

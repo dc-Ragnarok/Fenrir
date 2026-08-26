@@ -134,7 +134,7 @@ class CommandBuilder
      */
     public function setDefaultMemberPermissions(Bitwise $permissions): self
     {
-        $this->data['default_member_permissions'] = $permissions->getBitSet();
+        $this->data['default_member_permissions'] = (string) $permissions->get();
 
         return $this;
     }
@@ -145,7 +145,7 @@ class CommandBuilder
     public function getDefaultMemberPermissions(): ?Bitwise
     {
         return isset($this->data['default_member_permissions'])
-            ? Bitwise::fromBitSet($this->data['default_member_permissions'])
+            ? new Bitwise((int) $this->data['default_member_permissions'])
             : null;
     }
 

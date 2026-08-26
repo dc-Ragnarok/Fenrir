@@ -39,7 +39,7 @@ class EditPermissionsBuilderTest extends TestCase
 
         $this->assertNull($builder->getAllow());
 
-        $bitwise = new Bitwise(
+        $bitwise = Bitwise::from(
             1 << 1,
             1 << 2,
             1 << 3
@@ -48,6 +48,7 @@ class EditPermissionsBuilderTest extends TestCase
         $builder->setAllow($bitwise);
 
         $this->assertEquals($bitwise->get(), $builder->getAllow()->get());
+        $this->assertSame('14', $builder->get()['allow']);
     }
 
     public function testSetDeny(): void
@@ -56,7 +57,7 @@ class EditPermissionsBuilderTest extends TestCase
 
         $this->assertNull($builder->getDeny());
 
-        $bitwise = new Bitwise(
+        $bitwise = Bitwise::from(
             1 << 1,
             1 << 2,
             1 << 3
@@ -65,5 +66,11 @@ class EditPermissionsBuilderTest extends TestCase
         $builder->setDeny($bitwise);
 
         $this->assertEquals($bitwise->get(), $builder->getDeny()->get());
+
+        /*
+         * A decimal bit field, as Discord reads it; the binary representation
+         * would be read back as a different set of permissions.
+         */
+        $this->assertSame('14', $builder->get()['deny']);
     }
 }

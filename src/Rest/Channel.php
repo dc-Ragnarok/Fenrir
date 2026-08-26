@@ -21,6 +21,9 @@ use Ragnarok\Fenrir\Rest\Helpers\Channel\MessageBuilder;
 use Ragnarok\Fenrir\Rest\Helpers\Channel\StartThreadFromMessageBuilder;
 use Ragnarok\Fenrir\Rest\Helpers\Channel\StartThreadWithoutMessageBuilder;
 use Ragnarok\Fenrir\Rest\Helpers\Emoji\EmojiBuilder;
+use Ragnarok\Fenrir\Parts\PinnedMessages;
+use Ragnarok\Fenrir\Parts\ThreadSearchResult;
+use Ragnarok\Fenrir\Rest\Helpers\Channel\SearchThreadsBuilder;
 use React\Promise\PromiseInterface;
 
 /**
@@ -477,6 +480,9 @@ class Channel extends HttpResource
     /**
      * @see https://discord.com/developers/docs/resources/channel#get-pinned-messages
      *
+     * @deprecated Discord replaced this with getChannelPins, which paginates
+     *  and reports when each message was pinned
+     *
      * @return PromiseInterface<\Ragnarok\Fenrir\Parts\Message[]>
      */
     public function getPinnedMessages(string $channelId): PromiseInterface
@@ -495,6 +501,8 @@ class Channel extends HttpResource
     /**
      * @see https://discord.com/developers/docs/resources/channel#pin-message
      *
+     * @deprecated Use pinChannelMessage
+     *
      * @return PromiseInterface<void>
      */
     public function pinMessage(string $channelId, string $messageId): PromiseInterface
@@ -511,6 +519,8 @@ class Channel extends HttpResource
     /**
      * @see https://discord.com/developers/docs/resources/channel#unpin-message
      *
+     * @deprecated Use unpinChannelMessage
+     *
      * @return PromiseInterface<void>
      */
     public function unpinMessage(string $channelId, string $messageId): PromiseInterface
@@ -521,6 +531,123 @@ class Channel extends HttpResource
                 $channelId,
                 $messageId
             )
+        );
+    }
+
+    /**
+     * The current pins, newest first, with the time each was pinned.
+     *
+     * Replaces getPinnedMessages, which hits the endpoint Discord has since
+     * deprecated and returns bare messages without pagination.
+     *
+     * @see https://discord.com/developers/docs/resources/message#get-channel-pins
+     *
+     * @param ?string $before ISO8601 timestamp to page backwards from
+     * @param ?int $limit Up to 50, defaults to 50
+     *
+     * @return PromiseInterface<\Ragnarok\Fenrir\Parts\PinnedMessages>
+     */
+    public function getChannelPins(
+        string $channelId,
+        ?string $before = null,
+        ?int $limit = null
+    ): PromiseInterface {
+        $endpoint = Endpoint::bind(Endpoint::CHANNEL_MESSAGES_PINS, $channelId);
+
+        if (!is_null($before)) {
+            $endpoint->addQuery('before', $before);
+        }
+
+        if (!is_null($limit)) {
+            $endpoint->addQuery('limit', $limit);
+        }
+
+        return $this->mapPromise(
+            $this->http->get($endpoint),
+            PinnedMessages::class
+        );
+    }
+
+    /**
+     * @see https://discord.com/developers/docs/resources/message#pin-message
+     *
+     * @return PromiseInterface<void>
+     */
+    public function pinChannelMessage(
+        string $channelId,
+        string $messageId,
+        ?string $reason = null
+    ): PromiseInterface {
+        return $this->http->put(
+            Endpoint::bind(
+                Endpoint::CHANNEL_MESSAGES_PIN,
+                $channelId,
+                $messageId
+            ),
+            null,
+            $this->getAuditLogReasonHeader($reason)
+        );
+    }
+
+    /**
+     * @see https://discord.com/developers/docs/resources/message#unpin-message
+     *
+     * @return PromiseInterface<void>
+     */
+    public function unpinChannelMessage(
+        string $channelId,
+        string $messageId,
+        ?string $reason = null
+    ): PromiseInterface {
+        return $this->http->delete(
+            Endpoint::bind(
+                Endpoint::CHANNEL_MESSAGES_PIN,
+                $channelId,
+                $messageId
+            ),
+            null,
+            $this->getAuditLogReasonHeader($reason)
+        );
+    }
+
+    /**
+     * Sets the status shown on a voice channel, or clears it when given null.
+     *
+     * @see https://discord.com/developers/docs/resources/channel#modify-channel-voice-status
+     *
+     * @return PromiseInterface<void>
+     */
+    public function setVoiceStatus(string $channelId, ?string $status): PromiseInterface
+    {
+        return $this->http->put(
+            Endpoint::bind(
+                Endpoint::CHANNEL_VOICE_STATUS,
+                $channelId
+            ),
+            ['status' => $status]
+        );
+    }
+
+    /**
+     * Searches the threads of a forum or media channel.
+     *
+     * @see https://discord.com/developers/docs/resources/channel#search-threads
+     *
+     * @return PromiseInterface<\Ragnarok\Fenrir\Parts\ThreadSearchResult>
+     */
+    public function searchThreads(
+        string $channelId,
+        ?SearchThreadsBuilder $searchThreadsBuilder = null
+    ): PromiseInterface {
+        $endpoint = Endpoint::bind(Endpoint::CHANNEL_THREADS_SEARCH, $channelId);
+
+        foreach ($searchThreadsBuilder?->get() ?? [] as $key => $value) {
+            $endpoint->addQuery($key, $value);
+        }
+
+        return $this->mapPromise(
+            $this->http->get($endpoint),
+            ThreadSearchResult::class
         );
     }
 

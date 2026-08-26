@@ -13,6 +13,7 @@ use Ragnarok\Fenrir\Rest\Helpers\Channel\ComponentBuilder;
 use Ragnarok\Fenrir\Rest\Helpers\Channel\ComponentRowBuilder;
 use Ragnarok\Fenrir\Rest\Helpers\Channel\EmbedBuilder;
 use Ragnarok\Fenrir\Rest\Helpers\Channel\MessageBuilder;
+use Ragnarok\Fenrir\Rest\Helpers\Channel\PollBuilder;
 use PHPUnit\Framework\TestCase;
 
 class MessageBuilderTest extends TestCase
@@ -35,6 +36,25 @@ class MessageBuilderTest extends TestCase
 
         $this->assertTrue($builder->get()['enforce_nonce']);
         $this->assertTrue($builder->getEnforceNonce());
+    }
+
+    public function testSetPoll(): void
+    {
+        $builder = new MessageBuilder();
+
+        $this->assertNull($builder->getPoll());
+
+        $builder->setPoll(
+            PollBuilder::new()
+                ->setQuestion('Best language?')
+                ->addAnswer('PHP')
+        );
+
+        $this->assertEquals([
+            'question' => ['text' => 'Best language?'],
+            'answers' => [['poll_media' => ['text' => 'PHP']]],
+        ], $builder->get()['poll']);
+        $this->assertEquals($builder->get()['poll'], $builder->getPoll());
     }
 
     public function testSetTts(): void

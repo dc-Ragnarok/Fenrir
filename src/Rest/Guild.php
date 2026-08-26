@@ -22,6 +22,10 @@ use Ragnarok\Fenrir\Parts\WelcomeScreen;
 use Ragnarok\Fenrir\Parts\Widget;
 use Ragnarok\Fenrir\Parts\WidgetSettings;
 use Ragnarok\Fenrir\Rest\Helpers\Guild\ModifyChannelPositionsBuilder;
+use Ragnarok\Fenrir\Parts\BulkBanResult;
+use Ragnarok\Fenrir\Parts\GuildOnboarding;
+use Ragnarok\Fenrir\Rest\Helpers\Guild\ModifyGuildOnboardingBuilder;
+use Ragnarok\Fenrir\Rest\Helpers\Guild\ModifyWelcomeScreenBuilder;
 use React\Promise\PromiseInterface;
 
 /**
@@ -904,6 +908,132 @@ class Guild extends HttpResource
                 $userId
             ),
             $params,
+        );
+    }
+
+    /**
+     * @see https://discord.com/developers/docs/resources/guild#modify-guild-welcome-screen
+     *
+     * @return PromiseInterface<\Ragnarok\Fenrir\Parts\WelcomeScreen>
+     */
+    public function modifyWelcomeScreen(
+        string $guildId,
+        ModifyWelcomeScreenBuilder $welcomeScreenBuilder,
+        ?string $reason = null
+    ): PromiseInterface {
+        return $this->mapPromise(
+            $this->http->patch(
+                Endpoint::bind(
+                    Endpoint::GUILD_WELCOME_SCREEN,
+                    $guildId,
+                ),
+                $welcomeScreenBuilder->get(),
+                $this->getAuditLogReasonHeader($reason)
+            ),
+            WelcomeScreen::class,
+        );
+    }
+
+    /**
+     * @see https://discord.com/developers/docs/resources/guild#get-guild-onboarding
+     *
+     * @return PromiseInterface<\Ragnarok\Fenrir\Parts\GuildOnboarding>
+     */
+    public function getOnboarding(string $guildId): PromiseInterface
+    {
+        return $this->mapPromise(
+            $this->http->get(
+                Endpoint::bind(
+                    Endpoint::GUILD_ONBOARDING,
+                    $guildId,
+                ),
+            ),
+            GuildOnboarding::class,
+        );
+    }
+
+    /**
+     * Replaces the guild's onboarding flow wholesale; prompts left out of the
+     * request are removed.
+     *
+     * Discord requires an id on every prompt and option, including ones being
+     * created, and accepts a placeholder for those.
+     *
+     * @see https://discord.com/developers/docs/resources/guild#modify-guild-onboarding
+     *
+     * @return PromiseInterface<\Ragnarok\Fenrir\Parts\GuildOnboarding>
+     */
+    public function modifyOnboarding(
+        string $guildId,
+        ModifyGuildOnboardingBuilder $onboardingBuilder,
+        ?string $reason = null
+    ): PromiseInterface {
+        return $this->mapPromise(
+            $this->http->put(
+                Endpoint::bind(
+                    Endpoint::GUILD_ONBOARDING,
+                    $guildId,
+                ),
+                $onboardingBuilder->get(),
+                $this->getAuditLogReasonHeader($reason)
+            ),
+            GuildOnboarding::class,
+        );
+    }
+
+    /**
+     * Bans up to 200 users in one request. Discord reports which of them it
+     * could not ban rather than failing the whole call, and only rejects the
+     * request outright when none of them could be banned.
+     *
+     * @see https://discord.com/developers/docs/resources/guild#bulk-guild-ban
+     *
+     * @param string[] $userIds
+     * @param ?int $deleteMessageSeconds How much of their recent message
+     *  history to delete, up to 7 days
+     *
+     * @return PromiseInterface<\Ragnarok\Fenrir\Parts\BulkBanResult>
+     */
+    public function bulkBan(
+        string $guildId,
+        array $userIds,
+        ?int $deleteMessageSeconds = null,
+        ?string $reason = null
+    ): PromiseInterface {
+        $params = ['user_ids' => array_values($userIds)];
+
+        if (!is_null($deleteMessageSeconds)) {
+            $params['delete_message_seconds'] = $deleteMessageSeconds;
+        }
+
+        return $this->mapPromise(
+            $this->http->post(
+                Endpoint::bind(
+                    Endpoint::GUILD_BAN_BULK,
+                    $guildId,
+                ),
+                $params,
+                $this->getAuditLogReasonHeader($reason)
+            ),
+            BulkBanResult::class,
+        );
+    }
+
+    /**
+     * How many members hold each role, keyed by role id.
+     *
+     * The response is a plain map rather than a documented object, so it is
+     * returned as given.
+     *
+     * @return PromiseInterface<array<string, int>>
+     */
+    public function getRoleMemberCounts(string $guildId): PromiseInterface
+    {
+        return $this->http->get(
+            Endpoint::bind(
+                Endpoint::GUILD_ROLES_MEMBER_COUNTS,
+                $guildId,
+            ),
         );
     }
 }

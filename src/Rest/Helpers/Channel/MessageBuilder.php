@@ -14,6 +14,7 @@ use Ragnarok\Fenrir\Rest\Helpers\Channel\Message\AllowMentions;
 use Ragnarok\Fenrir\Rest\Helpers\Channel\Message\MultipartMessage;
 use Ragnarok\Fenrir\Rest\Helpers\Channel\Message\SetContent;
 use Ragnarok\Fenrir\Rest\Helpers\Channel\Message\SetFlags;
+use Ragnarok\Fenrir\Rest\Helpers\Channel\Message\SetPoll;
 use Ragnarok\Fenrir\Rest\Helpers\Channel\Message\SetTts;
 use Ragnarok\Fenrir\Rest\Helpers\GetNew;
 
@@ -31,6 +32,7 @@ class MessageBuilder
     use AllowMentions;
     use SetContent;
     use SetFlags;
+    use SetPoll;
     use MultipartMessage;
     use SetTts;
 

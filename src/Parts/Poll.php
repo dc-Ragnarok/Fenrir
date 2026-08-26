@@ -20,7 +20,8 @@ class Poll
      */
     #[ArrayMapping(PollAnswer::class)]
     public array $answers;
-    public Carbon $expiry;
+    public ?Carbon $expiry;
     public bool $allow_multiselect;
     public PollLayoutType $layout_type;
+    public PollResults $results;
 }

@@ -28,4 +28,6 @@ enum Intent: int
     case GUILD_SCHEDULED_EVENTS = 1 << 16;
     case AUTO_MODERATION_CONFIGURATION = 1 << 20;
     case AUTO_MODERATION_EXECUTION = 1 << 21;
+    case GUILD_MESSAGE_POLLS = 1 << 24;
+    case DIRECT_MESSAGE_POLLS = 1 << 25;
 }

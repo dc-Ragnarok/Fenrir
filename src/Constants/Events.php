@@ -27,9 +27,15 @@ class Events
     final public const THREAD_MEMBER_UPDATE = 'THREAD_MEMBER_UPDATE';
     final public const THREAD_MEMBERS_UPDATE = 'THREAD_MEMBERS_UPDATE';
 
+    final public const ENTITLEMENT_CREATE = 'ENTITLEMENT_CREATE';
+    final public const ENTITLEMENT_UPDATE = 'ENTITLEMENT_UPDATE';
+    final public const ENTITLEMENT_DELETE = 'ENTITLEMENT_DELETE';
+
     final public const GUILD_CREATE = 'GUILD_CREATE';
     final public const GUILD_UPDATE = 'GUILD_UPDATE';
     final public const GUILD_DELETE = 'GUILD_DELETE';
+
+    final public const GUILD_AUDIT_LOG_ENTRY_CREATE = 'GUILD_AUDIT_LOG_ENTRY_CREATE';
 
     final public const GUILD_BAN_ADD = 'GUILD_BAN_ADD';
     final public const GUILD_BAN_REMOVE = 'GUILD_BAN_REMOVE';
@@ -54,6 +60,12 @@ class Events
     final public const GUILD_SCHEDULED_EVENT_USER_ADD = 'GUILD_SCHEDULED_EVENT_USER_ADD';
     final public const GUILD_SCHEDULED_EVENT_USER_REMOVE = 'GUILD_SCHEDULED_EVENT_USER_REMOVE';
 
+    final public const GUILD_SOUNDBOARD_SOUND_CREATE = 'GUILD_SOUNDBOARD_SOUND_CREATE';
+    final public const GUILD_SOUNDBOARD_SOUND_UPDATE = 'GUILD_SOUNDBOARD_SOUND_UPDATE';
+    final public const GUILD_SOUNDBOARD_SOUND_DELETE = 'GUILD_SOUNDBOARD_SOUND_DELETE';
+    final public const GUILD_SOUNDBOARD_SOUNDS_UPDATE = 'GUILD_SOUNDBOARD_SOUNDS_UPDATE';
+    final public const SOUNDBOARD_SOUNDS = 'SOUNDBOARD_SOUNDS';
+
     final public const INTEGRATION_CREATE = 'INTEGRATION_CREATE';
     final public const INTEGRATION_UPDATE = 'INTEGRATION_UPDATE';
     final public const INTEGRATION_DELETE = 'INTEGRATION_DELETE';
@@ -77,6 +89,10 @@ class Events
     final public const STAGE_INSTANCE_CREATE = 'STAGE_INSTANCE_CREATE';
     final public const STAGE_INSTANCE_UPDATE = 'STAGE_INSTANCE_UPDATE';
     final public const STAGE_INSTANCE_DELETE = 'STAGE_INSTANCE_DELETE';
+
+    final public const SUBSCRIPTION_CREATE = 'SUBSCRIPTION_CREATE';
+    final public const SUBSCRIPTION_UPDATE = 'SUBSCRIPTION_UPDATE';
+    final public const SUBSCRIPTION_DELETE = 'SUBSCRIPTION_DELETE';
 
     final public const TYPING_START = 'TYPING_START';
     final public const USER_UPDATE = 'USER_UPDATE';
@@ -109,9 +125,16 @@ class Events
         self::THREAD_MEMBER_UPDATE => \Ragnarok\Fenrir\Gateway\Events\ThreadMemberUpdate::class,
         self::THREAD_MEMBERS_UPDATE => \Ragnarok\Fenrir\Gateway\Events\ThreadMembersUpdate::class,
 
+        self::ENTITLEMENT_CREATE => \Ragnarok\Fenrir\Gateway\Events\EntitlementCreate::class,
+        self::ENTITLEMENT_UPDATE => \Ragnarok\Fenrir\Gateway\Events\EntitlementUpdate::class,
+        self::ENTITLEMENT_DELETE => \Ragnarok\Fenrir\Gateway\Events\EntitlementDelete::class,
+
         self::GUILD_CREATE => \Ragnarok\Fenrir\Gateway\Events\GuildCreate::class,
         self::GUILD_UPDATE => \Ragnarok\Fenrir\Gateway\Events\GuildUpdate::class,
         self::GUILD_DELETE => \Ragnarok\Fenrir\Gateway\Events\GuildDelete::class,
+
+        self::GUILD_AUDIT_LOG_ENTRY_CREATE =>
+            \Ragnarok\Fenrir\Gateway\Events\GuildAuditLogEntryCreate::class,
 
         self::GUILD_BAN_ADD => \Ragnarok\Fenrir\Gateway\Events\GuildBanAdd::class,
         self::GUILD_BAN_REMOVE => \Ragnarok\Fenrir\Gateway\Events\GuildBanRemove::class,
@@ -137,6 +160,13 @@ class Events
         self::GUILD_SCHEDULED_EVENT_USER_REMOVE =>
             \Ragnarok\Fenrir\Gateway\Events\GuildScheduledEventUserRemove::class,
 
+        self::GUILD_SOUNDBOARD_SOUND_CREATE => \Ragnarok\Fenrir\Gateway\Events\GuildSoundboardSoundCreate::class,
+        self::GUILD_SOUNDBOARD_SOUND_UPDATE => \Ragnarok\Fenrir\Gateway\Events\GuildSoundboardSoundUpdate::class,
+        self::GUILD_SOUNDBOARD_SOUND_DELETE => \Ragnarok\Fenrir\Gateway\Events\GuildSoundboardSoundDelete::class,
+        self::GUILD_SOUNDBOARD_SOUNDS_UPDATE =>
+            \Ragnarok\Fenrir\Gateway\Events\GuildSoundboardSoundsUpdate::class,
+        self::SOUNDBOARD_SOUNDS => \Ragnarok\Fenrir\Gateway\Events\SoundboardSounds::class,
+
         self::INTEGRATION_CREATE => \Ragnarok\Fenrir\Gateway\Events\IntegrationCreate::class,
         self::INTEGRATION_UPDATE => \Ragnarok\Fenrir\Gateway\Events\IntegrationUpdate::class,
         self::INTEGRATION_DELETE => \Ragnarok\Fenrir\Gateway\Events\IntegrationDelete::class,
@@ -159,6 +189,10 @@ class Events
         self::STAGE_INSTANCE_CREATE => \Ragnarok\Fenrir\Gateway\Events\StageInstanceCreate::class,
         self::STAGE_INSTANCE_UPDATE => \Ragnarok\Fenrir\Gateway\Events\StageInstanceUpdate::class,
         self::STAGE_INSTANCE_DELETE => \Ragnarok\Fenrir\Gateway\Events\StageInstanceDelete::class,
+
+        self::SUBSCRIPTION_CREATE => \Ragnarok\Fenrir\Gateway\Events\SubscriptionCreate::class,
+        self::SUBSCRIPTION_UPDATE => \Ragnarok\Fenrir\Gateway\Events\SubscriptionUpdate::class,
+        self::SUBSCRIPTION_DELETE => \Ragnarok\Fenrir\Gateway\Events\SubscriptionDelete::class,
 
         self::TYPING_START => \Ragnarok\Fenrir\Gateway\Events\TypingStart::class,
         self::USER_UPDATE => \Ragnarok\Fenrir\Gateway\Events\UserUpdate::class,
